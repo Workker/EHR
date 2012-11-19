@@ -16,8 +16,9 @@ a {
     text-decoration: none;
 }
 
-h1 { font-size: 14px; }
-
+h1 {
+    font-size: 14px;
+}
 
 ul {
     list-style-type: none;
@@ -25,16 +26,137 @@ ul {
     padding: 0;
 }
 
+.lfloat {
+    float: left;
+}
 
-.lfloat { float: left; }
+.rfloat {
+    float: right;
+}
 
-.rfloat { float: right; }
+/* Super */
+
+#super {
+    min-height: 100%;
+    _height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+/* Page */
+#page {
+    margin-top: 300px;
+    width: 969px;
+    overflow: hidden;
+    display: block;
+}
+
+/* center */
+
+#center {
+    width: 637px;
+    overflow: hidden;
+}
+/* TimeLine */
+#timeLine {
+    width: 154px;
+    overflow: hidden;
+}
+
+/* Data */
+#data {
+    width: 154px;
+    overflow: hidden;
+}
+
+#dataListMenu li {
+    background-image: url(../Images/u91_normal.png);
+    height: 32px;
+    width: 239px;
+}
+
+    #dataListMenu li a {
+        font-size: 13px;
+        font-weight: normal;
+        font-style: normal;
+        text-decoration: none;
+        word-wrap: break-word;
+        color: #627AAD;
+    }
+
+.tinyViewport .fixed_elem {
+    position: static !important;
+}
+
+.fbTimelineScrubber {
+    background-color: #E7EBF2;
+    padding: 8px 0 8px 1px;
+    top: 38px;
+    width: 122px;
+    z-index: 1;
+}
+
+    .fbTimelineScrubber li {
+        margin-bottom: 1px;
+    }
+
+    .fbTimelineScrubber .selected a {
+        color: #627AAD;
+        font-weight: bold;
+    }
+
+    .fbTimelineScrubber .selected a, .fbTimelineScrubber .selected ul a {
+        border-left-color: #627AAD;
+    }
+
+    .fbTimelineScrubber a:hover, .fbTimelineScrubber a:focus {
+        border-left-color: #A7B4D1;
+        text-decoration: underline;
+    }
+
+    .fbTimelineScrubber a, .fbTimelineScrubber .selected ul a {
+        border-left: 5px solid #C8D1E2;
+        color: #94A0C1;
+        display: block;
+        font-weight: normal;
+        outline: none;
+        padding: 4px 0 4px 6px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Header */
 
-.slim { height: 38px; }
+.slim {
+    height: 38px;
+}
 
-.fixed_elem, .fixed_always { position: fixed !important; }
+.fixed_elem, .fixed_always {
+    position: fixed !important;
+}
 
 #topBar {
     background-color: #3B5998;
@@ -44,38 +166,40 @@ ul {
     z-index: 300;
 }
 
-#topBar.fixed_elem {
-    margin: 0;
-    position: relative !important;
-}
+    #topBar.fixed_elem {
+        margin: 0;
+        position: relative !important;
+    }
 
 .slim #topBar {
     -webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
     height: 37px;
 }
 
-.slim #topBar .fixed_elem {
-    left: 0;
-    right: 0;
-    top: 0;
-}
+    .slim #topBar .fixed_elem {
+        left: 0;
+        right: 0;
+        top: 0;
+    }
 
 #headContent {
     margin: 0 auto;
     width: 980px;
 }
 
-.clearfix { zoom: 1; }
-
-.clearfix::after {
-    clear: both;
-    content: ".";
-    display: block;
-    font-size: 0;
-    height: 0;
-    line-height: 0;
-    visibility: hidden;
+.clearfix {
+    zoom: 1;
 }
+
+    .clearfix::after {
+        clear: both;
+        content: ".";
+        display: block;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
+    }
 
 #topBar #headContent {
     padding-right: 205px;
@@ -90,18 +214,18 @@ ul {
     z-index: 5;
 }
 
-#pageLogo a, #pageLogo a:hover, #pageLogo a:focus, #pageLogo a:active {
-    background-image: url(/Images/logo.png);
-    background-repeat: no-repeat;
-    background-size: auto;
-    display: block;
-    height: 31px;
-    outline: none;
-    overflow: hidden;
-    text-indent: -999px;
-    white-space: nowrap;
-    width: 105px;
-}
+    #pageLogo a, #pageLogo a:hover, #pageLogo a:focus, #pageLogo a:active {
+        background-image: url(/Images/logo.png);
+        background-repeat: no-repeat;
+        background-size: auto;
+        display: block;
+        height: 31px;
+        outline: none;
+        overflow: hidden;
+        text-indent: -999px;
+        white-space: nowrap;
+        width: 105px;
+    }
 
 #headNav {
     height: 30px;
@@ -114,11 +238,17 @@ ul {
     width: 350px;
 }
 
-#pageNav { margin-right: 1px; }
+#pageNav {
+    margin-right: 1px;
+}
 
-#pageNav .navItem, #pageNav #navAccount { float: left; }
+    #pageNav .navItem, #pageNav #navAccount {
+        float: left;
+    }
 
-ul { list-style-type: none; }
+ul {
+    list-style-type: none;
+}
 
 #pageNav .navItem a, #pageNav #navAccountLink {
     color: #D8DFEA;
@@ -131,42 +261,50 @@ ul { list-style-type: none; }
     vertical-align: top;
 }
 
-#pageNav .navItem a::after {
-    background: #526DA4;
-    content: " ";
-    display: block;
-    height: 14px;
-    position: absolute;
-    right: 0;
-    top: 9px;
-    width: 1px;
-}
+    #pageNav .navItem a::after {
+        background: #526DA4;
+        content: " ";
+        display: block;
+        height: 14px;
+        position: absolute;
+        right: 0;
+        top: 9px;
+        width: 1px;
+    }
 
-#pageNav .voiceBarToggle { display: none; }
-
-#pageNav .middleItem a, #pageNav .lastItem a { padding: 0 8px; }
-
-#pageNav .middleItem a, #pageNav .lastItem a, #pageNav #navAccountLink { margin-left: -1px; }
-
-#navAccount { position: relative; }
-
-#navAccount .navigation {
+#pageNav .voiceBarToggle {
     display: none;
-    max-width: 400px;
-    min-width: 200px;
 }
 
-#navAccount .contextualHelp, #navAccount .navigation {
-    background: white;
-    border: 1px solid #333;
-    border-bottom: 2px solid #333;
-    margin-top: -1px;
-    padding: 4px 0;
-    position: absolute;
-    right: -1px;
-    top: 100%;
-    z-index: 1;
+#pageNav .middleItem a, #pageNav .lastItem a {
+    padding: 0 8px;
 }
+
+#pageNav .middleItem a, #pageNav .lastItem a, #pageNav #navAccountLink {
+    margin-left: -1px;
+}
+
+#navAccount {
+    position: relative;
+}
+
+    #navAccount .navigation {
+        display: none;
+        max-width: 400px;
+        min-width: 200px;
+    }
+
+    #navAccount .contextualHelp, #navAccount .navigation {
+        background: white;
+        border: 1px solid #333;
+        border-bottom: 2px solid #333;
+        margin-top: -1px;
+        padding: 4px 0;
+        position: absolute;
+        right: -1px;
+        top: 100%;
+        z-index: 1;
+    }
 
 #pageNav .menuDivider {
     background: #DDD;
@@ -185,4 +323,106 @@ ul { list-style-type: none; }
     overflow: hidden;
     text-indent: -5000px;
     width: 24px;
+}
+
+#navSearch .uiTypeahead {
+    border: 1px solid #294A8F;
+    -webkit-border-radius: 2px;
+    border-top: 1px solid #123682;
+}
+
+.uiTypeahead {
+    background: white;
+    border: solid #BDC7D8;
+    border-width: 1px 0;
+    cursor: default;
+    position: relative;
+}
+
+.uiSearchInput {
+    background: white;
+    border: 1px solid #899BC1;
+    border-top-color: #6484B4;
+    display: inline-block;
+}
+
+#navSearch .uiTypeahead .wrap, #navSearch .uiSearchInput span {
+    border: none;
+}
+
+.uiTypeahead .wrap {
+    border: solid #BDC7D8;
+    border-width: 0 1px;
+}
+
+.uiTypeahead .innerWrap {
+    overflow: hidden;
+    zoom: 1;
+}
+
+#navSearch .uiSearchInput {
+    border: 0;
+    -webkit-border-radius: 1px;
+    border-top: 1px solid #D9D9D9;
+    padding: 0 0 1px;
+}
+
+.uiTypeahead .textInput {
+    background-color: transparent;
+    border: 0;
+    -webkit-box-sizing: border-box;
+    outline: 0;
+    width: 100%;
+}
+
+.uiSearchInput span {
+    border: 0;
+    border-top: 1px solid #EDEDED;
+    display: inline-block;
+    padding: 1px 0 2px;
+    position: relative;
+}
+
+#navSearch .uiSearchInput input {
+    padding-top: 2px;
+    width: 315px;
+}
+
+.uiSearchInput input {
+    border: 0;
+    margin: 0 22px 0 5px;
+    outline: none;
+    padding: 1px 5px 2px 0;
+    width: 190px;
+}
+
+.DOMControl_placeholder {
+    color: #777;
+}
+
+textarea, .inputtext, .inputpassword {
+    border: 1px solid #BDC7D8;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    margin: 0;
+    padding: 3px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+
+.uiSearchInput button {
+    background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yK/x/nDEHv4nTejR.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: -230px -631px;
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    height: 19px;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 22px;
 }

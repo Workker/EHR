@@ -7,11 +7,25 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-    <body>
-        @Html.Partial("_Header")
-        @RenderBody()
+<body>
+    <section id="super">
+        <header class="slim">
+            @Html.Partial("_Header")
+        </header>
+        <section id="page">
+            <section id="timeLine" class="lfloat">
+                @Html.Partial("_TimeLine")
+            </section>
+                        <section id="data" class="lfloat">
+                @Html.Partial("_Data")
+            </section>
+            <section id="center" class="rfloat">
+                @RenderBody()
+            </section>
+        </section>
+    </section>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
 
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
+</body>
 </html>

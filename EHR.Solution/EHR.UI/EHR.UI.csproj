@@ -193,6 +193,7 @@
     <Content Include="Content\site-style.css" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\u91_normal.png" />
     <Content Include="Images\WlrEvsTFI5C.png" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -222,6 +223,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_TimeLine.cshtml" />
+    <Content Include="Views\Shared\_Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
