@@ -6,26 +6,50 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#collapser').jqcollapse({
+                slide: true,
+                speed: 1000,
+                easing: 'easeOutCubic'
+            });
+
+            $('#collapser li').click(
+                function () {
+                    $(this).toggleClass("selected").siblings("li.active").toggleClass("clearfix");
+                });
+        });
+    </script>
 </head>
 <body>
     <section id="super">
         <header class="slim">
-            @Html.Partial("_Header")
+            @Html.Partial("_Head")
         </header>
-        <section id="page">
-            <section id="timeLine" class="lfloat">
-                @Html.Partial("_TimeLine")
-            </section>
-                        <section id="data" class="lfloat">
-                @Html.Partial("_Data")
-            </section>
-            <section id="center" class="rfloat">
-                @RenderBody()
-            </section>
-        </section>
+        <div class="page">
+            <div id="contentCol" class="fixed_elem">
+                <div id="content" class="clearfix">
+                    <section id="header" class="header">
+                        @Html.Partial("_Header")
+                    </section>
+                    
+                    <section id="timeLine" class="lfloat">
+                        @Html.Partial("_TimeLine")
+                    </section>
+                    <div class="verticalLine"></div>
+                    <section id="data" class="lfloat">
+                        @Html.Partial("_Data")
+                    </section>
+                    <section id="center" class="lfloat">
+                        @RenderBody()
+                    </section>
+                </div>
+            </div>
+        </div>
     </section>
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
-
+    @RenderSection("scripts", false)
 </body>
 </html>

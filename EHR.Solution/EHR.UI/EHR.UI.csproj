@@ -133,6 +133,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\fb-buttons.css" />
     <Content Include="Content\overrides.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -188,18 +189,28 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\token-input-facebook.css" />
     <Content Include="Content\workkerReset.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\site-style.css" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Images\Capture.PNG" />
+    <Content Include="Images\fb-icons.png" />
+    <Content Include="Images\fork.png" />
+    <Content Include="Images\line_vertical.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\topo.png" />
     <Content Include="Images\u91_normal.png" />
+    <Content Include="Images\user.png" />
     <Content Include="Images\WlrEvsTFI5C.png" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.collapse.js" />
+    <Content Include="Scripts\jquery.easing.js" />
+    <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -221,10 +232,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_TimeLine.cshtml" />
     <Content Include="Views\Shared\_Data.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

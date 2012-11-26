@@ -2,5 +2,102 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
+<form>
+    <fieldset id="admissao">
+        <legend class="legenda">Admiss&atilde;o</legend>
+        <br />
+        <div>
+            <label>Motivo da admissão:</label>
+            <input type="text" id="demo-input-facebook-theme" name="blah2" />
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#demo-input-facebook-theme").tokenInput("home/Admission", {
+                        theme: "facebook"
+                    });
+                });
+            </script>
+        </div>
+        <br />
+    </fieldset>
+    <hr />
+    <fieldset id="alergias">
+        <legend class="legenda">Alergias</legend>
+        <br />
+        <label>Alergia Medicamentos  e outras:&nbsp;</label>
+        <input type="radio" name="alergia" value="true" />
+        Sim&nbsp;
+        <input type="radio" name="alergia" value="false" />
+        Não
+        <br />
+        <br />
+        <label>A que:</label>
+        <input type="text" class="inputtext" />
+        <br />
+        <br />
+        <label>Tipo(s):&nbsp;</label>
+        <input type="radio" name="tipos" />
+        Angioedema&nbsp;&nbsp;
+        <input type="radio" name="tipos" />
+        Urtic&aacute;ria&nbsp;&nbsp;
+        <input type="radio" name="tipos" />
+        Choque Anafil&aacute;tico&nbsp;&nbsp;
+        <input type="radio" name="tipos" />
+        Broncoespasmo&nbsp;&nbsp;
+        <input type="radio" name="tipos" />
+        Laringoespasmo&nbsp;&nbsp;
+        <input type="radio" name="tipos" />
+        Outros
+        <br />
+        <br />
+        <hr />
+        <br />
+    </fieldset>
+    <fieldset id="diagnosticos">
+        <legend class="legenda">Diagn&oacute;sticos</legend>
+        <table id="tabelaDeDiagnosticos" class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="actionCollum"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Diagn&oacute;stico Principal</td>
+                    <td>D63.0*</td>
+                    <td>Anemia em neoplasias (C00-D48)</td>
+                    <td class="actionCollum"><a href="#">Edit</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="grayBox">
+            <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
+            <input type="text" class="inputtext" value="Diagnóstico Secundário" /><br />
+            <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="inputtext" value="I51.7" /><br />
+            <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" class="inputtext" value="Cardiomegalia" /><br />
+            <br />
+            <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" value="Cancel" class="uibutton large" />
+        </div>
+        <table class="table" style="border-top: 1px solid #AAA; margin-top: 5px;">
+            <tbody >
+                <tr>
+                    <td>Diagn&oacute;stico Ternário</td>
+                    <td>I23,-</td>
+                    <td>Algumas complicações atuais</td>
+                    <td class="actionCollum"><a href="#">Edit</a></td>
+                </tr>
+                <tr >
+                    <td style="border-top: 1px solid #AAA;"></td>
+                    <td style="border-top: 1px solid #AAA;"></td>
+                    <td style="border-top: 1px solid #AAA;"></td>
+                    <td class="actionCollum" style="border-top: 1px solid #AAA;"><a href="#">New</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</form>
