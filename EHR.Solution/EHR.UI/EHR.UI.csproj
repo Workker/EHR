@@ -193,6 +193,7 @@
     <Content Include="Content\workkerReset.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\site-style.css" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\Capture.PNG" />
     <Content Include="Images\fb-icons.png" />
