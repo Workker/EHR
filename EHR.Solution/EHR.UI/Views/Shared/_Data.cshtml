@@ -1,12 +1,118 @@
-﻿<ul id="dataListMenu">
-    <li><a href="#">Dados Gerais</a></li>
-    <li><a href="#">Procedimentos</a></li>
-    <li><a href="#">Abtimicrobianos</a></li>
-    <li><a href="#">Outros Medicamentos Relevantes</a></li>
-    <li><a href="#">Exames</a></li>
-    <li><a href="#">Hemotransfusão</a></li>
-    <li><a href="#">Colonização por MDR</a></li>
-    <li><a href="#">Receituário</a></li>
-    <li><a href="#">Dados da Alta</a></li>
-    <li><a href="#">Formulário</a></li>
-</ul>
+﻿<script language="JavaScript">
+
+    $(document).ready(function () {
+
+        var Menu = $("#_Menu").AjaxFlagMenu({
+            Caption: 'Menu',
+            CaptionClass: 'CaptionClass',
+            onOutClass: 'onOutClass',
+            onOverClass: 'onOverClass',
+            onClickClass: 'onClickClass',
+            hscOutClass: 'hscOutClass',
+            hscClickClass: 'hscClickClass',
+            Loading_gif: '../../Images/Loading.gif',
+            ajaxContent: 'ajaxContent'
+        });
+        //Dados Gerais
+        var Commentaire = Menu.add({
+            Title: 'Dados Gerais',
+            onOutIcon: '../../Images/com_d.png',
+            onClickIcon: '../../Images/com_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        Commentaire.sethscCorner();
+        //Procedimentos
+        Menu.add({
+            Title: 'Procedimentos',
+            onOutIcon: '../../Images/event_d.png',
+            onClickIcon: '../../Images/event_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        //Abtimicrobianos
+        Menu.add({
+            Title: 'Abtimicrobianos',
+            onOutIcon: '../../Images/link_d.png',
+            onClickIcon: '../../Images/link_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        //Outros Medicamentos Relevantes
+        Menu.add({
+            Title: 'Outros Medicamentos Relevantes',
+            onOutIcon: '../../Images/help_d.png',
+            onClickIcon: '../../Images/help_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+
+
+
+        //Exames
+        Menu.add({
+            Title: 'Exames',
+            onOutIcon: '../../Images/help_d.png',
+            onClickIcon: '../../Images/help_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        //Hemotransfusão
+        Menu.add({
+            Title: 'Hemotransfusão',
+            onOutIcon: '../../Images/help_d.png',
+            onClickIcon: '../../Images/help_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        //Colonização por MDR
+        Menu.add({
+            Title: 'Colonização por MDR',
+            onOutIcon: '../../Images/help_d.png',
+            onClickIcon: '../../Images/help_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        //Receituário
+        Menu.add({
+            Title: 'Receituário',
+            onOutIcon: '../../Images/help_d.png',
+            onClickIcon: '../../Images/help_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        //Dados da Alta
+        Menu.add({
+            Title: 'Dados da Alta',
+            onOutIcon: '../../Images/help_d.png',
+            onClickIcon: '../../Images/help_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+        //Formulário
+        Menu.add({
+            Title: 'Formulário',
+            onOutIcon: '../../Images/help_d.png',
+            onClickIcon: '../../Images/help_c.png',
+            HtmlSatusContent: '',
+            url: '#',
+            data: ''
+        });
+
+
+        $("#_td").corner("4px");
+        $("#o_td").corner("4px");
+
+    });
+
+ </script>
+<div id="_Menu"></div>

@@ -139,24 +139,45 @@ section #header {
     width: 22%;
 }
 
-#dataListMenu li {
-    background-image: url("../Images/u91_normal.png");
-    background-repeat: no-repeat;
-    height: 32px;
-    margin: -7px;
-    padding-left: 7px !important;
-    padding-top: 7px !important;
-    width: 239px;
+.CaptionClass {
+    font-weight: bold;
 }
 
-    #dataListMenu li a {
-        color: #627AAD;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: normal;
-        text-decoration: none;
-        word-wrap: break-word;
-    }
+.onOverClass {
+    border-top: #D6D9DE solid 1px;
+    background-color: #ECEEF4;
+}
+
+.onOutClass {
+    border-top: #D6D9DE solid 1px;
+    background-color: #ffffff;
+}
+
+.onClickClass {
+    border: #3B59B6 solid 1px;
+    background-color: #6D84B4;
+    color: #FFFFFF;
+}
+
+.hscClickClass {
+    background-color: #7288B7;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.hscOutClass {
+    color: #6D84B4;
+    background-color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+
 
 .tinyViewport .fixed_elem {
     position: static !important;
