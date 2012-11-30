@@ -14,7 +14,10 @@ namespace EHR.UI
                         "~/Scripts/jquery.collapse.js",
                         "~/Scripts/jquery.tokeninput.js",
                         "~/Scripts/jquery.corner.js",
-                        "~/Scripts/AjaxFlagMenu-1.0.2.min.js"));
+                        "~/Scripts/AjaxFlagMenu-1.0.2.min.js",
+                        "~/Scripts/jquery.tmpl.js",
+                        "~/Scripts/knockout-2.1.0.js",
+                        "~/Scripts/knockout-mapping.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
