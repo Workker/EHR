@@ -101,16 +101,25 @@
                     onClickClass: 'onClickClass',
                     hscOutClass: 'hscOutClass',
                     hscClickClass: 'hscClickClass',
-                    Loading_gif: '../../Images/Loading.gif',
-                    ajaxContent: 'ajaxContent'
+                    Loading_gif: '../../Images/Loading.gif'
+                    //ajaxContent: 'ajaxContent'
                 });
                 
+                var Commentaire = Menu.add({
+                    Title: 'Gráficos',
+                    onOutIcon: '../../Images/com_d.png',
+                    onClickIcon: '../../Images/com_c.png',
+                    HtmlSatusContent: '',
+                    url: '/Charts/Index',
+                    data: ''
+                });
+
                 var Commentaire = Menu.add({
                     Title: 'Dados Gerais',
                     onOutIcon: '../../Images/com_d.png',
                     onClickIcon: '../../Images/com_c.png',
                     HtmlSatusContent: '',
-                    url: '#',
+                    url: '/Home/Index',
                     data: ''
                 });
                 Commentaire.sethscCorner();
