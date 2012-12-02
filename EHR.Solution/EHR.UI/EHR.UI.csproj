@@ -130,6 +130,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\facebook.css" />
     <Content Include="Content\fb-buttons.css" />
     <Content Include="Content\overrides.css" />
     <Content Include="Content\themes\base\images\preasurechart1.jpg" />
@@ -224,6 +225,7 @@
     <Content Include="Images\Profiles\5.jpg" />
     <Content Include="Images\Profiles\6.jpg" />
     <Content Include="Images\Profiles\7.jpg" />
+    <Content Include="Images\index.png" />
     <Content Include="Images\receituario.png" />
     <Content Include="Images\topo.png" />
     <Content Include="Images\u91_normal.png" />
