@@ -61,22 +61,22 @@
                     <td>Diagn&oacute;stico Principal</td>
                     <td>D63.0*</td>
                     <td>Anemia em neoplasias (C00-D48)</td>
-                    <td class="actionCollum"><a href="#">Edit</a></td>
+                    <td class="actionCollum"><a  href="#" onclick="exibeForm();">Edit</a></td>
                 </tr>
             </tbody>
         </table>
-        <div class="grayBox">
+        <div id="divForm" class="grayBox" style="display:none;">
             <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
-            <input type="text" class="inputtext" value="Diagnóstico Secundário" /><br />
+            <input type="text" class="inputtext" value="Diagn&oacute;stico Principal" /><br />
             <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" class="inputtext" value="I51.7" /><br />
+            <input type="text" class="inputtext" value="D63.0*" /><br />
             <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" class="inputtext" value="Cardiomegalia" /><br />
+            <input type="text" class="inputtext" value="Anemia em neoplasias (C00-D48)" /><br />
             <br />
-            <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-            <input type="reset" value="Cancel" class="uibutton large" />
+            <input type="submit"  onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick="fechaForm();" value="Cancel" class="uibutton large" />
         </div>
-        <table class="table" style="border-top: 1px solid #AAA; margin-top: 5px;">
+        <table class="table" style="margin-top: 5px;">
             <tbody >
                 <tr>
                     <td>Diagn&oacute;stico Ternário</td>

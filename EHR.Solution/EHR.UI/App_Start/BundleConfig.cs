@@ -17,6 +17,7 @@ namespace EHR.UI
                         "~/Scripts/AjaxFlagMenu-1.0.2.min.js",
                         "~/Scripts/jquery.tmpl.js",
                         "~/Scripts/knockout-2.1.0.js",
+                        "~/Scripts/highslide-with-gallery.js",
                         "~/Scripts/knockout-mapping.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
@@ -30,8 +31,8 @@ namespace EHR.UI
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/workkerReset.css", "~/Content/site-style.css", "~/Content/token-input-facebook.css", "~/Content/fb-buttons.css"));
+            //
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/workkerReset.css", "~/Content/site-style.css", "~/Content/token-input-facebook.css", "~/Content/fb-buttons.css", "~/Content/highslide.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
