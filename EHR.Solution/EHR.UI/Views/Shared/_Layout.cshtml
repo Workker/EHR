@@ -246,6 +246,7 @@
 
 
         $(function () {
+            debugger;
             var chart;
             $(document).ready(function () {
                 chart = new Highcharts.Chart({
@@ -294,6 +295,97 @@
 
         });
 
+        $(function () {
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'container2',
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Daily Average Temperature'
+                    },
+                    subtitle: {
+                        text: 'Source: Barra D´or'
+                    },
+                    xAxis: {
+                        categories: ['22/11', '23/11', '24/11', '25/11', '26/11', '27/11', '28/11', '29/11', '30/11', '01/12', '02/12', '03/12']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Temperature'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false,
+                        formatter: function () {
+                            return '<b>' + this.series.name + '</b><br/>' +
+                                this.x + ': ' + this.y + '°C';
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [{
+                        name: 'Temperature',
+                        data: [36, 36, 36, 35.5, 37, 37, 38, 39, 40, 41, 37, 36]
+                    }]
+                });
+            });
+
+        });
+
+        $(function () {
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'container3',
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'Daily Average Pulse'
+                    },
+                    subtitle: {
+                        text: 'Source: Barra D´or'
+                    },
+                    xAxis: {
+                        categories: ['22/11', '23/11', '24/11', '25/11', '26/11', '27/11', '28/11', '29/11', '30/11', '01/12', '02/12', '03/12']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Temperature'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false,
+                        formatter: function () {
+                            return '<b>' + this.series.name + '</b><br/>' +
+                                this.x + ': ' + this.y + '°C';
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [{
+                        name: 'Temperature',
+                        data: [107, 107, 108, 109, 110, 110, 111, 112, 113, 106, 110, 120]
+                    }]
+                });
+            });
+
+        });
 
     </script>
 </body>
