@@ -6,11 +6,15 @@ using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
 {
-    public class SearchPeopleController : Controller
+    public class AccountController : Controller
     {
+        //
+        // GET: /Login/
+
         public ActionResult Index()
         {
             return View();
         }
+
     }
 }

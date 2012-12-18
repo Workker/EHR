@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -120,11 +122,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ChartsController.cs" />
-    <Compile Include="Controllers\ExamsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\SearchPeopleController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -324,15 +323,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_Head.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_TimeLine.cshtml" />
-    <Content Include="Views\Shared\_Data.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
-    <Content Include="Views\SearchPeople\Index.cshtml" />
-    <Content Include="Views\Charts\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Exams\Index.cshtml" />
+    <Content Include="Views\Shared\_HeadBar.cshtml" />
+    <Content Include="Views\Patient\_TimeLine.cshtml" />
+    <Content Include="Views\Patient\_Data.cshtml" />
+    <Content Include="Views\Patient\_ProfileHeader.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Patient\_Charts.cshtml" />
+    <Content Include="Views\Patient\_Exams.cshtml" />
+    <Content Include="Views\Patient\_GeneralData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -369,6 +368,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
