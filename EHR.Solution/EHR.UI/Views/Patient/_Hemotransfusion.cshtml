@@ -1,51 +1,23 @@
 ﻿<form>
-    <fieldset id="diagnosticos">
-        <legend class="legenda">Diagn&oacute;sticos</legend>
-        <table id="tabelaDeDiagnosticos" class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th class="actionCollum"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Diagn&oacute;stico Principal</td>
-                    <td>D63.0*</td>
-                    <td>Anemia em neoplasias (C00-D48)</td>
-                    <td class="actionCollum"><a  href="#" onclick="exibeForm();">Edit</a></td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="divForm" class="grayBox" style="display:none;">
-            <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
-            <input type="text" class="inputtext" value="Diagn&oacute;stico Principal" /><br />
-            <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" class="inputtext" value="D63.0*" /><br />
-            <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" class="inputtext" value="Anemia em neoplasias (C00-D48)" /><br />
-            <br />
-            <input type="submit"  onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-            <input type="reset" onclick="fechaForm();" value="Cancel" class="uibutton large" />
-        </div>
-        <table class="table" style="margin-top: 5px;">
-            <tbody >
-                <tr>
-                    <td>Diagn&oacute;stico Ternário</td>
-                    <td>I23,-</td>
-                    <td>Algumas complicações atuais</td>
-                    <td class="actionCollum"><a href="#">Edit</a></td>
-                </tr>
-                <tr >
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td class="actionCollum" style="border-top: 1px solid #AAA;"><a href="#">New</a></td>
-                </tr>
-            </tbody>
-        </table>
+    <fieldset id="Hemotransfusion">
+        <legend class="legenda">Hemotransfusion</legend><br/><br/>
+        <label>Hemotransfusion: </label>&nbsp;<input type="radio" name="hemotransfusion" value="yes"/> Yes&nbsp;&nbsp;<input type="radio" name="hemotransfusion" value="no"/> No<br/><br/>
+        <h3>Reaction</h3>
+        <label>Transfusion: </label>&nbsp;&nbsp;<input type="radio" name="transfusion" value="yes"/> Yes&nbsp;&nbsp;<input type="radio" name="transfusion" value="no"/> No<br/><br/>
+        <label>Type:</label><br/>
+        <input type="checkbox" name="type.1"/> Aloimunização eritrocitária<br/>
+        <input type="checkbox" name="type.2"/> Aloimunização HLA<br/>
+        <input type="checkbox" name="type.3" checked="checked"/> Imunomodulação <br/>
+        <input type="checkbox" name="type.4" checked="checked"/> Lesão pulmonar relacionada a transfusão <br/>
+        <input type="checkbox" name="type.5"/> Púrpura pós transfusional<br/>
+        <input type="checkbox" name="type.6"/> Reação Alérgica: leve; moderada; grave<br/>
+        <input type="checkbox" name="type.7"/> Reação enxerto x hospedeiro<br/>
+        <input type="checkbox" name="type.8"/> Reação Febril não hemolítica<br/>
+        <input type="checkbox" name="type.9"/> Reação Hemolítica Imune 
     </fieldset>
-
+        <br />
+    <hr />
+    <br />
+    <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" value="Cancel" class="uibutton large" />
 </form>
