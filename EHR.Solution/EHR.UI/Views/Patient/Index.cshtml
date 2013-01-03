@@ -2,3 +2,24 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section PageLayout
+                    {
+    <section id="header">
+        @Html.Partial("Layout/_ProfileHeader")
+    </section>
+
+    <section id="timeLine" class="lfloat">
+        @Html.Partial("Layout/_TimeLine")
+    </section>
+    <div class="verticalLine"></div>
+    <section id="data" class="lfloat">
+        @Html.Partial("Layout/_Data")
+    </section>
+}
+<section id="center" class="lfloat">
+    @{
+        Html.RenderPartial("_GeneralData");
+    }
+    <div id="test"></div>
+</section>

@@ -288,6 +288,7 @@
     <Content Include="Images\user.png" />
     <Content Include="Images\WlrEvsTFI5C.png" />
     <Content Include="Scripts\AjaxFlagMenu-1.0.2.min.js" />
+    <Content Include="Scripts\EHR-Script.js" />
     <Content Include="Scripts\exporting.js" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\highslide-with-gallery.js" />
@@ -324,14 +325,23 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_HeadBar.cshtml" />
-    <Content Include="Views\Patient\_TimeLine.cshtml" />
-    <Content Include="Views\Patient\_Data.cshtml" />
-    <Content Include="Views\Patient\_ProfileHeader.cshtml" />
+    <Content Include="Views\Patient\Layout\_TimeLine.cshtml" />
+    <Content Include="Views\Patient\Layout\_Data.cshtml" />
+    <Content Include="Views\Patient\Layout\_ProfileHeader.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Patient\_Charts.cshtml" />
     <Content Include="Views\Patient\_Exams.cshtml" />
     <Content Include="Views\Patient\_GeneralData.cshtml" />
+    <Content Include="Views\Patient\_Procedures.cshtml" />
+    <Content Include="Views\Patient\_Antimicrobial.cshtml" />
+    <Content Include="Views\Patient\_OtherMedicationsRelevant.cshtml" />
+    <Content Include="Views\Patient\_Hemotransfusion.cshtml" />
+    <Content Include="Views\Patient\_ColonizationbyMDR.cshtml" />
+    <Content Include="Views\Patient\_Prescriptions.cshtml" />
+    <Content Include="Views\Patient\_DataHigh.cshtml" />
+    <Content Include="Views\Patient\_Form.cshtml" />
+    <Content Include="Views\Patient\_Images.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

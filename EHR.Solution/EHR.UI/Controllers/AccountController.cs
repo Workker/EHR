@@ -8,9 +8,6 @@ namespace EHR.UI.Controllers
 {
     public class AccountController : Controller
     {
-        //
-        // GET: /Login/
-
         public ActionResult Index()
         {
             return View();

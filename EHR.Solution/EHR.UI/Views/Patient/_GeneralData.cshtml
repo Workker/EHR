@@ -4,7 +4,7 @@
         <br />
         <div>
             <label>Motivo da admissão:</label>
-            <input type="text" id="demo-input-facebook-theme" name="blah2" />
+            <input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
         </div>
         <br />
     </fieldset>
@@ -57,11 +57,11 @@
                     <td>Diagn&oacute;stico Principal</td>
                     <td>D63.0*</td>
                     <td>Anemia em neoplasias (C00-D48)</td>
-                    <td class="actionCollum"><a  href="#" onclick="exibeForm();">Edit</a></td>
+                    <td class="actionCollum"><a  href="#" onclick=" exibeForm(); ">Edit</a></td>
                 </tr>
             </tbody>
         </table>
-        <div id="divForm" class="grayBox" style="display:none;">
+        <div id="divForm" class="grayBox" style="display: none;">
             <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
             <input type="text" class="inputtext" value="Diagn&oacute;stico Principal" /><br />
             <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -69,8 +69,8 @@
             <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="text" class="inputtext" value="Anemia em neoplasias (C00-D48)" /><br />
             <br />
-            <input type="submit"  onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-            <input type="reset" onclick="fechaForm();" value="Cancel" class="uibutton large" />
+            <input type="submit"  onclick=" fechaForm(); " value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick=" fechaForm(); " value="Cancel" class="uibutton large" />
         </div>
         <table class="table" style="margin-top: 5px;">
             <tbody >
@@ -89,4 +89,25 @@
             </tbody>
         </table>
     </fieldset>
+    <br/>
+    <fieldset id="medicineUsePrior">
+        <legend></legend>
+        <label>Medicamentos de uso pr&eacute;vio:</label><br/>
+        <textarea rows="10" cols="116"></textarea><br/><br/>
+        <label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br/>
+        <textarea rows="10" cols="116"></textarea>
+    </fieldset>
 </form>
+<script type="text/javascript">
+    window.onload = function() {
+        $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
+            theme: "facebook"
+        });
+    };
+
+    $(document).ready(function() {
+        $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
+            theme: "facebook"
+        });
+    });
+</script>

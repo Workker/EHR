@@ -1,0 +1,258 @@
+﻿// Suggest of search
+//Todo Componentizar
+(function ($) {
+    var baseModel =
+        {
+            query: "",
+            results: []
+        };
+
+    var viewModel = ko.mapping.fromJS(baseModel);
+    viewModel.doSearch = function () {
+        var $this = this;
+        setTimeout(function () {
+            var resultModel = null;
+            var q = $this.query();
+            if (q == "") {
+                resultModel = { results: [] };
+                ko.mapping.updateFromJS(viewModel, resultModel);
+            } else {
+                $.ajax({
+                    url: "../Patient/SearchPeaple",
+                    data: { "query": q },
+                    type: "GET",
+                    dataType: "json",
+                    success: function (r) {
+                        resultModel = r;
+                        ko.mapping.updateFromJS(viewModel, resultModel);
+                    }
+                });
+            }
+        }, 1);
+
+        return true;
+    };
+
+    window.vm = viewModel;
+    ko.applyBindings(viewModel, $("#search").get(0));
+})(jQuery);
+
+// Timeline animation
+$(function () {
+    $('#collapser').jqcollapse({
+        slide: true,
+        speed: 1000,
+        easing: 'easeOutCubic'
+    });
+
+    $('#collapser li').click(
+        function () {
+            $(this).toggleClass("selected").siblings("li.active").toggleClass("clearfix");
+        });
+});
+
+// Generate Data menu
+// Todo Componentizar
+$(document).ready(function () {
+
+    var Menu = $("#_Menu").AjaxFlagMenu({
+        Caption: 'Menu',
+        CaptionClass: 'CaptionClass',
+        onOutClass: 'onOutClass',
+        onOverClass: 'onOverClass',
+        onClickClass: 'onClickClass',
+        hscOutClass: 'hscOutClass',
+        hscClickClass: 'hscClickClass',
+        Loading_gif: '../../Images/Loading.gif',
+        ajaxContent: 'center'
+    });
+
+    Menu.add({
+        Title: 'Gráficos',
+        onOutIcon: '../../Images/graphics.png',
+        onClickIcon: '../../Images/graphics.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Charts',
+        data: ''
+    }).sethscCorner();
+    
+    Menu.add({
+        Title: 'Dados Gerais',
+        onOutIcon: '../../Images/dados_gerais.png',
+        onClickIcon: '../../Images/dados_gerais.png',
+        HtmlSatusContent: '',
+        url: '/Patient/GeneralData',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Imagens',
+        onOutIcon: '../../Images/exames.png',
+        onClickIcon: '../../Images/exames.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Images',
+        data: ''
+    });
+    
+    Menu.add({
+        Title: 'Exames',
+        onOutIcon: '../../Images/exames.png',
+        onClickIcon: '../../Images/exames.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Exams',
+        data: ''
+    });
+
+    Menu.add({
+        Title: 'Procedimentos',
+        onOutIcon: '../../Images/procedimentos.png',
+        onClickIcon: '../../Images/procedimentos.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Procedures',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Abtimicrobianos',
+        onOutIcon: '../../Images/abtimicrobianos.png',
+        onClickIcon: '../../Images/abtimicrobianos.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Antimicrobial',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Medicamentos',
+        onOutIcon: '../../Images/other_medices.png',
+        onClickIcon: '../../Images/other_medices.png',
+        HtmlSatusContent: '',
+        url: '/Patient/OtherMedicationsRelevant',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Hemotransfusão',
+        onOutIcon: '../../Images/hemotransfusao.png',
+        onClickIcon: '../../Images/hemotransfusao.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Hemotransfusion',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Colonização MDR',
+        onOutIcon: '../../Images/mdr.png',
+        onClickIcon: '../../Images/mdr.png',
+        HtmlSatusContent: '',
+        url: '/Patient/ColonizationbyMdr',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Receituário',
+        onOutIcon: '../../Images/receituario.png',
+        onClickIcon: '../../Images/receituario.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Prescriptions',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Dados da Alta',
+        onOutIcon: '../../Images/dados_alta.png',
+        onClickIcon: '../../Images/dados_alta.png',
+        HtmlSatusContent: '',
+        url: '/Patient/DataHigh',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
+        Title: 'Formulário',
+        onOutIcon: '../../Images/formulario.png',
+        onClickIcon: '../../Images/formulario.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Form',
+        data: ''
+    }).sethscCorner();
+
+    $("#_td").corner("4px");
+    $("#o_td").corner("4px");
+
+});
+
+// Suggest of text
+//Todo Componentizar
+
+
+//Water mark
+$(document).ready(function () {
+
+    var watermark = 'Search for people, places and things';
+
+    //init, set watermark text and class
+    $('.DOMControl_placeholder').val(watermark).addClass('watermark');
+
+    //if blur and no value inside, set watermark text and class again.
+    $('.DOMControl_placeholder').blur(function () {
+        if ($(this).val().length == 0) {
+            $(this).val(watermark).addClass('watermark');
+        }
+    });
+
+    //if focus and text is watermrk, set it to empty and remove the watermark class
+    $('.DOMControl_placeholder').focus(function () {
+        if ($(this).val() == watermark) {
+            $(this).val('').removeClass('watermark');
+        }
+    });
+});
+
+
+//Galeria de Exames:
+hs.graphicsDir = '../Images/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.fadeInOut = true;
+hs.dimmingOpacity = 0.8;
+hs.wrapperClassName = 'borderless floating-caption';
+hs.captionEval = 'this.thumb.alt';
+hs.marginLeft = 100; // make room for the thumbstrip
+hs.marginBottom = 80; // make room for the controls and the floating caption
+hs.numberPosition = 'caption';
+hs.lang.number = '%1/%2';
+
+// Add the slideshow providing the controlbar and the thumbstrip
+hs.addSlideshow({
+    //slideshowGroup: 'group1',
+    interval: 5000,
+    repeat: false,
+    useControls: true,
+    overlayOptions: {
+        className: 'text-controls',
+        position: 'bottom center',
+        relativeTo: 'viewport',
+        offsetX: 50,
+        offsetY: -5
+
+    },
+    thumbstrip: {
+        position: 'middle left',
+        mode: 'vertical',
+        relativeTo: 'viewport'
+    }
+});
+
+// Add the simple close button
+hs.registerOverlay({
+    html: '<div class="closebutton" onclick="return hs.close(this)" title="Close"></div>',
+    position: 'top right',
+    fade: 2 // fading the semi-transparent overlay looks bad in IE
+});
+
+function exibeForm() {
+
+    $("#divForm").show();
+}
+function fechaForm() {
+    $("#divForm").hide();
+}
