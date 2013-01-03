@@ -1,50 +1,46 @@
 ﻿<form>
-<fieldset id="diagnosticos">
-    <legend class="legenda">Diagn&oacute;sticos</legend>
-    <table id="tabelaDeDiagnosticos" class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th class="actionCollum"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Diagn&oacute;stico Principal</td>
-                <td>D63.0*</td>
-                <td>Anemia em neoplasias (C00-D48)</td>
-                <td class="actionCollum"><a  href="#" onclick="exibeForm();">Edit</a></td>
-            </tr>
-        </tbody>
-    </table>
-    <div id="divForm" class="grayBox" style="display:none;">
-        <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
-        <input type="text" class="inputtext" value="Diagn&oacute;stico Principal" /><br />
-        <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" class="inputtext" value="D63.0*" /><br />
-        <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" class="inputtext" value="Anemia em neoplasias (C00-D48)" /><br />
-        <br />
-        <input type="submit"  onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-        <input type="reset" onclick="fechaForm();" value="Cancel" class="uibutton large" />
-    </div>
-    <table class="table" style="margin-top: 5px;">
-        <tbody >
-            <tr>
-                <td>Diagn&oacute;stico Ternário</td>
-                <td>I23,-</td>
-                <td>Algumas complicações atuais</td>
-                <td class="actionCollum"><a href="#">Edit</a></td>
-            </tr>
-            <tr >
-                <td style="border-top: 1px solid #AAA;"></td>
-                <td style="border-top: 1px solid #AAA;"></td>
-                <td style="border-top: 1px solid #AAA;"></td>
-                <td class="actionCollum" style="border-top: 1px solid #AAA;"><a href="#">New</a></td>
-            </tr>
-        </tbody>
-    </table>
-</fieldset>
-    </form>
+    <fieldset id="medices">
+        <legend class="legenda">Medices</legend>
+        <table id="tableMedices" class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="actionCollum"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Novalgina</td>
+                    <td></td>
+                    <td>1 Days</td>
+                    <td class="actionCollum"><a href="#" onclick="exibeForm();">Edit</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="divForm" class="grayBox" style="display: none;">
+            <label>Item:</label>&nbsp;&nbsp;&nbsp;
+            <select>
+                <option selected="selected">Novalex 50%</option>
+            </select><br />
+            <br />
+            <label>Period:</label>
+            <input type="number" class="inputtext" value="1" />&nbsp;<select><option selected="selected">Days</option>
+            </select><br />
+            <br />
+            <input type="submit" onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick="fechaForm();" value="Cancel" class="uibutton large" />
+        </div>
+        <table class="table" style="margin-top: 5px;">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="actionCollum"><a href="#">New</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</form>
