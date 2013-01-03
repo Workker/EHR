@@ -1,50 +1,59 @@
 ﻿<form>
-<fieldset id="diagnosticos">
-    <legend class="legenda">Diagn&oacute;sticos</legend>
-    <table id="tabelaDeDiagnosticos" class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th class="actionCollum"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Diagn&oacute;stico Principal</td>
-                <td>D63.0*</td>
-                <td>Anemia em neoplasias (C00-D48)</td>
-                <td class="actionCollum"><a  href="#" onclick="exibeForm();">Edit</a></td>
-            </tr>
-        </tbody>
-    </table>
-    <div id="divForm" class="grayBox" style="display:none;">
-        <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
-        <input type="text" class="inputtext" value="Diagn&oacute;stico Principal" /><br />
-        <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-        <input type="text" class="inputtext" value="D63.0*" /><br />
-        <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="text" class="inputtext" value="Anemia em neoplasias (C00-D48)" /><br />
-        <br />
-        <input type="submit"  onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+    <fieldset id="exams">
+        <legend class="legenda">Exams</legend>
+        <table id="tableExams" class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="actionCollum"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Laboratory</td>
+                    <td>GHGHGHG</td>
+                    <td>20/05/2012</td>
+                    <td class="actionCollum"><a href="#" onclick="exibeForm();">Edit</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="divForm" class="grayBox" style="display: none;">
+            <label>Type of Exam:</label>
+            <select>
+                <option selected="selected">Laboratory</option>
+            </select>
+            <br /><br/>
+            <label>Date:</label>
+            <select name="dob_month" id="dob_month" class="input_pulldown">
+                <option value="0">Month:</option>
+                <option value="5" selected="selected">May</option>
+            </select>
+            <select name="dob_day" id="dob_day" class="input_pulldown">
+                <option value="0">Select...</option>
+                <option value="24" selected="selected">24</option>
+            </select>
+            <select name="dob_year" id="dob_year" class="input_pulldown">
+                <option value="0">Select...</option>
+                <option value="2012" selected="selected">2012</option>
+            </select>
+            <br /><br/>
+            <label>Description of Result:</label><br/>
+            <textarea></textarea><br />
+            <br />
+            <input type="submit" onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
         <input type="reset" onclick="fechaForm();" value="Cancel" class="uibutton large" />
-    </div>
-    <table class="table" style="margin-top: 5px;">
-        <tbody >
-            <tr>
-                <td>Diagn&oacute;stico Ternário</td>
-                <td>I23,-</td>
-                <td>Algumas complicações atuais</td>
-                <td class="actionCollum"><a href="#">Edit</a></td>
-            </tr>
-            <tr >
-                <td style="border-top: 1px solid #AAA;"></td>
-                <td style="border-top: 1px solid #AAA;"></td>
-                <td style="border-top: 1px solid #AAA;"></td>
-                <td class="actionCollum" style="border-top: 1px solid #AAA;"><a href="#">New</a></td>
-            </tr>
-        </tbody>
-    </table>
-</fieldset>
-    </form> 
+        </div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td ></td>
+                    <td></td>
+                    <td ></td>
+                    <td class="actionCollum"><a href="#">New</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</form>
