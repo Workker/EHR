@@ -536,7 +536,7 @@ textarea, .inputtext, .inputpassword {
 
 .table {
     border-bottom: 1px solid #AAA;
-    table-layout: auto;
+    width: 695px;
 }
 
     .table th {
@@ -548,7 +548,7 @@ textarea, .inputtext, .inputpassword {
     }
 
     .table td, .table th {
-        width: 190px;
+        padding-right: 10px;
     }
 
     .table .actionCollum {

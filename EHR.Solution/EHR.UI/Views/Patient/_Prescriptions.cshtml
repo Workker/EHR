@@ -1,6 +1,6 @@
 ﻿<form>
     <fieldset id="receituario">
-        <legend class="legenda">Diagn&oacute;sticos</legend>
+        <legend class="legenda">Receituario</legend>
         <table id="tabelaDeReceituario" class="table">
             <thead>
                 <tr>
@@ -21,36 +21,68 @@
                     <td>Auricular</td>
                     <td>Em caso de Diarréia</td>
                     <td>1 Meses</td>
-                    <td class="actionCollum"><a  href="#" onclick="exibeForm();">Edit</a></td>
+                    <td class="actionCollum"><a href="#" onclick="exibeForm();">Edit</a></td>
                 </tr>
             </tbody>
         </table>
-        <div id="divForm" class="grayBox" style="display:none;">
-            <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
-            <input type="text" class="inputtext" value="Diagn&oacute;stico Principal" /><br />
-            <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" class="inputtext" value="D63.0*" /><br />
-            <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" class="inputtext" value="Anemia em neoplasias (C00-D48)" /><br />
+        <div id="divForm" class="grayBox" style="display: none;">
+            <label>Medicamentos:</label>&nbsp;
+            <select>
+                <option selected="selected">Novalgina</option>
+            </select><br />
             <br />
-            <input type="submit"  onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <label>Outro Item:</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" /><br />
+            <br />
+            <label>Dose:</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" value="1.00" step="0.01" min="0"/>&nbsp;&nbsp;<select><option selected="selected">ml</option>
+            </select><br />
+            <br />
+            <label>Apresentação:</label>
+            &nbsp;&nbsp;
+            <input type="number"  value="1.00" step="0.01" min="0"/>&nbsp;&nbsp;<select><option selected="selected">Gota</option>
+            </select><br />
+            <br />
+            <label>Via:</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select>
+                <option selected="selected">Auricular</option>
+            </select>
+            &nbsp;&nbsp;
+            <label>Local:</label>
+            <input type="text" /><br />
+            <br />
+            <label>Frequência:</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select>
+                <option selected="selected">Em caso de </option>
+            </select>&nbsp;&nbsp;<select><option selected="selected">Diarréia</option>
+            </select><br/><br/>
+            <label>Duração:</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="number" value="1"/>&nbsp;&nbsp;<select><option selected="selected">Meses</option>
+            </select><br />
+            <br />
+            <br />
+            <input type="submit" onclick="fechaForm();" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
             <input type="reset" onclick="fechaForm();" value="Cancel" class="uibutton large" />
         </div>
         <table class="table" style="margin-top: 5px;">
-            <tbody >
+            <tbody>
                 <tr>
-                    <td>Diagn&oacute;stico Ternário</td>
-                    <td>I23,-</td>
-                    <td>Algumas complicações atuais</td>
-                    <td class="actionCollum"><a href="#">Edit</a></td>
-                </tr>
-                <tr >
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td class="actionCollum" style="border-top: 1px solid #AAA;"><a href="#">New</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="actionCollum"><a href="#">New</a></td>
                 </tr>
             </tbody>
         </table>
     </fieldset>
+    <br />
+    <hr />
+    <br />
+    <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" value="Cancel" class="uibutton large" />
 </form>
