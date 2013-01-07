@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace EHR.Test.UI
+namespace EHR.Test
 {
     [TestFixture]
     public class BaseTest
