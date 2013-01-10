@@ -12,9 +12,9 @@ namespace EHR.Domain.Repository
         public Patients() { }
         public Patients(ISession session) : base(session) { }
 
-        public virtual Allergy GetBy(int id)
+        public virtual Patient GetBy(int id)
         {
-            return base.Get<Allergy>(id);
+            return base.Get<Patient>(id);
         }
     }
 }
