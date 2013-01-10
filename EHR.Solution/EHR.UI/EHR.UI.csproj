@@ -131,9 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\facebook.css" />
-    <Content Include="Content\fb-buttons.css" />
     <Content Include="Content\highslide.css" />
     <Content Include="Content\overrides.css" />
+    <Content Include="Content\Refactoring.css" />
+    <Content Include="Content\site-structure.css" />
     <Content Include="Content\themes\base\images\preasurechart1.jpg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

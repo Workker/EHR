@@ -8,9 +8,10 @@ namespace EHR.UI
         {
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/workkerReset.css",
+                "~/Content/site-structure.css",
                 "~/Content/site-style.css",
+                "~/Content/Refactoring.css",
                 "~/Content/token-input-facebook.css",
-                "~/Content/fb-buttons.css",
                 "~/Content/highslide.css"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
