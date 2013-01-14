@@ -88,8 +88,6 @@ textarea {
 }
 
 /*Table */
-
-/*fbSettingsList*/
 .ulTable {
     color: #808080;
     border-bottom: 1px solid #aaa;
@@ -123,6 +121,10 @@ textarea {
         overflow-x: hidden;
     }
 
+    .ulTable .content {
+        display: none;
+    }
+
 ._4ks > li {
     border-color: #e9e9e9;
     border-style: solid;
@@ -140,10 +142,6 @@ textarea {
     visibility: hidden;
 }
 
-
-
-
-
 .sx_048384 {
     width: 18px;
     height: 18px;
@@ -157,10 +155,6 @@ textarea {
     display: inline-block;
     height: 16px;
     width: 16px;
-}
-
-#facebook .hidden_elem {
-    display: none !important;
 }
 
 .ulTable .ulTableItemSaved, .ulTable .ulTableItemEdit {
@@ -178,10 +172,6 @@ textarea {
     display: block;
     padding-left: 5px;
     width: 440px;
-}
-
-.ulTable .content {
-    display: none;
 }
 
 .grayBox {
