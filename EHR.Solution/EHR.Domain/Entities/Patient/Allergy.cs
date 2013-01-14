@@ -12,10 +12,10 @@ namespace EHR.Domain.Entities.Patient
         public virtual int Id { get; set; }
         public virtual bool HaveAllergies { get; set; }
         public virtual string TheWhich { get; set; }
-        public virtual Type Type { get; set; }
+        public virtual TypeOfAllergy Type { get; set; }
     }
 
-    public enum Type
+    public enum TypeOfAllergy
     {
         Angioedema = 1,
         Urticaria = 2,

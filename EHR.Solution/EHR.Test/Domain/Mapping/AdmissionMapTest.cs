@@ -16,7 +16,7 @@ namespace EHR.Test.Domain.Mapping
         public void test_mapping_of_admission()
         {
             new PersistenceSpecification<Admission>(session: BaseRepository.CreateSessionFactory().OpenSession())
-                .CheckProperty(x => x.Id, 1).CheckProperty(x => x.ResonOfAdmission, 1).VerifyTheMappings();
+                .CheckProperty(x => x.Id, 1).CheckProperty(x => x.ReasonOfAdmission, 1).VerifyTheMappings();
         }
     }
 }

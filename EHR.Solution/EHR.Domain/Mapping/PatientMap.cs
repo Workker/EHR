@@ -13,9 +13,9 @@ namespace EHR.Domain.Mapping
         public PatientMap()
         {
             Id(x => x.Id);
-            References(x => x.Admission);
-            HasMany(x => x.Allergies).KeyNullable();
-            HasMany(x => x.Diagnostics);
+            HasMany(x => x.Admissions);
+            HasMany(x => x.Allergies).Cascade.AllDeleteOrphan();
+            HasMany(x => x.Diagnostics).Cascade.AllDeleteOrphan();
             Map(x => x.MedicinesOfUsePrior);
             Map(x => x.Annotations);
         }

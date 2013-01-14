@@ -75,7 +75,7 @@ $(document).ready(function () {
         url: '/Patient/Charts',
         data: ''
     }).sethscCorner();
-    
+
     Menu.add({
         Title: 'Dados Gerais',
         onOutIcon: '../../Images/dados_gerais.png',
@@ -93,7 +93,7 @@ $(document).ready(function () {
         url: '/Patient/Images',
         data: ''
     });
-    
+
     Menu.add({
         Title: 'Exames',
         onOutIcon: '../../Images/exames.png',
@@ -249,10 +249,25 @@ hs.registerOverlay({
     fade: 2 // fading the semi-transparent overlay looks bad in IE
 });
 
-function exibeForm() {
-
-    $("#divForm").show();
+// Table
+function showForm(url, data, id, e) {
+    $.ajax({ type: "GET", url: url, data: data }).success(function (d) {
+        var div = $(e).parent().next();
+        $(div).html(d);
+        $(div).show();
+        $(e).parent().hide();
+    });
 }
-function fechaForm() {
-    $("#divForm").hide();
+
+function closeForm(id) {
+    $("#content" + id).hide();
+    $("#content" + id).prev().show();
+}
+
+function deleteIten(e, url, data) {
+    $.ajax({ type: "GET", url: url, data: data }).success(function () {
+        var li = $(e).parent().parent();
+        $(li).remove();
+    });
+
 }

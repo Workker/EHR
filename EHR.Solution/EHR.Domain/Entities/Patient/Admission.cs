@@ -11,7 +11,7 @@ namespace EHR.Domain.Entities.Patient
     public class Admission : IAggregateRoot<int>
     {
         public virtual int Id { get; set; }
-        public virtual IList<Reason> ResonOfAdmission { get; set; }
+        public virtual IList<Reason> ReasonOfAdmission { get; set; }
     }
 
     public enum Reason

@@ -21,7 +21,7 @@ namespace EHR.Controller
             return _patients.GetBy(id);
         }
 
-        public void Save(Patient patient)
+        public void Add(Patient patient)
         {
             _patients.Save(patient);
         }

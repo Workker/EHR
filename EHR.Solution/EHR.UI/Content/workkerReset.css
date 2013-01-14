@@ -1,5 +1,4 @@
 ﻿@charset "UTF-8";
-/* Reset all values of browser style and define values default */
 
 html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
     border: 0px;
@@ -9,7 +8,6 @@ html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acro
 }
 
 body {
-    -webkit-text-size-adjust: none;
     background: transparent;
     color: #000;
     font-size: 100%;
@@ -20,6 +18,7 @@ body {
     text-decoration: none;
     vertical-align: baseline;
     white-space: normal;
+    -webkit-text-size-adjust: none;
 }
 
 a:link {
@@ -49,9 +48,13 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0px;
 }
 
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
 
-nav ul { list-style: none; }
+    nav ul {
+        list-style: none;
+    }
 
 hr {
     border: 0px;
@@ -60,46 +63,56 @@ hr {
     margin: 0px;
 }
 
-:focus { outline: 0px; }
+:focus {
+    outline: 0px;
+}
 
-ol, ul { list-style: none; }
+ol, ul {
+    list-style: none;
+}
 
 table {
     border-collapse: separate;
     border-spacing: 0px;
 }
 
-blockquote, q { quotes: none; }
-
-blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
-    content: normal;
+blockquote, q {
+    quotes: none;
 }
 
-* html .clear { height: 1%; }
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: '';
+        content: normal;
+    }
+
+* html .clear {
+    height: 1%;
+}
 
 .clear {
     clear: both;
     display: block;
 }
 
-.clear:after {
-    clear: both;
-    content: ".";
+    .clear:after {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+
+.clearfix {
     display: block;
-    height: 0;
-    visibility: hidden;
 }
 
-.clearfix { display: block; }
-
-.clearfix:after {
-    clear: both;
-    content: ".";
-    display: block;
-    height: 0px;
-    visibility: hidden;
-}
+    .clearfix:after {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0px;
+        visibility: hidden;
+    }
 
 mark {
     background-color: #ff9;
@@ -108,9 +121,13 @@ mark {
     font-weight: bold;
 }
 
-del { text-decoration: line-through; }
+del {
+    text-decoration: line-through;
+}
 
-abbr[title], dfn[title], ins { border-bottom: 1px dotted #ccc; }
+abbr[title], dfn[title], ins {
+    border-bottom: 1px dotted #ccc;
+}
 
 button, input, isindex, select {
     margin-bottom: 0px;
@@ -133,17 +150,21 @@ input, textarea, keygen, select, button, isindex {
     word-spacing: normal;
 }
 
-select, input[type="button"], input[type="submit"], input[type="reset"], input[type="file"], button, input[type="radio"], input[type="checkbox"] {
-    box-sizing: border-box;
-    white-space: pre;
-    /*background-color: #FFF;*/
+    select, input[type="button"], input[type="submit"], input[type="reset"], input[type="file"], button, input[type="radio"], input[type="checkbox"] {
+        box-sizing: border-box;
+        white-space: pre;
+        /*background-color: #FFF;*/
+    }
+
+input, select {
+    vertical-align: middle;
 }
 
-input, select { vertical-align: middle; }
+    input[type="button"], input[type="submit"], input[type="reset"], input[type="file"], button {
+        color: #000;
+        text-align: center;
+    }
 
-input[type="button"], input[type="submit"], input[type="reset"], input[type="file"], button {
-    color: #000;
-    text-align: center;
-}
-
-input:focus, textarea:focus, isindex:focus, keygen:focus, select:focus { background-color: #FFF; }
+    input:focus, textarea:focus, isindex:focus, keygen:focus, select:focus {
+        background-color: #FFF;
+    }

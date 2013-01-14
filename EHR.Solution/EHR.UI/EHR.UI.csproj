@@ -343,6 +343,8 @@
     <Content Include="Views\Patient\_DataHigh.cshtml" />
     <Content Include="Views\Patient\_Form.cshtml" />
     <Content Include="Views\Patient\_Images.cshtml" />
+    <Content Include="Views\Patient\GeneralData\_DiagnosticsForm.cshtml" />
+    <Content Include="Views\Patient\GeneralData\_DiagnosticsTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,11 +9,40 @@ namespace EHR.Domain.Entities.Patient
 {
     public class Patient : IAggregateRoot<int>
     {
+        #region Properties
+
         public virtual int Id { get; set; }
-        public virtual Admission Admission { get; set; }
-        public virtual List<Allergy> Allergies { get; set; }
-        public virtual List<Diagnostic> Diagnostics { get; set; }
+        public virtual IList<Admission> Admissions { get; set; }
+        public virtual IList<Allergy> Allergies { get; set; }
+        public virtual IList<Diagnostic> Diagnostics { get; set; }
         public virtual String MedicinesOfUsePrior { get; set; }
         public virtual String Annotations { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        public void AddAdmission(Admission admission)
+        {
+            if (Admissions == null)
+                Admissions = new List<Admission>();
+            Admissions.Add(admission);
+        }
+
+        public void AddAllergy(Allergy allergy)
+        {
+            if (Allergies == null)
+                Allergies = new List<Allergy>();
+            Allergies.Add(allergy);
+        }
+
+        public void AddDiagnostic(Diagnostic diagnostic)
+        {
+            if (Diagnostics == null)
+                Diagnostics = new List<Diagnostic>();
+            Diagnostics.Add(diagnostic);
+        }
+
+        #endregion
     }
 }

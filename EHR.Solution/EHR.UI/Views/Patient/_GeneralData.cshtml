@@ -1,5 +1,5 @@
 ﻿<h1 class="legenda">Dados Gerais</h1>
-<hr/>
+<hr />
 <br />
 <form>
     <fieldset id="admissao">
@@ -23,7 +23,7 @@
         <br />
         <br />
         <label>A que:</label>&nbsp;
-        <input type="text" class="inputtext" />
+        <input type="text" />
         <br />
         <br />
         <label>Tipo(s):</label>&nbsp;
@@ -46,60 +46,19 @@
     </fieldset>
     <fieldset id="diagnosticos">
         <legend>Diagn&oacute;sticos</legend>
-        <table id="tabelaDeDiagnosticos" class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th class="actionCollum"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Diagn&oacute;stico Principal</td>
-                    <td>D63.0*</td>
-                    <td>Anemia em neoplasias (C00-D48)</td>
-                    <td class="actionCollum"><a href="#" onclick=" exibeForm(); ">Edit</a></td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="divForm" class="grayBox" style="display: none;">
-            <label>Tipo de Diagn&oacute;stico:&nbsp;</label>
-            <input type="text" class="inputtext" value="Diagn&oacute;stico Principal" /><br />
-            <label>C&oacute;digo CID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <input type="text" class="inputtext" value="D63.0*" /><br />
-            <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" class="inputtext" value="Anemia em neoplasias (C00-D48)" /><br />
-            <br />
-            <input type="submit" onclick=" fechaForm(); " value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-            <input type="reset" onclick=" fechaForm(); " value="Cancel" class="uibutton large" />
-        </div>
-        <table class="table" style="margin-top: 5px;">
-            <tbody>
-                <tr>
-                    <td>Diagn&oacute;stico Ternário</td>
-                    <td>I23,-</td>
-                    <td>Algumas complicações atuais</td>
-                    <td class="actionCollum"><a href="#">Edit</a></td>
-                </tr>
-                <tr>
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td style="border-top: 1px solid #AAA;"></td>
-                    <td class="actionCollum" style="border-top: 1px solid #AAA;"><a href="#">New</a></td>
-                </tr>
-            </tbody>
-        </table>
+        <br />
+        @{
+            Html.RenderPartial("GeneralData/_DiagnosticsTable");
+        }
     </fieldset>
     <br />
     <fieldset id="medicineUsePrior">
         <legend></legend>
         <label>Medicamentos de uso pr&eacute;vio:</label><br />
-        <textarea rows="10" cols="116"></textarea><br />
+        <textarea rows="10" cols="90"></textarea><br />
         <br />
         <label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
-        <textarea rows="10" cols="116"></textarea>
+        <textarea rows="10" cols="90"></textarea>
     </fieldset>
     <br />
     <hr />
@@ -113,7 +72,6 @@
             theme: "facebook"
         });
     };
-
     $(document).ready(function () {
         $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
             theme: "facebook"
