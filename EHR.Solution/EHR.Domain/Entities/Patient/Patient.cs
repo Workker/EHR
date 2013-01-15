@@ -22,21 +22,21 @@ namespace EHR.Domain.Entities.Patient
 
         #region Methods
 
-        public void AddAdmission(Admission admission)
+        public virtual void AddAdmission(Admission admission)
         {
             if (Admissions == null)
                 Admissions = new List<Admission>();
             Admissions.Add(admission);
         }
 
-        public void AddAllergy(Allergy allergy)
+        public virtual  void AddAllergy(Allergy allergy)
         {
             if (Allergies == null)
                 Allergies = new List<Allergy>();
             Allergies.Add(allergy);
         }
 
-        public void AddDiagnostic(Diagnostic diagnostic)
+        public virtual void AddDiagnostic(Diagnostic diagnostic)
         {
             if (Diagnostics == null)
                 Diagnostics = new List<Diagnostic>();

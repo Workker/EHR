@@ -250,7 +250,18 @@ hs.registerOverlay({
 });
 
 // Table
-function showForm(url, data, id, e) {
+function newRow(currentNode, url) {
+    $.ajax({ type: "GET", url: url }).success(function (d) {
+        $(currentNode).parent().parent().clone($(currentNode).parent().parent())
+            .appendTo($(currentNode).parent().parent().parent());
+        var contentDiv = $(currentNode).parent().next();
+        $(contentDiv).html(d);
+        $(contentDiv).show();
+        $(currentNode).parent().hide();
+    });
+}
+
+function editItem(url, data, id, e) {
     $.ajax({ type: "GET", url: url, data: data }).success(function (d) {
         var div = $(e).parent().next();
         $(div).html(d);
@@ -259,9 +270,9 @@ function showForm(url, data, id, e) {
     });
 }
 
-function closeForm(id) {
-    $("#content" + id).hide();
-    $("#content" + id).prev().show();
+function closeForm(element) {
+    $(element).parent().parent().parent().hide();
+    $(element).parent().parent().prev().show();
 }
 
 function deleteIten(e, url, data) {

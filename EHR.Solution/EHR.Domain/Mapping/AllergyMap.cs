@@ -15,7 +15,7 @@ namespace EHR.Domain.Mapping
             Id(x => x.Id);
             Map(x => x.HaveAllergies);
             Map(x => x.TheWhich);
-            Map(x => x.Type);
+            Map(x => x.Type).CustomType<int>();
         }
     }
 }

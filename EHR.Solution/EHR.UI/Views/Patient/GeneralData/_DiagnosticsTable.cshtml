@@ -3,7 +3,7 @@
         <div class="clearfix">
             <span class="firstColumn">Nameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
             <a class="ulTableItemEdit" onclick='deleteIten(this,"../Patient/DeleteDiagnostic", null)'><span>X</span></a>
-            <a class="ulTableItemEdit" onclick='showForm("../Patient/DiagnosticForm", null, 1, this);'>
+            <a class="ulTableItemEdit" onclick='editItem("../Patient/DiagnosticForm", null, 1, this);'>
                 <span>Edit</span></a>
             <span class="ulTableItemSaved">Changes saved</span>
             <span class="ulTableItemContent">Thiago Oliveira</span>
@@ -12,7 +12,7 @@
     </li>
     <li class="clearfix">
         <div class="clearfix">
-            <a class="ulTableItemEdit" onclick=' showForm("../Patient/DiagnosticForm", null, 0, this);'>
+            <a class="ulTableItemEdit" onclick=' newRow(this,"../Patient/DiagnosticForm");'>
                 <span>+</span>
             </a>
         </div>

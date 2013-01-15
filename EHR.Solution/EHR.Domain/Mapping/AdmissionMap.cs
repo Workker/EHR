@@ -13,7 +13,7 @@ namespace EHR.Domain.Mapping
         public AdmissionMap()
         {
             Id(x => x.Id);
-            Map(x => x.ReasonOfAdmission);
+            Map(x => x.ReasonOfAdmission).CustomType<int>();
         }
     }
 }

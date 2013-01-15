@@ -21,7 +21,7 @@ namespace EHR.Test.Domain.Entities
         [Test]
         public void add_new_admission()
         {
-            var reasons = new List<Reason> { Reason.Cirurgica };
+            var reasons = new List<Reason> { Reason.Cirurgic };
             var admission = new Admission { Id = 1, ReasonOfAdmission = reasons };
 
             patient.AddAdmission(admission);

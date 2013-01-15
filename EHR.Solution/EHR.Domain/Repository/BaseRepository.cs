@@ -79,7 +79,7 @@ namespace EHR.Domain.Repository
         {
             return
                 Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(c => c
-                    .FromAppSetting("conexao")
+                    .FromAppSetting("connection")
                     )).Mappings(m => m.FluentMappings.AddFromAssemblyOf<PatientMap>()).BuildSessionFactory();
         }
 

@@ -16,10 +16,10 @@ namespace EHR.Domain.Entities.Patient
 
     public enum Reason
     {
-        Eletiva = 1,
-        Emergencia = 2,
-        Clinica = 3,
-        Cirurgica = 4
+        Elective = 1,
+        Emergency = 2,
+        Clinic = 3,
+        Cirurgic = 4
     }
 
 }
