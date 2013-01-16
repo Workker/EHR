@@ -107,9 +107,14 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_DiagnosticsForm");
         }
 
+        public PartialViewResult SaveDiagnostic(string type, string code, string description)
+        {
+            return PartialView("GeneralData/_DiagnosticTableRow");
+        }
+
         public void DeleteDiagnostic()
         {
-            
+
         }
 
     }

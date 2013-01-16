@@ -261,7 +261,25 @@ function newRow(currentNode, url) {
     });
 }
 
-function editItem(url, data, id, e) {
+function saveRow(element, url) {
+    var form = $(element).parent();
+    form.submit(function () {
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+            success: function (data) {
+                var divContent = $(element).parent().parent();
+                $(divContent).hide();
+                $(divContent).prev().html(data);
+                $(divContent).prev().show();
+            }
+        });
+        return false;
+    });
+}
+
+function editRow(url, data, e) {
     $.ajax({ type: "GET", url: url, data: data }).success(function (d) {
         var div = $(e).parent().next();
         $(div).html(d);
@@ -270,15 +288,23 @@ function editItem(url, data, id, e) {
     });
 }
 
-function closeForm(element) {
-    $(element).parent().parent().parent().hide();
-    $(element).parent().parent().prev().show();
-}
-
-function deleteIten(e, url, data) {
-    $.ajax({ type: "GET", url: url, data: data }).success(function () {
+function deleteRow(e, url, data) {
+    $.ajax({ type: "DELETE", url: url, data: data }).success(function () {
         var li = $(e).parent().parent();
         $(li).remove();
     });
+}
 
+function closeForm(element) {
+
+    var divContent = $(element).parent().parent();
+    var spanOfLinkAction = $(divContent).prev().children().children();
+
+    if ($(spanOfLinkAction).text() == "+") {
+        var li = $(divContent).parent();
+        $(li).remove();
+    } else {
+        $(divContent).hide();
+        $(divContent).prev().show();
+    }
 }

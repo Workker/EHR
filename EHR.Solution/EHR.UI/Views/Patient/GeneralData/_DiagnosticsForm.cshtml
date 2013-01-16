@@ -1,14 +1,12 @@
-﻿<div id="divForm" class="grayBox">
-    <form>
+﻿<form id="diagnostic">
     <label>Type of diagnostic:</label>&nbsp;
-    <input type="text" value="" /><br />
+    <input type="text" value="" name="type"/><br />
     <label>CID code:</label>&nbsp;
-    <input type="text" value="" /><br />
+    <input type="text" value="" name="code" /><br />
     <label>CID:</label>&nbsp;
-    <input type="text" value="" />
+    <input type="text" value="" name="description" />
     <br />
     <br />
-    <input type="submit" onclick="closeForm(1);" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="submit" onclick='saveRow(this, "../Patient/SaveDiagnostic");' value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
             <input type="reset" onclick="closeForm(this);" value="Cancel" class="uibutton large" />
 </form>
-</div>

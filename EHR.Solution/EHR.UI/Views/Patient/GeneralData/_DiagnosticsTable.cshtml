@@ -1,18 +1,15 @@
 ﻿<ul class="ulTable _4kg  _4ks">
     <li class="clearfix">
         <div class="clearfix">
-            <span class="firstColumn">Nameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
-            <a class="ulTableItemEdit" onclick='deleteIten(this,"../Patient/DeleteDiagnostic", null)'><span>X</span></a>
-            <a class="ulTableItemEdit" onclick='editItem("../Patient/DiagnosticForm", null, 1, this);'>
-                <span>Edit</span></a>
-            <span class="ulTableItemSaved">Changes saved</span>
-            <span class="ulTableItemContent">Thiago Oliveira</span>
+            @{
+                Html.RenderPartial("GeneralData/_DiagnosticTableRow");
+            }
         </div>
         <div class="content" id="content1"></div>
     </li>
     <li class="clearfix">
         <div class="clearfix">
-            <a class="ulTableItemEdit" onclick=' newRow(this,"../Patient/DiagnosticForm");'>
+            <a class="action" onclick='newRow(this,"../Patient/DiagnosticForm");'>
                 <span>+</span>
             </a>
         </div>

@@ -5,18 +5,18 @@
 
 @section PageLayout
                     {
-    <section id="header">
+    <div id="header">
         @{Html.RenderPartial("Layout/_ProfileHeader");}
-    </section>
-    <section id="timeLine" class="lfloat">
+    </div>
+    <aside id="timeLine" class="lfloat">
         @{Html.RenderPartial("Layout/_TimeLine");}
-    </section>
+    </aside>
     <div class="verticalLine"></div>
-    <section id="data" class="lfloat">
+    <aside id="data" class="lfloat">
         @{Html.RenderPartial("Layout/_Data");}
-    </section>
+    </aside>
 }
-<section id="center" class="lfloat">
+<div id="center" class="lfloat contentPage">
     @{Html.RenderPartial("_GeneralData");}
     <div id="test"></div>
-</section>
+</div>
