@@ -124,6 +124,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -346,6 +347,9 @@
     <Content Include="Views\Patient\GeneralData\_DiagnosticsForm.cshtml" />
     <Content Include="Views\Patient\GeneralData\_DiagnosticsTable.cshtml" />
     <Content Include="Views\Patient\GeneralData\_DiagnosticTableRow.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\Layout\_LeaftCol.cshtml" />
+    <Content Include="Views\Search\Layout\_ContentArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

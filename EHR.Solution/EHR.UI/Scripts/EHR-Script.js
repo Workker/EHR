@@ -54,7 +54,6 @@ $(function () {
 // Generate Data menu
 // Todo Componentizar
 $(document).ready(function () {
-
     var Menu = $("#_Menu").AjaxFlagMenu({
         Caption: 'Menu',
         CaptionClass: 'CaptionClass',
@@ -308,3 +307,16 @@ function closeForm(element) {
         $(divContent).prev().show();
     }
 }
+
+// Toggle of class of Advanced Search
+
+$(".unitsSideBar li input[type='checkbox']").live(
+"click", function () {
+    if ($(this).is(':checked')) {
+        $(this).parent().addClass("itemChecked");
+    }else {
+        $(this).parent().removeAttr("class");
+    }
+}
+
+)
