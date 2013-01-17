@@ -289,7 +289,7 @@ function editRow(url, data, e) {
 }
 
 function deleteRow(e, url, data) {
-    $.ajax({ type: "DELETE", url: url, data: data }).success(function () {
+    $.ajax({ type: "POST", url: url, data: data }).success(function () {
         var li = $(e).parent().parent();
         $(li).remove();
     });
