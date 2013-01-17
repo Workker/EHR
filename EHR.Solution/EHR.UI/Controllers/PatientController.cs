@@ -111,7 +111,8 @@ namespace EHR.UI.Controllers
         {
             return PartialView("GeneralData/_DiagnosticTableRow");
         }
-
+        
+        [HttpDelete]
         public void DeleteDiagnostic()
         {
 
