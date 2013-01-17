@@ -112,7 +112,7 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_DiagnosticTableRow");
         }
         
-        [HttpDelete]
+        [AcceptVerbs(HttpVerbs.Delete)]
         public void DeleteDiagnostic()
         {
 
