@@ -510,7 +510,6 @@ div.searchBox {
             div.searchBox ul li.place a {
                 outline: none;
                 cursor: pointer;
-                color: #3B5998;
                 text-decoration: none;
             }
 
@@ -768,6 +767,49 @@ div.uiTypeaheadView .selected {
         vertical-align: bottom;
     }
 
+/*Search People */
+.results li {
+    color: #666;
+    cursor: pointer;
+    min-height: 50px;
+    padding: 2px 30px 2px 0px;
+    position: relative;
+}
+
+    .results li .subtext {
+        color: #999;
+    }
+
+    .results li:hover {
+        background: #6d84b4;
+    }
+
+        .results li:hover a, .results li:hover .subtext {
+            color: #fff;
+        }
+
+.calltoaction {
+    background: #f7f7f7;
+    text-align: center;
+}
+
+    .calltoaction .seeMore {
+        font-size: 11px;
+        font-weight: bold;
+        padding-bottom: 0;
+        padding-right: 7px;
+    }
+
+    .calltoaction .text, .calltoaction .subtext {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 2px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
+
 /* Search Page*/
 .leftCol {
     float: left;
@@ -831,10 +873,6 @@ div.uiTypeaheadView .selected {
     overflow-x: hidden;
 }
 
-.mbm {
-    margin-bottom: 10px;
-}
-
 .detailedsearch_feature_header {
     background-color: #e9e9e9;
     border: 0;
@@ -860,4 +898,30 @@ div.uiTypeaheadView .selected {
 .detailedsearch_result {
     padding-bottom: 5px;
     border-bottom: 1px solid #e9e9e9;
+}
+
+.mbm {
+    margin-bottom: 10px;
+}
+
+.pvm {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.plm {
+    padding-left: 10px;
+}
+
+.noborder {
+    border: none;
+}
+
+.uiBoxGray {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+}
+
+table {
+    word-wrap: normal;
 }

@@ -15,7 +15,18 @@
                                     <span class="accessible_elem">Search for people, places and things</span>
                                 </button>
                             </span>
-                            <ul class="results" data-bind='template: { name: "resultItem", foreach: results }, visible: results().length > 0'></ul>
+                            <ul class="results" data-bind='template: { name: "resultItem", foreach: results }, visible: results().length > 0'>
+                                <li class="calltoaction">
+                                    <a href="../Search/" rel="ignore">
+                                        <span class="text">
+                                            <span class="seeMore">See more results for c
+                                                <span class="arrow"></span>
+                                            </span>
+                                            <span class="subtext">Displaying top 3 results</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
                             <script type="text/html" id="resultItem">
                                 <li class="${ type() }">{{if type() == "header"}}
                                     <span data-bind="text: text"></span>
@@ -23,11 +34,12 @@
                                     <a href="#">
                                         <img src="${ imageUrl() }" />
                                         <span class="text" data-bind="text: name"></span>
-                                        <span style="color: #777">bla</span>
+                                        <span class="subtext">bla</span>
                                     </a>
                                     {{/if}}
                                 </li>
                             </script>
+
                         </div>
                     </div>
                     <div class="uiTypeaheadView wideSearchTypeaheadView mainSearchTypeaheadView" id="upjgpe41"></div>
@@ -40,8 +52,8 @@
                     <li class="navItem middleItem voiceBarToggle"></li>
                     <li class="navItem middleItem" id="navHome"><a href="#">Home</a></li>
                     <li id="navAccount"><a href="#" id="navAccountLink">
-                                            <div class="menuPulldown" id="userNavigationLabel">Account Settings</div>
-                                        </a>
+                        <div class="menuPulldown" id="userNavigationLabel">Account Settings</div>
+                    </a>
                         <ul class="navigation">
                             <li></li>
                             <li></li>
