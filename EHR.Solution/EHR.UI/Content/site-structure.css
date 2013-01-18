@@ -1,2 +1,6 @@
 ﻿@charset "UTF-8";
-.contentPage { padding-left: 4%; }
+
+.contentPage {
+    padding-left: 4%;
+    width: 700px;
+}

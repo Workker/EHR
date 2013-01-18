@@ -350,6 +350,9 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Search\Layout\_LeaftCol.cshtml" />
     <Content Include="Views\Search\Layout\_ContentArea.cshtml" />
+    <Content Include="Views\Patient\Exams\_ExamsTable.cshtml" />
+    <Content Include="Views\Patient\Exams\_ExamsForm.cshtml" />
+    <Content Include="Views\Patient\Exams\_ExamsTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

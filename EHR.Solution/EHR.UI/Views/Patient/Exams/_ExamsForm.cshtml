@@ -1,0 +1,28 @@
+﻿<form id="exams">
+    <label>Tipo de exame:</label>&nbsp;
+            <select>
+                <option selected="selected">Laboratorio</option>
+            </select>
+    <br />
+    <br />
+    <label>Data:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name="dob_month" id="dob_month">
+                <option value="0">Month:</option>
+                <option value="5" selected="selected">May</option>
+            </select>&nbsp;
+            <select name="dob_day" id="dob_day">
+                <option value="0">Select...</option>
+                <option value="24" selected="selected">24</option>
+            </select>&nbsp;
+            <select name="dob_year" id="dob_year">
+                <option value="0">Select...</option>
+                <option value="2012" selected="selected">2012</option>
+            </select>
+    <br />
+    <br />
+    <label>Descrição do resultado:</label><br />
+    <textarea style="width: 98%">GHGHGHG</textarea><br />
+    <br />
+    <input type="submit" onclick='saveRow(this, "../Patient/SaveExam");' value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick="closeForm(this);" value="Cancel" class="uibutton large" />
+</form>
