@@ -2,57 +2,71 @@
 <hr />
 <br />
 
-    <fieldset id="admissao">
-        <legend>Admiss&atilde;o</legend>
-        <br />
-        <div>
-            <label>Motivo da admissão:</label>&nbsp;
-            <input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
-        </div>
-        <br />
-    </fieldset>
-<hr />
-<br/>
-    <fieldset id="alergias">
-        <legend>Alergias</legend>
-        <br />
-        <label>Alergia Medicamentos  e outras:</label>&nbsp;
-        <input type="radio" name="alergia" value="true" onchange="Display($(this).next().next().next().next(), true)" />
-        Sim&nbsp;
-        <input type="radio" name="alergia" value="false" onchange="Display($(this).next().next().next(), false)" />
-        Não
-        <br />
-        <br />
-        @{
-            Html.RenderPartial("GeneralData/_AllergyTable");
-        }
-        <br />
-        <br />
-        <hr />
-        <br />
-    </fieldset>
-    <fieldset id="diagnosticos">
-        <legend>Diagn&oacute;sticos</legend>
-        <br />
-        @{
-            Html.RenderPartial("GeneralData/_DiagnosticsTable");
-        }
-    </fieldset>
+<fieldset id="admissao">
+    <legend>Admiss&atilde;o</legend>
     <br />
-    <fieldset id="medicineUsePrior">
-        <legend></legend>
-        <label>Medicamentos de uso pr&eacute;vio:</label><br />
-        <textarea rows="10" cols="90"></textarea><br />
+    <div>
+        <label>Motivo da admissão:</label>&nbsp;
+            <input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
+    </div>
+    <br />
+    <br/>
+    <hr />
+<br />
+</fieldset>
+<fieldset id="alergias">
+    <legend>Alergias</legend>
+    <br />
+    <label>Alergia Medicamentos  e outras:</label>&nbsp;
+        <input type="radio" name="alergia" value="true" onchange="Display($(this).next().next().next().next(), true)" />
+    Sim&nbsp;
+        <input type="radio" name="alergia" value="false" onchange="Display($(this).next().next().next(), false)" />
+    Não
         <br />
-        <label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
-        <textarea rows="10" cols="90"></textarea>
-    </fieldset>
+    <br />
+    @{
+        Html.RenderPartial("GeneralData/_AllergyTable");
+    }
+    <br />
     <br />
     <hr />
     <br />
-    <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-    <input type="reset" value="Cancel" class="uibutton large" />
-
+</fieldset>
+<fieldset id="diagnosticos">
+    <legend>Diagn&oacute;sticos</legend>
+    <br />
+    @{
+        Html.RenderPartial("GeneralData/_DiagnosticsTable");
+    }
+    <br />
+    <br />
+    <hr />
+    <br />
+</fieldset>
+<fieldset id="medicamentOfPreviousUse">
+    <legend>Medicamentos de Uso Pr&eacute;vio</legend>
+    <br />
+    @{
+        Html.RenderPartial("GeneralData/_MedicamentOfPreviousUseTable");
+    }
+    <br />
+    <br />
+    <hr />
+    <br />
+</fieldset>
+<fieldset id="MedicamentUsedDuringhospitalization">
+    <legend>Medicamentos Utilizados Durante a Internação</legend>
+    <br />
+    @{
+        Html.RenderPartial("GeneralData/_MedicamentUsedDuringhospitalizationTable");
+    }
+    <br />
+    <br />
+    <hr />
+    <br />
+</fieldset>
+<label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
+<textarea rows="10" cols="90"></textarea>
 <script type="text/javascript">
     window.onload = function () {
         $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {

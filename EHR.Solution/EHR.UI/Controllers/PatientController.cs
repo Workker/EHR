@@ -153,5 +153,40 @@ namespace EHR.UI.Controllers
         public void DeleteAllergy() { }
 
         #endregion
+
+        #region medicament of previous use
+
+
+        public PartialViewResult MedicamentOfPreviousUseForm()
+        {
+            return PartialView("GeneralData/_MedicamentOfPreviousUseForm");
+        }
+
+        public PartialViewResult SaveMedicamentOfPreviousUse(string type, string code, string description)
+        {
+            return PartialView("GeneralData/_MedicamentOfPreviousUseTableRow");
+        }
+
+        public void DeleteMedicamentOfPreviousUse() { }
+
+        #endregion
+
+        #region medicament used during hospitalization
+
+
+        public PartialViewResult MedicamentUsedDuringhospitalizationForm()
+        {
+            return PartialView("GeneralData/_MedicamentUsedDuringhospitalizationForm");
+        }
+
+        public PartialViewResult SaveMedicamentUsedDuringhospitalization(string type, string code, string description)
+        {
+            return PartialView("GeneralData/_MedicamentUsedDuringhospitalizationTableRow");
+        }
+
+        public void DeleteMedicamentUsedDuringhospitalization() { }
+
+        #endregion
+
     }
 }

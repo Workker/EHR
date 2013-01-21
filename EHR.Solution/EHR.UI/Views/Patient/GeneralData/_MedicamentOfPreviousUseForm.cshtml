@@ -1,0 +1,17 @@
+﻿<form id="diagnostic">
+    <label>Type of diagnostic:</label>&nbsp;
+    <select name="type">
+        <option value="0">Select</option>
+    </select>
+    <br />
+    <br />
+    <label>CID code:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" value="" name="code" /><br />
+    <br />
+    <label>CID:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" value="" name="description" />
+    <br />
+    <br />
+    <input type="submit" onclick='saveRow(this, "../Patient/SaveMedicamentOfPreviousUse");' value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick="closeForm(this);" value="Cancel" class="uibutton large" />
+</form>
