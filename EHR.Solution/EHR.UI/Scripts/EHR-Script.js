@@ -320,3 +320,12 @@ $(".unitsSideBar li input[type='checkbox']").live(
 }
 
 )
+// Role display or hide table
+function Display(element, option) {
+    debugger 
+    if(option == true) {
+        $(element).show();
+    } else {
+        $(element).hide();
+    }
+}

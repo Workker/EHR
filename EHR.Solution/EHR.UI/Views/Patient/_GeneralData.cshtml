@@ -11,34 +11,21 @@
         </div>
         <br />
     </fieldset>
-    <hr />
+<hr />
+<br/>
     <fieldset id="alergias">
         <legend>Alergias</legend>
         <br />
         <label>Alergia Medicamentos  e outras:</label>&nbsp;
-        <input type="radio" name="alergia" value="true" />
+        <input type="radio" name="alergia" value="true" onchange="Display($(this).next().next().next().next(), true)" />
         Sim&nbsp;
-        <input type="radio" name="alergia" value="false" />
+        <input type="radio" name="alergia" value="false" onchange="Display($(this).next().next().next(), false)" />
         Não
         <br />
         <br />
-        <label>A que:</label>&nbsp;
-        <input type="text" />
-        <br />
-        <br />
-        <label>Tipo(s):</label>&nbsp;
-        <input type="radio" name="tipos" />
-        Angioedema&nbsp;&nbsp;
-        <input type="radio" name="tipos" />
-        Urtic&aacute;ria&nbsp;&nbsp;
-        <input type="radio" name="tipos" />
-        Choque Anafil&aacute;tico&nbsp;&nbsp;
-        <input type="radio" name="tipos" />
-        Broncoespasmo&nbsp;&nbsp;
-        <input type="radio" name="tipos" />
-        Laringoespasmo&nbsp;&nbsp;
-        <input type="radio" name="tipos" />
-        Outros
+        @{
+            Html.RenderPartial("GeneralData/_AllergyTable");
+        }
         <br />
         <br />
         <hr />

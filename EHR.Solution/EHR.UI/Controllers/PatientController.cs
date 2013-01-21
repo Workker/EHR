@@ -136,5 +136,22 @@ namespace EHR.UI.Controllers
         }
 
         #endregion
+
+        #region Allergy
+
+
+        public PartialViewResult AllergyForm()
+        {
+            return PartialView("GeneralData/_AllergyForm");
+        }
+
+        public PartialViewResult SaveAllergy(string type, string code, string description)
+        {
+            return PartialView("GeneralData/_AllergyTableRow");
+        }
+
+        public void DeleteAllergy() { }
+
+        #endregion
     }
 }

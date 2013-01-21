@@ -1,0 +1,18 @@
+﻿<ul class="ulTable _4kg  _4ks">
+    <li class="clearfix">
+        <div class="clearfix">
+            @{
+                Html.RenderPartial("GeneralData/_AllergyTableRow");
+            }
+        </div>
+        <div class="content" id="content1"></div>
+    </li>
+    <li class="clearfix">
+        <div class="clearfix">
+            <a class="action" onclick='newRow(this,"../Patient/AllergyForm");'>
+                <span>+</span>
+            </a>
+        </div>
+        <div class="content" id="content0"></div>
+    </li>
+</ul>

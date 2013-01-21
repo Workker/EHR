@@ -1,0 +1,23 @@
+﻿<form id="allergy">
+    <label>A que:</label>&nbsp;
+        <input type="text" />
+    <br />
+    <br />
+    <label>Tipo(s):</label>&nbsp;
+        <input type="checkbox" name="tipos" />
+    Angioedema&nbsp;&nbsp;
+        <input type="checkbox" name="tipos" />
+    Urtic&aacute;ria&nbsp;&nbsp;
+        <input type="checkbox" name="tipos" />
+    Choque Anafil&aacute;tico&nbsp;&nbsp;
+        <input type="checkbox" name="tipos" />
+    Broncoespasmo&nbsp;&nbsp;
+        <input type="checkbox" name="tipos" />
+    Laringoespasmo&nbsp;&nbsp;
+        <input type="checkbox" name="tipos" />
+    Outros
+    <br />
+    <br />
+    <input type="submit" onclick='saveRow(this, "../Patient/SaveAllergy");' value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick="closeForm(this);" value="Cancel" class="uibutton large" />
+</form>

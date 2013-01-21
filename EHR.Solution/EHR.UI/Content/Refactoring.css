@@ -882,10 +882,6 @@ div.uiTypeaheadView .selected {
     text-align: center;
 }
 
-.detailedsearch_feature_header {
-    text-align: center;
-}
-
     .detailedsearch_feature_header span {
         background-color: #fff;
         padding: 0 5px;
@@ -924,4 +920,13 @@ div.uiTypeaheadView .selected {
 
 table {
     word-wrap: normal;
+}
+.uiMorePager .uiMorePagerPrimary:hover {
+background-color: #d8dfea;
+}
+.uiMorePager .uiMorePagerPrimary {
+      background-color: #f2f2f2;
+    border: 1px solid #ccc;
+display: block;
+padding: 10px 15px;
 }

@@ -131,7 +131,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\facebook.css" />
     <Content Include="Content\highslide.css" />
     <Content Include="Content\overrides.css" />
     <Content Include="Content\Refactoring.css" />
@@ -353,6 +352,9 @@
     <Content Include="Views\Patient\Exams\_ExamsTable.cshtml" />
     <Content Include="Views\Patient\Exams\_ExamsForm.cshtml" />
     <Content Include="Views\Patient\Exams\_ExamsTableRow.cshtml" />
+    <Content Include="Views\Patient\GeneralData\_AllergyForm.cshtml" />
+    <Content Include="Views\Patient\GeneralData\_AllergyTable.cshtml" />
+    <Content Include="Views\Patient\GeneralData\_AllergyTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
