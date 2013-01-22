@@ -186,7 +186,7 @@ $(document).ready(function () {
 //Water mark
 $(document).ready(function () {
 
-    var watermark = 'Search for people, places and things';
+    var watermark = 'Search for name, CPF or RN';
 
     //init, set watermark text and class
     $('.DOMControl_placeholder').val(watermark).addClass('watermark');

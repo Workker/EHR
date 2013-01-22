@@ -2,6 +2,32 @@
 <div class="mbm">
     <form method="get" action="#" id="">
         <div class="mbs pvm prl plm clearfix uiBoxGray noborder">
+            <select>
+                <option value="0">Filho(a) de</option>
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" />
+            <br />
+            <br />
+            <div style="display: none;">
+            <select>
+                <option value="1">Data de Nascimento</option>
+            </select>&nbsp;&nbsp;&nbsp;
+            <select name="dob_month" id="dob_month">
+                <option value="0">Month:</option>
+                <option value="5" selected="selected">May</option>
+            </select>&nbsp;&nbsp;
+            <select name="dob_day" id="dob_day">
+                <option value="0">Select...</option>
+                <option value="24" selected="selected">24</option>
+            </select>&nbsp;
+                <select name="dob_year" id="dob_year">
+                    <option value="0">Select...</option>
+                    <option value="2012" selected="selected">2012</option>
+                </select>
+                </div>
+            <br />
+            <br />
+            <label class="uiLinkButton fbSearchAdvancedFiltersAddButton">
+                <input type="button" value="Add another filter..." onclick="Display($(this).parent().prev().prev().prev(), true); Display(this, false);"></label>
         </div>
     </form>
 </div>
@@ -9,33 +35,28 @@
 <div class="mbm detailedsearch_result">
     <div class="clearfix">
         <a class="_8o _8r lfloat" href="#">
-            <img class="img" src="./j - Facebook Search_files/372140_100003211023003_254194256_q.jpg" alt=""></a><div class="clearfix _8m _8u _42ef">
+            <img class="img" src="../Images/Profiles/1.jpg" alt="" style="margin-right: 5px;"></a><div class="clearfix _8m _8u _42ef">
                 <div class="pls">
-                    <div class="instant_search_title fsl fwb fcb"><a href="#">José Silva</a></div>
+                    <div class="instant_search_title fsl fwb fcb"><a href="#">Andrew Brookes</a></div>
                     <div class="fsm fwn fcg">
-                        <div class="fsm fwn fcg"><a class="uiLinkSubtle" href="#" rel="dialog" role="button">17 followers</a></div>
                         <div class="fbProfileByline searchResultPersonByline">
                             <span class="fbProfileBylineFragment">
                                 <span class="fbProfileBylineIconContainer">
                                     <i class="mrs fbProfileBylineIcon img sp_bij1np sx_81762b"></i>
                                 </span>
-                                <span class="fbProfileBylineLabel">Lives in <a href="#">Contagem</a></span>
+                                <span class="fbProfileBylineLabel">Age 23</span>
                             </span><span class="fbProfileBylineFragment">
-                                <span class="fbProfileBylineIconContainer"><i class="mrs fbProfileBylineIcon img sp_19xhgf sx_088ae8"></i></span>
-                                <span class="fbProfileBylineLabel"><a href="#">Married</a> to <a href="#">Marcia Soares</a></span>
-                            </span><span class="fbProfileBylineFragment">
-                                <span class="fbProfileBylineIconContainer"><i class="mrs fbProfileBylineIcon img sp_19xhgf sx_6354db"></i></span>
-                                <span class="fbProfileBylineLabel">Born on May 15</span>
+                                       <br/>
+                                       <span class="fbProfileBylineIconContainer"><i class="mrs fbProfileBylineIcon img sp_19xhgf sx_088ae8"></i></span>
+                                       <span class="fbProfileBylineLabel" style="font-weight: bold">Barra Dor</span>
+                                   </span><span class="fbProfileBylineFragment">
                             </span>
                         </div>
-                    </div>
-                    <div>
-                        <div class="mts detailedsearch_actions fsm fwn fcg"><a href="#">1 mutual friend</a> · <span class="FollowLink"><a href="#">Follow</a><span class="hidden_elem" id="u_jsonp_4_21"><i class="followLinkInlineCheck img sp_5q8eak sx_ee38e0"></i><span class="followLinkSubscribed fcg">Following</span></span></span> · <a href="#">Send message</a></div>
                     </div>
                 </div>
             </div>
     </div>
 </div>
-<div class="clearfix uiMorePager stat_elem friendBrowserMorePager uiMorePagerCenter">
+@*<div class="clearfix uiMorePager stat_elem friendBrowserMorePager uiMorePagerCenter">
     <div><a class="pam uiBoxLightblue  uiMorePagerPrimary" href="#">Show More</a></div>
-</div>
+</div>*@
