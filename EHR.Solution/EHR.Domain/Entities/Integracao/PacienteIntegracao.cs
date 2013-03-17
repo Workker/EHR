@@ -6,15 +6,26 @@ using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities.Integracao
 {
+    public enum Sexo: int
+    {
+        M=1,
+        F=2
+    }
     public class PacienteIntegracao :IAggregateRoot<int>
     {
         public virtual int Id { get; set; }
-        public virtual string CodigoRegistroPaciente { get; set; }
+    //    public virtual string CodigoRegistroPaciente { get; set; }
         public virtual string CodigoProntuarioPaciente { get; set; }
         public virtual string DataEntrada { get; set; }
-        
-        
-        
+        public virtual string CodigoProfissional { get; set; }
+        public virtual string CodigoDaEspecialidade { get; set; }
+        public virtual string Leito { get; set; }
+        public virtual string NomePaciente { get; set; }
+        public virtual Sexo Sexo { get; set; }
+        public virtual string DataNascimento { get; set; }
+        public virtual string Identidade { get; set; }
+
+
     //A1.cod_pac,       --- REGISTRO DO PACIENTE (ANTENDIMENTO)
     //A1.cod_prt,       --- PRONTUÁRIO DO PACIENTE 
     //A1.data_ent,      --- DATA DE ENTRADA

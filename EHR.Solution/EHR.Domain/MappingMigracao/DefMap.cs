@@ -8,8 +8,6 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.MappingMigracao
 {
-    
-
     public class DefMigracaoMap : ClassMap<DefMigracao>
     {
         public DefMigracaoMap() 

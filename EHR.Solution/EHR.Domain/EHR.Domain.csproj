@@ -63,6 +63,7 @@
     <Compile Include="Entities\Sumario\Cid.cs" />
     <Compile Include="Entities\Sumario\Def.cs" />
     <Compile Include="Entities\Sumario\Procedimento.cs" />
+    <Compile Include="MappingIntegracao\PacienteIntegracaoMap.cs" />
     <Compile Include="Mapping\AdmissionMap.cs" />
     <Compile Include="Mapping\AllergyMap.cs" />
     <Compile Include="Mapping\CidMap.cs" />

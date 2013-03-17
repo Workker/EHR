@@ -35,7 +35,7 @@ namespace EHR.Test.Migracao
                 listaCid.Add(cid);
             }
 
-            repositorioCid.SalvarLista(listaCid);
+         //   repositorioCid.SalvarLista(listaCid);
 
         }
     }
