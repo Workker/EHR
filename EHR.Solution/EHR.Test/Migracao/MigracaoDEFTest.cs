@@ -17,6 +17,7 @@ using NUnit.Framework;
 namespace EHR.Test.Migracao
 {
     [TestFixture]
+    [Ignore]
     public class MigracaoDEF 
     {
         [Test]
