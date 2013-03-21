@@ -7,6 +7,7 @@ using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities.Patient
 {
+    [Serializable]
     public class Patient : IAggregateRoot<int>
     {
         #region Properties
