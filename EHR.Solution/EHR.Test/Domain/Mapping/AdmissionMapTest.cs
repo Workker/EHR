@@ -13,6 +13,7 @@ namespace EHR.Test.Domain.Mapping
     public class AdmissionMapTest
     {
         [Test]
+        [Ignore]
         public void test_mapping_of_admission()
         {
             new PersistenceSpecification<Admission>(session: BaseRepository.CreateSessionFactory().OpenSession())

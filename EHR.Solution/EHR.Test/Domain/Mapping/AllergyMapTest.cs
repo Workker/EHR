@@ -13,6 +13,7 @@ namespace EHR.Test.Domain.Mapping
     public class AllergyMapTest
     {
         [Test]
+        [Ignore]
         public void test_mapping_of_allergy()
         {
             new PersistenceSpecification<Allergy>(session: BaseRepository.CreateSessionFactory().OpenSession()).

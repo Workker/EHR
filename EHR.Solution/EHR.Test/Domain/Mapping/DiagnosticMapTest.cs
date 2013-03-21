@@ -13,6 +13,7 @@ namespace EHR.Test.Domain.Mapping
     public class DiagnosticMapTest
     {
         [Test]
+        [Ignore]
         public void test_mapping_of_diagnostic()
         {
             new PersistenceSpecification<Diagnostic>(session: BaseRepository.CreateSessionFactory().OpenSession()).
