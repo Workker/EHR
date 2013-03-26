@@ -182,7 +182,7 @@ $(document).ready(function () {
 //Water mark
 $(document).ready(function () {
 
-    var watermark = 'Search for name, CPF or RN';
+    var watermark = 'Digite o Nome ou CPF do paciente';
 
     //init, set watermark text and class
     $('.DOMControl_placeholder').val(watermark).addClass('watermark');
