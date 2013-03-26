@@ -13,7 +13,7 @@
         setTimeout(function () {
             var resultModel = null;
             var q = $this.query();
-            if (q == "") {
+            if (q == "" || q.length  <= 2) {
                 resultModel = { results: [] };
                 ko.mapping.updateFromJS(viewModel, resultModel);
             } else {
@@ -178,10 +178,6 @@ $(document).ready(function () {
     $("#o_td").corner("4px");
 
 });
-
-// Suggest of text
-//Todo Componentizar
-
 
 //Water mark
 $(document).ready(function () {

@@ -63,7 +63,6 @@
     <Compile Include="Domain\Mapping\AllergyMapTest.cs" />
     <Compile Include="Domain\Mapping\DiagnosticMapTest.cs" />
     <Compile Include="Domain\Mapping\PatientMapTest.cs" />
-    <Compile Include="Domain\Repository\Cache\PatientsTest.cs" />
     <Compile Include="InfraEstrutura\CriarBancoDeDadosPorModelo.cs" />
     <Compile Include="Migracao\Conexao.cs" />
     <Compile Include="Migracao\MigracaoCIDTest.cs" />
@@ -79,6 +78,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Domain\Repository\" />
     <Folder Include="UI\Controller\" />
   </ItemGroup>
   <ItemGroup>
