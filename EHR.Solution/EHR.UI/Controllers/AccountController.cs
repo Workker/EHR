@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : System.Web.Mvc.Controller
     {
         public ActionResult Index()
         {

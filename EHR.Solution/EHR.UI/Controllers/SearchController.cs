@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
 {
-    public class SearchController : Controller
+    public class SearchController : System.Web.Mvc.Controller
     {
         //
         // GET: /Search/

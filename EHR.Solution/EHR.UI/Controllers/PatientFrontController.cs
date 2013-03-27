@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using EHRIntegracao.Domain.Factorys;
+using EHRIntegracao.Domain.Services.DTO;
+
 
 namespace EHR.UI.Controllers
 {
-    public class PatientController : Controller
+    public class PatientController : System.Web.Mvc.Controller
     {
         #region Views
 
@@ -98,8 +101,10 @@ namespace EHR.UI.Controllers
 
         public string SearchPeaple(string query)
         {
-            return
-                "{\"results\":[{\"type\":\"header\",\"text\":\"People\"},{\"type\":\"person\",\"name\":\"Andrew Brookes\", \"imageUrl\":\"../Images/Profiles/1.jpg\"},{\"type\":\"person\",\"name\":\"Leo Coates\", \"imageUrl\":\"../Images/Profiles/2.jpg\"},{\"type\":\"person\",\"name\":\"Reece Davison\", \"imageUrl\":\"../Images/Profiles/3.jpg\"},{\"type\":\"person\",\"name\":\"Lauren Stanley\", \"imageUrl\":\"../Images/Profiles/4.jpg\"},{\"type\":\"person\",\"name\":\"Courtney Herbert\", \"imageUrl\":\"../Images/Profiles/5.jpg\"},{\"type\":\"person\",\"name\":\"Emily Holden\", \"imageUrl\":\"../Images/Profiles/6.jpg\"},{\"type\":\"person\",\"name\":\"Dylan Lynch\", \"imageUrl\":\"../Images/Profiles/7.jpg\"}]}";
+            var patient = new Domain.PatientDTO { Name = query };
+            var patientController = new EHR.Controller.PatientController();
+
+            return BuildResultsOfSimpleSearchOfPatients(patientController.GetBy(DbEnum.QuintaDor, patient));
         }
 
         #region Diagnostic
@@ -114,7 +119,9 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_DiagnosticTableRow");
         }
 
-        public void DeleteDiagnostic() { }
+        public void DeleteDiagnostic()
+        {
+        }
 
         #endregion
 
@@ -150,7 +157,9 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_AllergyTableRow");
         }
 
-        public void DeleteAllergy() { }
+        public void DeleteAllergy()
+        {
+        }
 
         #endregion
 
@@ -167,7 +176,9 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_MedicamentOfPreviousUseTableRow");
         }
 
-        public void DeleteMedicamentOfPreviousUse() { }
+        public void DeleteMedicamentOfPreviousUse()
+        {
+        }
 
         #endregion
 
@@ -184,9 +195,20 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_MedicamentUsedDuringhospitalizationTableRow");
         }
 
-        public void DeleteMedicamentUsedDuringhospitalization() { }
+        public void DeleteMedicamentUsedDuringhospitalization()
+        {
+        }
 
         #endregion
+
+
+        private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<IPatientDTO> patients)
+        {
+            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"name\":\"" + patient.Name + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
+
+            return result += "]}";
+
+        }
 
     }
 }
