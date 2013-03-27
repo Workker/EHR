@@ -10,7 +10,7 @@ namespace EHR.Domain
 {
     public class PatientDTO : IPatientDTO
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public DateTime DateBirthday { get; set; }
         public string CPF { get; set; }

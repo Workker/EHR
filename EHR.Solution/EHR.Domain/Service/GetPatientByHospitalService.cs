@@ -12,18 +12,20 @@ namespace EHR.Domain.Service
     {
         public IList<IPatientDTO> GetPatientBy(DbEnum hospital,IPatientDTO patientDTO)
         {
+            var service = new PatientIntegrationService();
+            return service.GetAllPatients(patientDTO, hospital);
             //var service = new PatientIntegrationService();
             //return service.GetAllPatients(patientDTO, hospital);
 
-            var pacientes = new List<IPatientDTO>
-                                {
-                                    new PatientDTO() {Name = "Sammuel"},
-                                    new PatientDTO() {Name = "Sammuel Garcia"},
-                                    new PatientDTO() {Name = "Thiago"},
-                                    new PatientDTO() {Name = "Thiago Oliveira"}
-                                };
+            //var pacientes = new List<IPatientDTO>
+            //                    {
+            //                        new PatientDTO() {Name = "Sammuel"},
+            //                        new PatientDTO() {Name = "Sammuel Garcia"},
+            //                        new PatientDTO() {Name = "Thiago"},
+            //                        new PatientDTO() {Name = "Thiago Oliveira"}
+            //                    };
 
-            return pacientes.Where(n => n.Name.Contains(patientDTO.Name)).ToList();
+            //return pacientes.Where(n => n.Name.Contains(patientDTO.Name)).ToList();
         }
     }
 }
