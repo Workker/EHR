@@ -12,7 +12,7 @@ namespace EHR.Domain
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public DateTime DateBirthday { get; set; }
+        public string DateBirthday { get; set; }
         public string CPF { get; set; }
         public string Identity { get; set; }
         public DbEnum Hospital { get; set; }
