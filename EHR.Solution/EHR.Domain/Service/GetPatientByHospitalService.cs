@@ -12,8 +12,12 @@ namespace EHR.Domain.Service
     {
         public IList<IPatientDTO> GetPatientBy(DbEnum hospital,IPatientDTO patientDTO)
         {
-            var service = new PatientIntegrationService();
-            return service.GetAllPatients(patientDTO, hospital);
+            //var service = new PatientIntegrationService();
+            //return service.GetAllPatients(patientDTO, hospital);
+
+            var servico = new GetPatientsLuceneService();
+            return servico.GetPatients(patientDTO.Name);
+
             //var service = new PatientIntegrationService();
             //return service.GetAllPatients(patientDTO, hospital);
 

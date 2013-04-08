@@ -204,7 +204,7 @@ namespace EHR.UI.Controllers
 
         private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<IPatientDTO> patients)
         {
-            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"name\":\"" + patient.Name + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
+            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" +Enum.GetName(typeof(DbEnum) ,patient.Hospital) + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
 
             return result += "]}";
 
