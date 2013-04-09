@@ -309,14 +309,8 @@
     <Content Include="Images\nordic.gif" />
     <Content Include="Images\other_medices.png" />
     <Content Include="Images\procedimentos.png" />
-    <Content Include="Images\Profiles\1.jpg" />
-    <Content Include="Images\Profiles\2.jpg" />
-    <Content Include="Images\Profiles\3.jpg" />
-    <Content Include="Images\Profiles\4.jpg" />
-    <Content Include="Images\Profiles\5.jpg" />
-    <Content Include="Images\Profiles\6.jpg" />
-    <Content Include="Images\Profiles\7.jpg" />
     <Content Include="Images\index.png" />
+    <Content Include="Images\Profiles\1.jpg" />
     <Content Include="Images\receituario.png" />
     <Content Include="Images\topo.png" />
     <Content Include="Images\u91_normal.png" />

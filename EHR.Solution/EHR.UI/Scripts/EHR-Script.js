@@ -13,7 +13,7 @@
         setTimeout(function () {
             var resultModel = null;
             var q = $this.query();
-            if (q == "" || q.length  <= 2) {
+            if (q == "") {
                 resultModel = { results: [] };
                 ko.mapping.updateFromJS(viewModel, resultModel);
             } else {
@@ -310,7 +310,7 @@ $(".unitsSideBar li input[type='checkbox']").live(
 "click", function () {
     if ($(this).is(':checked')) {
         $(this).parent().addClass("itemChecked");
-    }else {
+    } else {
         $(this).parent().removeAttr("class");
     }
 }
@@ -318,8 +318,8 @@ $(".unitsSideBar li input[type='checkbox']").live(
 )
 // Role display or hide table
 function Display(element, option) {
-    debugger 
-    if(option == true) {
+    debugger
+    if (option == true) {
         $(element).show();
     } else {
         $(element).hide();
