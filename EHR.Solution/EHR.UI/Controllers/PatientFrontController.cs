@@ -103,7 +103,7 @@ namespace EHR.UI.Controllers
         {
             var patient = new PatientDTO { Name = query };
             var patientController = new EHR.Controller.PatientController();
-            var patients = patientController.GetBy(DbEnum.QuintaDorWorkker, patient);
+            var patients = patientController.GetBy(DbEnum.QuintaDor, patient);
             return BuildResultsOfSimpleSearchOfPatients(patients);
         }
 
