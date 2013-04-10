@@ -103,8 +103,8 @@ namespace EHR.UI.Controllers
         {
             var patient = new Domain.PatientDTO { Name = query };
             var patientController = new EHR.Controller.PatientController();
-
-            return BuildResultsOfSimpleSearchOfPatients(patientController.GetBy(DbEnum.QuintaDorWorkker, patient));
+            var patients = patientController.GetBy(DbEnum.QuintaDorWorkker, patient);
+            return BuildResultsOfSimpleSearchOfPatients(patients);
         }
 
         #region Diagnostic

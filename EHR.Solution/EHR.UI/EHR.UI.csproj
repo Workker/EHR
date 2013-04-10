@@ -376,7 +376,7 @@
     <Content Include="Views\Patient\GeneralData\_DiagnosticsForm.cshtml" />
     <Content Include="Views\Patient\GeneralData\_DiagnosticsTable.cshtml" />
     <Content Include="Views\Patient\GeneralData\_DiagnosticTableRow.cshtml" />
-    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\_Search.cshtml" />
     <Content Include="Views\Search\Layout\_LeaftCol.cshtml" />
     <Content Include="Views\Search\Layout\_ContentArea.cshtml" />
     <Content Include="Views\Patient\Exams\_ExamsTable.cshtml" />
@@ -391,6 +391,7 @@
     <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationForm.cshtml" />
     <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationTable.cshtml" />
     <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationTableRow.cshtml" />
+    <Content Include="Views\Search\Layout\_Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

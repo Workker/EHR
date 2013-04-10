@@ -25,6 +25,7 @@
                     success: function (r) {
                         resultModel = r;
                         ko.mapping.updateFromJS(viewModel, resultModel);
+                        $("#advancedSearchLink").attr("onclick", "goAdvancedSearch(\"" + q + "\")");
                     }
                 });
             }
@@ -36,6 +37,31 @@
     window.vm = viewModel;
     ko.applyBindings(viewModel, $("#search").get(0));
 })(jQuery);
+
+// GO
+function goAdvancedSearch(q) {
+    $.ajax({
+        url: "../Search/Index/?query=" + q,
+        type: "GET",
+        success: function (r) {
+            $("#content").html(r);
+            $("ul.results").hide();
+        }
+    });
+}
+
+function goFilter(form) {
+    $.ajax({
+        url: "../Search/FilterPeople",
+        data: form,
+        type: "POST",
+        success: function (r) {
+            $("div#DivResult").html(r);
+            $("ul.results").hide();
+        }
+    });
+}
+
 
 // Timeline animation
 $(function () {
@@ -244,6 +270,18 @@ hs.registerOverlay({
     fade: 2 // fading the semi-transparent overlay looks bad in IE
 });
 
+function GetMore() {
+
+    $.ajax({
+        url: "../Search/More",
+        type: "GET",
+        success: function (r) {
+            $("#DivResult").append(r);
+        }
+    });
+}
+
+
 // Table
 function newRow(currentNode, url) {
     $.ajax({ type: "GET", url: url }).success(function (d) {
@@ -318,7 +356,6 @@ $(".unitsSideBar li input[type='checkbox']").live(
 )
 // Role display or hide table
 function Display(element, option) {
-    debugger
     if (option == true) {
         $(element).show();
     } else {

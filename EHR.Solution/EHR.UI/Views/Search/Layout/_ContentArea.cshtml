@@ -1,62 +1,52 @@
-﻿<div class="mbs detailedsearch_feature_header"><span>SEARCH TOOLS</span></div>
+﻿@using EHRIntegracao.Domain.Services.DTO
+<div class="mbs detailedsearch_feature_header"><span>SEARCH TOOLS</span></div>
 <div class="mbm">
-    <form method="get" action="#" id="">
+    
         <div class="mbs pvm prl plm clearfix uiBoxGray noborder">
-            <select>
+@*            <select>
                 <option value="0">Filho(a) de</option>
             </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" />
             <br />
-            <br />
-            <div style="display: none;">
-            <select>
-                <option value="1">Data de Nascimento</option>
-            </select>&nbsp;&nbsp;&nbsp;
-            <select name="dob_month" id="dob_month">
-                <option value="0">Month:</option>
-                <option value="5" selected="selected">May</option>
-            </select>&nbsp;&nbsp;
+            <br />*@
+            @*<div style="display: none;">*@ 
+
+            <label>Data de Nascimento: </label>
             <select name="dob_day" id="dob_day">
                 <option value="0">Select...</option>
-                <option value="24" selected="selected">24</option>
+                <option value="08" selected="selected">08</option>
+                <option value="09" selected="selected">09</option>
+                <option value="10" selected="selected">10</option>
+                <option value="11" selected="selected">11</option>
             </select>&nbsp;
+            <select name="dob_month" id="dob_month">
+                <option value="0">Month:</option>
+                <option value="06" selected="selected">Junho</option>
+                <option value="07" selected="selected">Julho</option>
+                <option value="08" selected="selected">Agosto</option>
+            </select>&nbsp;&nbsp;
                 <select name="dob_year" id="dob_year">
                     <option value="0">Select...</option>
-                    <option value="2012" selected="selected">2012</option>
+                    <option value="1964" selected="selected">1964</option>
+                    <option value="1964" selected="selected">1974</option>
+                    <option value="1964" selected="selected">1984</option>
+                    <option value="1964" selected="selected">1994</option>
+                    <option value="1964" selected="selected">2004</option>
+
                 </select>
-                </div>
+            @*</div>*@
             <br />
             <br />
-            <label class="uiLinkButton fbSearchAdvancedFiltersAddButton">
-                <input type="button" value="Add another filter..." onclick="Display($(this).parent().prev().prev().prev(), true); Display(this, false);"></label>
+            @*<label class="uiLinkButton fbSearchAdvancedFiltersAddButton">
+                <input type="button" value="Add another filter..." onclick="Display($(this).parent().prev().prev().prev(), true); Display(this, false);"></label>*@
+            <a  onclick="goFilter($('#searchPeopleFilter').serialize())">Teste</a>
+            @*<input type="submit" onclick="" value="Filter" class="uibutton large" />*@
         </div>
-    </form>
 </div>
 <div class="detailedsearch_feature_header"><span>RESULTS</span></div>
-<div class="mbm detailedsearch_result">
-    <div class="clearfix">
-        <a class="_8o _8r lfloat" href="#">
-            <img class="img" src="../Images/Profiles/1.jpg" alt="" style="margin-right: 5px;"></a><div class="clearfix _8m _8u _42ef">
-                <div class="pls">
-                    <div class="instant_search_title fsl fwb fcb"><a href="#">Andrew Brookes</a></div>
-                    <div class="fsm fwn fcg">
-                        <div class="fbProfileByline searchResultPersonByline">
-                            <span class="fbProfileBylineFragment">
-                                <span class="fbProfileBylineIconContainer">
-                                    <i class="mrs fbProfileBylineIcon img sp_bij1np sx_81762b"></i>
-                                </span>
-                                <span class="fbProfileBylineLabel">Age 23</span>
-                            </span><span class="fbProfileBylineFragment">
-                                       <br/>
-                                       <span class="fbProfileBylineIconContainer"><i class="mrs fbProfileBylineIcon img sp_19xhgf sx_088ae8"></i></span>
-                                       <span class="fbProfileBylineLabel" style="font-weight: bold">Barra Dor</span>
-                                   </span><span class="fbProfileBylineFragment">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
+<div class="mbm detailedsearch_result" id="DivResult">
+
+    @{Html.RenderPartial("Layout/_Result");}
 </div>
-@*<div class="clearfix uiMorePager stat_elem friendBrowserMorePager uiMorePagerCenter">
-    <div><a class="pam uiBoxLightblue  uiMorePagerPrimary" href="#">Show More</a></div>
-</div>*@
+<div class="clearfix uiMorePager stat_elem friendBrowserMorePager uiMorePagerCenter">
+    <div><a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick="GetMore()">Show More</a></div>
+</div>

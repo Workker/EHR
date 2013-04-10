@@ -10,19 +10,20 @@
                     <div class="wrap" id="search">
                         <div class="innerWrap searchBox">
                             <span class="uiSearchInput textInput searchContainer" id="upjgpe43">
-                                <input type="text" class="inputtext DOMControl_placeholder" maxlength="100" id="searchPeople"  data-bind="value: query, valueUpdate: 'afterkeyup', event: { keyup: doSearch }">
+                                <input type="text" class="inputtext DOMControl_placeholder" maxlength="100" id="searchPeople" data-bind="value: query, valueUpdate: 'afterkeyup', event: { keyup: doSearch }">
                                 <button title="Busca por pacientes" data-bind="click: doSearch">
                                     <span class="accessible_elem">Busca por pacientes</span>
                                 </button>
                             </span>
                             <ul class="results" data-bind='template: { name: "resultItem", foreach: results }, visible: results().length > 0'>
                                 <li class="calltoaction">
-                                    <a href="../Search/" rel="ignore">
+                                    <a onclick="" id="advancedSearchLink">
                                         <span class="text">
                                             <span class="seeMore">Busca Avan&ccedil;ada
                                                 <span class="arrow"></span>
                                             </span>
-                                            <span class="subtext">Para exibir a lista completa e refinar a busca<br />clique aqui</span>
+                                            <span class="subtext">Para exibir a lista completa e refinar a busca<br />
+                                                clique aqui</span>
                                         </span>
                                     </a>
                                 </li>

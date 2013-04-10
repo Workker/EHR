@@ -17,7 +17,7 @@ namespace EHR.Controller
 
         public PatientController()
         {
-           // _patients = new Patients();
+            // _patients = new Patients();
         }
 
         public Patient GetBy(int id)
@@ -35,6 +35,12 @@ namespace EHR.Controller
             var service = new GetPatientByHospitalService();
 
             return service.GetPatientBy(hospital, dto);
+        }
+
+        public IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital)
+        {
+            var service = new GetPatientByHospitalService();
+            return service.AdvancedGetPatientBy(dto,hospital);
         }
 
     }
