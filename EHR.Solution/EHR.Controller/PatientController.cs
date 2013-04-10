@@ -7,7 +7,7 @@ using EHR.Domain.Repository;
 using EHR.Domain.Service;
 using EHRIntegracao.Domain.Factorys;
 using EHRIntegracao.Domain.Services.DTO;
-using PatientDTO = EHR.Domain.PatientDTO;
+
 
 namespace EHR.Controller
 {

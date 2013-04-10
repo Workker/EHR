@@ -101,7 +101,7 @@ namespace EHR.UI.Controllers
 
         public string SearchPeaple(string query)
         {
-            var patient = new Domain.PatientDTO { Name = query };
+            var patient = new PatientDTO { Name = query };
             var patientController = new EHR.Controller.PatientController();
             var patients = patientController.GetBy(DbEnum.QuintaDorWorkker, patient);
             return BuildResultsOfSimpleSearchOfPatients(patients);
