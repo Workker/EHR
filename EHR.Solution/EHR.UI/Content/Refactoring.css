@@ -192,7 +192,6 @@ section #header {
 
 #pageLogo {
     float: left;
-    margin-left: -7px;
     padding-right: 1px;
     z-index: 5;
 }
@@ -207,7 +206,7 @@ section #header {
         overflow: hidden;
         text-indent: -999px;
         white-space: nowrap;
-        width: 105px;
+        width: 175px;
     }
 
 #headNav {
