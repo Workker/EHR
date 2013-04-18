@@ -305,6 +305,7 @@
     <Content Include="Images\link_d.png" />
     <Content Include="Images\Loading.gif" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo1.png" />
     <Content Include="Images\mdr.png" />
     <Content Include="Images\nordic.gif" />
     <Content Include="Images\other_medices.png" />
