@@ -38,29 +38,6 @@
     ko.applyBindings(viewModel, $("#search").get(0));
 })(jQuery);
 
-// GO
-function goAdvancedSearch(q) {
-    $.ajax({
-        url: "../Search/Index/?query=" + q,
-        type: "GET",
-        success: function (r) {
-            $("#content").html(r);
-            $("ul.results").hide();
-        }
-    });
-}
-
-function goFilter(form) {
-    $.ajax({
-        url: "../Search/FilterPeople",
-        data: form,
-        type: "POST",
-        success: function (r) {
-            $("div#DivResult").html(r);
-            $("ul.results").hide();
-        }
-    });
-}
 
 
 // Timeline animation
@@ -91,15 +68,6 @@ $(document).ready(function () {
         Loading_gif: '../../Images/Loading.gif',
         ajaxContent: 'center'
     });
-
-    Menu.add({
-        Title: 'Gráficos',
-        onOutIcon: '../../Images/graphics.png',
-        onClickIcon: '../../Images/graphics.png',
-        HtmlSatusContent: '',
-        url: '/Patient/Charts',
-        data: ''
-    }).sethscCorner();
 
     Menu.add({
         Title: 'Dados Gerais',
@@ -134,24 +102,6 @@ $(document).ready(function () {
         onClickIcon: '../../Images/procedimentos.png',
         HtmlSatusContent: '',
         url: '/Patient/Procedures',
-        data: ''
-    }).sethscCorner();
-
-    Menu.add({
-        Title: 'Abtimicrobianos',
-        onOutIcon: '../../Images/abtimicrobianos.png',
-        onClickIcon: '../../Images/abtimicrobianos.png',
-        HtmlSatusContent: '',
-        url: '/Patient/Antimicrobial',
-        data: ''
-    }).sethscCorner();
-
-    Menu.add({
-        Title: 'Medicamentos',
-        onOutIcon: '../../Images/other_medices.png',
-        onClickIcon: '../../Images/other_medices.png',
-        HtmlSatusContent: '',
-        url: '/Patient/OtherMedicationsRelevant',
         data: ''
     }).sethscCorner();
 
@@ -229,7 +179,7 @@ $(document).ready(function () {
 });
 
 
-//Galeria de Exames:
+// Images Gallery
 hs.graphicsDir = '../Images/graphics/';
 hs.align = 'center';
 hs.transitions = ['expand', 'crossfade'];
@@ -270,19 +220,10 @@ hs.registerOverlay({
     fade: 2 // fading the semi-transparent overlay looks bad in IE
 });
 
-function GetMore() {
-
-    $.ajax({
-        url: "../Search/More",
-        type: "GET",
-        success: function (r) {
-            $("#DivResult").append(r);
-        }
-    });
-}
 
 
-// Table
+
+// Table Component
 function newRow(currentNode, url) {
     $.ajax({ type: "GET", url: url }).success(function (d) {
         $(currentNode).parent().parent().clone($(currentNode).parent().parent())
@@ -342,18 +283,6 @@ function closeForm(element) {
     }
 }
 
-// Toggle of class of Advanced Search
-
-$(".unitsSideBar li input[type='checkbox']").live(
-"click", function () {
-    if ($(this).is(':checked')) {
-        $(this).parent().addClass("itemChecked");
-    } else {
-        $(this).parent().removeAttr("class");
-    }
-}
-
-)
 // Role display or hide table
 function Display(element, option) {
     if (option == true) {
@@ -364,7 +293,6 @@ function Display(element, option) {
 }
 
 // Format datepicker
-
 function formatDatePicker() {
     $('#dob_month, #dob_year').change(function () {
         var year = $('#dob_year').val();
@@ -393,3 +321,49 @@ function formatDatePicker() {
         }
     });
 }
+
+// AdvancedSearch
+function goAdvancedSearch(q) {
+    $.ajax({
+        url: "../Search/Index/?query=" + q,
+        type: "GET",
+        success: function (r) {
+            $("#content").html(r);
+            $("ul.results").hide();
+        }
+    });
+}
+
+function goFilter(form) {
+    $.ajax({
+        url: "../Search/FilterPeople",
+        data: form,
+        type: "POST",
+        success: function (r) {
+            $("div#DivResult").html(r);
+            $("ul.results").hide();
+        }
+    });
+}
+
+function GetMore() {
+
+    $.ajax({
+        url: "../Search/More",
+        type: "GET",
+        success: function (r) {
+            $("#DivResult").append(r);
+        }
+    });
+}
+
+// Toggle of class of Advanced Search
+$(".unitsSideBar li input[type='checkbox']").live(
+    "click", function () {
+        if ($(this).is(':checked')) {
+            $(this).parent().addClass("itemChecked");
+        } else {
+            $(this).parent().removeAttr("class");
+        }
+    }
+);
