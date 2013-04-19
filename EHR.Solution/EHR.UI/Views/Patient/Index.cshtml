@@ -5,7 +5,7 @@
 
 @section PageLayout
                     {
-    <div id="header">
+    <div class="header">
         @{Html.RenderPartial("Layout/_ProfileHeader");}
     </div>
     <aside id="timeLine" class="lfloat">
@@ -20,3 +20,8 @@
     @{Html.RenderPartial("_GeneralData");}
     <div id="test"></div>
 </div>
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/AjaxFlagMenu-1.0.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/highslide-with-gallery.js"></script>
+}

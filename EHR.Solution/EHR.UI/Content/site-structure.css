@@ -4,3 +4,63 @@
     padding-left: 4%;
     width: 700px;
 }
+
+/*Header*/
+div.header {
+    padding: 1px 0px 0px 0px;
+    margin: 20px 0px 25px 0px;
+    height: 25%;
+    width: 25%;
+}
+
+.header div.HeaderPhoto {
+    margin: 0px 0px 0px 26px;
+    width: 102px;
+    height: 73px;
+    position: absolute;
+    z-index: 2;
+}
+
+.header div.HeaderContent {
+    margin: 28px 0px 0px 0px;
+    height: 165px;
+    width: 975px;
+}
+
+.HeaderContent h1.name {
+    margin: 30px 0px 0px 132px;
+    width: 100%;
+    float: left;
+}
+
+.HeaderContent div.data {
+    margin: 3px 0px 0px 0px;
+    height: 75px;
+    width: 350px;
+    float: left;
+}
+
+.HeaderContent div.board {
+    margin: -40px 15px 0px 0px;
+    height: 142px;
+    width: 580px;
+    float: right;
+}
+
+/*TimeLine*/
+.timeline {
+    padding: 8px 0 8px 1px;
+    top: 38px;
+    width: 122px;
+    z-index: 1;
+}
+
+    .timeline li {
+        margin-bottom: 1px;
+    }
+
+    .timeline a, .timeline .selected ul a {
+        display: block;
+        outline: none;
+        padding: 4px 0 4px 6px;
+    }

@@ -39,10 +39,9 @@ body .page {
     padding-left: 5px;
 }
 
-section #header {
-    height: 25%;
-    min-height: 25%;
-}
+
+
+
 
 /* TimeLine */
 
@@ -96,41 +95,6 @@ section #header {
 .tinyViewport .fixed_elem {
     position: static !important;
 }
-
-.fbTimelineScrubber {
-    padding: 8px 0 8px 1px;
-    top: 38px;
-    width: 122px;
-    z-index: 1;
-}
-
-    .fbTimelineScrubber li {
-        margin-bottom: 1px;
-    }
-
-    .fbTimelineScrubber .selected a {
-        color: #627AAD;
-        font-weight: bold;
-    }
-
-    .fbTimelineScrubber .selected a, .fbTimelineScrubber .selected ul a {
-        border-left-color: #627AAD;
-    }
-
-    .fbTimelineScrubber a:hover, .fbTimelineScrubber a:focus {
-        border-left-color: #A7B4D1;
-        text-decoration: underline;
-    }
-
-    .fbTimelineScrubber a, .fbTimelineScrubber .selected ul a {
-        border-left: 5px solid #C8D1E2;
-        color: #94A0C1;
-        display: block;
-        font-weight: normal;
-        outline: none;
-        padding: 4px 0 4px 6px;
-    }
-
 
 /* Header */
 
@@ -920,23 +884,26 @@ div.uiTypeaheadView .selected {
 table {
     word-wrap: normal;
 }
+
 .uiMorePager .uiMorePagerPrimary:hover {
-background-color: #d8dfea;
+    background-color: #d8dfea;
 }
+
 .uiMorePager .uiMorePagerPrimary {
-      background-color: #f2f2f2;
+    background-color: #f2f2f2;
     border: 1px solid #ccc;
-display: block;
-padding: 10px 15px;
+    display: block;
+    padding: 10px 15px;
 }
+
 .uiLinkButton input {
-background: none;
-border: none;
-color: #3b5998;
-cursor: pointer;
-font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
-font-size: 11px;
-margin: 0;
-padding: 0;
-vertical-align: top;
+    background: none;
+    border: none;
+    color: #3b5998;
+    cursor: pointer;
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
 }

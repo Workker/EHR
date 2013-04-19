@@ -100,8 +100,47 @@ select {
     padding: 2px;
 }
 
-/*Table */
+/*Header*/
+.header div.HeaderPhoto {
+    border: 1px solid #333333;
+}
 
+.header div.HeaderContent {
+    border: 1px solid #e2e2e3;
+}
+
+.HeaderContent div.data {
+    border: 1px solid #e2e2e3;
+    background-color: #eeeff4;
+}
+
+.HeaderContent div.board {
+    border: 1px solid #e2e2e3;
+}
+
+/*TimeLine*/
+.timeline .selected a {
+    color: #627AAD;
+    font-weight: bold;
+}
+
+.timeline .selected a, .timeline .selected ul a {
+    border-left-color: #627AAD;
+}
+
+.timeline a:hover, .timeline a:focus {
+    border-left-color: #A7B4D1;
+    text-decoration: underline;
+}
+
+.timeline a, .timeline .selected ul a {
+    border-left: 5px solid #C8D1E2;
+    color: #94A0C1;
+    font-weight: normal;
+}
+
+
+/*Table */
 .ulTable {
     color: #808080;
     /*border-bottom: 1px solid #aaa;*/
