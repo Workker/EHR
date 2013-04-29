@@ -26,7 +26,7 @@ namespace EHR.Controller
             {
                 Name = "Joelma Santos Carvalho",
                 Hospital = DbEnum.BarraDor,
-                DateBirthday = "15/06/1965",
+                DateBirthday = new DateTime(1965,06,15),
                 Id = 1.ToString()
             };
         }

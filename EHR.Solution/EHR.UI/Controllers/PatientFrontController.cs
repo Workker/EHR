@@ -18,7 +18,7 @@ namespace EHR.UI.Controllers
             var controller = new EHR.Controller.PatientController();
             var patient = controller.GetBy(id);
             ViewBag.data = patient;
-            ViewBag.age = CalculateAgeFrom(patient.DateBirthday);
+            ViewBag.age = CalculateAgeFrom((DateTime) patient.DateBirthday);
             return View();
         }
 
@@ -199,9 +199,9 @@ namespace EHR.UI.Controllers
             return stringReturn;
         }
 
-        private int CalculateAgeFrom(string birthday)
+        private int CalculateAgeFrom(DateTime birthday)
         {
-            return DateTime.Today.Year - Convert.ToDateTime(birthday).Year;
+            return DateTime.Today.Year - birthday.Year;
         }
 
         #endregion
