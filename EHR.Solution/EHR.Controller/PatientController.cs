@@ -21,13 +21,8 @@ namespace EHR.Controller
 
         public IPatientDTO GetBy(string id)
         {
-            return new PatientDTO
-            {
-                Name = "Joelma Santos Carvalho",
-                Hospital = DbEnum.BarraDor,
-                DateBirthday = new DateTime(1965,06,15),
-                Id = 1.ToString()
-            };
+            var service = new GetPatientByHospitalService();
+            return service.GetPatientBy(id);
         }
 
         public IList<IPatientDTO> GetBy(DbEnum hospital, PatientDTO dto)

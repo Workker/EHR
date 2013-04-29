@@ -10,7 +10,13 @@ namespace EHR.Domain.Service
 {
     public class GetPatientByHospitalService
     {
-        public IList<IPatientDTO> GetPatientBy(DbEnum hospital,IPatientDTO patientDTO)
+        public IPatientDTO GetPatientBy(string id)
+        {
+            var servico = new GetPatientsLuceneService();
+            return servico.GetPatientBy(id);
+        }
+
+        public IList<IPatientDTO> GetPatientBy(DbEnum hospital, IPatientDTO patientDTO)
         {
             var servico = new GetPatientsLuceneService();
             return servico.GetPatients(patientDTO.Name);
@@ -19,7 +25,7 @@ namespace EHR.Domain.Service
         public IList<IPatientDTO> AdvancedGetPatientBy(IPatientDTO patientDTO, List<string> hospital)
         {
             var servico = new GetPatientsLuceneService();
-            return servico.GetPatientsAdvancedSearch(patientDTO,hospital);
+            return servico.GetPatientsAdvancedSearch(patientDTO, hospital);
         }
     }
 }
