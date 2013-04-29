@@ -176,13 +176,13 @@
         <input type="button" onclick="goFilter($('#searchPeopleFilter').serialize())" value="Filtrar" class="uibutton middle" />
     </div>
 </div>
-<div class="detailedsearch_feature_header"><span>Atendimentos</span></div>
-<div class="mbm detailedsearch_result" id="DivResult">
+<div class="detailedsearch_feature_header"><span>Pacientes</span></div>
+<div class="mbm" id="DivResult">
 
     @{Html.RenderPartial("Layout/_Result");}
 </div>
-<div class="clearfix uiMorePager stat_elem friendBrowserMorePager uiMorePagerCenter">
-    <div><a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick="GetMore()">Show More</a></div>
+<div class="clearfix uiMorePager uiMorePagerCenter showMore">
+    <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick="GetMore()">Exibir mais</a>
 </div>
 <script type="text/javascript">
     formatDatePicker();

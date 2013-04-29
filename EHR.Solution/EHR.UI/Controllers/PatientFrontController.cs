@@ -12,9 +12,13 @@ namespace EHR.UI.Controllers
     public class PatientController : System.Web.Mvc.Controller
     {
         #region Views
-
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(string id)
         {
+            var controller = new EHR.Controller.PatientController();
+            var patient = controller.GetBy(id);
+            ViewBag.data = patient;
+            ViewBag.age = CalculateAgeFrom(patient.DateBirthday);
             return View();
         }
 
@@ -83,29 +87,6 @@ namespace EHR.UI.Controllers
         }
 
         #endregion
-
-        public string Admission(string q)
-        {
-            string stringReturn = null;
-
-            if (q.Equals("c") || q.Equals("C"))
-            {
-                stringReturn = "[{\"name\":\"Clínica\",\"id\":\"1\"}, {\"name\":\"Cirúrgica\",\"id\":\"2\"}]";
-            }
-            else if (q.Equals("e") || q.Equals("E"))
-            {
-                stringReturn = "[{\"name\":\"Eletiva\",\"id\":\"3\"}, {\"name\":\"Emergência\",\"id\":\"4\"}]";
-            }
-            return stringReturn;
-        }
-
-        public string SearchPeaple(string query)
-        {
-            var patient = new PatientDTO { Name = query };
-            var patientController = new EHR.Controller.PatientController();
-            var patients = patientController.GetBy(DbEnum.QuintaDor, patient);
-            return BuildResultsOfSimpleSearchOfPatients(patients);
-        }
 
         #region Diagnostic
 
@@ -201,14 +182,29 @@ namespace EHR.UI.Controllers
 
         #endregion
 
+        #region private methods
 
-        private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<IPatientDTO> patients)
+        public string Admission(string q)
         {
-            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" +Enum.GetName(typeof(DbEnum) ,patient.Hospital) + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
+            string stringReturn = null;
 
-            return result += "]}";
-
+            if (q.Equals("c") || q.Equals("C"))
+            {
+                stringReturn = "[{\"name\":\"Clínica\",\"id\":\"1\"}, {\"name\":\"Cirúrgica\",\"id\":\"2\"}]";
+            }
+            else if (q.Equals("e") || q.Equals("E"))
+            {
+                stringReturn = "[{\"name\":\"Eletiva\",\"id\":\"3\"}, {\"name\":\"Emergência\",\"id\":\"4\"}]";
+            }
+            return stringReturn;
         }
+
+        private int CalculateAgeFrom(string birthday)
+        {
+            return DateTime.Today.Year - Convert.ToDateTime(birthday).Year;
+        }
+
+        #endregion
 
     }
 }

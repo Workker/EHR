@@ -20,9 +20,15 @@ namespace EHR.Controller
             // _patients = new Patients();
         }
 
-        public Patient GetBy(int id)
+        public IPatientDTO GetBy(string id)
         {
-            return _patients.GetBy(id);
+            return new PatientDTO
+            {
+                Name = "Joelma Santos Carvalho",
+                Hospital = DbEnum.BarraDor,
+                DateBirthday = "15/06/1965",
+                Id = 1.ToString()
+            };
         }
 
         public void Add(Patient patient)
@@ -40,7 +46,7 @@ namespace EHR.Controller
         public IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital)
         {
             var service = new GetPatientByHospitalService();
-            return service.AdvancedGetPatientBy(dto,hospital);
+            return service.AdvancedGetPatientBy(dto, hospital);
         }
 
     }

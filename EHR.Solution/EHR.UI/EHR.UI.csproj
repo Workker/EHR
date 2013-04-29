@@ -156,6 +156,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientFrontController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
@@ -228,6 +229,8 @@
     <Content Include="Content\workkerReset.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\site-style.css" />
+    <Content Include="Images\age_ico.png" />
+    <Content Include="Images\birthday_ico.png" />
     <Content Include="Images\exam1.jpg" />
     <Content Include="Images\exam10.jpg" />
     <Content Include="Images\exam10_thumb.jpg" />
@@ -300,6 +303,7 @@
     <Content Include="Images\help_c.png" />
     <Content Include="Images\help_d.png" />
     <Content Include="Images\hemotransfusao.png" />
+    <Content Include="Images\hospital_ico.png" />
     <Content Include="Images\line_vertical.png" />
     <Content Include="Images\link_c.png" />
     <Content Include="Images\link_d.png" />
@@ -309,6 +313,7 @@
     <Content Include="Images\mdr.png" />
     <Content Include="Images\nordic.gif" />
     <Content Include="Images\other_medices.png" />
+    <Content Include="Images\photo_none.png" />
     <Content Include="Images\procedimentos.png" />
     <Content Include="Images\index.png" />
     <Content Include="Images\Profiles\1.jpg" />
@@ -393,6 +398,7 @@
     <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationTable.cshtml" />
     <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationTableRow.cshtml" />
     <Content Include="Views\Search\Layout\_Result.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

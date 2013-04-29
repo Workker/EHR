@@ -50,7 +50,7 @@ namespace EHR.UI
                 "~/Scripts/jquery.unobtrusive*",
                 "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new ScriptBundle("~/scripts").Include(
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
                 "~/Scripts/EHR-Script.js"));
         }
     }

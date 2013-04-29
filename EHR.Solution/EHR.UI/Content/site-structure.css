@@ -1,11 +1,66 @@
 ﻿@charset "UTF-8";
 
+/* Generic */
+.lfloat {
+    float: left;
+}
+
+.rfloat {
+    float: right;
+}
+
+#super {
+    height: 100%;
+    width: 100%;
+}
+
+body .page {
+    width: 981px;
+}
+
+.page {
+    margin: 0 auto;
+    position: relative;
+    zoom: 1;
+}
+
+#contentCol {
+    min-width: 981px;
+    position: relative !important;
+}
+
+.content {
+    margin: 0 auto;
+    padding-left: 5px;
+}
+
+.timeline {
+    padding: 8px 0 8px 1px;
+    top: 38px;
+    width: 122px;
+    z-index: 1;
+}
+
+    .timeline li {
+        margin-bottom: 1px;
+    }
+
+    .timeline a, .timeline .selected ul a {
+        display: block;
+        outline: none;
+        padding: 4px 0 4px 6px;
+    }
+
+.Menu {
+    padding-left: 20px;
+    width: 12%;
+}
+
 .contentPage {
-    padding-left: 4%;
+    padding-left: 1%;
     width: 700px;
 }
 
-/*Header*/
 div.header {
     padding: 1px 0px 0px 0px;
     margin: 20px 0px 25px 0px;
@@ -19,6 +74,16 @@ div.header {
     height: 73px;
     position: absolute;
     z-index: 2;
+}
+
+div.HeaderPhoto img {
+    height: 70px;
+    width: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -35px;
+    margin-left: -50px;
 }
 
 .header div.HeaderContent {
@@ -37,7 +102,14 @@ div.header {
     margin: 3px 0px 0px 0px;
     height: 75px;
     width: 350px;
+    overflow-x: hidden;
     float: left;
+    font-size: 12px;
+    padding-top: 5px;
+}
+
+div.data b {
+    padding: 0px 0px 0px 50px;
 }
 
 .HeaderContent div.board {
@@ -47,20 +119,7 @@ div.header {
     float: right;
 }
 
-/*TimeLine*/
-.timeline {
-    padding: 8px 0 8px 1px;
-    top: 38px;
-    width: 122px;
-    z-index: 1;
+/* Advanced Search*/
+.detailedsearch_result {
+    padding-bottom: 5px;
 }
-
-    .timeline li {
-        margin-bottom: 1px;
-    }
-
-    .timeline a, .timeline .selected ul a {
-        display: block;
-        outline: none;
-        padding: 4px 0 4px 6px;
-    }

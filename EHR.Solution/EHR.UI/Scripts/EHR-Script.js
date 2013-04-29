@@ -18,7 +18,7 @@
                 ko.mapping.updateFromJS(viewModel, resultModel);
             } else {
                 $.ajax({
-                    url: "../Patient/SearchPeaple",
+                    url: "../Search/SearchPeaple",
                     data: { "query": q },
                     type: "GET",
                     dataType: "json",
@@ -327,6 +327,7 @@ function goAdvancedSearch(q) {
     $.ajax({
         url: "../Search/Index/?query=" + q,
         type: "GET",
+        cache: false,
         success: function (r) {
             $("#content").html(r);
             $("ul.results").hide();
@@ -339,6 +340,7 @@ function goFilter(form) {
         url: "../Search/FilterPeople",
         data: form,
         type: "POST",
+        cache: false,
         success: function (r) {
             $("div#DivResult").html(r);
             $("ul.results").hide();
@@ -351,8 +353,14 @@ function GetMore() {
     $.ajax({
         url: "../Search/More",
         type: "GET",
+        cache: false,
         success: function (r) {
-            $("#DivResult").append(r);
+            if(r.length > 0) {
+                $("#DivResult").append(r);
+            } else {
+                $("a.uiMorePagerPrimary").hide();
+                $("div.uiMorePagerCenter").append("<b>Sem mais resultados</b>");
+            }
         }
     });
 }

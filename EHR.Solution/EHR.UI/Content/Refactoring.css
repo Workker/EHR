@@ -1,101 +1,5 @@
 ﻿@charset "UTF-8";
 
-/* Generic */
-
-.lfloat {
-    float: left;
-}
-
-.rfloat {
-    float: right;
-}
-
-/* Super */
-
-#super {
-    height: 100%;
-    width: 100%;
-}
-
-/* Page */
-
-body .page {
-    width: 981px;
-}
-
-.page {
-    margin: 0 auto;
-    position: relative;
-    zoom: 1;
-}
-
-#contentCol {
-    min-width: 981px;
-    position: relative !important;
-}
-
-.content {
-    margin: 0 auto;
-    padding-left: 5px;
-}
-
-
-
-
-
-/* TimeLine */
-
-#timeLine {
-    width: 10%;
-}
-
-/* Data */
-
-#data {
-    padding-left: 20px;
-    width: 12%;
-}
-
-.CaptionClass {
-    font-weight: bold;
-}
-
-.onOverClass {
-    border-top: #D6D9DE solid 1px;
-    background-color: #ECEEF4;
-}
-
-.onOutClass {
-    border-top: #D6D9DE solid 1px;
-    background-color: #ffffff;
-}
-
-.onClickClass {
-    border: #3B59B6 solid 1px;
-    background-color: #6D84B4;
-    color: #FFFFFF;
-}
-
-.hscClickClass {
-    background-color: #7288B7;
-    color: #FFFFFF;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.hscOutClass {
-    color: #6D84B4;
-    background-color: #FFFFFF;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.tinyViewport .fixed_elem {
-    position: static !important;
-}
-
 /* Header */
 
 .slim {
@@ -854,10 +758,7 @@ div.uiTypeaheadView .selected {
         font-weight: bold;
     }
 
-.detailedsearch_result {
-    padding-bottom: 5px;
-    border-bottom: 1px solid #e9e9e9;
-}
+
 
 .mbm {
     margin-bottom: 10px;

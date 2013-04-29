@@ -1,9 +1,13 @@
-﻿<div class="leftColHead">
+﻿@using EHRIntegracao.Domain.Factorys
+<div class="leftColHead">
     <h4>Hospitais</h4>
 </div>
 <div>
     <ul class="unitsSideBar">
-        <li><input name="hospital" type="checkbox" value="BarraDor"/>&nbsp;Barra Dor</li>
-        <li><input name="hospital" type="checkbox" value="QuintaDor"/>&nbsp;Quinta Dor</li>
+        @foreach (var hospital in Enum.GetValues(typeof(DbEnum)).Cast<DbEnum>().ToList())
+        {
+            <li>
+                <input name="hospital" type="checkbox" value="@hospital"/>&nbsp;@hospital</li>      
+        }
     </ul>
 </div>
