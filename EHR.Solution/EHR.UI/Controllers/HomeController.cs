@@ -8,8 +8,6 @@ namespace EHR.UI.Controllers
 {
     public class HomeController : System.Web.Mvc.Controller
     {
-        //
-        // GET: /Home/
 
         public ActionResult Index()
         {

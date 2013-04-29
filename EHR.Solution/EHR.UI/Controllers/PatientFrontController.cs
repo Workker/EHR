@@ -12,7 +12,6 @@ namespace EHR.UI.Controllers
     public class PatientController : System.Web.Mvc.Controller
     {
         #region Views
-        [HttpGet]
         public ActionResult Index(string id)
         {
             var controller = new EHR.Controller.PatientController();

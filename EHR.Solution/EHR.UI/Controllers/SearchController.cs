@@ -13,7 +13,6 @@ namespace EHR.UI.Controllers
     {
         #region views
 
-        [HttpGet]
         public ActionResult Index(string query)
         {
             Session["Date"] = null;
@@ -44,7 +43,7 @@ namespace EHR.UI.Controllers
         public string SearchPeaple(string query)
         {
             var patient = new PatientDTO { Name = query };
-            var patientController = new EHR.Controller.PatientController();
+            var patientController = new Controller.PatientController();
             var patients = patientController.GetBy(DbEnum.QuintaDor, patient);
             return BuildResultsOfSimpleSearchOfPatients(patients);
         }
@@ -74,16 +73,16 @@ namespace EHR.UI.Controllers
         private IEnumerable<IPatientDTO> GetTreatment(bool skip)
         {
             ManagerSession(skip);
-            var patient = PreencherPaciente();
+            var patient = FillPatients();
             return GetPatients(patient, skip);
         }
 
-        private PatientDTO PreencherPaciente()
+        private PatientDTO FillPatients()
         {
             var patient = new PatientDTO { Name = Session["Name"].ToString() };
 
             if (Session["Date"] != null && !string.IsNullOrEmpty(Session["Date"].ToString()))
-                patient.DateBirthday =(DateTime?) Session["Date"];
+                patient.DateBirthday = (DateTime?)Session["Date"];
             return patient;
         }
 

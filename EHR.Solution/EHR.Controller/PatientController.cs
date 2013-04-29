@@ -13,7 +13,6 @@ namespace EHR.Controller
 {
     public class PatientController
     {
-        private readonly Patients _patients;
 
         public PatientController()
         {
@@ -29,11 +28,6 @@ namespace EHR.Controller
                 DateBirthday = new DateTime(1965,06,15),
                 Id = 1.ToString()
             };
-        }
-
-        public void Add(Patient patient)
-        {
-            _patients.Save(patient);
         }
 
         public IList<IPatientDTO> GetBy(DbEnum hospital, PatientDTO dto)
