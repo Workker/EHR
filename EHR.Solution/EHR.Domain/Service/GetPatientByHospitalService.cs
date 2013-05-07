@@ -10,10 +10,10 @@ namespace EHR.Domain.Service
 {
     public class GetPatientByHospitalService
     {
-        public IPatientDTO GetPatientBy(string id)
+        public IPatientDTO GetPatientBy(string cpf)
         {
             var servico = new GetPatientsLuceneService();
-            return servico.GetPatientBy(id);
+            return servico.GetPatientBy(cpf);
         }
 
         public IList<IPatientDTO> GetPatientBy(DbEnum hospital, IPatientDTO patientDTO)

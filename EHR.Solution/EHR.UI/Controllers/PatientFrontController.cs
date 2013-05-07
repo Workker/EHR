@@ -12,10 +12,10 @@ namespace EHR.UI.Controllers
     public class PatientController : System.Web.Mvc.Controller
     {
         #region Views
-        public ActionResult Index(string id)
+        public ActionResult Index(string cpf)
         {
             var controller = new EHR.Controller.PatientController();
-            var patient = controller.GetBy(id);
+            var patient = controller.GetBy(cpf);
             ViewBag.data = patient;
             ViewBag.age = CalculateAgeFrom((DateTime) patient.DateBirthday);
             return View();
