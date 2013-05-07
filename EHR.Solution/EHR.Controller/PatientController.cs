@@ -19,10 +19,10 @@ namespace EHR.Controller
             // _patients = new Patients();
         }
 
-        public IPatientDTO GetBy(string id)
+        public IPatientDTO GetBy(string cpf)
         {
             var service = new GetPatientByHospitalService();
-            return service.GetPatientBy(id);
+            return service.GetPatientBy(cpf);
         }
 
         public IList<IPatientDTO> GetBy(DbEnum hospital, PatientDTO dto)
