@@ -78,23 +78,23 @@ $(document).ready(function () {
         data: ''
     }).sethscCorner();
 
-    Menu.add({
-        Title: 'Imagens',
-        onOutIcon: '../../Images/exames.png',
-        onClickIcon: '../../Images/exames.png',
-        HtmlSatusContent: '',
-        url: '/Patient/Images',
-        data: ''
-    });
+    //Menu.add({
+    //    Title: 'Imagens',
+    //    onOutIcon: '../../Images/exames.png',
+    //    onClickIcon: '../../Images/exames.png',
+    //    HtmlSatusContent: '',
+    //    url: '/Patient/Images',
+    //    data: ''
+    //});
 
-    Menu.add({
-        Title: 'Exames',
-        onOutIcon: '../../Images/exames.png',
-        onClickIcon: '../../Images/exames.png',
-        HtmlSatusContent: '',
-        url: '/Patient/Exams',
-        data: ''
-    });
+    //Menu.add({
+    //    Title: 'Exames',
+    //    onOutIcon: '../../Images/exames.png',
+    //    onClickIcon: '../../Images/exames.png',
+    //    HtmlSatusContent: '',
+    //    url: '/Patient/Exams',
+    //    data: ''
+    //});
 
     Menu.add({
         Title: 'Procedimentos',
@@ -114,41 +114,41 @@ $(document).ready(function () {
         data: ''
     }).sethscCorner();
 
-    Menu.add({
-        Title: 'Colonização MDR',
-        onOutIcon: '../../Images/mdr.png',
-        onClickIcon: '../../Images/mdr.png',
-        HtmlSatusContent: '',
-        url: '/Patient/ColonizationbyMdr',
-        data: ''
-    }).sethscCorner();
+    //Menu.add({
+    //    Title: 'Colonização MDR',
+    //    onOutIcon: '../../Images/mdr.png',
+    //    onClickIcon: '../../Images/mdr.png',
+    //    HtmlSatusContent: '',
+    //    url: '/Patient/ColonizationbyMdr',
+    //    data: ''
+    //}).sethscCorner();
 
-    Menu.add({
-        Title: 'Receituário',
-        onOutIcon: '../../Images/receituario.png',
-        onClickIcon: '../../Images/receituario.png',
-        HtmlSatusContent: '',
-        url: '/Patient/Prescriptions',
-        data: ''
-    }).sethscCorner();
+    //Menu.add({
+    //    Title: 'Receituário',
+    //    onOutIcon: '../../Images/receituario.png',
+    //    onClickIcon: '../../Images/receituario.png',
+    //    HtmlSatusContent: '',
+    //    url: '/Patient/Prescriptions',
+    //    data: ''
+    //}).sethscCorner();
 
-    Menu.add({
-        Title: 'Dados da Alta',
-        onOutIcon: '../../Images/dados_alta.png',
-        onClickIcon: '../../Images/dados_alta.png',
-        HtmlSatusContent: '',
-        url: '/Patient/DataHigh',
-        data: ''
-    }).sethscCorner();
+    //Menu.add({
+    //    Title: 'Dados da Alta',
+    //    onOutIcon: '../../Images/dados_alta.png',
+    //    onClickIcon: '../../Images/dados_alta.png',
+    //    HtmlSatusContent: '',
+    //    url: '/Patient/DataHigh',
+    //    data: ''
+    //}).sethscCorner();
 
-    Menu.add({
-        Title: 'Formulário',
-        onOutIcon: '../../Images/formulario.png',
-        onClickIcon: '../../Images/formulario.png',
-        HtmlSatusContent: '',
-        url: '/Patient/Form',
-        data: ''
-    }).sethscCorner();
+    //Menu.add({
+    //    Title: 'Formulário',
+    //    onOutIcon: '../../Images/formulario.png',
+    //    onClickIcon: '../../Images/formulario.png',
+    //    HtmlSatusContent: '',
+    //    url: '/Patient/Form',
+    //    data: ''
+    //}).sethscCorner();
 
     $("#_td").corner("4px");
     $("#o_td").corner("4px");

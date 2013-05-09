@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace EHR.Controller
 {
-    public class PatientController
+    public class PatientController : IEHRController
     {
 
         public PatientController()

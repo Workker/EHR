@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared;
+﻿using EHR.Controller;
+using EHR.CoreShared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace EHR.UI.Controllers
         {
             Session["Date"] = null;
             var patient = new PatientDTO { Name = query };
-            var patientController = new EHR.Controller.PatientController();
+            var patientController = ControllerFactory("patient");
             ViewBag.Patients = patientController.GetBy(patient, new List<string>()).Take(10);
             Session["Name"] = query;
             return PartialView("_Search");
@@ -40,7 +41,7 @@ namespace EHR.UI.Controllers
         public string SearchPeaple(string query)
         {
             var patient = new PatientDTO { Name = query };
-            var patientController = new Controller.PatientController();
+            var patientController = ControllerFactory("patient");
             var patients = patientController.GetBy(DbEnum.QuintaDor, patient);
             return BuildResultsOfSimpleSearchOfPatients(patients);
         }
@@ -62,9 +63,7 @@ namespace EHR.UI.Controllers
         private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<IPatientDTO> patients)
         {
             var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"cpf\":\"" + patient.GetCPF() + "\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" + Enum.GetName(typeof(DbEnum), patient.Hospital) + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
-
             return result += "]}";
-
         }
 
         private IEnumerable<IPatientDTO> GetTreatment(bool skip)
@@ -79,13 +78,13 @@ namespace EHR.UI.Controllers
             var patient = new PatientDTO { Name = Session["Name"].ToString() };
 
             if (Session["Date"] != null && !string.IsNullOrEmpty(Session["Date"].ToString()))
-                patient.DateBirthday = (DateTime?)Session["Date"];
+                patient.DateBirthday = Convert.ToDateTime(Session["Date"]);
             return patient;
         }
 
         private IEnumerable<IPatientDTO> GetPatients(PatientDTO patient, bool skip)
         {
-            var patientController = new EHR.Controller.PatientController();
+            var patientController = ControllerFactory("patient");
 
             if (skip)
                 return patientController.GetBy(patient, (List<string>)Session["Hospital"]).Skip((int)Session["Skip"]).Take(10);
@@ -96,6 +95,18 @@ namespace EHR.UI.Controllers
         private void FillDateParameter(string dob_day, string dob_month, string dob_year)
         {
             Session["Date"] = dob_day + "/" + dob_month + "/" + dob_year;
+        }
+
+        private IEHRController ControllerFactory(string controller)
+        {
+            if (controller.Equals("patient"))
+            {
+                return new EHR.Controller.PatientController();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         #endregion

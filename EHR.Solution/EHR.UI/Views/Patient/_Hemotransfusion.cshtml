@@ -3,40 +3,22 @@
         <legend class="legenda">Hemotransfusão</legend>
         <hr />
         <br />
-        <label>Hemotransfusão:</label>&nbsp;<input type="radio" name="hemotransfusion" value="yes" />
-        Sim&nbsp;&nbsp;<input type="radio" name="hemotransfusion" value="no" />
-        Não<br />
+        <label>Realisada:</label>&nbsp;
+        <input type="radio" name="hemotransfusion" value="true" onchange="Display($(this).next().next().next().next(), true)" />
+        Sim&nbsp;&nbsp;
+        <input type="radio" name="hemotransfusion" value="false"  onchange="Display($(this).next().next().next(), false)" />
+        Não       
         <br />
-        <h3>Reação</h3>
-        <label>Transfusão:</label>&nbsp;&nbsp;<input type="radio" name="transfusion" value="yes" />
-        Sim&nbsp;&nbsp;<input type="radio" name="transfusion" value="no" />
-        Não<br />
         <br />
-        <label>Tipo:</label><br />
-        <input type="checkbox" name="type.1" />
-        Aloimunização eritrocitária<br />
-        <input type="checkbox" name="type.2" />
-        Aloimunização HLA<br />
-        <input type="checkbox" name="type.3" checked="checked" />
-        Imunomodulação
+        @{
+            Html.RenderPartial("Hemotransfusion/_HemotransfusionTable");
+        }
         <br />
-        <input type="checkbox" name="type.4" checked="checked" />
-        Lesão pulmonar relacionada a transfusão
         <br />
-        <input type="checkbox" name="type.5" />
-        Púrpura pós transfusional<br />
-        <input type="checkbox" name="type.6" />
-        Reação Alérgica: leve; moderada; grave<br />
-        <input type="checkbox" name="type.7" />
-        Reação enxerto x hospedeiro<br />
-        <input type="checkbox" name="type.8" />
-        Reação Febril não hemolítica<br />
-        <input type="checkbox" name="type.9" />
-        Reação Hemolítica Imune 
     </fieldset>
-    <br />
+    @*<br />
     <hr />
     <br />
     <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-    <input type="reset" value="Cancel" class="uibutton large" />
+    <input type="reset" value="Cancel" class="uibutton large" />*@
 </form>

@@ -1,0 +1,34 @@
+﻿@using EHR.Domain.Entities
+
+        <label>Tipo:</label>
+        <select>
+            @foreach (var type in Enum.GetValues(typeof(HemotransfusionTypeEnum)).Cast<HemotransfusionTypeEnum>().ToList())
+            {
+                <option value="@Enum.Parse(typeof(HemotransfusionTypeEnum), type.ToString())">@type</option>
+            }
+        </select>
+        <label>Rea&ccedil;&atilde;o transfusional:</label>&nbsp;&nbsp;<input type="radio" name="transfusion" value="yes" />
+        Sim&nbsp;&nbsp;<input type="radio" name="transfusion" value="no" />
+        Não<br />
+        <br />
+        <label>Tipo:</label><br />
+        <input type="checkbox" name="type.1" />
+        Aloimunização eritrocitária<br />
+        <input type="checkbox" name="type.2" />
+        Aloimunização HLA<br />
+        <input type="checkbox" name="type.3" checked="checked" />
+        Imunomodulação
+        <br />
+        <input type="checkbox" name="type.4" checked="checked" />
+        Lesão pulmonar relacionada a transfusão
+        <br />
+        <input type="checkbox" name="type.5" />
+        Púrpura pós transfusional<br />
+        <input type="checkbox" name="type.6" />
+        Alérgica: leve; moderada; grave<br />
+        <input type="checkbox" name="type.7" />
+        Enxerto x Hospedeiro<br />
+        <input type="checkbox" name="type.8" />
+        Febril não hemolítica<br />
+        <input type="checkbox" name="type.9" />
+        Hemolítica Imune 
