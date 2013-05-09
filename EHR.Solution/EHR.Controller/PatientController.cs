@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities.Patient;
-using EHR.Domain.Repository;
+﻿using EHR.CoreShared;
 using EHR.Domain.Service;
-using EHRIntegracao.Domain.Factorys;
-using EHRIntegracao.Domain.Services.DTO;
+using System.Collections.Generic;
 
 
 namespace EHR.Controller

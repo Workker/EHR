@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.Domain.Entities.Patient;
+﻿using EHR.Domain.Entities.Patient;
 using EHR.Domain.Mapping;
 using EHR.Domain.Repository;
 using FluentNHibernate.Cfg;
@@ -11,6 +6,8 @@ using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace EHR.Test
 {

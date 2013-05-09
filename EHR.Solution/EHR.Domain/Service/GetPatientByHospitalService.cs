@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHRIntegracao.Domain.Factorys;
+﻿using EHR.CoreShared;
 using EHRIntegracao.Domain.Services;
-using EHRIntegracao.Domain.Services.DTO;
+using System.Collections.Generic;
 
 namespace EHR.Domain.Service
 {

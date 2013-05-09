@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities.Migracao;
+﻿using EHR.Domain.Entities.Migracao;
 using EHR.Domain.Entities.Sumario;
-using EHR.Domain.MappingMigracao;
 using EHR.Domain.Repository;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace EHR.Test.Migracao
 {

@@ -1,11 +1,8 @@
-﻿using System;
+﻿using EHR.CoreShared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using EHR.Domain;
-using EHRIntegracao.Domain.Factorys;
-using EHRIntegracao.Domain.Services.DTO;
 
 namespace EHR.UI.Controllers
 {

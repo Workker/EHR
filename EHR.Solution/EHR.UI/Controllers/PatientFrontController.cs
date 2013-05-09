@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using EHRIntegracao.Domain.Factorys;
-using EHRIntegracao.Domain.Services.DTO;
 
 
 namespace EHR.UI.Controllers
