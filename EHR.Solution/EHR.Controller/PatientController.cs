@@ -8,11 +8,6 @@ namespace EHR.Controller
     public class PatientController : IEHRController
     {
 
-        public PatientController()
-        {
-            // _patients = new Patients();
-        }
-
         public IPatientDTO GetBy(string cpf)
         {
             var service = new GetPatientByHospitalService();

@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EHR.Domain.Entities.Sumario;
+using EHR.Domain.Entities;
 using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public class ProcedimentoMap : ClassMap<Procedimento>
+    public class ProcedimentoMap : ClassMap<Procedure>
     {
         public ProcedimentoMap()
         {
             Id(p => p.Id);
-            Map(p => p.NomeProcedimento);
-            Map(p => p.SubGrupo);
-            Map(p => p.Grupo);
-            Map(p => p.CodigoProcedimento);
+            Map(p => p.Date);
+            Map(p => p.Tus);
         }
     }
 }

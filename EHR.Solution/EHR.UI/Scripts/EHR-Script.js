@@ -375,3 +375,8 @@ $(".unitsSideBar li input[type='checkbox']").live(
         }
     }
 );
+
+//Auto save for text area
+$("#testaa").focusout(function () {
+    alert("aaaaaa");
+});

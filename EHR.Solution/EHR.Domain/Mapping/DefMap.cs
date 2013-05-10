@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EHR.Domain.Entities.Sumario;
+using EHR.Domain.Entities;
 using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
@@ -12,7 +12,7 @@ namespace EHR.Domain.Mapping
         public DefMap() 
         {
             Id(d => d.Id);
-            Map(d => d.Produto);
+            Map(d => d.Product);
         }
     }
 }

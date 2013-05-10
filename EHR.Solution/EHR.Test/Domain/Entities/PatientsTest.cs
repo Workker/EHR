@@ -18,26 +18,28 @@ namespace EHR.Test.Domain.Entities
             //patient = new Patient();
         }
 
-        //[Test]
-        //public void add_new_admission()
-        //{
-        //    var reasons = new List<Reason> { Reason.Cirurgic };
-        //    var admission = new Admission { Id = 1, ReasonOfAdmission = reasons };
+        [Test]
+        [Ignore]
+        public void add_new_admission()
+        {
+            //var reasons = new List<Reason> { Reason.Cirurgic };
+            //var admission = new Admission { Id = 1, ReasonOfAdmission = reasons };
 
-        //    patient.AddAdmission(admission);
+            //patient.AddAdmission(admission);
 
-        //    Assert.AreEqual(admission, patient.Admissions.First());
-        //}
+            //Assert.AreEqual(admission, patient.Admissions.First());
+        }
 
-        //[Test]
-        //public void add_new_allergy()
-        //{
-        //    var allergy = new Allergy { Id = 1, HaveAllergies = true, TheWhich = "eggs", Type = TypeOfAllergy.Urticaria };
+        [Test]
+        [Ignore]
+        public void add_new_allergy()
+        {
+            //var allergy = new Allergy { Id = 1, HaveAllergies = true, TheWhich = "eggs", Type = TypeOfAllergy.Urticaria };
 
-        //    patient.AddAllergy(allergy);
+            //patient.AddAllergy(allergy);
 
-        //    Assert.AreEqual(allergy, patient.Allergies.First());
-        //}
+            //Assert.AreEqual(allergy, patient.Allergies.First());
+        }
 
         //[Test]
         //public void add_new_diagnostic()

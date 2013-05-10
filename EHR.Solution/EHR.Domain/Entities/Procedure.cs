@@ -6,10 +6,10 @@ using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities
 {
-    public class Cid : IAggregateRoot<int>
+    public class Procedure
     {
         public virtual int Id { get; set; }
-        public virtual string Description { get; set; }
-        public virtual string Code { get; set; }
+        public virtual Tus Tus { get; set; }
+        public virtual DateTime Date { get; set; }
     }
 }

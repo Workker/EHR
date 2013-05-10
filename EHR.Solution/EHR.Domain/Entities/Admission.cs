@@ -12,6 +12,7 @@ namespace EHR.Domain.Entities
     {
         public virtual int Id { get; set; }
         public virtual IList<Reason> ReasonOfAdmission { get; set; }
+        
     }
 
     public enum Reason

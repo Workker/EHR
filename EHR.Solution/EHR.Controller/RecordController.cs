@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EHR.Domain.Entities
+namespace EHR.Controller
 {
-    public class MedicalRecord
+    public class RecordController
     {
-
     }
 }

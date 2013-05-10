@@ -1,37 +1,29 @@
 ﻿<h1>Dados Gerais</h1>
 <hr />
 <br />
-
-<fieldset id="admissao">
-    <legend>Admiss&atilde;o</legend>
-    <br />
-    <div>
-        <label>Motivo da admissão:</label>&nbsp;
-            <input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
-    </div>
-    <br />
-    <br/>
-    <hr />
+<h3>Admiss&atilde;o</h3>
 <br />
-</fieldset>
-<fieldset id="alergias">
-    <legend>Alergias</legend>
-    <br />
-    <label>Alergia Medicamentos  e outras:</label>&nbsp;
-        <input type="radio" name="alergia" value="true" onchange="Display($(this).next().next().next().next(), true)" />
-    Sim&nbsp;
-        <input type="radio" name="alergia" value="false" checked onchange="Display($(this).next().next().next(), false)" />
-    Não
-        <br />
-    <br />
-    @{
-        Html.RenderPartial("GeneralData/_AllergyTable");
-    }
-    <br />
-    <br />
-    <hr />
-    <br />
-</fieldset>
+<label>Motivo da admiss&atilde;o:</label>&nbsp;
+<input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
+<br />
+<br />
+<hr />
+<br />
+<h3>Alergias</h3>
+<br />
+<label>Alergia Medicamentos  e outras:</label>&nbsp;
+<input type="radio" name="alergia" value="true" onchange="Display($(this).next().next().next().next(), true)" />Sim&nbsp;
+<input type="radio" name="alergia" value="false" checked onchange="Display($(this).next().next().next(), false)" />N&atilde;o
+<br />
+<br />
+@{
+    Html.RenderPartial("GeneralData/_AllergyTable");
+}
+<br />
+<br />
+<hr />
+<br />
+
 @*<fieldset id="diagnosticos">
     <legend>Diagn&oacute;sticos</legend>
     <br />
@@ -66,7 +58,7 @@
     <br />
 </fieldset>*@
 <label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
-<textarea rows="10" cols="90" maxlength="1000"></textarea>
+<textarea  rows="10" cols="90" maxlength="1000"></textarea>
 <script type="text/javascript">
     window.onload = function () {
         $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {

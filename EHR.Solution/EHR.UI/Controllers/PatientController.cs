@@ -162,6 +162,26 @@ namespace EHR.UI.Controllers
 
         #endregion
 
+        #region Hemotransfusion
+
+
+        public PartialViewResult HemotransfusionForm()
+        {
+            return PartialView("Hemotransfusion/_HemotransfusionForm");
+        }
+
+        public PartialViewResult SaveHemotransfusion(string dob_day, string dob_month, string dob_year, string procedureCode, string procedure)
+        {
+            ViewBag.procedure = procedureCode + " - " + procedure;
+            ViewBag.data = dob_day + "/" + dob_month + "/" + dob_year;
+            return PartialView("Hemotransfusion/_HemotransfusionTableRow");
+        }
+
+        public void DeleteHemotransfusion()
+        {
+        }
+
+        #endregion
 
         #region medicament of previous use
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EHR.Domain.Entities;
+using EHRIntegracao.Domain.Domain;
 using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
