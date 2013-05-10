@@ -14,6 +14,12 @@ namespace EHR.Test
     [TestFixture]
     public class BaseTest
     {
+        [Test]
+        public void acept()
+        {
+            Assert.True(true);
+        }
+
         private void BuildSchema(Configuration config)
         {
             new SchemaExport(config)
