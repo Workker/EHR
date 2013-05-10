@@ -1,24 +1,13 @@
-﻿<form>
-    <fieldset id="Hemotransfusion">
-        <legend class="legenda">Hemotransfusão</legend>
-        <hr />
-        <br />
-        <label>Realisada:</label>&nbsp;
+﻿<h1>Hemotransfus&atilde;o</h1>
+<hr />
+<br />
+<label>Realisada:</label>&nbsp;
         <input type="radio" name="hemotransfusion" value="true" onchange="Display($(this).next().next().next().next(), true)" />
-        Sim&nbsp;&nbsp;
-        <input type="radio" name="hemotransfusion" value="false"  onchange="Display($(this).next().next().next(), false)" />
-        Não       
-        <br />
-        <br />
-        @{
-            Html.RenderPartial("Hemotransfusion/_HemotransfusionTable");
-        }
-        <br />
-        <br />
-    </fieldset>
-    @*<br />
-    <hr />
-    <br />
-    <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-    <input type="reset" value="Cancel" class="uibutton large" />*@
-</form>
+Sim&nbsp;&nbsp;
+        <input type="radio" name="hemotransfusion" value="false" checked onchange="Display($(this).next().next().next(), false)" />
+Não       
+<br />
+<br />
+@{
+    Html.RenderPartial("Hemotransfusion/_HemotransfusionTable");
+}

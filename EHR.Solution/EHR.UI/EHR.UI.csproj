@@ -406,6 +406,9 @@
     <Content Include="Views\Patient\Hemotransfusion\_HemotransfusionForm.cshtml" />
     <Content Include="Views\Patient\Hemotransfusion\_HemotransfusionTable.cshtml" />
     <Content Include="Views\Patient\Hemotransfusion\_HemotransfusionTableRow.cshtml" />
+    <Content Include="Views\Patient\Procedure\_ProcedureForm.cshtml" />
+    <Content Include="Views\Patient\Procedure\_ProcedureTable.cshtml" />
+    <Content Include="Views\Patient\Procedure\_ProcedureTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

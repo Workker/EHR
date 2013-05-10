@@ -1,0 +1,10 @@
+﻿@using EHR.Domain.Entities
+@using EHR.Domain.Util
+<span class="firstColumn">@ViewBag.procedure</span>
+<a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteProcedure", null)'><span>X</span></a>
+<a class="action" title="Editar registro" onclick='editRow("../Patient/ProcedureForm", null, this);'>
+    <span>Editar</span></a>
+<span class="lastColumn"></span>
+<span class="middleColumn">
+    @ViewBag.data
+</span>

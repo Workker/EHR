@@ -141,6 +141,28 @@ namespace EHR.UI.Controllers
 
         #endregion
 
+        #region Procedure
+
+
+        public PartialViewResult ProcedureForm()
+        {
+            return PartialView("Procedure/_ProcedureForm");
+        }
+
+        public PartialViewResult SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, string procedure)
+        {
+            ViewBag.procedure = procedureCode + " - " + procedure;
+            ViewBag.data = dob_day + "/" + dob_month + "/" + dob_year;
+            return PartialView("Procedure/_ProcedureTableRow");
+        }
+
+        public void DeleteProcedure()
+        {
+        }
+
+        #endregion
+
+
         #region medicament of previous use
 
 
