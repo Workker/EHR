@@ -15,6 +15,7 @@ namespace EHR.Test
     public class BaseTest
     {
         [Test]
+        [Ignore]
         private void BuildSchema(Configuration config)
         {
             new SchemaExport(config)
