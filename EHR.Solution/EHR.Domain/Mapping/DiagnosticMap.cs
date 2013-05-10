@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EHR.Domain.Entities.Patient;
+using EHR.Domain.Entities;
 using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping

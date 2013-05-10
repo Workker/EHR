@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
     <Compile Include="Entities\Integracao\PacienteIntegracao.cs" />
     <Compile Include="Entities\MedicalRecord.cs" />
@@ -78,6 +79,8 @@
     <Compile Include="Entities\Cid.cs" />
     <Compile Include="Entities\Def.cs" />
     <Compile Include="Entities\Procedimento.cs" />
+    <Compile Include="Entities\Treatment.cs" />
+    <Compile Include="Entities\Sumary.cs" />
     <Compile Include="MappingIntegracao\PacienteIntegracaoMap.cs" />
     <Compile Include="Mapping\AdmissionMap.cs" />
     <Compile Include="Mapping\AllergyMap.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Repository\Patients.cs" />
     <Compile Include="Repository\Procedimentos.cs" />
     <Compile Include="Service\GetPatientByHospitalService.cs" />
+    <Compile Include="Util\EnumUtil.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

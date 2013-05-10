@@ -3,47 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EHR.CoreShared;
 using EHR.Domain.Entities.Interfaces;
 
-namespace EHR.Domain.Entities.Patient
+namespace EHR.Domain.Entities
 {
     [Serializable]
-    public class Patient : IAggregateRoot<int>
+    public class Patient : IAggregateRoot<int>, IPatientDTO
     {
         #region Properties
 
+        string IPatientDTO.Id { get; set; }
+        public string Name { get; set; }
+        public DateTime? DateBirthday { get; set; }
+        public string CPF { get; set; }
+        public string Identity { get; set; }
+        public DbEnum Hospital { get; set; }
+        List<RecordDTO> IPatientDTO.Records { get; set; }
+        public List<ITreatmentDTO> Treatments { get; set; }
+        public List<string> Records { get; set; }
         public virtual int Id { get; set; }
-        public virtual IList<Admission> Admissions { get; set; }
-        public virtual IList<Allergy> Allergies { get; set; }
-        public virtual IList<Diagnostic> Diagnostics { get; set; }
-        public virtual String MedicinesOfUsePrior { get; set; }
-        public virtual String Annotations { get; set; }
+
 
         #endregion
 
-        #region Methods
 
-        public virtual void AddAdmission(Admission admission)
+        public string GetCPF()
         {
-            if (Admissions == null)
-                Admissions = new List<Admission>();
-            Admissions.Add(admission);
+            throw new NotImplementedException();
         }
 
-        public virtual  void AddAllergy(Allergy allergy)
+        public void AddRecord(RecordDTO record)
         {
-            if (Allergies == null)
-                Allergies = new List<Allergy>();
-            Allergies.Add(allergy);
+            throw new NotImplementedException();
         }
 
-        public virtual void AddDiagnostic(Diagnostic diagnostic)
+        public void AddRecord(string record)
         {
-            if (Diagnostics == null)
-                Diagnostics = new List<Diagnostic>();
-            Diagnostics.Add(diagnostic);
+            throw new NotImplementedException();
         }
 
-        #endregion
+        public void AddTreatments(IList<ITreatmentDTO> treatments)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

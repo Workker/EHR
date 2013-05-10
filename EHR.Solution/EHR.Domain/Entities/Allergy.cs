@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EHR.Domain.Entities.Interfaces;
 
-namespace EHR.Domain.Entities.Patient
+namespace EHR.Domain.Entities
 {
     public class Allergy : IAggregateRoot<int>
     {

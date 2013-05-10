@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 
@@ -12,7 +13,7 @@ namespace EHR.UI.Controllers
             var controller = new EHR.Controller.PatientController();
             var patient = controller.GetBy(cpf);
             ViewBag.data = patient;
-            ViewBag.age = CalculateAgeFrom((DateTime) patient.DateBirthday);
+            ViewBag.age = CalculateAgeFrom((DateTime)patient.DateBirthday);
             return View();
         }
 
@@ -127,8 +128,10 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_AllergyForm");
         }
 
-        public PartialViewResult SaveAllergy(string type, string code, string description)
+        public PartialViewResult SaveAllergy(string factor, List<string> type)
         {
+            ViewBag.types = type;
+            ViewBag.factor = factor;
             return PartialView("GeneralData/_AllergyTableRow");
         }
 

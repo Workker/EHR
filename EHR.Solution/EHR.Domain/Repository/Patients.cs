@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EHR.Domain.Entities.Patient;
+using EHR.Domain.Entities;
 using NHibernate;
 
 namespace EHR.Domain.Repository
