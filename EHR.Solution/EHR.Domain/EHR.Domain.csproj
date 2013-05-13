@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AllergyType.cs" />
     <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\Hemotransfusion.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
@@ -79,11 +80,13 @@
     <Compile Include="Entities\Procedure.cs" />
     <Compile Include="Entities\ReactionType.cs" />
     <Compile Include="Entities\ReactionTypeEnum.cs" />
+    <Compile Include="Entities\ReasonOfAdmission.cs" />
     <Compile Include="Entities\ReasonOfAdmissionEnum.cs" />
     <Compile Include="Entities\Summary.cs" />
     <Compile Include="Entities\Tus.cs" />
     <Compile Include="Mapping\AdmissionMap.cs" />
     <Compile Include="Mapping\AllergyMap.cs" />
+    <Compile Include="Mapping\AllergyTypeMap.cs" />
     <Compile Include="Mapping\CidMap.cs" />
     <Compile Include="Mapping\DefMap.cs" />
     <Compile Include="MappingMigracao\CidMap.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />
+    <Compile Include="Mapping\ReasonOfAdmissionMap.cs" />
     <Compile Include="Mapping\TusMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />

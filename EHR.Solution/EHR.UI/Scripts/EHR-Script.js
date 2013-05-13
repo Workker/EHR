@@ -22,6 +22,7 @@
                     data: { "query": q },
                     type: "GET",
                     dataType: "json",
+                    cache: false,
                     success: function (r) {
                         resultModel = r;
                         ko.mapping.updateFromJS(viewModel, resultModel);
@@ -225,7 +226,7 @@ hs.registerOverlay({
 
 // Table Component
 function newRow(currentNode, url) {
-    $.ajax({ type: "GET", url: url }).success(function (d) {
+    $.ajax({ type: "GET", url: url, cache: false }).success(function (d) {
         $(currentNode).parent().parent().clone($(currentNode).parent().parent())
             .appendTo($(currentNode).parent().parent().parent());
         var contentDiv = $(currentNode).parent().next();
@@ -241,6 +242,7 @@ function saveRow(element, url) {
         $.ajax({
             type: "POST",
             url: url,
+            cache: false,
             data: form.serialize(),
             success: function (data) {
                 var divContent = $(element).parent().parent();
@@ -254,7 +256,7 @@ function saveRow(element, url) {
 }
 
 function editRow(url, data, e) {
-    $.ajax({ type: "GET", url: url, data: data }).success(function (d) {
+    $.ajax({ type: "GET", url: url, cache: false, data: data }).success(function (d) {
         var div = $(e).parent().next();
         $(div).html(d);
         $(div).show();
@@ -263,7 +265,7 @@ function editRow(url, data, e) {
 }
 
 function deleteRow(e, url, data) {
-    $.ajax({ type: "POST", url: url, data: data }).success(function () {
+    $.ajax({ type: "POST", url: url, cache: false, data: data }).success(function () {
         var li = $(e).parent().parent();
         $(li).remove();
     });
@@ -355,7 +357,7 @@ function GetMore() {
         type: "GET",
         cache: false,
         success: function (r) {
-            if(r.length > 0) {
+            if (r.length > 0) {
                 $("#DivResult").append(r);
             } else {
                 $("a.uiMorePagerPrimary").hide();
