@@ -7,13 +7,11 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public class CidMap : ClassMap<Cid>
+    public class CidMap : ValueObjectMap<Cid>
     {
         public CidMap()
         {
-            Id(c => c.Id);
-            Map(c => c.Code);
-            Map(c => c.Description);
+            Map(c => c.Code);   
         }
     }
 }

@@ -27,7 +27,7 @@ namespace EHR.Test.Migracao
             {
                 var procedimento = new Tus();
                 procedimento.Code = procedimentoIntegracao.CodigoProcedimento;
-                procedimento.MedicalProcedure = procedimentoIntegracao.Procedimento;
+                procedimento.Description = procedimentoIntegracao.Procedimento;
                 listaProcedimento.Add(procedimento);
             }
 

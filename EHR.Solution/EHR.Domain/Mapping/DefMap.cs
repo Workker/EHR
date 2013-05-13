@@ -7,12 +7,10 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public class DefMap : ClassMap<Def>
+    public class DefMap : ValueObjectMap<Def>
     {
         public DefMap() 
         {
-            Id(d => d.Id);
-            Map(d => d.Product);
         }
     }
 }

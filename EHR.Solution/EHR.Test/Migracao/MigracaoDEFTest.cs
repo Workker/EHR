@@ -36,7 +36,7 @@ namespace EHR.Test.Migracao
             foreach (var defIntegracao in listaDefIntegracao)
             {
                 var def = new Def();
-                def.Product = defIntegracao.Produto;
+                def.Description = defIntegracao.Produto;
 
                 listaDef.Add(def);
             }

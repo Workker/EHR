@@ -3,12 +3,10 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public class TusMap : ClassMap<Tus>
+    public class TusMap : ValueObjectMap<Tus>
     {
         public TusMap()
         {
-            Id(p => p.Id);
-            Map(p => p.MedicalProcedure);
             Map(p => p.Code);
         }
     }

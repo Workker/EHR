@@ -84,6 +84,7 @@
     <Compile Include="Entities\ReasonOfAdmissionEnum.cs" />
     <Compile Include="Entities\Summary.cs" />
     <Compile Include="Entities\Tus.cs" />
+    <Compile Include="Entities\ValueObject.cs" />
     <Compile Include="Mapping\AdmissionMap.cs" />
     <Compile Include="Mapping\AllergyMap.cs" />
     <Compile Include="Mapping\AllergyTypeMap.cs" />
@@ -98,7 +99,9 @@
     <Compile Include="Mapping\ProcedureMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />
     <Compile Include="Mapping\ReasonOfAdmissionMap.cs" />
+    <Compile Include="Mapping\SummaryMap.cs" />
     <Compile Include="Mapping\TusMap.cs" />
+    <Compile Include="Mapping\ValueObjectMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\Cids.cs" />
@@ -108,6 +111,8 @@
     <Compile Include="Repository\Integracao\ProcedimentosIntegracao.cs" />
     <Compile Include="Repository\Patients.cs" />
     <Compile Include="Repository\Procedimentos.cs" />
+    <Compile Include="Repository\Summries.cs" />
+    <Compile Include="Repository\Types.cs" />
     <Compile Include="Service\GetPatientByHospitalService.cs" />
     <Compile Include="Util\EnumUtil.cs" />
   </ItemGroup>

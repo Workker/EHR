@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EHR.Domain.Entities.Interfaces;
+using System.Threading.Tasks;
 
-namespace EHR.Domain.Entities
+namespace EHR.Domain.Repository
 {
-    public class Def : ValueObject
+    public class Summries : BaseRepository
     {
+
     }
 }
