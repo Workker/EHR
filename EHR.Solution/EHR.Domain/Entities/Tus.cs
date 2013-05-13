@@ -4,9 +4,9 @@ namespace EHR.Domain.Entities
 {
     public class Tus : IAggregateRoot<int>
     {
-        public int Id { get; set; }
-        public string Code { get; set; }
-        public string Procedure { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Code { get; set; }
+        public virtual string MedicalProcedure { get; set; }
     }
 }
 

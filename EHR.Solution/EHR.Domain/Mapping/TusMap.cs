@@ -8,7 +8,7 @@ namespace EHR.Domain.Mapping
         public TusMap()
         {
             Id(p => p.Id);
-            Map(p => p.Procedure);
+            Map(p => p.MedicalProcedure);
             Map(p => p.Code);
         }
     }

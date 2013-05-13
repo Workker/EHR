@@ -8,9 +8,8 @@ namespace EHR.Domain.Mapping
         public HemotransfusionMap()
         {
             Id(x => x.Id);
-            Map(x => x.Type).CustomType<int>();
+            References(x => x.Type);
             HasMany(x => x.Reactions).Cascade.All();
-
         }
     }
 }

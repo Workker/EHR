@@ -7,16 +7,16 @@ using NHibernate;
 
 namespace EHR.Domain.Repository
 {
-    public  class Procedimentos
+    public  class TusRepository
         : BaseRepository
     {
-        public Procedimentos(ISession session)
+        public TusRepository(ISession session)
             : base(session) 
         {
 
         }
 
-        public virtual void SalvarLista(List<Procedure> roots)
+        public virtual void Save(List<Tus> roots)
         {
             var transaction = Session.BeginTransaction();
 

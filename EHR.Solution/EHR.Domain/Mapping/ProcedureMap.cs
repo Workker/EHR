@@ -7,8 +7,9 @@ namespace EHR.Domain.Mapping
     {
         public ProcedureMap()
         {
+            Table("MedicalProcedure");
             Id(x => x.Id);
-            Map(x => x.Tus);
+            References(x => x.Tus);
             Map(x => x.Date);
         }
     }

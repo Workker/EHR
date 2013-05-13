@@ -9,6 +9,7 @@ namespace EHR.Domain.Mapping
         {
             Id(x => x.Id);
             Map(x => x.Description);
+            
         }
     }
 }

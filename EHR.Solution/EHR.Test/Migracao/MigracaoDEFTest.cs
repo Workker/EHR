@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EHR.Domain.Entities;
 using EHR.Domain.Entities.Migracao;
 //using EHR.Domain.Entities.Sumario;
 using EHR.Domain.Mapping;
@@ -23,24 +24,24 @@ namespace EHR.Test.Migracao
         [Test]
         public void MigrarDEF() 
         {
-            //var conexao = Conexao.CreateSessionFactoryOracle();
-            //DefsIntegracao defs = new DefsIntegracao(conexao.OpenSession());
+            var conexao = Conexao.CreateSessionFactoryOracle();
+            DefsIntegracao defs = new DefsIntegracao(conexao.OpenSession());
 
-            //var listaDefIntegracao = defs.All<DefMigracao>();
+            var listaDefIntegracao = defs.All<DefMigracao>();
 
-            //Defs repositorioDef = new Defs(Conexao.CreateSessionFactory().OpenSession());
+            Defs repositorioDef = new Defs(Conexao.CreateSessionFactory().OpenSession());
 
-            //List<Def> listaDef = new List<Def>();
+            List<Def> listaDef = new List<Def>();
 
-            //foreach (var defIntegracao in listaDefIntegracao)
-            //{
-            //    var def = new Def();
-            //    def.Produto = defIntegracao.Produto;
+            foreach (var defIntegracao in listaDefIntegracao)
+            {
+                var def = new Def();
+                def.Product = defIntegracao.Produto;
 
-            //    listaDef.Add(def);
-            //}
+                listaDef.Add(def);
+            }
 
-            //repositorioDef.SalvarLista(listaDef);
+            repositorioDef.SalvarLista(listaDef);
             
         }
        

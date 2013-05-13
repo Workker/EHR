@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities.Migracao;
+﻿using EHR.Domain.Entities;
+using EHR.Domain.Entities.Migracao;
 //using EHR.Domain.Entities.Sumario;
 using EHR.Domain.Repository;
 using NUnit.Framework;
@@ -13,27 +14,24 @@ namespace EHR.Test.Migracao
         [Test]
         public void MigrarProcedimentos()
         {
-        //    var conexao = Conexao.CreateSessionFactoryOracle();
-        //    ProcedimentosIntegracao defs = new ProcedimentosIntegracao(conexao.OpenSession());
+            var conexao = Conexao.CreateSessionFactoryOracle();
+            ProcedimentosIntegracao defs = new ProcedimentosIntegracao(conexao.OpenSession());
 
-        //    var listaDefIntegracao = defs.All<ProcedimentoMigracao>();
+            var listaDefIntegracao = defs.All<ProcedimentoMigracao>();
 
-        //    Procedimentos repositorioProcedimento = new Procedimentos(Conexao.CreateSessionFactory().OpenSession());
+            TusRepository repositorioProcedimento = new TusRepository(Conexao.CreateSessionFactory().OpenSession());
 
-        //    List<Procedimento> listaProcedimento = new List<Procedimento>();
+            List<Tus> listaProcedimento = new List<Tus>();
 
-        //    foreach (var procedimentoIntegracao in listaDefIntegracao)
-        //    {
-        //        var procedimento = new Procedimento();
-        //        procedimento.CodigoProcedimento = procedimentoIntegracao.CodigoProcedimento;
-        //        procedimento.Grupo = procedimentoIntegracao.Grupo;
-        //        procedimento.NomeProcedimento = procedimentoIntegracao.Procedimento;
-        //        procedimento.SubGrupo = procedimentoIntegracao.SubGrupo;
+            foreach (var procedimentoIntegracao in listaDefIntegracao)
+            {
+                var procedimento = new Tus();
+                procedimento.Code = procedimentoIntegracao.CodigoProcedimento;
+                procedimento.MedicalProcedure = procedimentoIntegracao.Procedimento;
+                listaProcedimento.Add(procedimento);
+            }
 
-        //        listaProcedimento.Add(procedimento);
-        //    }
-
-        //    repositorioProcedimento.SalvarLista(listaProcedimento);
+            repositorioProcedimento.Save(listaProcedimento);
 
         }
 
