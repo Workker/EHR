@@ -10,7 +10,7 @@ namespace EHR.Domain.Entities
         public virtual string Observation { get; set; }
         public virtual string Cpf { get; set; }
 
-        public virtual IList<Admission> Admissions { get; set; }
+        public virtual Admission Admissions { get; set; }
         public virtual IList<Allergy> Allergies { get; set; }
         public virtual IList<Procedure> Procedures { get; set; }
         public virtual IList<Hemotransfusion> Hemotransfusions { get; set; }

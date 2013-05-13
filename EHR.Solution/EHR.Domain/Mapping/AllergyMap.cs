@@ -14,7 +14,7 @@ namespace EHR.Domain.Mapping
         {
             Id(x => x.Id);
             Map(x => x.TheWhich);
-            Map(x => x.Type).CustomType<int>();
+            HasMany(x => x.Type).Cascade.All();
         }
     }
 }

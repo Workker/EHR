@@ -11,6 +11,6 @@ namespace EHR.Domain.Entities
     {
         public virtual int Id { get; set; }
         public virtual string TheWhich { get; set; }
-        public virtual AllergyTypeEnum Type { get; set; }
+        public virtual IList<AllergyTypeEnum> Type { get; set; }
     }
 }
