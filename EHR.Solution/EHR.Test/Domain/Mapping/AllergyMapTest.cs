@@ -18,7 +18,7 @@ namespace EHR.Test.Domain.Mapping
         {
             new PersistenceSpecification<Allergy>(session: BaseRepository.CreateSessionFactory().OpenSession()).
                 CheckProperty(x => x.Id, 1).CheckProperty(x => x.TheWhich, "Test").
-                CheckProperty(x => x.HaveAllergies, true).CheckProperty(x => x.Type, 1).VerifyTheMappings();
+                CheckProperty(x => x.Type, AllergyTypeEnum.Angioedema).CheckProperty(x => x.Type, AllergyTypeEnum.Angioedema).VerifyTheMappings();
 
         }
     }
