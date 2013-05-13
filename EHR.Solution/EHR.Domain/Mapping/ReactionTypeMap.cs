@@ -3,12 +3,12 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public sealed class AdmissionMap : ClassMap<Admission>
+    public class ReactionTypeMap : ClassMap<ReactionType>
     {
-        public AdmissionMap()
+        public ReactionTypeMap()
         {
             Id(x => x.Id);
-            Map(x => x.ReasonOfAdmission).CustomType<int>();
+            Map(x => x.Description);
         }
     }
 }

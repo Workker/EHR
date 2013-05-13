@@ -3,12 +3,13 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public sealed class AdmissionMap : ClassMap<Admission>
+    public class ProcedureMap : ClassMap<Procedure>
     {
-        public AdmissionMap()
+        public ProcedureMap()
         {
             Id(x => x.Id);
-            Map(x => x.ReasonOfAdmission).CustomType<int>();
+            Map(x => x.Tus);
+            Map(x => x.Date);
         }
     }
 }

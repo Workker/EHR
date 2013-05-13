@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.Domain.Entities.Interfaces;
+﻿using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities
 {
@@ -14,3 +9,4 @@ namespace EHR.Domain.Entities
         public string Procedure { get; set; }
     }
 }
+

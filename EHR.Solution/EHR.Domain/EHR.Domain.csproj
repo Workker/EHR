@@ -67,7 +67,6 @@
     <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\Hemotransfusion.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
-    <Compile Include="Entities\Integracao\PacienteIntegracao.cs" />
     <Compile Include="Entities\Migracao\CidIntegracao.cs" />
     <Compile Include="Entities\Migracao\DefIntegracao.cs" />
     <Compile Include="Entities\Migracao\ProcedimentoIntegracao.cs" />
@@ -79,9 +78,8 @@
     <Compile Include="Entities\Def.cs" />
     <Compile Include="Entities\Procedure.cs" />
     <Compile Include="Entities\ReactionTypeEnum.cs" />
-    <Compile Include="Entities\Record.cs" />
+    <Compile Include="Entities\Summary.cs" />
     <Compile Include="Entities\Tus.cs" />
-    <Compile Include="MappingIntegracao\PacienteIntegracaoMap.cs" />
     <Compile Include="Mapping\AdmissionMap.cs" />
     <Compile Include="Mapping\AllergyMap.cs" />
     <Compile Include="Mapping\CidMap.cs" />

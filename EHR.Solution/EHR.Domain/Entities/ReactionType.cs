@@ -7,10 +7,9 @@ using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities
 {
-    public class Allergy : IAggregateRoot<int>
+    public class ReactionType : IAggregateRoot<short>
     {
-        public virtual int Id { get; set; }
-        public virtual string TheWhich { get; set; }
-        public virtual AllergyTypeEnum Type { get; set; }
+        public virtual short Id { get; set; }
+        public virtual string Description { get; set; }
     }
 }

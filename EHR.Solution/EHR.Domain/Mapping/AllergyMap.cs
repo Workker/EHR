@@ -13,7 +13,6 @@ namespace EHR.Domain.Mapping
         public AllergyMap()
         {
             Id(x => x.Id);
-            Map(x => x.HaveAllergies);
             Map(x => x.TheWhich);
             Map(x => x.Type).CustomType<int>();
         }
