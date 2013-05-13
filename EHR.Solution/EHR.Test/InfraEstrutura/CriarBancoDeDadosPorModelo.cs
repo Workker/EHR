@@ -11,7 +11,6 @@ using NUnit.Framework;
 namespace EHR.Test.InfraEstrutura
 {
     [TestFixture]   
-    [Ignore]
     public class CriarBancoDeDadosPorModelo
     {
         [Test]

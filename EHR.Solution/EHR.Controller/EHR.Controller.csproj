@@ -40,6 +40,7 @@
     <Reference Include="EHRIntegracao.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,10 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FactoryController.cs" />
     <Compile Include="IEHRController.cs" />
     <Compile Include="PatientController.cs" />
+    <Compile Include="ProcedureController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecordController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EHR.Domain\EHR.Domain.csproj">

@@ -14,11 +14,12 @@ namespace EHR.Domain.Mapping
         {
             Id(s => s.Id);
             Map(s => s.Cpf);
+            Map(s => s.Date);
             Map(s => s.Observation);
             References(s => s.Admission);
-            HasMany(s => s.Allergies).Cascade.All();
-            HasMany(s => s.Hemotransfusions).Cascade.All();
-            HasMany(s => s.Procedures).Cascade.All();
+            HasMany(s => s.Allergies).Cascade.AllDeleteOrphan();
+            HasMany(s => s.Hemotransfusions).Cascade.AllDeleteOrphan();
+            HasMany(s => s.Procedures).Cascade.AllDeleteOrphan();
         }
     }
 }

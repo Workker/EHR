@@ -266,7 +266,7 @@ function editRow(url, data, e) {
 
 function deleteRow(e, url, data) {
     $.ajax({ type: "POST", url: url, cache: false, data: data }).success(function () {
-        var li = $(e).parent().parent();
+        var li = $(e).parent();
         $(li).remove();
     });
 }

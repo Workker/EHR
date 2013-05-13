@@ -1,4 +1,6 @@
 ﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
+using EHR.Domain.Repository;
 using EHR.Domain.Service;
 using System.Collections.Generic;
 
@@ -27,5 +29,21 @@ namespace EHR.Controller
             return service.AdvancedGetPatientBy(dto, hospital);
         }
 
+        public Summary GetSummaryByPatient(IPatientDTO patient)
+        {
+            Summaries summaries = new Summaries();
+
+            var summary = summaries.GetLastSummary(patient.CPF);
+            if (summary != null)
+                summary.Patient = patient;
+            return summary;
+        }
+
+
+
+        public void RemoveProcedure(Summary summary, int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

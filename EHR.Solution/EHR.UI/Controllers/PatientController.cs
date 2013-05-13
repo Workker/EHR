@@ -1,4 +1,7 @@
-﻿using System;
+﻿using EHR.Controller;
+using EHR.Domain.Entities;
+using EHR.UI.Models;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -7,6 +10,11 @@ namespace EHR.UI.Controllers
 {
     public class PatientController : System.Web.Mvc.Controller
     {
+        public EHR.Controller.ProcedureController ProcedureController
+        {
+            get { return new EHR.Controller.ProcedureController(); }
+        }
+
         #region Views
         public ActionResult Index(string cpf)
         {
@@ -14,6 +22,12 @@ namespace EHR.UI.Controllers
             var patient = controller.GetBy(cpf);
             ViewBag.data = patient;
             ViewBag.age = CalculateAgeFrom((DateTime)patient.DateBirthday);
+            Session["Summary"] = controller.GetSummaryByPatient(patient);
+
+            if (Session["Summary"] == null)
+                Response.Redirect("/Home");
+
+
             return View();
         }
 
@@ -78,7 +92,36 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult Procedures()
         {
+            Summary summary = GetSummary();
+            ViewBag.Procedures = Convert(summary.Procedures);
+            ViewBag.li = "<li class=\"clearfix\">";
+            ViewBag.lied = "</li>";
             return PartialView("_Procedures");
+        }
+
+        public List<ProcedureModel> Convert(IList<Procedure> procedures)
+        {
+            var proceduresModels = new List<ProcedureModel>();
+
+            foreach (var procedure in procedures)
+            {
+                proceduresModels.Add(new ProcedureModel()
+                                         {
+                                             Code = procedure.GetCode()
+                                             ,
+                                             Description = procedure.GetDescription()
+                                             ,
+                                             Date = procedure.Date
+                                             ,
+                                             Id = procedure.Id
+                                         });
+            }
+            return proceduresModels;
+        }
+
+        public Summary GetSummary()
+        {
+            return (Summary)Session["Summary"];
         }
 
         #endregion
@@ -151,13 +194,16 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, string procedure)
         {
-            ViewBag.procedure = procedureCode + " - " + procedure;
-            ViewBag.data = dob_day + "/" + dob_month + "/" + dob_year;
+            
+            ViewBag.Procedures = GetSummary().Procedures;
             return PartialView("Procedure/_ProcedureTableRow");
         }
 
-        public void DeleteProcedure()
+        public void DeleteProcedure(int id)
         {
+            var summary = GetSummary();
+
+            FactoryController.GetController(ControllerEnum.Procedure).RemoveProcedure(summary, id);
         }
 
         #endregion
