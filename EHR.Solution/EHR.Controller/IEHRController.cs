@@ -15,5 +15,9 @@ namespace EHR.Controller
         IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital);
         void RemoveProcedure(Summary summary, int id);
 
+
+        List<Tus> GetTus();
+
+        void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary);
     }
 }

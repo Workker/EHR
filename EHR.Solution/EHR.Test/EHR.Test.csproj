@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Entities\PatientsTest.cs" />
+    <Compile Include="Domain\Entities\ProcedureTest.cs" />
+    <Compile Include="Domain\Entities\SummaryTest.cs" />
     <Compile Include="Domain\Mapping\AdmissionMapTest.cs" />
     <Compile Include="Domain\Mapping\AllergyMapTest.cs" />
     <Compile Include="Domain\Mapping\DiagnosticMapTest.cs" />
@@ -80,6 +82,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controller\" />
     <Folder Include="Domain\Repository\" />
     <Folder Include="UI\Controller\" />
   </ItemGroup>

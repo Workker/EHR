@@ -1,10 +1,11 @@
-﻿<form id="procedures">
+﻿@Scripts.Render("~/bundles/jqueryui")
+<form id="procedures">
     <label>Procedimento:</label>&nbsp;
-    <input type="text" name="procedure" value="" />
+    <input type="text" name="procedure" id="procedure" required value="" />
     <br />
     <br />
     <label>C&oacute;digo:</label>
-    <input type="text" style="margin-left: 45px" name="procedureCode" value="" /><br />
+    <input type="text" style="margin-left: 45px" name="procedureCode" readonly="readonly" value="" /><br />
     <br />
     <label>Data:</label>
     <select name="dob_year" id="dob_year" style="margin-left: 55px;">
@@ -176,5 +177,28 @@
 </form>
 <script type="text/javascript">
     formatDatePicker();
+    $("#procedure").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "../Patient/TusAutoComplete",
+                type: "POST",
+                dataType: "json",
+                data: { term: request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.Description, value: item.Description, code: item.Code };
+                    }));
+
+                }
+            });
+        },
+        messages: {
+            noResults: "",
+            results: ""
+        }, select: function (event, ui) {
+            $('input[name=procedureCode]').val(ui.item.code);
+        }
+    });
 </script>
+
 

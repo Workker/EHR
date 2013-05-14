@@ -45,5 +45,17 @@ namespace EHR.Controller
         {
             throw new System.NotImplementedException();
         }
+
+
+        public List<Tus> GetTus()
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

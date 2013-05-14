@@ -1,9 +1,11 @@
-﻿using EHR.Controller;
+﻿using System.Linq;
+using EHR.Controller;
 using EHR.Domain.Entities;
 using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 
 namespace EHR.UI.Controllers
@@ -94,8 +96,6 @@ namespace EHR.UI.Controllers
         {
             Summary summary = GetSummary();
             ViewBag.Procedures = Convert(summary.Procedures);
-            ViewBag.li = "<li class=\"clearfix\">";
-            ViewBag.lied = "</li>";
             return PartialView("_Procedures");
         }
 
@@ -116,6 +116,24 @@ namespace EHR.UI.Controllers
                                              Id = procedure.Id
                                          });
             }
+            return proceduresModels;
+        }
+
+        public List<ProcedureModel> ConvertLast(IList<Procedure> procedures)
+        {
+            var proceduresModels = new List<ProcedureModel>();
+
+                proceduresModels.Add(new ProcedureModel()
+                {
+                    Code = procedures.Last().GetCode()
+                    ,
+                    Description = procedures.Last().GetDescription()
+                    ,
+                    Date = procedures.Last().Date
+                    ,
+                    Id = procedures.Last().Id
+                });
+            
             return proceduresModels;
         }
 
@@ -194,8 +212,9 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, string procedure)
         {
-            
-            ViewBag.Procedures = GetSummary().Procedures;
+            FactoryController.GetController(ControllerEnum.Procedure).SaveProcedure(dob_day, dob_month, dob_year,
+                                                                                    procedureCode, GetSummary());
+            ViewBag.Procedures = ConvertLast(GetSummary().Procedures);
             return PartialView("Procedure/_ProcedureTableRow");
         }
 
@@ -291,5 +310,14 @@ namespace EHR.UI.Controllers
 
         #endregion
 
+        #region AutoComplet
+
+        public JsonResult TusAutoComplete(string term)
+        {
+            List<Tus> tus = FactoryController.GetController(ControllerEnum.Procedure).GetTus();
+
+            return Json(tus, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

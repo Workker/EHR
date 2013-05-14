@@ -46,8 +46,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Workker.Framework.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Workker.Framework.Domain">
       <HintPath>..\..\..\..\LibWorkker\Workker.Framework.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>

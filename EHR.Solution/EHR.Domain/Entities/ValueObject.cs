@@ -7,6 +7,7 @@ using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities
 {
+    [Serializable]
     public abstract class ValueObject : IAggregateRoot<short>
     {
         public virtual short Id { get; set; }
