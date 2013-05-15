@@ -1,4 +1,11 @@
-﻿<ul class="ulTable _4kg  _4ks" style="display: none;">
+﻿<h3>Alergias</h3>
+<br />
+<label>Alergia Medicamentos  e outras:</label>&nbsp;
+<input type="radio" name="haveAllergy" value="true" onchange="Display($(this).next().next().next().next(), true)" />Sim&nbsp;
+<input type="radio" name="haveAllergy" value="false" checked onchange="Display($(this).next().next().next(), false)" />N&atilde;o
+<br />
+<br />
+<ul class="ulTable _4kg  _4ks" style="display: none;">
     <li class="clearfix">
         <div class="clearfix">
             <a class="action" title="Incluir registro" onclick='newRow(this,"../Patient/AllergyForm");'>

@@ -5,16 +5,10 @@
 <br />
 <label>Motivo da admiss&atilde;o:</label>&nbsp;
 <input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
+<button onclick="test()"></button>
 <br />
 <br />
 <hr />
-<br />
-<h3>Alergias</h3>
-<br />
-<label>Alergia Medicamentos  e outras:</label>&nbsp;
-<input type="radio" name="alergia" value="true" onchange="Display($(this).next().next().next().next(), true)" />Sim&nbsp;
-<input type="radio" name="alergia" value="false" checked onchange="Display($(this).next().next().next(), false)" />N&atilde;o
-<br />
 <br />
 @{
     Html.RenderPartial("GeneralData/_AllergyTable");
@@ -70,4 +64,10 @@
             theme: "facebook"
         });
     });
+    function test() {
+        debugger 
+        var selectedValues = $('#motivoDaAdmissao').tokenInput("get");
+        alert(selectedValues[0].id);
+    }
+        
 </script>

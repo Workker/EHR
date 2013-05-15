@@ -1,9 +1,5 @@
-﻿using System;
+﻿using EHR.Domain.Entities.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities
 {
@@ -11,6 +7,12 @@ namespace EHR.Domain.Entities
     {
         public virtual int Id { get; set; }
         public virtual string TheWhich { get; set; }
-        public virtual IList<AllergyType> Type { get; set; }
+        public virtual IList<AllergyType> Types { get; set; }
+
+        public Allergy(string theWitch, IList<AllergyType> types)
+        {
+            this.TheWhich = theWitch;
+            this.Types = types;
+        }
     }
 }

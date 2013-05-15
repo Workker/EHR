@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.Domain.Entities;
+﻿using EHR.Domain.Entities;
 using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
@@ -14,7 +9,7 @@ namespace EHR.Domain.Mapping
         {
             Id(x => x.Id);
             Map(x => x.TheWhich);
-            HasMany(x => x.Type).Cascade.All();
+            HasMany(x => x.Types).Cascade.All();
         }
     }
 }

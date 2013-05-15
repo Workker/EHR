@@ -9,7 +9,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class ProcedureController : IEHRController
+    public class ProcedureController : EHRController
     {
         private TusRepository tusRepository;
         public TusRepository TusRepository
@@ -21,35 +21,10 @@ namespace EHR.Controller
             }
         }
 
-        private Summaries summaries;
-        public Summaries Summaries
-        {
-            get { return summaries ?? (summaries = new Summaries()); }
-            set
-            {
-                summaries = value;
-            }
-        }
-
         public virtual void RemoveProcedure(Summary summary, int id)
         {
             summary.RemoveProcedure(id);
             Summaries.Save(summary);
-        }
-
-        public virtual CoreShared.IPatientDTO GetBy(string cpf)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IList<CoreShared.IPatientDTO> GetBy(CoreShared.DbEnum hospital, CoreShared.PatientDTO dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual IList<CoreShared.IPatientDTO> GetBy(CoreShared.PatientDTO dto, List<string> hospital)
-        {
-            throw new NotImplementedException();
         }
 
 

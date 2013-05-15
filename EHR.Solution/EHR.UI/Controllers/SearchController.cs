@@ -97,7 +97,7 @@ namespace EHR.UI.Controllers
             Session["Date"] = dob_day + "/" + dob_month + "/" + dob_year;
         }
 
-        private IEHRController ControllerFactory(string controller)
+        private EHRController ControllerFactory(string controller)
         {
             if (controller.Equals("patient"))
             {

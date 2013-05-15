@@ -1,33 +1,41 @@
-﻿using System;
-using System.Collections;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using EHR.CoreShared;
-using EHR.Domain.Entities.Interfaces;
-using System.Collections.Generic;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
 {
     public class Summary : IAggregateRoot<int>
     {
+        #region Properties
+
         public virtual int Id { get; set; }
         public virtual string Observation { get; set; }
         public virtual string Cpf { get; set; }
         public virtual DateTime Date { get; set; }
 
         public virtual Admission Admission { get; set; }
-        public virtual IList<Allergy> Allergies { get; set; }
+        private IList<Allergy> _allergies;
+        public virtual IList<Allergy> Allergies
+        {
+            get { return _allergies ?? (_allergies = new List<Allergy>()); }
+        }
 
-        private IList<Procedure> procedures;
+        private IList<Procedure> _procedures;
         public virtual IList<Procedure> Procedures
         {
-            get { return procedures ?? (procedures = new List<Procedure>()); }
+            get { return _procedures ?? (_procedures = new List<Procedure>()); }
         }
 
         public virtual IList<Hemotransfusion> Hemotransfusions { get; set; }
         public virtual IPatientDTO Patient { get; set; }
         public virtual ITreatmentDTO Treatment { get; set; }
+
+        #endregion
+
+        #region Procedure
 
         public virtual void RemoveProcedure(int id)
         {
@@ -35,13 +43,12 @@ namespace EHR.Domain.Entities
 
             var procedure = Procedures.FirstOrDefault(p => p.Id == id);
 
-            Assertion.NotNull(procedure,"Procedimento não encontrado.").Validate();
+            Assertion.NotNull(procedure, "Procedimento não encontrado.").Validate();
 
             Procedures.Remove(procedure);
 
             Assertion.IsFalse(Procedures.Contains(procedure), "Procedimento não foi removido.").Validate();
         }
-
         public virtual void CreateProcedure(int month, int day, int year, Tus tus)
         {
             Assertion.GreaterThan(month, 0, "Mês inválido.").Validate();
@@ -58,5 +65,23 @@ namespace EHR.Domain.Entities
 
             Assertion.IsTrue(Procedures.Contains(procedure), "Procedimento não foi inserido corretamente.").Validate();
         }
+
+        #endregion
+
+        #region Allergy
+
+        public virtual void CreateAllergy(string theWitch, IList<AllergyType> types)
+        {
+            Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
+
+            var allergy = new Allergy(theWitch, types);
+
+            Allergies.Add(allergy);
+
+            Assertion.IsTrue(Allergies.Contains(allergy), "Alergia não foi inserida corretamente.").Validate();
+        }
+
+        #endregion
     }
 }

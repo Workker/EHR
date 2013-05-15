@@ -51,8 +51,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllergyController.cs" />
     <Compile Include="FactoryController.cs" />
-    <Compile Include="IEHRController.cs" />
+    <Compile Include="EHRController.cs" />
     <Compile Include="PatientController.cs" />
     <Compile Include="ProcedureController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

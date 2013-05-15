@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace EHR.Controller
 {
-    public class PatientController : IEHRController
+    public class PatientController : EHRController
     {
 
         public IPatientDTO GetBy(string cpf)

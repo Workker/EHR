@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using EHR.Controller;
+﻿using EHR.Controller;
 using EHR.Domain.Entities;
+using EHR.Domain.Util;
 using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
-using System.Web.Services.Description;
 
 
 namespace EHR.UI.Controllers
@@ -67,11 +67,6 @@ namespace EHR.UI.Controllers
             return PartialView("_Form");
         }
 
-        public PartialViewResult GeneralData()
-        {
-            return PartialView("_GeneralData");
-        }
-
         public PartialViewResult Hemotransfusion()
         {
             return PartialView("_hemotransfusion");
@@ -92,54 +87,34 @@ namespace EHR.UI.Controllers
             return PartialView("_Prescriptions");
         }
 
-        public PartialViewResult Procedures()
+        #endregion
+
+        #region General Data
+
+        public PartialViewResult GeneralData()
         {
-            Summary summary = GetSummary();
-            ViewBag.Procedures = Convert(summary.Procedures);
-            return PartialView("_Procedures");
-        }
-
-        public List<ProcedureModel> Convert(IList<Procedure> procedures)
-        {
-            var proceduresModels = new List<ProcedureModel>();
-
-            foreach (var procedure in procedures)
-            {
-                proceduresModels.Add(new ProcedureModel()
-                                         {
-                                             Code = procedure.GetCode()
-                                             ,
-                                             Description = procedure.GetDescription()
-                                             ,
-                                             Date = procedure.Date
-                                             ,
-                                             Id = procedure.Id
-                                         });
-            }
-            return proceduresModels;
-        }
-
-        public List<ProcedureModel> ConvertLast(IList<Procedure> procedures)
-        {
-            var proceduresModels = new List<ProcedureModel>();
-
-                proceduresModels.Add(new ProcedureModel()
-                {
-                    Code = procedures.Last().GetCode()
-                    ,
-                    Description = procedures.Last().GetDescription()
-                    ,
-                    Date = procedures.Last().Date
-                    ,
-                    Id = procedures.Last().Id
-                });
             
-            return proceduresModels;
+            return PartialView("_GeneralData");
         }
 
-        public Summary GetSummary()
+        public string Admission(string q)
         {
-            return (Summary)Session["Summary"];
+            var stringReturn = "[";
+
+
+            foreach (var id in Enum.GetValues(typeof(ReasonOfAdmissionEnum)).Cast<short>().ToList())
+            {
+                var description =
+                    EnumUtil.GetDescriptionFromEnumValue(
+                        (ReasonOfAdmissionEnum)Enum.Parse(typeof(ReasonOfAdmissionEnum), id.ToString()));
+                if (description.Contains(q))
+                {
+                    stringReturn += "{\"name\":\"" + description + "\",\"id\":\"" + id + "\"}, ";
+                }
+            }
+            stringReturn = stringReturn.Remove(stringReturn.Length - 2);
+            stringReturn += "]";
+            return stringReturn;
         }
 
         #endregion
@@ -204,6 +179,12 @@ namespace EHR.UI.Controllers
 
         #region Procedure
 
+        public PartialViewResult Procedures()
+        {
+            Summary summary = GetSummary();
+            ViewBag.Procedures = Convert(summary.Procedures);
+            return PartialView("_Procedures");
+        }
 
         public PartialViewResult ProcedureForm()
         {
@@ -223,6 +204,51 @@ namespace EHR.UI.Controllers
             var summary = GetSummary();
 
             FactoryController.GetController(ControllerEnum.Procedure).RemoveProcedure(summary, id);
+        }
+
+        public JsonResult TusAutoComplete(string term)
+        {
+            List<Tus> tus = FactoryController.GetController(ControllerEnum.Procedure).GetTus();
+
+            return Json(tus, JsonRequestBehavior.AllowGet);
+        }
+
+        public List<ProcedureModel> Convert(IList<Procedure> procedures)
+        {
+            var proceduresModels = new List<ProcedureModel>();
+
+            foreach (var procedure in procedures)
+            {
+                proceduresModels.Add(new ProcedureModel()
+                {
+                    Code = procedure.GetCode()
+                    ,
+                    Description = procedure.GetDescription()
+                    ,
+                    Date = procedure.Date
+                    ,
+                    Id = procedure.Id
+                });
+            }
+            return proceduresModels;
+        }
+
+        public List<ProcedureModel> ConvertLast(IList<Procedure> procedures)
+        {
+            var proceduresModels = new List<ProcedureModel>();
+
+            proceduresModels.Add(new ProcedureModel()
+            {
+                Code = procedures.Last().GetCode()
+                ,
+                Description = procedures.Last().GetDescription()
+                ,
+                Date = procedures.Last().Date
+                ,
+                Id = procedures.Last().Id
+            });
+
+            return proceduresModels;
         }
 
         #endregion
@@ -286,38 +312,19 @@ namespace EHR.UI.Controllers
 
         #endregion
 
-        #region private methods
-
-        public string Admission(string q)
-        {
-            string stringReturn = null;
-
-            if (q.Equals("c") || q.Equals("C"))
-            {
-                stringReturn = "[{\"name\":\"Clínica\",\"id\":\"1\"}, {\"name\":\"Cirúrgica\",\"id\":\"2\"}]";
-            }
-            else if (q.Equals("e") || q.Equals("E"))
-            {
-                stringReturn = "[{\"name\":\"Eletiva\",\"id\":\"3\"}, {\"name\":\"Emergência\",\"id\":\"4\"}]";
-            }
-            return stringReturn;
-        }
+        #region support methods
 
         private int CalculateAgeFrom(DateTime birthday)
         {
             return DateTime.Today.Year - birthday.Year;
         }
 
-        #endregion
-
-        #region AutoComplet
-
-        public JsonResult TusAutoComplete(string term)
+        private Summary GetSummary()
         {
-            List<Tus> tus = FactoryController.GetController(ControllerEnum.Procedure).GetTus();
-
-            return Json(tus, JsonRequestBehavior.AllowGet);
+            return (Summary)Session["Summary"];
         }
+
         #endregion
+
     }
 }

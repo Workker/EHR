@@ -8,7 +8,7 @@ namespace EHR.Controller
 {
     public class FactoryController
     {
-        public static IEHRController GetController(ControllerEnum controllerEnum)
+        public static EHRController GetController(ControllerEnum controllerEnum)
         {
             switch (controllerEnum)
             {
