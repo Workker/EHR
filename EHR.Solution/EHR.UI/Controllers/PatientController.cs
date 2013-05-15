@@ -164,16 +164,56 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_AllergyForm");
         }
 
-        public PartialViewResult SaveAllergy(string factor, List<string> type)
+        public PartialViewResult SaveAllergy(string theWitch, List<string> type)
         {
+            //TODO: Terminar
+            //FactoryController.GetController(ControllerEnum.Allergy).SaveAllergy(theWitch , GetSummary());
+            //ViewBag.Procedures = ConvertLast(GetSummary().Allergies);
+            
+
             ViewBag.types = type;
-            ViewBag.factor = factor;
+            ViewBag.factor = theWitch;
             return PartialView("GeneralData/_AllergyTableRow");
         }
 
         public void DeleteAllergy()
         {
         }
+
+
+        public List<AllergyModel> Convert(IList<Allergy> allergies)
+        {
+            var allergyModels = new List<AllergyModel>();
+
+            foreach (var allergy in allergies)
+            {
+                allergyModels.Add(new AllergyModel()
+                {
+                    Id = allergy.Id,
+                    TheWitch = allergy.TheWhich,
+                    //Types = allergy.Types
+                });
+            }
+            return allergyModels;
+        }
+
+        //public List<AllergyModel> ConvertLast(IList<Allergy> allergies)
+        //{
+        //    var proceduresModels = new List<ProcedureModel>();
+
+        //    proceduresModels.Add(new ProcedureModel()
+        //    {
+        //        Code = allergies.Last().GetCode()
+        //        ,
+        //        Description = allergies.Last().GetDescription()
+        //        ,
+        //        Date = allergies.Last().Date
+        //        ,
+        //        Id = allergies.Last().Id
+        //    });
+
+        //    return proceduresModels;
+        //}
 
         #endregion
 

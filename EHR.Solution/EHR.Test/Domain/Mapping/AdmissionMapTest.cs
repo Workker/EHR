@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities;
+﻿using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using FluentNHibernate.Testing;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace EHR.Test.Domain.Mapping
 {
     [TestFixture]
-    public class AdmissionMapTest
+    public class AdmissionMapTest : AbstractInMemoryDataFixture
     {
         [Test]
         [Ignore]
         public void test_mapping_of_admission()
         {
-            new PersistenceSpecification<Admission>(session: BaseRepository.CreateSessionFactory().OpenSession())
-                .CheckProperty(x => x.Id, 1).CheckProperty(x => x.ReasonOfAdmission, 1).VerifyTheMappings();
+            new PersistenceSpecification<Admission>(session: Session)
+                .CheckProperty(x => x.Id, 1).CheckProperty(x => x.ReasonOfAdmission,
+                new List<ReasonOfAdmission> { new ReasonOfAdmission() { Id = 1, Description = "Teste" } }).VerifyTheMappings();
         }
     }
 }

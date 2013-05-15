@@ -9,6 +9,8 @@ namespace EHR.Domain.Entities
         public virtual string TheWhich { get; set; }
         public virtual IList<AllergyType> Types { get; set; }
 
+        public Allergy() { }
+
         public Allergy(string theWitch, IList<AllergyType> types)
         {
             this.TheWhich = theWitch;

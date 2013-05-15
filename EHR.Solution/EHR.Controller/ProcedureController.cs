@@ -1,38 +1,27 @@
 ﻿using EHR.Domain.Entities;
-using System;
+using EHR.Domain.Repository;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.Domain.Repository;
 using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
     public class ProcedureController : EHRController
     {
-        private TusRepository tusRepository;
+        private TusRepository _tusRepository;
         public TusRepository TusRepository
         {
-            get { return tusRepository ?? (tusRepository = new TusRepository()); }
+            get { return _tusRepository ?? (_tusRepository = new TusRepository()); }
             set
             {
-                tusRepository = value;
+                _tusRepository = value;
             }
         }
-
-        public virtual void RemoveProcedure(Summary summary, int id)
-        {
-            summary.RemoveProcedure(id);
-            Summaries.Save(summary);
-        }
-
 
         public virtual List<Tus> GetTus()
         {
             return TusRepository.All<Tus>().ToList();
         }
-
 
         public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary)
         {
@@ -46,6 +35,12 @@ namespace EHR.Controller
 
             summary.CreateProcedure(int.Parse(dob_month), int.Parse(dob_day), int.Parse(dob_year), tus);
 
+            Summaries.Save(summary);
+        }
+
+        public virtual void RemoveProcedure(Summary summary, int id)
+        {
+            summary.RemoveProcedure(id);
             Summaries.Save(summary);
         }
     }

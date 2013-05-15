@@ -15,7 +15,9 @@ namespace EHR.Controller
                 case ControllerEnum.Patient:
                     return new PatientController();
                 case ControllerEnum.Procedure:
-                    return  new ProcedureController();
+                    return new ProcedureController();
+                case ControllerEnum.Allergy:
+                    return new AllergyController();
 
                 default:
                     throw new Exception("Controller not found.");
@@ -26,6 +28,7 @@ namespace EHR.Controller
     public enum ControllerEnum : short
     {
         Patient = 1,
-        Procedure
+        Procedure = 2,
+        Allergy = 3
     }
 }

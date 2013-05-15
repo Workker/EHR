@@ -37,18 +37,6 @@ namespace EHR.Domain.Entities
 
         #region Procedure
 
-        public virtual void RemoveProcedure(int id)
-        {
-            Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
-
-            var procedure = Procedures.FirstOrDefault(p => p.Id == id);
-
-            Assertion.NotNull(procedure, "Procedimento não encontrado.").Validate();
-
-            Procedures.Remove(procedure);
-
-            Assertion.IsFalse(Procedures.Contains(procedure), "Procedimento não foi removido.").Validate();
-        }
         public virtual void CreateProcedure(int month, int day, int year, Tus tus)
         {
             Assertion.GreaterThan(month, 0, "Mês inválido.").Validate();
@@ -64,6 +52,19 @@ namespace EHR.Domain.Entities
             Procedures.Add(procedure);
 
             Assertion.IsTrue(Procedures.Contains(procedure), "Procedimento não foi inserido corretamente.").Validate();
+        }
+
+        public virtual void RemoveProcedure(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
+
+            var procedure = Procedures.FirstOrDefault(p => p.Id == id);
+
+            Assertion.NotNull(procedure, "Procedimento não encontrado.").Validate();
+
+            Procedures.Remove(procedure);
+
+            Assertion.IsFalse(Procedures.Contains(procedure), "Procedimento não foi removido.").Validate();
         }
 
         #endregion
@@ -82,6 +83,21 @@ namespace EHR.Domain.Entities
             Assertion.IsTrue(Allergies.Contains(allergy), "Alergia não foi inserida corretamente.").Validate();
         }
 
+        public virtual void RemoveAllergy(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
+
+            var allergy = Allergies.FirstOrDefault(p => p.Id == id);
+
+            Assertion.NotNull(allergy, "Alergia não encontrada.").Validate();
+
+            Allergies.Remove(allergy);
+
+            Assertion.IsFalse(Allergies.Contains(allergy), "Alergia não foi removida.").Validate();
+        }
+
         #endregion
+
+
     }
 }

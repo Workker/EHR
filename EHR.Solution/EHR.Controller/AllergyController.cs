@@ -17,6 +17,10 @@ namespace EHR.Controller
             Summaries.Save(summary);
         }
 
-        public void RemoveAllergy(Summary summary, int id) { }
+        public void RemoveAllergy(Summary summary, int id)
+        {
+            summary.RemoveAllergy(id);
+            Summaries.Save(summary);
+        }
     }
 }
