@@ -1,21 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities;
+﻿using EHR.Domain.Entities;
 using NHibernate;
+using NHibernate.Criterion;
+using System.Collections.Generic;
 
 namespace EHR.Domain.Repository
 {
     public class Cids : BaseRepository
     {
+        public Cids()
+        {
+        }
+
         public Cids(ISession session)
-            : base(session) 
+            : base(session)
         {
 
         }
 
-        public virtual void SalvarLista(List<Cid> roots)
+        public virtual Cid GetByCode(string code)
+        {
+            var criterio = Session.CreateCriteria<Cid>();
+            criterio.Add(Expression.Eq("Code", code));
+
+            return criterio.UniqueResult<Cid>();
+        }
+
+        public virtual void Save(List<Cid> roots)
         {
             var transaction = Session.BeginTransaction();
 

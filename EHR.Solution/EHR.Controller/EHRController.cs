@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
+using System.Collections.Generic;
 
 namespace EHR.Controller
 {
@@ -21,16 +17,21 @@ namespace EHR.Controller
             }
         }
 
-        public IPatientDTO GetBy(string cpf) { return null; }
-        public IList<IPatientDTO> GetBy(DbEnum hospital, PatientDTO dto) { return null; }
-        public IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital) { return null; }
+        public virtual IPatientDTO GetBy(string cpf) { return null; }
+        public virtual IList<IPatientDTO> GetBy(PatientDTO dto) { return null; }
+        public virtual IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital) { return null; }
 
-        public List<Tus> GetTus() { return null; }
+        public virtual List<Tus> GetTus() { return null; }
 
-        public void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary) { }
-        public void RemoveProcedure(Summary summary, int id) { }
+        public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary) { }
+        public virtual void RemoveProcedure(Summary summary, int id) { }
 
-        public void SaveAllergy(string theWitch, IList<AllergyType> types, Summary summary) { }
-        public void RemoveAllergy(Summary summary, int id) { }
+        public virtual void SaveAllergy(string theWitch, IList<AllergyType> types, Summary summary) { }
+        public virtual void RemoveAllergy(Summary summary, int id) { }
+
+        public virtual List<Cid> GetCids() { return null; }
+
+        public virtual void SaveDiagnostic(string diagnosticType, string cid, Summary summary) { }
+        public virtual void RemoveDiagnostic(Summary summary, int id) { }
     }
 }

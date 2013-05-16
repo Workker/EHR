@@ -15,12 +15,18 @@ namespace EHR.Domain.Entities
         public virtual string Observation { get; set; }
         public virtual string Cpf { get; set; }
         public virtual DateTime Date { get; set; }
-
         public virtual Admission Admission { get; set; }
+
         private IList<Allergy> _allergies;
         public virtual IList<Allergy> Allergies
         {
             get { return _allergies ?? (_allergies = new List<Allergy>()); }
+        }
+
+        private IList<Diagnostic> _diagnostics;
+        public virtual IList<Diagnostic> Diagnostics
+        {
+            get { return _diagnostics ?? (_diagnostics = new List<Diagnostic>()); }
         }
 
         private IList<Procedure> _procedures;
@@ -29,7 +35,18 @@ namespace EHR.Domain.Entities
             get { return _procedures ?? (_procedures = new List<Procedure>()); }
         }
 
-        public virtual IList<Hemotransfusion> Hemotransfusions { get; set; }
+        private IList<Drug> _drugs;
+        public virtual IList<Drug> Drugs
+        {
+            get { return _drugs ?? (_drugs = new List<Drug>()); }
+        }
+
+        private IList<Hemotransfusion> _hemotransfusions;
+        public virtual IList<Hemotransfusion> Hemotransfusions
+        {
+            get { return _hemotransfusions ?? (_hemotransfusions = new List<Hemotransfusion>()); }
+        }
+
         public virtual IPatientDTO Patient { get; set; }
         public virtual ITreatmentDTO Treatment { get; set; }
 
@@ -98,6 +115,19 @@ namespace EHR.Domain.Entities
 
         #endregion
 
+        #region Diagnostic
+
+        public virtual void CreateDiagnostic(DiagnosticType diagnosticType, Cid cid)
+        {
+            //TODO: Implementar
+        }
+
+        public virtual void RemoveDiagnostic(int id)
+        {
+            //TODO: Implementar
+        }
+
+        #endregion
 
     }
 }

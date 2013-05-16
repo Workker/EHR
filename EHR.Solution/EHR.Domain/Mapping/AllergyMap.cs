@@ -3,7 +3,7 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public sealed class AllergyMap : ClassMap<Allergy>
+    public class AllergyMap : ClassMap<Allergy>
     {
         public AllergyMap()
         {

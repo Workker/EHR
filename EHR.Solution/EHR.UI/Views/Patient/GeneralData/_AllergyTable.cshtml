@@ -6,6 +6,9 @@
 <br />
 <br />
 <ul class="ulTable _4kg  _4ks" style="display: none;">
+    @{
+        Html.RenderPartial("GeneralData/_AllergyTableRow");
+    }
     <li class="clearfix">
         <div class="clearfix">
             <a class="action" title="Incluir registro" onclick='newRow(this,"../Patient/AllergyForm");'>

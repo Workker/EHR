@@ -2,7 +2,8 @@
 
 namespace EHR.Domain.Entities
 {
-    public class ReactionType : ValueObject
+    public class Drug : IAggregateRoot<int>
     {
+        public virtual int Id { get; set; }
     }
 }

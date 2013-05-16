@@ -1,6 +1,13 @@
-﻿<span class="firstColumn">Diagnóstico Principal</span>
-<a class="action" onclick='deleteRow(this,"../Patient/DeleteDiagnostic", null)'><span>X</span></a>
-<a class="action" onclick='editRow("../Patient/DiagnosticForm", null, this);'>
-    <span>Edit</span></a>
-<span class="lastColumn">D63.0*</span>
-<span class="middleColumn">Anemia em neoplasias (C00-D48)</span>
+﻿@using EHR.UI.Models
+
+@foreach (DiagnosticModel diagnostic in ViewBag.Diagnostics)
+{
+    <li class="clearfix">
+        <span class="firstColumn">@diagnostic.Type</span>
+        <a class="action" onclick='deleteRow(this, "../Patient/DeleteDiagnostic/?id=@diagnostic.Id", null)'><span>X</span></a>
+        @* <a class="action" onclick='editRow("../Patient/DiagnosticForm/?id=@diagnostic.Id", null, this);'>
+            <span>Edit</span></a>*@
+        <span class="lastColumn">D63.0*</span>
+        <span class="middleColumn">@diagnostic.Cid.Description</span>
+    </li>
+}

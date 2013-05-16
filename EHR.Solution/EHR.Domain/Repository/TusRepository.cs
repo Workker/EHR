@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities;
+﻿using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Collections.Generic;
 
 namespace EHR.Domain.Repository
 {
-    public  class TusRepository
+    public class TusRepository
         : BaseRepository
     {
-        public  TusRepository()
+        public TusRepository()
         {
         }
 
         public TusRepository(ISession session)
-            : base(session) 
+            : base(session)
         {
 
         }

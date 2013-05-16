@@ -93,7 +93,6 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult GeneralData()
         {
-            
             return PartialView("_GeneralData");
         }
 
@@ -158,7 +157,6 @@ namespace EHR.UI.Controllers
 
         #region Allergy
 
-
         public PartialViewResult AllergyForm()
         {
             return PartialView("GeneralData/_AllergyForm");
@@ -179,7 +177,6 @@ namespace EHR.UI.Controllers
         public void DeleteAllergy()
         {
         }
-
 
         public List<AllergyModel> Convert(IList<Allergy> allergies)
         {

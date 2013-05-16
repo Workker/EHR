@@ -1,20 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using EHR.Domain.Entities;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace EHR.Domain.Repository
 {
     public class Defs : BaseRepository
     {
-        public Defs(ISession session) : base(session) 
+        public Defs()
+        {
+        }
+
+        public Defs(ISession session)
+            : base(session)
         {
 
         }
 
-        public virtual void SalvarLista(List<Def> roots)
+        public virtual Def GetById(string id)
+        {
+            var criterio = Session.CreateCriteria<Def>();
+            criterio.Add(Expression.Eq("Id", id));
+
+            return criterio.UniqueResult<Def>();
+        }
+
+        public virtual void Save(List<Def> roots)
         {
             var transaction = Session.BeginTransaction();
 

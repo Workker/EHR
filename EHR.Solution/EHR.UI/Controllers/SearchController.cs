@@ -42,7 +42,7 @@ namespace EHR.UI.Controllers
         {
             var patient = new PatientDTO { Name = query };
             var patientController = ControllerFactory("patient");
-            var patients = patientController.GetBy(DbEnum.QuintaDor, patient);
+            var patients = patientController.GetBy(patient);
             return BuildResultsOfSimpleSearchOfPatients(patients);
         }
 

@@ -6,7 +6,7 @@ namespace EHR.Controller
 {
     public class AllergyController : EHRController
     {
-        public void SaveAllergy(string theWitch, IList<AllergyType> types, Summary summary)
+        public override void SaveAllergy(string theWitch, IList<AllergyType> types, Summary summary)
         {
             Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
@@ -17,7 +17,7 @@ namespace EHR.Controller
             Summaries.Save(summary);
         }
 
-        public void RemoveAllergy(Summary summary, int id)
+        public override void RemoveAllergy(Summary summary, int id)
         {
             summary.RemoveAllergy(id);
             Summaries.Save(summary);

@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllergyController.cs" />
+    <Compile Include="DiagnosticController.cs" />
     <Compile Include="FactoryController.cs" />
     <Compile Include="EHRController.cs" />
     <Compile Include="PatientController.cs" />

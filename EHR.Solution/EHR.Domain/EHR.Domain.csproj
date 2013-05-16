@@ -70,6 +70,10 @@
   <ItemGroup>
     <Compile Include="Entities\AllergyType.cs" />
     <Compile Include="Entities\AllergyTypeEnum.cs" />
+    <Compile Include="Entities\DiagnosticType.cs" />
+    <Compile Include="Entities\DiagnosticTypeEnum.cs" />
+    <Compile Include="Entities\Drug.cs" />
+    <Compile Include="Entities\DrugTypeEnum.cs" />
     <Compile Include="Entities\Hemotransfusion.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
     <Compile Include="Entities\Migracao\CidIntegracao.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="MappingMigracao\DefMap.cs" />
     <Compile Include="Mapping\DiagnosticMap.cs" />
     <Compile Include="MappingMigracao\TusMap.cs" />
+    <Compile Include="Mapping\DiagnosticTypeMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />

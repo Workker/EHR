@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities.Interfaces;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
@@ -13,29 +9,29 @@ namespace EHR.Domain.Entities
         public virtual Tus Tus { get; set; }
         public virtual DateTime Date { get; set; }
 
-        public  Procedure()
+        public Procedure()
         {
         }
 
-        public  Procedure(Tus tus,DateTime date)
+        public Procedure(Tus tus, DateTime date)
         {
             this.Tus = tus;
             this.Date = date;
         }
 
-        public  virtual  void SetDate(DateTime date)
+        public virtual void SetDate(DateTime date)
         {
-            Assertion.NotNull(date,"Data inválida.").Validate();
-            Assertion.IsTrue(date >  DateTime.MinValue, "Data inválida.").Validate();
+            Assertion.NotNull(date, "Data inválida.").Validate();
+            Assertion.IsTrue(date > DateTime.MinValue, "Data inválida.").Validate();
 
             this.Date = date;
 
-            Assertion.IsTrue(this.Date == date,"Data inválida.").Validate();
+            Assertion.IsTrue(this.Date == date, "Data inválida.").Validate();
         }
 
         public virtual string GetCode()
         {
-           return Tus.Code;
+            return Tus.Code;
         }
 
         public virtual string GetDescription()

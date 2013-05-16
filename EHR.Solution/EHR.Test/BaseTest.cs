@@ -1,25 +1,16 @@
-﻿using EHR.Domain.Entities;
-using EHR.Domain.Mapping;
-using EHR.Domain.Repository;
+﻿using EHR.Domain.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 
 namespace EHR.Test
 {
     [TestFixture]
     public class BaseTest
     {
-        [Test]
-        public void acept()
-        {
-            Assert.True(true);
-        }
-
         private void BuildSchema(Configuration config)
         {
             new SchemaExport(config)
@@ -36,7 +27,7 @@ namespace EHR.Test
             try
             {
                 Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(
-                    c => c.FromAppSetting("connection")).ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<PatientMap>()).
+                    c => c.FromAppSetting("connection")).ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).
                     Mappings(m => m.MergeMappings())
                     .ExposeConfiguration(BuildSchema).BuildSessionFactory();
             }

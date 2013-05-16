@@ -12,7 +12,7 @@ namespace EHR.Domain.Service
             return servico.GetPatientBy(cpf);
         }
 
-        public IList<IPatientDTO> GetPatientBy(DbEnum hospital, IPatientDTO patientDTO)
+        public IList<IPatientDTO> GetPatientBy(IPatientDTO patientDTO)
         {
             var servico = new GetPatientsLuceneService();
             return servico.GetPatients(patientDTO.Name);

@@ -18,12 +18,12 @@ namespace EHR.Controller
             }
         }
 
-        public virtual List<Tus> GetTus()
+        public override List<Tus> GetTus()
         {
             return TusRepository.All<Tus>().ToList();
         }
 
-        public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary)
+        public override void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary)
         {
             Assertion.GreaterThan(int.Parse(dob_month), 0, "Mês inválido").Validate();
             Assertion.GreaterThan(int.Parse(dob_day), 0, "Dia inválido").Validate();
@@ -38,7 +38,7 @@ namespace EHR.Controller
             Summaries.Save(summary);
         }
 
-        public virtual void RemoveProcedure(Summary summary, int id)
+        public override void RemoveProcedure(Summary summary, int id)
         {
             summary.RemoveProcedure(id);
             Summaries.Save(summary);
