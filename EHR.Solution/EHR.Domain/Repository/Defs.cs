@@ -43,5 +43,24 @@ namespace EHR.Domain.Repository
                 throw ex;
             }
         }
+        public virtual void SalvarLista(List<Def> roots)
+        {
+            var transaction = Session.BeginTransaction();
+
+            try
+            {
+                foreach (var root in roots)
+                {
+                    Session.SaveOrUpdate(root);
+                }
+                transaction.Commit();
+            }
+            catch (System.Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+        }
+        
     }
 }
