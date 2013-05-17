@@ -5,7 +5,7 @@
 <input type="radio" name="haveAllergy" value="false" checked onchange="Display($(this).next().next().next(), false)" />N&atilde;o
 <br />
 <br />
-<ul class="ulTable _4kg  _4ks" style="display: none;">
+<ul class="ulTable _4kg _4ks" id="ulAllergy" style="display: none;">
     @{
         Html.RenderPartial("GeneralData/_AllergyTableRow");
     }

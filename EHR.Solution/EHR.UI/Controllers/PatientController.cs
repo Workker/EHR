@@ -26,11 +26,35 @@ namespace EHR.UI.Controllers
             ViewBag.age = CalculateAgeFrom((DateTime)patient.DateBirthday);
             Session["Summary"] = controller.GetSummaryByPatient(patient);
 
+            FillAlergies(); 
+
+            FillDiagnostic();
+
             if (Session["Summary"] == null)
                 Response.Redirect("/Home");
 
 
             return View();
+        }
+
+        private void FillDiagnostic()
+        {
+            var diagnostics = new List<DiagnosticModel>
+                                  {
+                                      new DiagnosticModel()
+                                          {
+                                              Id = 1,
+                                              Cid = new Cid() {Id = 1, Description = "Teste1", Code = "001"},
+                                              Type = 1,
+                                          }
+                                  };
+
+            ViewBag.Diagnostics = diagnostics;
+        }
+
+        private void FillAlergies()
+        {
+            ViewBag.Allergies = Convert(GetSummary().Allergies);
         }
 
         #endregion
@@ -93,6 +117,8 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult GeneralData()
         {
+            FillAlergies();
+            FillDiagnostic();
             return PartialView("_GeneralData");
         }
 
@@ -134,6 +160,13 @@ namespace EHR.UI.Controllers
         {
         }
 
+        public JsonResult CidAutoComplete(string term)
+        {
+            var cids = FactoryController.GetController(ControllerEnum.Diagnostic).GetCids();
+
+            return Json(cids, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Exams
@@ -164,18 +197,15 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult SaveAllergy(string theWitch, List<string> type)
         {
-            //TODO: Terminar
-            //FactoryController.GetController(ControllerEnum.Allergy).SaveAllergy(theWitch , GetSummary());
-            //ViewBag.Procedures = ConvertLast(GetSummary().Allergies);
-            
+            FactoryController.GetController(ControllerEnum.Allergy).SaveAllergy(theWitch, type.ConvertAll(short.Parse), GetSummary());
+            ViewBag.Allergies = ConvertLast(GetSummary().Allergies);
 
-            ViewBag.types = type;
-            ViewBag.factor = theWitch;
             return PartialView("GeneralData/_AllergyTableRow");
         }
 
-        public void DeleteAllergy()
+        public void DeleteAllergy(string id)
         {
+            FactoryController.GetController(ControllerEnum.Allergy).RemoveAllergy(GetSummary(),int.Parse(id));
         }
 
         public List<AllergyModel> Convert(IList<Allergy> allergies)
@@ -184,33 +214,42 @@ namespace EHR.UI.Controllers
 
             foreach (var allergy in allergies)
             {
-                allergyModels.Add(new AllergyModel()
+                var allergyModel = new AllergyModel()
+                                       {
+                                           Id = allergy.Id,
+                                           TheWitch = allergy.TheWhich,
+                                       };
+                allergyModel.Types = new List<short>();
+                foreach (var allergyType in allergy.Types)
                 {
-                    Id = allergy.Id,
-                    TheWitch = allergy.TheWhich,
-                    //Types = allergy.Types
-                });
+                    allergyModel.Types.Add(allergyType.Id);
+                }
+                allergyModels.Add(allergyModel);
             }
             return allergyModels;
         }
 
-        //public List<AllergyModel> ConvertLast(IList<Allergy> allergies)
-        //{
-        //    var proceduresModels = new List<ProcedureModel>();
+        public List<AllergyModel> ConvertLast(IList<Allergy> allergies)
+        {
+            var allergyModels = new List<AllergyModel>();
 
-        //    proceduresModels.Add(new ProcedureModel()
-        //    {
-        //        Code = allergies.Last().GetCode()
-        //        ,
-        //        Description = allergies.Last().GetDescription()
-        //        ,
-        //        Date = allergies.Last().Date
-        //        ,
-        //        Id = allergies.Last().Id
-        //    });
+            var allergy = new AllergyModel()
+                 {
+                     Id = allergies.Last().Id,
+                     TheWitch = allergies.Last().TheWhich,
 
-        //    return proceduresModels;
-        //}
+                 };
+            allergy.Types = new List<short>();
+            foreach (var type in allergies.Last().Types)
+            {
+                allergy.Types.Add(type.Id);
+            }
+
+            allergyModels.Add(allergy);
+
+
+            return allergyModels;
+        }
 
         #endregion
 
@@ -287,6 +326,8 @@ namespace EHR.UI.Controllers
 
             return proceduresModels;
         }
+
+
 
         #endregion
 

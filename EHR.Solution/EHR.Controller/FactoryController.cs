@@ -18,7 +18,8 @@ namespace EHR.Controller
                     return new ProcedureController();
                 case ControllerEnum.Allergy:
                     return new AllergyController();
-
+                case ControllerEnum.Diagnostic:
+                    return new DiagnosticController();
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -29,6 +30,7 @@ namespace EHR.Controller
     {
         Patient = 1,
         Procedure = 2,
-        Allergy = 3
+        Allergy = 3,
+        Diagnostic = 4
     }
 }

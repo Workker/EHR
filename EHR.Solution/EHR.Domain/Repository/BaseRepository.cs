@@ -77,6 +77,25 @@ namespace EHR.Domain.Repository
             }
         }
 
+        public virtual void SalvarLista<T>(List<T>  roots)
+        {
+            var transaction = Session.BeginTransaction();
+
+            try
+            {
+                foreach (var root in roots)
+                {
+                    Session.SaveOrUpdate(root);
+                }
+                transaction.Commit();
+            }
+            catch (System.Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+        }
+
         #endregion
 
         #region Métodos de Sessão e Transação

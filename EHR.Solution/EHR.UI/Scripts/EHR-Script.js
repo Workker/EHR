@@ -382,3 +382,14 @@ $(".unitsSideBar li input[type='checkbox']").live(
 $("#testaa").focusout(function () {
     alert("aaaaaa");
 });
+
+function ToggleAllergy() {
+    
+
+    var liCount = $("#ulAllergy > li").length;
+    if (liCount > 1) {
+        $('input[value="false"]').removeAttr("checked");
+        $('input[value="true"]').attr("checked", "");
+        $('#ulAllergy').removeAttr("style");
+    }
+}

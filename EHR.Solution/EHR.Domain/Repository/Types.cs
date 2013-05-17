@@ -8,14 +8,16 @@ namespace EHR.Domain.Repository
 {
     public class Types<T> : BaseRepository
     {
-        public T Get(int id)
+        public T Get(short id)
         {
-            return Get<T>(id);
+            return Session.Get<T>(id);
         }
 
         public IList<T> All()
         {
             return All<T>();
         }
+
+
     }
 }

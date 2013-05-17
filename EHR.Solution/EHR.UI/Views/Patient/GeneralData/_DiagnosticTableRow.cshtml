@@ -1,9 +1,11 @@
-﻿@using EHR.UI.Models
+﻿@using EHR.Domain.Entities
+@using EHR.Domain.Util
+@using EHR.UI.Models
 
 @foreach (DiagnosticModel diagnostic in ViewBag.Diagnostics)
 {
     <li class="clearfix">
-        <span class="firstColumn">@diagnostic.Type</span>
+        <span class="firstColumn">@EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), @diagnostic.Type.ToString()))</span>
         <a class="action" onclick='deleteRow(this, "../Patient/DeleteDiagnostic/?id=@diagnostic.Id", null)'><span>X</span></a>
         @* <a class="action" onclick='editRow("../Patient/DiagnosticForm/?id=@diagnostic.Id", null, this);'>
             <span>Edit</span></a>*@

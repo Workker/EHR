@@ -41,7 +41,7 @@ namespace EHR.Test.Migracao
                 listaDef.Add(def);
             }
 
-            repositorioDef.SalvarLista(listaDef);
+            //repositorioDef.SalvarLista(listaDef);
             
         }
        

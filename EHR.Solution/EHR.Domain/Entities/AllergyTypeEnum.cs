@@ -5,16 +5,16 @@ namespace EHR.Domain.Entities
     public enum AllergyTypeEnum : short
     {
         [Description("Angioedema")]
-        Angioedema = 0,
+        Angioedema = 1,
         [Description("Urticária")]
-        Urticaria = 1,
+        Urticaria = 2,
         [Description("Choque Anafilático")]
-        ChoqueAnafilatico = 2,
+        ChoqueAnafilatico = 3,
         [Description("Broncoespasmo")]
-        Broncoespasmo = 3,
+        Broncoespasmo = 4,
         [Description("Laringoespasmo")]
-        Laringoespasmo = 4,
+        Laringoespasmo = 5,
         [Description("Outros")]
-        Outros = 5
+        Outros = 6
     }
 }

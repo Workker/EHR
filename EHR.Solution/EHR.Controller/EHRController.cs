@@ -26,7 +26,7 @@ namespace EHR.Controller
         public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary) { }
         public virtual void RemoveProcedure(Summary summary, int id) { }
 
-        public virtual void SaveAllergy(string theWitch, IList<AllergyType> types, Summary summary) { }
+        public virtual void SaveAllergy(string theWitch, IList<short> types, Summary summary) { }
         public virtual void RemoveAllergy(Summary summary, int id) { }
 
         public virtual List<Cid> GetCids() { return null; }

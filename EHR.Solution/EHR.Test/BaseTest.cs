@@ -1,10 +1,15 @@
-﻿using EHR.Domain.Mapping;
+﻿using System.Collections.Generic;
+using EHR.CoreShared;
+using EHR.Domain.Entities;
+using EHR.Domain.Mapping;
+using EHR.Domain.Repository;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using System;
+using EHR.Domain.Util;
 
 namespace EHR.Test
 {
@@ -37,29 +42,35 @@ namespace EHR.Test
             }
         }
 
-        //[Test]
-        //[Ignore]
-        //public void b_data_initialize()
-        //{
-        //    var admission = new Admission { Id = 1 };
-        //    var reasons = new List<Reason> { Reason.Cirurgic };
-        //    admission.ReasonOfAdmission = reasons;
+        [Test]
+        [Ignore]
+        public void b_data_initialize()
+        {
+            var summaries = new Summaries();
+            var sumary = new Summary {Cpf = "02338013751"};
+            summaries.Save(sumary);
 
-        //    var allergy = new Allergy { Id = 1, HaveAllergies = true, TheWhich = "egg", Type = TypeOfAllergy.Angioedema };
+          //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
+           // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
+            //sumary.CreateProcedure(5, 5, 2013, new Tus() { Code = "001", Description = "Teste" });
+        }
 
-        //    var diagnostic1 = new Diagnostic { Id = 1, Type = "test1", CidCode = "1", Cid = "test1" };
-        //    var diagnostic2 = new Diagnostic { Id = 2, Type = "test2", CidCode = "2", Cid = "test2" };
-        //    var diagnostic3 = new Diagnostic { Id = 3, Type = "test3", CidCode = "3", Cid = "test3" };
+        [Test]
+        [Ignore]
+        public  void create_allergies_types()
+        {
+            var angioedema = new AllergyType() { Id = (short) AllergyTypeEnum.Angioedema, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Angioedema) };
+            var urticaria = new AllergyType() { Id = (short)AllergyTypeEnum.Urticaria, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Urticaria) };
+            var choqueAnafilatico = new AllergyType() { Id = (short)AllergyTypeEnum.ChoqueAnafilatico, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.ChoqueAnafilatico) };
+            var broncoespasmo = new AllergyType() { Id = (short)AllergyTypeEnum.Broncoespasmo, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Broncoespasmo) };
+            var larigoespasmo = new AllergyType() { Id = (short)AllergyTypeEnum.Laringoespasmo, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Laringoespasmo) };
+            var outros = new AllergyType() { Id = (short)AllergyTypeEnum.Outros, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Outros) };
 
-        //    var patient = new Patient();
-        //    patient.AddAdmission(admission);
-        //    patient.AddAllergy(allergy);
-        //    patient.AddDiagnostic(diagnostic1);
-        //    patient.AddDiagnostic(diagnostic2);
-        //    patient.AddDiagnostic(diagnostic3);
+            var types = new List<AllergyType> {angioedema,urticaria,choqueAnafilatico,broncoespasmo,larigoespasmo,outros};
+            var typesRepository = new Types<AllergyType>();
 
-        //    var patients = new Patients();
-        //    patients.Save(patient);
-        //}
+            typesRepository.SalvarLista<AllergyType>(types);
+
+        }
     }
 }

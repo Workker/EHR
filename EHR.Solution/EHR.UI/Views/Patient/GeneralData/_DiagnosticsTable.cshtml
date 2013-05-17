@@ -1,15 +1,10 @@
 ﻿<ul class="ulTable _4kg  _4ks">
+    @{
+        Html.RenderPartial("GeneralData/_DiagnosticTableRow");
+    }
     <li class="clearfix">
         <div class="clearfix">
-            @{
-                Html.RenderPartial("GeneralData/_DiagnosticTableRow");
-            }
-        </div>
-        <div class="content"></div>
-    </li>
-    <li class="clearfix">
-        <div class="clearfix">
-            <a class="action" onclick='newRow(this,"../Patient/DiagnosticForm");'>
+            <a class="action" title="Incluir registro" onclick='newRow(this,"../Patient/DiagnosticForm");'>
                 <span>+</span>
             </a>
         </div>
