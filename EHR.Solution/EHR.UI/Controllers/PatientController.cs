@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using EHR.CoreShared;
 
 
 namespace EHR.UI.Controllers
@@ -21,13 +22,9 @@ namespace EHR.UI.Controllers
         public ActionResult Index(string cpf)
         {
             var controller = new EHR.Controller.PatientController();
-            var patient = controller.GetBy(cpf);
-            ViewBag.data = patient;
-            ViewBag.age = CalculateAgeFrom((DateTime)patient.DateBirthday);
-            Session["Summary"] = controller.GetSummaryByPatient(patient);
 
-            FillAlergies(); 
-
+            TreatPatient(cpf, controller);
+            FillAlergies();
             FillDiagnostic();
 
             if (Session["Summary"] == null)
@@ -37,19 +34,17 @@ namespace EHR.UI.Controllers
             return View();
         }
 
+        private void TreatPatient(string cpf, Controller.PatientController controller)
+        {
+            var patient = controller.GetBy(cpf);
+            ViewBag.data = patient;
+            ViewBag.age = CalculateAgeFrom((DateTime)patient.DateBirthday);
+            Session["Summary"] = controller.GetSummaryByPatient(patient);
+        }
+
         private void FillDiagnostic()
         {
-            var diagnostics = new List<DiagnosticModel>
-                                  {
-                                      new DiagnosticModel()
-                                          {
-                                              Id = 1,
-                                              Cid = new Cid() {Id = 1, Description = "Teste1", Code = "001"},
-                                              Type = 1,
-                                          }
-                                  };
-
-            ViewBag.Diagnostics = diagnostics;
+            ViewBag.Diagnostics = Convert(GetSummary().Diagnostics);
         }
 
         private void FillAlergies()
@@ -151,20 +146,63 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_DiagnosticsForm");
         }
 
-        public PartialViewResult SaveDiagnostic(string type, string code, string description)
+        public PartialViewResult SaveDiagnostic(string type, string cidCode, string description)
         {
+            FactoryController.GetController(ControllerEnum.Diagnostic).SaveDiagnostic(type, cidCode, GetSummary());
+            ViewBag.Diagnostics = ConvertLast(GetSummary().Diagnostics);
+
             return PartialView("GeneralData/_DiagnosticTableRow");
         }
 
-        public void DeleteDiagnostic()
+        public void DeleteDiagnostic(string id)
         {
+            FactoryController.GetController(ControllerEnum.Diagnostic).RemoveDiagnostic(GetSummary(), int.Parse(id));
         }
 
         public JsonResult CidAutoComplete(string term)
         {
-            var cids = FactoryController.GetController(ControllerEnum.Diagnostic).GetCids();
+            var cids = FactoryController.GetController(ControllerEnum.Diagnostic).GetCids(term);
 
             return Json(cids, JsonRequestBehavior.AllowGet);
+        }
+
+        private dynamic ConvertLast(IList<Diagnostic> diagnostics)
+        {
+            var diagnosticsModels = new List<DiagnosticModel>();
+
+            var diacnostic = new DiagnosticModel()
+            {
+                Id = diagnostics.Last().Id,
+                Cid = ConvertCid( diagnostics.Last().Cid),
+                Type = diagnostics.Last().Type.Id
+            };
+
+            diagnosticsModels.Add(diacnostic);
+
+            return diagnosticsModels;
+        }
+
+        private dynamic Convert(IList<Diagnostic> diagnostics)
+        {
+            var diagnosticsModels = new List<DiagnosticModel>();
+
+            foreach (var diagnostic in diagnostics)
+            {
+                diagnosticsModels.Add(new DiagnosticModel()
+                {
+                    Cid = ConvertCid(diagnostic.Cid)
+                    ,
+                    Id = diagnostic.Id
+                    ,
+                    Type = diagnostic.Type.Id
+                });
+            }
+            return diagnosticsModels;
+        }
+
+        private CidModel ConvertCid(Cid cid)
+        {
+            return new CidModel() { Code = cid.Code, Description = cid.Description };
         }
 
         #endregion
@@ -205,7 +243,7 @@ namespace EHR.UI.Controllers
 
         public void DeleteAllergy(string id)
         {
-            FactoryController.GetController(ControllerEnum.Allergy).RemoveAllergy(GetSummary(),int.Parse(id));
+            FactoryController.GetController(ControllerEnum.Allergy).RemoveAllergy(GetSummary(), int.Parse(id));
         }
 
         public List<AllergyModel> Convert(IList<Allergy> allergies)
@@ -284,7 +322,7 @@ namespace EHR.UI.Controllers
 
         public JsonResult TusAutoComplete(string term)
         {
-            List<Tus> tus = FactoryController.GetController(ControllerEnum.Procedure).GetTus();
+            List<TusDTO> tus = FactoryController.GetController(ControllerEnum.Procedure).GetTus(term);
 
             return Json(tus, JsonRequestBehavior.AllowGet);
         }

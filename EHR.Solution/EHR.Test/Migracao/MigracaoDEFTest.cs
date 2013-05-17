@@ -19,10 +19,10 @@ namespace EHR.Test.Migracao
 {
     [TestFixture]
     [Ignore]
-    public class MigracaoDEF 
+    public class MigracaoDEF
     {
         [Test]
-        public void MigrarDEF() 
+        public void MigrarDEF()
         {
             var conexao = Conexao.CreateSessionFactoryOracle();
             DefsIntegracao defs = new DefsIntegracao(conexao.OpenSession());
@@ -41,9 +41,9 @@ namespace EHR.Test.Migracao
                 listaDef.Add(def);
             }
 
-            //repositorioDef.SalvarLista(listaDef);
-            
+            repositorioDef.SalvarLista(listaDef);
+
         }
-       
+
     }
 }

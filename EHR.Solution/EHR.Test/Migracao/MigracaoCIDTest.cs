@@ -13,12 +13,11 @@ using NUnit.Framework;
 namespace EHR.Test.Migracao
 {
     [TestFixture]
-    
+    [Ignore]
     public class MigracaoCIDTest 
     {
         [Test]
-        [Ignore]
-        public void MigrarDEF()
+        public void MigrarCid()
         {
             var conexao = Conexao.CreateSessionFactoryOracle();
             CidsIntegracao defs = new CidsIntegracao(conexao.OpenSession());
@@ -38,8 +37,8 @@ namespace EHR.Test.Migracao
                 listaCid.Add(cid);
             }
 
-            //repositorioCid.SalvarLista(listaCid);
-
+            repositorioCid.SalvarLista(listaCid);
+            
         }
     }
 }

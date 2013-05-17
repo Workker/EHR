@@ -7,7 +7,7 @@ namespace EHR.Domain.Mapping
     {
         public ValueObjectMap()
         {
-            Id(x => x.Id).GeneratedBy.Identity();
+            Id(x => x.Id);
             Map(x => x.Description);
         }
     }

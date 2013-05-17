@@ -6,6 +6,7 @@ namespace EHR.Domain.Mapping
     {
         public CidMap()
         {
+            Id().GeneratedBy.Identity();
             Map(c => c.Code);
         }
     }

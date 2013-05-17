@@ -14,6 +14,7 @@ using EHR.Domain.Util;
 namespace EHR.Test
 {
     [TestFixture]
+    [Ignore]
     public class BaseTest
     {
         private void BuildSchema(Configuration config)
@@ -26,7 +27,6 @@ namespace EHR.Test
         }
 
         [Test]
-        [Ignore]
         public void a_create_database_by_model()
         {
             try
@@ -43,30 +43,28 @@ namespace EHR.Test
         }
 
         [Test]
-        [Ignore]
         public void b_data_initialize()
         {
             var summaries = new Summaries();
-            var sumary = new Summary {Cpf = "02338013751"};
+            var sumary = new Summary { Cpf = "02338013751" };
             summaries.Save(sumary);
 
-          //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
-           // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
+            //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
+            // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
             //sumary.CreateProcedure(5, 5, 2013, new Tus() { Code = "001", Description = "Teste" });
         }
 
         [Test]
-        [Ignore]
-        public  void create_allergies_types()
+        public void create_allergies_types()
         {
-            var angioedema = new AllergyType() { Id = (short) AllergyTypeEnum.Angioedema, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Angioedema) };
+            var angioedema = new AllergyType() { Id = (short)AllergyTypeEnum.Angioedema, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Angioedema) };
             var urticaria = new AllergyType() { Id = (short)AllergyTypeEnum.Urticaria, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Urticaria) };
             var choqueAnafilatico = new AllergyType() { Id = (short)AllergyTypeEnum.ChoqueAnafilatico, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.ChoqueAnafilatico) };
             var broncoespasmo = new AllergyType() { Id = (short)AllergyTypeEnum.Broncoespasmo, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Broncoespasmo) };
             var larigoespasmo = new AllergyType() { Id = (short)AllergyTypeEnum.Laringoespasmo, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Laringoespasmo) };
             var outros = new AllergyType() { Id = (short)AllergyTypeEnum.Outros, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Outros) };
 
-            var types = new List<AllergyType> {angioedema,urticaria,choqueAnafilatico,broncoespasmo,larigoespasmo,outros};
+            var types = new List<AllergyType> { angioedema, urticaria, choqueAnafilatico, broncoespasmo, larigoespasmo, outros };
             var typesRepository = new Types<AllergyType>();
 
             typesRepository.SalvarLista<AllergyType>(types);

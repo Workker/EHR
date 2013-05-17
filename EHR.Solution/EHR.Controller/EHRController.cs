@@ -21,7 +21,7 @@ namespace EHR.Controller
         public virtual IList<IPatientDTO> GetBy(PatientDTO dto) { return null; }
         public virtual IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital) { return null; }
 
-        public virtual List<Tus> GetTus() { return null; }
+        public virtual List<TusDTO> GetTus(string term) { return null; }
 
         public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary) { }
         public virtual void RemoveProcedure(Summary summary, int id) { }
@@ -29,7 +29,7 @@ namespace EHR.Controller
         public virtual void SaveAllergy(string theWitch, IList<short> types, Summary summary) { }
         public virtual void RemoveAllergy(Summary summary, int id) { }
 
-        public virtual List<Cid> GetCids() { return null; }
+        public virtual List<CidDTO> GetCids(string term) { return null; }
 
         public virtual void SaveDiagnostic(string diagnosticType, string cid, Summary summary) { }
         public virtual void RemoveDiagnostic(Summary summary, int id) { }

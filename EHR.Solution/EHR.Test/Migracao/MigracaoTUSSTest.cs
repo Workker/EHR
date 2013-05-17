@@ -8,10 +8,10 @@ using System.Collections.Generic;
 namespace EHR.Test.Migracao
 {
     [TestFixture]
+    [Ignore]
     public class MigracaoTUSSTest
     {
         [Test]
-        [Ignore]
         public void MigrarProcedimentos()
         {
             var conexao = Conexao.CreateSessionFactoryOracle();

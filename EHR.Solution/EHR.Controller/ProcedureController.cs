@@ -3,6 +3,8 @@ using EHR.Domain.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using Workker.Framework.Domain;
+using EHR.Domain.Service.Lucene;
+using EHR.CoreShared;
 
 namespace EHR.Controller
 {
@@ -18,9 +20,20 @@ namespace EHR.Controller
             }
         }
 
-        public override List<Tus> GetTus()
+        private GetTusLuceneService getTusLuceneService;
+        public GetTusLuceneService GetTusLuceneService
         {
-            return TusRepository.All<Tus>().ToList();
+            get { return getTusLuceneService ?? (getTusLuceneService = new GetTusLuceneService()); }
+            set
+            {
+                getTusLuceneService = value;
+            }
+        }
+        
+
+        public override List<TusDTO> GetTus(string term)
+        {
+            return GetTusLuceneService.GetTus(term);
         }
 
         public override void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary)

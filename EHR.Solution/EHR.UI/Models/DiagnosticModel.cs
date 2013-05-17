@@ -6,6 +6,6 @@ namespace EHR.UI.Models
     {
         public int Id { get; set; }
         public short Type { get; set; }
-        public Cid Cid { get; set; }
+        public CidModel Cid { get; set; }
     }
 }
