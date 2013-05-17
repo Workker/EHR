@@ -1,1 +1,21 @@
-﻿
+﻿@using EHR.Domain.Entities
+@using EHR.Domain.Util
+@using EHR.UI.Models
+
+@foreach (AllergyModel allergy in @ViewBag.Hemotransfusions)
+{
+    <li class="clearfix">
+        <span class="firstColumn">@allergy.TheWitch</span>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteAllergy/?id=@allergy.Id", null)'><span>X</span></a>
+        @* <a class="action" title="Editar registro" onclick='editRow("../Patient/AllergyForm/?id=@allergy.Id", null, this);'>
+            <span>Editar</span></a>*@
+        <span class="lastColumn"></span>
+        <span class="middleColumn">
+            @for (int i = 1; i <= @allergy.Types.Count; i++)
+            {
+                @(EnumUtil.GetDescriptionFromEnumValue((AllergyTypeEnum)Enum.Parse(typeof(AllergyTypeEnum), @allergy.Types[i - 1].ToString())) + (@allergy.Types.Count == i ? "" : ",  "))
+                ;
+            }
+        </span>
+    </li>
+}

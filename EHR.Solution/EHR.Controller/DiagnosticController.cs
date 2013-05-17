@@ -1,16 +1,13 @@
-﻿using System;
+﻿using EHR.Domain.Entities;
+using EHR.Domain.Repository;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.Domain.Entities;
-using EHR.Domain.Repository;
-using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
     public class DiagnosticController : EHRController
     {
+        #region Properties
 
         private Cids _cidsRepository;
         public Cids CidsRepository
@@ -21,6 +18,8 @@ namespace EHR.Controller
                 _cidsRepository = value;
             }
         }
+
+        #endregion
 
         public override List<Cid> GetCids()
         {

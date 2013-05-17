@@ -75,6 +75,7 @@
     <Compile Include="Entities\Drug.cs" />
     <Compile Include="Entities\DrugTypeEnum.cs" />
     <Compile Include="Entities\Hemotransfusion.cs" />
+    <Compile Include="Entities\HemotransfusionType.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
     <Compile Include="Entities\Migracao\CidIntegracao.cs" />
     <Compile Include="Entities\Migracao\DefIntegracao.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="MappingMigracao\TusMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
+    <Compile Include="Mapping\HemotransfusionTypeMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />

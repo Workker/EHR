@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EHR.Controller
 {
@@ -20,6 +16,8 @@ namespace EHR.Controller
                     return new AllergyController();
                 case ControllerEnum.Diagnostic:
                     return new DiagnosticController();
+                case ControllerEnum.Hemotransfusion:
+                    return new HemotransfusionController();
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -31,6 +29,8 @@ namespace EHR.Controller
         Patient = 1,
         Procedure = 2,
         Allergy = 3,
-        Diagnostic = 4
+        Diagnostic = 4,
+        Hemotransfusion = 5
+
     }
 }

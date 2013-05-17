@@ -129,5 +129,31 @@ namespace EHR.Domain.Entities
 
         #endregion
 
+        #region Hemotransfusion
+
+        public virtual void CreateHemotransfusion(HemotransfusionType hemotransfusionType, List<ReactionType> reactionTypes)
+        {
+            var hemotransfusion = new Hemotransfusion { Type = hemotransfusionType, Reactions = reactionTypes };
+
+            Hemotransfusions.Add(hemotransfusion);
+
+            Assertion.IsTrue(Hemotransfusions.Contains(hemotransfusion), "Hemotransfusão não foi inserida corretamente.").Validate();
+        }
+
+        public virtual void RemoveHemotransfusion(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
+
+            var hemotransfusion = Hemotransfusions.FirstOrDefault(p => p.Id == id);
+
+            Assertion.NotNull(hemotransfusion, "Hemotransfusão não encontrada.").Validate();
+
+            Hemotransfusions.Remove(hemotransfusion);
+
+            Assertion.IsFalse(Hemotransfusions.Contains(hemotransfusion), "Hemotransfusão não foi removida.").Validate();
+        }
+
+        #endregion
+
     }
 }

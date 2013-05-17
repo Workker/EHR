@@ -7,6 +7,8 @@ namespace EHR.Controller
 {
     public class AllergyController : EHRController
     {
+        #region Properties
+
         private Types<AllergyType> allergyTypes;
         public Types<AllergyType> AllergyTypes
         {
@@ -17,9 +19,11 @@ namespace EHR.Controller
             }
         }
 
+        #endregion
+
         public override void SaveAllergy(string theWitch, IList<short> types, Summary summary)
         {
-            Assertion.GreaterThan(types.Count,0, "Não foi selecionado um tipo de alergia.").Validate();
+            Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
             Assertion.NotNull(summary, "Não existe nenhum sumário selecionado para inserir o procedimento.").Validate();
 
@@ -36,6 +40,14 @@ namespace EHR.Controller
             Summaries.Save(summary);
         }
 
+        public override void RemoveAllergy(Summary summary, int id)
+        {
+            summary.RemoveAllergy(id);
+            Summaries.Save(summary);
+        }
+
+        #region Private Methods
+
         private AllergyType GetAllergy(short id)
         {
             Assertion.GreaterThan(id, short.Parse("0"), "Alergia deve ser informada.").Validate();
@@ -44,10 +56,6 @@ namespace EHR.Controller
             return type;
         }
 
-        public override void RemoveAllergy(Summary summary, int id)
-        {
-            summary.RemoveAllergy(id);
-            Summaries.Save(summary);
-        }
+        #endregion
     }
 }

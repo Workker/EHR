@@ -2,7 +2,7 @@
 
 namespace EHR.Domain.Entities
 {
-    public enum HemotransfusionTypeEnum
+    public enum HemotransfusionTypeEnum : short
     {
         [Description("Criopreciptado")]
         Criopreciptado = 1,

@@ -1,34 +1,25 @@
 ﻿@using EHR.Domain.Entities
+@using EHR.Domain.Util
 
-        <label>Tipo:</label>
-        <select>
-            @foreach (var type in Enum.GetValues(typeof(HemotransfusionTypeEnum)).Cast<HemotransfusionTypeEnum>().ToList())
-            {
-                <option value="@Enum.Parse(typeof(HemotransfusionTypeEnum), type.ToString())">@type</option>
-            }
-        </select>
-        <label>Rea&ccedil;&atilde;o transfusional:</label>&nbsp;&nbsp;<input type="radio" name="transfusion" value="yes" />
-        Sim&nbsp;&nbsp;<input type="radio" name="transfusion" value="no" />
-        Não<br />
-        <br />
-        <label>Tipo:</label><br />
-        <input type="checkbox" name="type.1" />
-        Aloimunização eritrocitária<br />
-        <input type="checkbox" name="type.2" />
-        Aloimunização HLA<br />
-        <input type="checkbox" name="type.3" checked="checked" />
-        Imunomodulação
-        <br />
-        <input type="checkbox" name="type.4" checked="checked" />
-        Lesão pulmonar relacionada a transfusão
-        <br />
-        <input type="checkbox" name="type.5" />
-        Púrpura pós transfusional<br />
-        <input type="checkbox" name="type.6" />
-        Alérgica: leve; moderada; grave<br />
-        <input type="checkbox" name="type.7" />
-        Enxerto x Hospedeiro<br />
-        <input type="checkbox" name="type.8" />
-        Febril não hemolítica<br />
-        <input type="checkbox" name="type.9" />
-        Hemolítica Imune 
+<label>Tipo:</label>
+<select name="type" style="margin-left: 5px">
+    <option value="0">Selecione</option>
+    @foreach (var value in Enum.GetValues(typeof(HemotransfusionTypeEnum)).Cast<short>().ToList())
+    {
+        <option value="@value">
+        @(EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), value.ToString())) + "  ")
+        </option>  
+    }
+</select>
+<label>Rea&ccedil;&atilde;o transfusional:</label>&nbsp;&nbsp;<input type="radio" name="transfusion" value="yes" />
+Sim&nbsp;&nbsp;<input type="radio" name="transfusion" value="no" />
+Não<br />
+<br />
+<label>Tipo:</label><br />
+
+@foreach (var value in Enum.GetValues(typeof(ReactionTypeEnum)).Cast<short>().ToList())
+{
+    <input type="checkbox" name="type.@value" />
+    @(EnumUtil.GetDescriptionFromEnumValue((ReactionTypeEnum)Enum.Parse(typeof(ReactionTypeEnum), value.ToString())) + "  ")
+    <br/>
+}

@@ -4,7 +4,7 @@
 <form id="diagnostic">
     <label>Tipo de diagn&oacute;stico:</label>
     <select name="type" style="margin-left: 5px">
-        <option value="0">Select</option>
+        <option value="0">Selecione</option>
 
         @foreach (var value in Enum.GetValues(typeof(DiagnosticTypeEnum)).Cast<short>().ToList())
         {

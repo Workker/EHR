@@ -2,7 +2,7 @@
 
 namespace EHR.Domain.Entities
 {
-    public enum ReactionTypeEnum
+    public enum ReactionTypeEnum : short
     {
         [Description("Aloimunização Eritrocitária")]
         AloimunizacaoEritrocitaria = 0,

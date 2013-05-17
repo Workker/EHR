@@ -55,6 +55,7 @@
     <Compile Include="DiagnosticController.cs" />
     <Compile Include="FactoryController.cs" />
     <Compile Include="EHRController.cs" />
+    <Compile Include="HemotransfusionController.cs" />
     <Compile Include="PatientController.cs" />
     <Compile Include="ProcedureController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
