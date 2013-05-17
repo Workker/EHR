@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Mapping;
+﻿using EHR.Domain.Mapping;
 using EHR.Domain.MappingMigracao;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;

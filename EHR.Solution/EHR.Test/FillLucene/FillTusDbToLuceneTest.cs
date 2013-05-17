@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Test.Migracao;
 using EHRIntegracao.Domain.Services.SaveLucene;
 using NUnit.Framework;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EHR.Test.FillLucene
 {
     [TestFixture]
-    [Ignore]
     public class FillTusDbToLuceneTest
     {
         [Test]
+        [Ignore]
         public void Fill()
         {
             var repository = new TusRepository(Conexao.CreateSessionFactory().OpenSession());
@@ -27,7 +23,7 @@ namespace EHR.Test.FillLucene
             service.Save(TusDTO);
         }
 
-        private List<TusDTO> Convert(List<Tus> tus) 
+        private List<TusDTO> Convert(List<Tus> tus)
         {
             var tusDTO = new List<TusDTO>();
 
