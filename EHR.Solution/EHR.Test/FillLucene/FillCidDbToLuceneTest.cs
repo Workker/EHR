@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Test.Migracao;
 using EHRIntegracao.Domain.Services.SaveLucene;
 using NUnit.Framework;
-using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EHR.Test.FillLucene
 {
@@ -17,6 +13,7 @@ namespace EHR.Test.FillLucene
     public class FillCidDbToLuceneTest
     {
         [Test]
+        [Ignore]
         public void Fill()
         {
             var repository = new Cids(Conexao.CreateSessionFactory().OpenSession());
