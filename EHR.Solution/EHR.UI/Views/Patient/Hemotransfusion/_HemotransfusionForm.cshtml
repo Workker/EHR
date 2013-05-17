@@ -2,8 +2,8 @@
 @using EHR.Domain.Util
 <form id="hemotransfusion">
     <label>Tipo:</label>
-    <select name="type" style="margin-left: 5px" required>
-        <option value="0">Selecione</option>
+    <select name="typeHemotrasfusion" style="margin-left: 5px" required>
+        <option value="">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(HemotransfusionTypeEnum)).Cast<short>().ToList())
         {
             <option value="@value">
@@ -22,7 +22,7 @@
         <br />
         @foreach (var value in Enum.GetValues(typeof(ReactionTypeEnum)).Cast<short>().ToList())
         {
-            <input type="checkbox" name="type.@value" style="margin-bottom: 3px; margin-right: 2px;"/>
+            <input type="checkbox" name="typeReaction" value="@value" style="margin-bottom: 3px; margin-right: 2px;"/>
             @(EnumUtil.GetDescriptionFromEnumValue((ReactionTypeEnum)Enum.Parse(typeof(ReactionTypeEnum), value.ToString())) + "  ")
             <br />
         }

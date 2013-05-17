@@ -34,7 +34,7 @@ namespace EHR.Controller
         public virtual void SaveDiagnostic(string diagnosticType, string cid, Summary summary) { }
         public virtual void RemoveDiagnostic(Summary summary, int id) { }
 
-        public virtual void SaveHemotransfusion(Summary summary) { }
+        public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, Summary summary) { }
         public virtual void RemoveHemotransfusion(Summary summary, int id) { }
     }
 }

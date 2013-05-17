@@ -392,6 +392,6 @@ function ToggleHemotransfusion() {
     if (liCount > 1) {
         $('input[value="false"]').removeAttr("checked");
         $('input[value="true"]').attr("checked", "");
-        $('#ulAllergy').removeAttr("style");
+        $('#ulHemotransfusion').removeAttr("style");
     }
 }

@@ -5,22 +5,22 @@ namespace EHR.Domain.Entities
     public enum ReactionTypeEnum : short
     {
         [Description("Aloimunização Eritrocitária")]
-        AloimunizacaoEritrocitaria = 0,
+        AloimunizacaoEritrocitaria = 1,
         [Description("Aloimunização HLA")]
-        AloimunizacaoHla = 1,
+        AloimunizacaoHla = 2,
         [Description("Imunomodulação")]
-        Imunomodulacao = 2,
+        Imunomodulacao =3,
         [Description("Lesão pulmonar relacionada a transfusão")]
-        LesaoPulmonarRelacionadaATransfusao = 3,
+        LesaoPulmonarRelacionadaATransfusao = 4,
         [Description("Púrpura pós transfusional")]
-        PurpuraPosTransfusional = 4,
+        PurpuraPosTransfusional = 5,
         [Description("Alérgica: leve; moderada; grave")]
-        AlergicaLeveModeradaGrave = 5,
+        AlergicaLeveModeradaGrave = 6,
         [Description("Enxerto x Hospedeiro")]
-        EnxertoXHospedeiro = 6,
+        EnxertoXHospedeiro = 7,
         [Description("Febril não hemolítica")]
-        FebrilNaoHemolitica = 7,
+        FebrilNaoHemolitica = 8,
         [Description("Hemolítica Imune")]
-        HemoliticaImune = 8,
+        HemoliticaImune = 9,
     }
 }

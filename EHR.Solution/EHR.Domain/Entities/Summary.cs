@@ -151,6 +151,8 @@ namespace EHR.Domain.Entities
 
         public virtual void CreateHemotransfusion(HemotransfusionType hemotransfusionType, List<ReactionType> reactionTypes)
         {
+            Assertion.NotNull(hemotransfusionType, "tipo da homotransfusão não informado.").Validate();
+
             var hemotransfusion = new Hemotransfusion { Type = hemotransfusionType, Reactions = reactionTypes };
 
             Hemotransfusions.Add(hemotransfusion);

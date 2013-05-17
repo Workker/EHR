@@ -40,6 +40,13 @@ namespace EHR.UI.Controllers
             ViewBag.data = patient;
             ViewBag.age = CalculateAgeFrom((DateTime)patient.DateBirthday);
             Session["Summary"] = controller.GetSummaryByPatient(patient);
+            FillDiagnostic();
+            FillAlergies();
+        }
+
+        private void FillHemotransfusion()
+        {
+            ViewBag.Hemotransfusions = Convert(GetSummary().Hemotransfusions);
         }
 
         private void FillDiagnostic()
@@ -84,11 +91,6 @@ namespace EHR.UI.Controllers
         public PartialViewResult Form()
         {
             return PartialView("_Form");
-        }
-
-        public PartialViewResult Hemotransfusion()
-        {
-            return PartialView("_hemotransfusion");
         }
 
         public PartialViewResult Images()
@@ -173,7 +175,7 @@ namespace EHR.UI.Controllers
             var diacnostic = new DiagnosticModel()
             {
                 Id = diagnostics.Last().Id,
-                Cid = ConvertCid( diagnostics.Last().Cid),
+                Cid = ConvertCid(diagnostics.Last().Cid),
                 Type = diagnostics.Last().Type.Id
             };
 
@@ -371,21 +373,74 @@ namespace EHR.UI.Controllers
 
         #region Hemotransfusion
 
+        public PartialViewResult Hemotransfusion()
+        {
+            FillHemotransfusion();
+            return PartialView("_hemotransfusion");
+        }
 
         public PartialViewResult HemotransfusionForm()
         {
             return PartialView("Hemotransfusion/_HemotransfusionForm");
         }
 
-        public PartialViewResult SaveHemotransfusion(string dob_day, string dob_month, string dob_year, string procedureCode, string procedure)
+        public PartialViewResult SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion)
         {
-            ViewBag.procedure = procedureCode + " - " + procedure;
-            ViewBag.data = dob_day + "/" + dob_month + "/" + dob_year;
+            FactoryController.GetController(ControllerEnum.Hemotransfusion).SaveHemotransfusion(typeReaction, typeHemotrasfusion, GetSummary());
+            ViewBag.Hemotransfusions = ConvertLast(GetSummary().Hemotransfusions);
+
             return PartialView("Hemotransfusion/_HemotransfusionTableRow");
         }
 
-        public void DeleteHemotransfusion()
+        public void DeleteHemotransfusion(string id)
         {
+            FactoryController.GetController(ControllerEnum.Hemotransfusion).RemoveHemotransfusion(GetSummary(), int.Parse(id));
+        }
+
+        private dynamic ConvertLast(IList<Domain.Entities.Hemotransfusion> hemos)
+        {
+            var HemoModels = new List<HemotransfusionModel>();
+
+            var hemoModel = new HemotransfusionModel()
+            {
+                Id = hemos.Last().Id,
+                HemotransfusionType = hemos.Last().Type.Id,
+            };
+
+            hemoModel.ReactionType = new List<short>();
+
+            foreach (var reaction in hemos.Last().Reactions)
+            {
+                hemoModel.ReactionType.Add(reaction.Id);
+            }
+
+            HemoModels.Add(hemoModel);
+
+            return HemoModels;
+        }
+
+        private dynamic Convert(IList<Domain.Entities.Hemotransfusion> hemos)
+        {
+            var HemoModels = new List<HemotransfusionModel>();
+
+            foreach (var hemo in hemos)
+            {
+                var hemoModel = new HemotransfusionModel()
+                {
+                    Id = hemo.Id,
+                    HemotransfusionType = hemo.Type.Id,
+                };
+
+                hemoModel.ReactionType = new List<short>();
+
+                foreach (var reaction in hemo.Reactions)
+                {
+                    hemoModel.ReactionType.Add(reaction.Id);
+                }
+
+                HemoModels.Add(hemoModel);
+            }
+            return HemoModels;
         }
 
         #endregion

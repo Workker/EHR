@@ -9,7 +9,7 @@ namespace EHR.Domain.Mapping
         {
             Id(x => x.Id);
             References(x => x.Type);
-            HasMany(x => x.Reactions).Cascade.All();
+            HasManyToMany(x => x.Reactions);
         }
     }
 }

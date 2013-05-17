@@ -70,5 +70,73 @@ namespace EHR.Test
             typesRepository.SalvarLista<AllergyType>(types);
 
         }
+
+        [Test]
+        public void create_reactions_types()
+        {
+            var alergicaLeveModeradaGrave = new ReactionType() { Id = (short)ReactionTypeEnum.AlergicaLeveModeradaGrave, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.AlergicaLeveModeradaGrave) };
+
+            var AloimunizacaoEritrocitaria = new ReactionType() { Id = (short)ReactionTypeEnum.AloimunizacaoEritrocitaria, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.AloimunizacaoEritrocitaria) };
+
+            var AloimunizacaoHla = new ReactionType() { Id = (short)ReactionTypeEnum.AloimunizacaoHla, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.AloimunizacaoHla) };
+
+            var EnxertoXHospedeiro = new ReactionType() { Id = (short)ReactionTypeEnum.EnxertoXHospedeiro, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.EnxertoXHospedeiro) };
+
+            var FebrilNaoHemolitica = new ReactionType() { Id = (short)ReactionTypeEnum.FebrilNaoHemolitica, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.FebrilNaoHemolitica) };
+
+            var HemoliticaImune = new ReactionType() { Id = (short)ReactionTypeEnum.HemoliticaImune, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.HemoliticaImune) };
+
+            var Imunomodulacao = new ReactionType() { Id = (short)ReactionTypeEnum.Imunomodulacao, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.Imunomodulacao) };
+
+            var LesaoPulmonarRelacionadaATransfusao = new ReactionType() { Id = (short)ReactionTypeEnum.LesaoPulmonarRelacionadaATransfusao, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.LesaoPulmonarRelacionadaATransfusao) };
+
+            var PurpuraPosTransfusional = new ReactionType() { Id = (short)ReactionTypeEnum.PurpuraPosTransfusional, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.PurpuraPosTransfusional) };
+
+
+
+            var types = new List<ReactionType> 
+            {
+            alergicaLeveModeradaGrave,
+            AloimunizacaoEritrocitaria,
+            AloimunizacaoHla,
+            EnxertoXHospedeiro,
+            FebrilNaoHemolitica,
+            HemoliticaImune,
+            Imunomodulacao,
+            LesaoPulmonarRelacionadaATransfusao,
+            PurpuraPosTransfusional
+            };
+
+            var reactionTypes = new Types<ReactionType>();
+
+            reactionTypes.SalvarLista<ReactionType>(types);
+        }
+
+        [Test]
+        public void create_hemotransfusion_types()
+        {
+            var ConcentradoDeHemacias = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.ConcentradoDeHemacias, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.ConcentradoDeHemacias) };
+
+            var ConcentradoDeNeutrofilos = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.ConcentradoDeNeutrofilos, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.ConcentradoDeNeutrofilos) };
+
+            var ConcentradoDePlaquetas = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.ConcentradoDePlaquetas, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.ConcentradoDePlaquetas) };
+
+            var Criopreciptado = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.Criopreciptado, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.Criopreciptado) };
+
+            var Plasma = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.Plasma, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.Plasma) };
+
+
+            var types = new List<HemotransfusionType> 
+            {
+                ConcentradoDeHemacias,
+                ConcentradoDeNeutrofilos,
+                ConcentradoDePlaquetas,
+                Criopreciptado
+            };
+
+            var reactionTypes = new Types<HemotransfusionType>();
+
+            reactionTypes.SalvarLista<HemotransfusionType>(types);
+        }
     }
 }

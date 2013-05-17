@@ -13,7 +13,7 @@
         <span class="middleColumn">
             @for (int i = 1; i <= @hemotransfusion.ReactionType.Count; i++)
             {
-                @(EnumUtil.GetDescriptionFromEnumValue((AllergyTypeEnum)Enum.Parse(typeof(AllergyTypeEnum), @hemotransfusion.ReactionType[i - 1].ToString())) + (@hemotransfusion.ReactionType.Count == i ? "" : ",  "))
+                @(EnumUtil.GetDescriptionFromEnumValue((ReactionTypeEnum)Enum.Parse(typeof(ReactionTypeEnum), @hemotransfusion.ReactionType[i - 1].ToString())) + (@hemotransfusion.ReactionType.Count == i ? "" : ",  "))
             }
         </span>
     </li>
