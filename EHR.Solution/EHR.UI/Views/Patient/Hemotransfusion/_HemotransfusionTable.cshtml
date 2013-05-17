@@ -1,4 +1,7 @@
-﻿<ul class="ulTable _4kg  _4ks" style="display: none;">
+﻿<ul class="ulTable _4kg  _4ks" id="ulHemotransfusion" style="display: none;">
+    @{
+        Html.RenderPartial("Hemotransfusion/_HemotransfusionTableRow");
+    }
     <li class="clearfix">
         <div class="clearfix">
             <a class="action" onclick='newRow(this,"../Patient/HemotransfusionForm");'>
