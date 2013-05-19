@@ -1,6 +1,7 @@
 ﻿using EHR.CoreShared;
 using EHRIntegracao.Domain.Services;
 using System.Collections.Generic;
+using EHRIntegracao.Domain.Services.GetEntities;
 
 namespace EHR.Domain.Service
 {
