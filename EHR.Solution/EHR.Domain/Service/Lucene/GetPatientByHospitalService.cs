@@ -19,6 +19,12 @@ namespace EHR.Domain.Service
             return servico.GetPatients(patientDTO.Name);
         }
 
+        public IList<IPatientDTO> GetPatientAll()
+        {
+            GetPatientsService service = new GetPatientsService();
+            return service.GetPatientsDbFor();
+        }
+
         public IList<IPatientDTO> AdvancedGetPatientBy(IPatientDTO patientDTO, List<string> hospital)
         {
             var servico = new GetPatientsLuceneService();

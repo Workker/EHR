@@ -6,7 +6,7 @@ namespace EHR.Domain.Mapping
     {
         public DefMap()
         {
-            Id().GeneratedBy.Identity();
+            Id(d=> d.Id).GeneratedBy.Identity();
         }
     }
 }

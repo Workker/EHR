@@ -10,11 +10,12 @@ using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using System;
 using EHR.Domain.Util;
+using EHR.Domain.Service;
 
 namespace EHR.Test
 {
     [TestFixture]
-   // [Ignore]
+    [Ignore]
     public class BaseTest
     {
         private void BuildSchema(Configuration config)
@@ -55,6 +56,30 @@ namespace EHR.Test
         }
 
         [Test]
+        public void b_data_initialize_all_sumaries_for_patients()
+        {
+            GetPatientByHospitalService service = new GetPatientByHospitalService();
+            var patients = service.GetPatientAll();
+
+            List<Summary> sumariesList = new List<Summary>();
+            foreach (var patient in patients)
+            {
+                if (patient.CPF != "02338013751")
+                {
+                    var summary = new Summary { Cpf = patient.CPF };
+                    sumariesList.Add(summary);
+                }
+            }
+
+            var summaries = new Summaries();
+            summaries.SalvarLista<Summary>(sumariesList);
+
+            //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
+            // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
+            //sumary.CreateProcedure(5, 5, 2013, new Tus() { Code = "001", Description = "Teste" });
+        }
+
+        [Test]
         public void create_allergies_types()
         {
             var angioedema = new AllergyType() { Id = (short)AllergyTypeEnum.Angioedema, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Angioedema) };
@@ -68,6 +93,20 @@ namespace EHR.Test
             var typesRepository = new Types<AllergyType>();
 
             typesRepository.SalvarLista<AllergyType>(types);
+
+        }
+
+        [Test]
+        public void create_diagnostic_types()
+        {
+            var AssociadosEOuOutros = new DiagnosticType() { Id = (short)DiagnosticTypeEnum.AssociadosEOuOutros, Description = EnumUtil.GetDescriptionFromEnumValue(DiagnosticTypeEnum.AssociadosEOuOutros) };
+
+            var Principal = new DiagnosticType() { Id = (short)DiagnosticTypeEnum.Principal, Description = EnumUtil.GetDescriptionFromEnumValue(DiagnosticTypeEnum.Principal) };
+
+            var types = new List<DiagnosticType> { AssociadosEOuOutros, Principal };
+            var typesRepository = new Types<DiagnosticType>();
+
+            typesRepository.SalvarLista<DiagnosticType>(types);
 
         }
 

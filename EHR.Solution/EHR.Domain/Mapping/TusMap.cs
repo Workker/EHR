@@ -7,7 +7,7 @@ namespace EHR.Domain.Mapping
     {
         public TusMap()
         {
-            Id().GeneratedBy.Identity();
+            Id(d => d.Id).GeneratedBy.Identity();
             Map(p => p.Code);
         }
     }
