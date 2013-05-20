@@ -82,6 +82,7 @@ input, textarea {
 
     input[type=radio], input[type=checkbox] {
         margin:  -3px 0px 0px 10px;
+        border: none;
     }
 
     textarea, input[type=text], input[type=password] {
