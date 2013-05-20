@@ -14,7 +14,7 @@ using EHR.Domain.Util;
 namespace EHR.Test
 {
     [TestFixture]
-    [Ignore]
+   // [Ignore]
     public class BaseTest
     {
         private void BuildSchema(Configuration config)
