@@ -6,8 +6,15 @@
     <ul class="unitsSideBar">
         @foreach (var hospital in Enum.GetValues(typeof(DbEnum)).Cast<DbEnum>().ToList())
         {
+            if (hospital != DbEnum.sumario)
+            {
             <li>
-                <input name="hospital" type="checkbox" value="@hospital"/>&nbsp;@hospital</li>      
+
+                <input name="hospital" type="checkbox" value="@hospital"/>
+                &nbsp; @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospital.ToString())) + "  ")
+
+            </li>      
+            }
         }
     </ul>
 </div>
