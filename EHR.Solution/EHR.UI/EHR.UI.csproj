@@ -244,6 +244,7 @@
     <Content Include="Content\site-style.css" />
     <Content Include="Images\age_ico.png" />
     <Content Include="Images\birthday_ico.png" />
+    <Content Include="Images\doctor.png" />
     <Content Include="Images\exam1.jpg" />
     <Content Include="Images\exam10.jpg" />
     <Content Include="Images\exam10_thumb.jpg" />
@@ -322,7 +323,7 @@
     <Content Include="Images\link_d.png" />
     <Content Include="Images\Loading.gif" />
     <Content Include="Images\logo.png" />
-    <Content Include="Images\logo1.png" />
+    <Content Include="Images\logoG.png" />
     <Content Include="Images\mdr.png" />
     <Content Include="Images\nordic.gif" />
     <Content Include="Images\other_medices.png" />
@@ -331,7 +332,6 @@
     <Content Include="Images\index.png" />
     <Content Include="Images\Profiles\1.jpg" />
     <Content Include="Images\receituario.png" />
-    <Content Include="Images\topo.png" />
     <Content Include="Images\u91_normal.png" />
     <Content Include="Images\user.png" />
     <Content Include="Images\WlrEvsTFI5C.png" />
