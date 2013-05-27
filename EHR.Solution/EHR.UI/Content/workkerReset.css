@@ -102,17 +102,7 @@ blockquote, q {
         visibility: hidden;
     }
 
-.clearfix {
-    display: block;
-}
 
-    .clearfix:after {
-        clear: both;
-        content: ".";
-        display: block;
-        height: 0px;
-        visibility: hidden;
-    }
 
 mark {
     background-color: #ff9;
