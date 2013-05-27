@@ -80,15 +80,7 @@
                                         <div class="mtm mbs birthday_label">Anivers&aacute;rio:</div>
                                         <div class="clearfix field_container">
                                             <div class="mrm lfloat">
-                                                <select name="birthday_day">
-                                                    <option value="-1">Dia:</option>
-                                                </select>
-                                                <select name="birthday_month">
-                                                    <option value="-1">M&ecirc;s:</option>
-                                                </select>
-                                                <select name="birthday_year">
-                                                    <option value="-1">Ano:</option>
-                                                </select>
+                                                @{Html.RenderPartial("_DatePicker");}
                                             </div>
                                         </div>
                                         <div class="mtl mbm">

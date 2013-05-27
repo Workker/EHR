@@ -418,6 +418,7 @@
     <Content Include="Views\Patient\Procedure\_ProcedureForm.cshtml" />
     <Content Include="Views\Patient\Procedure\_ProcedureTable.cshtml" />
     <Content Include="Views\Patient\Procedure\_ProcedureTableRow.cshtml" />
+    <Content Include="Views\Shared\_DatePicker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

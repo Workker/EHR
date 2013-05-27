@@ -1,0 +1,21 @@
+﻿<select name="dob_year" id="dob_year">
+    <option value="-1">Ano:</option>
+    @for (var year = int.Parse(DateTime.Now.Year.ToString()); year >= 1900; year--)
+    {
+        <option value="@year">@year</option>
+    }
+</select>
+<select name="dob_month" id="dob_month">
+    <option value="-1">M&ecirc;s:</option>
+    @for (var month = 1; month <= 12; month++)
+    {
+        <option value="@month">@month</option>
+    }
+</select>
+<select name="dob_day" id="dob_day">
+    <option value="-1">Dia:</option>
+    @for (var day = 1; day <= 31; day++)
+    {
+        <option value="@day">@day</option>
+    }
+</select>
