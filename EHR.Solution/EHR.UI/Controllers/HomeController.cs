@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Web;
-using System.Web.Mvc;
-using EHR.UI.Models;
+﻿using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
 {
