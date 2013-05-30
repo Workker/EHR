@@ -72,7 +72,7 @@ namespace EHR.Test
             }
 
             var summaries = new Summaries();
-            summaries.SalvarLista<Summary>(sumariesList);
+            summaries.SaveList<Summary>(sumariesList);
 
             //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
             // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
@@ -92,7 +92,7 @@ namespace EHR.Test
             var types = new List<AllergyType> { angioedema, urticaria, choqueAnafilatico, broncoespasmo, larigoespasmo, outros };
             var typesRepository = new Types<AllergyType>();
 
-            typesRepository.SalvarLista<AllergyType>(types);
+            typesRepository.SaveList<AllergyType>(types);
 
         }
 
@@ -106,7 +106,7 @@ namespace EHR.Test
             var types = new List<DiagnosticType> { AssociadosEOuOutros, Principal };
             var typesRepository = new Types<DiagnosticType>();
 
-            typesRepository.SalvarLista<DiagnosticType>(types);
+            typesRepository.SaveList<DiagnosticType>(types);
 
         }
 
@@ -148,7 +148,7 @@ namespace EHR.Test
 
             var reactionTypes = new Types<ReactionType>();
 
-            reactionTypes.SalvarLista<ReactionType>(types);
+            reactionTypes.SaveList<ReactionType>(types);
         }
 
         [Test]
@@ -175,7 +175,7 @@ namespace EHR.Test
 
             var reactionTypes = new Types<HemotransfusionType>();
 
-            reactionTypes.SalvarLista<HemotransfusionType>(types);
+            reactionTypes.SaveList<HemotransfusionType>(types);
         }
     }
 }

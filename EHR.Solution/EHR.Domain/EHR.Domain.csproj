@@ -121,6 +121,7 @@
     <Compile Include="Mapping\TusMap.cs" />
     <Compile Include="Mapping\ValueObjectMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Accounts.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\Cids.cs" />
     <Compile Include="Repository\Defs.cs" />
