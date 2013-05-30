@@ -3,9 +3,9 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public class DoctorMap : ClassMap<Doctor>
+    public class AccountMap : ClassMap<Account>
     {
-        public DoctorMap()
+        public AccountMap()
         {
             Id(d => d.Id);
             Map(d => d.CRM);

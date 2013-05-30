@@ -25,13 +25,23 @@ namespace EHR.Domain.Repository
             set { _session = value; }
         }
 
-        #region Métodos Genericos para acesso ao BD
+        #region Methods Generics to acess Database
 
         public BaseRepository() { }
 
         public BaseRepository(ISession session)
         {
             Session = session;
+        }
+
+        public virtual T Get<T>(int id)
+        {
+            return Session.Get<T>(id);
+        }
+
+        public virtual IList<T> All<T>()
+        {
+            return Session.CreateCriteria(typeof(T)).List<T>();
         }
 
         public virtual void Save(IAggregateRoot<int> root)
@@ -41,6 +51,44 @@ namespace EHR.Domain.Repository
             transaction.Commit();
         }
 
+        public virtual void SaveList(List<IAggregateRoot<int>> roots)
+        {
+            var transaction = Session.BeginTransaction();
+
+            try
+            {
+                foreach (var root in roots)
+                {
+                    Session.SaveOrUpdate(root);
+                }
+                transaction.Commit();
+            }
+            catch (System.Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+        }
+
+        public virtual void SaveList<T>(List<T> roots)
+        {
+            var transaction = Session.BeginTransaction();
+
+            try
+            {
+                foreach (var root in roots)
+                {
+                    Session.SaveOrUpdate(root);
+                }
+                transaction.Commit();
+            }
+            catch (System.Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+        }
+
         public virtual void Delete(IAggregateRoot<int> root)
         {
             var transaction = Session.BeginTransaction();
@@ -48,57 +96,9 @@ namespace EHR.Domain.Repository
             transaction.Commit();
         }
 
-        public virtual IList<T> All<T>()
-        {
-            return Session.CreateCriteria(typeof(T)).List<T>();
-        }
-
-        public virtual T Get<T>(int id)
-        {
-            return Session.Get<T>(id);
-        }
-
-        public virtual void SalvarLista(List<IAggregateRoot<int>> roots)
-        {
-            var transaction = Session.BeginTransaction();
-
-            try
-            {
-                foreach (var root in roots)
-                {
-                    Session.SaveOrUpdate(root);
-                }
-                transaction.Commit();
-            }
-            catch (System.Exception ex)
-            {
-                transaction.Rollback();
-                throw ex;
-            }
-        }
-
-        public virtual void SalvarLista<T>(List<T>  roots)
-        {
-            var transaction = Session.BeginTransaction();
-
-            try
-            {
-                foreach (var root in roots)
-                {
-                    Session.SaveOrUpdate(root);
-                }
-                transaction.Commit();
-            }
-            catch (System.Exception ex)
-            {
-                transaction.Rollback();
-                throw ex;
-            }
-        }
-
         #endregion
 
-        #region Métodos de Sessão e Transação
+        #region Methods of Session and Transaction
 
         public static void CloseTransaction(ITransaction transaction)
         {

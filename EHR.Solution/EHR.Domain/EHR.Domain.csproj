@@ -72,7 +72,7 @@
     <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\DiagnosticType.cs" />
     <Compile Include="Entities\DiagnosticTypeEnum.cs" />
-    <Compile Include="Entities\Doctor.cs" />
+    <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Drug.cs" />
     <Compile Include="Entities\DrugTypeEnum.cs" />
     <Compile Include="Entities\Hemotransfusion.cs" />
@@ -108,7 +108,7 @@
     <Compile Include="Mapping\DiagnosticMap.cs" />
     <Compile Include="MappingMigracao\TusMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />
-    <Compile Include="Mapping\DoctorMap.cs" />
+    <Compile Include="Mapping\AccountMap.cs" />
     <Compile Include="Mapping\GenderMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\HemotransfusionTypeMap.cs" />

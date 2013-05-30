@@ -2,7 +2,7 @@
 
 namespace EHR.UI.Models
 {
-    public class DoctorModel
+    public class AccountModel
     {
         public string LastName { get; set; }
         public string FirstName { get; set; }

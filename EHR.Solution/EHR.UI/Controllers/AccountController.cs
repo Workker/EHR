@@ -11,11 +11,11 @@ namespace EHR.UI.Controllers
             return View();
         }
 
-        public ActionResult Register(DoctorModel doctor)
-        {
-            FactoryController.GetController(ControllerEnum.Account).Register();
-            return null;
-        }
+        //public ActionResult Register(DoctorModel doctor)
+        //{
+        //    FactoryController.GetController(ControllerEnum.Account).Register();
+        //    return null;
+        //}
 
     }
 }

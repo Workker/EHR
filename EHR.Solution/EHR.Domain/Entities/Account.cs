@@ -4,7 +4,7 @@ using EHR.Domain.Entities.Interfaces;
 
 namespace EHR.Domain.Entities
 {
-    public class Doctor : IAggregateRoot<int>
+    public class Account : IAggregateRoot<int>
     {
         public virtual int Id { get; set; }
         public virtual string CRM { get; set; }

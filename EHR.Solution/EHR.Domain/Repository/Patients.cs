@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities;
-using EHRIntegracao.Domain.Domain;
+﻿using EHRIntegracao.Domain.Domain;
 using NHibernate;
 
 namespace EHR.Domain.Repository
