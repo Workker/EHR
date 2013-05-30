@@ -18,6 +18,8 @@ namespace EHR.Controller
                     return new DiagnosticController();
                 case ControllerEnum.Hemotransfusion:
                     return new HemotransfusionController();
+                case ControllerEnum.Account:
+                    return new AccountController();
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -30,7 +32,7 @@ namespace EHR.Controller
         Procedure = 2,
         Allergy = 3,
         Diagnostic = 4,
-        Hemotransfusion = 5
-
+        Hemotransfusion = 5,
+        Account = 6
     }
 }

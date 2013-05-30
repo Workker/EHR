@@ -16,6 +16,7 @@ namespace EHR.Domain.Entities
         public virtual string Cpf { get; set; }
         public virtual DateTime? Date { get; set; }
         public virtual Admission Admission { get; set; }
+        public virtual Doctor Doctor { get; set; }
 
         private IList<Allergy> _allergies;
         public virtual IList<Allergy> Allergies

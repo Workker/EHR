@@ -72,11 +72,13 @@
     <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\DiagnosticType.cs" />
     <Compile Include="Entities\DiagnosticTypeEnum.cs" />
+    <Compile Include="Entities\Doctor.cs" />
     <Compile Include="Entities\Drug.cs" />
     <Compile Include="Entities\DrugTypeEnum.cs" />
     <Compile Include="Entities\Hemotransfusion.cs" />
     <Compile Include="Entities\HemotransfusionType.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
+    <Compile Include="Entities\Hospital.cs" />
     <Compile Include="Entities\Migracao\CidIntegracao.cs" />
     <Compile Include="Entities\Migracao\DefIntegracao.cs" />
     <Compile Include="Entities\Migracao\ProcedimentoIntegracao.cs" />
@@ -91,6 +93,8 @@
     <Compile Include="Entities\ReactionTypeEnum.cs" />
     <Compile Include="Entities\ReasonOfAdmission.cs" />
     <Compile Include="Entities\ReasonOfAdmissionEnum.cs" />
+    <Compile Include="Entities\Gender.cs" />
+    <Compile Include="Entities\GenderEnum.cs" />
     <Compile Include="Entities\Summary.cs" />
     <Compile Include="Entities\Tus.cs" />
     <Compile Include="Entities\ValueObject.cs" />
@@ -104,8 +108,11 @@
     <Compile Include="Mapping\DiagnosticMap.cs" />
     <Compile Include="MappingMigracao\TusMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />
+    <Compile Include="Mapping\DoctorMap.cs" />
+    <Compile Include="Mapping\GenderMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\HemotransfusionTypeMap.cs" />
+    <Compile Include="Mapping\HospitalMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />

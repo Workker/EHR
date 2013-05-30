@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared;
+﻿using System;
+using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using System.Collections.Generic;
@@ -36,5 +37,7 @@ namespace EHR.Controller
 
         public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, Summary summary) { }
         public virtual void RemoveHemotransfusion(Summary summary, int id) { }
+
+        public virtual void Register(string firstName, string lastName, string gender, string crm, string email, string password, DateTime birthday) { }
     }
 }

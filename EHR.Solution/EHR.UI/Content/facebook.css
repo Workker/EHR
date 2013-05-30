@@ -309,17 +309,6 @@
     white-space: nowrap;
 }
 
-#reg_box.registration_redesign .text_field {
-    -webkit-border-radius: 5px;
-    border-color: #bdc7d8;
-    margin: 0;
-    width: 377px;
-}
-
-#reg_box.registration_redesign .short_fields .text_field {
-    width: 172px;
-}
-
 #reg_box.registration_redesign .gender_label {
     line-height: 18px;
     padding: 0 10px 0 3px;
@@ -24616,11 +24605,11 @@ body.hasViewasChromeBar .fbTimelineStickyHeader {
     -webkit-border-radius: 5px;
     border-color: #bdc7d8;
     margin: 0;
-    width: 410px;
+    width: 400px;
 }
 
 #reg_box.registration_redesign .short_fields .text_field {
-    width: 199px;
+    width: 185px;
 }
 
 #reg_box.registration_redesign .gender_label {

@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountController.cs" />
     <Compile Include="AllergyController.cs" />
     <Compile Include="DiagnosticController.cs" />
     <Compile Include="FactoryController.cs" />
