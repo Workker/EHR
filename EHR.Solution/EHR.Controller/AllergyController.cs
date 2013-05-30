@@ -27,7 +27,6 @@ namespace EHR.Controller
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
             Assertion.NotNull(summary, "Não existe nenhum sumário selecionado para inserir o procedimento.").Validate();
 
-
             var allergies = new List<AllergyType>();
             foreach (var id in types)
             {

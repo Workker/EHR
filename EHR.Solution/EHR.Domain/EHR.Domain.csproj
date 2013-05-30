@@ -35,6 +35,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EHR.CoreShared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\LibEHR\EHR.CoreShared.dll</HintPath>
@@ -93,7 +96,6 @@
     <Compile Include="Entities\ReactionTypeEnum.cs" />
     <Compile Include="Entities\ReasonOfAdmission.cs" />
     <Compile Include="Entities\ReasonOfAdmissionEnum.cs" />
-    <Compile Include="Entities\Gender.cs" />
     <Compile Include="Entities\GenderEnum.cs" />
     <Compile Include="Entities\Summary.cs" />
     <Compile Include="Entities\Tus.cs" />
@@ -109,7 +111,6 @@
     <Compile Include="MappingMigracao\TusMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />
     <Compile Include="Mapping\AccountMap.cs" />
-    <Compile Include="Mapping\GenderMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\HemotransfusionTypeMap.cs" />
     <Compile Include="Mapping\HospitalMap.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\Cids.cs" />
     <Compile Include="Repository\Defs.cs" />
+    <Compile Include="Repository\Hospitals.cs" />
     <Compile Include="Repository\Integracao\CidsIntegracao.cs" />
     <Compile Include="Repository\Integracao\DefsIntegracao.cs" />
     <Compile Include="Repository\Integracao\ProcedimentosIntegracao.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Service\Lucene\GetCidLucene.cs" />
     <Compile Include="Service\Lucene\GetPatientByHospitalService.cs" />
     <Compile Include="Service\Lucene\GetTusLucene.cs" />
+    <Compile Include="Util\CryptographyUtil.cs" />
     <Compile Include="Util\EnumUtil.cs" />
   </ItemGroup>
   <ItemGroup />

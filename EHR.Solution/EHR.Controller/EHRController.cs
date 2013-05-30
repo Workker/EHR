@@ -38,6 +38,7 @@ namespace EHR.Controller
         public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, Summary summary) { }
         public virtual void RemoveHemotransfusion(Summary summary, int id) { }
 
-        public virtual void Register(string firstName, string lastName, string gender, string crm, string email, string password, DateTime birthday) { }
+        public virtual void Register(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals) { }
+        public virtual Account Login(string email, string password) { return null; }
     }
 }

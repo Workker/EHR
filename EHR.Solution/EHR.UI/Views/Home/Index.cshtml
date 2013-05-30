@@ -2,7 +2,20 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Home</h2>
-@section PageLayout
-{}
+@section Page
+{
+    <section id="super">
+        <header class="slim">
+            @Html.Partial("_HeadBar")
+        </header>
+        <div class="page">
+            <div id="contentCol" class="fixed_elem">
+                <div id="content" class="clearfix">
+                    <h2>Home</h2>
+                    @*@RenderSection("PageLayout",false)
+                    @RenderBody()*@
+                </div>
+            </div>
+        </div>
+    </section>
+}

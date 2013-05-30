@@ -7,15 +7,16 @@ namespace EHR.Domain.Mapping
     {
         public AccountMap()
         {
-            Id(d => d.Id);
-            Map(d => d.CRM);
-            Map(d => d.FirstName);
-            Map(d => d.LastName);
-            References(d => d.Gender);
-            Map(d => d.Email);
-            Map(d => d.Password);
-            Map(d => d.Birthday);
-            HasManyToMany(d => d.Hospitals);
+            Id(a => a.Id);
+            Map(a => a.CRM);
+            Map(a => a.FirstName);
+            Map(a => a.LastName);
+            Map(a => a.Gender).CustomType<short>();
+            Map(a => a.Email);
+            Map(a => a.Password);
+            Map(a => a.Birthday);
+            HasManyToMany(a => a.Hospitals);
+            Map(a => a.Approved);
         }
     }
 }
