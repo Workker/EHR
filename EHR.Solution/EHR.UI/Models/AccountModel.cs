@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace EHR.UI.Models
 {
+    [Serializable]
     public class AccountModel
     {
         public virtual int Id { get; set; }

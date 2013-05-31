@@ -1,6 +1,7 @@
 ﻿using EHR.Controller;
 using EHR.Domain.Entities;
 using EHR.Domain.Util;
+using EHR.UI.Filters;
 using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using EHR.CoreShared;
 
 namespace EHR.UI.Controllers
 {
+    [AuthenticationFilter]
     public class PatientController : System.Web.Mvc.Controller
     {
         public EHR.Controller.ProcedureController ProcedureController
@@ -19,6 +21,7 @@ namespace EHR.UI.Controllers
         }
 
         #region Views
+
         public ActionResult Index(string cpf)
         {
             var controller = new EHR.Controller.PatientController();

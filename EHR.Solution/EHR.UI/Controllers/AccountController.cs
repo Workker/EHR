@@ -2,6 +2,7 @@
 using AutoMapper;
 using EHR.Controller;
 using EHR.Domain.Entities;
+using EHR.UI.Filters;
 using EHR.UI.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -56,7 +57,6 @@ namespace EHR.UI.Controllers
             {
                 account.Hospitals.Add(hospital.Id);
             }
-
             return account;
         }
     }

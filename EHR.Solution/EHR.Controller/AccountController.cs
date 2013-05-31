@@ -13,14 +13,15 @@ namespace EHR.Controller
         {
             var account = SetPropertiesOfAccount(firstName, lastName, gender, crm, email, password, birthday, hospitals);
             var accounts = new Accounts();
+            account.EncryptPassword();
             accounts.Save(account);
         }
 
         public override Account Login(string email, string password)
         {
             var accounts = new Accounts();
-            var a = CryptographyUtil.ConvertStringToMd5(password);
-            var account = accounts.GetBy(email, a);
+            var passwordEncrypted = CryptographyUtil.EncryptToSha512(password);
+            var account = accounts.GetBy(email, passwordEncrypted);
             return account;
         }
 

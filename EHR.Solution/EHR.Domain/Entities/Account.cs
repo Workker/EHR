@@ -13,15 +13,7 @@ namespace EHR.Domain.Entities
         public virtual string LastName { get; set; }
         public virtual GenderEnum Gender { get; set; }
         public virtual string Email { get; set; }
-        private string _password;
-        public virtual string Password
-        {
-            get { return _password; }
-            set
-            {
-                _password = CryptographyUtil.ConvertStringToMd5(value);
-            }
-        }
+        public virtual string Password { get; set; }
         public virtual DateTime? Birthday { get; set; }
         private IList<Hospital> _hospitals;
         public virtual IList<Hospital> Hospitals
@@ -30,5 +22,10 @@ namespace EHR.Domain.Entities
             set { _hospitals = value; }
         }
         public virtual bool Approved { get; set; }
+
+        public virtual void EncryptPassword()
+        {
+            Password = CryptographyUtil.EncryptToSha512(Password);
+        }
     }
 }
