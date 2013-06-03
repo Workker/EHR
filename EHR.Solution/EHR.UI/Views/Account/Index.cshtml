@@ -1,4 +1,5 @@
-﻿@using EHR.Domain.Entities
+﻿@using EHR.CoreShared
+@using EHR.Domain.Entities
 @using EHR.Domain.Util
 @{
     ViewBag.Title = "Rede D'or São Luiz - Login";
@@ -91,6 +92,31 @@
                                                     <label for="gender" class="gender_label">@(EnumUtil.GetDescriptionFromEnumValue((GenderEnum)Enum.Parse(typeof(GenderEnum), value.ToString())) + "  ")</label>
                                                 </div>
                                             }
+                                        </div>
+                                        <div class="mtm mbs birthday_label">Hospitais:</div>
+                                        <div class="mbm">
+                                            @{
+                                                        
+                                                var hospitals = Enum.GetValues(typeof(DbEnum)).Cast<short>().ToList();
+                                                hospitals.Remove((short)DbEnum.sumario);
+                                            }
+                                            <table style="margin-left: -10px;">
+                                                <tr>
+                                                    @for (
+                                                        int count = 0; count < hospitals.Count; count++)
+                                                    {
+                                                        if (count % 4 == 0)
+                                                        {
+                                                            WriteLiteral("</tr><tr>");
+                                                        }
+                                                
+                                                        <td style="padding: 3px 3px 3px 3px;">
+                                                            <input name="hospitals" type="checkbox" value="@hospitals[count]"/>
+                                                            <label style="font-size: 14px; color: #333;">@(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospitals[count].ToString())) + "  ")</label><br />
+                                                        </td>
+                                                    }
+                                                </tr>
+                                            </table>
                                         </div>
                                         <div class="reg_btn clearfix">
                                             <button type="submit" class="_6j mvm _6wk _6wl signup_button _3ma _6o _6v">Cadastre-se</button>

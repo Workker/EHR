@@ -19,5 +19,25 @@ namespace EHR.Domain.Repository
             Assertion.Equals(hospitalList.Count, list.Count, "Quantidade de hospitais informados não batem com a quantidade retornada.").Validate();
             return hospitalList;
         }
+
+        public virtual void Save(IList<Hospital> hospitals)
+        {
+            Assertion.GreaterThan(hospitals.Count, 0, "Lista de hospitais vazia.").Validate();
+            var transaction = Session.BeginTransaction();
+
+            try
+            {
+                foreach (var hospital in hospitals)
+                {
+                    Session.SaveOrUpdate(hospital);
+                }
+                transaction.Commit();
+            }
+            catch (System.Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+        }
     }
 }

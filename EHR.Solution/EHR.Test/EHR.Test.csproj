@@ -110,6 +110,10 @@
     <Folder Include="UI\Controller\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EHR.Controller\EHR.Controller.csproj">
+      <Project>{75af42b0-2a2a-4452-9500-2638183c812a}</Project>
+      <Name>EHR.Controller</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EHR.Domain\EHR.Domain.csproj">
       <Project>{075d9a69-4a94-4161-978d-b3822ebb6dd9}</Project>
       <Name>EHR.Domain</Name>

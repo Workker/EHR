@@ -25,7 +25,7 @@ namespace EHR.Domain.Repository
             var criterion = Session.CreateCriteria<Account>();
             criterion.Add(Expression.Eq("Email", email));
 
-            var account = criterion.UniqueResult<Account>();
+            var account = (Account)criterion.UniqueResult();
 
             Assertion.Null(account, "E-mail já cadastrado.");
             return account;

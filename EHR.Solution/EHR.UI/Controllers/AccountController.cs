@@ -2,7 +2,6 @@
 using EHR.Controller;
 using EHR.Domain.Entities;
 using EHR.UI.Models;
-using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
@@ -16,7 +15,7 @@ namespace EHR.UI.Controllers
 
         public ActionResult Register(AccountModel account)
         {
-            FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName, (GenderEnum)account.Gender, account.CRM, account.Email, account.Password, account.Birthday, new List<short>() { 1, 2, 3 });
+            FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName, (GenderEnum)account.Gender, account.CRM, account.Email, account.Password, account.Birthday, account.Hospitals);
             return RedirectToAction("Index");
         }
 

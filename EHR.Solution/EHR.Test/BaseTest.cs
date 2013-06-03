@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Mapping;
@@ -176,6 +178,28 @@ namespace EHR.Test
             var reactionTypes = new Types<HemotransfusionType>();
 
             reactionTypes.SaveList<HemotransfusionType>(types);
+        }
+
+        [Test]
+        public void insert_hospitals_in_database()
+        {
+            var hospitals = new Hospitals();
+            var hospitalList = new List<Hospital>();
+
+
+            foreach (var id in Enum.GetValues(typeof(DbEnum)).Cast<short>().ToList())
+            {
+                if (id != (short)DbEnum.sumario)
+                {
+                    var hospital = new Hospital()
+                                       {
+                                           Name = EnumUtil.GetDescriptionFromEnumValue(
+                                               (DbEnum)Enum.Parse(typeof(DbEnum), id.ToString())) + "  "
+                                       };
+                    hospitalList.Add(hospital);
+                }
+            }
+            hospitals.Save(hospitalList);
         }
     }
 }

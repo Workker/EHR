@@ -18,7 +18,7 @@ namespace EHR.Controller
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada.").Validate();
             Assertion.GreaterThan(birthday, DateTime.MinValue, "Data de aniverssario não informada.").Validate();
-            Assertion.GreaterThan(gender, new short(), "Genero não informado.").Validate();
+            //TODO: Gender validation
 
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
 
