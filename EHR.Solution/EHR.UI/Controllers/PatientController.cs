@@ -400,7 +400,7 @@ namespace EHR.UI.Controllers
             FactoryController.GetController(ControllerEnum.Hemotransfusion).RemoveHemotransfusion(GetSummary(), int.Parse(id));
         }
 
-        private dynamic ConvertLast(IList<Domain.Entities.Hemotransfusion> hemos)
+        private dynamic ConvertLast(IList<Hemotransfusion> hemos)
         {
             var HemoModels = new List<HemotransfusionModel>();
 
@@ -422,7 +422,7 @@ namespace EHR.UI.Controllers
             return HemoModels;
         }
 
-        private dynamic Convert(IList<Domain.Entities.Hemotransfusion> hemos)
+        private dynamic Convert(IList<Hemotransfusion> hemos)
         {
             var HemoModels = new List<HemotransfusionModel>();
 

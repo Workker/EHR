@@ -18,6 +18,19 @@ namespace EHR.Domain.Repository
             return account;
         }
 
+        public virtual Account GetBy(string email)
+        {
+            Assertion.IsFalse(string.IsNullOrEmpty(email), "Endereço de e-mail não informado.").Validate();
+
+            var criterion = Session.CreateCriteria<Account>();
+            criterion.Add(Expression.Eq("Email", email));
+
+            var account = criterion.UniqueResult<Account>();
+
+            Assertion.Null(account, "E-mail já cadastrado.");
+            return account;
+        }
+
         public virtual Account GetBy(string email, string password)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(email), "Endereço de e-mail não informado.").Validate();
