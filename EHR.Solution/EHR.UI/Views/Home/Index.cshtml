@@ -1,4 +1,6 @@
-﻿@{
+﻿@using EHR.UI.Models
+@model AccountModel
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,9 +13,46 @@
         <div class="page">
             <div id="contentCol" class="fixed_elem">
                 <div id="content" class="clearfix">
-                    <h2>Home</h2>
-                    @*@RenderSection("PageLayout",false)
-                    @RenderBody()*@
+                    <div class="fbTimelineSection mtm fbTimelineTopSection">
+                        <div id="fbProfileCover" class="drop_elem">
+                            <div class="cover" id="u_0_z">
+                                <div class="coverImage">
+                                    <img class="coverPhotoImg photo img" src="@(((List<HospitalModel>)ViewBag.Hospitals).First().URLImage)" alt="Cover Photo" style="top: 0px; width: 100%">
+                                </div>
+                                <div class="_6-e">
+                                    <h2 class="_6-f"><span class="_8_2">@Model.FirstName @Model.LastName</span></h2>
+                                </div>
+                            </div>
+                            <div id="fbTimelineHeadline" class="clearfix">
+                                <div class="_50zj">
+                                    <div class="actions _70j">
+                                        <!-- TODO: Action alter password -->
+                                        @* <form>
+                                            <div class="dropdown" id="dropdown">
+                                                <a class="dropdown_button dropdown_close" href="#">Buy/Listen <span class="arrow"></span></a>
+                                                <a class="dropdown_button dropdown_open" href="#dropdown">Buy/Listen <span class="arrow"></span></a>
+                                                <ul class="dropdown_content">
+                                                    @foreach (HospitalModel hospital in ViewBag.Hospitals)
+                                                    {
+                                                        <li><a href="#">@hospital.Name</a></li>   
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </form>*@
+                                    </div>
+                                </div>
+                                <div class="name">
+                                    <div class="photoContainer">
+                                        <div class="drop_elem">
+                                            <div class="profilePicThumb" id="profile_pic_education">
+                                                <img class="profilePic img" src="../../Images/photo_none.png" alt="@Model.FirstName @Model.LastName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ namespace EHR.UI.Models
         public string Password { get; set; }
         public DateTime Birthday { get; set; }
         private IList<short> _hospitals;
-        public virtual IList<short> Hospitals
+        public  IList<short> Hospitals
         {
             get { return _hospitals ?? (_hospitals = new List<short>()); }
             set { _hospitals = value; }

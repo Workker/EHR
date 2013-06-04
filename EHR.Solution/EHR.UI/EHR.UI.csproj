@@ -183,6 +183,7 @@
     <Compile Include="Models\DiagnosticModel.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\HemotransfusionModel.cs" />
+    <Compile Include="Models\HospitalModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -326,6 +327,11 @@
     <Content Include="Images\help_c.png" />
     <Content Include="Images\help_d.png" />
     <Content Include="Images\hemotransfusao.png" />
+    <Content Include="Images\Hospitals\barrador.png" />
+    <Content Include="Images\Hospitals\esperanca.png" />
+    <Content Include="Images\Hospitals\prontolinda.png" />
+    <Content Include="Images\Hospitals\quintador.png" />
+    <Content Include="Images\Hospitals\riosdor.png" />
     <Content Include="Images\hospital_ico.png" />
     <Content Include="Images\line_vertical.png" />
     <Content Include="Images\link_c.png" />

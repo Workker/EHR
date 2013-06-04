@@ -8,6 +8,7 @@ namespace EHR.UI.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Hospitals = Session["hospitals"];
             return View(Session["account"]);
         }
     }

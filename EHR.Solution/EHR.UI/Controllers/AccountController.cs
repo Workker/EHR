@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using EHR.Controller;
 using EHR.Domain.Entities;
 using EHR.UI.Models;
@@ -22,14 +23,37 @@ namespace EHR.UI.Controllers
         public ActionResult Login(AccountModel loginData)
         {
             var accountObject = FactoryController.GetController(ControllerEnum.Account).Login(loginData.Email, loginData.Password);
+
             var account = MapAccountModelFrom(accountObject);
 
+            Session["hospitals"] = MapHospitalModelFrom(accountObject);
             Session["account"] = account;
 
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+
+            return RedirectToAction("Index", "Account");
+        }
+
         #region Private Methods
+
+        private static List<HospitalModel> MapHospitalModelFrom(Account accountObject)
+        {
+            Mapper.CreateMap<Hospital, HospitalModel>();
+
+            var hospitalModels = new List<HospitalModel>();
+
+            foreach (var hospital in accountObject.Hospitals)
+            {
+                hospitalModels.Add(Mapper.Map<Hospital, HospitalModel>(hospital));
+            }
+
+            return hospitalModels;
+        }
 
         private static AccountModel MapAccountModelFrom(Account accountObject)
         {

@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using System.Collections.Generic;
+using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
 using Workker.Framework.Domain;
@@ -50,6 +51,16 @@ namespace EHR.Domain.Repository
         public virtual void Save(Account account)
         {
             base.Save(account);
+        }
+
+        public virtual IList<Account> GetAllNotApproved()
+        {
+            var criterion = Session.CreateCriteria<Account>();
+            criterion.Add(Expression.Eq("Approved", false));
+
+            var account = criterion.List<Account>();
+
+            return account;
         }
     }
 }
