@@ -8,7 +8,9 @@
 {
     <section id="super">
         <header class="slim">
-            @Html.Partial("_HeadBar")
+            @{
+                Html.RenderPartial("_HeadBar");
+            }
         </header>
         <div class="page">
             <div id="contentCol" class="fixed_elem">
@@ -53,10 +55,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id="center" class="lfloat contentPage">
-                        <div class=""></div>
-                        <div class=""></div>
-                    </div>
+                    @Html.Action("LastSumariesList")
+                    @Html.Action("AccountApprovedList")
                 </div>
             </div>
         </div>

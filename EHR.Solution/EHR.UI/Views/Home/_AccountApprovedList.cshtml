@@ -1,1 +1,10 @@
-﻿
+﻿@using EHR.UI.Models
+<div class="rfloat width50P leftLine">
+    <div style="padding-left: 10px;">
+        <h1 class="bottomLine">Solicita&ccedil;&otilde;es de Aprova&ccedil;&atilde;o</h1>
+        @foreach (AccountModel account in ViewBag.Accounts)
+        {
+            <p>@account.FirstName</p>
+        }
+    </div>
+</div>

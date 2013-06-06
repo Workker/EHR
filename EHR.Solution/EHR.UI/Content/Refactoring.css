@@ -227,7 +227,7 @@ div.uiTypeaheadView .selected { background-color: #6D84B4; border-color: #3B5998
 
 
 /* Search Page*/
-.leftCol { float: left; padding: 20px 0 0 2px; position: relative; width: 179px; word-wrap: break-word; border-right: 1px solid #ccc; }
+.leftCol { float: left; padding: 20px 0 0 2px; position: relative; width: 179px; word-wrap: break-word;}
 
 .leftColHead { margin: 8px 0 0 0px; padding: 7px 6px 7px 5px; border-top: 1px solid #aaa; border-color: #eee; }
 

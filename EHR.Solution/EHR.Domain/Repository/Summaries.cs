@@ -15,12 +15,13 @@ namespace EHR.Domain.Repository
             return criterio.List<Summary>().OrderByDescending(s => s.Date).FirstOrDefault();
         }
 
-        public List<Summary> GetLastSummary(Account account)
+        public List<Summary> GetLastTenSummaries(Account account)
         {
             var criterio = Session.CreateCriteria<Summary>();
             criterio.Add(Expression.Eq("Account", account));
+            //TODO: Add order by date of summary
 
-            return criterio.List<Summary>().ToList();
+            return criterio.List<Summary>().Take(10).ToList();
         }
     }
 }

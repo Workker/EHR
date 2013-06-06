@@ -13,6 +13,8 @@ namespace EHR.Controller
                     return new Accounts();
                 case RepositoryEnum.Hospitals:
                     return new Hospitals();
+                case RepositoryEnum.Sumaries:
+                    return new Summaries();
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -22,6 +24,7 @@ namespace EHR.Controller
     public enum RepositoryEnum : short
     {
         Accounts = 1,
-        Hospitals = 2
+        Hospitals = 2,
+        Sumaries = 3
     }
 }

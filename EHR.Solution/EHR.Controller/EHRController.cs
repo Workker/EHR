@@ -21,6 +21,8 @@ namespace EHR.Controller
         public virtual List<TusDTO> GetTus(string term) { return null; }
         public virtual List<CidDTO> GetCids(string term) { return null; }
 
+        public virtual IList<Summary> GetLastTenSumaries(int id) { return null; }
+
         #region Patient
 
         public virtual IPatientDTO GetBy(string cpf) { return null; }
@@ -35,6 +37,7 @@ namespace EHR.Controller
         public virtual Account Login(string email, string password) { return null; }
         public virtual bool VerifyIfExist(string email) { return false; }
         public virtual IList<Account> GetAllNotApproved() { return null; }
+        public virtual IList<Summary> GetLastTenSumaries(Account account) { return null; }
 
         #endregion
 

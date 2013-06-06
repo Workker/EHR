@@ -16,13 +16,17 @@ namespace EHR.UI.Controllers
 
         public ActionResult Register(AccountModel account)
         {
-            FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName, (GenderEnum)account.Gender, account.CRM, account.Email, account.Password, account.Birthday, account.Hospitals);
+            FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName,
+                                                                             (GenderEnum) account.Gender, account.CRM,
+                                                                             account.Email, account.Password,
+                                                                             account.Birthday, account.Hospitals);
             return RedirectToAction("Index");
         }
 
         public ActionResult Login(AccountModel loginData)
         {
-            var accountObject = FactoryController.GetController(ControllerEnum.Account).Login(loginData.Email, loginData.Password);
+            var accountObject = FactoryController.GetController(ControllerEnum.Account).Login(loginData.Email,
+                                                                                              loginData.Password);
 
             var account = MapAccountModelFrom(accountObject);
 
@@ -39,7 +43,7 @@ namespace EHR.UI.Controllers
             return RedirectToAction("Index", "Account");
         }
 
-        #region Private Methods
+    #region Private Methods
 
         private static List<HospitalModel> MapHospitalModelFrom(Account accountObject)
         {

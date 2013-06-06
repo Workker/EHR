@@ -185,6 +185,7 @@
     <Compile Include="Models\HemotransfusionModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
+    <Compile Include="Models\SumaryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -433,7 +434,7 @@
     <Content Include="Views\Patient\Procedure\_ProcedureTable.cshtml" />
     <Content Include="Views\Patient\Procedure\_ProcedureTableRow.cshtml" />
     <Content Include="Views\Shared\_DatePicker.cshtml" />
-    <Content Include="Views\Home\_SumariesList.cshtml" />
+    <Content Include="Views\Home\_LastSumariesList.cshtml" />
     <Content Include="Views\Home\_AccountApprovedList.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -40,25 +40,22 @@ namespace EHR.Controller
 
         public override bool VerifyIfExist(string email)
         {
-            var accounts = new Accounts();
-            var registered = accounts.GetBy(email);
+            var registered = ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).GetBy(email);
             Assertion.Null(registered, "E-mail já cadastrado.");
-
-            if (registered == null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
+            return registered == null;
         }
 
         public override IList<Account> GetAllNotApproved()
         {
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
             return accounts.GetAllNotApproved();
+        }
+
+        public override IList<Summary> GetLastTenSumaries(int id)
+        {
+            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(id);
+            var sumaries = ((Summaries)FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetLastTenSummaries(account);
+            return sumaries;
         }
 
         #region Private Methods
@@ -74,7 +71,7 @@ namespace EHR.Controller
                                   FirstName = firstName,
                                   LastName = lastName,
                                   Password = password,
-                                  Approved = true, //TODO: Alter aprroved to false
+                                  Approved = false,
                                   Administrator = false,
                                   Gender = gender
                               };
