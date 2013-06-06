@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using System.Collections.Generic;
+using EHR.Domain.Entities;
 using NHibernate.Criterion;
 using System.Linq;
 
@@ -12,6 +13,14 @@ namespace EHR.Domain.Repository
             criterio.Add(Expression.Eq("Cpf", cpf));
 
             return criterio.List<Summary>().OrderByDescending(s => s.Date).FirstOrDefault();
+        }
+
+        public List<Summary> GetLastSummary(Account account)
+        {
+            var criterio = Session.CreateCriteria<Summary>();
+            criterio.Add(Expression.Eq("Account", account));
+
+            return criterio.List<Summary>().ToList();
         }
     }
 }

@@ -188,7 +188,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\facebook.css" />
     <Content Include="Content\highslide.css" />
     <Content Include="Content\overrides.css" />
     <Content Include="Content\Refactoring.css" />
@@ -434,6 +433,8 @@
     <Content Include="Views\Patient\Procedure\_ProcedureTable.cshtml" />
     <Content Include="Views\Patient\Procedure\_ProcedureTableRow.cshtml" />
     <Content Include="Views\Shared\_DatePicker.cshtml" />
+    <Content Include="Views\Home\_SumariesList.cshtml" />
+    <Content Include="Views\Home\_AccountApprovedList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

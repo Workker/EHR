@@ -55,6 +55,12 @@ namespace EHR.Controller
 
         }
 
+        public override IList<Account> GetAllNotApproved()
+        {
+            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+            return accounts.GetAllNotApproved();
+        }
+
         #region Private Methods
 
         private Account SetPropertiesOfAccount(string firstName, string lastName, GenderEnum gender, string crm,

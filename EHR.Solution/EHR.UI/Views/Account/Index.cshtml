@@ -26,7 +26,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input name="Email" type="text" required tabindex="1" class="inputtext"></td>
+                                                <input name="Email" type="email" required tabindex="1" class="inputtext"></td>
                                             <td>
                                                 <input name="Password" type="password" required tabindex="2" class="inputtext"></td>
                                             <td>
@@ -88,7 +88,10 @@
                                             @foreach (var value in Enum.GetValues(typeof(GenderEnum)).Cast<short>().ToList())
                                             {
                                                 <div class="uiInputLabel clearfix inlineBlock">
-                                                    <input type="radio" name="Gender" value="@value" class=" uiInputLabelRadio">
+                                                    <input type="radio" name="Gender"  @if (value == 1)
+                                                                                       { 
+                                                                                                        @:required 
+                                                                                                    }  value="@value" class=" uiInputLabelRadio">
                                                     <label for="gender" class="gender_label">@(EnumUtil.GetDescriptionFromEnumValue((GenderEnum)Enum.Parse(typeof(GenderEnum), value.ToString())) + "  ")</label>
                                                 </div>
                                             }
@@ -105,13 +108,14 @@
                                                     @for (
                                                         int count = 0; count < hospitals.Count; count++)
                                                     {
-                                                        if (count % 4 == 0)
+                                                        if (count % 3 == 0)
                                                         {
                                                             WriteLiteral("</tr><tr>");
                                                         }
                                                 
                                                         <td style="padding: 3px 3px 3px 3px;">
-                                                            <input name="hospitals" type="checkbox" value="@hospitals[count]"/>
+                                                            <input name="hospitals" type="checkbox"  
+                                                                value="@hospitals[count]"/>
                                                             <label style="font-size: 14px; color: #333;">@(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospitals[count].ToString())) + "  ")</label><br />
                                                         </td>
                                                     }

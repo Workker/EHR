@@ -1,12 +1,11 @@
 ﻿@using EHR.CoreShared
 @foreach (IPatientDTO patient in ViewBag.Patients)
 {
-     
     <div class="clearfix">
         <a class="_8o _8r lfloat" href="#">
             <img class="img" src="/Images/Profiles/1.jpg" alt="" style="margin-right: 5px;">
         </a>
-        <div class="clearfix _8m _8u _42ef">
+        <div class="clearfix _8m _8u _42ef" style="margin-bottom: 10px;">
             <div class="pls">
                 <div class="instant_search_title fsl fwb fcb">
                     <a href="#">@patient.Name</a>
@@ -14,15 +13,10 @@
                 <div class="fsm fwn fcg">
                     <div class="fbProfileByline searchResultPersonByline">
                         <span class="fbProfileBylineFragment">
-                            <span class="fbProfileBylineIconContainer">
-                                <i class="mrs fbProfileBylineIcon img sp_bij1np sx_81762b"></i>
-                            </span>
                             <span class="fbProfileBylineLabel">@patient.DateBirthday.Value.ToShortDateString()</span>
                         </span><span class="fbProfileBylineFragment">
-                            <br />
-                            <span class="fbProfileBylineIconContainer"><i class="mrs fbProfileBylineIcon img sp_19xhgf sx_088ae8"></i></span>
                             <span class="fbProfileBylineLabel" style="font-weight: bold">@patient.Hospital.ToString()</span>
-                        </span><span class="fbProfileBylineFragment"></span>
+                        </span>
                     </div>
                 </div>
             </div>

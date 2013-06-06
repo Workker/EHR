@@ -12,8 +12,7 @@ namespace EHR.UI
                 "~/Content/site-style.css",
                 "~/Content/Refactoring.css",
                 "~/Content/token-input-facebook.css",
-                "~/Content/highslide.css",
-                "~/Content/facebook.css"));
+                "~/Content/highslide.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                 "~/Content/themes/base/jquery.ui.core.css",

@@ -59,6 +59,7 @@ namespace EHR.Test
         [Test]
         public void b_data_initialize_all_sumaries_for_patients()
         {
+            
             GetPatientByHospitalService service = new GetPatientByHospitalService();
             var patients = service.GetPatientAll();
 
