@@ -350,20 +350,54 @@ function goFilter(form) {
     });
 }
 
-function GetMore() {
+function GetMore(url, element) {
 
     $.ajax({
-        url: "../Search/More",
+        url: url,
         type: "GET",
         cache: false,
         success: function (r) {
             if (r.length > 0) {
                 $("#DivResult").append(r);
             } else {
-                $("a.uiMorePagerPrimary").hide();
-                $("div.uiMorePagerCenter").append("<b>Sem mais resultados</b>");
+                $(element).hide();
+                $(element).parent().append('<br/><b style="font-size:12px;">Sem mais resultados</b><br/><br/>');
             }
         }
+    });
+}
+
+function approveAccount(element, url) {
+    var form = $(element).parent().parent().parent().parent();
+    form.submit(function () {
+        $.ajax({
+            type: "POST",
+            url: url,
+            cache: false,
+            data: form.serialize(),
+            success: function (data) {
+                var divContent = $(element).parent().parent().parent().parent().parent();
+                $(divContent).hide();
+            }
+        });
+        return false;
+    });
+}
+
+function refuseAccount(element, url) {
+    var form = $(element).parent().parent().parent().parent();
+    form.submit(function () {
+        $.ajax({
+            type: "POST",
+            url: url,
+            cache: false,
+            data: form.serialize(),
+            success: function (data) {
+                var divContent = $(element).parent().parent().parent().parent().parent();
+                $(divContent).hide();
+            }
+        });
+        return false;
     });
 }
 

@@ -37,7 +37,8 @@ namespace EHR.Controller
         public virtual Account Login(string email, string password) { return null; }
         public virtual bool VerifyIfExist(string email) { return false; }
         public virtual IList<Account> GetAllNotApproved() { return null; }
-        public virtual IList<Summary> GetLastTenSumaries(Account account) { return null; }
+        public virtual IList<Summary> GetSumaries(int id) { return null; }
+        public virtual void ApproveAccount(int id) { }
 
         #endregion
 

@@ -47,42 +47,63 @@ namespace EHR.Test
         [Test]
         public void b_data_initialize()
         {
-            var summaries = new Summaries();
-            var sumary = new Summary { Cpf = "02338013751" };
-            summaries.Save(sumary);
+            insert_hospitals_in_database();
+            insert_allergies_types();
+            insert_diagnostic_types();
+            insert_reactions_types();
+            insert_hemotransfusion_types();
+            insert_admin_account();
+            insert_ten_accounts();
+            data_initialize_all_sumaries_for_patients();
+            //var summaries = new Summaries();
+            //var sumary = new Summary { Cpf = "02338013751" };
+            //summaries.Save(sumary);
 
             //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
             // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
             //sumary.CreateProcedure(5, 5, 2013, new Tus() { Code = "001", Description = "Teste" });
         }
 
-        [Test]
-        public void b_data_initialize_all_sumaries_for_patients()
+        public void insert_hospitals_in_database()
         {
-            
-            GetPatientByHospitalService service = new GetPatientByHospitalService();
-            var patients = service.GetPatientAll();
+            var hospitals = new Hospitals();
+            var hospitalList = new List<Hospital>();
 
-            List<Summary> sumariesList = new List<Summary>();
-            foreach (var patient in patients)
+            foreach (var id in Enum.GetValues(typeof(DbEnum)).Cast<short>().ToList())
             {
-                if (patient.CPF != "02338013751")
+                if (id != (short)DbEnum.sumario)
                 {
-                    var summary = new Summary { Cpf = patient.CPF };
-                    sumariesList.Add(summary);
+                    var hospital = new Hospital()
+                    {
+                        Description = "Hospital",
+                        Name = EnumUtil.GetDescriptionFromEnumValue(
+                            (DbEnum)Enum.Parse(typeof(DbEnum), id.ToString())) + "  "
+                    };
+
+                    if (id == (short)DbEnum.QuintaDor)
+                    {
+                        hospital.URLImage = "../../Images/Hospitals/quintador.png";
+                    }
+                    else if (id == (short)DbEnum.Pronto)
+                    {
+                        hospital.URLImage = "../../Images/Hospitals/prontolinda.png";
+                    }
+                    else if (id == (short)DbEnum.Rios)
+                    {
+                        hospital.URLImage = "../../Images/Hospitals/riosdor.png";
+                    }
+                    else if (id == (short)DbEnum.Esperanca)
+                    {
+                        hospital.URLImage = "../../Images/Hospitals/esperanca.png";
+                    }
+
+                    hospitalList.Add(hospital);
                 }
             }
-
-            var summaries = new Summaries();
-            summaries.SaveList<Summary>(sumariesList);
-
-            //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
-            // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
-            //sumary.CreateProcedure(5, 5, 2013, new Tus() { Code = "001", Description = "Teste" });
+            hospitals.Save(hospitalList);
         }
 
-        [Test]
-        public void create_allergies_types()
+        public void insert_allergies_types()
         {
             var angioedema = new AllergyType() { Id = (short)AllergyTypeEnum.Angioedema, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Angioedema) };
             var urticaria = new AllergyType() { Id = (short)AllergyTypeEnum.Urticaria, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Urticaria) };
@@ -98,8 +119,7 @@ namespace EHR.Test
 
         }
 
-        [Test]
-        public void create_diagnostic_types()
+        public void insert_diagnostic_types()
         {
             var AssociadosEOuOutros = new DiagnosticType() { Id = (short)DiagnosticTypeEnum.AssociadosEOuOutros, Description = EnumUtil.GetDescriptionFromEnumValue(DiagnosticTypeEnum.AssociadosEOuOutros) };
 
@@ -112,8 +132,7 @@ namespace EHR.Test
 
         }
 
-        [Test]
-        public void create_reactions_types()
+        public void insert_reactions_types()
         {
             var alergicaLeveModeradaGrave = new ReactionType() { Id = (short)ReactionTypeEnum.AlergicaLeveModeradaGrave, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.AlergicaLeveModeradaGrave) };
 
@@ -153,8 +172,82 @@ namespace EHR.Test
             reactionTypes.SaveList<ReactionType>(types);
         }
 
+        public void insert_admin_account()
+        {
+            var account = new Account()
+                              {
+                                  Administrator = true,
+                                  Approved = true,
+                                  Birthday = new DateTime(1989, 7, 17),
+                                  CRM = "123",
+                                  Email = "thiago@workker.com.br",
+                                  FirstName = "Thiago",
+                                  LastName = "Oliveira",
+                                  Gender = GenderEnum.Male,
+                                  Password = "123"
+                              };
+
+            account.EncryptPassword();
+
+            account.Hospitals = new Hospitals().All<Hospital>();
+
+            var accounts = new Accounts();
+            accounts.Save(account);
+        }
+
         [Test]
-        public void create_hemotransfusion_types()
+        public void insert_ten_accounts()
+        {
+            List<Account> accountList = new List<Account>();
+            for (int i = 10; i < 20; i++)
+            {
+                var account = new Account()
+                {
+                    Administrator = false,
+                    Approved = false,
+                    Birthday = new DateTime(1989, 7, 17),
+                    CRM = "123",
+                    Email = i + "@workker.com.br",
+                    FirstName = "Thiago",
+                    LastName = "Oliveira",
+                    Gender = GenderEnum.Male,
+                    Password = "123"
+                };
+
+                account.EncryptPassword();
+
+                account.Hospitals = new Hospitals().All<Hospital>();
+
+                accountList.Add(account);
+            }
+
+            var accounts = new Accounts();
+            accounts.SaveList(accountList);
+        }
+
+        //[Test]
+        //public void insert_reason_of_admission()
+        //{
+        //    var listOfReasons = new List<ReasonOfAdmission>();
+
+        //    foreach (var id in Enum.GetValues(typeof(ReasonOfAdmissionEnum)).Cast<short>().ToList())
+        //    {
+        //        var resonOfAdmission = new ReasonOfAdmission()
+        //        {
+        //            Id = id,
+        //            Description = EnumUtil.GetDescriptionFromEnumValue(
+        //                (ReasonOfAdmissionEnum)Enum.Parse(typeof(ReasonOfAdmissionEnum), id.ToString())) + "  "
+        //        };
+
+        //        listOfReasons.Add(resonOfAdmission);
+        //    }
+
+        //    var typesRepository = new Types<ReasonOfAdmission>();
+
+        //    typesRepository.SaveList<ReasonOfAdmission>(listOfReasons);
+        //}
+
+        public void insert_hemotransfusion_types()
         {
             var ConcentradoDeHemacias = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.ConcentradoDeHemacias, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.ConcentradoDeHemacias) };
 
@@ -180,26 +273,29 @@ namespace EHR.Test
             reactionTypes.SaveList<HemotransfusionType>(types);
         }
 
-        [Test]
-        public void insert_hospitals_in_database()
+        public void data_initialize_all_sumaries_for_patients()
         {
-            var hospitals = new Hospitals();
-            var hospitalList = new List<Hospital>();
+            GetPatientByHospitalService service = new GetPatientByHospitalService();
+            var patients = service.MockPatients("Ana");
 
+            var doctor = new Accounts().GetBy(1);
 
-            foreach (var id in Enum.GetValues(typeof(DbEnum)).Cast<short>().ToList())
+            var sumariesList = new List<Summary>();
+            foreach (var patient in patients)
             {
-                if (id != (short)DbEnum.sumario)
+                if (patient.CPF != "02338013751")
                 {
-                    var hospital = new Hospital()
-                                       {
-                                           Name = EnumUtil.GetDescriptionFromEnumValue(
-                                               (DbEnum)Enum.Parse(typeof(DbEnum), id.ToString())) + "  "
-                                       };
-                    hospitalList.Add(hospital);
+                    var summary = new Summary { Cpf = patient.CPF, Account = doctor, Date = new DateTime(2013, 6, 10) };
+                    sumariesList.Add(summary);
                 }
             }
-            hospitals.Save(hospitalList);
+
+            var summaries = new Summaries();
+            summaries.SaveList<Summary>(sumariesList);
+
+            //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
+            // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
+            //sumary.CreateProcedure(5, 5, 2013, new Tus() { Code = "001", Description = "Teste" });
         }
     }
 }

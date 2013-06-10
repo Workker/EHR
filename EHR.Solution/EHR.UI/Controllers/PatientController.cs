@@ -34,7 +34,7 @@ namespace EHR.UI.Controllers
                 Response.Redirect("/Home");
 
 
-            return View();
+            return View(Session["account"]);
         }
 
         private void TreatPatient(string cpf, Controller.PatientController controller)

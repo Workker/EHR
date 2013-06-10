@@ -1,0 +1,35 @@
+﻿@model EHR.UI.Models.AccountModel
+@using EHR.CoreShared
+@using EHR.UI.Models
+@foreach (AccountModel account in ViewBag.Accounts)
+{
+    <div class="clearfix bottomLine">
+        <form id="Accounts">
+            <div class="clearfix _8m _8u" style="margin-bottom: 10px;">
+                <div class="pls">
+                    <div class="fsm fwn fcg">
+                        <h2 class="text">@account.FirstName &nbsp; @account.LastName</h2>
+                        <div class="fbProfileByline searchResultPersonByline">
+                            <span class="fbProfileBylineFragment">
+                                <label>CRM:&nbsp;</label>@account.CRM
+                                &nbsp;&nbsp;
+                                   <label>E-mail:&nbsp;</label>@account.Email
+                            </span>
+                            <span class="fbProfileBylineFragment">
+                                <label>Hospital(is):&nbsp;</label>
+                                @for (int i = 1; i <= account.Hospitals.Count; i++)
+                                {
+                                    @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospitals[i - 1].ToString())) + (account.Hospitals.Count == i ? "" : ",  "))
+                                }
+                            </span>
+                        </div>
+                        <br />
+                        <input type="hidden" value="@account.Id" name="id"/>
+                        <input type="submit" onclick='approveAccount(this, "../Home/ApproveAccount")' value="Aprovar" class="uibutton special" />&nbsp;&nbsp;
+                           <input type="submit" onclick='refuseAccount(this, "../Home/RefuseAccount")' value="Reprovar" class="uibutton" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+}

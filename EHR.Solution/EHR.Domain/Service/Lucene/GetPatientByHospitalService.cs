@@ -25,10 +25,18 @@ namespace EHR.Domain.Service
             return service.GetPatientsDbFor();
         }
 
+
         public IList<IPatientDTO> AdvancedGetPatientBy(IPatientDTO patientDTO, List<string> hospital)
         {
             var servico = new GetPatientsLuceneService();
             return servico.GetPatientsAdvancedSearch(patientDTO, hospital);
         }
+        //todo: mock
+        public IList<IPatientDTO> MockPatients(string name)
+        {
+            var servico = new GetPatientsLuceneService();
+            return servico.MockPatients(name);
+        }
+
     }
 }

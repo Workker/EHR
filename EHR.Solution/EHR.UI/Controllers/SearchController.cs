@@ -1,10 +1,13 @@
-﻿using EHR.Controller;
+﻿using AutoMapper;
+using EHR.Controller;
 using EHR.CoreShared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using EHR.Domain.Util;
 using EHR.UI.Filters;
+using EHR.UI.Models;
 
 namespace EHR.UI.Controllers
 {
@@ -46,13 +49,28 @@ namespace EHR.UI.Controllers
         {
             var patient = new PatientDTO { Name = query };
             var patientController = FactoryController.GetController(ControllerEnum.Patient);
-            var patients = patientController.GetBy(patient);
+            var patients = MapPatientModelFrom(patientController.GetBy(patient));
             return BuildResultsOfSimpleSearchOfPatients(patients);
         }
 
         #endregion
 
         #region Private Methods
+
+        private static IEnumerable<PatientModel> MapPatientModelFrom(IEnumerable<IPatientDTO> patients)
+        {
+            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Hospital, source => source.Ignore());
+
+            var patientModels = new List<PatientModel>();
+
+            foreach (var item in patients)
+            {
+                var account = Mapper.Map<IPatientDTO, PatientModel>(item);
+                account.Hospital = EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), item.Hospital.ToString()));
+                patientModels.Add(account);
+            }
+            return patientModels;
+        }
 
         private void ManagerSession(bool skip)
         {
@@ -66,9 +84,9 @@ namespace EHR.UI.Controllers
                 Session["Skip"] = 0;
         }
 
-        private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<IPatientDTO> patients)
+        private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<PatientModel> patients)
         {
-            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"cpf\":\"" + patient.GetCPF() + "\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" + Enum.GetName(typeof(DbEnum), patient.Hospital) + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
+            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"cpf\":\"" + patient.CPF + "\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" + patient.Hospital + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
             return result += "]}";
         }
 

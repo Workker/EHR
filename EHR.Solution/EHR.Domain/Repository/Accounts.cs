@@ -62,5 +62,11 @@ namespace EHR.Domain.Repository
 
             return account;
         }
+
+        public virtual void Approve(Account account)
+        {
+            account.Approved = true;
+            base.Save(account);
+        }
     }
 }

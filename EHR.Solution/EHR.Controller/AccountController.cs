@@ -51,11 +51,16 @@ namespace EHR.Controller
             return accounts.GetAllNotApproved();
         }
 
-        public override IList<Summary> GetLastTenSumaries(int id)
+        public override IList<Summary> GetSumaries(int id)
         {
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(id);
-            var sumaries = ((Summaries)FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetLastTenSummaries(account);
-            return sumaries;
+            return ((Summaries)FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetSummaries(account);
+        }
+
+        public override void ApproveAccount(int id)
+        {
+            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(id);
+            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
         }
 
         #region Private Methods

@@ -184,6 +184,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\HemotransfusionModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
+    <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\SumaryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -436,6 +437,8 @@
     <Content Include="Views\Shared\_DatePicker.cshtml" />
     <Content Include="Views\Home\_LastSumariesList.cshtml" />
     <Content Include="Views\Home\_AccountApprovedList.cshtml" />
+    <Content Include="Views\Home\_LastSumariesResult.cshtml" />
+    <Content Include="Views\Home\_AccountApprovedListResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
