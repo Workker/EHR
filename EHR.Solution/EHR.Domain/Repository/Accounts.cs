@@ -57,6 +57,7 @@ namespace EHR.Domain.Repository
         {
             var criterion = Session.CreateCriteria<Account>();
             criterion.Add(Expression.Eq("Approved", false));
+            criterion.Add(Expression.Eq("Refused", false));
 
             var account = criterion.List<Account>();
 
@@ -66,6 +67,12 @@ namespace EHR.Domain.Repository
         public virtual void Approve(Account account)
         {
             account.Approved = true;
+            base.Save(account);
+        }
+
+        public virtual void Refuse(Account account)
+        {
+            account.Refused = true;
             base.Save(account);
         }
     }

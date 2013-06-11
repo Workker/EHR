@@ -17,6 +17,7 @@ namespace EHR.Domain.Mapping
             Map(a => a.Birthday);
             HasManyToMany(a => a.Hospitals);
             Map(a => a.Approved);
+            Map(a => a.Refused);
             Map(a => a.Administrator);
         }
     }

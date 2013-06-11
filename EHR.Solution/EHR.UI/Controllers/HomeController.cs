@@ -66,9 +66,10 @@ namespace EHR.UI.Controllers
             FactoryController.GetController(ControllerEnum.Account).ApproveAccount(int.Parse(id));
         }
 
+        [HttpPost]
         public void RefuseAccount(string id)
         {
-
+            FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(id));
         }
 
         #endregion

@@ -39,6 +39,7 @@ namespace EHR.Controller
         public virtual IList<Account> GetAllNotApproved() { return null; }
         public virtual IList<Summary> GetSumaries(int id) { return null; }
         public virtual void ApproveAccount(int id) { }
+        public virtual void RefuseAccount(int id) { }
 
         #endregion
 

@@ -63,6 +63,12 @@ namespace EHR.Controller
             ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
         }
 
+        public override void RefuseAccount(int id)
+        {
+            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(id);
+            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Refuse(account);
+        }
+
         #region Private Methods
 
         private Account SetPropertiesOfAccount(string firstName, string lastName, GenderEnum gender, string crm,
@@ -77,6 +83,7 @@ namespace EHR.Controller
                                   LastName = lastName,
                                   Password = password,
                                   Approved = false,
+                                  Refused = false,
                                   Administrator = false,
                                   Gender = gender
                               };

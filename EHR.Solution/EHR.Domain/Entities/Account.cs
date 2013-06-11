@@ -22,6 +22,7 @@ namespace EHR.Domain.Entities
             set { _hospitals = value; }
         }
         public virtual bool Approved { get; set; }
+        public virtual bool Refused { get; set; }
         public virtual bool Administrator { get; set; }
 
         public virtual void EncryptPassword()

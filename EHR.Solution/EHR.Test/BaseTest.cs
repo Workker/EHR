@@ -53,7 +53,7 @@ namespace EHR.Test
             insert_reactions_types();
             insert_hemotransfusion_types();
             insert_admin_account();
-            insert_ten_accounts();
+            insert_twenty_accounts();
             data_initialize_all_sumaries_for_patients();
             //var summaries = new Summaries();
             //var sumary = new Summary { Cpf = "02338013751" };
@@ -195,16 +195,16 @@ namespace EHR.Test
             accounts.Save(account);
         }
 
-        [Test]
-        public void insert_ten_accounts()
+        public void insert_twenty_accounts()
         {
             List<Account> accountList = new List<Account>();
-            for (int i = 10; i < 20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 var account = new Account()
                 {
                     Administrator = false,
                     Approved = false,
+                    Refused = false,
                     Birthday = new DateTime(1989, 7, 17),
                     CRM = "123",
                     Email = i + "@workker.com.br",
