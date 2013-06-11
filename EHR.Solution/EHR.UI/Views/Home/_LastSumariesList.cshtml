@@ -5,7 +5,10 @@
     {
 
     }
-    <div class="clearfix uiMorePager uiMorePagerCenter showMore">
-        <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore("../Home/MoreSumaries", this)'>Exibir mais</a>
-    </div>
+    @if (((List<SumaryModel>)ViewBag.Summaries).Count > 0)
+    {
+        <div class="clearfix uiMorePager uiMorePagerCenter showMore">
+            <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore("../Home/MoreSumaries", this)'>Exibir mais</a>
+        </div>
+    }
 </div>

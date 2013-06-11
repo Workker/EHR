@@ -481,3 +481,17 @@ function ChangeCurrentHospital(q) {
         }
     });
 }
+
+function ShowTopMenu(element) {
+    if ($(element).hasClass("grayButtonClicked")) {
+        $(element).removeClass("grayButtonClicked");
+        $("#ChangeHospitalButton span").removeClass("arrowActive");
+        $("#ChangeHospitalButton span").addClass("arrow");
+        $(element).next().hide();
+    } else {
+        $(element).addClass("grayButtonClicked");
+        $(element).next().show();
+        $("#ChangeHospitalButton span").removeClass("arrow");
+        $("#ChangeHospitalButton span").addClass("arrowActive");
+    }
+}
