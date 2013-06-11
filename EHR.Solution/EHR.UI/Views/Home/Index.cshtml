@@ -26,23 +26,36 @@
                                 </div>
                             </div>
                             <div id="fbTimelineHeadline" class="clearfix">
-                                <div class="_50zj">
-                                    <div class="actions _70j">
-                                        <!-- TODO: Action alter password -->
-                                        @* <form>
-                                            <div class="dropdown" id="dropdown">
-                                                <a class="dropdown_button dropdown_close" href="#">Buy/Listen <span class="arrow"></span></a>
-                                                <a class="dropdown_button dropdown_open" href="#dropdown">Buy/Listen <span class="arrow"></span></a>
-                                                <ul class="dropdown_content">
-                                                    @foreach (HospitalModel hospital in ViewBag.Hospitals)
-                                                    {
-                                                        <li><a href="#">@hospital.Name</a></li>   
-                                                    }
-                                                </ul>
-                                            </div>
-                                        </form>*@
-                                    </div>
+                                <button class="grayButton" onclick="ShowFormChangePassword(this);" style="position: absolute; margin: 7px 0px 0px 675px;">Alterar minha senha</button>
+                                <div id="ChangePassword">
+                                    <form>
+                                        <div class="mbm">
+                                            <input type="password" name="newPassword" placeholder="Nova Senha" required />
+                                        </div>
+                                        <div class="mbm">
+                                            <input type="password" name="confirm" placeholder="Confirme a nova senha" required />
+                                        </div>
+                                        <div class="mbm">
+                                            <input type="submit" value="Alterar" class="uibutton special" onclick="ChangePassword(this);" />
+                                            <input type="button" value="Cancelar" class="uibutton" onclick="HideFormChangePassword(this);" />
+                                        </div>
+                                    </form>
                                 </div>
+                                <div class="actions _70j">
+                                    <form>
+                                        <div class="dropdown" id="dropdown">
+                                            <a class="dropdown_button dropdown_close" href="#">Buy/Listen <span class="arrow"></span></a>
+                                            <a class="dropdown_button dropdown_open" href="#dropdown">Buy/Listen <span class="arrow"></span></a>
+                                            <ul class="dropdown_content">
+                                                @foreach (HospitalModel hospital in ViewBag.Hospitals)
+                                                {
+                                                    <li><a href="#">@hospital.Name</a></li>   
+                                                }
+                                            </ul>
+                                        </div>
+                                    </form>
+                                </div>
+
                                 <div class="name">
                                     <div class="photoContainer">
                                         <div class="drop_elem">

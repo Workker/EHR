@@ -4,7 +4,7 @@
 .lfloat { float: left; }
 
 .rfloat { float: right; }
-.width50P { width: 49%}
+.width50P { width: 49%; }
 
 #super { height: 100%; width: 100%; }
 
@@ -44,3 +44,7 @@ div.data b { padding: 0px 0px 0px 50px; }
 
 /* Advanced Search*/
 .detailedsearch_result { padding-bottom: 5px; }
+
+.grayButton { display: inline-block; padding: 4px 5px; }
+
+#ChangePassword { margin: 32px 0px 0px 657px; padding: 10px 5px 5px 5px; position: absolute; width: 133px; }

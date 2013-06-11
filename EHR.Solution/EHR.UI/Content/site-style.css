@@ -103,4 +103,10 @@ div.data b { color: #000; }
 .rightLine { border-right: 1px solid #ccc; }
 
 .leftLine { border-left: 1px solid #ccc; }
+
 .bottomLine { border-bottom: 1px solid #ccc; }
+
+#ChangePassword { background-color: #fff; text-align: left; border: 1px solid #AAA; display: none; }
+
+.grayButton { border: 1px solid #AAA; font-weight: bold; color: #717780; line-height: 16px; background-color: #fff; }
+.grayButtonClicked { border: 1px solid #3B5998; color: white; background: #6D84B4; border-radius: 2px 2px 0px 0px; border-bottom-color: #6D84B4; }

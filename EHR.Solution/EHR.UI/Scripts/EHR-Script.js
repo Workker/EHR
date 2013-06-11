@@ -429,3 +429,29 @@ function ToggleHemotransfusion() {
         $('#ulHemotransfusion').removeAttr("style");
     }
 }
+
+function ShowFormChangePassword(element) {
+    $(element).addClass("grayButtonClicked");
+    $(element).next().show();
+}
+
+function HideFormChangePassword(element) {
+    $(element).parent().parent().parent().prev().removeClass("grayButtonClicked");
+    $(element).parent().parent().parent().hide();
+}
+
+function ChangePassword(element) {
+    var form = $(element).parent().parent();
+    form.submit(function () {
+        $.ajax({
+            type: "POST",
+            url: "../Home/AlterPasswordOfAccount",
+            cache: false,
+            data: form.serialize(),
+            success: function () {
+                HideFormChangePassword(element);
+            }
+        });
+        return false;
+    });
+}

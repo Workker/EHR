@@ -72,6 +72,13 @@ namespace EHR.UI.Controllers
             FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(id));
         }
 
+        [HttpPost]
+        public void AlterPasswordOfAccount(string newPassword)
+        {
+            var account = (AccountModel)Session["account"];
+            FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword);
+        }
+
         #endregion
 
         #region Private Methods

@@ -69,6 +69,14 @@ namespace EHR.Controller
             ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Refuse(account);
         }
 
+        public override void AlterPasswordOfAccount(int id, string password)
+        {
+            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(id);
+            account.Password = password;
+            account.EncryptPassword();
+            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Save(account);
+        }
+
         #region Private Methods
 
         private Account SetPropertiesOfAccount(string firstName, string lastName, GenderEnum gender, string crm,
