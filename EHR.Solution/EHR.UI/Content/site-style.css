@@ -107,6 +107,13 @@ div.data b { color: #000; }
 .bottomLine { border-bottom: 1px solid #ccc; }
 
 #ChangePassword { background-color: #fff; text-align: left; border: 1px solid #AAA; display: none; }
+#ChangeHospital { background-color: #fff; text-align: right; border: 1px solid #AAA; display: none; font-weight: bold; color: #717780; line-height: 16px;text-align: left; }
 
 .grayButton { border: 1px solid #AAA; font-weight: bold; color: #717780; line-height: 16px; background-color: #fff; }
 .grayButtonClicked { border: 1px solid #3B5998; color: white; background: #6D84B4; border-radius: 2px 2px 0px 0px; border-bottom-color: #6D84B4; }
+
+.arrow { display: inline-block; width: 0px; height: 0px; border-top: 5px solid #6B7FA7; border-right: 5px solid transparent; border-left: 5px solid transparent; }
+.arrowActive { display: inline-block; width: 0px; height: 0px; border-top: 5px solid #fff; border-right: 5px solid transparent; border-left: 5px solid transparent; }
+
+li:hover { background: #6d84b4; }
+    li:hover a, .results li:hover .subtext { color: #fff; }

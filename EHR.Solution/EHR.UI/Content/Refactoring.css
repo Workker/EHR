@@ -276,45 +276,6 @@ a { color: #3b5998; text-decoration: none; }
 
 h2 { color: #3B5998; font-size: 18px; line-height: 24px; font-weight: bold; }
 
-.dropdown { /* display: block; */ display: inline-block; margin-right: 3px; margin-left: 3px; position: relative; }
-
-    .dropdown .dropdown_button { cursor: pointer; width: auto; display: inline-block; padding: 4px 5px; border: 1px solid #AAA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; font-weight: bold; color: #717780; line-height: 16px; text-decoration: none !important; background: white; }
-
-    .dropdown:target .dropdown_button { border: 1px solid #3B5998; color: white; background: #6D84B4; -moz-border-radius-topleft: 2px; -moz-border-radius-topright: 2px; -moz-border-radius-bottomright: 0px; -moz-border-radius-bottomleft: 0px; -webkit-border-radius: 2px 2px 0px 0px; border-radius: 2px 2px 0px 0px; border-bottom-color: #6D84B4; }
-
-    .dropdown .dropdown_close { display: none; }
-
-    .dropdown:target .dropdown_close { display: inline-block; }
-
-    .dropdown:target .dropdown_open { display: none; }
-
-/* .dropdown .dropdown_button img {
-    height: 14px; 
-    margin-top: 1px;
-    margin-bottom: 1px;
-    float: left; 
-    margin-right: 5px; 
-}
-   ================================================== */
-
-.arrow { display: inline-block; width: 0px; height: 0px; border-top: 5px solid #6B7FA7; border-right: 5px solid transparent; border-left: 5px solid transparent; }
-
-.dropdown:target .arrow { border-top: 5px solid #fff; border-right: 5px solid transparent; border-left: 5px solid transparent; }
-
-.dropdown .dropdown_content { display: none; position: absolute; border: 1px solid #777; padding: 0px; background: white; margin: 0; }
-
-.dropdown:target .dropdown_content { display: block; }
-
-.dropdown .dropdown_content li { list-style: none; margin-left: 0px; line-height: 16px; border-top: 1px solid #FFF; border-bottom: 1px solid #FFF; margin-top: 2px; margin-bottom: 2px; }
-
-    .dropdown .dropdown_content li:hover { border-top-color: #3B5998; border-bottom-color: #3B5998; background: #6D84B4; }
-
-    .dropdown .dropdown_content li a { display: block; padding: 2px 7px; padding-right: 15px; color: black; text-decoration: none !important; white-space: nowrap; }
-
-    .dropdown .dropdown_content li:hover a { color: white; text-decoration: none !important; }
-
-    .dropdown .dropdown_content li img { height: 14px; margin-top: 1px; margin-bottom: 1px; float: left; margin-right: 5px; border: none; }
-
 .fbMarketingMenu { list-style: none; margin: 0 0 20px 0; padding: 0; }
 #jewelCase .jewel { float: left; margin-right: -1px; position: relative; }
 .jewelCount { background-color: #00376a; -webkit-border-radius: 2px; top: -1px; color: #fff; display: none; font-size: 9px; font-weight: bold; overflow: hidden; padding-bottom: 1px; position: absolute; right: -1px; z-index: 101; }
@@ -5467,7 +5428,7 @@ div.albumsHeader { padding-bottom: 0; }
 #fbProfileCover .uiSelector, #fbProfileCover .uiSelectorButton, #fbProfileCover .uiButtonText { max-width: none; }
 #fbTimelineHeadline { min-height: 47px; position: relative; width: 100%; z-index: 4; }
     #fbTimelineHeadline .name { overflow: hidden; }
-    #fbTimelineHeadline .actions { float: right; padding: 7px 5px 0 10px; max-width: 500px; text-align: right; }
+    #fbTimelineHeadline .actions { float: right; padding: 7px 0px 0 10px; max-width: 500px; text-align: right; }
         #fbTimelineHeadline .actions .uiButtonGroup { white-space: nowrap; }
     #fbTimelineHeadline .profilePicThumb { background: rgba(0, 0, 0, .3); -webkit-border-radius: 3px; -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .07); display: block; left: 23px; margin-top: -140px; padding: 1px; position: absolute; }
 ._6-f { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 500; line-height: 30px; }

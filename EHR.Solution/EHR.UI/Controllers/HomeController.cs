@@ -79,6 +79,13 @@ namespace EHR.UI.Controllers
             FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword);
         }
 
+        public void ChangeCurrentHospital(string q)
+        {
+            var account = (AccountModel)Session["account"];
+            account.CurrentHospital = short.Parse(q);
+            Session["account"] = account;
+        }
+
         #endregion
 
         #region Private Methods

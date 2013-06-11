@@ -15,6 +15,7 @@ namespace EHR.UI.Models
         public string Password { get; set; }
         public DateTime Birthday { get; set; }
         public bool Administrator { get; set; }
+        public short CurrentHospital { get; set; }
         private IList<short> _hospitals;
         public IList<short> Hospitals
         {

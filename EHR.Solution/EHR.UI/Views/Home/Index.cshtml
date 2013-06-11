@@ -1,4 +1,5 @@
-﻿@using EHR.UI.Models
+﻿@using EHR.CoreShared
+@using EHR.UI.Models
 @model AccountModel
 @{
     ViewBag.Title = "Index";
@@ -19,7 +20,18 @@
                         <div id="fbProfileCover" class="drop_elem">
                             <div class="cover" id="u_0_z">
                                 <div class="coverImage">
-                                    <img class="coverPhotoImg photo img" src="@(((List<HospitalModel>)ViewBag.Hospitals).First().URLImage)" alt="Cover Photo" style="top: 0px; width: 100%">
+                                    @{
+
+                                        foreach (HospitalModel hospitalModel in ViewBag.Hospitals)
+                                        {
+
+                                            if (hospitalModel.Id == Model.CurrentHospital)
+                                            {
+                                        <img class="coverPhotoImg photo img" src="@hospitalModel.URLImage" alt="Cover Photo" style="top: 0px; width: 100%"/>
+                                            }
+                                        }
+                                        
+                                    }
                                 </div>
                                 <div class="_6-e">
                                     <h2 class="_6-f"><span class="_8_2">@Model.FirstName @Model.LastName</span></h2>
@@ -41,21 +53,22 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="actions _70j">
-                                    <form>
-                                        <div class="dropdown" id="dropdown">
-                                            <a class="dropdown_button dropdown_close" href="#">Buy/Listen <span class="arrow"></span></a>
-                                            <a class="dropdown_button dropdown_open" href="#dropdown">Buy/Listen <span class="arrow"></span></a>
-                                            <ul class="dropdown_content">
-                                                @foreach (HospitalModel hospital in ViewBag.Hospitals)
-                                                {
-                                                    <li><a href="#">@hospital.Name</a></li>   
-                                                }
-                                            </ul>
-                                        </div>
-                                    </form>
-                                </div>
+                                <div class="actions">
 
+                                    <button id="ChangeHospitalButton" class="grayButton" onclick="ShowListOfHospital(this);">
+                                        @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), Model.CurrentHospital.ToString())))&nbsp;<span class="arrow"></span>
+                                    </button>
+                                    <div id="ChangeHospital">
+                                        <ul>
+                                            @foreach (HospitalModel hospital in ViewBag.Hospitals)
+                                            {
+                                                if (hospital.Id != Model.CurrentHospital)
+                                                {<li><a onclick='ChangeCurrentHospital("@hospital.Id")'>@hospital.Name</a></li>  }
+
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div class="name">
                                     <div class="photoContainer">
                                         <div class="drop_elem">
