@@ -107,7 +107,7 @@ div.data b { color: #000; }
 .bottomLine { border-bottom: 1px solid #ccc; }
 
 #ChangePassword { background-color: #fff; text-align: left; border: 1px solid #AAA; display: none; }
-#ChangeHospital { background-color: #fff; text-align: right; border: 1px solid #AAA; display: none; font-weight: bold; color: #717780; line-height: 16px;text-align: left; }
+#ChangeHospital { background-color: #fff; text-align: right; border: 1px solid #AAA; display: none; font-weight: bold; color: #717780; line-height: 16px; text-align: left; }
 
 .grayButton { border: 1px solid #AAA; font-weight: bold; color: #717780; line-height: 16px; background-color: #fff; }
 .grayButtonClicked { border: 1px solid #3B5998; color: white; background: #6D84B4; border-radius: 2px 2px 0px 0px; border-bottom-color: #6D84B4; }
@@ -117,3 +117,20 @@ div.data b { color: #000; }
 
 li:hover { background: #6d84b4; }
     li:hover a, .results li:hover .subtext { color: #fff; }
+
+
+#pageNav ul { background: #3B5998; list-style: none; position: absolute; text-decoration: none; }
+.activeMenu { background-color: #6d84b4; }
+
+.Display { display: inline-block; }
+#pageNav ul li a { display: block; background-color: #fff; text-decoration: none; line-height: 18px; }
+#pageNav ul li a { padding-top: 1px; float: none; color: #3b5998; font-weight: bold; text-decoration: none; }
+#pageNav ul { border: 1px solid #BDC7D8; }
+
+#pageNav a:hover { color: #fff; text-decoration: none; }
+#pageNav li ul { left: -28px; margin-top: 4px; }
+#pageNav li:hover a { }
+#pageNav li ul a { text-decoration: none; padding: 0px 0px 0px 5px; line-height: 37px; }
+#pageNav li ul li { width: 50px; }
+#pageNav li:hover ul li a:hover { background-color: #6d84b4; }
+.backgroundSearch { background-image: url("../Images/icones.png");background-position: right; background-position: -603px -35px; background-size: auto; background-repeat: no-repeat; }

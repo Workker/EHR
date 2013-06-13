@@ -3800,7 +3800,6 @@ hr { background: #d9d9d9; border-width: 0; color: #d9d9d9; height: 1px; }
 .center { margin-left: auto; margin-right: auto; }
 #facebook .hidden_elem { display: none !important; }
 #facebook .invisible_elem { visibility: hidden; }
-#facebook .accessible_elem { left: -9999px; position: absolute; }
 .direction_ltr { direction: ltr; }
 .direction_rtl { direction: rtl; }
 .text_align_ltr { text-align: left; }

@@ -483,15 +483,13 @@ function ChangeCurrentHospital(q) {
 }
 
 function ShowTopMenu(element) {
-    if ($(element).hasClass("grayButtonClicked")) {
-        $(element).removeClass("grayButtonClicked");
-        $("#ChangeHospitalButton span").removeClass("arrowActive");
-        $("#ChangeHospitalButton span").addClass("arrow");
-        $(element).next().hide();
+    if ($(element).next().hasClass("Display")) {
+        $(element).next().removeClass("Display");
+        $(element).next().addClass("noDisplay");
+        $(element).parent().removeClass("activeMenu");
     } else {
-        $(element).addClass("grayButtonClicked");
-        $(element).next().show();
-        $("#ChangeHospitalButton span").removeClass("arrow");
-        $("#ChangeHospitalButton span").addClass("arrowActive");
+        $(element).next().removeClass("noDisplay");
+        $(element).next().addClass("Display");
+        $(element).parent().addClass("activeMenu");
     }
 }

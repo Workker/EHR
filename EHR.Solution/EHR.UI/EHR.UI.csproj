@@ -334,6 +334,7 @@
     <Content Include="Images\Hospitals\quintador.png" />
     <Content Include="Images\Hospitals\riosdor.png" />
     <Content Include="Images\hospital_ico.png" />
+    <Content Include="Images\icones.png" />
     <Content Include="Images\line_vertical.png" />
     <Content Include="Images\link_c.png" />
     <Content Include="Images\link_d.png" />

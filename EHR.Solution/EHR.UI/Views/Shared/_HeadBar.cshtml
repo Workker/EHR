@@ -1,21 +1,19 @@
 ﻿@model EHR.UI.Models.AccountModel
 <div id="topBar" class="fixed_elem">
     <div id="headContent" class="clearfix">
-        <h1 id="pageLogo"><a href="#">Rede D'or</a></h1>
+        <h1 id="pageLogo"><a href="../Home/" style="background-color: transparent;">Rede D'or</a></h1>
         <div id="notifications" class="lfloat" style="padding-top: 3px;">
             <img src="../../Images/Capture.PNG" alt="notifications" />
         </div>
         <div id="headNav" class="clearfix">
-            <form class="lfloat" method="get" id="navSearch" name="navSearch" action="results" role="search">
+            <form class="lfloat" id="navSearch" name="navSearch" role="search">
                 <div class="uiTypeahead" id="upjgpe42">
                     <div class="wrap" id="search">
                         <div class="innerWrap searchBox">
                             <span class="uiSearchInput textInput searchContainer" id="upjgpe43">
-                                <input type="text" class="inputtext DOMControl_placeholder" autocomplete="off" maxlength="100" id="searchPeople" data-bind="value: query, valueUpdate: 'afterkeyup', event: { keyup: doSearch }">
-                                <button title="Busca por pacientes" data-bind="click: doSearch">
-                                    <span class="accessible_elem">Busca por pacientes</span>
-                                </button>
+                                <input type="text" placeholder="Digite o Nome ou CPF do paciente" class="inputtext DOMControl_placeholder" autocomplete="off" maxlength="100" id="searchPeople" data-bind="value: query, valueUpdate: 'afterkeyup', event: { keyup: doSearch }">
                             </span>
+                            <span class="backgroundSearch">aaa</span>
                             <ul class="results" data-bind='template: { name: "resultItem", foreach: results }, visible: results().length > 0'>
                                 <li class="calltoaction">
                                     <a onclick="" id="advancedSearchLink">
@@ -50,21 +48,16 @@
             <div class="rfloat">
                 <ul id="pageNav" class="clearfix">
                     <li class="navItem firstItem tinyman">
-                        <img src="../../Images/user.png" alt="user" /><a href="#">@Model.FirstName @Model.LastName
+                        <img src="../../Images/user.png" alt="user" /><a href="../Home">@Model.FirstName @Model.LastName
 
                         </a></li>
                     <li class="navItem middleItem voiceBarToggle"></li>
                     <li class="navItem middleItem" id="navHome"><a href="../Home/">Home</a></li>
-                    <li id="navAccount"><a href="#" id="navAccountLink">
+                    <li id="navAccount"><a onclick='ShowTopMenu(this);' id="navAccountLink">
                         <div class="menuPulldown" id="userNavigationLabel">Account Settings</div>
                     </a>
-                        <ul class="navigation">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li class="menuDivider"></li>
-                            <li></li>
+                        <ul class="noDisplay">
+                            <li><a href="../Account/Logout">Sair</a></li>
                         </ul>
                     </li>
                 </ul>
