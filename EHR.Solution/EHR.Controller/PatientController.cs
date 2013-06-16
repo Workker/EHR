@@ -1,7 +1,9 @@
-﻿using EHR.CoreShared;
+﻿using System.Linq;
+using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Domain.Service;
+using System;
 using System.Collections.Generic;
 
 
@@ -28,13 +30,52 @@ namespace EHR.Controller
             return service.AdvancedGetPatientBy(dto, hospital);
         }
 
-        public Summary GetSummaryByPatient(IPatientDTO patient)
+        public override Summary GetSummaryBy(IPatientDTO patient, string treatment, int Id)
         {
             var summaries = new Summaries();
+            var accounts = new Accounts();
 
-            var summary = summaries.GetLastSummary(patient.CPF);
+            Summary summary;
+
+            summary = GetSummary(patient, treatment, summaries);
+
             if (summary != null)
                 summary.Patient = patient;
+            else
+            {
+                if (patient.Treatments != null && patient.Treatments.Count > 0)
+                {
+                    summary = CreateMedicalRecord(patient, Id, accounts, treatment);
+                    summaries.Save(summary);
+                }
+            }
+
+            return summary;
+        }
+
+        private static Summary CreateMedicalRecord(IPatientDTO patient, int Id, Accounts accounts, string treatment)
+        {
+            Summary summary;
+            var account = accounts.GetBy(Id);
+            var treatmentDTO = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault();
+            summary = new Summary()
+                          {
+                              Cpf = patient.CPF,
+                              Date = DateTime.Now,
+                              Treatment = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault(),
+                              CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
+                              Account = account
+                          };
+            return summary;
+        }
+
+        private static Summary GetSummary(IPatientDTO patient, string treatment, Summaries summaries)
+        {
+            Summary summary;
+            if (string.IsNullOrEmpty(treatment))
+                summary = summaries.GetLastSummary(patient.CPF);
+            else
+                summary = summaries.GetSummaryByTreatment(patient.CPF, treatment);
             return summary;
         }
     }

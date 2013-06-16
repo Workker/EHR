@@ -1,7 +1,7 @@
 ﻿using EHR.CoreShared;
-using EHRIntegracao.Domain.Services;
-using System.Collections.Generic;
 using EHRIntegracao.Domain.Services.GetEntities;
+using System;
+using System.Collections.Generic;
 
 namespace EHR.Domain.Service
 {
@@ -10,7 +10,13 @@ namespace EHR.Domain.Service
         public IPatientDTO GetPatientBy(string cpf)
         {
             var servico = new GetPatientsLuceneService();
-            return servico.GetPatientBy(cpf);
+            var patient = servico.GetPatientBy(cpf);
+            //Todo: Remover esta merda depois
+            patient.Treatments = new List<ITreatmentDTO>();
+            patient.Treatments.Add(new TreatmentDTO() { Id = "123", Hospital = DbEnum.Copa, EntryDate = DateTime.Now.AddDays(-3), CheckOutDate = DateTime.Now });
+            patient.Treatments.Add(new TreatmentDTO() { Id = "1234", Hospital = DbEnum.Copa, EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3), CheckOutDate = DateTime.Now.AddMonths(-3) });
+            patient.Treatments.Add(new TreatmentDTO() { Id = "1235", Hospital = DbEnum.Copa, EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5), CheckOutDate = DateTime.Now.AddMonths(-5) });
+            return patient;
         }
 
         public IList<IPatientDTO> GetPatientBy(IPatientDTO patientDTO)
@@ -35,7 +41,17 @@ namespace EHR.Domain.Service
         public IList<IPatientDTO> MockPatients(string name)
         {
             var servico = new GetPatientsLuceneService();
-            return servico.MockPatients(name);
+            var patients = servico.MockPatients(name);
+
+            foreach (var patient in patients)
+            {
+                patient.Treatments = new List<ITreatmentDTO>();
+                patient.Treatments.Add(new TreatmentDTO() { Hospital = DbEnum.Copa, EntryDate = DateTime.Now.AddDays(-3), CheckOutDate = DateTime.Now });
+                patient.Treatments.Add(new TreatmentDTO() { Hospital = DbEnum.Copa, EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3), CheckOutDate = DateTime.Now.AddMonths(-3) });
+                patient.Treatments.Add(new TreatmentDTO() { Hospital = DbEnum.Copa, EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5), CheckOutDate = DateTime.Now.AddMonths(-5) });
+            }
+
+            return patients;
         }
 
     }

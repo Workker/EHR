@@ -1,13 +1,14 @@
-﻿<div class="HeaderPhoto">
+﻿@model EHR.UI.Models.PatientModel
+<div class="HeaderPhoto">
     <img src="../../../Images/photo_none.png" alt="Profile Photo">
 </div>
 <div class="HeaderContent">
     <div class="name">
-        <h1>@ViewBag.data.Name</h1>
+        <h1>@Model.Name</h1>
     </div>
     <div class="data">
-        <b id="birthday">Idade:</b>&nbsp;@ViewBag.age<br />
-        <b id="hospital">Hospital:</b>&nbsp;@ViewBag.data.Hospital<br />
+        <b id="birthday">Idade:</b>&nbsp;@Model.GetAge()<br />
+        <b id="hospital">Hospital:</b>&nbsp;@Model.Hospital<br />
     </div>
     <div class="board">&nbsp;</div>
 </div>

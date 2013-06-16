@@ -156,29 +156,6 @@ $(document).ready(function () {
 
 });
 
-//Water mark
-$(document).ready(function () {
-
-    var watermark = 'Digite o Nome ou CPF do paciente';
-
-    //init, set watermark text and class
-    $('.DOMControl_placeholder').val(watermark).addClass('watermark');
-
-    //if blur and no value inside, set watermark text and class again.
-    $('.DOMControl_placeholder').blur(function () {
-        if ($(this).val().length == 0) {
-            $(this).val(watermark).addClass('watermark');
-        }
-    });
-
-    //if focus and text is watermrk, set it to empty and remove the watermark class
-    $('.DOMControl_placeholder').focus(function () {
-        if ($(this).val() == watermark) {
-            $(this).val('').removeClass('watermark');
-        }
-    });
-});
-
 
 // Images Gallery
 hs.graphicsDir = '../Images/graphics/';
@@ -492,4 +469,14 @@ function ShowTopMenu(element) {
         $(element).next().addClass("Display");
         $(element).parent().addClass("activeMenu");
     }
+}
+
+function SaveObsevation() {
+    var form = $('#observation').parent();
+    $.ajax({
+        type: "POST",
+        url: '../Patient/SaveObservation',
+        cache: false,
+        data: form.serialize(),
+    });
 }

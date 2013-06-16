@@ -49,24 +49,18 @@
     <hr />
     <br />
 </fieldset>*@
-@*<label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
-<textarea rows="10" cols="90" maxlength="1000"></textarea>*@
-<script type="text/javascript">
-    window.onload = function () {
-        $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
-            theme: "facebook"
+<label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
+<form>
+    <textarea rows="10" cols="90" maxlength="1000" id="observation" name="observation"></textarea>
+</form>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
+                theme: "facebook"
+            });
+            ToggleAllergy();
         });
-        ToggleAllergy();
-    };
-    $(document).ready(function () {
-        $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
-            theme: "facebook"
+        $('#observation').focusout(function () {
+            SaveObsevation();
         });
-        ToggleAllergy();
-    });
-
-    function test() {
-        var selectedValues = $('#motivoDaAdmissao').tokenInput("get");
-        alert(selectedValues[0].id);
-    }
-</script>
+    </script>

@@ -26,7 +26,7 @@
 
     #pageLogo a, #pageLogo a:hover, #pageLogo a:focus, #pageLogo a:active { background-image: url(/Images/logo.png); background-repeat: no-repeat; background-size: auto; display: block; height: 31px; outline: none; overflow: hidden; text-indent: -999px; white-space: nowrap; width: 175px; }
 
-#headNav { height: 30px; margin-left: 176px; }
+#headNav { height: 30px; margin-left: 176px;color: #fff; }
 
 #navSearch { margin: 3px 0 0 4px; position: relative; width: 350px; }
 
@@ -36,9 +36,9 @@
 
 ul { list-style-type: none; }
 
-#pageNav .navItem a, #pageNav #navAccountLink { color: #D8DFEA; display: inline-block; font-weight: bold; height: 31px; line-height: 29px; position: relative; text-decoration: none; vertical-align: top; }
+#pageNav .navItem a, #pageNav #navAccountLink { color: #fff; display: inline-block; font-weight: bold; height: 31px; line-height: 29px; position: relative; text-decoration: none; vertical-align: top; font-size: 12px}
 
-    #pageNav .navItem a::after { background: #526DA4; content: " "; display: block; height: 14px; position: absolute; right: 0; top: 9px; width: 1px; }
+    #pageNav .navItem a::after { background: #526DA4; content: " "; display: block; height: 16px; position: absolute; right: 0; top: 9px; width: 1px; margin-left: 15px }
 
 #pageNav .voiceBarToggle { display: none; }
 
@@ -77,8 +77,6 @@ ul { list-style-type: none; }
 #navSearch .uiSearchInput input { padding-top: 2px; width: 315px; }
 
 .uiSearchInput input { border: 0; margin: 0 22px 0 5px; outline: none; padding: 1px 5px 2px 0; width: 190px; }
-
-.DOMControl_placeholder { color: #777; }
 
 .uiSearchInput button { background-color: white; background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yK/x/nDEHv4nTejR.png); background-position: -230px -631px; background-repeat: no-repeat; background-size: auto; border: 0; cursor: pointer; display: block; height: 19px; padding: 0; position: absolute; right: 0; top: 0; width: 22px; }
 
@@ -4581,7 +4579,6 @@ button.as_link { background: none; border: none; color: #3b5998; cursor: pointer
 .fbDock { margin: 0 15px 0 0; }
     .fbDock .lNubContainer { float: left; }
     .fbDock .rNubContainer { float: right; }
-.DOMControl_placeholder { color: #777; }
 .no_js .DOMControl_placeholder { color: #000; }
 .noFooter #pageFooter { display: none; }
 #globalContainer { margin: 0 auto; position: relative; zoom: 1; }

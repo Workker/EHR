@@ -40,6 +40,8 @@ namespace EHR.Domain.Repository
             var criterion = Session.CreateCriteria<Account>();
             criterion.Add(Expression.Eq("Email", email));
             criterion.Add(Expression.Eq("Password", password));
+            criterion.Add(Expression.Eq("Approved", true));
+            criterion.Add(Expression.Eq("Refused", false));
 
             var account = criterion.UniqueResult<Account>();
 

@@ -1,4 +1,5 @@
-﻿using EHR.Controller;
+﻿using AutoMapper;
+using EHR.Controller;
 using EHR.Domain.Entities;
 using EHR.Domain.Util;
 using EHR.UI.Filters;
@@ -15,51 +16,27 @@ namespace EHR.UI.Controllers
     [AuthenticationFilter]
     public class PatientController : System.Web.Mvc.Controller
     {
-        public EHR.Controller.ProcedureController ProcedureController
-        {
-            get { return new EHR.Controller.ProcedureController(); }
-        }
-
         #region Views
 
-        public ActionResult Index(string cpf)
+        public ActionResult Index(string cpf, string treatment)
         {
-            var controller = new EHR.Controller.PatientController();
+            var patient = FactoryController.GetController(ControllerEnum.Patient).GetBy(cpf);
+            var patientModel = MapPatientModelFrom(patient,treatment);
 
-            TreatPatient(cpf, controller);
+            var sumary = FactoryController.GetController(ControllerEnum.Patient).GetSummaryBy(patient, treatment, ((AccountModel)Session["account"]).Id);
+
+            Session["Summary"] = sumary;
+
+            FillDiagnostic();
+            FillAlergies();
+
             FillAlergies();
             FillDiagnostic();
 
             if (Session["Summary"] == null)
                 Response.Redirect("/Home");
 
-
-            return View(Session["account"]);
-        }
-
-        private void TreatPatient(string cpf, Controller.PatientController controller)
-        {
-            var patient = controller.GetBy(cpf);
-            ViewBag.data = patient;
-            ViewBag.age = CalculateAgeFrom((DateTime)patient.DateBirthday);
-            Session["Summary"] = controller.GetSummaryByPatient(patient);
-            FillDiagnostic();
-            FillAlergies();
-        }
-
-        private void FillHemotransfusion()
-        {
-            ViewBag.Hemotransfusions = Convert(GetSummary().Hemotransfusions);
-        }
-
-        private void FillDiagnostic()
-        {
-            ViewBag.Diagnostics = Convert(GetSummary().Diagnostics);
-        }
-
-        private void FillAlergies()
-        {
-            ViewBag.Allergies = Convert(GetSummary().Allergies);
+            return View(patientModel);
         }
 
         #endregion
@@ -142,6 +119,12 @@ namespace EHR.UI.Controllers
             return stringReturn;
         }
 
+        [HttpPost]
+        public void SaveObservation(string observation)
+        {
+
+        }
+
         #endregion
 
         #region Diagnostic
@@ -176,11 +159,11 @@ namespace EHR.UI.Controllers
             var diagnosticsModels = new List<DiagnosticModel>();
 
             var diacnostic = new DiagnosticModel()
-            {
-                Id = diagnostics.Last().Id,
-                Cid = ConvertCid(diagnostics.Last().Cid),
-                Type = diagnostics.Last().Type.Id
-            };
+                                 {
+                                     Id = diagnostics.Last().Id,
+                                     Cid = ConvertCid(diagnostics.Last().Cid),
+                                     Type = diagnostics.Last().Type.Id
+                                 };
 
             diagnosticsModels.Add(diacnostic);
 
@@ -194,13 +177,13 @@ namespace EHR.UI.Controllers
             foreach (var diagnostic in diagnostics)
             {
                 diagnosticsModels.Add(new DiagnosticModel()
-                {
-                    Cid = ConvertCid(diagnostic.Cid)
-                    ,
-                    Id = diagnostic.Id
-                    ,
-                    Type = diagnostic.Type.Id
-                });
+                                          {
+                                              Cid = ConvertCid(diagnostic.Cid)
+                                              ,
+                                              Id = diagnostic.Id
+                                              ,
+                                              Type = diagnostic.Type.Id
+                                          });
             }
             return diagnosticsModels;
         }
@@ -240,7 +223,8 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult SaveAllergy(string theWitch, List<string> type)
         {
-            FactoryController.GetController(ControllerEnum.Allergy).SaveAllergy(theWitch, type.ConvertAll(short.Parse), GetSummary());
+            FactoryController.GetController(ControllerEnum.Allergy).SaveAllergy(theWitch, type.ConvertAll(short.Parse),
+                                                                                GetSummary());
             ViewBag.Allergies = ConvertLast(GetSummary().Allergies);
 
             return PartialView("GeneralData/_AllergyTableRow");
@@ -277,11 +261,11 @@ namespace EHR.UI.Controllers
             var allergyModels = new List<AllergyModel>();
 
             var allergy = new AllergyModel()
-                 {
-                     Id = allergies.Last().Id,
-                     TheWitch = allergies.Last().TheWhich,
+                              {
+                                  Id = allergies.Last().Id,
+                                  TheWitch = allergies.Last().TheWhich,
 
-                 };
+                              };
             allergy.Types = new List<short>();
             foreach (var type in allergies.Last().Types)
             {
@@ -310,7 +294,8 @@ namespace EHR.UI.Controllers
             return PartialView("Procedure/_ProcedureForm");
         }
 
-        public PartialViewResult SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, string procedure)
+        public PartialViewResult SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode,
+                                               string procedure)
         {
             FactoryController.GetController(ControllerEnum.Procedure).SaveProcedure(dob_day, dob_month, dob_year,
                                                                                     procedureCode, GetSummary());
@@ -339,15 +324,15 @@ namespace EHR.UI.Controllers
             foreach (var procedure in procedures)
             {
                 proceduresModels.Add(new ProcedureModel()
-                {
-                    Code = procedure.GetCode()
-                    ,
-                    Description = procedure.GetDescription()
-                    ,
-                    Date = procedure.Date
-                    ,
-                    Id = procedure.Id
-                });
+                                         {
+                                             Code = procedure.GetCode()
+                                             ,
+                                             Description = procedure.GetDescription()
+                                             ,
+                                             Date = procedure.Date
+                                             ,
+                                             Id = procedure.Id
+                                         });
             }
             return proceduresModels;
         }
@@ -357,20 +342,18 @@ namespace EHR.UI.Controllers
             var proceduresModels = new List<ProcedureModel>();
 
             proceduresModels.Add(new ProcedureModel()
-            {
-                Code = procedures.Last().GetCode()
-                ,
-                Description = procedures.Last().GetDescription()
-                ,
-                Date = procedures.Last().Date
-                ,
-                Id = procedures.Last().Id
-            });
+                                     {
+                                         Code = procedures.Last().GetCode()
+                                         ,
+                                         Description = procedures.Last().GetDescription()
+                                         ,
+                                         Date = procedures.Last().Date
+                                         ,
+                                         Id = procedures.Last().Id
+                                     });
 
             return proceduresModels;
         }
-
-
 
         #endregion
 
@@ -389,7 +372,9 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion)
         {
-            FactoryController.GetController(ControllerEnum.Hemotransfusion).SaveHemotransfusion(typeReaction, typeHemotrasfusion, GetSummary());
+            FactoryController.GetController(ControllerEnum.Hemotransfusion).SaveHemotransfusion(typeReaction,
+                                                                                                typeHemotrasfusion,
+                                                                                                GetSummary());
             ViewBag.Hemotransfusions = ConvertLast(GetSummary().Hemotransfusions);
 
             return PartialView("Hemotransfusion/_HemotransfusionTableRow");
@@ -397,7 +382,8 @@ namespace EHR.UI.Controllers
 
         public void DeleteHemotransfusion(string id)
         {
-            FactoryController.GetController(ControllerEnum.Hemotransfusion).RemoveHemotransfusion(GetSummary(), int.Parse(id));
+            FactoryController.GetController(ControllerEnum.Hemotransfusion).RemoveHemotransfusion(GetSummary(),
+                                                                                                  int.Parse(id));
         }
 
         private dynamic ConvertLast(IList<Hemotransfusion> hemos)
@@ -405,10 +391,10 @@ namespace EHR.UI.Controllers
             var HemoModels = new List<HemotransfusionModel>();
 
             var hemoModel = new HemotransfusionModel()
-            {
-                Id = hemos.Last().Id,
-                HemotransfusionType = hemos.Last().Type.Id,
-            };
+                                {
+                                    Id = hemos.Last().Id,
+                                    HemotransfusionType = hemos.Last().Type.Id,
+                                };
 
             hemoModel.ReactionType = new List<short>();
 
@@ -429,10 +415,10 @@ namespace EHR.UI.Controllers
             foreach (var hemo in hemos)
             {
                 var hemoModel = new HemotransfusionModel()
-                {
-                    Id = hemo.Id,
-                    HemotransfusionType = hemo.Type.Id,
-                };
+                                    {
+                                        Id = hemo.Id,
+                                        HemotransfusionType = hemo.Type.Id,
+                                    };
 
                 hemoModel.ReactionType = new List<short>();
 
@@ -450,7 +436,6 @@ namespace EHR.UI.Controllers
 
         #region medicament of previous use
 
-
         public PartialViewResult MedicamentOfPreviousUseForm()
         {
             return PartialView("GeneralData/_MedicamentOfPreviousUseForm");
@@ -467,8 +452,7 @@ namespace EHR.UI.Controllers
 
         #endregion
 
-        #region medicament used during hospitalization
-
+        #region Medicament used during hospitalization
 
         public PartialViewResult MedicamentUsedDuringhospitalizationForm()
         {
@@ -486,19 +470,70 @@ namespace EHR.UI.Controllers
 
         #endregion
 
-        #region support methods
-
-        private int CalculateAgeFrom(DateTime birthday)
-        {
-            return DateTime.Today.Year - birthday.Year;
-        }
+        #region Private Methods
 
         private Summary GetSummary()
         {
             return (Summary)Session["Summary"];
         }
 
-        #endregion
+        private void FillHemotransfusion()
+        {
+            ViewBag.Hemotransfusions = Convert(GetSummary().Hemotransfusions);
+        }
 
+        private void FillDiagnostic()
+        {
+            ViewBag.Diagnostics = Convert(GetSummary().Diagnostics);
+        }
+
+        private void FillAlergies()
+        {
+            ViewBag.Allergies = Convert(GetSummary().Allergies);
+        }
+
+        private static PatientModel MapPatientModelFrom(IPatientDTO patient, string treatmentStr)
+        {
+            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Treatments, source => source.Ignore());
+
+            var patientModel = Mapper.Map<IPatientDTO, PatientModel>(patient);
+            var treatmentModels = new List<TreatmentModel>();
+
+            AddHospital(patient, treatmentStr, patientModel);
+
+            foreach (var treatment in patient.Treatments)
+            {
+                var treatmentModel = MapTreatmentModelFrom(treatment);
+                treatmentModels.Add(treatmentModel);
+            }
+
+            patientModel.Treatments = treatmentModels;
+
+            return patientModel;
+        }
+
+        private static void AddHospital(IPatientDTO patient, string treatmentStr, PatientModel patientModel)
+        {
+            if (patient.Treatments != null && patient.Treatments.Count > 0 && !string.IsNullOrEmpty(treatmentStr) &&
+                patient.Treatments.Count(t => t.Id == treatmentStr) > 0)
+            {
+                patientModel.Hospital =
+                    EnumUtil.GetDescriptionFromEnumValue(
+                        (DbEnum)
+                        Enum.Parse(typeof (DbEnum),
+                                   patient.Treatments.FirstOrDefault(t => t.Id == treatmentStr).Hospital.ToString()));
+            }
+            else
+                patientModel.Hospital =
+                    EnumUtil.GetDescriptionFromEnumValue((DbEnum) Enum.Parse(typeof (DbEnum), patient.Hospital.ToString()));
+        }
+
+        private static TreatmentModel MapTreatmentModelFrom(ITreatmentDTO treatment)
+        {
+            Mapper.CreateMap<ITreatmentDTO, TreatmentModel>();
+            return Mapper.Map<ITreatmentDTO, TreatmentModel>(treatment);
+        }
+
+        #endregion
     }
 }

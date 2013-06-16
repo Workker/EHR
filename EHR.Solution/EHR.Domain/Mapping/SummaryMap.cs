@@ -11,6 +11,9 @@ namespace EHR.Domain.Mapping
             Map(s => s.Cpf);
             Map(s => s.Date);
             Map(s => s.Observation);
+            Map(s => s.CodeMedicalRecord);
+            Map(s => s.Hospital);
+            Map(s => s.EntryDateTreatment);
             References(s => s.Admission);
             HasMany(s => s.Diagnostics).Cascade.AllDeleteOrphan();
             HasMany(s => s.Allergies).Cascade.AllDeleteOrphan();

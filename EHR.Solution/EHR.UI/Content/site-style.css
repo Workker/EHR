@@ -54,7 +54,8 @@ div.data b { color: #000; }
 
 .timeline a:hover, .timeline a:focus { border-left-color: #A7B4D1; text-decoration: underline; }
 
-.timeline a, .timeline .selected ul a { border-left: 5px solid #C8D1E2; color: #94A0C1; font-weight: normal; }
+.timeline a,.timeline .selected ul a { border-left: 5px solid #C8D1E2; color: #94A0C1; font-weight: normal; }
+.timeline span{padding-left: 10px;color: #94A0C1; font-weight: normal;}
 
 /*Menu*/
 .CaptionClass { font-weight: bold; }
@@ -115,8 +116,8 @@ div.data b { color: #000; }
 .arrow { display: inline-block; width: 0px; height: 0px; border-top: 5px solid #6B7FA7; border-right: 5px solid transparent; border-left: 5px solid transparent; }
 .arrowActive { display: inline-block; width: 0px; height: 0px; border-top: 5px solid #fff; border-right: 5px solid transparent; border-left: 5px solid transparent; }
 
-li:hover { background: #6d84b4; }
-    li:hover a, .results li:hover .subtext { color: #fff; }
+div#ChangeHospital li:hover { background: #6d84b4; }
+    div#ChangeHospital li:hover a, .results li:hover .subtext { color: #fff; text-decoration: none; }
 
 
 #pageNav ul { background: #3B5998; list-style: none; position: absolute; text-decoration: none; }
@@ -133,4 +134,4 @@ li:hover { background: #6d84b4; }
 #pageNav li ul a { text-decoration: none; padding: 0px 0px 0px 5px; line-height: 37px; }
 #pageNav li ul li { width: 50px; }
 #pageNav li:hover ul li a:hover { background-color: #6d84b4; }
-.backgroundSearch { background-image: url("../Images/icones.png");background-position: right; background-position: -603px -35px; background-size: auto; background-repeat: no-repeat; }
+.backgroundSearch { background-image: url("../Images/icones.png"); background-position: right; background-position: -603px -35px; background-size: auto; background-repeat: no-repeat; }

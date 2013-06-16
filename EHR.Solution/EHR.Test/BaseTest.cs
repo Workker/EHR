@@ -273,6 +273,7 @@ namespace EHR.Test
             reactionTypes.SaveList<HemotransfusionType>(types);
         }
 
+        [Test]
         public void data_initialize_all_sumaries_for_patients()
         {
             GetPatientByHospitalService service = new GetPatientByHospitalService();
@@ -285,8 +286,20 @@ namespace EHR.Test
             {
                 if (patient.CPF != "02338013751")
                 {
-                    var summary = new Summary { Cpf = patient.CPF, Account = doctor, Date = new DateTime(2013, 6, 10) };
-                    sumariesList.Add(summary);
+                    foreach (var treatment in patient.Treatments)
+                    {
+                        var summary = new Summary
+                                          {
+                                              Cpf = patient.CPF,
+                                              Account = doctor,
+                                              Date = new DateTime(2013, 6, 10),
+                                              Hospital = treatment.Hospital,
+                                              CodeMedicalRecord = treatment.Id,
+                                              EntryDateTreatment = treatment.EntryDate
+                                          };
+                        sumariesList.Add(summary);    
+                    }
+                    
                 }
             }
 

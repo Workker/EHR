@@ -101,7 +101,7 @@ namespace EHR.UI.Controllers
         {
             var patient = new PatientDTO { Name = Session["Name"].ToString() };
 
-            if (Session["Date"] != null && !string.IsNullOrEmpty(Session["Date"].ToString()) && (string)Session["Date"] != "//")
+            if (Session["Date"] != null && !string.IsNullOrEmpty(Session["Date"].ToString()) && (string)Session["Date"] != "-1/-1/-1")
                 patient.DateBirthday = Convert.ToDateTime(Session["Date"]);
             return patient;
         }
