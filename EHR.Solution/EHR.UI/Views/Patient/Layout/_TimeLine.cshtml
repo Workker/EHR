@@ -1,21 +1,40 @@
-﻿@using EHR.UI.Models
+﻿@using EHR.Domain.Entities
+@using EHR.Domain.Util
+@using EHR.UI.Models
 @model PatientModel
 <ul class="timeline" id="collapser">
-    @foreach (TreatmentModel treatment in Model.Treatments)
-    {
-        <li><a href="../../Patient/?cpf=@Model.CPF&treatment=@treatment.Id">@treatment.EntryDate.ToShortDateString()</a></li>    
+    <li><a>Agora</a></li>
+    @{
+        int year = 0;
+        foreach (var treatmentYear in Model.Treatments)
+        {
+            if (treatmentYear.EntryDate.Year != year)
+            {
+                year = treatmentYear.EntryDate.Year;
+                @:<li><a href="#" tabindex="-1">@year</a>
+                @:<ul class="clearfix">
+                int month = 0;
+                foreach (var treatmentMonth in Model.Treatments)
+                {
+                    if (treatmentMonth.EntryDate.Month != month && treatmentMonth.EntryDate.Year == year)
+                    {
+                        month = treatmentMonth.EntryDate.Month;
+                        @:<li><a href="#">@(EnumUtil.GetDescriptionFromEnumValue((MonthEnum)Enum.Parse(typeof(MonthEnum), month.ToString())) + "  ")</a>
+                        @:<ul class="clearfix">
+                        foreach (var treatment in Model.Treatments)
+                        {
+                            if (treatment.EntryDate.Month == month && treatment.EntryDate.Year == year)
+                            {
+                                @:<li><a href="../../Patient/?cpf=@Model.CPF&treatment=@treatment.Id">@treatment.EntryDate.Day</a></li>
+                            }
+                        }
+                        @:</ul>
+                        @:</li>
+                    }
+                }
+                @:</ul>
+                @:</li>
+            }
+        }
     }
-    @*<li><a href="#" tabindex="-1">2011</a>
-        <ul class="clearfix">
-            <li><a href="#">September</a></li>
-            <li><a href="#">August</a></li>
-            <li><a href="#">July</a></li>
-            <li><a href="#">June</a></li>
-            <li><a href="#">May</a></li>
-            <li><a href="#">April</a></li>
-            <li><a href="#">March</a></li>
-            <li><a href="#">February</a></li>
-            <li><a href="#">January</a></li>
-        </ul>
-    </li>*@
 </ul>
