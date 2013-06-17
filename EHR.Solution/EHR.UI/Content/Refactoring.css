@@ -3439,7 +3439,7 @@ div._211 ._213:active, div._211 ._214:active, div._211 ._213, div._211 ._214 { b
 .MercuryVideoIcon i { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yB/x/quDgQijldvy.png); background-repeat: no-repeat; background-size: auto; background-position: -18px -135px; }
 .MercuryMusicIcon i { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yB/x/quDgQijldvy.png); background-repeat: no-repeat; background-size: auto; background-position: -119px -135px; }
 .MercuryTextIcon i { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/fTPTMvuTSEe.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -331px; }
-.MercuryDefaultIcon i { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -81px -95px; }
+.MercuryDefaultIcon i {  background-repeat: no-repeat; background-size: auto; background-position: -81px -95px; }
 .MercuryErrorIcon i { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yB/x/quDgQijldvy.png); background-repeat: no-repeat; background-size: auto; background-position: -170px -118px; }
 .MercuryMSWordIcon i { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/fTPTMvuTSEe.png); background-repeat: no-repeat; background-size: auto; background-position: -198px -289px; }
 .MercuryMSPPTIcon i { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/fTPTMvuTSEe.png); background-repeat: no-repeat; background-size: auto; background-position: -181px -289px; }
@@ -5741,9 +5741,9 @@ label._11b { padding: 2px 16px; }
     .no_js #navAccount:hover #navAccountLink, #navAccount.openToggler #navAccountLink { background-color: #fff; border: 1px solid #333; border-bottom: 0; color: #333; margin: -1px -1px 0 -2px; position: relative; z-index: 2; }
         .no_js #navAccountLink:hover, #navAccount.openToggler #navAccountLink:hover, #navAccount.openToggler #navAccountLink:focus, #navAccount.openToggler #navAccountLink:active { background-color: #fff; }
     .no_js #navAccount:hover #navAccountLink, #pageNav #navAccount.openToggler #navAccountLink { padding-left: 0; }
-#navAccountLink .menuPulldown { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -57px -118px; height: 31px; overflow: hidden; text-indent: -5000px; width: 24px; }
-#navAccountLink:hover .menuPulldown { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -2px -254px; }
-.no_js #navAccount:hover #navAccountLink .menuPulldown, #navAccount.openToggler #navAccountLink .menuPulldown, #navAccount.openToggler #navAccountLink:hover .menuPulldown { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png) !important; background-repeat: no-repeat !important; background-size: auto !important; background-position: -77px -219px !important; background-color: #fff; }
+#navAccountLink .menuPulldown { background-repeat: no-repeat; background-size: auto; height: 31px; overflow: hidden; text-indent: -5000px; width: 24px; }
+#navAccountLink:hover .menuPulldown { background-repeat: no-repeat; background-size: auto; background-position: -2px -254px; }
+.no_js #navAccount:hover #navAccountLink .menuPulldown, #navAccount.openToggler #navAccountLink .menuPulldown, #navAccount.openToggler #navAccountLink:hover .menuPulldown { background-repeat: no-repeat !important; background-size: auto !important; background-position: -77px -219px !important; background-color: #fff; }
 #navAccount .contextualHelp, #navAccount .navigation { background: #fff; border: 1px solid #333; border-bottom: 2px solid #333; margin-top: -1px; padding: 4px 0; position: absolute; right: -1px; top: 100%; z-index: 1; }
 #navAccount #accountSettingsFlyout .navigation { border: 0; margin-top: 2px; position: relative; width: 200px; }
 #navAccount #accountSettingsFlyout { left: -171px; margin-top: -1px; width: 202px; }
@@ -5851,16 +5851,16 @@ div.homeWiderContent .megaphone_box { margin-left: -18px; margin-top: -5px; }
     .notifNegativeBase .fbJewelFlyout .jewelItemList { padding: 0; }
     .notifNegativeBase .fbJewelFlyout .uiScrollableAreaContent { padding-bottom: 1px; }
     .notifNegativeBase .fbJewelFlyout li.jewelItemNew { background-color: transparent; }
-    .notifNegativeBase .fbJewelFlyout .beeperNub, #tinymanNavWrapper .fbJewelFlyout .beeperNub { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -82px -12px; height: 11px; position: absolute; top: -11px; width: 20px; }
+    .notifNegativeBase .fbJewelFlyout .beeperNub, #tinymanNavWrapper .fbJewelFlyout .beeperNub {  background-repeat: no-repeat; background-size: auto; background-position: -82px -12px; height: 11px; position: absolute; top: -11px; width: 20px; }
 .notifNegativeBase .timestamp { font-size: 11px; color: #999; }
 .notifNegativeBase .fbJewelFlyout .jewelHeader, #tinymanNavWrapper .fbJewelFlyout .jewelHeader { border-bottom: solid 1px #ddd; border-bottom: solid 1px rgba(100, 100, 100, .22); -webkit-background-clip: padding-box; z-index: 100; position: relative; padding: 8px 8px 6px 8px; background-color: #fff; -webkit-border-top-left-radius: 3px; -webkit-border-top-right-radius: 3px; }
 .notifNegativeBase .fbJewelFlyout .jewelFooter a { background-color: #f7f7f7; border-top: 1px solid #c5c5c5; -webkit-border-bottom-left-radius: 3px; -webkit-border-bottom-right-radius: 3px; position: relative; z-index: 100; }
     .notifNegativeBase .fbJewelFlyout .jewelFooter a:hover, .notifNegativeBase .fbJewelFlyout .jewelFooter a:active, .notifNegativeBase .fbJewelFlyout .jewelFooter a:focus { background-color: #f7f7f7; border-top: 1px solid #c5c5c5; color: #3b5998; outline: none; text-decoration: underline; }
         .notifNegativeBase .fbJewelFlyout .jewelFooter a:hover .seeMoreCount, .notifNegativeBase .fbJewelFlyout .jewelFooter a:active .seeMoreCount, .notifNegativeBase .fbJewelFlyout .jewelFooter a:focus .seeMoreCount { color: gray; }
-#fbMessagesJewel a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -31px -85px; }
-    #fbMessagesJewel a.jewelButton:active, #fbMessagesJewel a.jewelButton:focus, #fbMessagesJewel a.jewelButton:hover { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -31px -50px; }
-#fbMessagesJewel.hasNew a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -50px -221px; }
-#fbMessagesJewel.openToggler a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png) !important; background-repeat: no-repeat !important; background-size: auto !important; background-position: -56px -50px !important; }
+#fbMessagesJewel a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: -31px -85px; }
+    #fbMessagesJewel a.jewelButton:active, #fbMessagesJewel a.jewelButton:focus, #fbMessagesJewel a.jewelButton:hover {  background-repeat: no-repeat; background-size: auto; background-position: -31px -50px; }
+#fbMessagesJewel.hasNew a.jewelButton { background-repeat: no-repeat; background-size: auto; background-position: -50px -221px; }
+#fbMessagesJewel.openToggler a.jewelButton { background-repeat: no-repeat !important; background-size: auto !important; background-position: -56px -50px !important; }
 #fbMessagesFlyout li a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #fbMessagesFlyout .content { display: block; width: auto; }
 #fbMessagesFlyout .author { color: #3b5998; font-weight: bold; padding-top: 2px; white-space: normal; }
@@ -5870,7 +5870,7 @@ div.homeWiderContent .megaphone_box { margin-left: -18px; margin-top: -5px; }
 #fbMessagesFlyout a:hover .author, #fbMessagesFlyout a:hover .preview, #fbMessagesFlyout a:hover .subject, #fbMessagesFlyout a:hover .time { color: #fff; }
 .notifNegativeBase #fbMessagesFlyout { left: -128px; }
     .notifNegativeBase #fbMessagesFlyout .beeperNub { left: 130px; }
-.notifNegativeBase #fbMessagesJewel.openToggler a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png) !important; background-repeat: no-repeat !important; background-size: auto !important; background-position: -50px -286px !important; }
+.notifNegativeBase #fbMessagesJewel.openToggler a.jewelButton { background-repeat: no-repeat !important; background-size: auto !important; background-position: -50px -286px !important; }
 .notifNegativeBase #fbMessagesFlyout .author, .notifNegativeBase #fbMessagesFlyout a.messagesContent:hover .author, .notifNegativeBase #fbMessagesFlyout .subject, .notifNegativeBase #fbMessagesFlyout a.messagesContent:hover .subject { color: #333; }
 .notifNegativeBase #fbMessagesFlyout .preview, .notifNegativeBase #fbMessagesFlyout a.messagesContent:hover .preview { color: gray; padding-top: 1px; }
 .notifNegativeBase #fbMessagesFlyout .time .timestamp, .notifNegativeBase #fbMessagesFlyout a.messagesContent:hover .time .timestamp { color: #9d9d9d; font-size: 9px; padding-top: 2px; display: block; }
@@ -5882,14 +5882,14 @@ div.homeWiderContent .megaphone_box { margin-left: -18px; margin-top: -5px; }
 .notifNegativeBase #fbMessagesFlyout .jewelContent li.jewelItemNew a.messagesContent:hover, .notifNegativeBase #fbMessagesFlyout .jewelContent li.jewelItemNew a.messagesContent:active, .notifNegativeBase #fbMessagesFlyout .jewelContent li.jewelItemNew a.messagesContent:focus { background-color: #e7ebf2 !important; border-color: #d1d8e7; }
 .notifNegativeBase .fbJewelFlyout .jewelHighlight a.messagesContent:hover span, .notifNegativeBase .fbJewelFlyout .jewelHighlight a.messagesContent:active span, .notifNegativeBase .fbJewelFlyout .jewelHighlight a.messagesContent:focus span, .notifNegativeBase .fbJewelFlyout .jewelHighlight a.messagesContent:hover div, .notifNegativeBase .fbJewelFlyout .jewelHighlight a.messagesContent:active div, .notifNegativeBase .fbJewelFlyout .jewelHighlight a.messagesContent:focus div { color: gray; }
 .notifNegativeBase .fbJewelFlyout .jewelItemList { padding: 0; }
-#fbNotificationsJewel.west a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -25px -186px; }
-    #fbNotificationsJewel.west a.jewelButton:active, #fbNotificationsJewel.west a.jewelButton:focus, #fbNotificationsJewel.west a.jewelButton:hover { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -56px -85px; }
-#fbNotificationsJewel.west.hasNew a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -186px; }
-#fbNotificationsJewel.west.openToggler a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -286px; }
-#fbNotificationsJewel.east a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -27px -254px; }
-    #fbNotificationsJewel.east a.jewelButton:active, #fbNotificationsJewel.east a.jewelButton:focus, #fbNotificationsJewel.east a.jewelButton:hover { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -77px -254px; }
-#fbNotificationsJewel.east.hasNew a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -52px -254px; }
-#fbNotificationsJewel.east.openToggler a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -25px -286px; }
+#fbNotificationsJewel.west a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: -25px -186px; }
+    #fbNotificationsJewel.west a.jewelButton:active, #fbNotificationsJewel.west a.jewelButton:focus, #fbNotificationsJewel.west a.jewelButton:hover {  background-repeat: no-repeat; background-size: auto; background-position: -56px -85px; }
+#fbNotificationsJewel.west.hasNew a.jewelButton { background-repeat: no-repeat; background-size: auto; background-position: 0 -186px; }
+#fbNotificationsJewel.west.openToggler a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: 0 -286px; }
+#fbNotificationsJewel.east a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: -27px -254px; }
+    #fbNotificationsJewel.east a.jewelButton:active, #fbNotificationsJewel.east a.jewelButton:focus, #fbNotificationsJewel.east a.jewelButton:hover { background-repeat: no-repeat; background-size: auto; background-position: -77px -254px; }
+#fbNotificationsJewel.east.hasNew a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: -52px -254px; }
+#fbNotificationsJewel.east.openToggler a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: -25px -286px; }
 .notifNegativeBase #fbNotificationsFlyout .blueName { color: #333; font-weight: bold; }
 #fbNotificationsFlyout .staticAppIcon { background-position: right; height: 16px; width: 16px; }
 #fbNotificationsFlyout .selected .staticAppIcon { background-position: left; }
@@ -5923,9 +5923,9 @@ div.homeWiderContent .megaphone_box { margin-left: -18px; margin-top: -5px; }
 #fbNotificationsFlyout .beeperArea, #fbNotificationsFlyout.hasBeeps .aggregatedNotifs { display: none; }
 #fbNotificationsFlyout.hasBeeps .beeperArea { display: block; }
 #fbNotificationsJewel #fbNotificationsFlyout .jewelItemList li:first-child a.notifMainLink { border-top: none; }
-#fbRequestsJewel a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -25px -221px; }
-    #fbRequestsJewel a.jewelButton:active, #fbRequestsJewel a.jewelButton:focus, #fbRequestsJewel a.jewelButton:hover { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -50px -186px; }
-#fbRequestsJewel.hasNew a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -75px -186px; }
+#fbRequestsJewel a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: -25px -221px; }
+    #fbRequestsJewel a.jewelButton:active, #fbRequestsJewel a.jewelButton:focus, #fbRequestsJewel a.jewelButton:hover {  background-repeat: no-repeat; background-size: auto; background-position: -50px -186px; }
+#fbRequestsJewel.hasNew a.jewelButton {  background-repeat: no-repeat; background-size: auto; background-position: -75px -186px; }
 #fbRequestsJewel.openToggler a.jewelButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png) !important; background-repeat: no-repeat !important; background-size: auto !important; background-position: 0 -221px !important; }
 #fbRequestsFlyout ul.jewelItemList { padding: 0; }
 #fbRequestsFlyout li { padding: 4px 8px; }
@@ -5968,9 +5968,9 @@ div.homeWiderContent .megaphone_box { margin-left: -18px; margin-top: -5px; }
     #fbRequestsJewel #fbRequestsFlyout #fbRequestsJewelManualPager a { padding: 0; line-height: 30px; }
         #fbRequestsJewel #fbRequestsFlyout #fbRequestsJewelManualPager a:hover { background-color: #fff; }
     #fbRequestsJewel #fbRequestsFlyout #fbRequestsJewelManualPager img { vertical-align: middle; }
-#blueBarHolder .voiceBarToggle .pagesVoiceTab { background-color: #6d84b4; display: none; background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -47px -331px; height: 6px; left: 10px; position: relative; top: -3px; width: 11px; z-index: 1; }
+#blueBarHolder .voiceBarToggle .pagesVoiceTab { background-color: #6d84b4; display: none;  background-repeat: no-repeat; background-size: auto; background-position: -47px -331px; height: 6px; left: 10px; position: relative; top: -3px; width: 11px; z-index: 1; }
 .hasVoiceBar #blueBarHolder .voiceBarToggle .pagesVoiceTab { display: block; }
-#blueBarHolder .voiceBarToggle a:hover .pagesVoiceTab, #blueBarHolder .voiceBarToggle a:focus .pagesVoiceTab, #blueBarHolder .voiceBarToggle a:active .pagesVoiceTab { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -62px -318px; }
+#blueBarHolder .voiceBarToggle a:hover .pagesVoiceTab, #blueBarHolder .voiceBarToggle a:focus .pagesVoiceTab, #blueBarHolder .voiceBarToggle a:active .pagesVoiceTab {  background-repeat: no-repeat; background-size: auto; background-position: -62px -318px; }
 .pagesVoiceBar { background-color: #6d84b4; border-bottom: solid #3B5998 1px; border-top: solid #1A356E 1px; color: #fff; display: none; height: 26px; position: relative; width: 100%; }
 .hasVoiceBar .pagesVoiceBar { display: block; }
 .pagesVoiceBar #pagesVoiceBarContent { margin: 0 auto; padding: 3px 0; position: relative; width: 981px; }
@@ -5985,11 +5985,11 @@ div.homeWiderContent .megaphone_box { margin-left: -18px; margin-top: -5px; }
 .uiTypeaheadView .search li { min-height: 50px; padding: 2px 30px 2px 63px; }
     .uiTypeaheadView .search li a { outline: none; }
         .uiTypeaheadView .search li a:hover { text-decoration: none; }
-.uiTypeaheadView .search .playButton { height: 30px; left: 16px; top: 12px; position: absolute; width: 30px; background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 0; }
-.uiTypeaheadView .search a:hover .playButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -30px; }
-.uiTypeaheadView .search .music_playing a .playButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -60px; }
-.uiTypeaheadView .search .music_playing a:hover .playButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -90px; }
-.uiTypeaheadView .search .song.async_saving a .playButton { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -120px; }
+.uiTypeaheadView .search .playButton { height: 30px; left: 16px; top: 12px; position: absolute; width: 30px;  background-repeat: no-repeat; background-size: auto; background-position: 0 0; }
+.uiTypeaheadView .search a:hover .playButton {  background-repeat: no-repeat; background-size: auto; background-position: 0 -30px; }
+.uiTypeaheadView .search .music_playing a .playButton {  background-repeat: no-repeat; background-size: auto; background-position: 0 -60px; }
+.uiTypeaheadView .search .music_playing a:hover .playButton {  background-repeat: no-repeat; background-size: auto; background-position: 0 -90px; }
+.uiTypeaheadView .search .song.async_saving a .playButton {  background-repeat: no-repeat; background-size: auto; background-position: 0 -120px; }
 .uiTypeaheadView .search .song.async_saving a .playLoader { position: absolute; width: 14px; height: 14px; left: 24px; top: 20px; background: url(http://static.ak.fbcdn.net/rsrc.php/v2/y8/x/DrGcdjdlpCl.gif) no-repeat; }
 .uiTypeaheadView .search img { background-color: #eceff5; display: block; height: 50px; left: 6px; position: absolute; width: 50px; }
 .uiTypeaheadView .search .text { color: #3b5998; font-weight: bold; }
@@ -6003,12 +6003,12 @@ div.homeWiderContent .megaphone_box { margin-left: -18px; margin-top: -5px; }
     .uiTypeaheadView .search .websuggestion .text, .uiTypeaheadView .search .websuggestion .shiftedtext { display: inline; }
     .uiTypeaheadView .search .websuggestion .shiftedtext { margin-left: 20px; }
     .uiTypeaheadView .search .websuggestion .subtext { display: inline; margin-left: 5px; white-space: nowrap; }
-    .uiTypeaheadView .search .websuggestion img { width: 16px; height: 16px; display: inline; position: absolute; background: none; background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: -82px -118px; }
+    .uiTypeaheadView .search .websuggestion img { width: 16px; height: 16px; display: inline; position: absolute; background: none;  background-repeat: no-repeat; background-size: auto; background-position: -82px -118px; }
 .uiTypeaheadView .search .group .photo, .uiTypeaheadView .search .friendlist .photo { background-color: transparent; }
 .uiTypeaheadView .search .text .alias { color: #999; font-weight: normal; }
 .uiTypeaheadView .debug { background-color: #fff; border: 1px solid #d8dfea; }
 div div.wideSearchTypeaheadView { width: 475px; }
-.uiTypeaheadView.mainSearchTypeaheadView .search .report { width: 15px; height: 15px; right: 4px; top: 4px; position: absolute; background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-repeat: no-repeat; background-size: auto; background-position: 0 -344px; }
+.uiTypeaheadView.mainSearchTypeaheadView .search .report { width: 15px; height: 15px; right: 4px; top: 4px; position: absolute;  background-repeat: no-repeat; background-size: auto; background-position: 0 -344px; }
 span.FollowLink .followLinkInlineCheck { display: inline; margin-right: 4px; }
 .followLinkSubscribed { cursor: default; }
 .uiSideNavCountSpritedRed { display: inline-block; font-weight: bold; line-height: 13px; /* @noflip */ padding-right: 4px; text-decoration: none; }
@@ -6102,7 +6102,7 @@ body.hasViewasChromeBar .fbTimelineStickyHeader { padding-top: 39px; }
 .sx_8ac726 { width: 30px; height: 32px; background-position: 0 -75px; }
 .sx_f52aa2 { width: 111px; height: 74px; background-position: 0 0; }
 .sx_b677ba { width: 11px; height: 13px; background-position: -94px -75px; }
-.sp_321njy { background-image: url(http://static.ak.fbcdn.net/rsrc.php/v2/yo/x/FIzYUnngBFt.png); background-size: auto; background-repeat: no-repeat; display: inline-block; height: 31px; width: 24px; }
+.sp_321njy {  background-size: auto; background-repeat: no-repeat; display: inline-block; height: 31px; width: 24px; }
 .sx_2dec1b { width: 10px; height: 10px; background-position: -67px -344px; }
 .sx_3747c6 { width: 16px; height: 16px; background-position: -82px -118px; }
 .sx_302a60 { width: 7px; height: 7px; background-position: 0 -360px; }
