@@ -1,6 +1,9 @@
-﻿<ul class="ulTable _4kg  _4ks">
+﻿@model EHR.UI.Models.SummaryModel
+<h3>Diagn&oacute;sticos</h3>
+<br />
+<ul class="ulTable _4kg  _4ks">
     @{
-        Html.RenderPartial("GeneralData/_DiagnosticTableRow");
+        Html.RenderPartial("GeneralData/_DiagnosticTableRow", Model);
     }
     <li class="clearfix">
         <div class="clearfix">

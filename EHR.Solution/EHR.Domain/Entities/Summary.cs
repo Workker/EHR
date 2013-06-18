@@ -39,10 +39,10 @@ namespace EHR.Domain.Entities
             get { return _procedures ?? (_procedures = new List<Procedure>()); }
         }
 
-        private IList<Drug> _drugs;
-        public virtual IList<Drug> Drugs
+        private IList<Medication> _drugs;
+        public virtual IList<Medication> Drugs
         {
-            get { return _drugs ?? (_drugs = new List<Drug>()); }
+            get { return _drugs ?? (_drugs = new List<Medication>()); }
         }
 
         private IList<Hemotransfusion> _hemotransfusions;
@@ -53,6 +53,8 @@ namespace EHR.Domain.Entities
 
         public virtual IPatientDTO Patient { get; set; }
         public virtual ITreatmentDTO Treatment { get; set; }
+
+        public virtual string Mdr { get; set; }
 
         #endregion
 

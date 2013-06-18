@@ -2,10 +2,10 @@
 @using EHR.Domain.Util
 @using EHR.UI.Models
 
-@foreach (AllergyModel allergy in @ViewBag.Allergies)
+@foreach (AllergyModel allergy in ViewBag.Allergies)
 {
     <li class="clearfix">
-        <span class="firstColumn">@allergy.TheWitch</span>
+        <span class="firstColumn">@allergy.TheWhich</span>
         <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteAllergy/?id=@allergy.Id", null)'><span>X</span></a>
         @* <a class="action" title="Editar registro" onclick='editRow("../Patient/AllergyForm/?id=@allergy.Id", null, this);'>
             <span>Editar</span></a>*@

@@ -1,19 +1,16 @@
-﻿<form>
-    <fieldset name="colonizationByMDR">
-        <legend class="legenda">Colonização por MDR</legend>
-        <hr/>
-        <br />
-        <input type="radio" name="MDR" />
-        Sim &nbsp;&nbsp;
-        <input type="radio" name="MDR" />
-        Não<br />
-        <br />
-        <label>Descrição:</label><br />
-        <textarea style="width: 690px"></textarea>
-    </fieldset>
-    <br />
+﻿<form id="ColonizationByMDR">
+    <h3>Colonização por MDR</h3>
     <hr />
     <br />
-    <input type="submit" value="Save Changes" class="uibutton large confirm" />&nbsp;&nbsp;
-    <input type="reset" value="Cancel" class="uibutton large" />
+    <input type="radio" name="haveMDR" required value="true" onchange="Display($(this).next().next(), true)" />&nbsp;Sim&nbsp;
+    <input type="radio" name="haveMDR" value="false" checked onchange="Display($(this).next(), false)" />&nbsp;N&atilde;o
+    <div style="display: none;">
+        <br />
+        <label>Descri&ccedil;&atilde;o:</label><br />
+        <textarea rows="10" cols="90" maxlength="1000"></textarea>
+        <br />
+        <br />
+        <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+        <input type="reset" value="Cancelar" onclick="Display($(this).parent(), false)" class="uibutton large" />
+    </div>
 </form>

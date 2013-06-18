@@ -1,4 +1,4 @@
-﻿@model EHR.UI.Models.PatientModel
+﻿@model EHR.UI.Models.SummaryModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,17 +14,17 @@
             <div id="contentCol" class="fixed_elem">
                 <div id="content" class="clearfix">
                     <div class="header">
-                        @{Html.RenderPartial("Layout/_ProfileHeader", Model);}
+                        @{Html.RenderPartial("Layout/_ProfileHeader", Model.Patient);}
                     </div>
                     <aside id="timeLine" class="lfloat">
-                        @{Html.RenderPartial("Layout/_TimeLine", Model);}
+                        @{Html.RenderPartial("Layout/_TimeLine", Model.Patient);}
                     </aside>
                     <div class="verticalLine"></div>
                     <aside class="lfloat Menu">
                         @{Html.RenderPartial("Layout/_Data");}
                     </aside>
                     <div id="center" class="lfloat contentPage">
-                        @{Html.RenderPartial("_GeneralData");}
+                        @{Html.RenderPartial("_GeneralData", Model);}
                     </div>
                 </div>
             </div>

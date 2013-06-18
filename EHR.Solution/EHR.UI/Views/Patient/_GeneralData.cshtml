@@ -1,4 +1,5 @@
-﻿<h1>Dados Gerais</h1>
+﻿@model EHR.UI.Models.SummaryModel
+<h1>Dados Gerais</h1>
 <hr />
 <br />
 <h3>Admiss&atilde;o</h3>
@@ -6,61 +7,39 @@
 <label>Motivo da admiss&atilde;o:</label>&nbsp;
 <input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
 <br />
-<br />
 <hr />
-<br />
 @{
     Html.RenderPartial("GeneralData/_AllergyTable");
 }
 <br />
+<hr />
+@{
+    Html.RenderPartial("GeneralData/_DiagnosticsTable", Model);
+}
 <br />
 <hr />
+@{
+    Html.RenderPartial("GeneralData/_MedicamentOfPreviousUseTable");
+}
 <br />
-<fieldset id="diagnosticos">
-    <legend>Diagn&oacute;sticos</legend>
-    <br />
-    @{
-        Html.RenderPartial("GeneralData/_DiagnosticsTable");
-    }
-    <br />
-    <br />
-    <hr />
-    <br />
-</fieldset>
-@*<fieldset id="medicamentOfPreviousUse">
-    <legend>Medicamentos de Uso Pr&eacute;vio</legend>
-    <br />
-    @{
-        Html.RenderPartial("GeneralData/_MedicamentOfPreviousUseTable");
-    }
-    <br />
-    <br />
-    <hr />
-    <br />
-</fieldset>
-<fieldset id="MedicamentUsedDuringhospitalization">
-    <legend>Medicamentos Utilizados Durante a Internação</legend>
-    <br />
-    @{
-        Html.RenderPartial("GeneralData/_MedicamentUsedDuringhospitalizationTable");
-    }
-    <br />
-    <br />
-    <hr />
-    <br />
-</fieldset>*@
+<hr />
+@{
+    Html.RenderPartial("GeneralData/_MedicamentUsedDuringhospitalizationTable");
+}
+<br />
+<hr />
 @*<label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
 <form>
     <textarea rows="10" cols="90" maxlength="1000" id="observation" name="observation"></textarea>
 </form>*@
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
-                theme: "facebook"
-            });
-            ToggleAllergy();
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
+            theme: "facebook"
         });
-        $('#observation').focusout(function () {
-            SaveObsevation();
-        });
-    </script>
+        ToggleAllergy();
+    });
+    $('#observation').focusout(function () {
+        SaveObsevation();
+    });
+</script>

@@ -28,7 +28,14 @@ namespace EHR.Controller
         public virtual IPatientDTO GetBy(string cpf) { return null; }
         public virtual IList<IPatientDTO> GetBy(PatientDTO dto) { return null; }
         public virtual IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital) { return null; }
-        public virtual Summary GetSummaryBy(IPatientDTO patient,string treatment,int Id) { return null; }
+        public virtual Summary GetSummaryBy(IPatientDTO patient, string treatment, int idAccount) { return null; }
+
+        #endregion
+
+        #region Summary
+
+        public virtual void SaveMdr(int summaryId, string mdr) { }
+        public virtual Summary GetBy(int id) { return null; }
 
         #endregion
 
@@ -47,29 +54,29 @@ namespace EHR.Controller
 
         #region Procedure
 
-        public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, Summary summary) { }
-        public virtual void RemoveProcedure(Summary summary, int id) { }
+        public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, int idSummary) { }
+        public virtual void RemoveProcedure(int idSummary, int id) { }
 
         #endregion
 
         #region Allergy
 
-        public virtual void SaveAllergy(string theWitch, IList<short> types, Summary summary) { }
-        public virtual void RemoveAllergy(Summary summary, int id) { }
+        public virtual void SaveAllergy(string theWitch, IList<short> types, int idSummary) { }
+        public virtual void RemoveAllergy(int idSummary, int id) { }
 
         #endregion
 
         #region Diagnostic
 
-        public virtual void SaveDiagnostic(string diagnosticType, string cid, Summary summary) { }
-        public virtual void RemoveDiagnostic(Summary summary, int id) { }
+        public virtual void SaveDiagnostic(string diagnosticType, string cid, int idSummary) { }
+        public virtual void RemoveDiagnostic(int idSummary, int id) { }
 
         #endregion
 
         #region Hemotransfusion
 
-        public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, Summary summary) { }
-        public virtual void RemoveHemotransfusion(Summary summary, int id) { }
+        public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, int idSummary) { }
+        public virtual void RemoveHemotransfusion(int idSummary, int id) { }
 
         #endregion
     }

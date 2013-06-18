@@ -26,15 +26,14 @@ namespace EHR.Controller
                 reactionTypes = value;
             }
         }
-        
 
-        public override void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, Summary summary)
+
+        public override void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, int idSummary)
         {
-            Assertion.NotNull(summary, "Não existe nenhum sumário selecionado para inserir o procedimento.").Validate();
-            Assertion.NotNull(summary, "Sumário não informado.").Validate();
+            var summary = Summaries.Get<Summary>(idSummary);
 
             List<ReactionType> reactions = GetReactions(typeReaction);
-            var hemoType = HemotransfusionTypes.Get(short.Parse( typeHemotrasfusion));
+            var hemoType = HemotransfusionTypes.Get(short.Parse(typeHemotrasfusion));
 
             summary.CreateHemotransfusion(hemoType, reactions);
 
@@ -65,10 +64,11 @@ namespace EHR.Controller
             reactions.Add(reaction);
         }
 
-        public override void RemoveHemotransfusion(Summary summary, int id)
+        public override void RemoveHemotransfusion(int idSummary, int id)
         {
-            Assertion.NotNull(summary, "Sumário não informado.").Validate();
+
             Assertion.GreaterThan(id, 0, "Hemotransfusão não informada.").Validate();
+            var summary = Summaries.Get<Summary>(idSummary);
 
             summary.RemoveHemotransfusion(id);
             Summaries.Save(summary);

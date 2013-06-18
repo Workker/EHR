@@ -14,6 +14,7 @@ namespace EHR.Domain.Mapping
             Map(s => s.CodeMedicalRecord);
             Map(s => s.Hospital);
             Map(s => s.EntryDateTreatment);
+            Map(s => s.Mdr);
             References(s => s.Admission);
             HasMany(s => s.Diagnostics).Cascade.AllDeleteOrphan();
             HasMany(s => s.Allergies).Cascade.AllDeleteOrphan();

@@ -115,23 +115,23 @@ $(document).ready(function () {
         data: ''
     }).sethscCorner();
 
-    //Menu.add({
-    //    Title: 'Colonização MDR',
-    //    onOutIcon: '../../Images/mdr.png',
-    //    onClickIcon: '../../Images/mdr.png',
-    //    HtmlSatusContent: '',
-    //    url: '/Patient/ColonizationbyMdr',
-    //    data: ''
-    //}).sethscCorner();
+    Menu.add({
+        Title: 'MDR',
+        onOutIcon: '../../Images/mdr.png',
+        onClickIcon: '../../Images/mdr.png',
+        HtmlSatusContent: '',
+        url: '/Patient/ColonizationbyMdr',
+        data: ''
+    }).sethscCorner();
 
-    //Menu.add({
-    //    Title: 'Receituário',
-    //    onOutIcon: '../../Images/receituario.png',
-    //    onClickIcon: '../../Images/receituario.png',
-    //    HtmlSatusContent: '',
-    //    url: '/Patient/Prescriptions',
-    //    data: ''
-    //}).sethscCorner();
+    Menu.add({
+        Title: 'Prescrição de Alta',
+        onOutIcon: '../../Images/receituario.png',
+        onClickIcon: '../../Images/receituario.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Prescriptions',
+        data: ''
+    }).sethscCorner();
 
     //Menu.add({
     //    Title: 'Dados da Alta',

@@ -1,11 +1,11 @@
 ﻿@using EHR.UI.Models
 <div class="lfloat width50P">
     <h1 class="bottomLine">Últimos Sum&aacute;rios Realizados</h1>
-    @foreach (SumaryModel sumaryModel in ViewBag.Summaries)
+    @foreach (SummaryModel summaryModel in ViewBag.Summaries)
     {
 
     }
-    @if (((List<SumaryModel>)ViewBag.Summaries).Count > 0)
+    @if (((List<SummaryModel>)ViewBag.Summaries).Count > 0)
     {
         <div class="clearfix uiMorePager uiMorePagerCenter showMore">
             <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore("../Home/MoreSumaries", this)'>Exibir mais</a>

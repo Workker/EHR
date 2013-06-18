@@ -30,7 +30,7 @@ namespace EHR.Controller
             return service.AdvancedGetPatientBy(dto, hospital);
         }
 
-        public override Summary GetSummaryBy(IPatientDTO patient, string treatment, int Id)
+        public override Summary GetSummaryBy(IPatientDTO patient, string treatment, int idAccount)
         {
             var summaries = new Summaries();
             var accounts = new Accounts();
@@ -45,7 +45,7 @@ namespace EHR.Controller
             {
                 if (patient.Treatments != null && patient.Treatments.Count > 0)
                 {
-                    summary = CreateMedicalRecord(patient, Id, accounts, treatment);
+                    summary = CreateMedicalRecord(patient, idAccount, accounts, treatment);
                     summaries.Save(summary);
                 }
             }
@@ -78,5 +78,6 @@ namespace EHR.Controller
                 summary = summaries.GetSummaryByTreatment(patient.CPF, treatment);
             return summary;
         }
+
     }
 }

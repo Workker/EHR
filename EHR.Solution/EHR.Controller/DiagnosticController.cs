@@ -1,9 +1,8 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 using EHR.Domain.Repository;
-using System.Collections.Generic;
-using System.Linq;
 using EHR.Domain.Service.Lucene;
-using EHR.CoreShared;
+using System.Collections.Generic;
 using Workker.Framework.Domain;
 
 namespace EHR.Controller
@@ -50,22 +49,22 @@ namespace EHR.Controller
             return GetCidLucene.GetCid(term);
         }
 
-        public override void SaveDiagnostic(string diagnosticType, string cid, Summary summary)
+        public override void SaveDiagnostic(string diagnosticType, string cid, int idSummary)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(diagnosticType), "Tipo do diagnostico não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(cid), "Cid não informado.").Validate();
-            Assertion.NotNull(summary, "Sumário foi encontrado, por favor selecione um sumário de alta.").Validate();
+
+            var summary = Summaries.Get<Summary>(idSummary);
 
             var cidObj = CidsRepository.GetByCode(cid);
             var typeDiagnostic = DiagnosticTypes.Get(short.Parse(diagnosticType));
             summary.CreateDiagnostic(typeDiagnostic, cidObj);
             Summaries.Save(summary);
-
-
         }
 
-        public override void RemoveDiagnostic(Summary summary, int id)
+        public override void RemoveDiagnostic(int idSummary, int id)
         {
+            var summary = Summaries.Get<Summary>(idSummary);
             summary.RemoveDiagnostic(id);
             Summaries.Save(summary);
         }

@@ -1,6 +1,6 @@
 ﻿namespace EHR.Domain.Entities
 {
-    public enum DrugTypeEnum
+    public enum MedicationTypeEnum : short
     {
         DrugUseBefore = 1,
         DrugUseDuring = 2,

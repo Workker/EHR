@@ -41,7 +41,7 @@ namespace EHR.UI.Controllers
         {
             var account = (AccountModel)Session["account"];
             var sumaries = FactoryController.GetController(ControllerEnum.Account).GetSumaries(account.Id).Take(10);
-            ViewBag.Summaries = new List<SumaryModel>();
+            ViewBag.Summaries = new List<SummaryModel>();
             return PartialView("_LastSumariesList");
         }
 
@@ -129,29 +129,29 @@ namespace EHR.UI.Controllers
 
         #region Summary
 
-        private IEnumerable<SumaryModel> GetSummaries(bool skip)
+        private IEnumerable<SummaryModel> GetSummaries(bool skip)
         {
             ManagerSession(skip);
             var account = (AccountModel)Session["account"];
             return GetSummaries(account, skip);
         }
 
-        private IEnumerable<SumaryModel> GetSummaries(AccountModel account, bool skip)
+        private IEnumerable<SummaryModel> GetSummaries(AccountModel account, bool skip)
         {
             var accountController = FactoryController.GetController(ControllerEnum.Account);
 
             return skip ? MapSummaryModelFrom(accountController.GetSumaries(account.Id).Skip((int)Session["Skip"]).Take(10).ToList()) : MapSummaryModelFrom(accountController.GetSumaries(account.Id).Take(10).ToList());
         }
 
-        private static List<SumaryModel> MapSummaryModelFrom(IEnumerable<Summary> summaries)
+        private static List<SummaryModel> MapSummaryModelFrom(IEnumerable<Summary> summaries)
         {
-            Mapper.CreateMap<Summary, SumaryModel>();
+            Mapper.CreateMap<Summary, SummaryModel>();
 
-            var sumaryModels = new List<SumaryModel>();
+            var sumaryModels = new List<SummaryModel>();
 
             foreach (Summary summary in summaries)
             {
-                var summaryModel = Mapper.Map<Summary, SumaryModel>(summary);
+                var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
                 sumaryModels.Add(summaryModel);
             }
             return sumaryModels;

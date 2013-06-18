@@ -21,13 +21,15 @@ namespace EHR.Controller
 
         #endregion
 
-        public override void SaveAllergy(string theWitch, IList<short> types, Summary summary)
+        public override void SaveAllergy(string theWitch, IList<short> types, int idSummary)
         {
             Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
-            Assertion.NotNull(summary, "Não existe nenhum sumário selecionado para inserir o procedimento.").Validate();
+
+            var summary = Summaries.Get<Summary>(idSummary);
 
             var allergies = new List<AllergyType>();
+
             foreach (var id in types)
             {
                 var type = GetAllergy(id);
@@ -39,8 +41,9 @@ namespace EHR.Controller
             Summaries.Save(summary);
         }
 
-        public override void RemoveAllergy(Summary summary, int id)
+        public override void RemoveAllergy(int idSummary, int id)
         {
+            var summary = Summaries.Get<Summary>(idSummary);
             summary.RemoveAllergy(id);
             Summaries.Save(summary);
         }
