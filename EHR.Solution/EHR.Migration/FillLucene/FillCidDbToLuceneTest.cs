@@ -1,13 +1,13 @@
 ﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
-using EHR.Test.Migracao;
+using EHR.Migration.Migracao;
 using EHRIntegracao.Domain.Services.SaveLucene;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EHR.Test.FillLucene
+namespace EHR.Migration.FillLucene
 {
     [TestFixture]
     public class FillCidDbToLuceneTest

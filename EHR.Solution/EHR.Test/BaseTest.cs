@@ -265,7 +265,8 @@ namespace EHR.Test
                 ConcentradoDeHemacias,
                 ConcentradoDeNeutrofilos,
                 ConcentradoDePlaquetas,
-                Criopreciptado
+                Criopreciptado,
+                Plasma
             };
 
             var reactionTypes = new Types<HemotransfusionType>();

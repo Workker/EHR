@@ -93,13 +93,15 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult GeneralData()
         {
-            return PartialView("_GeneralData", GetSummary());
+            var summary = GetSummary();
+            ViewBag.Allergies = summary.Allergies;
+            ViewBag.Diagnostics = summary.Diagnostics;
+            return PartialView("_GeneralData");
         }
 
         public string Admission(string q)
         {
             var stringReturn = "[";
-
 
             foreach (var id in Enum.GetValues(typeof(ReasonOfAdmissionEnum)).Cast<short>().ToList())
             {
@@ -279,7 +281,8 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult Hemotransfusion()
         {
-            return PartialView("_hemotransfusion", GetSummary());
+            ViewBag.Hemotransfusions = GetSummary().Hemotransfusions;
+            return PartialView("_hemotransfusion");
         }
 
         public PartialViewResult HemotransfusionForm()
@@ -379,7 +382,7 @@ namespace EHR.UI.Controllers
 
         private static SummaryModel MapSummaryModelFrom(Summary summary)
         {
-            Mapper.CreateMap<Summary, SummaryModel>().ForMember(dest => dest.Hospital, source => source.Ignore()).ForMember(al => al.Allergies, so => so.Ignore());
+            Mapper.CreateMap<Summary, SummaryModel>().ForMember(hosp => hosp.Hospital, source => source.Ignore()).ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore()).ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore());
             var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
 
             summaryModel.Allergies = MapAllergyModelsFrom(summary.Allergies);
@@ -397,9 +400,10 @@ namespace EHR.UI.Controllers
             {
                 Mapper.CreateMap<Hemotransfusion, HemotransfusionModel>();
                 var hemotransfusionModel = Mapper.Map<Hemotransfusion, HemotransfusionModel>(hemotransfusion);
+                hemotransfusionModel.HemotransfusionType = hemotransfusion.Type.Id;
                 foreach (var reaction in hemotransfusion.Reactions)
                 {
-                    hemotransfusionModel.ReactionType.Add(reaction.Id);
+                    hemotransfusionModel.ReactionTypes.Add(reaction.Id);
                 }
 
                 hemoModels.Add(hemotransfusionModel);
@@ -424,8 +428,9 @@ namespace EHR.UI.Controllers
             var diagnosticsModels = new List<DiagnosticModel>();
             foreach (var diagnostic in diagnostics)
             {
-                Mapper.CreateMap<Diagnostic, DiagnosticModel>().ForMember(cid => cid, source => source.Ignore());
+                Mapper.CreateMap<Diagnostic, DiagnosticModel>().ForMember(type => type.Type, diag => diag.Ignore()).ForMember(cid => cid.Cid, diag => diag.Ignore());
                 var diagnosticsModel = Mapper.Map<Diagnostic, DiagnosticModel>(diagnostic);
+                diagnosticsModel.Type = diagnostic.Type.Id;
                 diagnosticsModel.Cid = MapCidModelFrom(diagnostic.Cid);
                 diagnosticsModels.Add(diagnosticsModel);
             }

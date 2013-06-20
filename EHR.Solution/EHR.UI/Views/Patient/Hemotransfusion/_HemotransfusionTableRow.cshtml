@@ -2,18 +2,18 @@
 @using EHR.Domain.Util
 @using EHR.UI.Models
 
-@foreach (HemotransfusionModel hemotransfusion in @ViewBag.Hemotransfusions)
+@foreach (HemotransfusionModel hemotransfusion in ViewBag.Hemotransfusions)
 {
     <li class="clearfix">
-        <span class="firstColumn">@(EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), @hemotransfusion.HemotransfusionType.ToString())))</span>
+        <span class="firstColumn">@(EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), hemotransfusion.HemotransfusionType.ToString())))</span>
         <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteHemotransfusion/?id=@hemotransfusion.Id", null)'><span>X</span></a>
         @* <a class="action" title="Editar registro" onclick='editRow("../Patient/AllergyForm/?id=@allergy.Id", null, this);'>
             <span>Editar</span></a>*@
         <span class="lastColumn"></span>
         <span class="middleColumn">
-            @for (int i = 1; i <= @hemotransfusion.ReactionType.Count; i++)
+            @for (int i = 1; i <= hemotransfusion.ReactionTypes.Count; i++)
             {
-                @(EnumUtil.GetDescriptionFromEnumValue((ReactionTypeEnum)Enum.Parse(typeof(ReactionTypeEnum), @hemotransfusion.ReactionType[i - 1].ToString())) + (@hemotransfusion.ReactionType.Count == i ? "" : ",  "))
+                @(EnumUtil.GetDescriptionFromEnumValue((ReactionTypeEnum)Enum.Parse(typeof(ReactionTypeEnum), hemotransfusion.ReactionTypes[i - 1].ToString())) + (hemotransfusion.ReactionTypes.Count == i ? "" : ",  "))
             }
         </span>
     </li>

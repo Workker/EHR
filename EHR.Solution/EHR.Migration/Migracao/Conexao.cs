@@ -1,10 +1,10 @@
 ﻿using EHR.Domain.Mapping;
-using EHR.Domain.MappingMigracao;
+using EHR.Migration.Mapping.MappingMigracao;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 
-namespace EHR.Test.Migracao
+namespace EHR.Migration.Migracao
 {
     public class Conexao
     {

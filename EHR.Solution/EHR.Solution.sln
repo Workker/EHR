@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Domain", "EHR.Domain\EH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Controller", "EHR.Controller\EHR.Controller.csproj", "{75AF42B0-2A2A-4452-9500-2638183C812A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Migration", "EHR.Migration\EHR.Migration.csproj", "{12604DE4-3EAB-440A-A138-EFB5654ECE20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{75AF42B0-2A2A-4452-9500-2638183C812A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75AF42B0-2A2A-4452-9500-2638183C812A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75AF42B0-2A2A-4452-9500-2638183C812A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12604DE4-3EAB-440A-A138-EFB5654ECE20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12604DE4-3EAB-440A-A138-EFB5654ECE20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12604DE4-3EAB-440A-A138-EFB5654ECE20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12604DE4-3EAB-440A-A138-EFB5654ECE20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

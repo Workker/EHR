@@ -83,9 +83,6 @@
     <Compile Include="Entities\HemotransfusionType.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
     <Compile Include="Entities\Hospital.cs" />
-    <Compile Include="Entities\Migracao\CidIntegracao.cs" />
-    <Compile Include="Entities\Migracao\DefIntegracao.cs" />
-    <Compile Include="Entities\Migracao\ProcedimentoIntegracao.cs" />
     <Compile Include="Entities\Allergy.cs" />
     <Compile Include="Entities\Interfaces\IAggregateRoot.cs" />
     <Compile Include="Entities\Admission.cs" />
@@ -106,10 +103,7 @@
     <Compile Include="Mapping\AllergyTypeMap.cs" />
     <Compile Include="Mapping\CidMap.cs" />
     <Compile Include="Mapping\DefMap.cs" />
-    <Compile Include="MappingMigracao\CidMap.cs" />
-    <Compile Include="MappingMigracao\DefMap.cs" />
     <Compile Include="Mapping\DiagnosticMap.cs" />
-    <Compile Include="MappingMigracao\TusMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />
     <Compile Include="Mapping\AccountMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
@@ -128,9 +122,6 @@
     <Compile Include="Repository\Cids.cs" />
     <Compile Include="Repository\Defs.cs" />
     <Compile Include="Repository\Hospitals.cs" />
-    <Compile Include="Repository\Integracao\CidsIntegracao.cs" />
-    <Compile Include="Repository\Integracao\DefsIntegracao.cs" />
-    <Compile Include="Repository\Integracao\ProcedimentosIntegracao.cs" />
     <Compile Include="Repository\Patients.cs" />
     <Compile Include="Repository\TusRepository.cs" />
     <Compile Include="Repository\Summaries.cs" />

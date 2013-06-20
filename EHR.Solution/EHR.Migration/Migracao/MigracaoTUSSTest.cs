@@ -1,11 +1,12 @@
 ﻿using EHR.Domain.Entities;
-using EHR.Domain.Entities.Migracao;
-//using EHR.Domain.Entities.Sumario;
 using EHR.Domain.Repository;
+using EHR.Migration.Entities.Migracao;
+//using EHR.Domain.Entities.Sumario;
+using EHR.Migration.Repository.Integracao;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace EHR.Test.Migracao
+namespace EHR.Migration.Migracao
 {
     [TestFixture]
     [Ignore]
@@ -30,10 +31,7 @@ namespace EHR.Test.Migracao
                 procedimento.Description = procedimentoIntegracao.Procedimento;
                 listaProcedimento.Add(procedimento);
             }
-
             repositorioProcedimento.Save(listaProcedimento);
-
         }
-
     }
 }

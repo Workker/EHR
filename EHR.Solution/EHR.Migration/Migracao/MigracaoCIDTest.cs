@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using EHR.Domain.Entities;
-using EHR.Domain.Entities.Migracao;
-//using EHR.Domain.Entities.Sumario;
-using EHR.Domain.MappingMigracao;
 using EHR.Domain.Repository;
-using EHR.Domain.Repository.Integracao;
+using EHR.Migration.Entities.Migracao;
+//using EHR.Domain.Entities.Sumario;
+using EHR.Migration.Mapping.MappingMigracao;
+using EHR.Migration.Repository.Integracao;
 using NUnit.Framework;
 
-namespace EHR.Test.Migracao
+namespace EHR.Migration.Migracao
 {
     [TestFixture]
     [Ignore]

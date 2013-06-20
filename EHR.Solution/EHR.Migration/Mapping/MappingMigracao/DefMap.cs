@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EHR.Domain.Entities.Migracao;
-using EHR.Domain.Entities.Interfaces;
+﻿using EHR.Migration.Entities.Migracao;
 using FluentNHibernate.Mapping;
 
-namespace EHR.Domain.MappingMigracao
+namespace EHR.Migration.Mapping.MappingMigracao
 {
     public class DefMigracaoMap : ClassMap<DefMigracao>
     {

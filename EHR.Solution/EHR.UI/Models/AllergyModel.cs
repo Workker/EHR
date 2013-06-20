@@ -7,7 +7,7 @@ namespace EHR.UI.Models
         public int Id { get; set; }
         public string TheWhich { get; set; }
         private IList<short> _Types { get; set; }
-        public virtual IList<short> Types
+        public  IList<short> Types
         {
             get { return _Types ?? (_Types = new List<short>()); }
         }

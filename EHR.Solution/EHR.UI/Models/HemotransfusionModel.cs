@@ -6,6 +6,10 @@ namespace EHR.UI.Models
     {
         public int Id { get; set; }
         public short HemotransfusionType { get; set; }
-        public List<short> ReactionType { get; set; }
+        private List<short> _ReactionTypes { get; set; }
+        public IList<short> ReactionTypes
+        {
+            get { return _ReactionTypes ?? (_ReactionTypes = new List<short>()); }
+        }
     }
 }
