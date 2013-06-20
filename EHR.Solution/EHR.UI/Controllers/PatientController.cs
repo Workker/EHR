@@ -34,6 +34,7 @@ namespace EHR.UI.Controllers
             ViewBag.Allergies = summaryModel.Allergies;
             ViewBag.Diagnostics = summaryModel.Diagnostics;
             ViewBag.Procedures = summaryModel.Procedures;
+            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
 
             return View(summaryModel);
         }
@@ -50,11 +51,6 @@ namespace EHR.UI.Controllers
         public PartialViewResult Charts()
         {
             return PartialView("_Charts");
-        }
-
-        public PartialViewResult ColonizationbyMdr()
-        {
-            return PartialView("_ColonizationbyMDR");
         }
 
         public PartialViewResult DataHigh()
@@ -84,6 +80,7 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult Prescriptions()
         {
+            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
             return PartialView("_Prescriptions");
         }
 
@@ -96,6 +93,7 @@ namespace EHR.UI.Controllers
             var summary = GetSummary();
             ViewBag.Allergies = summary.Allergies;
             ViewBag.Diagnostics = summary.Diagnostics;
+            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
             return PartialView("_GeneralData");
         }
 
@@ -180,41 +178,24 @@ namespace EHR.UI.Controllers
 
         #endregion
 
-        #region medicament of previous use
-
-        public PartialViewResult MedicamentOfPreviousUseForm()
-        {
-            return PartialView("GeneralData/_MedicamentOfPreviousUseForm");
-        }
-
-        public PartialViewResult SaveMedicamentOfPreviousUse()
-        {
-            return PartialView("GeneralData/_MedicamentOfPreviousUseTableRow");
-        }
-
-        public void DeleteMedicamentOfPreviousUse()
-        {
-        }
-
         #endregion
 
-        #region Medicament used during hospitalization
+        #region Medication
 
-        public PartialViewResult MedicamentUsedDuringhospitalizationForm()
+        public PartialViewResult MedicationForm()
         {
-            return PartialView("GeneralData/_MedicamentUsedDuringhospitalizationForm");
+            return PartialView("Medication/_Form");
         }
 
-        public PartialViewResult SaveMedicamentUsedDuringhospitalization()
+        public PartialViewResult SaveMedication(string typeOfMedication)
         {
-            return PartialView("GeneralData/_MedicamentUsedDuringhospitalizationTableRow");
+            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
+            return PartialView("Medication/_TableRow");
         }
 
-        public void DeleteMedicamentUsedDuringhospitalization()
+        public void DeleteMedication(Medication medication)
         {
         }
-
-        #endregion
 
         #endregion
 
@@ -311,9 +292,17 @@ namespace EHR.UI.Controllers
 
         #region MDR
 
+        public PartialViewResult ColonizationbyMdr()
+        {
+            ViewBag.Mdr = GetSummary().Mdr;
+            return PartialView("_ColonizationbyMDR");
+        }
+
+        [HttpPost]
         public void SaveMdr(string mdr)
         {
             FactoryController.GetController(ControllerEnum.Summary).SaveMdr(GetSummary().Id, mdr);
+            RefreshSessionSummary();
         }
 
         #endregion

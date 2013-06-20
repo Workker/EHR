@@ -3,7 +3,7 @@
 <form id="hemotransfusion">
     <label>Tipo:</label>
     <select name="typeHemotrasfusion" style="margin-left: 5px" required>
-        <option value="">Selecione</option>
+        <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(HemotransfusionTypeEnum)).Cast<short>().ToList())
         {
             <option value="@value">

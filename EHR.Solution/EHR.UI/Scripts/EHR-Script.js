@@ -480,3 +480,16 @@ function SaveObsevation() {
         data: form.serialize(),
     });
 }
+
+function SaveMDR(element) {
+    var form = $(element).parent().parent();
+    $.ajax({
+        type: "POST",
+        url: '../Patient/SaveMdr',
+        cache: false,
+        data: form.serialize(),
+        success: function () {
+            alert("aaaaaa");
+        }
+    });
+}

@@ -4,13 +4,21 @@
     <br />
     <input type="radio" name="haveMDR" required value="true" onchange="Display($(this).next().next(), true)" />&nbsp;Sim&nbsp;
     <input type="radio" name="haveMDR" value="false" checked onchange="Display($(this).next(), false)" />&nbsp;N&atilde;o
-    <div style="display: none;">
+    <div style="display: none;" id="divMdr">
         <br />
         <label>Descri&ccedil;&atilde;o:</label><br />
-        <textarea rows="10" cols="90" maxlength="1000"></textarea>
+        <textarea rows="10" cols="90" maxlength="1000" name="mdr" id="mdr">@ViewBag.Mdr</textarea>
         <br />
         <br />
-        <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+        <input type="submit" value="Salvar" onclick="SaveMDR(this);" class="uibutton large confirm" />&nbsp;&nbsp;
         <input type="reset" value="Cancelar" onclick="Display($(this).parent(), false)" class="uibutton large" />
     </div>
 </form>
+<script type="text/javascript">
+    var mdr = $("#mdr").val();
+    if ((mdr != null) && (mdr != "")) {
+        $('input[value="false"]').removeAttr("checked");
+        $('input[value="true"]').attr("checked", "");
+        $('#divMdr').removeAttr("style");
+    }
+</script>

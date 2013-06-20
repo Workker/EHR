@@ -184,6 +184,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\HemotransfusionModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
+    <Compile Include="Models\MedicationModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\SummaryModel.cs" />
@@ -421,12 +422,9 @@
     <Content Include="Views\Patient\GeneralData\_AllergyForm.cshtml" />
     <Content Include="Views\Patient\GeneralData\_AllergyTable.cshtml" />
     <Content Include="Views\Patient\GeneralData\_AllergyTableRow.cshtml" />
-    <Content Include="Views\Patient\GeneralData\_MedicamentOfPreviousUseForm.cshtml" />
-    <Content Include="Views\Patient\GeneralData\_MedicamentOfPreviousUseTable.cshtml" />
-    <Content Include="Views\Patient\GeneralData\_MedicamentOfPreviousUseTableRow.cshtml" />
-    <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationForm.cshtml" />
-    <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationTable.cshtml" />
-    <Content Include="Views\Patient\GeneralData\_MedicamentUsedDuringhospitalizationTableRow.cshtml" />
+    <Content Include="Views\Patient\Medication\_Form.cshtml" />
+    <Content Include="Views\Patient\Medication\_Table.cshtml" />
+    <Content Include="Views\Patient\Medication\_TableRow.cshtml" />
     <Content Include="Views\Search\Layout\_Result.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Patient\Hemotransfusion\_HemotransfusionForm.cshtml" />

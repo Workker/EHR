@@ -5,8 +5,6 @@
    <li class="clearfix">
     <span class="firstColumn">@p.Description</span>
     <a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteProcedure/?id=@p.Id", null)'><span>X</span></a>
-    @*<a class="action" title="Editar registro" onclick='editRow("../Patient/ProcedureForm/?id=@p.Id", null, this);'>
-        <span>Editar</span></a>*@
     <span class="lastColumn"></span>
     <span class="middleColumn">
         @p.Date.Value.ToShortDateString()

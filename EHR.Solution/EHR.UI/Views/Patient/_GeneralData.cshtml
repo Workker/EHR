@@ -2,29 +2,33 @@
 <h1>Dados Gerais</h1>
 <hr />
 <br />
-<h3>Admiss&atilde;o</h3>
+@*<h3>Admiss&atilde;o</h3>
 <br />
 <label>Motivo da admiss&atilde;o:</label>&nbsp;
 <input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
 <br />
-<hr />
+<hr />*@
 @{
     Html.RenderPartial("GeneralData/_AllergyTable");
 }
 <br />
 <hr />
 @{
-    Html.RenderPartial("GeneralData/_DiagnosticsTable", Model);
+    Html.RenderPartial("GeneralData/_DiagnosticsTable");
 }
 <br />
 <hr />
+<h3>Medicamentos de Uso Pr&eacute;vio</h3>
+<br />
 @{
-    Html.RenderPartial("GeneralData/_MedicamentOfPreviousUseTable");
+    Html.RenderPartial("Medication/_Table");
 }
 <br />
 <hr />
+<h3>Medicamentos Utilizados Durante a Interna&ccedil;&atilde;o</h3>
+<br />
 @{
-    Html.RenderPartial("GeneralData/_MedicamentUsedDuringhospitalizationTable");
+    Html.RenderPartial("Medication/_Table");
 }
 <br />
 <hr />

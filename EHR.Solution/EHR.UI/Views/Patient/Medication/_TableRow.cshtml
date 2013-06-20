@@ -1,0 +1,11 @@
+﻿@using EHR.UI.Models
+
+@foreach (MedicationModel medication in ViewBag.Medications)
+{
+    <li class="clearfix">
+        <span class="firstColumn"></span>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteMedication/?id=", null)'><span>X</span></a>
+        <span class="lastColumn"></span>
+        <span class="middleColumn"></span>
+    </li>
+}
