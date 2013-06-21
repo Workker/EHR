@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using EHR.Domain.Entities;
+﻿using EHR.Domain.Entities;
 using NHibernate.Criterion;
+using System.Collections.Generic;
 using System.Linq;
-using EHR.CoreShared;
-using System;
 
 namespace EHR.Domain.Repository
 {

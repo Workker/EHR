@@ -2,8 +2,8 @@
 {
     public enum MedicationTypeEnum : short
     {
-        DrugUseBefore = 1,
-        DrugUseDuring = 2,
+        MedicationUseBefore = 1,
+        MedicationUseDuring = 2,
         Prescription = 3
     }
 }

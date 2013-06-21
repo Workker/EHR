@@ -39,10 +39,10 @@ namespace EHR.Domain.Entities
             get { return _procedures ?? (_procedures = new List<Procedure>()); }
         }
 
-        private IList<Medication> _drugs;
-        public virtual IList<Medication> Drugs
+        private IList<Medication> _medications;
+        public virtual IList<Medication> Medications
         {
-            get { return _drugs ?? (_drugs = new List<Medication>()); }
+            get { return _medications ?? (_medications = new List<Medication>()); }
         }
 
         private IList<Hemotransfusion> _hemotransfusions;
@@ -177,6 +177,57 @@ namespace EHR.Domain.Entities
             Hemotransfusions.Remove(hemotransfusion);
 
             Assertion.IsFalse(Hemotransfusions.Contains(hemotransfusion), "Hemotransfusão não foi removida.").Validate();
+        }
+
+        #endregion
+
+        #region Medication
+
+        public virtual void CreateMedication(MedicationTypeEnum type, Def def, string presentation, string presentationType,
+            string dose, string dosage, string way, string place, string frequency, string frequencyCase, int duration)
+        {
+            Assertion.NotNull(def, "Medicamento não informado.");
+            Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(presentationType), "Tipo de apresentação não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(dosage), "Dosagem não informada.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(way), "Via informada.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(place), "Lugar não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(frequency), "Frequencia não informada.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(frequencyCase), "Caso de frequencia não informado.").Validate();
+            Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
+
+            var medication = new Medication()
+                                 {
+                                     Type = type,
+                                     Def = def,
+                                     Presentation = presentation,
+                                     PresentationType = presentationType,
+                                     Dose = dose,
+                                     Dosage = dosage,
+                                     Way = way,
+                                     Place = place,
+                                     Frequency = frequency,
+                                     FrequencyCase = frequencyCase,
+                                     Duration = duration
+                                 };
+
+            Medications.Add(medication);
+
+            Assertion.IsTrue(Medications.Contains(medication), "Medicamento não foi inserido.").Validate();
+        }
+
+        public virtual void RemoveMedication(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
+
+            var medication = Medications.FirstOrDefault(m => m.Id == id);
+
+            Assertion.NotNull(medication, "Medicamento não encontrado.").Validate();
+
+            Medications.Remove(medication);
+
+            Assertion.IsFalse(Medications.Contains(medication), "Medicamento não foi removido.").Validate();
         }
 
         #endregion

@@ -20,6 +20,7 @@ namespace EHR.Domain.Mapping
             HasMany(s => s.Allergies).Cascade.AllDeleteOrphan();
             HasMany(s => s.Hemotransfusions).Cascade.AllDeleteOrphan();
             HasMany(s => s.Procedures).Cascade.AllDeleteOrphan();
+            HasMany(s => s.Medications).Cascade.AllDeleteOrphan();
             References(s => s.Account).Cascade.None();
         }
     }
