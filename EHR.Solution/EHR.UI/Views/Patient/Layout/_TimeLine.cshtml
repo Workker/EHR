@@ -5,7 +5,7 @@
 <ul class="timeline" id="collapser">
     <li><a>Agora</a></li>
     @{
-        int year = 0;
+        var year = 0;
         foreach (var treatmentYear in Model.Treatments)
         {
             if (treatmentYear.EntryDate.Year != year)
@@ -13,7 +13,7 @@
                 year = treatmentYear.EntryDate.Year;
                 @:<li><a href="#" tabindex="-1">@year</a>
                 @:<ul class="clearfix">
-                int month = 0;
+                var month = 0;
                 foreach (var treatmentMonth in Model.Treatments)
                 {
                     if (treatmentMonth.EntryDate.Month != month && treatmentMonth.EntryDate.Year == year)

@@ -1,18 +1,19 @@
 ﻿<form id="medicationForm">
-    <input type="hidden" name="medicationType" value="" />
+    <input type="hidden" name="medicationType" />
     <label>Medicamento:</label>
-    <input type="text" name="def" id="def" required value="" style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', null)" />
+    <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', 'input[name=defId]')" />
+    <input type="hidden" name="defId" />
     <br />
     <br />
     <label>Apresenta&ccedil;&atilde;o:</label>
-    <input type="text" name="presentation" required value="" style="margin: 0px 5px 0px 10px;" />
+    <input type="text" name="presentation" required style="margin: 0px 5px 0px 10px;" />
     <select name="presentationType" required>
         <option value="-1">Selecione</option>
     </select>
     <br />
     <br />
     <label>Dose:</label>
-    <input type="text" name="dose" required value="" style="margin: 0px 5px 0px 60px;" />
+    <input type="text" name="dose" required style="margin: 0px 5px 0px 60px;" />
     <select name="dosagem" required>
         <option value="-1">Selecione</option>
     </select>
@@ -23,7 +24,7 @@
         <option value="-1">Selecione</option>
     </select>
     <label>Local:</label>
-    <input type="text" name="local" required value="" />
+    <input type="text" name="local" required />
     <br />
     <br />
     <label>Frequ&ecirc;ncia:</label>
@@ -35,7 +36,7 @@
     </select><br />
     <br />
     <label>Dura&ccedil;&atilde;o:</label>
-    <input type="number" name="duration" value="" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
+    <input type="number" name="duration" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
     <br />
     <br />
     <input type="submit" onclick='saveRow(this, "../Patient/SaveMedication");' value="Savar" class="uibutton large confirm" />&nbsp;&nbsp;

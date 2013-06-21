@@ -1,10 +1,10 @@
 ﻿<form id="procedures">
     <label>Procedimento:</label>&nbsp;
-    <input type="text" name="procedure" id="procedure" required value="" onclick="GenericAutoComplete(this, '../Patient/TusAutoComplete', 'input[name=procedureCode]')" />
+    <input type="text" required onclick="GenericAutoComplete(this, '../Patient/TusAutoComplete', 'input[name=procedureCode]')" />
     <br />
     <br />
     <label>C&oacute;digo:</label>
-    <input type="text" style="margin-left: 45px" name="procedureCode" readonly="readonly" value="" /><br />
+    <input type="text" style="margin-left: 45px" name="procedureCode" readonly="readonly" /><br />
     <br />
     <label style="margin: 0px 55px 0px 0px">Data:</label>
     @{Html.RenderPartial("_DatePicker");}
