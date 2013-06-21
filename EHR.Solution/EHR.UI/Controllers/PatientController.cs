@@ -187,7 +187,7 @@ namespace EHR.UI.Controllers
             return PartialView("Medication/_Form");
         }
 
-        public PartialViewResult SaveMedication(string typeOfMedication)
+        public PartialViewResult SaveMedication(string typeOfMedication, string def)
         {
             ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
             return PartialView("Medication/_TableRow");
@@ -197,6 +197,14 @@ namespace EHR.UI.Controllers
         {
         }
 
+        public JsonResult DefAutoComplete(string term)
+        {
+            var defDtOs = FactoryController.GetController(ControllerEnum.Def).GetDef(term);
+
+            var defModels = MapDefModelsFrom(defDtOs);
+
+            return Json(defModels, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Procedure
@@ -448,6 +456,23 @@ namespace EHR.UI.Controllers
         {
             Mapper.CreateMap<Cid, CidModel>();
             return Mapper.Map<Cid, CidModel>(cid);
+        }
+
+        private static List<DefModel> MapDefModelsFrom(IList<DefDTO> defs)
+        {
+            var defModels = new List<DefModel>();
+            foreach (var def in defs)
+            {
+                var defModel = MapDefModelFrom(def);
+                defModels.Add(defModel);
+            }
+            return defModels;
+        }
+
+        private static DefModel MapDefModelFrom(DefDTO def)
+        {
+            Mapper.CreateMap<DefDTO, DefModel>();
+            return Mapper.Map<DefDTO, DefModel>(def);
         }
 
         #endregion

@@ -39,6 +39,13 @@ namespace EHR.Controller
 
         #endregion
 
+        #region Medication
+
+        public virtual List<DefDTO> GetDef(string term) { return null; }
+
+        #endregion
+
+
         #region Account
 
         public virtual void Register(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals) { }

@@ -22,6 +22,8 @@ namespace EHR.Controller
                     return new AccountController();
                 case ControllerEnum.Summary:
                     return new SummaryController();
+                case ControllerEnum.Def:
+                    return new DefController();
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -36,6 +38,7 @@ namespace EHR.Controller
         Diagnostic = 4,
         Hemotransfusion = 5,
         Account = 6,
-        Summary = 7
+        Summary = 7,
+        Def = 8
     }
 }

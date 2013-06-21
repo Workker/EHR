@@ -26,7 +26,7 @@ input, textarea { border: 1px solid #BDC7D8; }
 
     input[type=radio], input[type=checkbox] { margin: -3px 0px 0px 10px; border: none; }
 
-    textarea, input[type=text], input[type=password] { -webkit-appearance: none; -webkit-border-radius: 0; margin: 0; padding: 3px; }
+    textarea, input[type=text], input[type=password], input[type=number], input[type=email] { -webkit-appearance: none; -webkit-border-radius: 0; margin: 0; padding: 3px; }
 
 textarea { resize: none; }
 

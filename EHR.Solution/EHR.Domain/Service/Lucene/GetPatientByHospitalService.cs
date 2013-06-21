@@ -31,7 +31,6 @@ namespace EHR.Domain.Service
             return service.GetPatientsDbFor();
         }
 
-
         public IList<IPatientDTO> AdvancedGetPatientBy(IPatientDTO patientDTO, List<string> hospital)
         {
             var servico = new GetPatientsLuceneService();
@@ -53,6 +52,5 @@ namespace EHR.Domain.Service
 
             return patients;
         }
-
     }
 }

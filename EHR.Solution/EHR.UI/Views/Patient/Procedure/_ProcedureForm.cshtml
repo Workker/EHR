@@ -1,13 +1,12 @@
-﻿@Scripts.Render("~/bundles/jqueryui")
-<form id="procedures">
+﻿<form id="procedures">
     <label>Procedimento:</label>&nbsp;
-    <input type="text" name="procedure" id="procedure" required value="" />
+    <input type="text" name="procedure" id="procedure" required value="" onclick="GenericAutoComplete(this, '../Patient/TusAutoComplete', 'input[name=procedureCode]')" />
     <br />
     <br />
     <label>C&oacute;digo:</label>
     <input type="text" style="margin-left: 45px" name="procedureCode" readonly="readonly" value="" /><br />
     <br />
-    <label>Data:</label>
+    <label style="margin: 0px 55px 0px 0px">Data:</label>
     @{Html.RenderPartial("_DatePicker");}
     <br />
     <br />
@@ -16,28 +15,4 @@
 </form>
 <script type="text/javascript">
     formatDatePicker();
-    $("#procedure").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: "../Patient/TusAutoComplete",
-                type: "POST",
-                dataType: "json",
-                data: { term: request.term },
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return { label: item.Description, value: item.Description, code: item.Code };
-                    }));
-
-                }
-            });
-        },
-        messages: {
-            noResults: "",
-            results: ""
-        }, select: function (event, ui) {
-            $('input[name=procedureCode]').val(ui.item.code);
-        }
-    });
 </script>
-
-

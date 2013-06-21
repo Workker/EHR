@@ -43,6 +43,7 @@ namespace EHR.Domain.Repository
                 throw ex;
             }
         }
+
         public virtual void SalvarLista(List<Def> roots)
         {
             var transaction = Session.BeginTransaction();
@@ -61,6 +62,5 @@ namespace EHR.Domain.Repository
                 throw ex;
             }
         }
-        
     }
 }

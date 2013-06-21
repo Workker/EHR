@@ -127,6 +127,7 @@
     <Compile Include="Repository\Summaries.cs" />
     <Compile Include="Repository\Types.cs" />
     <Compile Include="Service\Lucene\GetCidLucene.cs" />
+    <Compile Include="Service\Lucene\GetDefLuceneService.cs" />
     <Compile Include="Service\Lucene\GetPatientByHospitalService.cs" />
     <Compile Include="Service\Lucene\GetTusLucene.cs" />
     <Compile Include="Util\CryptographyUtil.cs" />

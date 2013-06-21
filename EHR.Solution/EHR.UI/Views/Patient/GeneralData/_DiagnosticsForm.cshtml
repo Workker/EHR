@@ -1,10 +1,9 @@
 ﻿@using EHR.Domain.Entities
 @using EHR.Domain.Util
-@Scripts.Render("~/bundles/jqueryui")
 <form id="diagnostic">
     <label>Tipo de diagn&oacute;stico:</label>
-    <select name="type" style="margin-left: 5px">
-        <option value="0">Selecione</option>
+    <select name="type" style="margin-left: 5px" required>
+        <option value="-1">Selecione</option>
 
         @foreach (var value in Enum.GetValues(typeof(DiagnosticTypeEnum)).Cast<short>().ToList())
         {
@@ -16,7 +15,7 @@
     <br />
     <br />
     <label>CID:</label>
-    <input type="text" value="" name="cid" required style="margin-left: 93px" size="50"/>
+    <input type="text" value="" name="cid" required style="margin-left: 93px" size="50" onclick="GenericAutoComplete(this, '../Patient/CidAutoComplete', 'input[name=cidCode]')" />
     <br />
     <br />
     <label>CID c&oacute;digo:</label>
@@ -26,27 +25,3 @@
     <input type="submit" onclick='saveRow(this, "../Patient/SaveDiagnostic");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
             <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
-<script type="text/javascript">
-    $("input[name=cid]").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: "../Patient/CidAutoComplete",
-                type: "POST",
-                dataType: "json",
-                data: { term: request.term },
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return { label: item.Description, value: item.Description, code: item.Code };
-                    }));
-
-                }
-            });
-        },
-        messages: {
-            noResults: "",
-            results: ""
-        }, select: function (event, ui) {
-            $('input[name=cidCode]').val(ui.item.code);
-        }
-    });
-</script>

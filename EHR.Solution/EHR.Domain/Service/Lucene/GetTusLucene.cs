@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHRIntegracao.Domain.Services.GetEntities;
+using System.Collections.Generic;
 
 namespace EHR.Domain.Service.Lucene
 {
     public class GetTusLuceneService
     {
-        private GetTusFromLuceneService getTusFromLuceneService;
+        private GetTusFromLuceneService _getTusFromLuceneService;
         public virtual GetTusFromLuceneService GetTusFromLuceneService
         {
-            get { return getTusFromLuceneService ?? (getTusFromLuceneService = new GetTusFromLuceneService()); }
+            get { return _getTusFromLuceneService ?? (_getTusFromLuceneService = new GetTusFromLuceneService()); }
             set
             {
-                getTusFromLuceneService = value;
+                _getTusFromLuceneService = value;
             }
         }
 

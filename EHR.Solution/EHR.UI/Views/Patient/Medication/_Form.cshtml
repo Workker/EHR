@@ -1,43 +1,43 @@
 ﻿<form id="medicationForm">
     <input type="hidden" name="medicationType" value="" />
     <label>Medicamento:</label>
-    <input type="text" name="def" id="def" required value="" />
+    <input type="text" name="def" id="def" required value="" style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', null)" />
     <br />
     <br />
-    <label>Apresentação:</label>
-    <input type="text" name="presentation" required value="" />
+    <label>Apresenta&ccedil;&atilde;o:</label>
+    <input type="text" name="presentation" required value="" style="margin: 0px 5px 0px 10px;" />
     <select name="presentationType" required>
         <option value="-1">Selecione</option>
     </select>
     <br />
     <br />
     <label>Dose:</label>
-    <input type="text" name="dose" required value="" />
+    <input type="text" name="dose" required value="" style="margin: 0px 5px 0px 60px;" />
     <select name="dosagem" required>
         <option value="-1">Selecione</option>
     </select>
     <br />
     <br />
     <label>Via:</label>
-    <select name="via" required>
+    <select name="via" required style="margin: 0px 5px 0px 70px;">
         <option value="-1">Selecione</option>
     </select>
     <label>Local:</label>
     <input type="text" name="local" required value="" />
     <br />
     <br />
-    <label>Frequência:</label>
-    <select name="frequency" required>
+    <label>Frequ&ecirc;ncia:</label>
+    <select name="frequency" required style="margin: 0px 5px 0px 25px;">
         <option value="-1">Selecione</option>
     </select>
     <select name="frequencyCase" required>
         <option value="-1">Selecione</option>
     </select><br />
     <br />
-    <label>Duração:</label>
-    <input type="number" name="duration" value="" />&nbsp;&nbsp;Dia(s)<br />
+    <label>Dura&ccedil;&atilde;o:</label>
+    <input type="number" name="duration" value="" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
     <br />
     <br />
-    <input type="submit" onclick='saveRow(this, "../Patient/SaveMedicamention");' value="Savar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="submit" onclick='saveRow(this, "../Patient/SaveMedication");' value="Savar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>

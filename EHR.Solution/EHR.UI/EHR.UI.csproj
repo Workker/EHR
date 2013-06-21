@@ -180,6 +180,7 @@
     </Compile>
     <Compile Include="Models\AllergyModel.cs" />
     <Compile Include="Models\CidModel.cs" />
+    <Compile Include="Models\DefModel.cs" />
     <Compile Include="Models\DiagnosticModel.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\HemotransfusionModel.cs" />

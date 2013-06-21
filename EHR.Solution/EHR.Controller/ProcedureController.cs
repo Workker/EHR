@@ -1,10 +1,9 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 using EHR.Domain.Repository;
-using System.Collections.Generic;
-using System.Linq;
-using Workker.Framework.Domain;
 using EHR.Domain.Service.Lucene;
-using EHR.CoreShared;
+using System.Collections.Generic;
+using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
@@ -20,13 +19,13 @@ namespace EHR.Controller
             }
         }
 
-        private GetTusLuceneService getTusLuceneService;
+        private GetTusLuceneService _getTusLuceneService;
         public GetTusLuceneService GetTusLuceneService
         {
-            get { return getTusLuceneService ?? (getTusLuceneService = new GetTusLuceneService()); }
+            get { return _getTusLuceneService ?? (_getTusLuceneService = new GetTusLuceneService()); }
             set
             {
-                getTusLuceneService = value;
+                _getTusLuceneService = value;
             }
         }
 
