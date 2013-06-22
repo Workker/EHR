@@ -10,7 +10,6 @@ using System.Linq;
 using System.Web.Mvc;
 using EHR.CoreShared;
 
-
 namespace EHR.UI.Controllers
 {
     [AuthenticationFilter]
@@ -34,7 +33,7 @@ namespace EHR.UI.Controllers
             ViewBag.Allergies = summaryModel.Allergies;
             ViewBag.Diagnostics = summaryModel.Diagnostics;
             ViewBag.Procedures = summaryModel.Procedures;
-            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
+            ViewBag.Medications = summaryModel.Medications;
 
             return View(summaryModel);
         }
@@ -80,7 +79,7 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult Prescriptions()
         {
-            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
+            ViewBag.Medications = GetSummary().Medications;
             return PartialView("_Prescriptions");
         }
 
@@ -93,7 +92,7 @@ namespace EHR.UI.Controllers
             var summary = GetSummary();
             ViewBag.Allergies = summary.Allergies;
             ViewBag.Diagnostics = summary.Diagnostics;
-            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
+            ViewBag.Medications = summary.Medications;
             return PartialView("_GeneralData");
         }
 
@@ -182,14 +181,22 @@ namespace EHR.UI.Controllers
 
         #region Medication
 
-        public PartialViewResult MedicationForm()
+        public PartialViewResult MedicationForm(string medicationType)
         {
+            ViewBag.MedicationType = medicationType;
             return PartialView("Medication/_Form");
         }
 
-        public PartialViewResult SaveMedication(string typeOfMedication, string def)
+        public PartialViewResult SaveMedication(MedicationModel medication)
         {
-            ViewBag.Medications = new List<MedicationModel>(); //Todo: replace for medication list map of medication from domain
+            var summry = GetSummary();
+            FactoryController.GetController(ControllerEnum.Summary).SaveMedication(summry.Id, medication.MedicationType,
+                medication.Def, medication.Presentation, medication.PresentationType, medication.Dose, medication.Dosage,
+                medication.Way, medication.Place, medication.Frequency, medication.FrequencyCase, medication.Duration);
+
+            RefreshSessionSummary();
+
+            ViewBag.Medications = new List<MedicationModel> { summry.Medications.Last() };
             return PartialView("Medication/_TableRow");
         }
 
@@ -205,6 +212,7 @@ namespace EHR.UI.Controllers
 
             return Json(defModels, JsonRequestBehavior.AllowGet);
         }
+
         #endregion
 
         #region Procedure
@@ -385,6 +393,7 @@ namespace EHR.UI.Controllers
             summaryModel.Allergies = MapAllergyModelsFrom(summary.Allergies);
             summaryModel.Diagnostics = MapDiagnosticsModelsFrom(summary.Diagnostics);
             summaryModel.Procedures = MapProceduresModelsFrom(summary.Procedures);
+            summaryModel.Medications = MapMedicationModelFrom(summary.Medications);
             summaryModel.Hemotransfusions = MapHemotransfusionModelFrom(summary.Hemotransfusions);
 
             return summaryModel;
@@ -464,6 +473,7 @@ namespace EHR.UI.Controllers
             foreach (var def in defs)
             {
                 var defModel = MapDefModelFrom(def);
+                defModel.Code = def.Id;
                 defModels.Add(defModel);
             }
             return defModels;
@@ -473,6 +483,33 @@ namespace EHR.UI.Controllers
         {
             Mapper.CreateMap<DefDTO, DefModel>();
             return Mapper.Map<DefDTO, DefModel>(def);
+        }
+
+        private static DefModel MapDefModelFrom(Def def)
+        {
+            Mapper.CreateMap<Def, DefModel>();
+            var defModel = Mapper.Map<Def, DefModel>(def);
+            defModel.Code = def.Id;
+            return defModel;
+        }
+
+        private static List<MedicationModel> MapMedicationModelFrom(IList<Medication> medications)
+        {
+            var medicationsModel = new List<MedicationModel>();
+            foreach (var medication in medications)
+            {
+                var medicationModel = MapMedicationModelFrom(medication);
+                medicationsModel.Add(medicationModel);
+            }
+            return medicationsModel;
+        }
+
+        private static MedicationModel MapMedicationModelFrom(Medication medication)
+        {
+            Mapper.CreateMap<Medication, MedicationModel>();
+            var medicationModel = Mapper.Map<Medication, MedicationModel>(medication);
+            medicationModel.Def = MapDefModelFrom(medication.Def).Id;
+            return medicationModel;
         }
 
         #endregion

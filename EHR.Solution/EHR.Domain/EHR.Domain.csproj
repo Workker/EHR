@@ -109,6 +109,7 @@
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\HemotransfusionTypeMap.cs" />
     <Compile Include="Mapping\HospitalMap.cs" />
+    <Compile Include="Mapping\MedicationMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />

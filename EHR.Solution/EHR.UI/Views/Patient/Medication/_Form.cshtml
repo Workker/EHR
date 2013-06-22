@@ -1,8 +1,8 @@
 ﻿<form id="medicationForm">
-    <input type="hidden" name="medicationType" />
+    <input type="hidden" name="medicationType" value="@ViewBag.MedicationType" />
     <label>Medicamento:</label>
-    <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', 'input[name=defId]')" />
-    <input type="hidden" name="defId" />
+    <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', 'input[name=def]')" />
+    <input type="hidden" name="def" />
     <br />
     <br />
     <label>Apresenta&ccedil;&atilde;o:</label>
@@ -14,7 +14,7 @@
     <br />
     <label>Dose:</label>
     <input type="text" name="dose" required style="margin: 0px 5px 0px 60px;" />
-    <select name="dosagem" required>
+    <select name="dosage" required>
         <option value="-1">Selecione</option>
     </select>
     <br />

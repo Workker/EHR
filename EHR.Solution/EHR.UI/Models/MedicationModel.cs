@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EHR.UI.Models
+﻿namespace EHR.UI.Models
 {
     public class MedicationModel
     {
@@ -13,11 +8,11 @@ namespace EHR.UI.Models
         public string Presentation { get; set; }
         public string PresentationType { get; set; }
         public string Dose { get; set; }
-        public string Dosagem { get; set; }
-        public string Via { get; set; }
-        public string Local { get; set; }
+        public string Dosage { get; set; }
+        public string Way { get; set; }
+        public string Place { get; set; }
         public string Frequency { get; set; }
         public string FrequencyCase { get; set; }
-        public string Duration { get; set; }
+        public int Duration { get; set; }
     }
 }

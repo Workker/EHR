@@ -8,13 +8,13 @@ namespace EHR.Controller
 {
     public abstract class EHRController
     {
-        private Summaries summaries;
+        private Summaries _summaries;
         public Summaries Summaries
         {
-            get { return summaries ?? (summaries = new Summaries()); }
+            get { return _summaries ?? (_summaries = new Summaries()); }
             set
             {
-                summaries = value;
+                _summaries = value;
             }
         }
 
@@ -42,6 +42,9 @@ namespace EHR.Controller
         #region Medication
 
         public virtual List<DefDTO> GetDef(string term) { return null; }
+        public virtual void SaveMedication(int idSummary, short medicationType, short def, string presentation,
+            string presentationType, string dose, string dosage, string way, string place, string frequency, string frequencyCase, int duration) { }
+        public virtual void RemoveMedication(int idSummary, int id) { }
 
         #endregion
 

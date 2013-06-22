@@ -1,4 +1,6 @@
-﻿@model EHR.UI.Models.SummaryModel
+﻿@using EHR.Domain.Entities
+@using EHR.UI.Models
+@model EHR.UI.Models.SummaryModel
 <h1>Dados Gerais</h1>
 <hr />
 <br />
@@ -21,14 +23,16 @@
 <h3>Medicamentos de Uso Pr&eacute;vio</h3>
 <br />
 @{
-    Html.RenderPartial("Medication/_Table");
+    var medicationUseBefore = new MedicationModel { MedicationType = (short)MedicationTypeEnum.MedicationUseBefore };
+    Html.RenderPartial("Medication/_Table", medicationUseBefore);
 }
 <br />
 <hr />
 <h3>Medicamentos Utilizados Durante a Interna&ccedil;&atilde;o</h3>
 <br />
 @{
-    Html.RenderPartial("Medication/_Table");
+    var medicationUseDuring = new MedicationModel { MedicationType = (short)MedicationTypeEnum.MedicationUseDuring };
+    Html.RenderPartial("Medication/_Table", medicationUseDuring);
 }
 <br />
 <hr />

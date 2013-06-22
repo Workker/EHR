@@ -18,6 +18,7 @@ namespace EHR.UI.Models
         public List<AllergyModel> Allergies { get; set; }
         public List<DiagnosticModel> Diagnostics { get; set; }
         public List<ProcedureModel> Procedures { get; set; }
+        public List<MedicationModel> Medications { get; set; }
         public List<HemotransfusionModel> Hemotransfusions { get; set; }
     }
 }

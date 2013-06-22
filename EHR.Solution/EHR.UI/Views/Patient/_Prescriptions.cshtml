@@ -1,6 +1,9 @@
-﻿<h1>Prescri&ccedil;&atilde;o de Alta</h1>
+﻿@using EHR.Domain.Entities
+@using EHR.UI.Models
+<h1>Prescri&ccedil;&atilde;o de Alta</h1>
 <hr />
 <br />
 @{
-    Html.RenderPartial("Medication/_Table");
+    var medicationUseBefore = new MedicationModel { MedicationType = (short)MedicationTypeEnum.Prescription };
+    Html.RenderPartial("Medication/_Table", medicationUseBefore);
 }

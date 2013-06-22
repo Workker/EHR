@@ -16,7 +16,6 @@ namespace EHR.Controller
                 hemotransfusionTypes = value;
             }
         }
-
         private Types<ReactionType> reactionTypes;
         public Types<ReactionType> ReactionTypes
         {
@@ -26,7 +25,6 @@ namespace EHR.Controller
                 reactionTypes = value;
             }
         }
-
 
         public override void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, int idSummary)
         {
@@ -73,6 +71,5 @@ namespace EHR.Controller
             summary.RemoveHemotransfusion(id);
             Summaries.Save(summary);
         }
-
     }
 }

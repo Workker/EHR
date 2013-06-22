@@ -495,6 +495,7 @@ function SaveMDR(element) {
 }
 
 function GenericAutoComplete(autoCompleteElement, url, codeElement) {
+    
     $(autoCompleteElement).autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -503,6 +504,7 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
                 dataType: "JSON",
                 data: { term: request.term },
                 success: function (data) {
+                    debugger
                     response($.map(data, function (item) {
                         return { label: item.Description, value: item.Description, code: item.Code };
                     }));
@@ -513,6 +515,7 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
             noResults: "",
             results: ""
         }, select: function (event, ui) {
+            debugger
             $(codeElement).val(ui.item.code);
         }
     });
