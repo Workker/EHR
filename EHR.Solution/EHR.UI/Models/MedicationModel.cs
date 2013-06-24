@@ -3,8 +3,8 @@
     public class MedicationModel
     {
         public int Id { get; set; }
-        public short MedicationType { get; set; }
-        public short Def { get; set; }
+        public short Type { get; set; }
+        public DefModel Def { get; set; }
         public string Presentation { get; set; }
         public string PresentationType { get; set; }
         public string Dose { get; set; }

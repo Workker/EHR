@@ -88,14 +88,14 @@ $(document).ready(function () {
     //    data: ''
     //});
 
-    //Menu.add({
-    //    Title: 'Exames',
-    //    onOutIcon: '../../Images/exames.png',
-    //    onClickIcon: '../../Images/exames.png',
-    //    HtmlSatusContent: '',
-    //    url: '/Patient/Exams',
-    //    data: ''
-    //});
+    Menu.add({
+        Title: 'Exames',
+        onOutIcon: '../../Images/exames.png',
+        onClickIcon: '../../Images/exames.png',
+        HtmlSatusContent: '',
+        url: '/Patient/Exams',
+        data: ''
+    });
 
     Menu.add({
         Title: 'Procedimentos',
@@ -504,7 +504,6 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
                 dataType: "JSON",
                 data: { term: request.term },
                 success: function (data) {
-                    debugger
                     response($.map(data, function (item) {
                         return { label: item.Description, value: item.Description, code: item.Code };
                     }));
@@ -515,7 +514,6 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
             noResults: "",
             results: ""
         }, select: function (event, ui) {
-            debugger
             $(codeElement).val(ui.item.code);
         }
     });

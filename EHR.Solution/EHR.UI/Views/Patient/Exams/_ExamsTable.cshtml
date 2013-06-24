@@ -1,12 +1,7 @@
 ﻿<ul class="ulTable _4kg  _4ks">
-    <li class="clearfix">
-        <div class="clearfix">
-            @{
-                Html.RenderPartial("Exams/_ExamsTableRow");
-            }
-        </div>
-        <div class="content"></div>
-    </li>
+    @{
+        Html.RenderPartial("Exams/_ExamsTableRow");
+    }
     <li class="clearfix">
         <div class="clearfix">
             <a class="action" onclick='newRow(this,"../Patient/ExamForm");'>

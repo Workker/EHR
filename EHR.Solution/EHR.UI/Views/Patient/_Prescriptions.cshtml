@@ -4,6 +4,7 @@
 <hr />
 <br />
 @{
-    var medicationUseBefore = new MedicationModel { MedicationType = (short)MedicationTypeEnum.Prescription };
+    var medicationUseBefore = new MedicationModel { Type = (short)MedicationTypeEnum.Prescription };
+    ViewBag.MedicationType = (short)MedicationTypeEnum.Prescription;
     Html.RenderPartial("Medication/_Table", medicationUseBefore);
 }

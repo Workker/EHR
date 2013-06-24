@@ -42,24 +42,9 @@ namespace EHR.UI.Controllers
 
         #region PartialViews
 
-        public PartialViewResult Antimicrobial()
-        {
-            return PartialView("_Antimicrobial");
-        }
-
-        public PartialViewResult Charts()
-        {
-            return PartialView("_Charts");
-        }
-
         public PartialViewResult DataHigh()
         {
             return PartialView("_DataHigh");
-        }
-
-        public PartialViewResult Exams()
-        {
-            return PartialView("_Exams");
         }
 
         public PartialViewResult Form()
@@ -72,14 +57,10 @@ namespace EHR.UI.Controllers
             return PartialView("_Images");
         }
 
-        public PartialViewResult OtherMedicationsRelevant()
-        {
-            return PartialView("_OtherMedicationsRelevant");
-        }
-
         public PartialViewResult Prescriptions()
         {
-            ViewBag.Medications = GetSummary().Medications;
+            var medications = GetSummary().Medications;
+            ViewBag.Medications = medications;
             return PartialView("_Prescriptions");
         }
 
@@ -189,19 +170,21 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult SaveMedication(MedicationModel medication)
         {
-            var summry = GetSummary();
-            FactoryController.GetController(ControllerEnum.Summary).SaveMedication(summry.Id, medication.MedicationType,
-                medication.Def, medication.Presentation, medication.PresentationType, medication.Dose, medication.Dosage,
+
+            FactoryController.GetController(ControllerEnum.Summary).SaveMedication(GetSummary().Id, medication.Type,
+                medication.Def.Id, medication.Presentation, medication.PresentationType, medication.Dose, medication.Dosage,
                 medication.Way, medication.Place, medication.Frequency, medication.FrequencyCase, medication.Duration);
 
             RefreshSessionSummary();
 
-            ViewBag.Medications = new List<MedicationModel> { summry.Medications.Last() };
+            ViewBag.Medications = new List<MedicationModel> { GetSummary().Medications.Last() };
+            ViewBag.MedicationType = medication.Type;
             return PartialView("Medication/_TableRow");
         }
 
         public void DeleteMedication(Medication medication)
         {
+            FactoryController.GetController(ControllerEnum.Summary).RemoveMedication(GetSummary().Id, medication.Id);
         }
 
         public JsonResult DefAutoComplete(string term)
@@ -257,19 +240,29 @@ namespace EHR.UI.Controllers
 
         #region Exams
 
+        public PartialViewResult Exams()
+        {
+            ViewBag.Exams = GetSummary().Exams;
+            return PartialView("_Exams");
+        }
+
         public PartialViewResult ExamForm()
         {
             return PartialView("Exams/_ExamsForm");
         }
 
-        public PartialViewResult SaveExam(string type, string code, string description)
+        public PartialViewResult SaveExam(string type, string dob_day, string dob_month, string dob_year, string description)
         {
+            FactoryController.GetController(ControllerEnum.Summary).SaveExam(GetSummary().Id, short.Parse(type), dob_day, dob_month, dob_year, description);
+
+            RefreshSessionSummary();
+            ViewBag.Exams = new List<ExamModel> { GetSummary().Exams.Last() };
             return PartialView("Exams/_ExamsTableRow");
         }
 
-        public void DeleteExam()
+        public void DeleteExam(int id)
         {
-
+            FactoryController.GetController(ControllerEnum.Summary).RemoveExam(GetSummary().Id, id);
         }
 
         #endregion
@@ -387,19 +380,23 @@ namespace EHR.UI.Controllers
 
         private static SummaryModel MapSummaryModelFrom(Summary summary)
         {
-            Mapper.CreateMap<Summary, SummaryModel>().ForMember(hosp => hosp.Hospital, source => source.Ignore()).ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore()).ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore());
+            Mapper.CreateMap<Summary, SummaryModel>().ForMember(hosp => hosp.Hospital, source => source.Ignore())
+                .ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore())
+                .ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
+                .ForMember(ex => ex.Exams, so => so.Ignore()).ForMember(me => me.Medications, so => so.Ignore());
             var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
 
             summaryModel.Allergies = MapAllergyModelsFrom(summary.Allergies);
             summaryModel.Diagnostics = MapDiagnosticsModelsFrom(summary.Diagnostics);
             summaryModel.Procedures = MapProceduresModelsFrom(summary.Procedures);
-            summaryModel.Medications = MapMedicationModelFrom(summary.Medications);
-            summaryModel.Hemotransfusions = MapHemotransfusionModelFrom(summary.Hemotransfusions);
+            summaryModel.Medications = MapMedicationModelsFrom(summary.Medications);
+            summaryModel.Hemotransfusions = MapHemotransfusionModelsFrom(summary.Hemotransfusions);
+            summaryModel.Exams = MapExamModelsFrom(summary.Exams);
 
             return summaryModel;
         }
 
-        private static List<HemotransfusionModel> MapHemotransfusionModelFrom(IList<Hemotransfusion> hemotransfusions)
+        private static List<HemotransfusionModel> MapHemotransfusionModelsFrom(IList<Hemotransfusion> hemotransfusions)
         {
             var hemoModels = new List<HemotransfusionModel>();
             foreach (var hemotransfusion in hemotransfusions)
@@ -493,7 +490,7 @@ namespace EHR.UI.Controllers
             return defModel;
         }
 
-        private static List<MedicationModel> MapMedicationModelFrom(IList<Medication> medications)
+        private static List<MedicationModel> MapMedicationModelsFrom(IList<Medication> medications)
         {
             var medicationsModel = new List<MedicationModel>();
             foreach (var medication in medications)
@@ -506,10 +503,26 @@ namespace EHR.UI.Controllers
 
         private static MedicationModel MapMedicationModelFrom(Medication medication)
         {
-            Mapper.CreateMap<Medication, MedicationModel>();
+            Mapper.CreateMap<Medication, MedicationModel>().ForMember(def => def.Def, so => so.Ignore());
             var medicationModel = Mapper.Map<Medication, MedicationModel>(medication);
-            medicationModel.Def = MapDefModelFrom(medication.Def).Id;
+            medicationModel.Def = MapDefModelFrom(medication.Def);
             return medicationModel;
+        }
+
+        private static ExamModel MapExamModelFrom(Exam exam)
+        {
+            Mapper.CreateMap<Exam, ExamModel>();
+            return Mapper.Map<Exam, ExamModel>(exam);
+        }
+
+        private static List<ExamModel> MapExamModelsFrom(IList<Exam> exams)
+        {
+            var examModels = new List<ExamModel>();
+            foreach (var exam in exams)
+            {
+                examModels.Add(MapExamModelFrom(exam));
+            }
+            return examModels;
         }
 
         #endregion

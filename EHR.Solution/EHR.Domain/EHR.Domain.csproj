@@ -73,6 +73,8 @@
   <ItemGroup>
     <Compile Include="Entities\AllergyType.cs" />
     <Compile Include="Entities\AllergyTypeEnum.cs" />
+    <Compile Include="Entities\Exam.cs" />
+    <Compile Include="Entities\ExamTypeEnum.cs" />
     <Compile Include="Entities\MonthEnum.cs" />
     <Compile Include="Entities\DiagnosticType.cs" />
     <Compile Include="Entities\DiagnosticTypeEnum.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Mapping\DiagnosticMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />
     <Compile Include="Mapping\AccountMap.cs" />
+    <Compile Include="Mapping\ExamMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\HemotransfusionTypeMap.cs" />
     <Compile Include="Mapping\HospitalMap.cs" />

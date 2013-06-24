@@ -1,42 +1,42 @@
 ﻿<form id="medicationForm">
-    <input type="hidden" name="medicationType" value="@ViewBag.MedicationType" />
+    <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
     <label>Medicamento:</label>
-    <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', 'input[name=def]')" />
-    <input type="hidden" name="def" />
+    <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', '#def')" />
+    <input type="hidden" name="medication.def.id" id="def" />
     <br />
     <br />
     <label>Apresenta&ccedil;&atilde;o:</label>
-    <input type="text" name="presentation" required style="margin: 0px 5px 0px 10px;" />
-    <select name="presentationType" required>
+    <input type="text" name="medication.presentation" required style="margin: 0px 5px 0px 10px;" />
+    <select name="medication.presentationType" required>
         <option value="-1">Selecione</option>
     </select>
     <br />
     <br />
     <label>Dose:</label>
-    <input type="text" name="dose" required style="margin: 0px 5px 0px 60px;" />
-    <select name="dosage" required>
+    <input type="text" name="medication.dose" required style="margin: 0px 5px 0px 60px;" />
+    <select name="medication.dosage" required>
         <option value="-1">Selecione</option>
     </select>
     <br />
     <br />
     <label>Via:</label>
-    <select name="way" required style="margin: 0px 5px 0px 70px;">
+    <select name="medication.way" required style="margin: 0px 5px 0px 70px;">
         <option value="-1">Selecione</option>
     </select>
     <label>Local:</label>
-    <input type="text" name="place" required />
+    <input type="text" name="medication.place" required />
     <br />
     <br />
     <label>Frequ&ecirc;ncia:</label>
-    <select name="frequency" required style="margin: 0px 5px 0px 25px;">
+    <select name="medication.frequency" required style="margin: 0px 5px 0px 25px;">
         <option value="-1">Selecione</option>
     </select>
-    <select name="frequencyCase" required>
+    <select name="medication.frequencyCase" required>
         <option value="-1">Selecione</option>
     </select><br />
     <br />
     <label>Dura&ccedil;&atilde;o:</label>
-    <input type="number" name="duration" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
+    <input type="text" name="medication.duration" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
     <br />
     <br />
     <input type="submit" onclick='saveRow(this, "../Patient/SaveMedication");' value="Savar" class="uibutton large confirm" />&nbsp;&nbsp;

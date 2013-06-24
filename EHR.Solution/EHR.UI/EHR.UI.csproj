@@ -183,6 +183,7 @@
     <Compile Include="Models\DefModel.cs" />
     <Compile Include="Models\DiagnosticModel.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\ExamModel.cs" />
     <Compile Include="Models\HemotransfusionModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
     <Compile Include="Models\MedicationModel.cs" />
@@ -403,8 +404,6 @@
     <Content Include="Views\Patient\_Exams.cshtml" />
     <Content Include="Views\Patient\_GeneralData.cshtml" />
     <Content Include="Views\Patient\_Procedures.cshtml" />
-    <Content Include="Views\Patient\_Antimicrobial.cshtml" />
-    <Content Include="Views\Patient\_OtherMedicationsRelevant.cshtml" />
     <Content Include="Views\Patient\_Hemotransfusion.cshtml" />
     <Content Include="Views\Patient\_ColonizationbyMDR.cshtml" />
     <Content Include="Views\Patient\_Prescriptions.cshtml" />

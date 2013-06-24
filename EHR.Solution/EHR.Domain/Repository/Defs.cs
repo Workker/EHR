@@ -17,7 +17,7 @@ namespace EHR.Domain.Repository
 
         }
 
-        public virtual Def GetById(string id)
+        public virtual Def GetById(short id)
         {
             var criterio = Session.CreateCriteria<Def>();
             criterio.Add(Expression.Eq("Id", id));

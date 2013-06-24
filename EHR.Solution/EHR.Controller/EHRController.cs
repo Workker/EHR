@@ -48,6 +48,12 @@ namespace EHR.Controller
 
         #endregion
 
+        #region Exam
+
+        public virtual void SaveExam(int idSummary, short type, string day, string month, string year, string description) { }
+        public virtual void RemoveExam(int idSummary, int id) { }
+
+        #endregion
 
         #region Account
 

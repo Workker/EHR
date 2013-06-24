@@ -1,10 +1,16 @@
 ﻿@using EHR.UI.Models
+@{
+    var test = ViewBag.MedicationType;
+}
 @foreach (MedicationModel medication in ViewBag.Medications)
 {
+    if (medication.Type == ViewBag.MedicationType)
+    {
     <li class="clearfix">
-        <span class="firstColumn"></span>
-        <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteMedication/?id=", null)'><span>X</span></a>
+        <span class="firstColumn">@medication.Def.Description</span>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteMedication/?id=@medication.Id", null)'><span>X</span></a>
         <span class="lastColumn"></span>
         <span class="middleColumn"></span>
     </li>
+    }
 }
