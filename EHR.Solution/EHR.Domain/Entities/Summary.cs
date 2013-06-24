@@ -45,6 +45,12 @@ namespace EHR.Domain.Entities
             get { return _medications ?? (_medications = new List<Medication>()); }
         }
 
+        private IList<Exam> _exams;
+        public virtual IList<Exam> Exams
+        {
+            get { return _exams ?? (_exams = new List<Exam>()); }
+        }
+
         private IList<Hemotransfusion> _hemotransfusions;
         public virtual IList<Hemotransfusion> Hemotransfusions
         {
@@ -228,6 +234,40 @@ namespace EHR.Domain.Entities
             Medications.Remove(medication);
 
             Assertion.IsFalse(Medications.Contains(medication), "Medicamento não foi removido.").Validate();
+        }
+
+        #endregion
+
+        #region Exam
+
+        public virtual void CreateExam(ExamTypeEnum type, int day, int month, int year, string description)
+        {
+            Assertion.NotNull(Date, "Tipo de exame não informado.");
+            Assertion.IsFalse(string.IsNullOrEmpty(description), "Descrição não informada.").Validate();
+
+            var exam = new Exam()
+            {
+                Type = type,
+                Date = new DateTime(year, month, day),
+                Description = description
+            };
+
+            Exams.Add(exam);
+
+            Assertion.IsTrue(Exams.Contains(exam), "Exame não foi inserido.").Validate();
+        }
+
+        public virtual void RemoveExam(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
+
+            var exam = Exams.FirstOrDefault(m => m.Id == id);
+
+            Assertion.NotNull(exam, "Exame não encontrado.").Validate();
+
+            Exams.Remove(exam);
+
+            Assertion.IsFalse(Exams.Contains(exam), "Exame não foi removido.").Validate();
         }
 
         #endregion

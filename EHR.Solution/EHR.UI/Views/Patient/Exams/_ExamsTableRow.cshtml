@@ -1,6 +1,15 @@
-﻿<span class="firstColumn">Laboratorio</span>
-<a class="action" onclick='deleteRow(this,"../Patient/DeleteExam", null)'><span>X</span></a>
-<a class="action" onclick='editRow("../Patient/ExamForm", null, this);'>
-    <span>Edit</span></a>
-<span class="lastColumn">GHGHGHG</span>
-<span class="middleColumn">20/05/2012</span>
+﻿@using EHR.Domain.Entities
+@using EHR.Domain.Util
+@using EHR.UI.Models
+@foreach (ExamModel exam in ViewBag.Exams)
+{
+    <li class="clearfix">
+        <span class="firstColumn">
+            @(EnumUtil.GetDescriptionFromEnumValue((ExamTypeEnum)Enum.Parse(typeof(ExamTypeEnum), exam.Type.ToString())))
+        </span>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteExam/?id=@exam.Id", null)'><span>X</span></a>
+        <span class="lastColumn">@exam.Date.ToShortDateString()</span>
+        <span class="middleColumn">@exam.Description
+        </span>
+    </li>
+}

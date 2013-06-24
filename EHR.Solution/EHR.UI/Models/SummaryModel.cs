@@ -20,5 +20,6 @@ namespace EHR.UI.Models
         public List<ProcedureModel> Procedures { get; set; }
         public List<MedicationModel> Medications { get; set; }
         public List<HemotransfusionModel> Hemotransfusions { get; set; }
+        public IList<ExamModel> Exams { get; set; }
     }
 }

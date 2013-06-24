@@ -43,7 +43,7 @@ namespace EHR.Controller
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
 
             var summary = Summaries.Get<Summary>(idSummary);
-            var defObj = DefsRepository.Get<Def>(def);
+            var defObj = DefsRepository.GetById(def);
             summary.CreateMedication((MedicationTypeEnum)medicationType, defObj, presentation, presentationType, dose, dosage, way, place, frequency, frequencyCase, duration);
             Summaries.Save(summary);
         }
@@ -52,6 +52,23 @@ namespace EHR.Controller
         {
             var summary = Summaries.Get<Summary>(idSummary);
             summary.RemoveMedication(id);
+            Summaries.Save(summary);
+        }
+
+        public override void SaveExam(int idSummary, short type, string day, string month, string year, string description)
+        {
+            var summary = Summaries.Get<Summary>(idSummary);
+            summary.CreateExam((ExamTypeEnum)type, int.Parse(day), int.Parse(month), int.Parse(year), description);
+            Summaries.Save(summary);
+        }
+
+        public override void RemoveExam(int idSummary, int id)
+        {
+            Assertion.GreaterThan(idSummary, 0, "Duração não informada.").Validate();
+            Assertion.GreaterThan(id, 0, "Duração não informada.").Validate();
+
+            var summary = Summaries.Get<Summary>(idSummary);
+            summary.RemoveExam(id);
             Summaries.Save(summary);
         }
     }

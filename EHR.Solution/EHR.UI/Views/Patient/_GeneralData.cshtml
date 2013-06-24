@@ -23,7 +23,8 @@
 <h3>Medicamentos de Uso Pr&eacute;vio</h3>
 <br />
 @{
-    var medicationUseBefore = new MedicationModel { MedicationType = (short)MedicationTypeEnum.MedicationUseBefore };
+    var medicationUseBefore = new MedicationModel { Type = (short)MedicationTypeEnum.MedicationUseBefore };
+    ViewBag.MedicationType = (short)MedicationTypeEnum.MedicationUseBefore;
     Html.RenderPartial("Medication/_Table", medicationUseBefore);
 }
 <br />
@@ -31,7 +32,8 @@
 <h3>Medicamentos Utilizados Durante a Interna&ccedil;&atilde;o</h3>
 <br />
 @{
-    var medicationUseDuring = new MedicationModel { MedicationType = (short)MedicationTypeEnum.MedicationUseDuring };
+    var medicationUseDuring = new MedicationModel { Type = (short)MedicationTypeEnum.MedicationUseDuring };
+    ViewBag.MedicationType = (short)MedicationTypeEnum.MedicationUseDuring;
     Html.RenderPartial("Medication/_Table", medicationUseDuring);
 }
 <br />
