@@ -55,6 +55,7 @@ namespace EHR.Test
             insert_admin_account();
             insert_twenty_accounts();
             data_initialize_all_sumaries_for_patients();
+            insert_specialties();
             //var summaries = new Summaries();
             //var sumary = new Summary { Cpf = "02338013751" };
             //summaries.Save(sumary);
@@ -116,6 +117,68 @@ namespace EHR.Test
             var typesRepository = new Types<AllergyType>();
 
             typesRepository.SaveList<AllergyType>(types);
+
+        }
+
+        public void insert_specialties()
+        {
+            var specialties = new List<Specialty> { 
+            new Specialty { Description = "Acupuntura" },
+            new Specialty { Description = "Alergia e Imunologia" },
+            new Specialty { Description = "Anestesiologia" },
+            new Specialty { Description = "Angiologia" },
+            new Specialty { Description = "Cancerologia (oncologia)" },
+            new Specialty { Description = "Cardiologia" },
+            new Specialty { Description = "Cirurgia Cardiovascular" },
+            new Specialty { Description = "Cirurgia da Mão" },
+            new Specialty { Description = "Cirurgia neurológica" },
+            new Specialty { Description = "Cirurgia do Aparelho Digestório" },
+            new Specialty { Description = "Cirurgia Geral" },
+            new Specialty { Description = "Cirurgia Pediátrica" },
+            new Specialty { Description = "Cirurgia Plástica" },
+            new Specialty { Description = "Cirurgia Torácica" },
+            new Specialty { Description = "Cirurgia Vascular" },
+            new Specialty { Description = "Clínica Médica (Medicina interna)" },
+            new Specialty { Description = "Coloproctologia" },
+            new Specialty { Description = "Dermatologia" },
+            new Specialty { Description = "Endocrinologia e Metabologia" },
+            new Specialty { Description = "Endoscopia" },
+            new Specialty { Description = "Gastroenterologia" },
+            new Specialty { Description = "Genética médica" },
+            new Specialty { Description = "Geriatria" },
+            new Specialty { Description = "Ginecologia e Obstetrícia" },
+            new Specialty { Description = "Hematologia e Hemoterapia" },
+            new Specialty { Description = "Homeopatia" },
+            new Specialty { Description = "Infectologia" },
+            new Specialty { Description = "Mastologia" },
+            new Specialty { Description = "Medicina de Família e Comunidade" },
+            new Specialty { Description = "Medicina do Trabalho" },
+            new Specialty { Description = "Medicina do Tráfego" },
+            new Specialty { Description = "Medicina Esportiva" },
+            new Specialty { Description = "Medicina Física e Reabilitação" },
+            new Specialty { Description = "Medicina Intensiva" },
+            new Specialty { Description = "Medicina Legal e Perícia Médica (ou medicina forense)" },
+            new Specialty { Description = "Medicina Nuclear" },
+            new Specialty { Description = "Medicina Preventiva e Social" },
+            new Specialty { Description = "Nefrologia" },
+            new Specialty { Description = "Neurocirurgia" },
+            new Specialty { Description = "Neurologia" },
+            new Specialty { Description = "Nutrologia" },
+            new Specialty { Description = "Oftalmologia" },
+            new Specialty { Description = "Ortopedia e Traumatologia" },
+            new Specialty { Description = "Otorrinolaringologia" },
+            new Specialty { Description = "Patologia" },
+            new Specialty { Description = "Patologia Clínica/Medicina laboratorial" },
+            new Specialty { Description = "Pediatria" },
+            new Specialty { Description = "Pneumologia" },
+            new Specialty { Description = "Psiquiatria" },
+            new Specialty { Description = "Radiologia e Diagnóstico por Imagem" },
+            new Specialty { Description = "Radioterapia" },
+            new Specialty { Description = "Reumatologia" },
+            new Specialty { Description = "Urologia" }
+            };
+            var typesRepository = new Types<Specialty>();
+            typesRepository.SaveList<Specialty>(specialties);
 
         }
 
@@ -197,8 +260,8 @@ namespace EHR.Test
 
         public void insert_twenty_accounts()
         {
-            List<Account> accountList = new List<Account>();
-            for (int i = 0; i < 20; i++)
+            var accountList = new List<Account>();
+            for (var i = 0; i <= 20; i++)
             {
                 var account = new Account()
                 {
@@ -296,11 +359,12 @@ namespace EHR.Test
                                               Date = new DateTime(2013, 6, 10),
                                               Hospital = treatment.Hospital,
                                               CodeMedicalRecord = treatment.Id,
-                                              EntryDateTreatment = treatment.EntryDate
+                                              EntryDateTreatment = treatment.EntryDate,
+                                              HighData = new HighData()
                                           };
-                        sumariesList.Add(summary);    
+                        sumariesList.Add(summary);
                     }
-                    
+
                 }
             }
 

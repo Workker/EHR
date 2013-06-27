@@ -1,28 +1,28 @@
-﻿<select name="dob_year" id="dob_year" onchange="datepicker()">
+﻿<select name="@(ViewBag.Context ?? "")year" id="dob_year" onchange="datepicker()">
     <option value="-1">Ano:</option>
     @for (var year = int.Parse(DateTime.Now.Year.ToString()); year >= 1900; year--)
     {
         <option value="@year">@year</option>
     }
 </select>
-<select name="dob_month" id="dob_month" onchange="datepicker()">
+<select name="@(ViewBag.Context ?? "")month" id="dob_month" onchange="datepicker()">
     <option value="-1">M&ecirc;s:</option>
     @for (var month = 1; month <= 12; month++)
     {
         <option value="@month">@month</option>
     }
 </select>
-<select name="dob_day" id="dob_day" onchange="datepicker()">
+<select name="@(ViewBag.Context ?? "")day" id="dob_day" onchange="datepicker()">
     <option value="-1">Dia:</option>
     @for (var day = 1; day <= 31; day++)
     {
         <option value="@day">@day</option>
     }
 </select>
-<input type="hidden" name="Birthday"  />
+<input type="hidden" name="Birthday" />
 <script type="text/javascript">
     formatDatePicker();
-    
+
     function datepicker() {
         var day = $("[name=dob_day]").val();
         var month = $("[name=dob_month]").val();

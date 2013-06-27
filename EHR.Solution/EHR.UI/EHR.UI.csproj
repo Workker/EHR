@@ -185,10 +185,12 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ExamModel.cs" />
     <Compile Include="Models\HemotransfusionModel.cs" />
+    <Compile Include="Models\HighDataModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
     <Compile Include="Models\MedicationModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
+    <Compile Include="Models\SpecialtyModel.cs" />
     <Compile Include="Models\SummaryModel.cs" />
     <Compile Include="Models\TreatmentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

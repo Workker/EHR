@@ -9,7 +9,7 @@ namespace EHR.Controller
 {
     public class AccountController : EHRController
     {
-        public override void Register(string firstName, string lastName, GenderEnum gender, string crm,
+        public override void Register(string firstName, string lastName, short gender, string crm,
                                       string email, string password, DateTime birthday, IList<short> hospitals)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(firstName), "Primeiro nome não informado.").Validate();
@@ -23,7 +23,7 @@ namespace EHR.Controller
 
             Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.");
 
-            var account = SetPropertiesOfAccount(firstName, lastName, gender, crm, email, password, birthday, hospitals);
+            var account = SetPropertiesOfAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitals);
 
             account.EncryptPassword();
             accounts.Save(account);

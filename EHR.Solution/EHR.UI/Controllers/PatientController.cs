@@ -42,11 +42,6 @@ namespace EHR.UI.Controllers
 
         #region PartialViews
 
-        public PartialViewResult DataHigh()
-        {
-            return PartialView("_DataHigh");
-        }
-
         public PartialViewResult Form()
         {
             return PartialView("_Form");
@@ -316,6 +311,44 @@ namespace EHR.UI.Controllers
 
         #endregion
 
+        #region High Data
+
+        public PartialViewResult DataHigh()
+        {
+            return PartialView("_DataHigh", GetSummary());
+        }
+
+        [HttpPost]
+        public void SaveHighData(HighDataModel highDataModel)
+        {
+            FactoryController.GetController(ControllerEnum.Summary).SaveHighData
+                (
+                GetSummary().Id,
+                highDataModel.ComplementaryExams,
+                highDataModel.HighType,
+                highDataModel.ConditionOfThePatientAtHigh,
+                highDataModel.DestinationOfThePatientAtDischarge,
+                highDataModel.OrientationOfMultidisciplinaryTeamsMet,
+                highDataModel.TermMedicalReviewAt, highDataModel.Specialty,
+                new DateTime(highDataModel.PrescribedHighYear, highDataModel.PrescribedHighMonth, highDataModel.PrescribedHighDay),
+                highDataModel.PersonWhoDeliveredTheSummary,
+                new DateTime(highDataModel.DeliveredDateYear, highDataModel.DeliveredDateMonth, highDataModel.DeliveredDateDay)
+                    );
+
+            RefreshSessionSummary();
+        }
+
+        public JsonResult SpecialtyAutoComplete(string term)
+        {
+            var specialties = FactoryController.GetController(ControllerEnum.Specialty).GetSpecialty(term);
+
+            var specialtyModels = specialties != null ? MapSpecialtyModelsFrom(specialties) : new List<SpecialtyModel>();
+
+            return Json(specialtyModels, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
         #region Private Methods
 
         private SummaryModel GetSummary()
@@ -383,9 +416,11 @@ namespace EHR.UI.Controllers
             Mapper.CreateMap<Summary, SummaryModel>().ForMember(hosp => hosp.Hospital, source => source.Ignore())
                 .ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore())
                 .ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
-                .ForMember(ex => ex.Exams, so => so.Ignore()).ForMember(me => me.Medications, so => so.Ignore());
-            var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
+                .ForMember(ex => ex.Exams, so => so.Ignore()).ForMember(me => me.Medications, so => so.Ignore())
+                .ForMember(hd => hd.HighData, so => so.Ignore());
 
+            var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
+            summaryModel.HighData = MapHighDataModelFrom(summary.HighData);
             summaryModel.Allergies = MapAllergyModelsFrom(summary.Allergies);
             summaryModel.Diagnostics = MapDiagnosticsModelsFrom(summary.Diagnostics);
             summaryModel.Procedures = MapProceduresModelsFrom(summary.Procedures);
@@ -394,6 +429,24 @@ namespace EHR.UI.Controllers
             summaryModel.Exams = MapExamModelsFrom(summary.Exams);
 
             return summaryModel;
+        }
+
+        public static HighDataModel MapHighDataModelFrom(HighData highData)
+        {
+            Mapper.CreateMap<HighData, HighDataModel>().ForMember(ec => ec.ComplementaryExams, source => source.Ignore())
+                .ForMember(s => s.Specialty, source => source.Ignore());
+            var highDataModel = Mapper.Map<HighData, HighDataModel>(highData);
+
+            highDataModel.PrescribedHighYear = highData.PrescribedHigh.Value.Year;
+            highDataModel.PrescribedHighMonth = highData.PrescribedHigh.Value.Month;
+            highDataModel.PrescribedHighDay = highData.PrescribedHigh.Value.Day;
+
+            highDataModel.DeliveredDateYear = highData.DeliveredDate.Value.Year;
+            highDataModel.DeliveredDateMonth = highData.DeliveredDate.Value.Month;
+            highDataModel.DeliveredDateDay = highData.DeliveredDate.Value.Day;
+
+
+            return highDataModel;
         }
 
         private static List<HemotransfusionModel> MapHemotransfusionModelsFrom(IList<Hemotransfusion> hemotransfusions)
@@ -523,6 +576,24 @@ namespace EHR.UI.Controllers
                 examModels.Add(MapExamModelFrom(exam));
             }
             return examModels;
+        }
+
+        private static List<SpecialtyModel> MapSpecialtyModelsFrom(IList<Specialty> specialties)
+        {
+            var specialtyModels = new List<SpecialtyModel>();
+            foreach (var specialty in specialties)
+            {
+                var specialtyModel = MapSpecialtyModelFrom(specialty);
+                specialtyModel.Code = specialty.Id;
+                specialtyModels.Add(specialtyModel);
+            }
+            return specialtyModels;
+        }
+
+        private static SpecialtyModel MapSpecialtyModelFrom(Specialty specialty)
+        {
+            Mapper.CreateMap<Specialty, SpecialtyModel>();
+            return Mapper.Map<Specialty, SpecialtyModel>(specialty);
         }
 
         #endregion

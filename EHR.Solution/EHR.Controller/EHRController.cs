@@ -57,7 +57,7 @@ namespace EHR.Controller
 
         #region Account
 
-        public virtual void Register(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals) { }
+        public virtual void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals) { }
         public virtual Account Login(string email, string password) { return null; }
         public virtual bool VerifyIfExist(string email) { return false; }
         public virtual IList<Account> GetAllNotApproved() { return null; }
@@ -93,6 +93,22 @@ namespace EHR.Controller
 
         public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, int idSummary) { }
         public virtual void RemoveHemotransfusion(int idSummary, int id) { }
+
+        #endregion
+
+        #region HighData
+
+        #region Specialty
+
+        public virtual List<Specialty> GetSpecialty(string term) { return null; }
+        public virtual Specialty GetById(short id) { return null; }
+
+        #endregion
+
+        public virtual void SaveHighData(int idSummary, IDictionary<short, IDictionary<string, int>> complementaryExams, short highType,
+           short conditionOfThePatientAtHigh, short destinationOfThePatientAtDischarge,
+          short orientationOfMultidisciplinaryTeamsMet, int termMedicalReviewAt, short specialty, DateTime prescribedHigh,
+           string personWhoDeliveredTheSummary, DateTime deliveredDate) { }
 
         #endregion
     }

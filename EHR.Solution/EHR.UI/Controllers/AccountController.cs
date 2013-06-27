@@ -17,7 +17,7 @@ namespace EHR.UI.Controllers
         public ActionResult Register(AccountModel account)
         {
             FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName,
-                                                                             (GenderEnum)account.Gender, account.CRM,
+                                                                             account.Gender, account.CRM,
                                                                              account.Email, account.Password,
                                                                              account.Birthday, account.Hospitals);
             return RedirectToAction("Index");

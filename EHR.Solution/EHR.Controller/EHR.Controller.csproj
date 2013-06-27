@@ -66,6 +66,7 @@
     <Compile Include="PatientController.cs" />
     <Compile Include="ProcedureController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecialtyController.cs" />
     <Compile Include="SummaryController.cs" />
     <Compile Include="DefController.cs" />
   </ItemGroup>

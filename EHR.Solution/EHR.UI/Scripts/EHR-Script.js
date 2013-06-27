@@ -133,14 +133,14 @@ $(document).ready(function () {
         data: ''
     }).sethscCorner();
 
-    //Menu.add({
-    //    Title: 'Dados da Alta',
-    //    onOutIcon: '../../Images/dados_alta.png',
-    //    onClickIcon: '../../Images/dados_alta.png',
-    //    HtmlSatusContent: '',
-    //    url: '/Patient/DataHigh',
-    //    data: ''
-    //}).sethscCorner();
+    Menu.add({
+        Title: 'Dados da Alta',
+        onOutIcon: '../../Images/dados_alta.png',
+        onClickIcon: '../../Images/dados_alta.png',
+        HtmlSatusContent: '',
+        url: '/Patient/DataHigh',
+        data: ''
+    }).sethscCorner();
 
     //Menu.add({
     //    Title: 'Formulário',
@@ -407,7 +407,6 @@ function ToggleHemotransfusion() {
     }
 }
 
-
 function ShowFormChangePassword(element) {
     $(element).addClass("grayButtonClicked");
     $(element).next().show();
@@ -481,21 +480,8 @@ function SaveObsevation() {
     });
 }
 
-function SaveMDR(element) {
-    var form = $(element).parent().parent();
-    $.ajax({
-        type: "POST",
-        url: '../Patient/SaveMdr',
-        cache: false,
-        data: form.serialize(),
-        success: function () {
-            alert("aaaaaa");
-        }
-    });
-}
-
 function GenericAutoComplete(autoCompleteElement, url, codeElement) {
-    
+
     $(autoCompleteElement).autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -518,3 +504,29 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
         }
     });
 }
+
+$(document).on('submit', '#dataHigh', function (e) {
+    e.preventDefault();
+    data = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: '../Patient/SaveHighData',
+        cache: false,
+        data: data,
+        success: function () {
+        }
+    });
+});
+
+$(document).on('submit', '#ColonizationByMDR', function (e) {
+    e.preventDefault();
+    data = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: '../Patient/SaveMdr',
+        cache: false,
+        data: data,
+        success: function () {
+        }
+    });
+});

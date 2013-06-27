@@ -1,4 +1,6 @@
-﻿using EHR.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using Workker.Framework.Domain;
 
@@ -69,6 +71,36 @@ namespace EHR.Controller
 
             var summary = Summaries.Get<Summary>(idSummary);
             summary.RemoveExam(id);
+            Summaries.Save(summary);
+        }
+
+        public override void SaveHighData(int idSummary, IDictionary<short, IDictionary<string, int>> complementaryExams, short highType,
+            short conditionOfThePatientAtHigh, short destinationOfThePatientAtDischarge,
+           short orientationOfMultidisciplinaryTeamsMet, int termMedicalReviewAt, short specialtyId, DateTime prescribedHigh,
+            string personWhoDeliveredTheSummary, DateTime deliveredDate)
+        {
+            var summary = Summaries.Get<Summary>(idSummary);
+            var specialty = new Types<Specialty>().Get(specialtyId);
+
+            summary.HighData.HighType = (HighTypeEnum)highType;
+            summary.HighData.ConditionOfThePatientAtHigh = (ConditionOfThePatientAtHighEnum)conditionOfThePatientAtHigh;
+            summary.HighData.DestinationOfThePatientAtDischarge = (DestinationOfThePatientAtDischargeEnum)destinationOfThePatientAtDischarge;
+            summary.HighData.OrientationOfMultidisciplinaryTeamsMet = (OrientationOfMultidisciplinaryTeamsMetEnum)orientationOfMultidisciplinaryTeamsMet;
+            summary.HighData.TermMedicalReviewAt = termMedicalReviewAt;
+            summary.HighData.Specialty = specialty;
+            summary.HighData.PrescribedHigh = prescribedHigh;
+            summary.HighData.PersonWhoDeliveredTheSummary = personWhoDeliveredTheSummary;
+            summary.HighData.DeliveredDate = deliveredDate;
+
+            foreach (var complementaryExam in complementaryExams)
+            {
+                if (complementaryExam.Value != null)
+                    foreach (var exam in complementaryExam.Value)
+                    {
+                        summary.HighData.CreateComplementaryExam(exam.Key, exam.Value);
+                    }
+            }
+
             Summaries.Save(summary);
         }
     }

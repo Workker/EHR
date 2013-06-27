@@ -35,9 +35,7 @@ namespace EHR.Controller
             var summaries = new Summaries();
             var accounts = new Accounts();
 
-            Summary summary;
-
-            summary = GetSummary(patient, treatment, summaries);
+            var summary = GetSummary(patient, treatment, summaries);
 
             if (summary != null)
                 summary.Patient = patient;
@@ -53,19 +51,20 @@ namespace EHR.Controller
             return summary;
         }
 
-        private static Summary CreateMedicalRecord(IPatientDTO patient, int Id, Accounts accounts, string treatment)
+        private static Summary CreateMedicalRecord(IPatientDTO patient, int id, Accounts accounts, string treatment)
         {
-            Summary summary;
-            var account = accounts.GetBy(Id);
+            var account = accounts.GetBy(id);
             var treatmentDTO = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault();
-            summary = new Summary()
-                          {
-                              Cpf = patient.CPF,
-                              Date = DateTime.Now,
-                              Treatment = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault(),
-                              CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
-                              Account = account
-                          };
+
+            var summary = new Summary()
+                         {
+                             Cpf = patient.CPF,
+                             Date = DateTime.Now,
+                             Treatment = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault(),
+                             CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
+                             Account = account,
+                             HighData = new HighData()
+                         };
             return summary;
         }
 

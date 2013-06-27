@@ -1,5 +1,5 @@
 ﻿<form id="ColonizationByMDR">
-    <h3>Colonização por MDR</h3>
+    <h3>Coloniza&ccedil;&atilde;o por Germes Multirresistentes</h3>
     <hr />
     <br />
     <input type="radio" name="haveMDR" required value="true" onchange="Display($(this).next().next(), true)" />&nbsp;Sim&nbsp;
@@ -10,7 +10,7 @@
         <textarea rows="10" cols="90" maxlength="1000" name="mdr" id="mdr">@ViewBag.Mdr</textarea>
         <br />
         <br />
-        <input type="submit" value="Salvar" onclick="SaveMDR(this);" class="uibutton large confirm" />&nbsp;&nbsp;
+        <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
         <input type="reset" value="Cancelar" onclick="Display($(this).parent(), false)" class="uibutton large" />
     </div>
 </form>

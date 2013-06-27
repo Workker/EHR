@@ -16,6 +16,7 @@ namespace EHR.Domain.Mapping
             Map(s => s.EntryDateTreatment);
             Map(s => s.Mdr);
             References(s => s.Admission);
+            References(s => s.HighData).Cascade.All();
             HasMany(s => s.Diagnostics).Cascade.AllDeleteOrphan();
             HasMany(s => s.Allergies).Cascade.AllDeleteOrphan();
             HasMany(s => s.Hemotransfusions).Cascade.AllDeleteOrphan();

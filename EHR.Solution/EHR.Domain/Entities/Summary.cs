@@ -20,6 +20,8 @@ namespace EHR.Domain.Entities
         public virtual DateTime? Date { get; set; }
         public virtual Admission Admission { get; set; }
         public virtual Account Account { get; set; }
+        public virtual string Mdr { get; set; }
+        public virtual HighData HighData { get; set; }
 
         private IList<Allergy> _allergies;
         public virtual IList<Allergy> Allergies
@@ -59,8 +61,6 @@ namespace EHR.Domain.Entities
 
         public virtual IPatientDTO Patient { get; set; }
         public virtual ITreatmentDTO Treatment { get; set; }
-
-        public virtual string Mdr { get; set; }
 
         #endregion
 

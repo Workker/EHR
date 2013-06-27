@@ -73,8 +73,13 @@
   <ItemGroup>
     <Compile Include="Entities\AllergyType.cs" />
     <Compile Include="Entities\AllergyTypeEnum.cs" />
+    <Compile Include="Entities\ComplementaryExam.cs" />
+    <Compile Include="Entities\ConditionOfThePatientAtHighEnum.cs" />
+    <Compile Include="Entities\DestinationOfThePatientAtDischargeEnum.cs" />
     <Compile Include="Entities\Exam.cs" />
     <Compile Include="Entities\ExamTypeEnum.cs" />
+    <Compile Include="Entities\HighData.cs" />
+    <Compile Include="Entities\HighTypeEnum.cs" />
     <Compile Include="Entities\MonthEnum.cs" />
     <Compile Include="Entities\DiagnosticType.cs" />
     <Compile Include="Entities\DiagnosticTypeEnum.cs" />
@@ -91,12 +96,14 @@
     <Compile Include="Entities\Diagnostic.cs" />
     <Compile Include="Entities\Cid.cs" />
     <Compile Include="Entities\Def.cs" />
+    <Compile Include="Entities\OrientationOfMultidisciplinaryTeamsMetEnum.cs" />
     <Compile Include="Entities\Procedure.cs" />
     <Compile Include="Entities\ReactionType.cs" />
     <Compile Include="Entities\ReactionTypeEnum.cs" />
     <Compile Include="Entities\ReasonOfAdmission.cs" />
     <Compile Include="Entities\ReasonOfAdmissionEnum.cs" />
     <Compile Include="Entities\GenderEnum.cs" />
+    <Compile Include="Entities\Specialty.cs" />
     <Compile Include="Entities\Summary.cs" />
     <Compile Include="Entities\Tus.cs" />
     <Compile Include="Entities\ValueObject.cs" />
@@ -104,6 +111,7 @@
     <Compile Include="Mapping\AllergyMap.cs" />
     <Compile Include="Mapping\AllergyTypeMap.cs" />
     <Compile Include="Mapping\CidMap.cs" />
+    <Compile Include="Mapping\ComplementaryExamMap.cs" />
     <Compile Include="Mapping\DefMap.cs" />
     <Compile Include="Mapping\DiagnosticMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />
@@ -111,12 +119,14 @@
     <Compile Include="Mapping\ExamMap.cs" />
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\HemotransfusionTypeMap.cs" />
+    <Compile Include="Mapping\HighDataMap.cs" />
     <Compile Include="Mapping\HospitalMap.cs" />
     <Compile Include="Mapping\MedicationMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />
     <Compile Include="Mapping\ReasonOfAdmissionMap.cs" />
+    <Compile Include="Mapping\SpecialtyMap.cs" />
     <Compile Include="Mapping\SummaryMap.cs" />
     <Compile Include="Mapping\TusMap.cs" />
     <Compile Include="Mapping\ValueObjectMap.cs" />
