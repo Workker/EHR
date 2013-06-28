@@ -74,7 +74,7 @@ namespace EHR.Controller
             Summaries.Save(summary);
         }
 
-        public override void SaveHighData(int idSummary, IDictionary<short, IDictionary<string, int>> complementaryExams, short highType,
+        public override void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, short highType,
             short conditionOfThePatientAtHigh, short destinationOfThePatientAtDischarge,
            short orientationOfMultidisciplinaryTeamsMet, int termMedicalReviewAt, short specialtyId, DateTime prescribedHigh,
             string personWhoDeliveredTheSummary, DateTime deliveredDate)
@@ -92,13 +92,14 @@ namespace EHR.Controller
             summary.HighData.PersonWhoDeliveredTheSummary = personWhoDeliveredTheSummary;
             summary.HighData.DeliveredDate = deliveredDate;
 
+            foreach (var id in complementaryExamDeleteds)
+            {
+                summary.HighData.RemoveComplementaryExam(id);
+            }
+
             foreach (var complementaryExam in complementaryExams)
             {
-                if (complementaryExam.Value != null)
-                    foreach (var exam in complementaryExam.Value)
-                    {
-                        summary.HighData.CreateComplementaryExam(exam.Key, exam.Value);
-                    }
+                summary.HighData.ComplementaryExams.Add(complementaryExam);
             }
 
             Summaries.Save(summary);

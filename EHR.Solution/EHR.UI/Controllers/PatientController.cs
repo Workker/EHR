@@ -319,23 +319,45 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult DataHigh()
         {
-            Session["ComplementaryExams"] = new List<ComplementaryExamModel>();
+            var summary = GetSummary();
+            Session["ComplementaryExams"] = summary.HighData.ComplementaryExams;
             ViewBag.ComplementaryExams = GetComplementaryExamsFromSession();
-            return PartialView("_DataHigh", GetSummary());
+            return PartialView("_DataHigh", summary);
         }
 
         [HttpPost]
         public void SaveHighData(HighDataModel highDataModel)
         {
+            var complementaryExam = new List<ComplementaryExam>();
+            var complementaryExamDeleteds = new List<int>();
+
+            foreach (var complementaryExamModel in GetComplementaryExamsFromSession())
+            {
+                if (complementaryExamModel.Id == 0)
+                {
+                    complementaryExam.Add(new ComplementaryExam()
+                    {
+                        Description = complementaryExamModel.Description,
+                        Period = complementaryExamModel.Period
+                    });
+                }
+
+                if (complementaryExamModel.Deleted)
+                {
+                    complementaryExamDeleteds.Add(complementaryExamModel.Id);
+                }
+            }
+
             FactoryController.GetController(ControllerEnum.Summary).SaveHighData
                 (
                 GetSummary().Id,
-                null,
+                complementaryExam,
+                complementaryExamDeleteds,
                 highDataModel.HighType,
                 highDataModel.ConditionOfThePatientAtHigh,
                 highDataModel.DestinationOfThePatientAtDischarge,
                 highDataModel.OrientationOfMultidisciplinaryTeamsMet,
-                highDataModel.TermMedicalReviewAt, highDataModel.Specialty,
+                highDataModel.TermMedicalReviewAt, highDataModel.Specialty.Id,
                 new DateTime(highDataModel.PrescribedHighYear, highDataModel.PrescribedHighMonth, highDataModel.PrescribedHighDay),
                 highDataModel.PersonWhoDeliveredTheSummary,
                 new DateTime(highDataModel.DeliveredDateYear, highDataModel.DeliveredDateMonth, highDataModel.DeliveredDateDay)
@@ -379,30 +401,16 @@ namespace EHR.UI.Controllers
             return (List<ComplementaryExamModel>)Session["ComplementaryExams"];
         }
 
+        [HttpPost]
         public void DeleteComplementaryExam(int id)
         {
             if (id != 0)
             {
-                var summary = GetSummary();
-                var complementaryExam = summary.HighData.ComplementaryExams.Where(ce => ce.Id == id).ToList();
+                var complementaryExam = GetComplementaryExamsFromSession();
 
-                summary.HighData.ComplementaryExams.Remove(complementaryExam.FirstOrDefault());
+                complementaryExam.Find(c => c.Id == id).Deleted = true;
 
-                FactoryController.GetController(ControllerEnum.Summary).SaveHighData
-                (
-                summary.Id,
-                null,//todo: Idictionary
-                summary.HighData.HighType,
-                summary.HighData.ConditionOfThePatientAtHigh,
-                summary.HighData.DestinationOfThePatientAtDischarge,
-                summary.HighData.OrientationOfMultidisciplinaryTeamsMet,
-                summary.HighData.TermMedicalReviewAt, summary.HighData.Specialty,
-                new DateTime(summary.HighData.PrescribedHighYear, summary.HighData.PrescribedHighMonth, summary.HighData.PrescribedHighDay),
-                summary.HighData.PersonWhoDeliveredTheSummary,
-                new DateTime(summary.HighData.DeliveredDateYear, summary.HighData.DeliveredDateMonth, summary.HighData.DeliveredDateDay)
-                    );
-
-                RefreshSessionSummary();
+                Session["ComplementaryExams"] = complementaryExam;
             }
         }
 
@@ -501,16 +509,37 @@ namespace EHR.UI.Controllers
                 .ForMember(s => s.Specialty, source => source.Ignore());
             var highDataModel = Mapper.Map<HighData, HighDataModel>(highData);
 
-            highDataModel.PrescribedHighYear = highData.PrescribedHigh.Value.Year;
-            highDataModel.PrescribedHighMonth = highData.PrescribedHigh.Value.Month;
-            highDataModel.PrescribedHighDay = highData.PrescribedHigh.Value.Day;
+            highDataModel.PrescribedHighYear = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Year;
+            highDataModel.PrescribedHighMonth = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Month;
+            highDataModel.PrescribedHighDay = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Day;
 
-            highDataModel.DeliveredDateYear = highData.DeliveredDate.Value.Year;
-            highDataModel.DeliveredDateMonth = highData.DeliveredDate.Value.Month;
-            highDataModel.DeliveredDateDay = highData.DeliveredDate.Value.Day;
+            if (highData.Specialty != null)
+            {
+                highDataModel.Specialty = new SpecialtyModel()
+                {
+                    Id = highData.Specialty.Id,
+                    Description = highData.Specialty.Description,
+                    Code = highData.Specialty.Id
+                };
 
+            }
+
+            highDataModel.DeliveredDateYear = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Year;
+            highDataModel.DeliveredDateMonth = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Month;
+            highDataModel.DeliveredDateDay = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Day;
+
+            foreach (var complementaryExam in highData.ComplementaryExams)
+            {
+                highDataModel.ComplementaryExams.Add(MapComplementaryExamModelFrom(complementaryExam));
+            }
 
             return highDataModel;
+        }
+
+        private static ComplementaryExamModel MapComplementaryExamModelFrom(ComplementaryExam complementaryExam)
+        {
+            Mapper.CreateMap<ComplementaryExam, ComplementaryExamModel>();
+            return Mapper.Map<ComplementaryExam, ComplementaryExamModel>(complementaryExam);
         }
 
         private static List<HemotransfusionModel> MapHemotransfusionModelsFrom(IList<Hemotransfusion> hemotransfusions)

@@ -11,7 +11,10 @@
         <input type="radio" name="highType"  @if (value == 1)
                                              { 
                                                  @:required 
-                                             }  value="@value" style="margin-right: 2px;"/>
+                                             }  value="@value" style="margin-right: 2px;" @if(((SummaryModel)Model).HighData.HighType == value)
+                                                                                          {
+                                                                                              @:checked
+                                                                                          } />
         @(EnumUtil.GetDescriptionFromEnumValue((HighTypeEnum)Enum.Parse(typeof(HighTypeEnum), value.ToString())))
     }
     <br />
@@ -21,8 +24,11 @@
     {
         <input type="radio" name="ConditionOfThePatientAtHigh"  @if (value == 1)
                                                                 { 
-                                                 @:required 
-                                             }  value="@value" style="margin-right: 2px;"/>
+                                                                    @:required 
+                                                                }  value="@value" style="margin-right: 2px;" @if(((SummaryModel)Model).HighData.ConditionOfThePatientAtHigh == value)
+                                                                                          {
+                                                                                              @:checked
+                                                                                          }/>
         @(EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString())))
     }
     <br />
@@ -32,8 +38,11 @@
     {
         <input type="radio" name="DestinationOfThePatientAtDischarge"  @if (value == 1)
                                                                        { 
-                                                 @:required 
-                                             }  value="@value" style="margin-right: 2px;"/>
+                                                                           @:required 
+                                                                       }  value="@value" style="margin-right: 2px;" @if(((SummaryModel)Model).HighData.DestinationOfThePatientAtDischarge == value)
+                                                                                          {
+                                                                                              @:checked
+                                                                                          }/>
         @(EnumUtil.GetDescriptionFromEnumValue((DestinationOfThePatientAtDischargeEnum)Enum.Parse(typeof(DestinationOfThePatientAtDischargeEnum), value.ToString())))
     }
     <br />
@@ -44,19 +53,23 @@
     {
         <input type="radio" name="OrientationOfMultidisciplinaryTeamsMet"  @if (value == 1)
                                                                            { 
-                                                 @:required 
-                                             }  value="@value" style="margin-right: 2px;"/>
+                                                                               @:required 
+                                                                           }  value="@value" style="margin-right: 2px;"@if(((SummaryModel)Model).HighData.OrientationOfMultidisciplinaryTeamsMet == value)
+                                                                                          {
+                                                                                              @:checked
+                                                                                          }/>
         @(EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString())))
     }
     <br />
     <br />
     <label>Prazo de revisão médica em (Dias):</label>&nbsp;
-    <input type="text" name="TermMedicalReviewAt" size="3" />&nbsp;&nbsp;
+    <input type="text" name="TermMedicalReviewAt" size="3" value="@(((SummaryModel)Model).HighData.TermMedicalReviewAt)" />&nbsp;&nbsp;
     <label>Especialidade:</label>&nbsp;
-    <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/SpecialtyAutoComplete', '#Specialty')" />
-    <input type="hidden" name="Specialty" id="Specialty" />
+    <input type="text" required style="margin-left: 10px;" name="Specialty.Description" value="@(((SummaryModel)Model).HighData.Specialty.Description)" onclick="GenericAutoComplete(this, '../Patient/SpecialtyAutoComplete', '#Specialty')" />
+    <input type="hidden" name="Specialty.id" id="Specialty" value="@(((SummaryModel)Model).HighData.Specialty.Id)" />
     <br />
     <hr />
+    <br/>
     <h3>Exames complementares p&oacute;s alta:</h3>
     <br />
     @{
@@ -82,7 +95,7 @@
     <hr />
     <br />
     <label>Sum&aacute;rio entregue a:</label>&nbsp;
-    <input type="text" name="PersonWhoDeliveredTheSummary" required />
+    <input type="text" name="PersonWhoDeliveredTheSummary" required value="@(((SummaryModel)Model).HighData.PersonWhoDeliveredTheSummary)" />
     <br />
     <br />
     <label>Data:</label>&nbsp;
@@ -95,4 +108,13 @@
     <br />
     <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" value="Cancelar" class="uibutton large" />
+    <script type="text/javascript">
+        $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).HighData.PrescribedHighYear));
+        $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).HighData.PrescribedHighMonth));
+        $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).HighData.PrescribedHighDay));
+
+        $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).HighData.DeliveredDateYear));
+        $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).HighData.DeliveredDateMonth));
+        $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).HighData.DeliveredDateDay));
+    </script>
 </form>

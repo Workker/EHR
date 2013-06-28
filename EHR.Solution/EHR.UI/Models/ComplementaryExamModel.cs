@@ -2,8 +2,9 @@
 {
     public class ComplementaryExamModel
     {
-        public virtual int Id { get; set; }
-        public virtual string Description { get; set; }
-        public virtual int Period { get; set; }
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public int Period { get; set; }
+        public bool Deleted { get; set; }
     }
 }
