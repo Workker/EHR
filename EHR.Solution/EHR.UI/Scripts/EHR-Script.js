@@ -262,6 +262,24 @@ function closeForm(element) {
     }
 }
 
+function SaveComplementaryExam(element) {
+    debugger 
+    var period = $(element).prev().prev().prev().val();
+    var description = $(element).prev().prev().prev().prev().prev().prev().prev().val();
+    $.ajax({
+        type: "POST",
+        url: "../Patient/SaveComplementaryExam",
+        cache: false,
+        data: { description: description, period: period },
+        success: function (data) {
+            var divContent = $(element).parent().parent();
+            $(divContent).hide();
+            $(divContent).prev().html(data);
+            $(divContent).prev().show();
+        }
+    });
+}
+
 // Role display or hide table
 function Display(element, option) {
     if (option == true) {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EHR.Domain.Entities;
 
 namespace EHR.UI.Models
 {
@@ -12,15 +13,14 @@ namespace EHR.UI.Models
         public int TermMedicalReviewAt { get; set; }
         public short Specialty { get; set; }
         public string PersonWhoDeliveredTheSummary { get; set; }
-        private IDictionary<short, IDictionary<string, int>> _complementaryExams;
-        public IDictionary<short, IDictionary<string, int>> ComplementaryExams
+        private IList<ComplementaryExamModel> _complementaryExams;
+        public IList<ComplementaryExamModel> ComplementaryExams
         {
-            get { return _complementaryExams ?? (_complementaryExams = new Dictionary<short, IDictionary<string, int>>()); }
+            get { return _complementaryExams ?? (_complementaryExams = new List<ComplementaryExamModel>()); }
         }
         public int PrescribedHighMonth { get; set; }
         public int PrescribedHighYear { get; set; }
         public int PrescribedHighDay { get; set; }
-
         public int DeliveredDateMonth { get; set; }
         public int DeliveredDateYear { get; set; }
         public int DeliveredDateDay { get; set; }

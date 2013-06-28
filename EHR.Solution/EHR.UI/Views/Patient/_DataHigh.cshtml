@@ -57,9 +57,11 @@
     <input type="hidden" name="Specialty" id="Specialty" />
     <br />
     <hr />
+    <h3>Exames complementares p&oacute;s alta:</h3>
     <br />
-    <label>Exames complementares p&oacute;s alta:</label>&nbsp;
-    <input type="text" id="examesPosAlta" name="examesPosAlta" />
+    @{
+        Html.RenderPartial("DataHigh/_ComplementaryExamTable");
+    }
     <br />
     <hr />
     <br />

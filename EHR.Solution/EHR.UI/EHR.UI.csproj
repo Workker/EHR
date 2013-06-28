@@ -180,6 +180,7 @@
     </Compile>
     <Compile Include="Models\AllergyModel.cs" />
     <Compile Include="Models\CidModel.cs" />
+    <Compile Include="Models\ComplementaryExamModel.cs" />
     <Compile Include="Models\DefModel.cs" />
     <Compile Include="Models\DiagnosticModel.cs" />
     <Compile Include="Models\AccountModel.cs" />
@@ -440,6 +441,9 @@
     <Content Include="Views\Home\_AccountApprovedList.cshtml" />
     <Content Include="Views\Home\_LastSumariesResult.cshtml" />
     <Content Include="Views\Home\_AccountApprovedListResult.cshtml" />
+    <Content Include="Views\Patient\DataHigh\_ComplementaryExamForm.cshtml" />
+    <Content Include="Views\Patient\DataHigh\_ComplementaryExamTable.cshtml" />
+    <Content Include="Views\Patient\DataHigh\_ComplementaryExamTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

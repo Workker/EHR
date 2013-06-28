@@ -315,6 +315,8 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult DataHigh()
         {
+            Session["ComplementaryExams"] = new List<ComplementaryExamModel>();
+            ViewBag.ComplementaryExams = new List<ComplementaryExamModel>();
             return PartialView("_DataHigh", GetSummary());
         }
 
@@ -324,7 +326,7 @@ namespace EHR.UI.Controllers
             FactoryController.GetController(ControllerEnum.Summary).SaveHighData
                 (
                 GetSummary().Id,
-                highDataModel.ComplementaryExams,
+                null,
                 highDataModel.HighType,
                 highDataModel.ConditionOfThePatientAtHigh,
                 highDataModel.DestinationOfThePatientAtDischarge,
@@ -347,6 +349,35 @@ namespace EHR.UI.Controllers
             return Json(specialtyModels, JsonRequestBehavior.AllowGet);
         }
 
+        public PartialViewResult ComplementaryExamForm()
+        {
+            return PartialView("DataHigh/_ComplementaryExamForm");
+        }
+
+        [HttpPost]
+        public PartialViewResult SaveComplementaryExam(ComplementaryExamModel complementaryExamModel)
+        {
+            AddOnSessionComplementaryExams(complementaryExamModel);
+
+            ViewBag.ComplementaryExams = new List<ComplementaryExamModel> { GetComplementaryExamsFromSession().Last() };
+            return PartialView("DataHigh/_ComplementaryExamTableRow");
+        }
+
+        private void AddOnSessionComplementaryExams(ComplementaryExamModel complementaryExamModel)
+        {
+            var complementaryExams = GetComplementaryExamsFromSession();
+            complementaryExams.Add(complementaryExamModel);
+            Session["ComplementaryExams"] = complementaryExams;
+        }
+
+        private List<ComplementaryExamModel> GetComplementaryExamsFromSession()
+        {
+            return (List<ComplementaryExamModel>)Session["ComplementaryExams"];
+        }
+
+
+        public void DeleteComplementaryExam(string id) { }
+
         #endregion
 
         #region Private Methods
@@ -354,6 +385,11 @@ namespace EHR.UI.Controllers
         private SummaryModel GetSummary()
         {
             return (SummaryModel)Session["Summary"];
+        }
+
+        private void SetSummary(SummaryModel summaryModel)
+        {
+            Session["Summary"] = summaryModel;
         }
 
         private AccountModel GetAccount()
