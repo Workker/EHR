@@ -163,6 +163,7 @@ namespace EHR.UI.Controllers
             return PartialView("Medication/_Form");
         }
 
+        [HttpPost]
         public PartialViewResult SaveMedication(MedicationModel medication)
         {
 
@@ -180,6 +181,7 @@ namespace EHR.UI.Controllers
         public void DeleteMedication(Medication medication)
         {
             FactoryController.GetController(ControllerEnum.Summary).RemoveMedication(GetSummary().Id, medication.Id);
+            RefreshSessionSummary();
         }
 
         public JsonResult DefAutoComplete(string term)
@@ -207,10 +209,10 @@ namespace EHR.UI.Controllers
             return PartialView("Procedure/_ProcedureForm");
         }
 
-        public PartialViewResult SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode,
+        public PartialViewResult SaveProcedure(string day, string month, string year, string procedureCode,
                                                string procedure)
         {
-            FactoryController.GetController(ControllerEnum.Procedure).SaveProcedure(dob_day, dob_month, dob_year,
+            FactoryController.GetController(ControllerEnum.Procedure).SaveProcedure(day, month, year,
                                                                                     procedureCode, GetSummary().Id);
 
             RefreshSessionSummary();
@@ -246,9 +248,9 @@ namespace EHR.UI.Controllers
             return PartialView("Exams/_ExamsForm");
         }
 
-        public PartialViewResult SaveExam(string type, string dob_day, string dob_month, string dob_year, string description)
+        public PartialViewResult SaveExam(string type, string day, string month, string year, string description)
         {
-            FactoryController.GetController(ControllerEnum.Summary).SaveExam(GetSummary().Id, short.Parse(type), dob_day, dob_month, dob_year, description);
+            FactoryController.GetController(ControllerEnum.Summary).SaveExam(GetSummary().Id, short.Parse(type), day, month, year, description);
 
             RefreshSessionSummary();
             ViewBag.Exams = new List<ExamModel> { GetSummary().Exams.Last() };
@@ -258,6 +260,8 @@ namespace EHR.UI.Controllers
         public void DeleteExam(int id)
         {
             FactoryController.GetController(ControllerEnum.Summary).RemoveExam(GetSummary().Id, id);
+
+            RefreshSessionSummary();
         }
 
         #endregion
@@ -316,7 +320,7 @@ namespace EHR.UI.Controllers
         public PartialViewResult DataHigh()
         {
             Session["ComplementaryExams"] = new List<ComplementaryExamModel>();
-            ViewBag.ComplementaryExams = new List<ComplementaryExamModel>();
+            ViewBag.ComplementaryExams = GetComplementaryExamsFromSession();
             return PartialView("_DataHigh", GetSummary());
         }
 
@@ -375,8 +379,32 @@ namespace EHR.UI.Controllers
             return (List<ComplementaryExamModel>)Session["ComplementaryExams"];
         }
 
+        public void DeleteComplementaryExam(int id)
+        {
+            if (id != 0)
+            {
+                var summary = GetSummary();
+                var complementaryExam = summary.HighData.ComplementaryExams.Where(ce => ce.Id == id).ToList();
 
-        public void DeleteComplementaryExam(string id) { }
+                summary.HighData.ComplementaryExams.Remove(complementaryExam.FirstOrDefault());
+
+                FactoryController.GetController(ControllerEnum.Summary).SaveHighData
+                (
+                summary.Id,
+                null,//todo: Idictionary
+                summary.HighData.HighType,
+                summary.HighData.ConditionOfThePatientAtHigh,
+                summary.HighData.DestinationOfThePatientAtDischarge,
+                summary.HighData.OrientationOfMultidisciplinaryTeamsMet,
+                summary.HighData.TermMedicalReviewAt, summary.HighData.Specialty,
+                new DateTime(summary.HighData.PrescribedHighYear, summary.HighData.PrescribedHighMonth, summary.HighData.PrescribedHighDay),
+                summary.HighData.PersonWhoDeliveredTheSummary,
+                new DateTime(summary.HighData.DeliveredDateYear, summary.HighData.DeliveredDateMonth, summary.HighData.DeliveredDateDay)
+                    );
+
+                RefreshSessionSummary();
+            }
+        }
 
         #endregion
 

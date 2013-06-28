@@ -31,10 +31,10 @@ namespace EHR.UI.Controllers
         #region Ajax Methods
 
         [HttpPost]
-        public ActionResult FilterPeople(string dob_day, string dob_month, string dob_year, List<string> hospital)
+        public ActionResult FilterPeople(string day, string month, string year, List<string> hospital)
         {
             Session["Hospital"] = hospital;
-            FillDateParameter(dob_day, dob_month, dob_year);
+            FillDateParameter(day, month, year);
             ViewBag.Patients = GetTreatment(false);
             return PartialView("Layout/_Result");
         }
@@ -113,9 +113,9 @@ namespace EHR.UI.Controllers
             return skip ? patientController.GetBy(patient, (List<string>)Session["Hospital"]).Skip((int)Session["Skip"]).Take(10) : patientController.GetBy(patient, (List<string>)Session["Hospital"]).Take(10);
         }
 
-        private void FillDateParameter(string dob_day, string dob_month, string dob_year)
+        private void FillDateParameter(string day, string month, string year)
         {
-            Session["Date"] = dob_day + "/" + dob_month + "/" + dob_year;
+            Session["Date"] = day + "/" + month + "/" + year;
         }
 
         #endregion

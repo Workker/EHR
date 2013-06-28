@@ -24,9 +24,9 @@
     formatDatePicker();
 
     function datepicker() {
-        var day = $("[name=dob_day]").val();
-        var month = $("[name=dob_month]").val();
-        var year = $("[name=dob_year]").val();
+        var day = $("#dob_day").val();
+        var month = $("#dob_month").val();
+        var year = $("#dob_year").val();
         var value = day + "/" + month + "/" + year;
         $("[name=Birthday]").val(value);
     }

@@ -70,7 +70,7 @@ namespace EHR.Controller
 
         #region Procedure
 
-        public virtual void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, int idSummary) { }
+        public virtual void SaveProcedure(string day, string month, string year, string procedureCode, int idSummary) { }
         public virtual void RemoveProcedure(int idSummary, int id) { }
 
         #endregion

@@ -263,7 +263,6 @@ function closeForm(element) {
 }
 
 function SaveComplementaryExam(element) {
-    debugger 
     var period = $(element).prev().prev().prev().val();
     var description = $(element).prev().prev().prev().prev().prev().prev().prev().val();
     $.ajax({

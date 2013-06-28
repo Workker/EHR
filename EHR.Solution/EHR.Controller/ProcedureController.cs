@@ -35,18 +35,18 @@ namespace EHR.Controller
             return GetTusLuceneService.GetTus(term);
         }
 
-        public override void SaveProcedure(string dob_day, string dob_month, string dob_year, string procedureCode, int idSummary)
+        public override void SaveProcedure(string day, string month, string year, string procedureCode, int idSummary)
         {
-            Assertion.GreaterThan(int.Parse(dob_month), 0, "Mês inválido").Validate();
-            Assertion.GreaterThan(int.Parse(dob_day), 0, "Dia inválido").Validate();
-            Assertion.GreaterThan(int.Parse(dob_year), 0, "Ano inválido").Validate();
+            Assertion.GreaterThan(int.Parse(month), 0, "Mês inválido").Validate();
+            Assertion.GreaterThan(int.Parse(day), 0, "Dia inválido").Validate();
+            Assertion.GreaterThan(int.Parse(year), 0, "Ano inválido").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(procedureCode), "Codigo do procedimento inválido").Validate();
 
             var summary = Summaries.Get<Summary>(idSummary);
 
             var tus = TusRepository.GetByCode(procedureCode);
 
-            summary.CreateProcedure(int.Parse(dob_month), int.Parse(dob_day), int.Parse(dob_year), tus);
+            summary.CreateProcedure(int.Parse(month), int.Parse(day), int.Parse(year), tus);
 
             Summaries.Save(summary);
         }
