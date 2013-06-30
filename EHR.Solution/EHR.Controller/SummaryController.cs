@@ -25,6 +25,13 @@ namespace EHR.Controller
             Summaries.Save(summary);
         }
 
+        public override void SaveObservation(int summaryId, string observation)
+        {
+            var summary = Summaries.Get<Summary>(summaryId);
+            summary.Observation = observation;
+            Summaries.Save(summary);
+        }
+
         public override Summary GetBy(int id)
         {
             return Summaries.Get<Summary>(id);

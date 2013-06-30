@@ -69,7 +69,7 @@ namespace EHR.UI.Controllers
             ViewBag.Allergies = summary.Allergies;
             ViewBag.Diagnostics = summary.Diagnostics;
             ViewBag.Medications = summary.Medications;
-            return PartialView("_GeneralData");
+            return PartialView("_GeneralData", summary);
         }
 
         public string Admission(string q)
@@ -94,7 +94,8 @@ namespace EHR.UI.Controllers
         [HttpPost]
         public void SaveObservation(string observation)
         {
-
+            FactoryController.GetController(ControllerEnum.Summary).SaveObservation(GetSummary().Id, observation);
+            RefreshSessionSummary();
         }
 
         #region Allergy

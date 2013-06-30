@@ -487,13 +487,18 @@ function ShowTopMenu(element) {
     }
 }
 
-function SaveObsevation() {
-    var form = $('#observation').parent();
-    $.ajax({
-        type: "POST",
-        url: '../Patient/SaveObservation',
-        cache: false,
-        data: form.serialize(),
+function SaveObsevation(element) {
+    var form = $(element).parent();
+    form.submit(function () {
+        $.ajax({
+            type: "POST",
+            url: "../Patient/SaveObservation",
+            cache: false,
+            data: form.serialize(),
+            success: function () {
+            }
+        });
+        return false;
     });
 }
 

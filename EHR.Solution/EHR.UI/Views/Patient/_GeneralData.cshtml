@@ -38,10 +38,13 @@
 }
 <br />
 <hr />
-@*<label>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</label><br />
-<form>
-    <textarea rows="10" cols="90" maxlength="1000" id="observation" name="observation"></textarea>
-</form>*@
+<h3>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</h3>
+<br />
+<form style="padding-bottom: 20px;">
+    <textarea rows="10" cols="135" maxlength="1000" id="observation" name="observation">@(((SummaryModel)Model).Observation)</textarea><br />
+    <input type="submit" value="Salvar" onclick="SaveObsevation(this)" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" value="Limpar" class="uibutton large" />
+</form>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
