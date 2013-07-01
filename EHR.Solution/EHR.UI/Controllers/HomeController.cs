@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using AutoMapper;
-using EHR.Controller;
+﻿using EHR.Controller;
 using EHR.Domain.Entities;
 using EHR.UI.Filters;
+using EHR.UI.Mappers;
 using EHR.UI.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
 {
@@ -92,31 +92,11 @@ namespace EHR.UI.Controllers
 
         #region Account
 
-        private static List<AccountModel> MapAccountModelFrom(IEnumerable<Account> accounts)
-        {
-            Mapper.CreateMap<Account, AccountModel>().ForMember(dest => dest.Hospitals, source => source.Ignore());
-
-            var accountModels = new List<AccountModel>();
-
-            foreach (var item in accounts)
-            {
-                var account = Mapper.Map<Account, AccountModel>(item);
-
-                foreach (var hospital in item.Hospitals)
-                {
-                    account.Hospitals.Add(hospital.Id);
-                }
-                accountModels.Add(account);
-            }
-
-            return accountModels;
-        }
-
         private IEnumerable<AccountModel> GetAccountsSkip(bool skip)
         {
             ManagerSession(skip);
             var accounts = GetAccounts(skip);
-            return MapAccountModelFrom(accounts);
+            return AccountMapper.MapAccountModelFrom(accounts);
         }
 
         private IEnumerable<Account> GetAccounts(bool skip)
@@ -140,42 +120,8 @@ namespace EHR.UI.Controllers
         {
             var accountController = FactoryController.GetController(ControllerEnum.Account);
 
-            return skip ? MapSummaryModelFrom(accountController.GetSumaries(account.Id).Skip((int)Session["Skip"]).Take(10).ToList()) : MapSummaryModelFrom(accountController.GetSumaries(account.Id).Take(10).ToList());
+            return skip ? SummaryMapper.MapSummaryModelFrom(accountController.GetSumaries(account.Id).Skip((int)Session["Skip"]).Take(10).ToList()) : SummaryMapper.MapSummaryModelFrom(accountController.GetSumaries(account.Id).Take(10).ToList());
         }
-
-        private static List<SummaryModel> MapSummaryModelFrom(IEnumerable<Summary> summaries)
-        {
-            Mapper.CreateMap<Summary, SummaryModel>();
-
-            var sumaryModels = new List<SummaryModel>();
-
-            foreach (Summary summary in summaries)
-            {
-                var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
-                sumaryModels.Add(summaryModel);
-            }
-            return sumaryModels;
-        }
-
-        //private static List<SumaryModel> MapSummaryModelFrom(IList<Summary> summaries)
-        //{
-        //    Mapper.CreateMap<Summary, SumaryModel>();
-
-        //    var accountModels = new List<AccountModel>();
-
-        //    foreach (var item in summaries)
-        //    {
-        //        var summary = Mapper.Map<Summary, SumaryModel>(item);
-
-        //        foreach (var hospital in item.Hospitals)
-        //        {
-        //            account.Hospitals.Add(hospital.Id);
-        //        }
-        //        accountModels.Add(account);
-        //    }
-
-        //    return accountModels;
-        //}
 
         #endregion
 

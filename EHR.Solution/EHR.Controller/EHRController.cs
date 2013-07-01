@@ -21,7 +21,7 @@ namespace EHR.Controller
         public virtual List<TusDTO> GetTus(string term) { return null; }
         public virtual List<CidDTO> GetCids(string term) { return null; }
 
-        public virtual void SaveObservation(int summaryId, string observation){}
+        public virtual void SaveObservation(int summaryId, string observation) { }
 
         public virtual IList<Summary> GetLastTenSumaries(int id) { return null; }
 
@@ -38,6 +38,8 @@ namespace EHR.Controller
 
         public virtual void SaveMdr(int summaryId, string mdr) { }
         public virtual Summary GetBy(int id) { return null; }
+
+        public virtual void AddView(int idSummary, int idAccount, DateTime date) { }
 
         #endregion
 

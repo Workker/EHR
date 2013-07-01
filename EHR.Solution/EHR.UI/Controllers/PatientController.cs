@@ -1,14 +1,14 @@
-﻿using AutoMapper;
-using EHR.Controller;
+﻿using EHR.Controller;
+using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Util;
 using EHR.UI.Filters;
+using EHR.UI.Mappers;
 using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using EHR.CoreShared;
 
 namespace EHR.UI.Controllers
 {
@@ -20,9 +20,12 @@ namespace EHR.UI.Controllers
         public ActionResult Index(string cpf, string treatment)
         {
             var patient = FactoryController.GetController(ControllerEnum.Patient).GetBy(cpf);
-            var patientModel = MapPatientModelFrom(patient, treatment);
+            var patientModel = PatientMapper.MapPatientModelFrom(patient, treatment);
             var summary = FactoryController.GetController(ControllerEnum.Patient).GetSummaryBy(patient, treatment, GetAccount().Id);
-            var summaryModel = MapSummaryModelFrom(summary);
+
+            RegisterView(summary);
+
+            var summaryModel = SummaryMapper.MapSummaryModelFrom(summary);
 
             summaryModel.Patient = patientModel;
             Session["Summary"] = summaryModel;
@@ -30,6 +33,10 @@ namespace EHR.UI.Controllers
             if (GetSummary() == null)
                 Response.Redirect("/Home");
 
+            ViewBag.LastVisitors = summaryModel.LastVisitors != null
+                                       ? DistinctView(summaryModel.LastVisitors
+                                       .OrderByDescending(model => model.Id).Take(10).ToList())
+                                       : new List<ViewModel>();
             ViewBag.Allergies = summaryModel.Allergies;
             ViewBag.Diagnostics = summaryModel.Diagnostics;
             ViewBag.Procedures = summaryModel.Procedures;
@@ -189,7 +196,7 @@ namespace EHR.UI.Controllers
         {
             var defDtOs = FactoryController.GetController(ControllerEnum.Def).GetDef(term);
 
-            var defModels = MapDefModelsFrom(defDtOs);
+            var defModels = DefMapper.MapDefModelsFrom(defDtOs);
 
             return Json(defModels, JsonRequestBehavior.AllowGet);
         }
@@ -371,7 +378,7 @@ namespace EHR.UI.Controllers
         {
             var specialties = FactoryController.GetController(ControllerEnum.Specialty).GetSpecialty(term);
 
-            var specialtyModels = specialties != null ? MapSpecialtyModelsFrom(specialties) : new List<SpecialtyModel>();
+            var specialtyModels = specialties != null ? SpecialtyMapper.MapSpecialtyModelsFrom(specialties) : new List<SpecialtyModel>();
 
             return Json(specialtyModels, JsonRequestBehavior.AllowGet);
         }
@@ -424,9 +431,10 @@ namespace EHR.UI.Controllers
             return (SummaryModel)Session["Summary"];
         }
 
-        private void SetSummary(SummaryModel summaryModel)
+        private void RegisterView(Summary summary)
         {
-            Session["Summary"] = summaryModel;
+            FactoryController.GetController(ControllerEnum.Summary).AddView(summary.Id,
+                                                                               ((AccountModel)Session["account"]).Id, DateTime.Now);
         }
 
         private AccountModel GetAccount()
@@ -437,260 +445,13 @@ namespace EHR.UI.Controllers
         private void RefreshSessionSummary()
         {
             var summary = FactoryController.GetController(ControllerEnum.Summary).GetBy(GetSummary().Id);
-            Session["Summary"] = MapSummaryModelFrom(summary);
+            Session["Summary"] = SummaryMapper.MapSummaryModelFrom(summary);
         }
 
-        private static void AddHospital(IPatientDTO patient, string treatmentStr, PatientModel patientModel)
+        private IList<ViewModel> DistinctView(IList<ViewModel> viewModels)
         {
-            if (patient.Treatments != null && patient.Treatments.Count > 0 && !string.IsNullOrEmpty(treatmentStr) &&
-                patient.Treatments.Count(t => t.Id == treatmentStr) > 0)
-            {
-                patientModel.Hospital =
-                    EnumUtil.GetDescriptionFromEnumValue(
-                        (DbEnum)
-                        Enum.Parse(typeof(DbEnum),
-                                   patient.Treatments.FirstOrDefault(t => t.Id == treatmentStr).Hospital.ToString()));
-            }
-            else
-                patientModel.Hospital =
-                    EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), patient.Hospital.ToString()));
+            return (IList<ViewModel>)viewModels.GroupBy(x => x.Account.Id).Select(x => x.FirstOrDefault()).ToList();
         }
-
-        #region Mappings
-
-        private static PatientModel MapPatientModelFrom(IPatientDTO patient, string treatmentStr)
-        {
-            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Treatments, source => source.Ignore());
-
-            var patientModel = Mapper.Map<IPatientDTO, PatientModel>(patient);
-            var treatmentModels = new List<TreatmentModel>();
-
-            AddHospital(patient, treatmentStr, patientModel);
-
-            foreach (var treatment in patient.Treatments)
-            {
-                var treatmentModel = MapTreatmentModelFrom(treatment);
-                treatmentModels.Add(treatmentModel);
-            }
-
-            patientModel.Treatments = treatmentModels;
-
-            return patientModel;
-        }
-
-        private static TreatmentModel MapTreatmentModelFrom(ITreatmentDTO treatment)
-        {
-            Mapper.CreateMap<ITreatmentDTO, TreatmentModel>();
-            return Mapper.Map<ITreatmentDTO, TreatmentModel>(treatment);
-        }
-
-        private static SummaryModel MapSummaryModelFrom(Summary summary)
-        {
-            Mapper.CreateMap<Summary, SummaryModel>().ForMember(hosp => hosp.Hospital, source => source.Ignore())
-                .ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore())
-                .ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
-                .ForMember(ex => ex.Exams, so => so.Ignore()).ForMember(me => me.Medications, so => so.Ignore())
-                .ForMember(hd => hd.HighData, so => so.Ignore());
-
-            var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
-            summaryModel.HighData = MapHighDataModelFrom(summary.HighData);
-            summaryModel.Allergies = MapAllergyModelsFrom(summary.Allergies);
-            summaryModel.Diagnostics = MapDiagnosticsModelsFrom(summary.Diagnostics);
-            summaryModel.Procedures = MapProceduresModelsFrom(summary.Procedures);
-            summaryModel.Medications = MapMedicationModelsFrom(summary.Medications);
-            summaryModel.Hemotransfusions = MapHemotransfusionModelsFrom(summary.Hemotransfusions);
-            summaryModel.Exams = MapExamModelsFrom(summary.Exams);
-
-            return summaryModel;
-        }
-
-        public static HighDataModel MapHighDataModelFrom(HighData highData)
-        {
-            Mapper.CreateMap<HighData, HighDataModel>().ForMember(ec => ec.ComplementaryExams, source => source.Ignore())
-                .ForMember(s => s.Specialty, source => source.Ignore());
-            var highDataModel = Mapper.Map<HighData, HighDataModel>(highData);
-
-            highDataModel.PrescribedHighYear = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Year;
-            highDataModel.PrescribedHighMonth = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Month;
-            highDataModel.PrescribedHighDay = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Day;
-
-            if (highData.Specialty != null)
-            {
-                highDataModel.Specialty = new SpecialtyModel()
-                {
-                    Id = highData.Specialty.Id,
-                    Description = highData.Specialty.Description,
-                    Code = highData.Specialty.Id
-                };
-
-            }
-
-            highDataModel.DeliveredDateYear = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Year;
-            highDataModel.DeliveredDateMonth = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Month;
-            highDataModel.DeliveredDateDay = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Day;
-
-            foreach (var complementaryExam in highData.ComplementaryExams)
-            {
-                highDataModel.ComplementaryExams.Add(MapComplementaryExamModelFrom(complementaryExam));
-            }
-
-            return highDataModel;
-        }
-
-        private static ComplementaryExamModel MapComplementaryExamModelFrom(ComplementaryExam complementaryExam)
-        {
-            Mapper.CreateMap<ComplementaryExam, ComplementaryExamModel>();
-            return Mapper.Map<ComplementaryExam, ComplementaryExamModel>(complementaryExam);
-        }
-
-        private static List<HemotransfusionModel> MapHemotransfusionModelsFrom(IList<Hemotransfusion> hemotransfusions)
-        {
-            var hemoModels = new List<HemotransfusionModel>();
-            foreach (var hemotransfusion in hemotransfusions)
-            {
-                Mapper.CreateMap<Hemotransfusion, HemotransfusionModel>();
-                var hemotransfusionModel = Mapper.Map<Hemotransfusion, HemotransfusionModel>(hemotransfusion);
-                hemotransfusionModel.HemotransfusionType = hemotransfusion.Type.Id;
-                foreach (var reaction in hemotransfusion.Reactions)
-                {
-                    hemotransfusionModel.ReactionTypes.Add(reaction.Id);
-                }
-
-                hemoModels.Add(hemotransfusionModel);
-            }
-            return hemoModels;
-        }
-
-        private static List<ProcedureModel> MapProceduresModelsFrom(IList<Procedure> procedures)
-        {
-            var proceduresModels = new List<ProcedureModel>();
-            foreach (var procedure in procedures)
-            {
-                Mapper.CreateMap<Procedure, ProcedureModel>();
-                var procedureModel = Mapper.Map<Procedure, ProcedureModel>(procedure);
-                proceduresModels.Add(procedureModel);
-            }
-            return proceduresModels;
-        }
-
-        private static List<DiagnosticModel> MapDiagnosticsModelsFrom(IList<Diagnostic> diagnostics)
-        {
-            var diagnosticsModels = new List<DiagnosticModel>();
-            foreach (var diagnostic in diagnostics)
-            {
-                Mapper.CreateMap<Diagnostic, DiagnosticModel>().ForMember(type => type.Type, diag => diag.Ignore()).ForMember(cid => cid.Cid, diag => diag.Ignore());
-                var diagnosticsModel = Mapper.Map<Diagnostic, DiagnosticModel>(diagnostic);
-                diagnosticsModel.Type = diagnostic.Type.Id;
-                diagnosticsModel.Cid = MapCidModelFrom(diagnostic.Cid);
-                diagnosticsModels.Add(diagnosticsModel);
-            }
-            return diagnosticsModels;
-        }
-
-        private static List<AllergyModel> MapAllergyModelsFrom(IList<Allergy> allergies)
-        {
-            var allergyModels = new List<AllergyModel>();
-
-            foreach (var allergy in allergies)
-            {
-                Mapper.CreateMap<Allergy, AllergyModel>().ForMember(type => type.Types, source => source.Ignore());
-                var allergyModel = Mapper.Map<Allergy, AllergyModel>(allergy);
-
-                foreach (var allergyType in allergy.Types)
-                {
-                    allergyModel.Types.Add(allergyType.Id);
-                }
-                allergyModels.Add(allergyModel);
-            }
-            return allergyModels;
-        }
-
-        private static CidModel MapCidModelFrom(Cid cid)
-        {
-            Mapper.CreateMap<Cid, CidModel>();
-            return Mapper.Map<Cid, CidModel>(cid);
-        }
-
-        private static List<DefModel> MapDefModelsFrom(IList<DefDTO> defs)
-        {
-            var defModels = new List<DefModel>();
-            foreach (var def in defs)
-            {
-                var defModel = MapDefModelFrom(def);
-                defModel.Code = def.Id;
-                defModels.Add(defModel);
-            }
-            return defModels;
-        }
-
-        private static DefModel MapDefModelFrom(DefDTO def)
-        {
-            Mapper.CreateMap<DefDTO, DefModel>();
-            return Mapper.Map<DefDTO, DefModel>(def);
-        }
-
-        private static DefModel MapDefModelFrom(Def def)
-        {
-            Mapper.CreateMap<Def, DefModel>();
-            var defModel = Mapper.Map<Def, DefModel>(def);
-            defModel.Code = def.Id;
-            return defModel;
-        }
-
-        private static List<MedicationModel> MapMedicationModelsFrom(IList<Medication> medications)
-        {
-            var medicationsModel = new List<MedicationModel>();
-            foreach (var medication in medications)
-            {
-                var medicationModel = MapMedicationModelFrom(medication);
-                medicationsModel.Add(medicationModel);
-            }
-            return medicationsModel;
-        }
-
-        private static MedicationModel MapMedicationModelFrom(Medication medication)
-        {
-            Mapper.CreateMap<Medication, MedicationModel>().ForMember(def => def.Def, so => so.Ignore());
-            var medicationModel = Mapper.Map<Medication, MedicationModel>(medication);
-            medicationModel.Def = MapDefModelFrom(medication.Def);
-            return medicationModel;
-        }
-
-        private static ExamModel MapExamModelFrom(Exam exam)
-        {
-            Mapper.CreateMap<Exam, ExamModel>();
-            return Mapper.Map<Exam, ExamModel>(exam);
-        }
-
-        private static List<ExamModel> MapExamModelsFrom(IList<Exam> exams)
-        {
-            var examModels = new List<ExamModel>();
-            foreach (var exam in exams)
-            {
-                examModels.Add(MapExamModelFrom(exam));
-            }
-            return examModels;
-        }
-
-        private static List<SpecialtyModel> MapSpecialtyModelsFrom(IList<Specialty> specialties)
-        {
-            var specialtyModels = new List<SpecialtyModel>();
-            foreach (var specialty in specialties)
-            {
-                var specialtyModel = MapSpecialtyModelFrom(specialty);
-                specialtyModel.Code = specialty.Id;
-                specialtyModels.Add(specialtyModel);
-            }
-            return specialtyModels;
-        }
-
-        private static SpecialtyModel MapSpecialtyModelFrom(Specialty specialty)
-        {
-            Mapper.CreateMap<Specialty, SpecialtyModel>();
-            return Mapper.Map<Specialty, SpecialtyModel>(specialty);
-        }
-
-        #endregion
 
         #endregion
     }

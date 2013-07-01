@@ -178,6 +178,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\AccountMapper.cs" />
+    <Compile Include="Mappers\AllergyMapper.cs" />
+    <Compile Include="Mappers\CidMapper.cs" />
+    <Compile Include="Mappers\ComplementaryExamMapper.cs" />
+    <Compile Include="Mappers\DefMapper.cs" />
+    <Compile Include="Mappers\DiagnosticMapper.cs" />
+    <Compile Include="Mappers\ExamMapper.cs" />
+    <Compile Include="Mappers\HemotransfusionMapper.cs" />
+    <Compile Include="Mappers\HighDataMapper.cs" />
+    <Compile Include="Mappers\HospitalMapper.cs" />
+    <Compile Include="Mappers\MedicationMapper.cs" />
+    <Compile Include="Mappers\PatientMapper.cs" />
+    <Compile Include="Mappers\ProcedureMapper.cs" />
+    <Compile Include="Mappers\SpecialtyMapper.cs" />
+    <Compile Include="Mappers\SummaryMapper.cs" />
+    <Compile Include="Mappers\TreatmentMapper.cs" />
     <Compile Include="Models\AllergyModel.cs" />
     <Compile Include="Models\CidModel.cs" />
     <Compile Include="Models\ComplementaryExamModel.cs" />
@@ -194,6 +210,7 @@
     <Compile Include="Models\SpecialtyModel.cs" />
     <Compile Include="Models\SummaryModel.cs" />
     <Compile Include="Models\TreatmentModel.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -444,6 +461,7 @@
     <Content Include="Views\Patient\DataHigh\_ComplementaryExamForm.cshtml" />
     <Content Include="Views\Patient\DataHigh\_ComplementaryExamTable.cshtml" />
     <Content Include="Views\Patient\DataHigh\_ComplementaryExamTableRow.cshtml" />
+    <Content Include="Views\Patient\Layout\_LastVisitors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

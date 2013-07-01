@@ -1,21 +1,18 @@
-﻿using AutoMapper;
-using EHR.Controller;
+﻿using EHR.Controller;
 using EHR.CoreShared;
+using EHR.UI.Filters;
+using EHR.UI.Mappers;
+using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using EHR.Domain.Util;
-using EHR.UI.Filters;
-using EHR.UI.Models;
 
 namespace EHR.UI.Controllers
 {
     [AuthenticationFilter]
     public class SearchController : System.Web.Mvc.Controller
     {
-        #region Views
-
         public ActionResult Index(string query)
         {
             Session["Date"] = null;
@@ -25,10 +22,6 @@ namespace EHR.UI.Controllers
             Session["Name"] = query;
             return PartialView("_Search");
         }
-
-        #endregion
-
-        #region Ajax Methods
 
         [HttpPost]
         public ActionResult FilterPeople(string day, string month, string year, List<string> hospital)
@@ -49,27 +42,8 @@ namespace EHR.UI.Controllers
         {
             var patient = new PatientDTO { Name = query };
             var patientController = FactoryController.GetController(ControllerEnum.Patient);
-            var patients = MapPatientModelFrom(patientController.GetBy(patient));
+            var patients = PatientMapper.MapPatientModelFrom(patientController.GetBy(patient));
             return BuildResultsOfSimpleSearchOfPatients(patients);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private static IEnumerable<PatientModel> MapPatientModelFrom(IEnumerable<IPatientDTO> patients)
-        {
-            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Hospital, source => source.Ignore());
-
-            var patientModels = new List<PatientModel>();
-
-            foreach (var item in patients)
-            {
-                var account = Mapper.Map<IPatientDTO, PatientModel>(item);
-                account.Hospital = EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), item.Hospital.ToString()));
-                patientModels.Add(account);
-            }
-            return patientModels;
         }
 
         private void ManagerSession(bool skip)
@@ -117,7 +91,5 @@ namespace EHR.UI.Controllers
         {
             Session["Date"] = day + "/" + month + "/" + year;
         }
-
-        #endregion
     }
 }

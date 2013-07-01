@@ -62,6 +62,21 @@ namespace EHR.Domain.Entities
         public virtual IPatientDTO Patient { get; set; }
         public virtual ITreatmentDTO Treatment { get; set; }
 
+        private IList<View> _views;
+        public virtual IList<View> Views
+        {
+            get { return _views ?? (_views = new List<View>()); }
+        }
+
+        #endregion
+
+        #region LastVisitors
+
+        public virtual void AddView(Account account, DateTime date)
+        {
+            Views.Add(new View() { Account = account, VisiteDate = date });
+        }
+
         #endregion
 
         #region Procedure
@@ -74,7 +89,6 @@ namespace EHR.Domain.Entities
             Assertion.NotNull(tus, "Tus não informado.").Validate();
             Assertion.GreaterThan(tus.Id, short.Parse("0"), "Tus inválido.").Validate();
 
-            //TODO: serviço para validar data
             var date = new DateTime(year, month, day);
             var procedure = new Procedure(tus, date);
 

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
-using EHR.Controller;
-using EHR.Domain.Entities;
+﻿using EHR.Controller;
+using EHR.UI.Mappers;
 using EHR.UI.Models;
 using System.Web.Mvc;
 
@@ -28,10 +26,10 @@ namespace EHR.UI.Controllers
             var accountObject = FactoryController.GetController(ControllerEnum.Account).Login(loginData.Email,
                                                                                               loginData.Password);
 
-            var account = MapAccountModelFrom(accountObject);
+            var account = AccountMapper.MapAccountModelFrom(accountObject);
             account.CurrentHospital = account.Hospitals[0];
 
-            Session["hospitals"] = MapHospitalModelFrom(accountObject);
+            Session["hospitals"] = HospitalMapper.MapHospitalModelFrom(accountObject);
             Session["account"] = account;
 
             return RedirectToAction("Index", "Home");
@@ -43,35 +41,5 @@ namespace EHR.UI.Controllers
 
             return RedirectToAction("Index", "Account");
         }
-
-        #region Private Methods
-
-        private static List<HospitalModel> MapHospitalModelFrom(Account accountObject)
-        {
-            Mapper.CreateMap<Hospital, HospitalModel>();
-
-            var hospitalModels = new List<HospitalModel>();
-
-            foreach (var hospital in accountObject.Hospitals)
-            {
-                hospitalModels.Add(Mapper.Map<Hospital, HospitalModel>(hospital));
-            }
-
-            return hospitalModels;
-        }
-
-        private static AccountModel MapAccountModelFrom(Account accountObject)
-        {
-            Mapper.CreateMap<Account, AccountModel>().ForMember(dest => dest.Hospitals, source => source.Ignore());
-            var account = Mapper.Map<Account, AccountModel>(accountObject);
-
-            foreach (var hospital in accountObject.Hospitals)
-            {
-                account.Hospitals.Add(hospital.Id);
-            }
-            return account;
-        }
-
-        #endregion
     }
 }

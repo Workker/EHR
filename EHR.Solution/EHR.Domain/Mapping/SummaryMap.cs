@@ -23,6 +23,7 @@ namespace EHR.Domain.Mapping
             HasMany(s => s.Procedures).Cascade.AllDeleteOrphan();
             HasMany(s => s.Medications).Cascade.AllDeleteOrphan();
             HasMany(s => s.Exams).Cascade.AllDeleteOrphan();
+            HasMany(s => s.Views).Cascade.AllDeleteOrphan();
             References(s => s.Account).Cascade.None();
         }
     }

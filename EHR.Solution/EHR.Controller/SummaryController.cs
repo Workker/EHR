@@ -111,5 +111,17 @@ namespace EHR.Controller
 
             Summaries.Save(summary);
         }
+
+        public override void AddView(int idSummary, int idAccount, DateTime date)
+        {
+            var summary = Summaries.Get<Summary>(idSummary);
+
+            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(idAccount);
+            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
+
+            summary.AddView(account, date);
+
+            Summaries.Save(summary);
+        }
     }
 }
