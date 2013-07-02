@@ -174,10 +174,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Filters\AjaxMessagesFilter.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Notification\ControllerExtensions.cs" />
+    <Compile Include="Infrastructure\Notification\HtmlHelperExtensions.cs" />
+    <Compile Include="Infrastructure\Notification\MessageTypeEnum.cs" />
     <Compile Include="Mappers\AccountMapper.cs" />
     <Compile Include="Mappers\AllergyMapper.cs" />
     <Compile Include="Mappers\CidMapper.cs" />
@@ -359,6 +363,9 @@
     <Content Include="Images\Hospitals\riosdor.png" />
     <Content Include="Images\hospital_ico.png" />
     <Content Include="Images\icones.png" />
+    <Content Include="Images\Icons\fail.gif" />
+    <Content Include="Images\Icons\ok.gif" />
+    <Content Include="Images\Icons\warn.gif" />
     <Content Include="Images\line_vertical.png" />
     <Content Include="Images\link_c.png" />
     <Content Include="Images\link_d.png" />

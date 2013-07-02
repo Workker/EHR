@@ -1,6 +1,7 @@
 ﻿using EHR.Controller;
 using EHR.Domain.Entities;
 using EHR.UI.Filters;
+using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Mappers;
 using EHR.UI.Models;
 using System.Collections.Generic;
