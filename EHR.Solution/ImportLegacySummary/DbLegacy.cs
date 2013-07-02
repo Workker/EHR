@@ -37,9 +37,8 @@ namespace ImportLegacySummary
             SELECT 
                 S.IDINT058 as Id
                 ,S.DESMDR as Observation
-                ,S.DTAASSIMED as EntryDateTreatment                
-                ,'' as CodeMedicalRecord
-                ,'' as Hospital                
+                ,S.DTAASSIMED as EntryDateTreatment
+                ,S.IDDWD001 as HospitalId
                 ,S.NRCPF as Cpf
                 ,S.HISEXAFISADM as Admission
                 ,S.ALGMEDQ as AllergyMed
@@ -55,21 +54,26 @@ namespace ImportLegacySummary
                 
                 ,M.IDINT067 as MedicationId
 
-                ,H.IDINT100 as HemotransfusionId
+                ,He.IDINT100 as HemotransfusionId
                 ,HT.IDINT099 as HemotransfusionTypeId
             FROM 
+                --Summary
                 TBINT058 S
-                
+
+                --Diagnostic
                 LEFT JOIN TBINT098 D ON S.IDINT058 = D.IDINT058
                 LEFT JOIN TBDWD057 DD ON D.IDDWD057 = DD.IDDWD057 
 
+                --Procedure
                 LEFT JOIN TBINT063 P ON S.IDINT058 = P.IDINT058
                 LEFT JOIN TBINT106 TUS ON P.IDDWD016 = TUS.IDINT106
 
+                --Medication
                 LEFT JOIN TBINT067 M ON S.IDINT058 = M.IDINT058
                 
-                LEFT JOIN TBINT100 H ON S.IDINT058 = H.IDINT058
-                LEFT JOIN TBINT099 HT ON H.IDINT100 = HT.IDINT099
+                --Hemotransfusion
+                LEFT JOIN TBINT100 He ON S.IDINT058 = He.IDINT058
+                LEFT JOIN TBINT099 HT ON He.IDINT100 = HT.IDINT099
             WHERE 
                 S.NRCPF IS NOT NULL
                 AND S.NRCPF <> 0 

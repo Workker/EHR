@@ -19,8 +19,7 @@ namespace ImportLegacySummary.DTO
         public long Id { get; set; }
         public string Observation { get; set; }
         public DateTime? EntryDateTreatment { get; set; }
-        public string CodeMedicalRecord { get; set; }
-        public string Hospital { get; set; }
+        public int HospitalId { get; set; }
         public string Cpf { get; set; }
         public string Admission { get; set; }
         public string AllergyMed { get; set; }
