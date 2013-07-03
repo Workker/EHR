@@ -10,7 +10,6 @@ using NUnit.Framework;
 namespace EHR.Migration.Migracao
 {
     [TestFixture]
-    [Ignore]
     public class MigracaoCIDTest 
     {
         [Test]

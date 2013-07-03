@@ -9,7 +9,6 @@ using System.Collections.Generic;
 namespace EHR.Migration.Migracao
 {
     [TestFixture]
-    [Ignore]
     public class MigracaoTUSSTest
     {
         [Test]

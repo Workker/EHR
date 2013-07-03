@@ -53,6 +53,15 @@ namespace ImportLegacySummary
                 ,TUS.CDTUSS AS TusCode
                 
                 ,M.IDINT067 as MedicationId
+                ,'' as Presentation 
+                ,'' PresentationType 
+                ,'' as Dose
+                ,M.DSEVAL as Dosage
+                ,M.VIAMED as Way
+                ,'' as Place
+                ,M.FREQMED as Frequency
+                ,'' as FrequencyCase
+                ,M.DURMED as Duration 
 
                 ,He.IDINT100 as HemotransfusionId
                 ,HT.IDINT099 as HemotransfusionTypeId
@@ -74,6 +83,10 @@ namespace ImportLegacySummary
                 --Hemotransfusion
                 LEFT JOIN TBINT100 He ON S.IDINT058 = He.IDINT058
                 LEFT JOIN TBINT099 HT ON He.IDINT100 = HT.IDINT099
+
+                --Hemotransfusion Reactions
+                
+                
             WHERE 
                 S.NRCPF IS NOT NULL
                 AND S.NRCPF <> 0 
