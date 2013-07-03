@@ -3,6 +3,7 @@ using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Util;
 using EHR.UI.Filters;
+using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Mappers;
 using EHR.UI.Models;
 using System;
@@ -103,6 +104,8 @@ namespace EHR.UI.Controllers
         {
             FactoryController.GetController(ControllerEnum.Summary).SaveObservation(GetSummary().Id, observation);
             RefreshSessionSummary();
+
+            this.ShowMessage(MessageTypeEnum.Success, "História, exame fisico na admissão, breve curso hospitalar e exames relevantes. Atualizado.");
         }
 
         #region Allergy
@@ -114,11 +117,14 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult SaveAllergy(string theWitch, List<string> type)
         {
+
             FactoryController.GetController(ControllerEnum.Allergy).SaveAllergy(theWitch, type.ConvertAll(short.Parse),
-                                                                                GetSummary().Id);
+                                                                           GetSummary().Id);
 
             RefreshSessionSummary();
             ViewBag.Allergies = new List<AllergyModel> { GetSummary().Allergies.Last() };
+
+            this.ShowMessage(MessageTypeEnum.Success, "Alergia incluída.");
 
             return PartialView("GeneralData/_AllergyTableRow");
         }
@@ -126,6 +132,7 @@ namespace EHR.UI.Controllers
         public void DeleteAllergy(string id)
         {
             FactoryController.GetController(ControllerEnum.Allergy).RemoveAllergy(GetSummary().Id, int.Parse(id));
+            this.ShowMessage(MessageTypeEnum.Success, "Alergia excluida.");
         }
 
         #endregion
@@ -137,12 +144,14 @@ namespace EHR.UI.Controllers
             return PartialView("GeneralData/_DiagnosticsForm");
         }
 
-        public PartialViewResult SaveDiagnostic(string type, string cidCode, string description)
+        public PartialViewResult SaveDiagnostic(DiagnosticModel diagnostic)
         {
-            FactoryController.GetController(ControllerEnum.Diagnostic).SaveDiagnostic(type, cidCode, GetSummary().Id);
+            FactoryController.GetController(ControllerEnum.Diagnostic).SaveDiagnostic(diagnostic.Type, diagnostic.Cid.Code, GetSummary().Id);
 
             RefreshSessionSummary();
             ViewBag.Diagnostics = new List<DiagnosticModel> { GetSummary().Diagnostics.Last() };
+
+            this.ShowMessage(MessageTypeEnum.Success, "Diagnóstico incluído.");
 
             return PartialView("GeneralData/_DiagnosticTableRow");
         }
@@ -150,6 +159,7 @@ namespace EHR.UI.Controllers
         public void DeleteDiagnostic(string id)
         {
             FactoryController.GetController(ControllerEnum.Diagnostic).RemoveDiagnostic(GetSummary().Id, int.Parse(id));
+            this.ShowMessage(MessageTypeEnum.Success, "Diagnóstico excluído.");
         }
 
         public JsonResult CidAutoComplete(string term)
@@ -183,6 +193,9 @@ namespace EHR.UI.Controllers
 
             ViewBag.Medications = new List<MedicationModel> { GetSummary().Medications.Last() };
             ViewBag.MedicationType = medication.Type;
+
+            this.ShowMessage(MessageTypeEnum.Success, "Medicamento incluído.");
+
             return PartialView("Medication/_TableRow");
         }
 
@@ -190,6 +203,7 @@ namespace EHR.UI.Controllers
         {
             FactoryController.GetController(ControllerEnum.Summary).RemoveMedication(GetSummary().Id, medication.Id);
             RefreshSessionSummary();
+            this.ShowMessage(MessageTypeEnum.Success, "Medicamento excluído.");
         }
 
         public JsonResult DefAutoComplete(string term)
@@ -226,12 +240,15 @@ namespace EHR.UI.Controllers
             RefreshSessionSummary();
             ViewBag.Procedures = new List<ProcedureModel> { GetSummary().Procedures.Last() };
 
+            this.ShowMessage(MessageTypeEnum.Success, "Procedimento incluído.");
+
             return PartialView("Procedure/_ProcedureTableRow");
         }
 
         public void DeleteProcedure(int id)
         {
             FactoryController.GetController(ControllerEnum.Procedure).RemoveProcedure(GetSummary().Id, id);
+            this.ShowMessage(MessageTypeEnum.Success, "Procedimento excluído.");
         }
 
         public JsonResult TusAutoComplete(string term)
@@ -262,6 +279,9 @@ namespace EHR.UI.Controllers
 
             RefreshSessionSummary();
             ViewBag.Exams = new List<ExamModel> { GetSummary().Exams.Last() };
+
+            this.ShowMessage(MessageTypeEnum.Success, "Exame incluído.");
+
             return PartialView("Exams/_ExamsTableRow");
         }
 
@@ -270,6 +290,8 @@ namespace EHR.UI.Controllers
             FactoryController.GetController(ControllerEnum.Summary).RemoveExam(GetSummary().Id, id);
 
             RefreshSessionSummary();
+
+            this.ShowMessage(MessageTypeEnum.Success, "Exame excluído.");
         }
 
         #endregion
@@ -295,6 +317,8 @@ namespace EHR.UI.Controllers
             RefreshSessionSummary();
             ViewBag.Hemotransfusions = new List<HemotransfusionModel> { GetSummary().Hemotransfusions.Last() };
 
+            this.ShowMessage(MessageTypeEnum.Success, "Hemotransfusão incluída.");
+
             return PartialView("Hemotransfusion/_HemotransfusionTableRow");
         }
 
@@ -302,6 +326,8 @@ namespace EHR.UI.Controllers
         {
             FactoryController.GetController(ControllerEnum.Hemotransfusion).RemoveHemotransfusion(GetSummary().Id,
                                                                                                   int.Parse(id));
+
+            this.ShowMessage(MessageTypeEnum.Success, "Hemotransfusão excluída.");
         }
 
         #endregion
@@ -319,6 +345,8 @@ namespace EHR.UI.Controllers
         {
             FactoryController.GetController(ControllerEnum.Summary).SaveMdr(GetSummary().Id, mdr);
             RefreshSessionSummary();
+
+            this.ShowMessage(MessageTypeEnum.Success, "Colonização por germes multiresistentes atualizado.");
         }
 
         #endregion
@@ -372,6 +400,8 @@ namespace EHR.UI.Controllers
                     );
 
             RefreshSessionSummary();
+
+            this.ShowMessage(MessageTypeEnum.Success, "Dados de alta salvo.");
         }
 
         public JsonResult SpecialtyAutoComplete(string term)
@@ -394,19 +424,10 @@ namespace EHR.UI.Controllers
             AddOnSessionComplementaryExams(complementaryExamModel);
 
             ViewBag.ComplementaryExams = new List<ComplementaryExamModel> { GetComplementaryExamsFromSession().Last() };
+
+            this.ShowMessage(MessageTypeEnum.Success, "Exame complementar incluído.");
+
             return PartialView("DataHigh/_ComplementaryExamTableRow");
-        }
-
-        private void AddOnSessionComplementaryExams(ComplementaryExamModel complementaryExamModel)
-        {
-            var complementaryExams = GetComplementaryExamsFromSession();
-            complementaryExams.Add(complementaryExamModel);
-            Session["ComplementaryExams"] = complementaryExams;
-        }
-
-        private List<ComplementaryExamModel> GetComplementaryExamsFromSession()
-        {
-            return (List<ComplementaryExamModel>)Session["ComplementaryExams"];
         }
 
         [HttpPost]
@@ -420,6 +441,20 @@ namespace EHR.UI.Controllers
 
                 Session["ComplementaryExams"] = complementaryExam;
             }
+
+            this.ShowMessage(MessageTypeEnum.Success, "Exame complementar excluído.");
+        }
+
+        private void AddOnSessionComplementaryExams(ComplementaryExamModel complementaryExamModel)
+        {
+            var complementaryExams = GetComplementaryExamsFromSession();
+            complementaryExams.Add(complementaryExamModel);
+            Session["ComplementaryExams"] = complementaryExams;
+        }
+
+        private List<ComplementaryExamModel> GetComplementaryExamsFromSession()
+        {
+            return (List<ComplementaryExamModel>)Session["ComplementaryExams"];
         }
 
         #endregion

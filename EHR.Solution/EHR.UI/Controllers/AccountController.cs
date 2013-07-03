@@ -1,4 +1,5 @@
 ﻿using EHR.Controller;
+using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Mappers;
 using EHR.UI.Models;
 using System.Web.Mvc;
@@ -18,6 +19,9 @@ namespace EHR.UI.Controllers
                                                                              account.Gender, account.CRM,
                                                                              account.Email, account.Password,
                                                                              account.Birthday, account.Hospitals);
+
+            this.ShowMessage(MessageTypeEnum.Success, "Conta de usuário criada. Aguarde aprovação do administrador.");
+
             return RedirectToAction("Index");
         }
 

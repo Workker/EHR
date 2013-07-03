@@ -216,6 +216,7 @@ function newRow(currentNode, url) {
 }
 
 function saveRow(element, url) {
+
     var form = $(element).parent();
     form.submit(function () {
         $.ajax({
@@ -224,10 +225,9 @@ function saveRow(element, url) {
             cache: false,
             data: form.serialize(),
             success: function (data) {
-                var divContent = $(element).parent().parent();
-                $(divContent).hide();
-                $(divContent).prev().html(data);
-                $(divContent).prev().show();
+                var divContent = $(element).parent().parent().parent();
+                var data2 = data.toString().replace('<li class="clearfix">', '').replace("</li>", "");
+                $(divContent).html(data2);
             }
         });
         return false;

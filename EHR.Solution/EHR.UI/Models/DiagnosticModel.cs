@@ -1,6 +1,4 @@
-﻿using EHR.Domain.Entities;
-
-namespace EHR.UI.Models
+﻿namespace EHR.UI.Models
 {
     public class DiagnosticModel
     {

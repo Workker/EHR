@@ -135,14 +135,13 @@ div#ChangeHospital li:hover { background: #6d84b4; }
 #pageNav li ul li { width: 50px; }
 #pageNav li:hover ul li a:hover { background-color: #6d84b4; }
 .backgroundSearch { background-image: url("../Images/icones.png"); background-position: right; background-position: -603px -35px; background-size: auto; background-repeat: no-repeat; }
-/* Notification styles
------------------------------------------------------------*/
-#messagewrapper { position: fixed; top: 0px; right: 10px; z-index: 1000; margin: 5px auto; width: 500px; }
 
-    #messagewrapper .messagebox { padding: 12px 10px 10px 30px; box-shadow: 5px 5px 10px #000; }
+#messagewrapper { left: 35%; width: 500px; z-index: 1000; position: fixed; top: 6%; }
 
-    #messagewrapper .success { color: #060; background: #cfc url(../Images/Icons/ok.gif) no-repeat 8px 12px; }
+    #messagewrapper .messagebox { padding: 12px 10px 10px 30px; margin-bottom: 20px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
 
-    #messagewrapper .warning { color: #c60; background: #ffc url(../Images/Icons/warn.gif) no-repeat 8px 12px; }
+    #messagewrapper .success { color: #468847; border-color: #d6e9c6; background: #dff0d8 url("../Images/Icons/ok.gif") no-repeat 8px 12px; }
 
-    #messagewrapper .error { color: #c00; background: #fcc url(../Images/Icons/fail.gif) no-repeat 8px 12px; }
+    #messagewrapper .warning { color: #c09853; border: 1px solid #fbeed5; background: #fcf8e3 url("../Images/Icons/warn.gif") no-repeat 8px 12px; }
+
+    #messagewrapper .error { color: #b94a48; border-color: #eed3d7; background: #f2dede url("../Images/Icons/fail.gif") no-repeat 8px 12px; }
