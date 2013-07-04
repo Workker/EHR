@@ -29,10 +29,15 @@ namespace EHR.Controller
             }
         }
 
-
         public override List<TusDTO> GetTus(string term)
         {
-            return GetTusLuceneService.GetTus(term);
+            //todo: do
+
+            var tusList = GetTusLuceneService.GetTus(term);
+
+            Assertion.NotNull(tusList, "Lista de procedimentos nula.").Validate();
+
+            return tusList;
         }
 
         public override void SaveProcedure(string day, string month, string year, string procedureCode, int idSummary)
@@ -49,13 +54,20 @@ namespace EHR.Controller
             summary.CreateProcedure(int.Parse(month), int.Parse(day), int.Parse(year), tus);
 
             Summaries.Save(summary);
+
+            //todo: do
         }
 
-        public override void RemoveProcedure(int idSummary, int id)
+        public override void RemoveProcedure(int idSummary, int procedureId)
         {
+            Assertion.GreaterThan(idSummary, 0, "Sumário de alta não especificado.").Validate();
+
             var summary = Summaries.Get<Summary>(idSummary);
-            summary.RemoveProcedure(id);
+
+            summary.RemoveProcedure(procedureId);
             Summaries.Save(summary);
+
+            //todo: do
         }
     }
 }

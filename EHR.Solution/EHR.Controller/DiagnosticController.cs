@@ -58,6 +58,8 @@ namespace EHR.Controller
 
             summary.CreateDiagnostic(typeDiagnostic, cidObj);
             Summaries.Save(summary);
+
+            //todo: do
         }
 
         public override void RemoveDiagnostic(int summaryId, int diagnosticId)
@@ -68,6 +70,8 @@ namespace EHR.Controller
             var summary = Summaries.Get<Summary>(summaryId);
             summary.RemoveDiagnostic(diagnosticId);
             Summaries.Save(summary);
+
+            //todo: do
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using EHR.Controller;
 using EHR.CoreShared;
 using EHR.UI.Filters;
+using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Mappers;
 using EHR.UI.Models;
 using System;
@@ -29,6 +30,9 @@ namespace EHR.UI.Controllers
             Session["Hospital"] = hospital;
             FillDateParameter(day, month, year);
             ViewBag.Patients = GetTreatment(false);
+
+            this.ShowMessage(MessageTypeEnum.Success, "Filtro alterado.");
+
             return PartialView("Layout/_Result");
         }
 
@@ -45,6 +49,8 @@ namespace EHR.UI.Controllers
             var patients = PatientMapper.MapPatientModelFrom(patientController.GetBy(patient));
             return BuildResultsOfSimpleSearchOfPatients(patients);
         }
+
+        #region Private Methods
 
         private void ManagerSession(bool skip)
         {
@@ -91,5 +97,7 @@ namespace EHR.UI.Controllers
         {
             Session["Date"] = day + "/" + month + "/" + year;
         }
+
+        #endregion
     }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EHR.Domain.Entities.Interfaces;
+﻿using EHR.Domain.Entities.Interfaces;
 using EHR.Domain.Mapping;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using FluentNHibernate.Cfg;
+using System.Collections.Generic;
 
 namespace EHR.Domain.Repository
 {

@@ -36,6 +36,8 @@ namespace EHR.Controller
             summary.CreateAllergy(theWitch, allergies);
 
             Summaries.Save(summary);
+
+            //todo: do
         }
 
         public override void RemoveAllergy(int summaryId, int alleryId)
@@ -44,11 +46,12 @@ namespace EHR.Controller
             Assertion.GreaterThan(alleryId, 0, "Alergia inválida.").Validate();
 
             var summary = Summaries.Get<Summary>(summaryId);
+
             summary.RemoveAllergy(alleryId);
             Summaries.Save(summary);
-        }
 
-        #region Private Methods
+            //todo: do
+        }
 
         private AllergyType GetAllergy(short id)
         {
@@ -61,6 +64,5 @@ namespace EHR.Controller
             return type;
         }
 
-        #endregion
     }
 }

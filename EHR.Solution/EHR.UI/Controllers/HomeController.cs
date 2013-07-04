@@ -13,15 +13,11 @@ namespace EHR.UI.Controllers
     [AuthenticationFilter]
     public class HomeController : System.Web.Mvc.Controller
     {
-        #region Views
-
         public ActionResult Index()
         {
             ViewBag.Hospitals = Session["hospitals"];
             return View(Session["account"]);
         }
-
-        #endregion
 
         #region Partial Views
 
@@ -58,6 +54,7 @@ namespace EHR.UI.Controllers
         public ActionResult MoreAccounts()
         {
             ViewBag.Accounts = GetAccountsSkip(true);
+
             return PartialView("_AccountApprovedListResult");
         }
 
@@ -65,24 +62,32 @@ namespace EHR.UI.Controllers
         public void ApproveAccount(string id)
         {
             FactoryController.GetController(ControllerEnum.Account).ApproveAccount(int.Parse(id));
+
+            this.ShowMessage(MessageTypeEnum.Success, "Usuário aprovado.");
         }
 
         [HttpPost]
         public void RefuseAccount(string id)
         {
             FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(id));
+
+            this.ShowMessage(MessageTypeEnum.Warning, "Usuário reprovado.");
         }
 
         [HttpPost]
         public void AlterPasswordOfAccount(string newPassword)
         {
             var account = (AccountModel)Session["account"];
+
             FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword);
+
+            this.ShowMessage(MessageTypeEnum.Success, "Senha alterada.");
         }
 
         public void ChangeCurrentHospital(string q)
         {
             var account = (AccountModel)Session["account"];
+
             account.CurrentHospital = short.Parse(q);
             Session["account"] = account;
         }

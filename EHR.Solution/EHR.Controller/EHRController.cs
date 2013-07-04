@@ -53,7 +53,7 @@ namespace EHR.Controller
 
         #region Exam
 
-        public virtual void SaveExam(int idSummary, short type, string day, string month, string year, string description) { }
+        public virtual void SaveExam(int idSummary, short type, int day, int month, int year, string description) { }
         public virtual void RemoveExam(int idSummary, int id) { }
 
         #endregion
@@ -94,7 +94,7 @@ namespace EHR.Controller
 
         #region Hemotransfusion
 
-        public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, int idSummary) { }
+        public virtual void SaveHemotransfusion(IList<short> typeReaction, short typeHemotrasfusion, int idSummary) { }
         public virtual void RemoveHemotransfusion(int idSummary, int id) { }
 
         #endregion

@@ -16,8 +16,6 @@ namespace EHR.UI.Controllers
     [AuthenticationFilter]
     public class PatientController : System.Web.Mvc.Controller
     {
-        #region Views
-
         public ActionResult Index(string cpf, string treatment)
         {
             var patient = FactoryController.GetController(ControllerEnum.Patient).GetBy(cpf);
@@ -45,8 +43,6 @@ namespace EHR.UI.Controllers
 
             return View(summaryModel);
         }
-
-        #endregion
 
         #region PartialViews
 
@@ -273,7 +269,7 @@ namespace EHR.UI.Controllers
             return PartialView("Exams/_ExamsForm");
         }
 
-        public PartialViewResult SaveExam(string type, string day, string month, string year, string description)
+        public PartialViewResult SaveExam(string type, int day, int month, int year, string description)
         {
             FactoryController.GetController(ControllerEnum.Summary).SaveExam(GetSummary().Id, short.Parse(type), day, month, year, description);
 
@@ -309,7 +305,7 @@ namespace EHR.UI.Controllers
             return PartialView("Hemotransfusion/_HemotransfusionForm");
         }
 
-        public PartialViewResult SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion)
+        public PartialViewResult SaveHemotransfusion(List<short> typeReaction, short typeHemotrasfusion)
         {
             FactoryController.GetController(ControllerEnum.Hemotransfusion).SaveHemotransfusion(typeReaction,
                                                                                                 typeHemotrasfusion,

@@ -1,46 +1,66 @@
-﻿using System.Collections.Generic;
-using EHR.Domain.Entities;
+﻿using EHR.Domain.Entities;
 using EHR.Domain.Repository;
+using System.Collections.Generic;
 using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
     public class HemotransfusionController : EHRController
     {
-        private Types<HemotransfusionType> hemotransfusionTypes;
+        private Types<HemotransfusionType> _hemotransfusionTypes;
         public Types<HemotransfusionType> HemotransfusionTypes
         {
-            get { return hemotransfusionTypes ?? (hemotransfusionTypes = new Types<HemotransfusionType>()); }
+            get { return _hemotransfusionTypes ?? (_hemotransfusionTypes = new Types<HemotransfusionType>()); }
             set
             {
-                hemotransfusionTypes = value;
+                _hemotransfusionTypes = value;
             }
         }
-        private Types<ReactionType> reactionTypes;
+
+        private Types<ReactionType> _reactionTypes;
         public Types<ReactionType> ReactionTypes
         {
-            get { return reactionTypes ?? (reactionTypes = new Types<ReactionType>()); }
+            get { return _reactionTypes ?? (_reactionTypes = new Types<ReactionType>()); }
             set
             {
-                reactionTypes = value;
+                _reactionTypes = value;
             }
         }
 
-        public override void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, int idSummary)
+        public override void SaveHemotransfusion(IList<short> typeReaction, short typeHemotrasfusion, int idSummary)
         {
-            var summary = Summaries.Get<Summary>(idSummary);
+            Assertion.NotNull(typeReaction, "Lista de reações nula.");
+            Assertion.GreaterThan((int)typeHemotrasfusion, 0, "Não foi informado o tipo de hemotransfusão.").Validate();
+            Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
 
-            List<ReactionType> reactions = GetReactions(typeReaction);
-            var hemoType = HemotransfusionTypes.Get(short.Parse(typeHemotrasfusion));
+            var summary = Summaries.Get<Summary>(idSummary);
+            var reactions = GetReactions(typeReaction);
+            var hemoType = HemotransfusionTypes.Get(typeHemotrasfusion);
 
             summary.CreateHemotransfusion(hemoType, reactions);
-
             Summaries.Save(summary);
+
+            //todo: do
         }
 
-        private List<ReactionType> GetReactions(List<string> typeReaction)
+        public override void RemoveHemotransfusion(int idSummary, int id)
         {
-            List<ReactionType> reactions = new List<ReactionType>();
+            Assertion.GreaterThan(id, 0, "Hemotransfusão não informada.").Validate();
+            Assertion.GreaterThan(id, 0, "Sumário de alta inválido.").Validate();
+
+            var summary = Summaries.Get<Summary>(idSummary);
+
+            summary.RemoveHemotransfusion(id);
+            Summaries.Save(summary);
+
+            //todo: do
+        }
+
+        private List<ReactionType> GetReactions(IList<short> typeReaction)
+        {
+            Assertion.NotNull(typeReaction, "Lista de tipos de reação nula.").Validate();
+
+            var reactions = new List<ReactionType>();
 
             if (typeReaction != null && typeReaction.Count > 0)
             {
@@ -53,23 +73,16 @@ namespace EHR.Controller
             return reactions;
         }
 
-        private void FillReaction(List<ReactionType> reactions, string type)
+        private void FillReaction(IList<ReactionType> reactions, short type)
         {
             Assertion.NotNull(reactions, "Lista de reações não foi inicializada.").Validate();
-            Assertion.GreaterThan(short.Parse(type), short.Parse("0"), "tipo reação não informado.").Validate();
+            Assertion.GreaterThan((int)type, 0, "Tipo reação não informado.").Validate();
 
-            var reaction = ReactionTypes.Get(short.Parse(type));
+            var reaction = ReactionTypes.Get(type);
+
+            Assertion.NotNull(reaction, "Reação não encontrada.").Validate();
+
             reactions.Add(reaction);
-        }
-
-        public override void RemoveHemotransfusion(int idSummary, int id)
-        {
-
-            Assertion.GreaterThan(id, 0, "Hemotransfusão não informada.").Validate();
-            var summary = Summaries.Get<Summary>(idSummary);
-
-            summary.RemoveHemotransfusion(id);
-            Summaries.Save(summary);
         }
     }
 }

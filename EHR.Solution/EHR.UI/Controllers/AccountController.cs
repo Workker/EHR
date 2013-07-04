@@ -20,7 +20,7 @@ namespace EHR.UI.Controllers
                                                                              account.Email, account.Password,
                                                                              account.Birthday, account.Hospitals);
 
-            this.ShowMessage(MessageTypeEnum.Success, "Conta de usuário criada. Aguarde aprovação do administrador.");
+            this.ShowMessage(MessageTypeEnum.Success, "Conta de usuário criada. Aguarde aprovação do administrador.", true);
 
             return RedirectToAction("Index");
         }
