@@ -9,6 +9,7 @@ namespace EHR.Controller
 {
     public class AccountController : EHRController
     {
+        [ExceptionLogger]
         public override void Register(string firstName, string lastName, short gender, string crm,
                                       string email, string password, DateTime birthday, IList<short> hospitals)
         {
@@ -33,6 +34,7 @@ namespace EHR.Controller
             Assertion.GreaterThan(account.Id, 0, "Conta de usuário não criada.").Validate();
         }
 
+        [ExceptionLogger]
         public override Account Login(string email, string password)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
@@ -46,6 +48,7 @@ namespace EHR.Controller
             return account;
         }
 
+        [ExceptionLogger]
         public override bool VerifyIfExist(string email)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
@@ -57,6 +60,7 @@ namespace EHR.Controller
             return registered == null;
         }
 
+        [ExceptionLogger]
         public override IList<Account> GetAllNotApproved()
         {
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
@@ -67,6 +71,7 @@ namespace EHR.Controller
             return accountList;
         }
 
+        [ExceptionLogger]
         public override IList<Summary> GetSumaries(int accountId)
         {
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
@@ -80,6 +85,7 @@ namespace EHR.Controller
             return summaryList;
         }
 
+        [ExceptionLogger]
         public override void ApproveAccount(int accountId)
         {
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
@@ -90,6 +96,7 @@ namespace EHR.Controller
             Assertion.IsTrue(account.Approved, "Conta não aprovada.").Validate();
         }
 
+        [ExceptionLogger]
         public override void RefuseAccount(int accountId)
         {
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
@@ -100,6 +107,7 @@ namespace EHR.Controller
             Assertion.IsTrue(account.Refused, "A conta não pode ser recusada.").Validate();
         }
 
+        [ExceptionLogger]
         public override void AlterPasswordOfAccount(int accountId, string password)
         {
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
@@ -114,6 +122,7 @@ namespace EHR.Controller
             Assertion.Equals(account.Password, CryptographyUtil.EncryptToSha512(password), "Senha não alterada.").Validate();
         }
 
+        [ExceptionLogger]
         public IList<Hospital> GetHospitalsFromRepository(IList<short> hospitals)
         {
             Assertion.GreaterThan(hospitals.Count, 0, "Hospital(is) não informado(s).").Validate();

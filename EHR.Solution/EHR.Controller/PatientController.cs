@@ -12,6 +12,7 @@ namespace EHR.Controller
 {
     public class PatientController : EHRController
     {
+        [ExceptionLogger]
         public override IPatientDTO GetBy(string cpf)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(cpf), "CPF não informado.").Validate();
@@ -24,6 +25,7 @@ namespace EHR.Controller
             return patient;
         }
 
+        [ExceptionLogger]
         public override IList<IPatientDTO> GetBy(PatientDTO patientDTO)
         {
             Assertion.NotNull(patientDTO, "Paciente não informado.").Validate();
@@ -36,6 +38,7 @@ namespace EHR.Controller
             return patients;
         }
 
+        [ExceptionLogger]
         public override IList<IPatientDTO> GetBy(PatientDTO patientDTO, List<string> hospitals)
         {
             Assertion.NotNull(patientDTO, "Paciente não informado.").Validate();
@@ -49,6 +52,7 @@ namespace EHR.Controller
             return patients;
         }
 
+        [ExceptionLogger]
         public override Summary GetSummaryBy(IPatientDTO patient, string treatment, int accountId)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
@@ -73,6 +77,7 @@ namespace EHR.Controller
             return summary;
         }
 
+        [ExceptionLogger]
         private static Summary CreateMedicalRecord(IPatientDTO patient, int accountId, string treatment)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
@@ -97,6 +102,7 @@ namespace EHR.Controller
             return summary;
         }
 
+        [ExceptionLogger]
         private static Summary GetSummary(IPatientDTO patient, string treatment, Summaries summaries)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();

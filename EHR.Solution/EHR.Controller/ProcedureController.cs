@@ -29,6 +29,7 @@ namespace EHR.Controller
             }
         }
 
+        [ExceptionLogger]
         public override List<TusDTO> GetTus(string term)
         {
             //todo: do
@@ -40,6 +41,7 @@ namespace EHR.Controller
             return tusList;
         }
 
+        [ExceptionLogger]
         public override void SaveProcedure(string day, string month, string year, string procedureCode, int idSummary)
         {
             Assertion.GreaterThan(int.Parse(month), 0, "Mês inválido").Validate();
@@ -58,6 +60,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void RemoveProcedure(int idSummary, int procedureId)
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta não especificado.").Validate();

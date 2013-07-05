@@ -40,12 +40,13 @@ namespace EHR.Controller
             }
         }
 
-
+        [ExceptionLogger]
         public override List<CidDTO> GetCids(string term)
         {
             return GetCidLucene.GetCid(term);
         }
 
+        [ExceptionLogger]
         public override void SaveDiagnostic(short diagnosticType, string cid, int summaryId)
         {
             Assertion.GreaterThan((int)diagnosticType, 0, "Tipo do diagnostico não informado.").Validate();
@@ -62,6 +63,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void RemoveDiagnostic(int summaryId, int diagnosticId)
         {
             Assertion.GreaterThan(summaryId, 0, "Summario de alta inválido.");

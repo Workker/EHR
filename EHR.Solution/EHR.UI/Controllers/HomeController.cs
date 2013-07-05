@@ -4,6 +4,7 @@ using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Mappers;
 using EHR.UI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -23,23 +24,40 @@ namespace EHR.UI.Controllers
 
         public ActionResult AccountApprovedList()
         {
-            if (((AccountModel)Session["account"]).Administrator == true)
+            try
             {
-                ViewBag.Accounts = GetAccountsSkip(false);
-                return PartialView("_AccountApprovedList");
+                if (((AccountModel)Session["account"]).Administrator == true)
+                {
+                    ViewBag.Accounts = GetAccountsSkip(false);
+                    return PartialView("_AccountApprovedList");
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
                 return null;
             }
         }
 
         public ActionResult LastSumariesList()
         {
-            var account = (AccountModel)Session["account"];
-            var sumaries = FactoryController.GetController(ControllerEnum.Account).GetSumaries(account.Id).Take(10);
-            ViewBag.Summaries = new List<SummaryModel>();
-            return PartialView("_LastSumariesList");
+            try
+            {
+                var account = (AccountModel)Session["account"];
+                var sumaries = FactoryController.GetController(ControllerEnum.Account).GetSumaries(account.Id).Take(10);
+                ViewBag.Summaries = new List<SummaryModel>();
+                return PartialView("_LastSumariesList");
+
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
         }
 
         #endregion
@@ -48,48 +66,92 @@ namespace EHR.UI.Controllers
 
         public ActionResult MoreSumaries()
         {
-            return PartialView("_LastSumariesResult", GetSummaries(true));
+            try
+            {
+                return PartialView("_LastSumariesResult", GetSummaries(true));
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
         }
 
         public ActionResult MoreAccounts()
         {
-            ViewBag.Accounts = GetAccountsSkip(true);
+            try
+            {
+                ViewBag.Accounts = GetAccountsSkip(true);
 
-            return PartialView("_AccountApprovedListResult");
+                return PartialView("_AccountApprovedListResult");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
         }
 
         [HttpPost]
         public void ApproveAccount(string id)
         {
-            FactoryController.GetController(ControllerEnum.Account).ApproveAccount(int.Parse(id));
+            try
+            {
+                FactoryController.GetController(ControllerEnum.Account).ApproveAccount(int.Parse(id));
 
-            this.ShowMessage(MessageTypeEnum.Success, "Usuário aprovado.");
+                this.ShowMessage(MessageTypeEnum.Success, "Usuário aprovado.");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+            }
         }
 
         [HttpPost]
         public void RefuseAccount(string id)
         {
-            FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(id));
+            try
+            {
+                FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(id));
 
-            this.ShowMessage(MessageTypeEnum.Warning, "Usuário reprovado.");
+                this.ShowMessage(MessageTypeEnum.Warning, "Usuário reprovado.");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+            }
         }
 
         [HttpPost]
         public void AlterPasswordOfAccount(string newPassword)
         {
-            var account = (AccountModel)Session["account"];
+            try
+            {
+                var account = (AccountModel)Session["account"];
 
-            FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword);
+                FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword);
 
-            this.ShowMessage(MessageTypeEnum.Success, "Senha alterada.");
+                this.ShowMessage(MessageTypeEnum.Success, "Senha alterada.");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+            }
         }
 
         public void ChangeCurrentHospital(string q)
         {
-            var account = (AccountModel)Session["account"];
+            try
+            {
+                var account = (AccountModel)Session["account"];
 
-            account.CurrentHospital = short.Parse(q);
-            Session["account"] = account;
+                account.CurrentHospital = short.Parse(q);
+                Session["account"] = account;
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+            }
         }
 
         #endregion

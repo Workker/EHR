@@ -10,6 +10,7 @@ namespace EHR.Controller
     {
         private Types<Specialty> typesRepository = new Types<Specialty>();
 
+        [ExceptionLogger]
         public override List<Specialty> GetSpecialty(string term)
         {
             //todo: do
@@ -21,6 +22,7 @@ namespace EHR.Controller
             return listSpe;
         }
 
+        [ExceptionLogger]
         public override Specialty GetById(short id)
         {
             Assertion.GreaterThan((int)id, 0, "Especialidade não informada.").Validate();

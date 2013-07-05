@@ -27,6 +27,7 @@ namespace EHR.Controller
             }
         }
 
+        [ExceptionLogger]
         public override void SaveHemotransfusion(IList<short> typeReaction, short typeHemotrasfusion, int idSummary)
         {
             Assertion.NotNull(typeReaction, "Lista de reações nula.");
@@ -43,6 +44,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void RemoveHemotransfusion(int idSummary, int id)
         {
             Assertion.GreaterThan(id, 0, "Hemotransfusão não informada.").Validate();
@@ -56,6 +58,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         private List<ReactionType> GetReactions(IList<short> typeReaction)
         {
             Assertion.NotNull(typeReaction, "Lista de tipos de reação nula.").Validate();
@@ -73,6 +76,7 @@ namespace EHR.Controller
             return reactions;
         }
 
+        [ExceptionLogger]
         private void FillReaction(IList<ReactionType> reactions, short type)
         {
             Assertion.NotNull(reactions, "Lista de reações não foi inicializada.").Validate();

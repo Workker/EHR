@@ -17,6 +17,7 @@ namespace EHR.Controller
             }
         }
 
+        [ExceptionLogger]
         public override List<DefDTO> GetDef(string term)
         {
             var defList = GetDefLuceneService.GetDef(term);

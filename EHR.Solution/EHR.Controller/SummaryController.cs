@@ -18,6 +18,7 @@ namespace EHR.Controller
             }
         }
 
+        [ExceptionLogger]
         public override void SaveMdr(int summaryId, string mdr)
         {
             Assertion.GreaterThan(summaryId, 0, "Sumário de alta não informado.").Validate();
@@ -31,6 +32,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void SaveObservation(int summaryId, string observation)
         {
             Assertion.GreaterThan(summaryId, 0, "Sumário de alta não informado.").Validate();
@@ -44,6 +46,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override Summary GetBy(int id)
         {
             Assertion.GreaterThan(id, 0, "Sumário de alta inválido.").Validate();
@@ -55,6 +58,7 @@ namespace EHR.Controller
             return summary;
         }
 
+        [ExceptionLogger]
         public override void SaveMedication(int idSummary, short medicationType, short def, string presentation,
             string presentationType, string dose, string dosage, string way, string place, string frequency, string frequencyCase, int duration)
         {
@@ -80,6 +84,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void RemoveMedication(int idSummary, int id)
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta não informado.").Validate();
@@ -93,6 +98,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void SaveExam(int idSummary, short type, int day, int month, int year, string description)
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
@@ -110,6 +116,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void RemoveExam(int summaryId, int examId)
         {
             Assertion.GreaterThan(summaryId, 0, "Duração não informada.").Validate();
@@ -122,6 +129,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, short highType,
             short conditionOfThePatientAtHigh, short destinationOfThePatientAtDischarge,
            short orientationOfMultidisciplinaryTeamsMet, int termMedicalReviewAt, short specialtyId, DateTime prescribedHigh,
@@ -172,6 +180,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void AddView(int idSummary, int idAccount, DateTime date)
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();

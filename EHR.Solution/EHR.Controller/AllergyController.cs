@@ -17,6 +17,7 @@ namespace EHR.Controller
             }
         }
 
+        [ExceptionLogger]
         public override void SaveAllergy(string theWitch, IList<short> types, int idSummary)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
@@ -40,6 +41,7 @@ namespace EHR.Controller
             //todo: do
         }
 
+        [ExceptionLogger]
         public override void RemoveAllergy(int summaryId, int alleryId)
         {
             Assertion.GreaterThan(summaryId, 0, "Sumario de alta inválido.").Validate();
