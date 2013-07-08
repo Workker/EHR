@@ -22,7 +22,7 @@ body .page { width: 981px; }
 
     .timeline a, .timeline .selected ul a { display: block; outline: none; padding: 4px 0 4px 6px; }
 
-.Menu { padding-left: 20px; width: 12%; }
+.Menu { padding-left: 10px; padding-right: 10px; width: 12%; }
 
 .contentPage { padding-left: 1%; width: 700px; }
 

@@ -11,6 +11,7 @@ namespace EHR.Domain.Repository
         public Accounts() { }
         public Accounts(ISession session) : base(session) { }
 
+        [ExceptionLogger]
         public virtual Account GetBy(int id)
         {
             Assertion.GreaterThan(id, 0, "Identificador não informado").Validate();
@@ -19,6 +20,7 @@ namespace EHR.Domain.Repository
             return account;
         }
 
+        [ExceptionLogger]
         public virtual Account GetBy(string email)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(email), "Endereço de e-mail não informado.").Validate();
@@ -32,6 +34,7 @@ namespace EHR.Domain.Repository
             return account;
         }
 
+        [ExceptionLogger]
         public virtual Account GetBy(string email, string password)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(email), "Endereço de e-mail não informado.").Validate();
@@ -50,11 +53,17 @@ namespace EHR.Domain.Repository
             return account;
         }
 
+        [ExceptionLogger]
         public virtual void Save(Account account)
         {
+            Assertion.NotNull(account, "Conta de usuário não informada.").Validate();
+
             base.Save(account);
+
+            Assertion.GreaterThan(account.Id, 0, "A conta de usuário não foi salva.").Validate();
         }
 
+        [ExceptionLogger]
         public virtual IList<Account> GetAllNotApproved()
         {
             var criterion = Session.CreateCriteria<Account>();
@@ -63,19 +72,31 @@ namespace EHR.Domain.Repository
 
             var account = criterion.List<Account>();
 
+            Assertion.NotNull(account, "Lista de contas nula.").Validate();
+
             return account;
         }
 
+        [ExceptionLogger]
         public virtual void Approve(Account account)
         {
+            Assertion.NotNull(account, "Conta de usuário não informada.").Validate();
+
             account.Approved = true;
             base.Save(account);
+
+            Assertion.IsTrue(account.Approved, "Conta de usuário não aprovada.").Validate();
         }
 
+        [ExceptionLogger]
         public virtual void Refuse(Account account)
         {
+            Assertion.NotNull(account, "Conta de usuário não informada.").Validate();
+
             account.Refused = true;
             base.Save(account);
+
+            Assertion.IsTrue(account.Refused, "Conta de usuário não reprovada.").Validate();
         }
     }
 }

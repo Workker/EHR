@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using System.Linq;
+using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using System.Collections.Generic;
 using Workker.Framework.Domain;
@@ -34,11 +35,12 @@ namespace EHR.Controller
                 allergies.Add(type);
             }
 
-            summary.CreateAllergy(theWitch, allergies);
+            var allergy = summary.CreateAllergy(theWitch, allergies);
+            summary.AddAllergy(allergy);
 
             Summaries.Save(summary);
 
-            //todo: do
+            Assertion.IsTrue(summary.Allergies.Contains(allergy), "Alergia não foi criada.").Validate();
         }
 
         [ExceptionLogger]
@@ -52,7 +54,7 @@ namespace EHR.Controller
             summary.RemoveAllergy(alleryId);
             Summaries.Save(summary);
 
-            //todo: do
+            Assertion.IsTrue(summary.Allergies.All(a => a.Id != alleryId), "Alergia não foi removida.").Validate();
         }
 
         private AllergyType GetAllergy(short id)

@@ -82,7 +82,7 @@ namespace EHR.Controller
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
             Assertion.GreaterThan(accountId, 0, "Conta de usuário não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(treatment), "Tratamento não informado.").Validate();
+            //Assertion.IsFalse(string.IsNullOrEmpty(treatment), "Tratamento não informado.").Validate();
 
             var account = ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).GetBy(accountId);
             var treatmentDTO = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault();
@@ -115,7 +115,7 @@ namespace EHR.Controller
             else
                 summary = summaries.GetSummaryByTreatment(patient.CPF, treatment);
 
-            Assertion.NotNull(summary, "Sumário de Alta não encontrado.").Validate();
+            //Assertion.NotNull(summary, "Sumário de Alta não encontrado.").Validate();
 
             return summary;
         }

@@ -46,8 +46,6 @@ namespace EHR.Domain.Entities
 
             var complementaryExam = ComplementaryExams.FirstOrDefault(c => c.Id == id);
 
-            Assertion.NotNull(complementaryExam, "Exame complementar não encontrado.").Validate();
-
             ComplementaryExams.Remove(complementaryExam);
 
             Assertion.IsFalse(ComplementaryExams.Contains(complementaryExam), "Exame complementar não foi removido.").Validate();

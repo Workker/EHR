@@ -495,7 +495,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Hemotransfusion).SaveHemotransfusion(typeReaction,
+                FactoryController.GetController(ControllerEnum.Hemotransfusion).SaveHemotransfusion(typeReaction ?? new List<short>(),
                                                                                                     typeHemotrasfusion,
                                                                                                     GetSummary().Id);
                 RefreshSessionSummary();
@@ -519,6 +519,8 @@ namespace EHR.UI.Controllers
             {
                 FactoryController.GetController(ControllerEnum.Hemotransfusion).RemoveHemotransfusion(GetSummary().Id,
                                                                                                       int.Parse(id));
+
+                RefreshSessionSummary();
 
                 this.ShowMessage(MessageTypeEnum.Success, "Hemotransfusão excluída.");
             }

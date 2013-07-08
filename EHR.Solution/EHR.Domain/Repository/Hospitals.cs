@@ -8,10 +8,11 @@ namespace EHR.Domain.Repository
 {
     public class Hospitals : BaseRepository
     {
+        [ExceptionLogger]
         public IList<Hospital> GetBy(IList<short> list)
         {
             Assertion.NotNull(list, "Não foram informados hospitais.").Validate();
-            Assertion.GreaterThan(list.Count, 0, "").Validate();
+            Assertion.GreaterThan(list.Count, 0, "Nenhum hospital informado.").Validate();
 
             var criterio = Session.CreateCriteria<Hospital>();
             criterio.Add(Expression.In("Id", list.ToList()));
@@ -19,11 +20,12 @@ namespace EHR.Domain.Repository
             var hospitalList = criterio.List<Hospital>();
 
             Assertion.NotNull(hospitalList, "Nem um hospital encontrado, que corresponde a lista informada.").Validate();
-            Assertion.Equals(hospitalList.Count, list.Count, "Quantidade de hospitais informados não batem com a quantidade retornada.").Validate();
+            Assertion.GreaterThan(hospitalList.Count, list.Count, "Quantidade de hospitais informados não batem com a quantidade retornada.").Validate();
 
             return hospitalList;
         }
 
+        [ExceptionLogger]
         public virtual void Save(IList<Hospital> hospitals)
         {
             Assertion.GreaterThan(hospitals.Count, 0, "Lista de hospitais vazia.").Validate();

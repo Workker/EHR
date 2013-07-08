@@ -30,7 +30,7 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void SaveHemotransfusion(IList<short> typeReaction, short typeHemotrasfusion, int idSummary)
         {
-            Assertion.NotNull(typeReaction, "Lista de reações nula.");
+            Assertion.NotNull(typeReaction, "Lista de reações nula.").Validate();
             Assertion.GreaterThan((int)typeHemotrasfusion, 0, "Não foi informado o tipo de hemotransfusão.").Validate();
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
 

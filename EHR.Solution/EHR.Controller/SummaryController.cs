@@ -64,7 +64,7 @@ namespace EHR.Controller
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)medicationType, 0, "Tipo de medicação inválido.").Validate();
-            Assertion.NotNull(def, "Medicamento não informado.");
+            Assertion.GreaterThan((int)def, 0, "Medicamento não informado.");
             Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(presentationType), "Tipo de apresentação não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
