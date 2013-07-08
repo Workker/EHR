@@ -1,6 +1,7 @@
 ﻿using EHR.CoreShared;
 using EHR.Domain.Service.Lucene;
 using System.Collections.Generic;
+using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
@@ -16,9 +17,14 @@ namespace EHR.Controller
             }
         }
 
+        [ExceptionLogger]
         public override List<DefDTO> GetDef(string term)
         {
-            return GetDefLuceneService.GetDef(term);
+            var defList = GetDefLuceneService.GetDef(term);
+            
+            Assertion.NotNull(defList,"Lista de medicamentos nula.").Validate();
+            
+            return defList;
         }
     }
 }

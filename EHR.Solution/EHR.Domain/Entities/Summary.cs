@@ -114,13 +114,16 @@ namespace EHR.Domain.Entities
 
         #region Allergy
 
-        public virtual void CreateAllergy(string theWitch, IList<AllergyType> types)
+        public virtual Allergy CreateAllergy(string theWitch, IList<AllergyType> types)
         {
             Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
 
-            var allergy = new Allergy(theWitch, types);
+            return new Allergy(theWitch, types);
+        }
 
+        public virtual void AddAllergy(Allergy allergy)
+        {
             Allergies.Add(allergy);
 
             Assertion.IsTrue(Allergies.Contains(allergy), "Alergia não foi inserida corretamente.").Validate();

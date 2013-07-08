@@ -1,6 +1,7 @@
 ﻿using EHR.Controller;
 using EHR.CoreShared;
 using EHR.UI.Filters;
+using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Mappers;
 using EHR.UI.Models;
 using System;
@@ -15,36 +16,73 @@ namespace EHR.UI.Controllers
     {
         public ActionResult Index(string query)
         {
-            Session["Date"] = null;
-            var patient = new PatientDTO { Name = query };
-            var patientController = FactoryController.GetController(ControllerEnum.Patient);
-            ViewBag.Patients = patientController.GetBy(patient, new List<string>()).Take(10);
-            Session["Name"] = query;
-            return PartialView("_Search");
+            try
+            {
+                Session["Date"] = null;
+                var patient = new PatientDTO { Name = query };
+                var patientController = FactoryController.GetController(ControllerEnum.Patient);
+                ViewBag.Patients = patientController.GetBy(patient, new List<string>()).Take(10);
+                Session["Name"] = query;
+                return PartialView("_Search");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
         }
 
         [HttpPost]
         public ActionResult FilterPeople(string day, string month, string year, List<string> hospital)
         {
-            Session["Hospital"] = hospital;
-            FillDateParameter(day, month, year);
-            ViewBag.Patients = GetTreatment(false);
-            return PartialView("Layout/_Result");
+            try
+            {
+                Session["Hospital"] = hospital;
+                FillDateParameter(day, month, year);
+                ViewBag.Patients = GetTreatment(false);
+
+                this.ShowMessage(MessageTypeEnum.Success, "Filtro alterado.");
+
+                return PartialView("Layout/_Result");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
         }
 
         public ActionResult More()
         {
-            ViewBag.Patients = GetTreatment(true);
-            return PartialView("Layout/_Result");
+            try
+            {
+                ViewBag.Patients = GetTreatment(true);
+                return PartialView("Layout/_Result");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
         }
 
         public string SearchPeaple(string query)
         {
-            var patient = new PatientDTO { Name = query };
-            var patientController = FactoryController.GetController(ControllerEnum.Patient);
-            var patients = PatientMapper.MapPatientModelFrom(patientController.GetBy(patient));
-            return BuildResultsOfSimpleSearchOfPatients(patients);
+            try
+            {
+                var patient = new PatientDTO { Name = query };
+                var patientController = FactoryController.GetController(ControllerEnum.Patient);
+                var patients = PatientMapper.MapPatientModelFrom(patientController.GetBy(patient));
+                return BuildResultsOfSimpleSearchOfPatients(patients);
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
         }
+
+        #region Private Methods
 
         private void ManagerSession(bool skip)
         {
@@ -91,5 +129,7 @@ namespace EHR.UI.Controllers
         {
             Session["Date"] = day + "/" + month + "/" + year;
         }
+
+        #endregion
     }
 }

@@ -9,7 +9,6 @@ namespace EHR.Controller
 {
     public class DiagnosticController : EHRController
     {
-        #region Properties
 
         private Cids _cidsRepository;
         public Cids CidsRepository
@@ -21,52 +20,60 @@ namespace EHR.Controller
             }
         }
 
-        private Types<DiagnosticType> diagnosticTypes;
+        private Types<DiagnosticType> _diagnosticTypes;
         public Types<DiagnosticType> DiagnosticTypes
         {
-            get { return diagnosticTypes ?? (diagnosticTypes = new Types<DiagnosticType>()); }
+            get { return _diagnosticTypes ?? (_diagnosticTypes = new Types<DiagnosticType>()); }
             set
             {
-                diagnosticTypes = value;
+                _diagnosticTypes = value;
             }
         }
 
-        private GetCidLucene getCidLucene;
+        private GetCidLucene _getCidLucene;
         public GetCidLucene GetCidLucene
         {
-            get { return getCidLucene ?? (getCidLucene = new GetCidLucene()); }
+            get { return _getCidLucene ?? (_getCidLucene = new GetCidLucene()); }
             set
             {
-                getCidLucene = value;
+                _getCidLucene = value;
             }
         }
 
-
-        #endregion
-
+        [ExceptionLogger]
         public override List<CidDTO> GetCids(string term)
         {
             return GetCidLucene.GetCid(term);
         }
 
-        public override void SaveDiagnostic(string diagnosticType, string cid, int idSummary)
+        [ExceptionLogger]
+        public override void SaveDiagnostic(short diagnosticType, string cid, int summaryId)
         {
-            Assertion.IsFalse(string.IsNullOrEmpty(diagnosticType), "Tipo do diagnostico não informado.").Validate();
+            Assertion.GreaterThan((int)diagnosticType, 0, "Tipo do diagnostico não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(cid), "Cid não informado.").Validate();
+            Assertion.GreaterThan(summaryId, 0, "Summario de alta inválido.");
 
-            var summary = Summaries.Get<Summary>(idSummary);
-
+            var summary = Summaries.Get<Summary>(summaryId);
             var cidObj = CidsRepository.GetByCode(cid);
-            var typeDiagnostic = DiagnosticTypes.Get(short.Parse(diagnosticType));
+            var typeDiagnostic = DiagnosticTypes.Get(diagnosticType);
+
             summary.CreateDiagnostic(typeDiagnostic, cidObj);
             Summaries.Save(summary);
+
+            //todo: do
         }
 
-        public override void RemoveDiagnostic(int idSummary, int id)
+        [ExceptionLogger]
+        public override void RemoveDiagnostic(int summaryId, int diagnosticId)
         {
-            var summary = Summaries.Get<Summary>(idSummary);
-            summary.RemoveDiagnostic(id);
+            Assertion.GreaterThan(summaryId, 0, "Summario de alta inválido.");
+            Assertion.GreaterThan(diagnosticId, 0, "Diagnóstico inválido.");
+
+            var summary = Summaries.Get<Summary>(summaryId);
+            summary.RemoveDiagnostic(diagnosticId);
             Summaries.Save(summary);
+
+            //todo: do
         }
     }
 }

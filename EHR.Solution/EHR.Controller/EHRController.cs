@@ -1,7 +1,7 @@
-﻿using System;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
+using System;
 using System.Collections.Generic;
 
 namespace EHR.Controller
@@ -38,7 +38,6 @@ namespace EHR.Controller
 
         public virtual void SaveMdr(int summaryId, string mdr) { }
         public virtual Summary GetBy(int id) { return null; }
-
         public virtual void AddView(int idSummary, int idAccount, DateTime date) { }
 
         #endregion
@@ -54,7 +53,7 @@ namespace EHR.Controller
 
         #region Exam
 
-        public virtual void SaveExam(int idSummary, short type, string day, string month, string year, string description) { }
+        public virtual void SaveExam(int idSummary, short type, int day, int month, int year, string description) { }
         public virtual void RemoveExam(int idSummary, int id) { }
 
         #endregion
@@ -88,14 +87,14 @@ namespace EHR.Controller
 
         #region Diagnostic
 
-        public virtual void SaveDiagnostic(string diagnosticType, string cid, int idSummary) { }
+        public virtual void SaveDiagnostic(short diagnosticType, string cid, int idSummary) { }
         public virtual void RemoveDiagnostic(int idSummary, int id) { }
 
         #endregion
 
         #region Hemotransfusion
 
-        public virtual void SaveHemotransfusion(List<string> typeReaction, string typeHemotrasfusion, int idSummary) { }
+        public virtual void SaveHemotransfusion(IList<short> typeReaction, short typeHemotrasfusion, int idSummary) { }
         public virtual void RemoveHemotransfusion(int idSummary, int id) { }
 
         #endregion

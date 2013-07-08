@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using EHR.UI.Infrastructure.Notification
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,6 +11,9 @@
 </head>
     <body>
         @RenderSection("Page")
+        	<div id="messagewrapper" style="display: none">
+		@Html.RenderMessages()
+	</div>
         @Scripts.Render("~/bundles/jquery")
         @RenderSection("scripts", false)
         @Scripts.Render("~/bundles/scripts")

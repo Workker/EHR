@@ -58,6 +58,8 @@ $(function () {
 // Generate Data menu
 // Todo Componentizar
 $(document).ready(function () {
+    handleAjaxMessages();
+    displayMessages();
     var Menu = $("#_Menu").AjaxFlagMenu({
         Caption: 'Menu',
         CaptionClass: 'CaptionClass',
@@ -214,6 +216,7 @@ function newRow(currentNode, url) {
 }
 
 function saveRow(element, url) {
+
     var form = $(element).parent();
     form.submit(function () {
         $.ajax({
@@ -222,10 +225,9 @@ function saveRow(element, url) {
             cache: false,
             data: form.serialize(),
             success: function (data) {
-                var divContent = $(element).parent().parent();
-                $(divContent).hide();
-                $(divContent).prev().html(data);
-                $(divContent).prev().show();
+                var divContent = $(element).parent().parent().parent();
+                var data2 = data.toString().replace('<li class="clearfix">', '').replace("</li>", "");
+                $(divContent).html(data2);
             }
         });
         return false;
@@ -552,3 +554,42 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
         }
     });
 });
+
+function displayMessage(message, messageType) {
+    $("#messagewrapper").html('<div class="messagebox ' + messageType.toLowerCase() + '"></div>');
+    $("#messagewrapper .messagebox").text(message);
+    displayMessages();
+}
+
+function displayMessages() {
+    if ($("#messagewrapper").children().length > 0) {
+        $("#messagewrapper").show();
+        $(document).click(function () {
+            clearMessages();
+        });
+    }
+    else {
+        $("#messagewrapper").hide();
+    }
+}
+
+function clearMessages() {
+    $("#messagewrapper").fadeOut(500, function () {
+        $("#messagewrapper").empty();
+    });
+}
+
+function handleAjaxMessages() {
+    $(document).ajaxSuccess(function (event, request) {
+        checkAndHandleMessageFromHeader(request);
+    }).ajaxError(function (event, request) {
+        displayMessage(request.responseText, "error");
+    });
+}
+
+function checkAndHandleMessageFromHeader(request) {
+    var msg = request.getResponseHeader('X-Message');
+    if (msg) {
+        displayMessage(msg, request.getResponseHeader('X-Message-Type'));
+    }
+}
