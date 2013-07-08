@@ -1,4 +1,6 @@
-﻿<form id="medicationForm">
+﻿@using EHR.Domain.Entities
+@using EHR.Domain.Util
+<form id="medicationForm">
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
     <label>Medicamento:</label>
     <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', '#def')" />
@@ -9,6 +11,12 @@
     <input type="text" name="medication.presentation" required style="margin: 0px 5px 0px 10px;" />
     <select name="medication.presentationType" required>
         <option value="-1">Selecione</option>
+        @foreach (var value in Enum.GetValues(typeof(PresentationTypeEnum)).Cast<short>().ToList())
+        {
+            <option value="@value">
+                @(EnumUtil.GetDescriptionFromEnumValue((PresentationTypeEnum)Enum.Parse(typeof(PresentationTypeEnum), value.ToString())))
+            </option>  
+        }
     </select>
     <br />
     <br />
@@ -16,24 +24,49 @@
     <input type="text" name="medication.dose" required style="margin: 0px 5px 0px 60px;" />
     <select name="medication.dosage" required>
         <option value="-1">Selecione</option>
+        @foreach (var value in Enum.GetValues(typeof(DosageEnum)).Cast<short>().ToList())
+        {
+            <option value="@value">
+                @(EnumUtil.GetDescriptionFromEnumValue((DosageEnum)Enum.Parse(typeof(DosageEnum), value.ToString())))
+            </option>  
+        }
     </select>
     <br />
     <br />
     <label>Via:</label>
     <select name="medication.way" required style="margin: 0px 5px 0px 70px;">
         <option value="-1">Selecione</option>
+        @foreach (var value in Enum.GetValues(typeof(WayEnum)).Cast<short>().ToList())
+        {
+            <option value="@value">
+                @(EnumUtil.GetDescriptionFromEnumValue((WayEnum)Enum.Parse(typeof(WayEnum), value.ToString())))
+            </option>  
+        }
     </select>
     <label>Local:</label>
     <input type="text" name="medication.place" required />
     <br />
     <br />
     <label>Frequ&ecirc;ncia:</label>
-    <select name="medication.frequency" required style="margin: 0px 5px 0px 25px;">
+    <select name="medication.frequency" required style="margin: 0px 5px 0px 25px;" onchange="SelectFrequencyCase(this);">
         <option value="-1">Selecione</option>
+        @foreach (var value in Enum.GetValues(typeof(FrequencyEnum)).Cast<short>().ToList())
+        {
+            <option value="@value">
+                @(EnumUtil.GetDescriptionFromEnumValue((FrequencyEnum)Enum.Parse(typeof(FrequencyEnum), value.ToString())))
+            </option>  
+        }
     </select>
-    <select name="medication.frequencyCase" required>
+    <select name="medication.frequencyCase" disabled id="frequencyCase">
         <option value="-1">Selecione</option>
-    </select><br />
+        @foreach (var value in Enum.GetValues(typeof(FrequencyCaseEnum)).Cast<short>().ToList())
+        {
+            <option value="@value">
+                @(EnumUtil.GetDescriptionFromEnumValue((FrequencyCaseEnum)Enum.Parse(typeof(FrequencyCaseEnum), value.ToString())))
+            </option>  
+        }
+    </select>
+    <br />
     <br />
     <label>Dura&ccedil;&atilde;o:</label>
     <input type="text" name="medication.duration" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
@@ -42,3 +75,12 @@
     <input type="submit" onclick='saveRow(this, "../Patient/SaveMedication");' value="Savar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
+<script type="text/javascript">
+    function SelectFrequencyCase(e) {
+        if ($(e).val() == 8) {
+            $(e).next().removeAttr("disabled");
+        } else {
+            $(e).next().attr("disabled", "disabled");
+        }
+    }
+</script>

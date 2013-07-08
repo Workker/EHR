@@ -206,18 +206,18 @@ namespace EHR.Domain.Entities
 
         #region Medication
 
-        public virtual void CreateMedication(MedicationTypeEnum type, Def def, string presentation, string presentationType,
-            string dose, string dosage, string way, string place, string frequency, string frequencyCase, int duration)
+        public virtual void CreateMedication(MedicationTypeEnum type, Def def, string presentation, short presentationType,
+            string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
         {
             Assertion.NotNull(def, "Medicamento não informado.");
             Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(presentationType), "Tipo de apresentação não informado.").Validate();
+            Assertion.GreaterThan((int)presentationType, 0, "Tipo de apresentação não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(dosage), "Dosagem não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(way), "Via informada.").Validate();
+            Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
+            Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(place), "Lugar não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(frequency), "Frequencia não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(frequencyCase), "Caso de frequencia não informado.").Validate();
+            Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
+            Assertion.GreaterThan((int)frequencyCase, 0, "Caso de frequencia não informado.").Validate();
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
 
             var medication = new Medication()
@@ -225,13 +225,13 @@ namespace EHR.Domain.Entities
                                      Type = type,
                                      Def = def,
                                      Presentation = presentation,
-                                     PresentationType = presentationType,
+                                     PresentationType = (PresentationTypeEnum)presentationType,
                                      Dose = dose,
-                                     Dosage = dosage,
-                                     Way = way,
+                                     Dosage = (DosageEnum)dosage,
+                                     Way = (WayEnum)way,
                                      Place = place,
-                                     Frequency = frequency,
-                                     FrequencyCase = frequencyCase,
+                                     Frequency = (FrequencyEnum)frequency,
+                                     FrequencyCase = (FrequencyCaseEnum)frequencyCase,
                                      Duration = duration
                                  };
 

@@ -89,8 +89,11 @@
     <Compile Include="Entities\ComplementaryExam.cs" />
     <Compile Include="Entities\ConditionOfThePatientAtHighEnum.cs" />
     <Compile Include="Entities\DestinationOfThePatientAtDischargeEnum.cs" />
+    <Compile Include="Entities\DosageEnum.cs" />
     <Compile Include="Entities\Exam.cs" />
     <Compile Include="Entities\ExamTypeEnum.cs" />
+    <Compile Include="Entities\FrequencyCaseEnum.cs" />
+    <Compile Include="Entities\FrequencyEnum.cs" />
     <Compile Include="Entities\HighData.cs" />
     <Compile Include="Entities\HighTypeEnum.cs" />
     <Compile Include="Entities\MonthEnum.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Entities\Cid.cs" />
     <Compile Include="Entities\Def.cs" />
     <Compile Include="Entities\OrientationOfMultidisciplinaryTeamsMetEnum.cs" />
+    <Compile Include="Entities\PresentationTypeEnum.cs" />
     <Compile Include="Entities\Procedure.cs" />
     <Compile Include="Entities\ReactionType.cs" />
     <Compile Include="Entities\ReactionTypeEnum.cs" />
@@ -121,6 +125,7 @@
     <Compile Include="Entities\Tus.cs" />
     <Compile Include="Entities\ValueObject.cs" />
     <Compile Include="Entities\View.cs" />
+    <Compile Include="Entities\WayEnum.cs" />
     <Compile Include="Mapping\AdmissionMap.cs" />
     <Compile Include="Mapping\AllergyMap.cs" />
     <Compile Include="Mapping\AllergyTypeMap.cs" />

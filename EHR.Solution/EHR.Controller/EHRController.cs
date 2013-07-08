@@ -46,7 +46,7 @@ namespace EHR.Controller
 
         public virtual List<DefDTO> GetDef(string term) { return null; }
         public virtual void SaveMedication(int idSummary, short medicationType, short def, string presentation,
-            string presentationType, string dose, string dosage, string way, string place, string frequency, string frequencyCase, int duration) { }
+            short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration) { }
         public virtual void RemoveMedication(int idSummary, int id) { }
 
         #endregion

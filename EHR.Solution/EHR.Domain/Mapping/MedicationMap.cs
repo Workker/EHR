@@ -11,13 +11,13 @@ namespace EHR.Domain.Mapping
             Map(m => m.Type).CustomType<short>();
             References(m => m.Def).Cascade.None();
             Map(m => m.Presentation);
-            Map(m => m.PresentationType);
+            Map(m => m.PresentationType).CustomType<short>();
             Map(m => m.Dose);
-            Map(m => m.Dosage);
-            Map(m => m.Way);
+            Map(m => m.Dosage).CustomType<short>();
+            Map(m => m.Way).CustomType<short>();
             Map(m => m.Place);
-            Map(m => m.Frequency);
-            Map(m => m.FrequencyCase);
+            Map(m => m.Frequency).CustomType<short>();
+            Map(m => m.FrequencyCase).CustomType<short>();
             Map(m => m.Duration);
         }
     }

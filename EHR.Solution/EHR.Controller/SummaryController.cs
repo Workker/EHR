@@ -60,19 +60,19 @@ namespace EHR.Controller
 
         [ExceptionLogger]
         public override void SaveMedication(int idSummary, short medicationType, short def, string presentation,
-            string presentationType, string dose, string dosage, string way, string place, string frequency, string frequencyCase, int duration)
+            short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)medicationType, 0, "Tipo de medicação inválido.").Validate();
             Assertion.GreaterThan((int)def, 0, "Medicamento não informado.");
             Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(presentationType), "Tipo de apresentação não informado.").Validate();
+            Assertion.GreaterThan((int)presentationType, 0, "Tipo de apresentação não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(dosage), "Dosagem não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(way), "Via informada.").Validate();
+            Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
+            Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(place), "Lugar não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(frequency), "Frequencia não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(frequencyCase), "Caso de frequencia não informado.").Validate();
+            Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
+            Assertion.GreaterThan((int)frequencyCase, 0, "Caso de frequencia não informado.").Validate();
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
 
             var summary = Summaries.Get<Summary>(idSummary);

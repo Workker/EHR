@@ -6,13 +6,13 @@
         public short Type { get; set; }
         public DefModel Def { get; set; }
         public string Presentation { get; set; }
-        public string PresentationType { get; set; }
+        public short PresentationType { get; set; }
         public string Dose { get; set; }
-        public string Dosage { get; set; }
-        public string Way { get; set; }
+        public short Dosage { get; set; }
+        public short Way { get; set; }
         public string Place { get; set; }
-        public string Frequency { get; set; }
-        public string FrequencyCase { get; set; }
+        public short Frequency { get; set; }
+        public short FrequencyCase { get; set; }
         public int Duration { get; set; }
     }
 }
