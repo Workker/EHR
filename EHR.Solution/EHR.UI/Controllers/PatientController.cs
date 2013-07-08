@@ -23,6 +23,8 @@ namespace EHR.UI.Controllers
                 var patient = FactoryController.GetController(ControllerEnum.Patient).GetBy(cpf);
                 var patientModel = PatientMapper.MapPatientModelFrom(patient, treatment);
                 var summary = FactoryController.GetController(ControllerEnum.Patient).GetSummaryBy(patient, treatment, GetAccount().Id);
+                var allergies = FactoryController.GetController(ControllerEnum.Patient).GetAllergiesBy(patient.CPF);
+                var medications = FactoryController.GetController(ControllerEnum.Patient).GetMedicationsBy(patient.CPF);
 
                 RegisterView(summary);
 
@@ -38,6 +40,9 @@ namespace EHR.UI.Controllers
                                            ? DistinctView(summaryModel.LastVisitors
                                            .OrderByDescending(model => model.Id).Take(10).ToList())
                                            : new List<ViewModel>();
+
+                ViewBag.AllAlergies = AllergyMapper.MapAllergyModelsFrom(allergies);
+                ViewBag.AllMedications = MedicationMapper.MapMedicationModelsFrom(medications);
                 ViewBag.Allergies = summaryModel.Allergies;
                 ViewBag.Diagnostics = summaryModel.Diagnostics;
                 ViewBag.Procedures = summaryModel.Procedures;

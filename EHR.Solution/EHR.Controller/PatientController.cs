@@ -26,6 +26,48 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
+        public override IList<Allergy> GetAllergiesBy(string cpf)
+        {
+            Assertion.IsTrue(!string.IsNullOrEmpty(cpf), "Paciente inválido.").Validate();
+
+            var summaries = Summaries.GetAllSummaries(cpf);
+
+            var allergies = new List<Allergy>();
+            foreach (var summary in summaries)
+            {
+                foreach (var allergy in summary.Allergies)
+                {
+                    allergies.Add(allergy);
+                }
+            }
+
+            Assertion.NotNull(allergies, "Lista de alergias nula.").Validate();
+
+            return allergies;
+        }
+
+        [ExceptionLogger]
+        public override IList<Medication> GetMedicationsBy(string cpf)
+        {
+            Assertion.IsTrue(!string.IsNullOrEmpty(cpf), "Paciente inválido.").Validate();
+
+            var summaries = Summaries.GetAllSummaries(cpf);
+
+            var medications = new List<Medication>();
+            foreach (var summary in summaries)
+            {
+                foreach (var medication in summary.Medications)
+                {
+                    medications.Add(medication);
+                }
+            }
+
+            Assertion.NotNull(medications, "Lista de medicamentos nula.").Validate();
+
+            return medications;
+        }
+
+        [ExceptionLogger]
         public override IList<IPatientDTO> GetBy(PatientDTO patientDTO)
         {
             Assertion.NotNull(patientDTO, "Paciente não informado.").Validate();

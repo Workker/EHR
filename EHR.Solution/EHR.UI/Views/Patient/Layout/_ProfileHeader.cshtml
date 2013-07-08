@@ -1,4 +1,5 @@
-﻿@model EHR.UI.Models.PatientModel
+﻿@using EHR.UI.Models
+@model PatientModel
 <div class="HeaderPhoto">
     <img src="../../../Images/photo_none.png" alt="Profile Photo">
 </div>
@@ -10,5 +11,30 @@
         <b id="birthday">Idade:</b>&nbsp;@Model.GetAge()<br />
         <b id="hospital">Hospital:</b>&nbsp;@Model.Hospital<br />
     </div>
-    <div class="board">&nbsp;</div>
+    <div class="board" style="display: inline-block">
+        <div style="width: 48%; height: 100%; float: left; padding-top: 2px; text-align: center">
+            <h4>Alergias Conhecidas</h4>
+            <hr />
+            <div style="height: 115px; padding-left: 4px; overflow-y: auto; text-align: left; overflow-x: hidden;">
+                <ul>
+                    @foreach (AllergyModel allergy in ViewBag.AllAlergies)
+                    {
+                        <li>@allergy.TheWhich</li>    
+                    }
+                </ul>
+            </div>
+        </div>
+        <div style="width: 48%; height: 100%; overflow-y: auto; float: right; padding-top: 2px; text-align: center">
+            <h4>Medicamentos Utilizados na &Uacute;ltima Interna&ccedil;&atilde;o</h4>
+            <hr />
+            <div style="height: 115px; overflow-y: auto; overflow-x: hidden; text-align: left;">
+                <ul>
+                    @foreach (MedicationModel medication in ViewBag.AllMedications)
+                    {
+                        <li>@medication.Def.Description</li>    
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

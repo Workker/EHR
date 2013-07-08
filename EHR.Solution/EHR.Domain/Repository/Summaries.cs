@@ -52,5 +52,19 @@ namespace EHR.Domain.Repository
 
             return summaries;
         }
+
+        [ExceptionLogger]
+        public IList<Summary> GetAllSummaries(string cpf)
+        {
+            Assertion.IsTrue(!string.IsNullOrEmpty(cpf), "Paciente inválido.").Validate();
+
+            var criterio = Session.CreateCriteria<Summary>();
+            criterio.Add(Restrictions.Eq("Cpf", cpf));
+            var summaries = criterio.List<Summary>().ToList();
+
+            Assertion.NotNull(summaries, "Lista de sumários nula.").Validate();
+
+            return summaries;
+        }
     }
 }

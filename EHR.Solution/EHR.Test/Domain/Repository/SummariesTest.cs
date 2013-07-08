@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EHR.Domain.Repository;
 using NUnit.Framework;
 
 namespace EHR.Test.Domain.Repository
@@ -11,9 +7,11 @@ namespace EHR.Test.Domain.Repository
     public class SummariesTest
     {
         [Test]
-        public void get_all_records_by_account()
+        public void Get_all_summaries_of_one_cpf()
         {
-
+            var summaries = new Summaries();
+            var result = summaries.GetAllSummaries("37179780715");
+            Assert.AreEqual(3, result.Count);
         }
     }
 }
