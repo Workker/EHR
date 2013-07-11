@@ -53,8 +53,8 @@ namespace EHR.Test
             insert_reactions_types();
             insert_hemotransfusion_types();
             insert_admin_account();
-            insert_twenty_accounts();
-            data_initialize_all_sumaries_for_patients();
+            //insert_twenty_accounts();
+            //data_initialize_all_sumaries_for_patients();
             insert_specialties();
             //var summaries = new Summaries();
             //var sumary = new Summary { Cpf = "02338013751" };
@@ -337,7 +337,7 @@ namespace EHR.Test
             reactionTypes.SaveList<HemotransfusionType>(types);
         }
 
-        [Test]
+        //[Test]
         public void data_initialize_all_sumaries_for_patients()
         {
             GetPatientByHospitalService service = new GetPatientByHospitalService();

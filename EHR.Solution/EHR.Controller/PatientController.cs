@@ -55,11 +55,14 @@ namespace EHR.Controller
 
             var medications = new List<Medication>();
 
-            foreach (var medication in summaries[1].Medications)
+            if (summaries.Count > 1)
             {
-                medications.Add(medication);
-            }
+                foreach (var medication in summaries[1].Medications)
+                {
+                    medications.Add(medication);
+                }
 
+            }
 
             Assertion.NotNull(medications, "Lista de medicamentos nula.").Validate();
 
@@ -126,16 +129,23 @@ namespace EHR.Controller
             //Assertion.IsFalse(string.IsNullOrEmpty(treatment), "Tratamento não informado.").Validate();
 
             var account = ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).GetBy(accountId);
-            var treatmentDTO = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault();
+
+            ITreatmentDTO treatmentDTO;
+
+            if (string.IsNullOrEmpty(treatment))
+                treatmentDTO = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault();
+            else
+                treatmentDTO = patient.Treatments.FirstOrDefault(t => t.Id == treatment);
 
             var summary = new Summary()
                          {
                              Cpf = patient.CPF,
                              Date = DateTime.Now,
-                             Treatment = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault(),
+                             Treatment = treatmentDTO,
                              CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
                              Account = account,
-                             HighData = new HighData()
+                             HighData = new HighData(),
+                             Hospital = treatmentDTO.Hospital
                          };
 
             Assertion.NotNull(summary, "Sumário de alta foi criado.");

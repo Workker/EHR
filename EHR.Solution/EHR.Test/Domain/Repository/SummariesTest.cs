@@ -11,7 +11,7 @@ namespace EHR.Test.Domain.Repository
         {
             var summaries = new Summaries();
             var result = summaries.GetAllSummaries("37179780715");
-            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(1, result.Count);
         }
     }
 }

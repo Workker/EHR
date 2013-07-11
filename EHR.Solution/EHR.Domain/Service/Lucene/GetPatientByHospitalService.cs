@@ -24,14 +24,14 @@ namespace EHR.Domain.Service.Lucene
                                          new TreatmentDTO
                                              {
                                                  Id = "1234",
-                                                 Hospital = DbEnum.Copa,
+                                                 Hospital = DbEnum.Esperanca,
                                                  EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
                                                  CheckOutDate = DateTime.Now.AddMonths(-3)
                                              },
                                          new TreatmentDTO
                                              {
                                                  Id = "1235",
-                                                 Hospital = DbEnum.Copa,
+                                                 Hospital = DbEnum.QuintaDor,
                                                  EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
                                                  CheckOutDate = DateTime.Now.AddMonths(-5)
                                              }

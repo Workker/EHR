@@ -18,7 +18,7 @@ namespace EHR.Domain.Repository
 
             var summary = criterio.List<Summary>().OrderByDescending(s => s.Date).FirstOrDefault();
 
-            Assertion.NotNull(summary, "Sumário inválido.").Validate();
+            //Assertion.NotNull(summary, "Sumário inválido.").Validate();
             return summary;
         }
 
