@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using System;
+using EHR.Domain.Entities;
 using NHibernate.Criterion;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,11 @@ namespace EHR.Domain.Repository
             var hospitalList = criterio.List<Hospital>();
 
             Assertion.NotNull(hospitalList, "Nem um hospital encontrado, que corresponde a lista informada.").Validate();
-            Assertion.GreaterThan(hospitalList.Count, list.Count, "Quantidade de hospitais informados não batem com a quantidade retornada.").Validate();
+            Assertion.Equals(hospitalList.Count, list.Count, "Quantidade de hospitais informados não batem com a quantidade retornada.").Validate();
 
             return hospitalList;
         }
 
-        [ExceptionLogger]
         public virtual void Save(IList<Hospital> hospitals)
         {
             Assertion.GreaterThan(hospitals.Count, 0, "Lista de hospitais vazia.").Validate();
@@ -40,10 +40,10 @@ namespace EHR.Domain.Repository
                 }
                 transaction.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 transaction.Rollback();
-                throw ex;
+                throw;
             }
         }
     }

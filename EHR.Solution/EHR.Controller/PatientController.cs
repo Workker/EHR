@@ -1,7 +1,7 @@
 ﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
-using EHR.Domain.Service;
+using EHR.Domain.Service.Lucene;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,20 +47,19 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<Medication> GetMedicationsBy(string cpf)
+        public override IList<Medication> GetMedicationsOfUseAfterInternationBy(string cpf)
         {
             Assertion.IsTrue(!string.IsNullOrEmpty(cpf), "Paciente inválido.").Validate();
 
-            var summaries = Summaries.GetAllSummaries(cpf);
+            var summaries = Summaries.GetAllSummaries(cpf).OrderByDescending(x => x.Date).ToList();
 
             var medications = new List<Medication>();
-            foreach (var summary in summaries)
+
+            foreach (var medication in summaries[1].Medications)
             {
-                foreach (var medication in summary.Medications)
-                {
-                    medications.Add(medication);
-                }
+                medications.Add(medication);
             }
+
 
             Assertion.NotNull(medications, "Lista de medicamentos nula.").Validate();
 

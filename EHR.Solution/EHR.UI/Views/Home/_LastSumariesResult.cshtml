@@ -1,1 +1,21 @@
-﻿
+﻿@using EHR.UI.Models
+@foreach (SummaryModel summary in ViewBag.Summaries)
+{
+    <div class="clearfix bottomLine">
+        <div class="clearfix _8m _8u" style="margin-bottom: 10px;">
+            <div class="pls">
+                <div class="fsm fwn fcg">
+                    <a href="../Patient/?cpf=@summary.Patient.CPF">
+                        <h2 class="text">@summary.Patient.Name</h2>
+                    </a>
+                    <div class="fbProfileByline searchResultPersonByline">
+                        <span class="fbProfileBylineFragment">
+                            <label>Hospital:&nbsp;</label>
+                            @summary.Hospital.Name
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}  

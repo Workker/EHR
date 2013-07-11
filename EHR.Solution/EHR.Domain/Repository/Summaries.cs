@@ -25,8 +25,8 @@ namespace EHR.Domain.Repository
         [ExceptionLogger]
         public Summary GetSummaryByTreatment(string cpf, string codeMedicalRecord)
         {
-            Assertion.IsFalse(!string.IsNullOrEmpty(cpf), "CPF não informado.").Validate();
-            Assertion.IsFalse(!string.IsNullOrEmpty(codeMedicalRecord), "Código do prontuario não informado.").Validate();
+            Assertion.IsTrue(!string.IsNullOrEmpty(cpf), "CPF não informado.").Validate();
+            Assertion.IsTrue(!string.IsNullOrEmpty(codeMedicalRecord), "Código do prontuario não informado.").Validate();
 
             var criterio = Session.CreateCriteria<Summary>();
             criterio.Add(Restrictions.Eq("Cpf", cpf));
@@ -34,19 +34,22 @@ namespace EHR.Domain.Repository
 
             var summary = criterio.UniqueResult<Summary>();
 
-            Assertion.NotNull(summary, "Sumário inválido.").Validate();
+            //Assertion.NotNull(summary, "Sumário inválido.").Validate();
 
             return summary;
         }
 
         [ExceptionLogger]
-        public IList<Summary> GetSummaries(Account account)
+        public IList<Summary> GetLastSumariesrealizedby(Account account)
         {
             Assertion.NotNull(account, "Conta de usuário inválido.").Validate();
 
             var criterio = Session.CreateCriteria<Summary>();
+
             criterio.Add(Restrictions.Eq("Account", account));
-            var summaries = criterio.List<Summary>().OrderByDescending(s => s.Date).ToList();
+            criterio.AddOrder(Order.Desc("Date"));
+
+            var summaries = criterio.List<Summary>();
 
             Assertion.NotNull(summaries, "Lista de sumários nula.").Validate();
 
@@ -59,7 +62,9 @@ namespace EHR.Domain.Repository
             Assertion.IsTrue(!string.IsNullOrEmpty(cpf), "Paciente inválido.").Validate();
 
             var criterio = Session.CreateCriteria<Summary>();
+
             criterio.Add(Restrictions.Eq("Cpf", cpf));
+
             var summaries = criterio.List<Summary>().ToList();
 
             Assertion.NotNull(summaries, "Lista de sumários nula.").Validate();

@@ -2,7 +2,7 @@
 using EHR.Domain.Entities;
 using EHR.Domain.Mapping;
 using EHR.Domain.Repository;
-using EHR.Domain.Service;
+using EHR.Domain.Service.Lucene;
 using EHR.Domain.Util;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;

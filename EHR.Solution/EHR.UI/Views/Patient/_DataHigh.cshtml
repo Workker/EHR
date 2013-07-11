@@ -109,6 +109,7 @@
     <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" value="Cancelar" class="uibutton large" />
     <script type="text/javascript">
+        
         $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).HighData.PrescribedHighYear));
         $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).HighData.PrescribedHighMonth));
         $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).HighData.PrescribedHighDay));
@@ -116,5 +117,19 @@
         $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).HighData.DeliveredDateYear));
         $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).HighData.DeliveredDateMonth));
         $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).HighData.DeliveredDateDay));
+
+        $(document).on('submit', '#dataHigh', function (e) {
+            e.preventDefault();
+            data = $(this).serialize();
+            $.ajax({
+                type: "POST",
+                url: '../Patient/SaveHighData',
+                cache: false,
+                data: data,
+                success: function () {
+                }
+            });
+        });
+
     </script>
 </form>

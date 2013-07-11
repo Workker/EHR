@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Documents\Domain.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

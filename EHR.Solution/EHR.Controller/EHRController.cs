@@ -32,7 +32,7 @@ namespace EHR.Controller
         public virtual IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital) { return null; }
         public virtual Summary GetSummaryBy(IPatientDTO patient, string treatment, int idAccount) { return null; }
         public virtual IList<Allergy> GetAllergiesBy(string cpf) { return null; }
-        public virtual IList<Medication> GetMedicationsBy(string cpf) { return null; }
+        public virtual IList<Medication> GetMedicationsOfUseAfterInternationBy(string cpf) { return null; }
 
         #endregion
 
@@ -66,7 +66,7 @@ namespace EHR.Controller
         public virtual Account Login(string email, string password) { return null; }
         public virtual bool VerifyIfExist(string email) { return false; }
         public virtual IList<Account> GetAllNotApproved() { return null; }
-        public virtual IList<Summary> GetSumaries(int id) { return null; }
+        public virtual IList<Summary> GetLastSumariesRealizedby(int accountId) { return null; }
         public virtual void ApproveAccount(int id) { }
         public virtual void RefuseAccount(int id) { }
         public virtual void AlterPasswordOfAccount(int id, string password) { }

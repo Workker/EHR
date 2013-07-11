@@ -1,5 +1,7 @@
-﻿using EHRIntegracao.Domain.Domain;
+﻿using EHR.CoreShared;
+using EHRIntegracao.Domain.Domain;
 using NHibernate;
+using NHibernate.Criterion;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository
@@ -17,6 +19,7 @@ namespace EHR.Domain.Repository
             var patient = base.Get<Patient>(id);
 
             Assertion.NotNull(patient, "Paciente inválido.").Validate();
+
             return patient;
         }
     }

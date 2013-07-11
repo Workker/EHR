@@ -69,6 +69,8 @@ namespace EHR.Domain.Repository
             var criterion = Session.CreateCriteria<Account>();
             criterion.Add(Expression.Eq("Approved", false));
             criterion.Add(Expression.Eq("Refused", false));
+            criterion.AddOrder(Order.Desc("Id"));
+
 
             var account = criterion.List<Account>();
 

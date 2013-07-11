@@ -17,6 +17,8 @@ namespace EHR.Controller
                     return new Summaries();
                 case RepositoryEnum.Def:
                     return new Defs();
+                case RepositoryEnum.Patient:
+                    return new Patients();
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -28,6 +30,7 @@ namespace EHR.Controller
         Accounts = 1,
         Hospitals = 2,
         Sumaries = 3,
-        Def = 4
+        Def = 4,
+        Patient = 5
     }
 }

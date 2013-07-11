@@ -47,9 +47,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                var account = (AccountModel)Session["account"];
-                var sumaries = FactoryController.GetController(ControllerEnum.Account).GetSumaries(account.Id).Take(10);
-                ViewBag.Summaries = new List<SummaryModel>();
+                ViewBag.Summaries = GetSummariesSkip(false);
                 return PartialView("_LastSumariesList");
 
             }
@@ -68,7 +66,8 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                return PartialView("_LastSumariesResult", GetSummaries(true));
+                ViewBag.Summaries = GetSummariesSkip(true);
+                return PartialView("_LastSumariesResult");
             }
             catch (Exception ex)
             {
@@ -177,7 +176,7 @@ namespace EHR.UI.Controllers
 
         #region Summary
 
-        private IEnumerable<SummaryModel> GetSummaries(bool skip)
+        private IEnumerable<SummaryModel> GetSummariesSkip(bool skip)
         {
             ManagerSession(skip);
             var account = (AccountModel)Session["account"];
@@ -188,7 +187,7 @@ namespace EHR.UI.Controllers
         {
             var accountController = FactoryController.GetController(ControllerEnum.Account);
 
-            return skip ? SummaryMapper.MapSummaryModelFrom(accountController.GetSumaries(account.Id).Skip((int)Session["Skip"]).Take(10).ToList()) : SummaryMapper.MapSummaryModelFrom(accountController.GetSumaries(account.Id).Take(10).ToList());
+            return skip ? SummaryMapper.MapSummaryModelFrom(accountController.GetLastSumariesRealizedby(account.Id).Skip((int)Session["Skip"]).Take(10).ToList()) : SummaryMapper.MapSummaryModelFrom(accountController.GetLastSumariesRealizedby(account.Id).Take(10).ToList());
         }
 
         #endregion

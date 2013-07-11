@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities.Interfaces;
+﻿using System;
+using EHR.Domain.Entities.Interfaces;
 using EHR.Domain.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -59,10 +60,10 @@ namespace EHR.Domain.Repository
                 }
                 transaction.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 transaction.Rollback();
-                throw ex;
+                throw;
             }
         }
 
@@ -78,10 +79,10 @@ namespace EHR.Domain.Repository
                 }
                 transaction.Commit();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 transaction.Rollback();
-                throw ex;
+                throw;
             }
         }
 

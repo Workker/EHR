@@ -22,6 +22,8 @@ namespace EHR.Domain.Entities
         public virtual Account Account { get; set; }
         public virtual string Mdr { get; set; }
         public virtual HighData HighData { get; set; }
+        public virtual IPatientDTO Patient { get; set; }
+        public virtual ITreatmentDTO Treatment { get; set; }
 
         private IList<Allergy> _allergies;
         public virtual IList<Allergy> Allergies
@@ -59,9 +61,6 @@ namespace EHR.Domain.Entities
             get { return _hemotransfusions ?? (_hemotransfusions = new List<Hemotransfusion>()); }
         }
 
-        public virtual IPatientDTO Patient { get; set; }
-        public virtual ITreatmentDTO Treatment { get; set; }
-
         private IList<View> _views;
         public virtual IList<View> Views
         {
@@ -90,7 +89,7 @@ namespace EHR.Domain.Entities
             Assertion.GreaterThan(tus.Id, short.Parse("0"), "Tus inválido.").Validate();
 
             var date = new DateTime(year, month, day);
-            var procedure = new Procedure(tus, date);
+            var procedure = new Procedure() { Date = date, Tus = tus };
 
             Procedures.Add(procedure);
 
@@ -119,7 +118,7 @@ namespace EHR.Domain.Entities
             Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
 
-            return new Allergy(theWitch, types);
+            return new Allergy() { TheWhich = theWitch, Types = types };
         }
 
         public virtual void AddAllergy(Allergy allergy)
@@ -151,7 +150,7 @@ namespace EHR.Domain.Entities
             Assertion.NotNull(diagnosticType, "Tipo do diagnostico não informado.").Validate();
             Assertion.NotNull(cid, "Cid não informado").Validate();
 
-            var diagnostic = new Diagnostic(diagnosticType, cid);
+            var diagnostic = new Diagnostic() { Cid = cid, Type = diagnosticType };
 
             Assertion.NotNull(diagnostic, "Diagnostico não foi criado corretamente.").Validate();
 

@@ -1,5 +1,6 @@
 ﻿using EHR.Domain.Entities;
 using EHR.Domain.Repository;
+using EHR.Domain.Service.Lucene;
 using EHR.Domain.Util;
 using System;
 using System.Collections.Generic;
@@ -72,13 +73,20 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<Summary> GetSumaries(int accountId)
+        public override IList<Summary> GetLastSumariesRealizedby(int accountId)
         {
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
 
-            var summaryList = ((Summaries)FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetSummaries(account);
+            var summaryList = ((Summaries)FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetLastSumariesrealizedby(account);
+
+            var service = new GetPatientByHospitalService();
+
+            foreach (var summary in summaryList)
+            {
+                summary.Patient = service.GetPatientBy(summary.Cpf);
+            }
 
             Assertion.NotNull(summaryList, "A lista retornada está nula.").Validate();
 

@@ -1,10 +1,12 @@
 ﻿@using EHR.UI.Models
 <div class="lfloat width50P">
     <h1 class="bottomLine">Últimos Sum&aacute;rios Realizados</h1>
-    @foreach (SummaryModel summaryModel in ViewBag.Summaries)
-    {
-
-    }
+    <br />
+    <div id="DivResult">
+        @{
+            Html.RenderPartial("_LastSumariesResult");
+        }
+    </div>
     @if (((List<SummaryModel>)ViewBag.Summaries).Count > 0)
     {
         <div class="clearfix uiMorePager uiMorePagerCenter showMore">

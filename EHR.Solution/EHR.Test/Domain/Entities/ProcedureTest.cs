@@ -1,10 +1,6 @@
 ﻿using EHR.Domain.Entities;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EHR.Test.Domain.Entities
 {
@@ -23,14 +19,14 @@ namespace EHR.Test.Domain.Entities
         [Test]
         public void get_code_witch_sucess()
         {
-            var procedure = new Procedure(new Tus() { Code = "03" }, DateTime.Now);
+            var procedure = new Procedure() { Tus = new Tus() { Code = "03" }, Date = DateTime.Now };
             Assert.IsTrue(procedure.GetCode() != string.Empty);
         }
 
         [Test]
         public void get_description_witch_sucess()
         {
-            var procedure = new Procedure(new Tus() { Description = "desc" }, DateTime.Now);
+            var procedure = new Procedure() { Tus = new Tus() { Description = "desc" }, Date = DateTime.Now };
             Assert.IsTrue(procedure.GetDescription() != string.Empty);
         }
 

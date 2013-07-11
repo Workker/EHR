@@ -24,7 +24,7 @@ namespace EHR.UI.Controllers
                 var patientModel = PatientMapper.MapPatientModelFrom(patient, treatment);
                 var summary = FactoryController.GetController(ControllerEnum.Patient).GetSummaryBy(patient, treatment, GetAccount().Id);
                 var allergies = FactoryController.GetController(ControllerEnum.Patient).GetAllergiesBy(patient.CPF);
-                var medications = FactoryController.GetController(ControllerEnum.Patient).GetMedicationsBy(patient.CPF);
+                var medications = FactoryController.GetController(ControllerEnum.Patient).GetMedicationsOfUseAfterInternationBy(patient.CPF);
 
                 RegisterView(summary);
 

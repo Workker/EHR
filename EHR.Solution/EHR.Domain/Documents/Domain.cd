@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EHR.Domain.Entities.Account" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="11.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>gAACAGACACAAAACAQAAAAAAAgAGIAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Entities\Account.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.Admission" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Admission.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.Allergy" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Allergy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.Diagnostic" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAABABAAAAAAAAAAAAAAQAQAAAAAAAAA=</HashCode>
+      <FileName>Entities\Diagnostic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.Exam" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAAAAAAAAABAQAAAAAAAAA=</HashCode>
+      <FileName>Entities\Exam.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.Hemotransfusion" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAIAAAAAA=</HashCode>
+      <FileName>Entities\Hemotransfusion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.Medication" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAABCAACAAAAAAAAAAICAAAAgQUAAAAAAAAA=</HashCode>
+      <FileName>Entities\Medication.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.Procedure" Collapsed="true">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACABAAAAAAAAAAIAAAAAAAAAAAAAABAAAAAACAAIA=</HashCode>
+      <FileName>Entities\Procedure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EHR.Domain.Entities.Summary" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="5.25" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Account" Type="EHR.Domain.Entities.Account" FixedFromPoint="true">
+      <Path>
+        <Point X="4.875" Y="8.411" />
+        <Point X="4.875" Y="11.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Admission" Type="EHR.Domain.Entities.Admission" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.812" Y="8.411" />
+        <Point X="5.812" Y="10.031" />
+        <Point X="7.5" Y="10.031" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Allergies" Type="EHR.Domain.Entities.Allergy" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.938" Y="5.25" />
+        <Point X="3.938" Y="2.719" />
+        <Point X="2" Y="2.719" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Diagnostics" Type="EHR.Domain.Entities.Diagnostic" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.125" Y="8.411" />
+        <Point X="4.125" Y="9.531" />
+        <Point X="2.25" Y="9.531" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Procedures" Type="EHR.Domain.Entities.Procedure" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="5.438" />
+        <Point X="6.375" Y="5.438" />
+        <Point X="6.375" Y="4.343" />
+        <Point X="7.25" Y="4.343" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ijgCBBgCAQAAAAoABADQAAAMABAEHAgBACRAEAKgCdA=</HashCode>
+      <FileName>Entities\Summary.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Account" />
+      <Property Name="Admission" />
+      <Property Name="Patient" />
+      <Property Name="Treatment" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Allergies" />
+      <Property Name="Diagnostics" />
+      <Property Name="Exams" />
+      <Property Name="Hemotransfusions" />
+      <Property Name="Medications" />
+      <Property Name="Procedures" />
+      <Property Name="Views" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EHR.Domain.Entities.View" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Entities\View.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="EHR.CoreShared.IPatientDTO" Collapsed="true">
+    <Position X="7.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Interface Name="EHR.CoreShared.ITreatmentDTO" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

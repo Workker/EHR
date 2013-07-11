@@ -1,5 +1,4 @@
 ﻿// Suggest of search
-//Todo Componentizar
 (function ($) {
     var baseModel =
         {
@@ -40,7 +39,6 @@
 })(jQuery);
 
 
-
 // Timeline animation
 $(function () {
     $('#collapser').jqcollapse({
@@ -56,7 +54,6 @@ $(function () {
 });
 
 // Generate Data menu
-// Todo Componentizar
 $(document).ready(function () {
     handleAjaxMessages();
     displayMessages();
@@ -159,49 +156,46 @@ $(document).ready(function () {
 });
 
 
-// Images Gallery
-hs.graphicsDir = '../Images/graphics/';
-hs.align = 'center';
-hs.transitions = ['expand', 'crossfade'];
-hs.fadeInOut = true;
-hs.dimmingOpacity = 0.8;
-hs.wrapperClassName = 'borderless floating-caption';
-hs.captionEval = 'this.thumb.alt';
-hs.marginLeft = 100; // make room for the thumbstrip
-hs.marginBottom = 80; // make room for the controls and the floating caption
-hs.numberPosition = 'caption';
-hs.lang.number = '%1/%2';
+//// Images Gallery
+//hs.graphicsDir = '../Images/graphics/';
+//hs.align = 'center';
+//hs.transitions = ['expand', 'crossfade'];
+//hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.8;
+//hs.wrapperClassName = 'borderless floating-caption';
+//hs.captionEval = 'this.thumb.alt';
+//hs.marginLeft = 100; // make room for the thumbstrip
+//hs.marginBottom = 80; // make room for the controls and the floating caption
+//hs.numberPosition = 'caption';
+//hs.lang.number = '%1/%2';
 
-// Add the slideshow providing the controlbar and the thumbstrip
-hs.addSlideshow({
-    //slideshowGroup: 'group1',
-    interval: 5000,
-    repeat: false,
-    useControls: true,
-    overlayOptions: {
-        className: 'text-controls',
-        position: 'bottom center',
-        relativeTo: 'viewport',
-        offsetX: 50,
-        offsetY: -5
+//// Add the slideshow providing the controlbar and the thumbstrip
+//hs.addSlideshow({
+//    //slideshowGroup: 'group1',
+//    interval: 5000,
+//    repeat: false,
+//    useControls: true,
+//    overlayOptions: {
+//        className: 'text-controls',
+//        position: 'bottom center',
+//        relativeTo: 'viewport',
+//        offsetX: 50,
+//        offsetY: -5
 
-    },
-    thumbstrip: {
-        position: 'middle left',
-        mode: 'vertical',
-        relativeTo: 'viewport'
-    }
-});
+//    },
+//    thumbstrip: {
+//        position: 'middle left',
+//        mode: 'vertical',
+//        relativeTo: 'viewport'
+//    }
+//});
 
-// Add the simple close button
-hs.registerOverlay({
-    html: '<div class="closebutton" onclick="return hs.close(this)" title="Close"></div>',
-    position: 'top right',
-    fade: 2 // fading the semi-transparent overlay looks bad in IE
-});
-
-
-
+//// Add the simple close button
+//hs.registerOverlay({
+//    html: '<div class="closebutton" onclick="return hs.close(this)" title="Close"></div>',
+//    position: 'top right',
+//    fade: 2 // fading the semi-transparent overlay looks bad in IE
+//});
 
 // Table Component
 function newRow(currentNode, url) {
@@ -216,8 +210,8 @@ function newRow(currentNode, url) {
 }
 
 function saveRow(element, url) {
-
     var form = $(element).parent();
+
     form.submit(function () {
         $.ajax({
             type: "POST",
@@ -265,8 +259,10 @@ function closeForm(element) {
 }
 
 function SaveComplementaryExam(element) {
+
     var period = $(element).prev().prev().prev().val();
     var description = $(element).prev().prev().prev().prev().prev().prev().prev().val();
+
     $.ajax({
         type: "POST",
         url: "../Patient/SaveComplementaryExam",
@@ -297,11 +293,11 @@ function formatDatePicker() {
         var month = $('#dob_month').val();
         if ((year != 0) && (month != 0)) {
             var lastday = 32 - new Date(year, month - 1, 32).getDate();
-            var selected_day = $('#dob_day').val();
+            var selectedDay = $('#dob_day').val();
 
             // Change selected day if it is greater than the number of days in current month
-            if (selected_day > lastday) {
-                $('#dob_day  > option[value=' + selected_day + ']').attr('selected', false);
+            if (selectedDay > lastday) {
+                $('#dob_day  > option[value=' + selectedDay + ']').attr('selected', false);
                 $('#dob_day  > option[value=' + lastday + ']').attr('selected', true);
             }
 
@@ -347,14 +343,13 @@ function goFilter(form) {
 }
 
 function GetMore(url, element) {
-
     $.ajax({
         url: url,
         type: "GET",
         cache: false,
         success: function (r) {
-            if (r.length > 0) {
-                $("#DivResult").append(r);
+            if (r.length > 10) {
+                $(element).parent().prev().append(r);
             } else {
                 $(element).hide();
                 $(element).parent().append('<br/><b style="font-size:12px;">Sem mais resultados</b><br/><br/>');
@@ -365,6 +360,7 @@ function GetMore(url, element) {
 
 function approveAccount(element, url) {
     var form = $(element).parent().parent().parent().parent();
+
     form.submit(function () {
         $.ajax({
             type: "POST",
@@ -407,24 +403,6 @@ $(".unitsSideBar li input[type='checkbox']").live(
         }
     }
 );
-
-function ToggleAllergy() {
-    var liCount = $("#ulAllergy > li").length;
-    if (liCount > 1) {
-        $('input[value="false"]').removeAttr("checked");
-        $('input[value="true"]').attr("checked", "");
-        $('#ulAllergy').removeAttr("style");
-    }
-}
-
-function ToggleHemotransfusion() {
-    var liCount = $("#ulHemotransfusion > li").length;
-    if (liCount > 1) {
-        $('input[value="false"]').removeAttr("checked");
-        $('input[value="true"]').attr("checked", "");
-        $('#ulHemotransfusion').removeAttr("style");
-    }
-}
 
 function ShowFormChangePassword(element) {
     $(element).addClass("grayButtonClicked");
@@ -489,23 +467,7 @@ function ShowTopMenu(element) {
     }
 }
 
-function SaveObsevation(element) {
-    var form = $(element).parent();
-    form.submit(function () {
-        $.ajax({
-            type: "POST",
-            url: "../Patient/SaveObservation",
-            cache: false,
-            data: form.serialize(),
-            success: function () {
-            }
-        });
-        return false;
-    });
-}
-
 function GenericAutoComplete(autoCompleteElement, url, codeElement) {
-
     $(autoCompleteElement).autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -528,32 +490,6 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
         }
     });
 }
-
-$(document).on('submit', '#dataHigh', function (e) {
-    e.preventDefault();
-    data = $(this).serialize();
-    $.ajax({
-        type: "POST",
-        url: '../Patient/SaveHighData',
-        cache: false,
-        data: data,
-        success: function () {
-        }
-    });
-});
-
-$(document).on('submit', '#ColonizationByMDR', function (e) {
-    e.preventDefault();
-    data = $(this).serialize();
-    $.ajax({
-        type: "POST",
-        url: '../Patient/SaveMdr',
-        cache: false,
-        data: data,
-        success: function () {
-        }
-    });
-});
 
 function displayMessage(message, messageType) {
     $("#messagewrapper").html('<div class="messagebox ' + messageType.toLowerCase() + '"></div>');

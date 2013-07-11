@@ -30,6 +30,15 @@ namespace EHR.UI.Mappers
             return patientModel;
         }
 
+        public static PatientModel MapPatientModelFrom(IPatientDTO patient)
+        {
+            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Treatments, source => source.Ignore());
+
+            var patientModel = Mapper.Map<IPatientDTO, PatientModel>(patient);
+
+            return patientModel;
+        }
+
         public static IEnumerable<PatientModel> MapPatientModelFrom(IEnumerable<IPatientDTO> patients)
         {
             Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Hospital, source => source.Ignore());
