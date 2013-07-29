@@ -21,18 +21,5 @@
         $('input[value="false"]').removeAttr("checked");
         $('input[value="true"]').attr("checked", "");
         $('#divMdr').removeAttr("style");
-
-        $(document).on('submit', '#ColonizationByMDR', function (e) {
-            e.preventDefault();
-            data = $(this).serialize();
-            $.ajax({
-                type: "POST",
-                url: '../Patient/SaveMdr',
-                cache: false,
-                data: data,
-                success: function () {
-                }
-            });
-        });
     }
 </script>

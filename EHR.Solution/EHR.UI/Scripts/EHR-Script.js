@@ -529,3 +529,16 @@ function checkAndHandleMessageFromHeader(request) {
         displayMessage(msg, request.getResponseHeader('X-Message-Type'));
     }
 }
+
+$(document).on('submit', '#ColonizationByMDR', function (e) {
+    e.preventDefault();
+    data = $(this).serialize();
+    $.ajax({
+        type: "POST",
+        url: '../Patient/SaveMdr',
+        cache: false,
+        data: data,
+        success: function () {
+        }
+    });
+});

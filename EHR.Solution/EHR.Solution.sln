@@ -22,7 +22,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportLegacySummary", "Impo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{241C88B7-0379-4FB4-A0CE-552AEC0318A4}"
 	ProjectSection(SolutionItems) = preProject
+		Graph1.dgml = Graph1.dgml
 		Performance1.psess = Performance1.psess
+		SequenceDiagram1.sequencediagram = SequenceDiagram1.sequencediagram
 	EndProjectSection
 EndProject
 Global
