@@ -6,7 +6,11 @@
         <a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteProcedure/?id=@p.Id", null)'><span>X</span></a>
         <span class="lastColumn"></span>
         <span class="middleColumn">
-            @p.Date.Value.ToShortDateString()
+            @if (p.Date != null)
+            {
+                @p.Date.Value.ToShortDateString()
+            }
+
         </span>
     </li>
 }

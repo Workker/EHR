@@ -24,9 +24,9 @@ namespace EHR.Domain.Repository
 
         #region Methods Generics to acess Database
 
-        public BaseRepository() { }
+        protected BaseRepository() { }
 
-        public BaseRepository(ISession session)
+        protected BaseRepository(ISession session)
         {
             Session = session;
         }
@@ -60,7 +60,7 @@ namespace EHR.Domain.Repository
                 }
                 transaction.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
                 throw;
@@ -79,7 +79,7 @@ namespace EHR.Domain.Repository
                 }
                 transaction.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
                 throw;

@@ -1,10 +1,11 @@
-﻿using EHR.Controller;
+﻿using System.Globalization;
+using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Util;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Mappers;
+using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -115,7 +116,7 @@ namespace EHR.UI.Controllers
                 {
                     var description =
                         EnumUtil.GetDescriptionFromEnumValue(
-                            (ReasonOfAdmissionEnum)Enum.Parse(typeof(ReasonOfAdmissionEnum), id.ToString()));
+                            (ReasonOfAdmissionEnum)Enum.Parse(typeof(ReasonOfAdmissionEnum), id.ToString(CultureInfo.InvariantCulture)));
                     if (description.Contains(q))
                     {
                         stringReturn += "{\"name\":\"" + description + "\",\"id\":\"" + id + "\"}, ";
@@ -358,7 +359,8 @@ namespace EHR.UI.Controllers
         }
 
         public PartialViewResult SaveProcedure(string day, string month, string year, string procedureCode,
-                                               string procedure)
+                                               string
+            procedure)
         {
             try
             {
@@ -438,7 +440,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Summary).SaveExam(GetSummary().Id, short.Parse(type), day, month, year, description);
+                FactoryController.GetController(ControllerEnum.Summary).SaveExam(GetSummary().Id, short.Parse(type), new DateTime(year, month, day), description);
 
                 RefreshSessionSummary();
                 ViewBag.Exams = new List<ExamModel> { GetSummary().Exams.Last() };
@@ -607,7 +609,7 @@ namespace EHR.UI.Controllers
                 {
                     if (complementaryExamModel.Id == 0)
                     {
-                        complementaryExam.Add(new ComplementaryExam()
+                        complementaryExam.Add(new ComplementaryExam
                         {
                             Description = complementaryExamModel.Description,
                             Period = complementaryExamModel.Period
@@ -750,9 +752,9 @@ namespace EHR.UI.Controllers
             Session["Summary"] = SummaryMapper.MapSummaryModelFrom(summary);
         }
 
-        private IList<ViewModel> DistinctView(IList<ViewModel> viewModels)
+        private IList<ViewModel> DistinctView(IEnumerable<ViewModel> viewModels)
         {
-            return (IList<ViewModel>)viewModels.GroupBy(x => x.Account.Id).Select(x => x.FirstOrDefault()).ToList();
+            return viewModels.GroupBy(x => x.Account.Id).Select(x => x.FirstOrDefault()).ToList();
         }
 
         #endregion

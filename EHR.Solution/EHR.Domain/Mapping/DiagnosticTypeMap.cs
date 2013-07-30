@@ -4,8 +4,5 @@ namespace EHR.Domain.Mapping
 {
     public class DiagnosticTypeMap : ValueObjectMap<DiagnosticType>
     {
-        public DiagnosticTypeMap()
-        {
-        }
     }
 }

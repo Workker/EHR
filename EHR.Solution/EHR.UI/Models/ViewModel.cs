@@ -10,7 +10,7 @@ namespace EHR.UI.Models
 
         public override int GetHashCode()
         {
-            return this.Account.Id;
+            return Account.Id;
         }
 
         

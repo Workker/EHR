@@ -1,11 +1,12 @@
-﻿@using EHR.Domain.Entities
+﻿@using System.Globalization
+@using EHR.Domain.Entities
 @using EHR.Domain.Util
 @using EHR.UI.Models
 @foreach (ExamModel exam in ViewBag.Exams)
 {
     <li class="clearfix">
         <span class="firstColumn">
-            @(EnumUtil.GetDescriptionFromEnumValue((ExamTypeEnum)Enum.Parse(typeof(ExamTypeEnum), exam.Type.ToString())))
+            @EnumUtil.GetDescriptionFromEnumValue((ExamTypeEnum)Enum.Parse(typeof(ExamTypeEnum), exam.Type.ToString(CultureInfo.InvariantCulture)))
         </span>
         <a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteExam/?id=@exam.Id", null)'><span>X</span></a>
         <span class="lastColumn">@exam.Date.ToShortDateString()</span>

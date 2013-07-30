@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using EHR.CoreShared;
-using EHR.UI.Models;
 
-namespace EHR.UI.Mappers
+namespace EHR.UI.Models.Mappers
 {
     public static class TreatmentMapper
     {

@@ -8,7 +8,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class AccountController : EHRController
+    public class AccountController : EhrController
     {
         [ExceptionLogger]
         public override void Register(string firstName, string lastName, short gender, string crm,
@@ -151,7 +151,7 @@ namespace EHR.Controller
             var account = new Account
                               {
                                   Birthday = birthday,
-                                  CRM = crm,
+                                  Crm = crm,
                                   Email = email,
                                   FirstName = firstName,
                                   LastName = lastName,

@@ -4,9 +4,5 @@ namespace EHR.Domain.Mapping
 {
     public class ReactionTypeMap : ValueObjectMap<ReactionType>
     {
-        public ReactionTypeMap()
-        {
-
-        }
     }
 }

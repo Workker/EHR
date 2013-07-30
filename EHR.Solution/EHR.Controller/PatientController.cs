@@ -10,7 +10,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class PatientController : EHRController
+    public class PatientController : EhrController
     {
         [ExceptionLogger]
         public override IPatientDTO GetBy(string cpf)
@@ -130,23 +130,20 @@ namespace EHR.Controller
 
             var account = ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).GetBy(accountId);
 
-            ITreatmentDTO treatmentDTO;
+            ITreatmentDTO treatmentDTO = string.IsNullOrEmpty(treatment) ? patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault() : patient.Treatments.FirstOrDefault(t => t.Id == treatment);
 
-            if (string.IsNullOrEmpty(treatment))
-                treatmentDTO = patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault();
-            else
-                treatmentDTO = patient.Treatments.FirstOrDefault(t => t.Id == treatment);
-
-            var summary = new Summary()
-                         {
-                             Cpf = patient.CPF,
-                             Date = DateTime.Now,
-                             Treatment = treatmentDTO,
-                             CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
-                             Account = account,
-                             HighData = new HighData(),
-                             Hospital = treatmentDTO.Hospital
-                         };
+            Assertion.NotNull(treatmentDTO, "Tratamento invalido.").Validate();
+            
+            var summary = new Summary
+                              {
+                                  Cpf = patient.CPF,
+                                  Date = DateTime.Now,
+                                  Treatment = treatmentDTO,
+                                  CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
+                                  Account = account,
+                                  HighData = new HighData(),
+                                  Hospital = treatmentDTO.Hospital
+                              };
 
             Assertion.NotNull(summary, "Sumário de alta foi criado.");
 
@@ -160,11 +157,7 @@ namespace EHR.Controller
             //Assertion.IsFalse(string.IsNullOrEmpty(treatment), "Tratamento não informado.").Validate();
             Assertion.NotNull(summaries, "Repositório de sumários de alta não informado.").Validate();
 
-            Summary summary;
-            if (string.IsNullOrEmpty(treatment))
-                summary = summaries.GetLastSummary(patient.CPF);
-            else
-                summary = summaries.GetSummaryByTreatment(patient.CPF, treatment);
+            Summary summary = string.IsNullOrEmpty(treatment) ? summaries.GetLastSummary(patient.CPF) : summaries.GetSummaryByTreatment(patient.CPF, treatment);
 
             //Assertion.NotNull(summary, "Sumário de Alta não encontrado.").Validate();
 

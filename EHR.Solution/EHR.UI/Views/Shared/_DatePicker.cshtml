@@ -1,6 +1,7 @@
-﻿<select name="@(ViewBag.Context ?? "")year" id="dob_year" onchange="datepicker()">
+﻿@using System.Globalization
+<select name="@(ViewBag.Context ?? "")year" id="dob_year" onchange="datepicker()">
     <option value="-1">Ano:</option>
-    @for (var year = int.Parse(DateTime.Now.Year.ToString()); year >= 1900; year--)
+    @for (var year = int.Parse(DateTime.Now.Year.ToString(CultureInfo.InvariantCulture)); year >= 1900; year--)
     {
         <option value="@year">@year</option>
     }

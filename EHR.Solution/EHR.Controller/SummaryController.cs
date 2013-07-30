@@ -6,7 +6,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class SummaryController : EHRController
+    public class SummaryController : EhrController
     {
         private Defs _defsRepository;
         public Defs DefsRepository
@@ -99,18 +99,16 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void SaveExam(int idSummary, short type, int day, int month, int year, string description)
+        public override void SaveExam(int idSummary, short type, DateTime date, string description)
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)type, 0, "Tipo de exame inválido.").Validate();
-            Assertion.GreaterThan(day, 0, "Dia inválido.").Validate();
-            Assertion.GreaterThan(month, 0, "Mês inválido.").Validate();
-            Assertion.GreaterThan(year, 0, "Ano inválido.").Validate();
+            //todo: validade date
             Assertion.IsFalse(string.IsNullOrEmpty(description), "Dia inválido.").Validate();
 
             var summary = Summaries.Get<Summary>(idSummary);
 
-            summary.CreateExam((ExamTypeEnum)type, day, month, year, description);
+            summary.CreateExam((ExamTypeEnum)type, date, description);
             Summaries.Save(summary);
 
             //todo: do

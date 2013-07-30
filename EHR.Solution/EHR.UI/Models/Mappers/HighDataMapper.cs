@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using EHR.Domain.Entities;
-using EHR.UI.Models;
 
-namespace EHR.UI.Mappers
+namespace EHR.UI.Models.Mappers
 {
     public static class HighDataMapper
     {
@@ -18,7 +17,7 @@ namespace EHR.UI.Mappers
 
             if (highData.Specialty != null)
             {
-                highDataModel.Specialty = new SpecialtyModel()
+                highDataModel.Specialty = new SpecialtyModel
                 {
                     Id = highData.Specialty.Id,
                     Description = highData.Specialty.Description,

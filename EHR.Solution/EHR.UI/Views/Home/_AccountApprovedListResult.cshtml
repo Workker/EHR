@@ -1,4 +1,5 @@
 ﻿@model AccountModel
+@using System.Globalization
 @using EHR.CoreShared
 @using EHR.UI.Models
 @foreach (AccountModel account in ViewBag.Accounts)
@@ -11,7 +12,7 @@
                         <h2 class="text">@account.FirstName &nbsp; @account.LastName</h2>
                         <div class="fbProfileByline searchResultPersonByline">
                             <span class="fbProfileBylineFragment">
-                                <label>CRM:&nbsp;</label>@account.CRM
+                                <label>CRM:&nbsp;</label>@account.Crm
                                 &nbsp;&nbsp;
                                    <label>E-mail:&nbsp;</label>@account.Email
                             </span>
@@ -19,7 +20,7 @@
                                 <label>Hospital(is):&nbsp;</label>
                                 @for (int i = 1; i <= account.Hospitals.Count; i++)
                                 {
-                                    @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospitals[i - 1].ToString())) + (account.Hospitals.Count == i ? "" : ",  "))
+                                    @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospitals[i - 1].ToString(CultureInfo.InvariantCulture))) + (account.Hospitals.Count == i ? "" : ",  "))
                                 }
                             </span>
                         </div>

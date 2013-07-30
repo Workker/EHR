@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace EHR.UI
+namespace EHR.UI.App_Start
 {
     public class FilterConfig
     {

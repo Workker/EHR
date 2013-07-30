@@ -1,6 +1,6 @@
 ﻿using EHR.Controller;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Mappers;
+using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
 using System;
 using System.Web.Mvc;
@@ -20,7 +20,7 @@ namespace EHR.UI.Controllers
             try
             {
                 FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName,
-                                                                             account.Gender, account.CRM,
+                                                                             account.Gender, account.Crm,
                                                                              account.Email, account.Password,
                                                                              account.Birthday, account.Hospitals);
 

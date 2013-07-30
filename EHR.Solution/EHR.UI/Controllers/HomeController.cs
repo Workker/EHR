@@ -2,7 +2,7 @@
 using EHR.Domain.Entities;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Mappers;
+using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -26,15 +26,12 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                if (((AccountModel)Session["account"]).Administrator == true)
+                if (((AccountModel)Session["account"]).Administrator)
                 {
                     ViewBag.Accounts = GetAccountsSkip(false);
                     return PartialView("_AccountApprovedList");
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
             catch (Exception ex)
             {

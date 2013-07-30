@@ -1,7 +1,4 @@
 ﻿@using EHR.UI.Models
-@{
-    var test = ViewBag.MedicationType;
-}
 @foreach (MedicationModel medication in ViewBag.Medications)
 {
     if (medication.Type == ViewBag.MedicationType)

@@ -26,7 +26,7 @@ namespace EHR.Domain.Repository
             Assertion.IsFalse(string.IsNullOrEmpty(email), "Endereço de e-mail não informado.").Validate();
 
             var criterion = Session.CreateCriteria<Account>();
-            criterion.Add(Expression.Eq("Email", email));
+            criterion.Add(Restrictions.Eq("Email", email));
 
             var account = (Account)criterion.UniqueResult();
 
@@ -41,10 +41,10 @@ namespace EHR.Domain.Repository
             Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada").Validate();
 
             var criterion = Session.CreateCriteria<Account>();
-            criterion.Add(Expression.Eq("Email", email));
-            criterion.Add(Expression.Eq("Password", password));
-            criterion.Add(Expression.Eq("Approved", true));
-            criterion.Add(Expression.Eq("Refused", false));
+            criterion.Add(Restrictions.Eq("Email", email));
+            criterion.Add(Restrictions.Eq("Password", password));
+            criterion.Add(Restrictions.Eq("Approved", true));
+            criterion.Add(Restrictions.Eq("Refused", false));
 
             var account = criterion.UniqueResult<Account>();
 
@@ -67,8 +67,8 @@ namespace EHR.Domain.Repository
         public virtual IList<Account> GetAllNotApproved()
         {
             var criterion = Session.CreateCriteria<Account>();
-            criterion.Add(Expression.Eq("Approved", false));
-            criterion.Add(Expression.Eq("Refused", false));
+            criterion.Add(Restrictions.Eq("Approved", false));
+            criterion.Add(Restrictions.Eq("Refused", false));
             criterion.AddOrder(Order.Desc("Id"));
 
 

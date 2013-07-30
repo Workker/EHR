@@ -2,7 +2,7 @@
 using EHR.CoreShared;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Mappers;
+using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -98,8 +98,8 @@ namespace EHR.UI.Controllers
 
         private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<PatientModel> patients)
         {
-            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"cpf\":\"" + patient.CPF + "\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" + patient.Hospital + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
-            return result += "]}";
+            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"cpf\":\"" + patient.Cpf + "\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" + patient.Hospital + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
+            return result + "]}";
         }
 
         private IEnumerable<IPatientDTO> GetTreatment(bool skip)

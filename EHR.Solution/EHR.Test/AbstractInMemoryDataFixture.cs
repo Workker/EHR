@@ -5,24 +5,24 @@ namespace EHR.Test
 {
     public abstract class AbstractInMemoryDataFixture
     {
-        private ISession session;
+        private ISession _session;
 
         [SetUp]
         public void BaseSetup()
         {
-            session = InMemorySessionFactoryProvider.Instance.OpenSession();
+            _session = InMemorySessionFactoryProvider.Instance.OpenSession();
         }
 
         [TearDown]
         public void BaseTearDown()
         {
-            if (session != null)
-                session.Dispose();
+            if (_session != null)
+                _session.Dispose();
         }
 
         protected ISession Session
         {
-            get { return session; }
+            get { return _session; }
         }
     }
 }

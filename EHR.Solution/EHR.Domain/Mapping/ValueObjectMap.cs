@@ -5,7 +5,7 @@ namespace EHR.Domain.Mapping
 {
     public abstract class ValueObjectMap<T> : ClassMap<T> where T : ValueObject
     {
-        public ValueObjectMap()
+        protected ValueObjectMap()
         {
             Id(x => x.Id);
             Map(x => x.Description);

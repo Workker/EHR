@@ -23,7 +23,7 @@ namespace EHR.Domain.Repository
             Assertion.GreaterThan((int)id, 0, "Def inválido.").Validate();
 
             var criterio = Session.CreateCriteria<Def>();
-            criterio.Add(Expression.Eq("Id", id));
+            criterio.Add(Restrictions.Eq("Id", id));
 
             var def = criterio.UniqueResult<Def>();
 

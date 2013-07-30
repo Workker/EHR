@@ -1,12 +1,10 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Util;
-using EHR.UI.Models;
 using System.Collections.Generic;
 
-namespace EHR.UI.Mappers
+namespace EHR.UI.Models.Mappers
 {
     public static class HospitalMapper
     {
@@ -26,7 +24,7 @@ namespace EHR.UI.Mappers
 
         public static HospitalModel MapHospitalModelFrom(DbEnum hospital)
         {
-            var hospitalModel = new HospitalModel()
+            var hospitalModel = new HospitalModel
             {
                 Name =
                     EnumUtil.GetDescriptionFromEnumValue(hospital)

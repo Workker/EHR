@@ -1,5 +1,4 @@
 ﻿using EHR.Domain.Entities;
-using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {

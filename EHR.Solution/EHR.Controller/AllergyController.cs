@@ -6,7 +6,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class AllergyController : EHRController
+    public class AllergyController : EhrController
     {
         private Types<AllergyType> _allergyTypes;
         public Types<AllergyType> AllergyTypes

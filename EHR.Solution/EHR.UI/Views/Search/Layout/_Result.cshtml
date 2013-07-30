@@ -13,7 +13,11 @@
                 <div class="fsm fwn fcg">
                     <div class="fbProfileByline searchResultPersonByline">
                         <span class="fbProfileBylineFragment">
-                            <span class="fbProfileBylineLabel">@patient.DateBirthday.Value.ToShortDateString()</span>
+                            <span class="fbProfileBylineLabel">@if (patient.DateBirthday != null)
+                                                               {
+                                                                   @patient.DateBirthday.Value.ToShortDateString()
+                                                               }
+                            </span>
                         </span><span class="fbProfileBylineFragment">
                             <span class="fbProfileBylineLabel" style="font-weight: bold">@patient.Hospital.ToString()</span>
                         </span>

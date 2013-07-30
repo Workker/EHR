@@ -1,4 +1,5 @@
-﻿@using EHR.Domain.Entities
+﻿@using System.Globalization
+@using EHR.Domain.Entities
 @using EHR.Domain.Util
 <form id="medicationForm">
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
@@ -14,7 +15,7 @@
         @foreach (var value in Enum.GetValues(typeof(PresentationTypeEnum)).Cast<short>().ToList())
         {
             <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((PresentationTypeEnum)Enum.Parse(typeof(PresentationTypeEnum), value.ToString())))
+                @EnumUtil.GetDescriptionFromEnumValue((PresentationTypeEnum)Enum.Parse(typeof(PresentationTypeEnum), value.ToString(CultureInfo.InvariantCulture)))
             </option>  
         }
     </select>
@@ -27,7 +28,7 @@
         @foreach (var value in Enum.GetValues(typeof(DosageEnum)).Cast<short>().ToList())
         {
             <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((DosageEnum)Enum.Parse(typeof(DosageEnum), value.ToString())))
+                @EnumUtil.GetDescriptionFromEnumValue((DosageEnum)Enum.Parse(typeof(DosageEnum), value.ToString(CultureInfo.InvariantCulture)))
             </option>  
         }
     </select>
@@ -39,7 +40,7 @@
         @foreach (var value in Enum.GetValues(typeof(WayEnum)).Cast<short>().ToList())
         {
             <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((WayEnum)Enum.Parse(typeof(WayEnum), value.ToString())))
+                @EnumUtil.GetDescriptionFromEnumValue((WayEnum)Enum.Parse(typeof(WayEnum), value.ToString(CultureInfo.InvariantCulture)))
             </option>  
         }
     </select>
@@ -53,7 +54,7 @@
         @foreach (var value in Enum.GetValues(typeof(FrequencyEnum)).Cast<short>().ToList())
         {
             <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((FrequencyEnum)Enum.Parse(typeof(FrequencyEnum), value.ToString())))
+                @EnumUtil.GetDescriptionFromEnumValue((FrequencyEnum)Enum.Parse(typeof(FrequencyEnum), value.ToString(CultureInfo.InvariantCulture)))
             </option>  
         }
     </select>
@@ -62,7 +63,7 @@
         @foreach (var value in Enum.GetValues(typeof(FrequencyCaseEnum)).Cast<short>().ToList())
         {
             <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((FrequencyCaseEnum)Enum.Parse(typeof(FrequencyCaseEnum), value.ToString())))
+                @EnumUtil.GetDescriptionFromEnumValue((FrequencyCaseEnum)Enum.Parse(typeof(FrequencyCaseEnum), value.ToString(CultureInfo.InvariantCulture)))
             </option>  
         }
     </select>

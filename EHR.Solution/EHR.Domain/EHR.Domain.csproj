@@ -155,6 +155,7 @@
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\Cids.cs" />
     <Compile Include="Repository\Defs.cs" />
+    <Compile Include="Repository\FactoryRepository.cs" />
     <Compile Include="Repository\Hospitals.cs" />
     <Compile Include="Repository\Patients.cs" />
     <Compile Include="Repository\TusRepository.cs" />

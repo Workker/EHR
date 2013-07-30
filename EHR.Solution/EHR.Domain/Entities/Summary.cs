@@ -73,7 +73,7 @@ namespace EHR.Domain.Entities
 
         public virtual void AddView(Account account, DateTime date)
         {
-            Views.Add(new View() { Account = account, VisiteDate = date });
+            Views.Add(new View { Account = account, VisiteDate = date });
         }
 
         #endregion
@@ -89,7 +89,7 @@ namespace EHR.Domain.Entities
             Assertion.GreaterThan(tus.Id, short.Parse("0"), "Tus inválido.").Validate();
 
             var date = new DateTime(year, month, day);
-            var procedure = new Procedure() { Date = date, Tus = tus };
+            var procedure = new Procedure { Date = date, Tus = tus };
 
             Procedures.Add(procedure);
 
@@ -118,7 +118,7 @@ namespace EHR.Domain.Entities
             Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
 
-            return new Allergy() { TheWhich = theWitch, Types = types };
+            return new Allergy { TheWhich = theWitch, Types = types };
         }
 
         public virtual void AddAllergy(Allergy allergy)
@@ -150,7 +150,7 @@ namespace EHR.Domain.Entities
             Assertion.NotNull(diagnosticType, "Tipo do diagnostico não informado.").Validate();
             Assertion.NotNull(cid, "Cid não informado").Validate();
 
-            var diagnostic = new Diagnostic() { Cid = cid, Type = diagnosticType };
+            var diagnostic = new Diagnostic { Cid = cid, Type = diagnosticType };
 
             Assertion.NotNull(diagnostic, "Diagnostico não foi criado corretamente.").Validate();
 
@@ -219,7 +219,7 @@ namespace EHR.Domain.Entities
             Assertion.GreaterThan((int)frequencyCase, 0, "Caso de frequencia não informado.").Validate();
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
 
-            var medication = new Medication()
+            var medication = new Medication
                                  {
                                      Type = type,
                                      Def = def,
@@ -256,15 +256,15 @@ namespace EHR.Domain.Entities
 
         #region Exam
 
-        public virtual void CreateExam(ExamTypeEnum type, int day, int month, int year, string description)
+        public virtual void CreateExam(ExamTypeEnum type, DateTime date, string description)
         {
             Assertion.NotNull(Date, "Tipo de exame não informado.");
             Assertion.IsFalse(string.IsNullOrEmpty(description), "Descrição não informada.").Validate();
 
-            var exam = new Exam()
+            var exam = new Exam
             {
                 Type = type,
-                Date = new DateTime(year, month, day),
+                Date = date,
                 Description = description
             };
 

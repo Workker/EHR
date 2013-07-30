@@ -9,20 +9,20 @@ namespace EHR.Test
 {
     public class InMemorySessionFactoryProvider
     {
-        private static InMemorySessionFactoryProvider instance;
+        private static InMemorySessionFactoryProvider _instance;
         public static InMemorySessionFactoryProvider Instance
         {
-            get { return instance ?? (instance = new InMemorySessionFactoryProvider()); }
+            get { return _instance ?? (_instance = new InMemorySessionFactoryProvider()); }
         }
 
-        private ISessionFactory sessionFactory;
-        private Configuration configuration;
+        private ISessionFactory _sessionFactory;
+        private Configuration _configuration;
 
         private InMemorySessionFactoryProvider() { }
 
         public void Initialize()
         {
-            sessionFactory = CreateSessionFactory();
+            _sessionFactory = CreateSessionFactory();
         }
 
         private ISessionFactory CreateSessionFactory()
@@ -30,7 +30,7 @@ namespace EHR.Test
             return Fluently.Configure()
                     .Database(SQLiteConfiguration.Standard.InMemory().ShowSql())
                     .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>())
-                    .ExposeConfiguration(cfg => configuration = cfg)
+                    .ExposeConfiguration(cfg => _configuration = cfg)
                     .BuildSessionFactory();
         }
 
@@ -38,9 +38,9 @@ namespace EHR.Test
         {
             Initialize();
 
-            ISession session = sessionFactory.OpenSession();
+            ISession session = _sessionFactory.OpenSession();
 
-            var export = new SchemaExport(configuration);
+            var export = new SchemaExport(_configuration);
             export.Execute(true, true, false, session.Connection, null);
 
             return session;
@@ -48,11 +48,11 @@ namespace EHR.Test
 
         public void Dispose()
         {
-            if (sessionFactory != null)
-                sessionFactory.Dispose();
+            if (_sessionFactory != null)
+                _sessionFactory.Dispose();
 
-            sessionFactory = null;
-            configuration = null;
+            _sessionFactory = null;
+            _configuration = null;
         }
     }
 }

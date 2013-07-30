@@ -7,7 +7,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class ProcedureController : EHRController
+    public class ProcedureController : EhrController
     {
         private TusRepository _tusRepository;
         public TusRepository TusRepository

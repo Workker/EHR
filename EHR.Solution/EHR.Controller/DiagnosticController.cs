@@ -7,7 +7,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class DiagnosticController : EHRController
+    public class DiagnosticController : EhrController
     {
 
         private Cids _cidsRepository;

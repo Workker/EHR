@@ -29,7 +29,7 @@ namespace EHR.Domain.Entities
             Assertion.IsFalse(string.IsNullOrEmpty(description), "Descrição não informada.").Validate();
             Assertion.GreaterThan(period, 0, "Periodo não informado.").Validate();
 
-            var complementaryexam = new ComplementaryExam()
+            var complementaryexam = new ComplementaryExam
             {
                 Description = description,
                 Period = period

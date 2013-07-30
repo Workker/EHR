@@ -1,4 +1,5 @@
-﻿using EHR.UI.Filters;
+﻿using EHR.UI.App_Start;
+using EHR.UI.Filters;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;

@@ -1,7 +1,6 @@
 ﻿using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
-using System.Collections.Generic;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository
@@ -25,7 +24,7 @@ namespace EHR.Domain.Repository
             Assertion.IsTrue(!string.IsNullOrEmpty(code), "Código do TUS inválido").Validate();
 
             var criterio = Session.CreateCriteria<Tus>();
-            criterio.Add(Expression.Eq("Code", code));
+            criterio.Add(Restrictions.Eq("Code", code));
 
             var tus = criterio.UniqueResult<Tus>();
 

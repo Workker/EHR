@@ -8,7 +8,7 @@ namespace EHR.Domain.Entities
     public class Account : IAggregateRoot<int>
     {
         public virtual int Id { get; set; }
-        public virtual string CRM { get; set; }
+        public virtual string Crm { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual GenderEnum Gender { get; set; }

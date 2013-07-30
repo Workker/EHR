@@ -1,4 +1,5 @@
-﻿@using EHR.Domain.Entities
+﻿@using System.Globalization
+@using EHR.Domain.Entities
 @using EHR.Domain.Util
 @using EHR.UI.Models
 <h3>Dados da Alta</h3>
@@ -15,7 +16,7 @@
                                                                                           {
                                                                                               @:checked
                                                                                           } />
-        @(EnumUtil.GetDescriptionFromEnumValue((HighTypeEnum)Enum.Parse(typeof(HighTypeEnum), value.ToString())))
+        @EnumUtil.GetDescriptionFromEnumValue((HighTypeEnum)Enum.Parse(typeof(HighTypeEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
     <br />
@@ -29,7 +30,7 @@
                                                                                                              {
                                                                                               @:checked
                                                                                           }/>
-        @(EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString())))
+        @EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
     <br />
@@ -43,7 +44,7 @@
                                                                                                                     {
                                                                                               @:checked
                                                                                           }/>
-        @(EnumUtil.GetDescriptionFromEnumValue((DestinationOfThePatientAtDischargeEnum)Enum.Parse(typeof(DestinationOfThePatientAtDischargeEnum), value.ToString())))
+        @EnumUtil.GetDescriptionFromEnumValue((DestinationOfThePatientAtDischargeEnum)Enum.Parse(typeof(DestinationOfThePatientAtDischargeEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
     <hr />
@@ -58,7 +59,7 @@
                                                                                                                        {
                                                                                               @:checked
                                                                                           }/>
-        @(EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString())))
+        @EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
     <br />
@@ -78,7 +79,7 @@
     <br />
     <hr />
     <br />
-    <label>CRM:</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.CRM)" />
+    <label>CRM:</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.Crm)" />
     <br />
     <br />
 

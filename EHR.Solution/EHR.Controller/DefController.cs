@@ -5,7 +5,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class DefController : EHRController
+    public class DefController : EhrController
     {
         private GetDefLuceneService _getDefLuceneService;
         public GetDefLuceneService GetDefLuceneService

@@ -1,4 +1,5 @@
-﻿@using EHR.Domain.Entities
+﻿@using System.Globalization
+@using EHR.Domain.Entities
 @using EHR.Domain.Util
 @using EHR.UI.Models
 @model PatientModel
@@ -19,13 +20,13 @@
                     if (treatmentMonth.EntryDate.Month != month && treatmentMonth.EntryDate.Year == year)
                     {
                         month = treatmentMonth.EntryDate.Month;
-                        @:<li><a href="#">@(EnumUtil.GetDescriptionFromEnumValue((MonthEnum)Enum.Parse(typeof(MonthEnum), month.ToString())) + "  ")</a>
+                        @:<li><a href="#">@(EnumUtil.GetDescriptionFromEnumValue((MonthEnum)Enum.Parse(typeof(MonthEnum), month.ToString(CultureInfo.InvariantCulture))) + "  ")</a>
                         @:<ul class="clearfix">
                         foreach (var treatment in Model.Treatments)
                         {
                             if (treatment.EntryDate.Month == month && treatment.EntryDate.Year == year)
                             {
-                                @:<li><a href="../../Patient/?cpf=@Model.CPF&treatment=@treatment.Id">@treatment.EntryDate.Day</a></li>
+                                @:<li><a href="../../Patient/?cpf=@Model.Cpf&treatment=@treatment.Id">@treatment.EntryDate.Day</a></li>
                             }
                         }
                         @:</ul>

@@ -16,7 +16,7 @@ namespace EHR.Domain.Repository
             Assertion.GreaterThan(list.Count, 0, "Nenhum hospital informado.").Validate();
 
             var criterio = Session.CreateCriteria<Hospital>();
-            criterio.Add(Expression.In("Id", list.ToList()));
+            criterio.Add(Restrictions.In("Id", list.ToList()));
 
             var hospitalList = criterio.List<Hospital>();
 
@@ -40,7 +40,7 @@ namespace EHR.Domain.Repository
                 }
                 transaction.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 transaction.Rollback();
                 throw;

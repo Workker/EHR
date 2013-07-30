@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
-using EHR.UI.Models;
 using System.Collections.Generic;
 
-namespace EHR.UI.Mappers
+namespace EHR.UI.Models.Mappers
 {
     public static class DefMapper
     {

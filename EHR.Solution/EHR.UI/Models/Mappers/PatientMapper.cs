@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using EHR.CoreShared;
 using EHR.Domain.Util;
-using EHR.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EHR.UI.Mappers
+namespace EHR.UI.Models.Mappers
 {
     public static class PatientMapper
     {
@@ -59,11 +58,13 @@ namespace EHR.UI.Mappers
             if (patient.Treatments != null && patient.Treatments.Count > 0 && !string.IsNullOrEmpty(treatmentStr) &&
                 patient.Treatments.Count(t => t.Id == treatmentStr) > 0)
             {
-                patientModel.Hospital =
-                    EnumUtil.GetDescriptionFromEnumValue(
-                        (DbEnum)
-                        Enum.Parse(typeof(DbEnum),
-                                   patient.Treatments.FirstOrDefault(t => t.Id == treatmentStr).Hospital.ToString()));
+                var firstOrDefault = patient.Treatments.FirstOrDefault(t => t.Id == treatmentStr);
+                if (firstOrDefault != null)
+                    patientModel.Hospital =
+                        EnumUtil.GetDescriptionFromEnumValue(
+                            (DbEnum)
+                            Enum.Parse(typeof(DbEnum),
+                                       firstOrDefault.Hospital.ToString()));
             }
             else
                 patientModel.Hospital =

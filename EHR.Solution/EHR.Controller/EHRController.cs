@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace EHR.Controller
 {
-    public abstract class EHRController
+    public abstract class EhrController
     {
         private Summaries _summaries;
         public Summaries Summaries
@@ -55,7 +55,7 @@ namespace EHR.Controller
 
         #region Exam
 
-        public virtual void SaveExam(int idSummary, short type, int day, int month, int year, string description) { }
+        public virtual void SaveExam(int idSummary, short type, DateTime date, string description) { }
         public virtual void RemoveExam(int idSummary, int id) { }
 
         #endregion

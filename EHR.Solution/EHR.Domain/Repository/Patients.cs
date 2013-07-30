@@ -1,7 +1,5 @@
-﻿using EHR.CoreShared;
-using EHRIntegracao.Domain.Domain;
+﻿using EHRIntegracao.Domain.Domain;
 using NHibernate;
-using NHibernate.Criterion;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository

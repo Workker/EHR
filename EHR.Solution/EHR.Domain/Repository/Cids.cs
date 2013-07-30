@@ -23,7 +23,7 @@ namespace EHR.Domain.Repository
             Assertion.IsTrue(!string.IsNullOrEmpty(code), "Código não informado.").Validate();
 
             var criterio = Session.CreateCriteria<Cid>();
-            criterio.Add(Expression.Eq("Code", code));
+            criterio.Add(Restrictions.Eq("Code", code));
 
             var cid = criterio.UniqueResult<Cid>();
 

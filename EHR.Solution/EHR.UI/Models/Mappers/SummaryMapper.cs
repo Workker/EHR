@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using EHR.Domain.Entities;
-using EHR.UI.Models;
 using System.Collections.Generic;
 
-namespace EHR.UI.Mappers
+namespace EHR.UI.Models.Mappers
 {
     public static class SummaryMapper
     {
@@ -43,14 +42,14 @@ namespace EHR.UI.Mappers
             return sumaryModels;
         }
 
-        private static IList<ViewModel> MapViewModelFrom(IList<View> views)
+        private static IList<ViewModel> MapViewModelFrom(IEnumerable<View> views)
         {
             var viewModels = new List<ViewModel>();
 
             foreach (var view in views)
             {
                 Mapper.CreateMap<View, ViewModel>();
-                viewModels.Add(new ViewModel()
+                viewModels.Add(new ViewModel
                 {
                     Id = view.Id,
                     Account = AccountMapper.MapAccountModelFrom(view.Account),

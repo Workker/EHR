@@ -5,7 +5,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
-    public class HemotransfusionController : EHRController
+    public class HemotransfusionController : EhrController
     {
         private Types<HemotransfusionType> _hemotransfusionTypes;
         public Types<HemotransfusionType> HemotransfusionTypes

@@ -1,6 +1,6 @@
 ﻿@using EHR.Domain.Entities
 @using EHR.UI.Models
-@model EHR.UI.Models.SummaryModel
+@model SummaryModel
 <h1>Dados Gerais</h1>
 <hr />
 <br />
@@ -41,7 +41,7 @@
 <h3>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</h3>
 <br />
 <form style="padding-bottom: 20px;">
-    <textarea rows="10" cols="135" maxlength="1000" id="observation" name="observation">@(((SummaryModel)Model).Observation)</textarea><br />
+    <textarea rows="10" cols="135" maxlength="1000" id="observation" name="observation">@Model.Observation</textarea><br />
     <input type="submit" value="Salvar" onclick="SaveObsevation(this)" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" value="Limpar" class="uibutton large" />
 </form>
