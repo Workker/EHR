@@ -26,7 +26,7 @@
                         {
                             if (treatment.EntryDate.Month == month && treatment.EntryDate.Year == year)
                             {
-                                @:<li><a href="../../Patient/?cpf=@Model.Cpf&treatment=@treatment.Id">@treatment.EntryDate.Day</a></li>
+                                @:<li><a href="../../Patient/@Model.Cpf/@treatment.Id">@treatment.EntryDate.Day</a></li>
                             }
                         }
                         @:</ul>
