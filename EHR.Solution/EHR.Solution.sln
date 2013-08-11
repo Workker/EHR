@@ -29,6 +29,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Infrastructure", "EHR.Infrastructure\EHR.Infrastructure.csproj", "{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget (2)", ".nuget (2)", "{D574EADD-8428-45BE-8CED-2554FA12598B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Import (2)", "Import (2)", "{F823D928-7DE2-4EFA-8B79-3BF86E39AB80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items (2)", "Solution Items (2)", "{9F818C42-A5ED-4023-825C-4580B60BF337}"
+	ProjectSection(SolutionItems) = preProject
+		Graph1.dgml = Graph1.dgml
+		Performance1.psess = Performance1.psess
+		SequenceDiagram1.sequencediagram = SequenceDiagram1.sequencediagram
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,9 +71,7 @@ Global
 		{1B2917E6-5971-49D4-9926-FC0F9D3E75E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B2917E6-5971-49D4-9926-FC0F9D3E75E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

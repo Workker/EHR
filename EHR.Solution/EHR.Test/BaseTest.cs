@@ -238,20 +238,24 @@ namespace EHR.Test
                               {
                                   Administrator = true,
                                   Approved = true,
-                                  Birthday = new DateTime(1989, 7, 17),
-                                  Crm = "123",
-                                  Email = "thiago@workker.com.br",
-                                  FirstName = "Thiago",
-                                  LastName = "Oliveira",
-                                  Gender = GenderEnum.Male,
-                                  Password = "123"
                               };
 
-            account.EncryptPassword();
+            account.ToEnterCRM("123");
+            account.ToEnterFirstName("Thiago");
+            account.ToEnterLastName("Oliveira");
+            account.ToEnterGender(GenderEnum.Male);
+            account.ToEnterEmail("thiago@workker.com.br");
+            account.ToEnterBirthday(new DateTime(1989, 7, 17));
 
-            account.Hospitals = new Hospitals().All<Hospital>();
+            var hospitals = new Hospitals().All<Hospital>();
+
+            foreach (var hospital in hospitals)
+            {
+                account.AddHospital(hospital);
+            }
 
             var accounts = new Accounts();
+
             accounts.Save(account);
         }
 
@@ -265,18 +269,21 @@ namespace EHR.Test
                     Administrator = false,
                     Approved = false,
                     Refused = false,
-                    Birthday = new DateTime(1989, 7, 17),
-                    Crm = "123",
-                    Email = i + "@workker.com.br",
-                    FirstName = "Thiago",
-                    LastName = "Oliveira",
-                    Gender = GenderEnum.Male,
-                    Password = "123"
                 };
 
-                account.EncryptPassword();
+                account.ToEnterCRM("123");
+                account.ToEnterFirstName("123");
+                account.ToEnterLastName("Oliveira");
+                account.ToEnterGender(GenderEnum.Male);
+                account.ToEnterEmail(i + "@workker.com.br");
+                account.ToEnterBirthday(new DateTime(1989, 7, 17));
 
-                account.Hospitals = new Hospitals().All<Hospital>();
+                var hospitals = new Hospitals().All<Hospital>();
+
+                foreach (var hospital in hospitals)
+                {
+                    account.AddHospital(hospital);
+                }
 
                 accountList.Add(account);
             }

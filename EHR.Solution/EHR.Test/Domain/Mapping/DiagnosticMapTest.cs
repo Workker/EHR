@@ -5,6 +5,7 @@ using NUnit.Framework;
 namespace EHR.Test.Domain.Mapping
 {
     [TestFixture]
+    [Ignore]
     public class DiagnosticMapTest : AbstractInMemoryDataFixture
     {
         [Test]

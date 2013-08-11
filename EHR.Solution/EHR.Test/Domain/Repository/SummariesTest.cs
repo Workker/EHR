@@ -7,6 +7,7 @@ namespace EHR.Test.Domain.Repository
     public class SummariesTest
     {
         [Test]
+        [Ignore]
         public void Get_all_summaries_of_one_cpf()
         {
             var summaries = new Summaries();

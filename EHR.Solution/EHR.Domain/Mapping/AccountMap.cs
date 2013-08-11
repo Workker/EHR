@@ -8,7 +8,7 @@ namespace EHR.Domain.Mapping
         public AccountMap()
         {
             Id(a => a.Id);
-            Map(a => a.Crm);
+            Map(a => a.CRM);
             Map(a => a.FirstName);
             Map(a => a.LastName);
             Map(a => a.Gender).CustomType<short>();

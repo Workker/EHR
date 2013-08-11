@@ -29,7 +29,6 @@ namespace EHR.Controller
 
             var account = SetPropertiesOfAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitals);
 
-            account.EncryptPassword();
             accounts.Save(account);
 
             Assertion.GreaterThan(account.Id, 0, "Conta de usuário não criada.").Validate();
@@ -123,8 +122,8 @@ namespace EHR.Controller
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
 
-            account.Password = password;
-            account.EncryptPassword();
+            account.ToEnterPassword(password);
+
             ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Save(account);
 
             Assertion.Equals(account.Password, CryptographyUtil.EncryptToSha512(password), "Senha não alterada.").Validate();
@@ -150,19 +149,25 @@ namespace EHR.Controller
         {
             var account = new Account
                               {
-                                  Birthday = birthday,
-                                  Crm = crm,
-                                  Email = email,
-                                  FirstName = firstName,
-                                  LastName = lastName,
-                                  Password = password,
                                   Approved = false,
                                   Refused = false,
-                                  Administrator = false,
-                                  Gender = gender
+                                  Administrator = false
                               };
+            
+            account.ToEnterCRM(crm);
+            account.ToEnterFirstName(firstName);
+            account.ToEnterLastName(lastName);
+            account.ToEnterGender(gender);
+            account.ToEnterEmail(email);
+            account.ToEnterPassword(password);
+            account.ToEnterBirthday(birthday);
+
             var hospitalsList = GetHospitalsFromRepository(hospitals);
-            account.Hospitals = hospitalsList;
+
+            foreach (var hospital in hospitalsList)
+            {
+                account.AddHospital(hospital);
+            }
 
             return account;
         }
