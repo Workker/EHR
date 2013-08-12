@@ -10,10 +10,38 @@ namespace EHR.Controller
 {
     public class AccountController : EhrController
     {
-        [ExceptionLogger]
-        public override void Register(string firstName, string lastName, short gender, string crm,
-                                      string email, string password, DateTime birthday, IList<short> hospitals)
+        private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
         {
+            var account = new Account
+            {
+                Approved = false,
+                Refused = false,
+                Administrator = false
+            };
+
+            account.ToEnterCRM(crm);
+            account.ToEnterFirstName(firstName);
+            account.ToEnterLastName(lastName);
+            account.ToEnterGender(gender);
+            account.ToEnterEmail(email);
+            account.ToEnterPassword(password);
+            account.ToEnterBirthday(birthday);
+
+            var hospitalsList = GetHospitalsFromRepository(hospitals);
+
+            foreach (var hospital in hospitalsList)
+            {
+                account.AddHospital(hospital);
+            }
+
+            return account;
+        }
+        
+        [ExceptionLogger]
+        public override void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
+        {
+            #region Precondition
+
             Assertion.IsFalse(string.IsNullOrEmpty(firstName), "Primeiro nome não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(lastName), "Ultimo nome não informado.").Validate();
             Assertion.GreaterThan((int)gender, 0, "Género não informado.").Validate();
@@ -23,50 +51,60 @@ namespace EHR.Controller
             Assertion.GreaterThan(birthday, DateTime.MinValue, "Data de aniverssario não informada.").Validate();
             Assertion.GreaterThan(hospitals.Count, 0, "Hospital(is) não informado(s).").Validate();
 
+            #endregion
+
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
 
             Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
 
-            var account = SetPropertiesOfAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitals);
+            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitals);
 
             accounts.Save(account);
 
+            #region Poscondition
+
             Assertion.GreaterThan(account.Id, 0, "Conta de usuário não criada.").Validate();
+
+            #endregion
         }
 
         [ExceptionLogger]
         public override Account Login(string email, string password)
         {
+            #region Precondition
+
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(password), "E-mail não informado.").Validate();
 
+            #endregion
+
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+
             var passwordEncrypted = CryptographyUtil.EncryptToSha512(password);
+
             var account = accounts.GetBy(email, passwordEncrypted);
 
+            #region Poscondition
+
             Assertion.NotNull(account, "Conta de usuário não encontrada.").Validate();
+
+            #endregion
+
             return account;
-        }
-
-        [ExceptionLogger]
-        public override bool VerifyIfExist(string email)
-        {
-            Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
-
-            var registered = ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).GetBy(email);
-
-            Assertion.Null(registered, "E-mail já cadastrado.").Validate();
-
-            return registered == null;
         }
 
         [ExceptionLogger]
         public override IList<Account> GetAllNotApproved()
         {
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+            
             var accountList = accounts.GetAllNotApproved();
 
+            #region Poscondition
+
             Assertion.NotNull(accountList, "A lista retornada está nula.").Validate();
+
+            #endregion
 
             return accountList;
         }
@@ -74,7 +112,11 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override IList<Summary> GetLastSumariesRealizedby(int accountId)
         {
+            #region Precondition
+
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
+
+            #endregion
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
 
@@ -87,7 +129,11 @@ namespace EHR.Controller
                 summary.Patient = service.GetPatientBy(summary.Cpf);
             }
 
+            #region Poscondition
+
             Assertion.NotNull(summaryList, "A lista retornada está nula.").Validate();
+
+            #endregion
 
             return summaryList;
         }
@@ -117,8 +163,12 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void AlterPasswordOfAccount(int accountId, string password)
         {
+            #region Precondition
+
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(password), "Nova senha não informada.").Validate();
+
+            #endregion
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
 
@@ -126,52 +176,33 @@ namespace EHR.Controller
 
             ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Save(account);
 
+            #region Poscondition
+
             Assertion.Equals(account.Password, CryptographyUtil.EncryptToSha512(password), "Senha não alterada.").Validate();
+
+            #endregion
         }
 
         [ExceptionLogger]
         public IList<Hospital> GetHospitalsFromRepository(IList<short> hospitals)
         {
+            #region Precondition
+
             Assertion.GreaterThan(hospitals.Count, 0, "Hospital(is) não informado(s).").Validate();
 
+            #endregion
+
             var hospitalRepository = (Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals);
+            
             var hospitalsList = hospitalRepository.GetBy(hospitals);
+
+            #region Poscondition
 
             Assertion.NotNull(hospitalsList, "Não foram retornados hospitais.");
 
+            #endregion
+
             return hospitalsList;
         }
-
-        #region Private Methods
-
-        private Account SetPropertiesOfAccount(string firstName, string lastName, GenderEnum gender, string crm,
-                                                   string email, string password, DateTime birthday, IList<short> hospitals)
-        {
-            var account = new Account
-                              {
-                                  Approved = false,
-                                  Refused = false,
-                                  Administrator = false
-                              };
-            
-            account.ToEnterCRM(crm);
-            account.ToEnterFirstName(firstName);
-            account.ToEnterLastName(lastName);
-            account.ToEnterGender(gender);
-            account.ToEnterEmail(email);
-            account.ToEnterPassword(password);
-            account.ToEnterBirthday(birthday);
-
-            var hospitalsList = GetHospitalsFromRepository(hospitals);
-
-            foreach (var hospital in hospitalsList)
-            {
-                account.AddHospital(hospital);
-            }
-
-            return account;
-        }
-
-        #endregion
     }
 }
