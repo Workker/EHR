@@ -107,18 +107,17 @@ namespace EHR.Test
 
         public void insert_allergies_types()
         {
-            var angioedema = new AllergyType() { Id = (short)AllergyTypeEnum.Angioedema, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Angioedema) };
-            var urticaria = new AllergyType() { Id = (short)AllergyTypeEnum.Urticaria, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Urticaria) };
-            var choqueAnafilatico = new AllergyType() { Id = (short)AllergyTypeEnum.ChoqueAnafilatico, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.ChoqueAnafilatico) };
-            var broncoespasmo = new AllergyType() { Id = (short)AllergyTypeEnum.Broncoespasmo, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Broncoespasmo) };
-            var larigoespasmo = new AllergyType() { Id = (short)AllergyTypeEnum.Laringoespasmo, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Laringoespasmo) };
-            var outros = new AllergyType() { Id = (short)AllergyTypeEnum.Outros, Description = EnumUtil.GetDescriptionFromEnumValue(AllergyTypeEnum.Outros) };
+            var angioedema = new AllergyType() { Id = 1, Description = "Angioedema" };
+            var urticaria = new AllergyType() { Id = 2, Description = "Urticária" };
+            var choqueAnafilatico = new AllergyType() { Id = 3, Description = "Choque Anafilático" };
+            var broncoespasmo = new AllergyType() { Id = 4, Description = "Broncoespasmo" };
+            var larigoespasmo = new AllergyType() { Id = 5, Description = "Laringoespasmo" };
+            var outros = new AllergyType() { Id = 6, Description = "Outros" };
 
             var types = new List<AllergyType> { angioedema, urticaria, choqueAnafilatico, broncoespasmo, larigoespasmo, outros };
             var typesRepository = new Types<AllergyType>();
 
-            typesRepository.SaveList<AllergyType>(types);
-
+            typesRepository.SaveList(types);
         }
 
         public void insert_specialties()
@@ -185,38 +184,35 @@ namespace EHR.Test
 
         public void insert_diagnostic_types()
         {
-            var associadosEOuOutros = new DiagnosticType() { Id = (short)DiagnosticTypeEnum.AssociadosEOuOutros, Description = EnumUtil.GetDescriptionFromEnumValue(DiagnosticTypeEnum.AssociadosEOuOutros) };
+            var associadosEOuOutros = new DiagnosticType() { Id = 1, Description = "Principal" };
 
-            var principal = new DiagnosticType() { Id = (short)DiagnosticTypeEnum.Principal, Description = EnumUtil.GetDescriptionFromEnumValue(DiagnosticTypeEnum.Principal) };
+            var principal = new DiagnosticType() { Id = 2, Description = "Associados e/ou Outros" };
 
             var types = new List<DiagnosticType> { associadosEOuOutros, principal };
             var typesRepository = new Types<DiagnosticType>();
 
-            typesRepository.SaveList<DiagnosticType>(types);
-
+            typesRepository.SaveList(types);
         }
 
         public void insert_reactions_types()
         {
-            var alergicaLeveModeradaGrave = new ReactionType() { Id = (short)ReactionTypeEnum.AlergicaLeveModeradaGrave, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.AlergicaLeveModeradaGrave) };
+            var alergicaLeveModeradaGrave = new ReactionType() { Id = 1, Description = "Aloimunização Eritrocitária" };
 
-            var aloimunizacaoEritrocitaria = new ReactionType() { Id = (short)ReactionTypeEnum.AloimunizacaoEritrocitaria, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.AloimunizacaoEritrocitaria) };
+            var aloimunizacaoEritrocitaria = new ReactionType() { Id = 2, Description = "Aloimunização HLA" };
 
-            var aloimunizacaoHla = new ReactionType() { Id = (short)ReactionTypeEnum.AloimunizacaoHla, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.AloimunizacaoHla) };
+            var aloimunizacaoHla = new ReactionType() { Id = 3, Description = "Imunomodulação" };
 
-            var enxertoXHospedeiro = new ReactionType() { Id = (short)ReactionTypeEnum.EnxertoXHospedeiro, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.EnxertoXHospedeiro) };
+            var enxertoXHospedeiro = new ReactionType() { Id = 4, Description = "Lesão pulmonar relacionada a transfusão" };
 
-            var febrilNaoHemolitica = new ReactionType() { Id = (short)ReactionTypeEnum.FebrilNaoHemolitica, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.FebrilNaoHemolitica) };
+            var febrilNaoHemolitica = new ReactionType() { Id = 5, Description = "Púrpura pós transfusional" };
 
-            var hemoliticaImune = new ReactionType() { Id = (short)ReactionTypeEnum.HemoliticaImune, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.HemoliticaImune) };
+            var hemoliticaImune = new ReactionType() { Id = 6, Description = "Alérgica: leve; moderada; grave" };
 
-            var imunomodulacao = new ReactionType() { Id = (short)ReactionTypeEnum.Imunomodulacao, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.Imunomodulacao) };
+            var imunomodulacao = new ReactionType() { Id = 7, Description = "Enxerto x Hospedeiro" };
 
-            var lesaoPulmonarRelacionadaATransfusao = new ReactionType() { Id = (short)ReactionTypeEnum.LesaoPulmonarRelacionadaATransfusao, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.LesaoPulmonarRelacionadaATransfusao) };
+            var lesaoPulmonarRelacionadaATransfusao = new ReactionType() { Id = 8, Description = "Febril não hemolítica" };
 
-            var purpuraPosTransfusional = new ReactionType() { Id = (short)ReactionTypeEnum.PurpuraPosTransfusional, Description = EnumUtil.GetDescriptionFromEnumValue(ReactionTypeEnum.PurpuraPosTransfusional) };
-
-
+            var purpuraPosTransfusional = new ReactionType() { Id = 9, Description = "Hemolítica Imune" };
 
             var types = new List<ReactionType> 
             {
@@ -233,7 +229,7 @@ namespace EHR.Test
 
             var reactionTypes = new Types<ReactionType>();
 
-            reactionTypes.SaveList<ReactionType>(types);
+            reactionTypes.SaveList(types);
         }
 
         public void insert_admin_account()
@@ -289,6 +285,33 @@ namespace EHR.Test
             accounts.SaveList(accountList);
         }
 
+        public void insert_hemotransfusion_types()
+        {
+            var concentradoDeHemacias = new HemotransfusionType() { Id = 1, Description = "Criopreciptado" };
+
+            var concentradoDeNeutrofilos = new HemotransfusionType() { Id = 2, Description = "Concentrado de hemácias" };
+
+            var concentradoDePlaquetas = new HemotransfusionType() { Id = 3, Description = "Concentrado de neutrófilos" };
+
+            var criopreciptado = new HemotransfusionType() { Id = 4, Description = "Concentrado de plaquetas" };
+
+            var plasma = new HemotransfusionType() { Id = 5, Description = "Plasma" };
+
+
+            var types = new List<HemotransfusionType> 
+            {
+                concentradoDeHemacias,
+                concentradoDeNeutrofilos,
+                concentradoDePlaquetas,
+                criopreciptado,
+                plasma
+            };
+
+            var reactionTypes = new Types<HemotransfusionType>();
+
+            reactionTypes.SaveList(types);
+        }
+
         //[Test]
         //public void insert_reason_of_admission()
         //{
@@ -311,32 +334,7 @@ namespace EHR.Test
         //    typesRepository.SaveList<ReasonOfAdmission>(listOfReasons);
         //}
 
-        public void insert_hemotransfusion_types()
-        {
-            var concentradoDeHemacias = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.ConcentradoDeHemacias, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.ConcentradoDeHemacias) };
 
-            var concentradoDeNeutrofilos = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.ConcentradoDeNeutrofilos, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.ConcentradoDeNeutrofilos) };
-
-            var concentradoDePlaquetas = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.ConcentradoDePlaquetas, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.ConcentradoDePlaquetas) };
-
-            var criopreciptado = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.Criopreciptado, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.Criopreciptado) };
-
-            var plasma = new HemotransfusionType() { Id = (short)HemotransfusionTypeEnum.Plasma, Description = EnumUtil.GetDescriptionFromEnumValue(HemotransfusionTypeEnum.Plasma) };
-
-
-            var types = new List<HemotransfusionType> 
-            {
-                concentradoDeHemacias,
-                concentradoDeNeutrofilos,
-                concentradoDePlaquetas,
-                criopreciptado,
-                plasma
-            };
-
-            var reactionTypes = new Types<HemotransfusionType>();
-
-            reactionTypes.SaveList<HemotransfusionType>(types);
-        }
 
         //[Test]
         public void data_initialize_all_sumaries_for_patients()

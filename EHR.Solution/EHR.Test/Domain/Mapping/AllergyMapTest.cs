@@ -12,9 +12,9 @@ namespace EHR.Test.Domain.Mapping
         [Ignore]
         public void test_mapping_of_allergy()
         {
-            new PersistenceSpecification<Allergy>(session: Session).
+            new PersistenceSpecification<Allergy>(Session).
                 CheckProperty(x => x.Id, 1).CheckProperty(x => x.TheWhich, "Test").
-                CheckProperty(x => x.Types, AllergyTypeEnum.Angioedema).CheckProperty(x => x.Types, AllergyTypeEnum.Angioedema).VerifyTheMappings();
+                CheckProperty(x => x.Types, 1).CheckProperty(x => x.Types, "Angioedema").VerifyTheMappings();
 
         }
     }

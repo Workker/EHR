@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AllergyType.cs" />
-    <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\ComplementaryExam.cs" />
     <Compile Include="Entities\ConditionOfThePatientAtHighEnum.cs" />
     <Compile Include="Entities\DestinationOfThePatientAtDischargeEnum.cs" />
@@ -98,7 +97,6 @@
     <Compile Include="Entities\HighTypeEnum.cs" />
     <Compile Include="Entities\MonthEnum.cs" />
     <Compile Include="Entities\DiagnosticType.cs" />
-    <Compile Include="Entities\DiagnosticTypeEnum.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\Medication.cs" />
     <Compile Include="Entities\MedicationTypeEnum.cs" />

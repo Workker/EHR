@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		SequenceDiagram1.sequencediagram = SequenceDiagram1.sequencediagram
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Infrastructure", "EHR.Infrastructure\EHR.Infrastructure.csproj", "{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{1B2917E6-5971-49D4-9926-FC0F9D3E75E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B2917E6-5971-49D4-9926-FC0F9D3E75E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B2917E6-5971-49D4-9926-FC0F9D3E75E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

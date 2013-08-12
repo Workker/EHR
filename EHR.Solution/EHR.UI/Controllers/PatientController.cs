@@ -17,6 +17,19 @@ namespace EHR.UI.Controllers
     [AuthenticationFilter]
     public class PatientController : System.Web.Mvc.Controller
     {
+        private static EhrController AllergyController
+        {
+            get { return FactoryController.GetController(ControllerEnum.Allergy); }
+        }
+        private static EhrController DiagnosticController
+        {
+            get { return FactoryController.GetController(ControllerEnum.Diagnostic); }
+        }
+        private static EhrController SummaryController
+        {
+            get { return FactoryController.GetController(ControllerEnum.Summary); }
+        }
+
         public ActionResult Index(string cpf, string treatment)
         {
             try
@@ -160,8 +173,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Allergy).SaveAllergy(theWitch, type.ConvertAll(short.Parse),
-                                                                               GetSummary().Id);
+                AllergyController.SaveAllergy(theWitch, type.ConvertAll(short.Parse), GetSummary().Id);
 
                 RefreshSessionSummary();
 
@@ -182,7 +194,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Allergy).RemoveAllergy(GetSummary().Id, int.Parse(id));
+                AllergyController.RemoveAllergy(GetSummary().Id, int.Parse(id));
                 this.ShowMessage(MessageTypeEnum.Success, "Alergia excluida.");
             }
             catch (Exception ex)
@@ -204,7 +216,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Diagnostic).SaveDiagnostic(diagnostic.Type, diagnostic.Cid.Code, GetSummary().Id);
+                DiagnosticController.SaveDiagnostic(diagnostic.Type, diagnostic.Cid.Code, GetSummary().Id);
 
                 RefreshSessionSummary();
 
@@ -226,7 +238,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Diagnostic).RemoveDiagnostic(GetSummary().Id, int.Parse(id));
+                DiagnosticController.RemoveDiagnostic(GetSummary().Id, int.Parse(id));
 
                 this.ShowMessage(MessageTypeEnum.Success, "Diagnóstico excluído.");
             }
@@ -240,7 +252,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                var cids = FactoryController.GetController(ControllerEnum.Diagnostic).GetCids(term);
+                var cids = DiagnosticController.GetCids(term);
 
                 return Json(cids, JsonRequestBehavior.AllowGet);
             }
@@ -278,8 +290,8 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Summary).SaveMedication(GetSummary().Id, medication.Type,
-                    medication.Def.Id, medication.Presentation, medication.PresentationType, medication.Dose, medication.Dosage,
+                SummaryController.SaveMedication(GetSummary().Id, medication.Type, medication.Def.Id, medication.Presentation,
+                    medication.PresentationType, medication.Dose, medication.Dosage,
                     medication.Way, medication.Place, medication.Frequency, medication.FrequencyCase, medication.Duration);
 
                 RefreshSessionSummary();
@@ -303,7 +315,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Summary).RemoveMedication(GetSummary().Id, medication.Id);
+                SummaryController.RemoveMedication(GetSummary().Id, medication.Id);
 
                 RefreshSessionSummary();
 
@@ -736,8 +748,7 @@ namespace EHR.UI.Controllers
 
         private void RegisterView(Summary summary)
         {
-            FactoryController.GetController(ControllerEnum.Summary).AddView(summary.Id,
-                                                                               ((AccountModel)Session["account"]).Id, DateTime.Now);
+            SummaryController.AddView(summary.Id, ((AccountModel)Session["account"]).Id, DateTime.Now);
         }
 
         private AccountModel GetAccount()
@@ -747,7 +758,7 @@ namespace EHR.UI.Controllers
 
         private void RefreshSessionSummary()
         {
-            var summary = FactoryController.GetController(ControllerEnum.Summary).GetBy(GetSummary().Id);
+            var summary = SummaryController.GetBy(GetSummary().Id);
 
             Session["Summary"] = SummaryMapper.MapSummaryModelFrom(summary);
         }
