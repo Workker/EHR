@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities.Interfaces;
+﻿using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
@@ -7,10 +8,10 @@ namespace EHR.Domain.Entities
     {
         public virtual int Id { get; set; }
         public virtual DiagnosticType Type { get; set; }
-        public virtual Cid Cid { get; set; }
+        public virtual CID Cid { get; set; }
 
 
-        private void SetCid(Cid cid)
+        private void SetCid(CID cid)
         {
             Assertion.NotNull(cid, "Cid não informado.").Validate();
 

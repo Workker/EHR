@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities.Interfaces;
+﻿using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 
 namespace EHR.Domain.Entities
 {
@@ -6,7 +7,7 @@ namespace EHR.Domain.Entities
     {
         public virtual int Id { get; set; }
         public virtual MedicationTypeEnum Type { get; set; }
-        public virtual Def Def { get; set; }
+        public virtual DEF Def { get; set; }
         public virtual string Presentation { get; set; }
         public virtual PresentationTypeEnum PresentationType { get; set; }
         public virtual string Dose { get; set; }

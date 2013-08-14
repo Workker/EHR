@@ -56,6 +56,10 @@
     <Reference Include="Dapper">
       <HintPath>..\packages\Dapper.1.13\lib\net45\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="EHR.CoreShared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\LibEHR\EHR.CoreShared.dll</HintPath>
+    </Reference>
     <Reference Include="Oracle.DataAccess, Version=4.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\LibEHR\Oracle.DataAccess.dll</HintPath>
@@ -105,6 +109,10 @@
     <ProjectReference Include="..\EHR.Domain\EHR.Domain.csproj">
       <Project>{075d9a69-4a94-4161-978d-b3822ebb6dd9}</Project>
       <Name>EHR.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EHR.UI\EHR.UI.csproj">
+      <Project>{861a5584-7574-4021-a0fe-01b1c1642da2}</Project>
+      <Name>EHR.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

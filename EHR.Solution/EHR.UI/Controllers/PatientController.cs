@@ -412,7 +412,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                List<TusDTO> tus = FactoryController.GetController(ControllerEnum.Procedure).GetTus(term);
+                List<TUS> tus = FactoryController.GetController(ControllerEnum.Procedure).GetTus(term);
 
                 return Json(tus, JsonRequestBehavior.AllowGet);
             }

@@ -16,7 +16,7 @@ namespace EHR.Domain.Service.Lucene
             }
         }
 
-        public List<TusDTO> GetTus(string code)
+        public List<TUS> GetTus(string code)
         {
             return GetTusFromLuceneService.GetTus(code);
         }

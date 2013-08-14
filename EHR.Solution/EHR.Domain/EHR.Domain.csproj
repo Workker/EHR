@@ -103,13 +103,9 @@
     <Compile Include="Entities\Hemotransfusion.cs" />
     <Compile Include="Entities\HemotransfusionType.cs" />
     <Compile Include="Entities\HemotransfusionTypeEnum.cs" />
-    <Compile Include="Entities\Hospital.cs" />
     <Compile Include="Entities\Allergy.cs" />
-    <Compile Include="Entities\Interfaces\IAggregateRoot.cs" />
     <Compile Include="Entities\Admission.cs" />
     <Compile Include="Entities\Diagnostic.cs" />
-    <Compile Include="Entities\Cid.cs" />
-    <Compile Include="Entities\Def.cs" />
     <Compile Include="Entities\OrientationOfMultidisciplinaryTeamsMetEnum.cs" />
     <Compile Include="Entities\PresentationTypeEnum.cs" />
     <Compile Include="Entities\Procedure.cs" />
@@ -120,8 +116,6 @@
     <Compile Include="Entities\GenderEnum.cs" />
     <Compile Include="Entities\Specialty.cs" />
     <Compile Include="Entities\Summary.cs" />
-    <Compile Include="Entities\Tus.cs" />
-    <Compile Include="Entities\ValueObject.cs" />
     <Compile Include="Entities\View.cs" />
     <Compile Include="Entities\WayEnum.cs" />
     <Compile Include="Mapping\AdmissionMap.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using EHR.CoreShared;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
@@ -6,7 +7,7 @@ namespace EHR.Domain.Entities
     public class Procedure
     {
         public virtual int Id { get; set; }
-        public virtual Tus Tus { get; set; }
+        public virtual TUS Tus { get; set; }
         public virtual DateTime? Date { get; set; }
 
         public virtual void SetDate(DateTime date)

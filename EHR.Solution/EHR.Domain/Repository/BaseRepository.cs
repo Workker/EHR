@@ -1,5 +1,5 @@
 ﻿using System;
-using EHR.Domain.Entities.Interfaces;
+using EHR.CoreShared.Interfaces;
 using EHR.Domain.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;

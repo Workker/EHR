@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 using EHR.Domain.Util;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace EHR.UI.Models.Mappers
 {
     public static class PatientMapper
     {
-        public static PatientModel MapPatientModelFrom(IPatientDTO patient, string treatmentStr)
+        public static PatientModel MapPatientModelFrom(IPatient patient, string treatmentStr)
         {
-            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Treatments, source => source.Ignore());
+            Mapper.CreateMap<IPatient, PatientModel>().ForMember(dest => dest.Treatments, source => source.Ignore());
 
-            var patientModel = Mapper.Map<IPatientDTO, PatientModel>(patient);
+            var patientModel = Mapper.Map<IPatient, PatientModel>(patient);
             var treatmentModels = new List<TreatmentModel>();
 
             AddHospital(patient, treatmentStr, patientModel);
@@ -29,31 +30,31 @@ namespace EHR.UI.Models.Mappers
             return patientModel;
         }
 
-        public static PatientModel MapPatientModelFrom(IPatientDTO patient)
+        public static PatientModel MapPatientModelFrom(IPatient patient)
         {
-            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Treatments, source => source.Ignore());
+            Mapper.CreateMap<IPatient, PatientModel>().ForMember(dest => dest.Treatments, source => source.Ignore());
 
-            var patientModel = Mapper.Map<IPatientDTO, PatientModel>(patient);
+            var patientModel = Mapper.Map<IPatient, PatientModel>(patient);
 
             return patientModel;
         }
 
-        public static IEnumerable<PatientModel> MapPatientModelFrom(IEnumerable<IPatientDTO> patients)
+        public static IEnumerable<PatientModel> MapPatientModelFrom(IEnumerable<IPatient> patients)
         {
-            Mapper.CreateMap<IPatientDTO, PatientModel>().ForMember(dest => dest.Hospital, source => source.Ignore());
+            Mapper.CreateMap<IPatient, PatientModel>().ForMember(dest => dest.Hospital, source => source.Ignore());
 
             var patientModels = new List<PatientModel>();
 
             foreach (var item in patients)
             {
-                var account = Mapper.Map<IPatientDTO, PatientModel>(item);
+                var account = Mapper.Map<IPatient, PatientModel>(item);
                 account.Hospital = EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), item.Hospital.ToString()));
                 patientModels.Add(account);
             }
             return patientModels;
         }
 
-        private static void AddHospital(IPatientDTO patient, string treatmentStr, PatientModel patientModel)
+        private static void AddHospital(IPatient patient, string treatmentStr, PatientModel patientModel)
         {
             if (patient.Treatments != null && patient.Treatments.Count > 0 && !string.IsNullOrEmpty(treatmentStr) &&
                 patient.Treatments.Count(t => t.Id == treatmentStr) > 0)

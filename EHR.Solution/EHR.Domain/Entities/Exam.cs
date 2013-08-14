@@ -1,5 +1,5 @@
 ﻿using System;
-using EHR.Domain.Entities.Interfaces;
+using EHR.CoreShared.Interfaces;
 
 namespace EHR.Domain.Entities
 {

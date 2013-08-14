@@ -1,8 +1,9 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 
 namespace EHR.Domain.Mapping
 {
-    public class CidMap : ValueObjectMap<Cid>
+    public class CidMap : ValueObjectMap<CID>
     {
         public CidMap()
         {

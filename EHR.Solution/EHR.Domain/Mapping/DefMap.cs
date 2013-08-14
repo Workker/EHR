@@ -1,8 +1,9 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 
 namespace EHR.Domain.Mapping
 {
-    public class DefMap : ValueObjectMap<Def>
+    public class DefMap : ValueObjectMap<DEF>
     {
         public DefMap()
         {

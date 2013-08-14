@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
 using Workker.Framework.Domain;
@@ -19,14 +20,14 @@ namespace EHR.Domain.Repository
         }
 
         [ExceptionLogger]
-        public virtual Tus GetByCode(string code)
+        public virtual TUS GetByCode(string code)
         {
             Assertion.IsTrue(!string.IsNullOrEmpty(code), "Código do TUS inválido").Validate();
 
-            var criterio = Session.CreateCriteria<Tus>();
+            var criterio = Session.CreateCriteria<TUS>();
             criterio.Add(Restrictions.Eq("Code", code));
 
-            var tus = criterio.UniqueResult<Tus>();
+            var tus = criterio.UniqueResult<TUS>();
 
             Assertion.NotNull(tus, "TUS inválido.").Validate();
 

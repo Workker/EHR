@@ -16,7 +16,7 @@ namespace EHR.Domain.Service.Lucene
             }
         }
 
-        public List<CidDTO> GetCid(string code)
+        public List<CID> GetCid(string code)
         {
             return GetCidFromLuceneService.GetCid(code);
         }

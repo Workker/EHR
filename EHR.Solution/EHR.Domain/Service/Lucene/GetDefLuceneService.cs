@@ -16,7 +16,7 @@ namespace EHR.Domain.Service.Lucene
             }
         }
 
-        public List<DefDTO> GetDef(string code)
+        public List<DEF> GetDef(string code)
         {
             return GetDefFromLuceneService.GetDef(code);
         }

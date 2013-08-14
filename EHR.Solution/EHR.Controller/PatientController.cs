@@ -1,4 +1,5 @@
 ﻿using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Domain.Service.Lucene;
@@ -13,7 +14,7 @@ namespace EHR.Controller
     public class PatientController : EhrController
     {
         [ExceptionLogger]
-        public override IPatientDTO GetBy(string cpf)
+        public override IPatient GetBy(string cpf)
         {
             Assertion.IsFalse(string.IsNullOrEmpty(cpf), "CPF não informado.").Validate();
 
@@ -70,7 +71,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<IPatientDTO> GetBy(PatientDTO patientDTO)
+        public override IList<IPatient> GetBy(Patient patientDTO)
         {
             Assertion.NotNull(patientDTO, "Paciente não informado.").Validate();
 
@@ -83,7 +84,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<IPatientDTO> GetBy(PatientDTO patientDTO, List<string> hospitals)
+        public override IList<IPatient> GetBy(Patient patientDTO, List<string> hospitals)
         {
             Assertion.NotNull(patientDTO, "Paciente não informado.").Validate();
             Assertion.NotNull(hospitals, "Lista dos hospitais está nula.").Validate();
@@ -97,7 +98,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override Summary GetSummaryBy(IPatientDTO patient, string treatment, int accountId)
+        public override Summary GetSummaryBy(IPatient patient, string treatment, int accountId)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
             //Assertion.IsFalse(string.IsNullOrEmpty(treatment), "Tratamento não informado.").Validate();
@@ -122,7 +123,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        private static Summary CreateMedicalRecord(IPatientDTO patient, int accountId, string treatment)
+        private static Summary CreateMedicalRecord(IPatient patient, int accountId, string treatment)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
             Assertion.GreaterThan(accountId, 0, "Conta de usuário não informado.").Validate();
@@ -130,7 +131,7 @@ namespace EHR.Controller
 
             var account = ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).GetBy(accountId);
 
-            ITreatmentDTO treatmentDTO = string.IsNullOrEmpty(treatment) ? patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault() : patient.Treatments.FirstOrDefault(t => t.Id == treatment);
+            ITreatment treatmentDTO = string.IsNullOrEmpty(treatment) ? patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault() : patient.Treatments.FirstOrDefault(t => t.Id == treatment);
 
             Assertion.NotNull(treatmentDTO, "Tratamento invalido.").Validate();
             
@@ -151,7 +152,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        private static Summary GetSummary(IPatientDTO patient, string treatment, Summaries summaries)
+        private static Summary GetSummary(IPatient patient, string treatment, Summaries summaries)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
             //Assertion.IsFalse(string.IsNullOrEmpty(treatment), "Tratamento não informado.").Validate();

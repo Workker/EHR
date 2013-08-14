@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using EHR.Domain.Entities;
+using EHR.CoreShared;
 
 namespace EHR.UI.Models.Mappers
 {
     public static class CidMapper
     {
-        public static CidModel MapCidModelFrom(Cid cid)
+        public static CidModel MapCidModelFrom(CID cid)
         {
-            Mapper.CreateMap<Cid, CidModel>();
-            return Mapper.Map<Cid, CidModel>(cid);
+            Mapper.CreateMap<CID, CidModel>();
+            return Mapper.Map<CID, CidModel>(cid);
         }
     }
 }

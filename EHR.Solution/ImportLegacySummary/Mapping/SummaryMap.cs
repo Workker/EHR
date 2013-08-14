@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
+using System;
+using System.Collections.Generic;
 using Legacy = ImportLegacySummary.DTO;
 
 namespace ImportLegacySummary.Mapping
@@ -30,7 +28,7 @@ namespace ImportLegacySummary.Mapping
                 .AfterMap(AddHemotransfusions);
         }
 
-        private void AddDiagnostics(Legacy.Summary legacySummary, Summary newSummary) 
+        private void AddDiagnostics(Legacy.Summary legacySummary, Summary newSummary)
         {
             var diagnosticTypesRepository = new Types<DiagnosticType>();
 
@@ -40,43 +38,43 @@ namespace ImportLegacySummary.Mapping
                 {
                     short diagnosticTypeId = Convert.ToInt16(legacyDiagnostic.Type);
                     DiagnosticType diagnosticType = diagnosticTypesRepository.Get(diagnosticTypeId);
-                    Cid cid = new Cid { Code = legacyDiagnostic.Cid };
+                    CID cid = new CID { Code = legacyDiagnostic.Cid };
 
                     newSummary.CreateDiagnostic(diagnosticType, cid);
                 }
             }
         }
 
-        private void AddProcedures(Legacy.Summary legacySummary, Summary newSummary) 
+        private void AddProcedures(Legacy.Summary legacySummary, Summary newSummary)
         {
             var tusRepository = new TusRepository();
 
             foreach (var legacyProcedure in legacySummary.Procedures)
             {
-                if (legacyProcedure != null 
+                if (legacyProcedure != null
                     && legacyProcedure.DateProc.HasValue
                     && !String.IsNullOrWhiteSpace(legacyProcedure.TusCode))
                 {
                     DateTime procDate = legacyProcedure.DateProc.Value;
-                    Tus tus = tusRepository.GetByCode(legacyProcedure.TusCode);
+                    TUS tus = tusRepository.GetByCode(legacyProcedure.TusCode);
 
                     newSummary.CreateProcedure(procDate.Month, procDate.Day, procDate.Year, tus);
                 }
             }
         }
 
-        private void AddMedications(Legacy.Summary legacySummary, Summary newSummary) 
+        private void AddMedications(Legacy.Summary legacySummary, Summary newSummary)
         {
             foreach (var legacyMedication in legacySummary.Medications)
             {
-                if (legacyMedication != null) 
+                if (legacyMedication != null)
                 {
                     //newSummary.CreateMedication();
                 }
             }
         }
 
-        private void AddHemotransfusions(Legacy.Summary legacySummary, Summary newSummary) 
+        private void AddHemotransfusions(Legacy.Summary legacySummary, Summary newSummary)
         {
             var hemotransfusionTypesRepository = new Types<HemotransfusionType>();
 

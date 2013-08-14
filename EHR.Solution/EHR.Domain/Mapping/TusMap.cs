@@ -1,8 +1,9 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+
 
 namespace EHR.Domain.Mapping
 {
-    public class TusMap : ValueObjectMap<Tus>
+    public class TusMap : ValueObjectMap<TUS>
     {
         public TusMap()
         {

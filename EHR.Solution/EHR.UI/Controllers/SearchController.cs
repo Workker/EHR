@@ -1,9 +1,10 @@
 ﻿using EHR.Controller;
 using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
+using EHR.UI.Models.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace EHR.UI.Controllers
             try
             {
                 Session["Date"] = null;
-                var patient = new PatientDTO { Name = query };
+                var patient = new Patient { Name = query };
                 var patientController = FactoryController.GetController(ControllerEnum.Patient);
                 ViewBag.Patients = patientController.GetBy(patient, new List<string>()).Take(10);
                 Session["Name"] = query;
@@ -70,7 +71,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                var patient = new PatientDTO { Name = query };
+                var patient = new Patient { Name = query };
                 var patientController = FactoryController.GetController(ControllerEnum.Patient);
                 var patients = PatientMapper.MapPatientModelFrom(patientController.GetBy(patient));
                 return BuildResultsOfSimpleSearchOfPatients(patients);
@@ -102,23 +103,23 @@ namespace EHR.UI.Controllers
             return result + "]}";
         }
 
-        private IEnumerable<IPatientDTO> GetTreatment(bool skip)
+        private IEnumerable<IPatient> GetTreatment(bool skip)
         {
             ManagerSession(skip);
             var patient = FillPatients();
             return GetPatients(patient, skip);
         }
 
-        private PatientDTO FillPatients()
+        private Patient FillPatients()
         {
-            var patient = new PatientDTO { Name = Session["Name"].ToString() };
+            var patient = new Patient { Name = Session["Name"].ToString() };
 
             if (Session["Date"] != null && !string.IsNullOrEmpty(Session["Date"].ToString()) && (string)Session["Date"] != "-1/-1/-1")
                 patient.DateBirthday = Convert.ToDateTime(Session["Date"]);
             return patient;
         }
 
-        private IEnumerable<IPatientDTO> GetPatients(PatientDTO patient, bool skip)
+        private IEnumerable<IPatient> GetPatients(Patient patient, bool skip)
         {
             var patientController = FactoryController.GetController(ControllerEnum.Patient);
 

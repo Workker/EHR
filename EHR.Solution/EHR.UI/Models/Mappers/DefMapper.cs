@@ -7,7 +7,7 @@ namespace EHR.UI.Models.Mappers
 {
     public static class DefMapper
     {
-        public static List<DefModel> MapDefModelsFrom(IList<DefDTO> defs)
+        public static List<DefModel> MapDefModelsFrom(IList<DEF> defs)
         {
             var defModels = new List<DefModel>();
             foreach (var def in defs)
@@ -19,16 +19,16 @@ namespace EHR.UI.Models.Mappers
             return defModels;
         }
 
-        public static DefModel MapDefModelFrom(DefDTO def)
-        {
-            Mapper.CreateMap<DefDTO, DefModel>();
-            return Mapper.Map<DefDTO, DefModel>(def);
-        }
+        //public static DefModel MapDefModelFrom(DEF def)
+        //{
+        //    Mapper.CreateMap<DEF, DefModel>();
+        //    return Mapper.Map<DEF, DefModel>(def);
+        //}
 
-        public static DefModel MapDefModelFrom(Def def)
+        public static DefModel MapDefModelFrom(DEF def)
         {
-            Mapper.CreateMap<Def, DefModel>();
-            var defModel = Mapper.Map<Def, DefModel>(def);
+            Mapper.CreateMap<DEF, DefModel>();
+            var defModel = Mapper.Map<DEF, DefModel>(def);
             defModel.Code = def.Id;
             return defModel;
         }

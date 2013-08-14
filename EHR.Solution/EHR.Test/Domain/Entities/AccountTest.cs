@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 using NUnit.Framework;
 using System;
 using System.Diagnostics.Contracts;

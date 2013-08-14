@@ -1,6 +1,6 @@
-﻿using System;
-using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
 using NHibernate.Criterion;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Workker.Framework.Domain;

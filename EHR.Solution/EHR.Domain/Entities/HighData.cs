@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EHR.Domain.Entities.Interfaces;
+using EHR.CoreShared.Interfaces;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities

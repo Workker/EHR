@@ -41,7 +41,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override List<CidDTO> GetCids(string term)
+        public override List<CID> GetCids(string term)
         {
             return GetCidLucene.GetCid(term);
         }

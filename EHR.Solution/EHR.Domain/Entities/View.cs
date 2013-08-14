@@ -1,4 +1,4 @@
-﻿using EHR.Domain.Entities.Interfaces;
+﻿using EHR.CoreShared.Interfaces;
 using System;
 
 namespace EHR.Domain.Entities

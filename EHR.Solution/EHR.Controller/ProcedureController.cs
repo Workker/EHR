@@ -30,7 +30,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override List<TusDTO> GetTus(string term)
+        public override List<TUS> GetTus(string term)
         {
             //todo: do
 

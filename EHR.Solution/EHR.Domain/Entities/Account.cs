@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities.Interfaces;
+﻿using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 using EHR.Domain.Util;
 using System;
 using System.Collections.Generic;

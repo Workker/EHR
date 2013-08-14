@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
 using Workker.Framework.Domain;
@@ -18,14 +19,14 @@ namespace EHR.Domain.Repository
         }
 
         [ExceptionLogger]
-        public virtual Cid GetByCode(string code)
+        public virtual CID GetByCode(string code)
         {
             Assertion.IsTrue(!string.IsNullOrEmpty(code), "Código não informado.").Validate();
 
-            var criterio = Session.CreateCriteria<Cid>();
+            var criterio = Session.CreateCriteria<CID>();
             criterio.Add(Restrictions.Eq("Code", code));
 
-            var cid = criterio.UniqueResult<Cid>();
+            var cid = criterio.UniqueResult<CID>();
 
             Assertion.NotNull(cid, "Cid inválido.").Validate();
 

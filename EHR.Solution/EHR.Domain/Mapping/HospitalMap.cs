@@ -1,4 +1,4 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
 
 namespace EHR.Domain.Mapping
 {

@@ -1,5 +1,5 @@
 ﻿using EHR.CoreShared;
-using EHR.Domain.Entities.Interfaces;
+using EHR.CoreShared.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +22,8 @@ namespace EHR.Domain.Entities
         public virtual Account Account { get; set; }
         public virtual string Mdr { get; set; }
         public virtual HighData HighData { get; set; }
-        public virtual IPatientDTO Patient { get; set; }
-        public virtual ITreatmentDTO Treatment { get; set; }
+        public virtual IPatient Patient { get; set; }
+        public virtual ITreatment Treatment { get; set; }
 
         private IList<Allergy> _allergies;
         public virtual IList<Allergy> Allergies
@@ -80,7 +80,7 @@ namespace EHR.Domain.Entities
 
         #region Procedure
 
-        public virtual void CreateProcedure(int month, int day, int year, Tus tus)
+        public virtual void CreateProcedure(int month, int day, int year, TUS tus)
         {
             Assertion.GreaterThan(month, 0, "Mês inválido.").Validate();
             Assertion.GreaterThan(day, 0, "Dia inválido.").Validate();
@@ -145,7 +145,7 @@ namespace EHR.Domain.Entities
 
         #region Diagnostic
 
-        public virtual void CreateDiagnostic(DiagnosticType diagnosticType, Cid cid)
+        public virtual void CreateDiagnostic(DiagnosticType diagnosticType, CID cid)
         {
             Assertion.NotNull(diagnosticType, "Tipo do diagnostico não informado.").Validate();
             Assertion.NotNull(cid, "Cid não informado").Validate();
@@ -205,7 +205,7 @@ namespace EHR.Domain.Entities
 
         #region Medication
 
-        public virtual void CreateMedication(MedicationTypeEnum type, Def def, string presentation, short presentationType,
+        public virtual void CreateMedication(MedicationTypeEnum type, DEF def, string presentation, short presentationType,
             string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
         {
             Assertion.NotNull(def, "Medicamento não informado.");

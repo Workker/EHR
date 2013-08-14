@@ -1,4 +1,5 @@
 ﻿using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using System;
@@ -18,8 +19,8 @@ namespace EHR.Controller
             }
         }
 
-        public virtual List<TusDTO> GetTus(string term) { return null; }
-        public virtual List<CidDTO> GetCids(string term) { return null; }
+        public virtual List<TUS> GetTus(string term) { return null; }
+        public virtual List<CID> GetCids(string term) { return null; }
 
         public virtual void SaveObservation(int summaryId, string observation) { }
 
@@ -27,10 +28,10 @@ namespace EHR.Controller
 
         #region Patient
 
-        public virtual IPatientDTO GetBy(string cpf) { return null; }
-        public virtual IList<IPatientDTO> GetBy(PatientDTO dto) { return null; }
-        public virtual IList<IPatientDTO> GetBy(PatientDTO dto, List<string> hospital) { return null; }
-        public virtual Summary GetSummaryBy(IPatientDTO patient, string treatment, int idAccount) { return null; }
+        public virtual IPatient GetBy(string cpf) { return null; }
+        public virtual IList<IPatient> GetBy(Patient dto) { return null; }
+        public virtual IList<IPatient> GetBy(Patient dto, List<string> hospital) { return null; }
+        public virtual Summary GetSummaryBy(IPatient patient, string treatment, int idAccount) { return null; }
         public virtual IList<Allergy> GetAllergiesBy(string cpf) { return null; }
         public virtual IList<Medication> GetMedicationsOfUseAfterInternationBy(string cpf) { return null; }
 
@@ -46,7 +47,7 @@ namespace EHR.Controller
 
         #region Medication
 
-        public virtual List<DefDTO> GetDef(string term) { return null; }
+        public virtual List<DEF> GetDef(string term) { return null; }
         public virtual void SaveMedication(int idSummary, short medicationType, short def, string presentation,
             short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration) { }
         public virtual void RemoveMedication(int idSummary, int id) { }
