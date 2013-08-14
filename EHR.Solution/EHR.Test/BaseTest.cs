@@ -241,6 +241,7 @@ namespace EHR.Test
                               };
 
             account.ToEnterCRM("123");
+            account.ToEnterPassword("123");
             account.ToEnterFirstName("Thiago");
             account.ToEnterLastName("Oliveira");
             account.ToEnterGender(GenderEnum.Male);
