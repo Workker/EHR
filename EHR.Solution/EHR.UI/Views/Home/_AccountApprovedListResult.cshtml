@@ -9,7 +9,7 @@
             <div class="clearfix _8m _8u" style="margin-bottom: 10px;">
                 <div class="pls">
                     <div class="fsm fwn fcg">
-                        <h2 class="text">@account.FirstName &nbsp; @account.LastName</h2>
+                        <h2 class="text">@account.FirstName &nbsp;@account.LastName</h2>
                         <div class="fbProfileByline searchResultPersonByline">
                             <span class="fbProfileBylineFragment">
                                 <label>CRM:&nbsp;</label>@account.Crm
@@ -17,7 +17,7 @@
                                    <label>E-mail:&nbsp;</label>@account.Email
                             </span>
                             <span class="fbProfileBylineFragment">
-                                <label>Hospital(is):&nbsp;</label>
+                                <label>Hospital:&nbsp;</label>
                                 @for (int i = 1; i <= account.Hospitals.Count; i++)
                                 {
                                     @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospitals[i - 1].ToString(CultureInfo.InvariantCulture))) + (account.Hospitals.Count == i ? "" : ",  "))
