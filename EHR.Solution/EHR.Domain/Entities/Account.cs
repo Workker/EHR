@@ -10,7 +10,7 @@ namespace EHR.Domain.Entities
     {
         #region Fields
 
-        private IList<Hospital> hospitals;
+        private IList<Hospital> _hospitals;
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace EHR.Domain.Entities
         public virtual DateTime? Birthday { get; protected set; }
         public virtual IList<Hospital> Hospitals
         {
-            get { return hospitals ?? (hospitals = new List<Hospital>()); }
+            get { return _hospitals ?? (_hospitals = new List<Hospital>()); }
         }
         public virtual bool Approved { get; set; }
         public virtual bool Refused { get; set; }
