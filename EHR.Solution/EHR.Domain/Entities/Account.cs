@@ -17,13 +17,13 @@ namespace EHR.Domain.Entities
         #region Properties
 
         public virtual int Id { get; set; }
-        public virtual string CRM { get; private set; }
-        public virtual string FirstName { get; private set; }
-        public virtual string LastName { get; private set; }
-        public virtual GenderEnum Gender { get; private set; }
-        public virtual string Email { get; private set; }
-        public virtual string Password { get; private set; }
-        public virtual DateTime? Birthday { get; private set; }
+        public virtual string CRM { get; protected set; }
+        public virtual string FirstName { get; protected set; }
+        public virtual string LastName { get; protected set; }
+        public virtual GenderEnum Gender { get; protected set; }
+        public virtual string Email { get; protected set; }
+        public virtual string Password { get; protected set; }
+        public virtual DateTime? Birthday { get; protected set; }
         public virtual IList<Hospital> Hospitals
         {
             get { return hospitals ?? (hospitals = new List<Hospital>()); }
@@ -34,7 +34,7 @@ namespace EHR.Domain.Entities
 
         #endregion
 
-        public void ToEnterCRM(string crm)
+        public virtual void ToEnterCRM(string crm)
         {
             #region Precondition
 
@@ -45,7 +45,7 @@ namespace EHR.Domain.Entities
             CRM = crm;
         }
 
-        public void ToEnterFirstName(string firstName)
+        public virtual void ToEnterFirstName(string firstName)
         {
             #region Precondition
 
@@ -56,7 +56,7 @@ namespace EHR.Domain.Entities
             FirstName = firstName;
         }
 
-        public void ToEnterLastName(string lastName)
+        public virtual void ToEnterLastName(string lastName)
         {
             #region Precondition
 
@@ -67,13 +67,13 @@ namespace EHR.Domain.Entities
             LastName = lastName;
         }
 
-        public void ToEnterGender(GenderEnum gender)
+        public virtual void ToEnterGender(GenderEnum gender)
         {
             //TODO: validar valor do enum informado
             Gender = gender;
         }
 
-        public void ToEnterEmail(string email)
+        public virtual void ToEnterEmail(string email)
         {
             #region Precondition
 
@@ -84,7 +84,7 @@ namespace EHR.Domain.Entities
             Email = email;
         }
 
-        public void ToEnterPassword(string password)
+        public virtual void ToEnterPassword(string password)
         {
             #region Precondition
 
@@ -95,7 +95,7 @@ namespace EHR.Domain.Entities
             Password = CryptographyUtil.EncryptToSha512(password);
         }
 
-        public void ToEnterBirthday(DateTime? birthday)
+        public virtual void ToEnterBirthday(DateTime? birthday)
         {
             #region Precondition
 
@@ -107,7 +107,7 @@ namespace EHR.Domain.Entities
             Birthday = birthday;
         }
 
-        public void AddHospital(Hospital hospital)
+        public virtual void AddHospital(Hospital hospital)
         {
             #region Precondition
 

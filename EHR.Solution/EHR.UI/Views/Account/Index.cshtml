@@ -115,7 +115,7 @@
                                                         }
                                                 
                                                         <td style="padding: 3px 3px 3px 3px;">
-                                                            <input name="hospitals" type="checkbox"  
+                                                            <input name="hospitals" type="radio"  
                                                                 value="@hospitals[count]"/>
                                                             <label style="font-size: 14px; color: #333;">@(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospitals[count].ToString(CultureInfo.InvariantCulture))) + "  ")</label><br />
                                                         </td>
