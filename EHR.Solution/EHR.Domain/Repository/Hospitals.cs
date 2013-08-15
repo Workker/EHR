@@ -26,6 +26,7 @@ namespace EHR.Domain.Repository
             return hospitalList;
         }
 
+        [ExceptionLogger]
         public virtual void Save(IList<Hospital> hospitals)
         {
             Assertion.GreaterThan(hospitals.Count, 0, "Lista de hospitais vazia.").Validate();
@@ -45,6 +46,12 @@ namespace EHR.Domain.Repository
                 transaction.Rollback();
                 throw;
             }
+        }
+
+        [ExceptionLogger]
+        public IList<Hospital> GetAll()
+        {
+            return base.All<Hospital>();
         }
     }
 }

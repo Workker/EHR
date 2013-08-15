@@ -1,4 +1,4 @@
-﻿using EHRIntegracao.Domain.Domain;
+﻿using EHR.CoreShared;
 using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping

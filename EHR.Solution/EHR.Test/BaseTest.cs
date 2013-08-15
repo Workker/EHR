@@ -68,41 +68,29 @@ namespace EHR.Test
 
         public void insert_hospitals_in_database()
         {
-            var hospitals = new Hospitals();
-            var hospitalList = new List<Hospital>();
+            var repository = new Hospitals();
+            var hospitalList = new List<Hospital>
+                                   {
+                                       new Hospital{Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png"},
+                                       new Hospital{Name = "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png"},
+                                       new Hospital{Name = "Bangu", Description = "Hospital", URLImage = "../../Images/Hospitals/bangu.png"},
+                                       new Hospital{Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png"},
+                                       new Hospital{Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png"},
+                                       new Hospital{Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png"},
+                                       new Hospital{Name = "Esperança", Description = "Hospital", URLImage = "../../Images/Hospitals/esperanca.png"},
+                                       new Hospital{Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png"},
+                                       new Hospital{Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png"},
+                                       new Hospital{Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png"},
+                                       new Hospital{Name = "Norte D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/nortedor.png"},
+                                       new Hospital{Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png"},
+                                       new Hospital{Name = "Quinta D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/quintador.png"},
+                                       new Hospital{Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png"},
+                                       new Hospital{Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png"},
+                                       new Hospital{Name = "Rios D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/riosdor.png"},
+                                       new Hospital{Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png"}
+                                   };
 
-            foreach (var id in Enum.GetValues(typeof(DbEnum)).Cast<short>().ToList())
-            {
-                if (id != (short)DbEnum.sumario)
-                {
-                    var hospital = new Hospital()
-                    {
-                        Description = "Hospital",
-                        Name = EnumUtil.GetDescriptionFromEnumValue(
-                            (DbEnum)Enum.Parse(typeof(DbEnum), id.ToString(CultureInfo.InvariantCulture))) + "  "
-                    };
-
-                    if (id == (short)DbEnum.QuintaDor)
-                    {
-                        hospital.URLImage = "../../Images/Hospitals/quintador.png";
-                    }
-                    else if (id == (short)DbEnum.Pronto)
-                    {
-                        hospital.URLImage = "../../Images/Hospitals/prontolinda.png";
-                    }
-                    else if (id == (short)DbEnum.Rios)
-                    {
-                        hospital.URLImage = "../../Images/Hospitals/riosdor.png";
-                    }
-                    else if (id == (short)DbEnum.Esperanca)
-                    {
-                        hospital.URLImage = "../../Images/Hospitals/esperanca.png";
-                    }
-
-                    hospitalList.Add(hospital);
-                }
-            }
-            hospitals.Save(hospitalList);
+            repository.Save(hospitalList);
         }
 
         public void insert_allergies_types()

@@ -498,6 +498,10 @@
       <Project>{075d9a69-4a94-4161-978d-b3822ebb6dd9}</Project>
       <Name>EHR.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EHR.Infrastructure\EHR.Infrastructure.csproj">
+      <Project>{7d33b377-c5ba-4a95-92e8-0dde91080ad7}</Project>
+      <Name>EHR.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -2,6 +2,7 @@
 @using EHR.CoreShared
 @using EHR.Domain.Entities
 @using EHR.Domain.Util
+@using EHR.Infrastructure.Service.Cache
 @{
     ViewBag.Title = "Rede D'or São Luiz - Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -90,7 +91,7 @@
                                             {
                                                 <div class="uiInputLabel clearfix inlineBlock">
                                                     <input type="radio" name="Gender" id="gender"  @if (value == 1)
-                                                                                       { 
+                                                                                                   { 
                                                                                                         @:required 
                                                                                                     }  value="@value" class=" uiInputLabelRadio">
                                                     <label for="gender" class="gender_label">@(EnumUtil.GetDescriptionFromEnumValue((GenderEnum)Enum.Parse(typeof(GenderEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")</label>
@@ -101,8 +102,8 @@
                                         <div class="mbm">
                                             @{
                                                         
-                                                var hospitals = Enum.GetValues(typeof(DbEnum)).Cast<short>().ToList();
-                                                hospitals.Remove((short)DbEnum.sumario);
+                                                var hospitals = CacheManagementService.GetBy<IList<Hospital>>("Hospitals");
+                                                        //hospitals.Remove((short)DbEnum.sumario);
                                             }
                                             <table style="margin-left: -10px;">
                                                 <tr>
@@ -116,8 +117,8 @@
                                                 
                                                         <td style="padding: 3px 3px 3px 3px;">
                                                             <input name="hospitals" type="radio"  
-                                                                value="@hospitals[count]"/>
-                                                            <label style="font-size: 14px; color: #333;">@(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospitals[count].ToString(CultureInfo.InvariantCulture))) + "  ")</label><br />
+                                                                value="@hospitals[count].Id"/>
+                                                            <label style="font-size: 14px; color: #333;">@(@hospitals[count].Name + "  ")</label><br />
                                                         </td>
                                                     }
                                                 </tr>
