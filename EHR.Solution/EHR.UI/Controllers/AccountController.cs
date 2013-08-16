@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using EHR.Controller;
+﻿using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Infrastructure.Service.Cache;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
+using EHR.UI.Models.Mappers;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
