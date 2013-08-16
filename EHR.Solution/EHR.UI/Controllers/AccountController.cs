@@ -1,4 +1,7 @@
-﻿using EHR.Controller;
+﻿using System.Collections.Generic;
+using EHR.Controller;
+using EHR.CoreShared;
+using EHR.Infrastructure.Service.Cache;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
@@ -12,6 +15,8 @@ namespace EHR.UI.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Hospitals = CacheManagementService.GetBy<IList<Hospital>>("Hospitals");
+
             return View();
         }
 

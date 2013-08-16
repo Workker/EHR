@@ -101,9 +101,7 @@
                                         <div class="mtm mbs birthday_label">Hospitais:</div>
                                         <div class="mbm">
                                             @{
-                                                        
-                                                var hospitals = CacheManagementService.GetBy<IList<Hospital>>("Hospitals");
-                                                        //hospitals.Remove((short)DbEnum.sumario);
+                                                var hospitals = ViewBag.hospitals;
                                             }
                                             <table style="margin-left: -10px;">
                                                 <tr>
