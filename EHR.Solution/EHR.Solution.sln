@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.UI", "EHR.UI\EHR.UI.csproj", "{861A5584-7574-4021-A0FE-01B1C1642DA2}"
 EndProject
@@ -12,6 +13,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Test", "EHR.Test\EHR.Test.csproj", "{55F94D7F-C923-40E8-9710-2B4D351CCCBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Domain", "EHR.Domain\EHR.Domain.csproj", "{075D9A69-4A94-4161-978D-B3822EBB6DD9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7D33B377-C5BA-4A95-92E8-0DDE91080AD7} = {7D33B377-C5BA-4A95-92E8-0DDE91080AD7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Controller", "EHR.Controller\EHR.Controller.csproj", "{75AF42B0-2A2A-4452-9500-2638183C812A}"
 EndProject

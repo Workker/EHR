@@ -12,13 +12,14 @@ namespace EHR.Controller
     public class AccountController : EhrController
     {
         [ExceptionLogger]
-        public override void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
+        public override void Register(string firstName, string lastName, short gender, string crm, string email,
+                                      string password, DateTime birthday, IList<short> hospitals)
         {
             #region Precondition
 
             Assertion.IsFalse(string.IsNullOrEmpty(firstName), "Primeiro nome não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(lastName), "Ultimo nome não informado.").Validate();
-            Assertion.GreaterThan((int)gender, 0, "Género não informado.").Validate();
+            Assertion.GreaterThan((int) gender, 0, "Género não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(crm), "CRM não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada.").Validate();
@@ -27,11 +28,12 @@ namespace EHR.Controller
 
             #endregion
 
-            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+            var accounts = (Accounts) FactoryRepository.GetRepository(RepositoryEnum.Accounts);
 
             Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
 
-            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitals);
+            var account = CreateAccount(firstName, lastName, (GenderEnum) gender, crm, email, password, birthday,
+                                        hospitals);
 
             accounts.Save(account);
 
@@ -52,7 +54,7 @@ namespace EHR.Controller
 
             #endregion
 
-            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+            var accounts = (Accounts) FactoryRepository.GetRepository(RepositoryEnum.Accounts);
 
             var passwordEncrypted = CryptographyUtil.EncryptToSha512(password);
 
@@ -70,7 +72,7 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override IList<Account> GetAllNotApproved()
         {
-            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+            var accounts = (Accounts) FactoryRepository.GetRepository(RepositoryEnum.Accounts);
 
             var accountList = accounts.GetAllNotApproved();
 
@@ -94,7 +96,8 @@ namespace EHR.Controller
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
 
-            var summaryList = ((Summaries)FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetLastSumariesrealizedby(account);
+            var summaryList =
+                ((Summaries) FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetLastSumariesrealizedby(account);
 
             var service = new GetPatientByHospitalService();
 
@@ -118,7 +121,7 @@ namespace EHR.Controller
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
+            ((Accounts) FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
 
             Assertion.IsTrue(account.Approved, "Conta não aprovada.").Validate();
         }
@@ -129,7 +132,7 @@ namespace EHR.Controller
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Refuse(account);
+            ((Accounts) FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Refuse(account);
 
             Assertion.IsTrue(account.Refused, "A conta não pode ser recusada.").Validate();
         }
@@ -148,11 +151,12 @@ namespace EHR.Controller
 
             account.ToEnterPassword(password);
 
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Save(account);
+            ((Accounts) FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Save(account);
 
             #region Poscondition
 
-            Assertion.Equals(account.Password, CryptographyUtil.EncryptToSha512(password), "Senha não alterada.").Validate();
+            Assertion.Equals(account.Password, CryptographyUtil.EncryptToSha512(password), "Senha não alterada.").
+                Validate();
 
             #endregion
         }
@@ -166,7 +170,7 @@ namespace EHR.Controller
 
             #endregion
 
-            var hospitalRepository = (Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals);
+            var hospitalRepository = (Hospitals) FactoryRepository.GetRepository(RepositoryEnum.Hospitals);
 
             var hospitalsList = hospitalRepository.GetBy(hospitals);
 
@@ -179,7 +183,8 @@ namespace EHR.Controller
             return hospitalsList;
         }
 
-        private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
+        private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email,
+                                      string password, DateTime birthday, IList<short> hospitals)
         {
             var account = new Account(false);
             account.ToApprove(false);
@@ -201,4 +206,5 @@ namespace EHR.Controller
 
             return account;
         }
+    }
 }

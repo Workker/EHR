@@ -2,8 +2,7 @@
 using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
-using EHR.Domain.Util;
-using EHR.Infrastructure.Service.Cache;
+using EHR.Infrastructure.Util;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Models.Mappers;

@@ -110,11 +110,8 @@ namespace InitializeDatabaseAndCacheData
 
         public void insert_admin_account()
         {
-            var account = new Account()
-            {
-                Administrator = true,
-                Approved = true,
-            };
+            var account = new Account(true);
+            account.ToApprove(true);
 
             account.ToEnterCRM("123");
             account.ToEnterPassword("123");
@@ -241,35 +238,35 @@ namespace InitializeDatabaseAndCacheData
 
         public void insert_twenty_accounts()
         {
-            var accountList = new List<Account>();
-            for (var i = 0; i <= 20; i++)
-            {
-                var account = new Account()
-                {
-                    Administrator = false,
-                    Approved = false,
-                    Refused = false,
-                };
+            //var accountList = new List<Account>();
+            //for (var i = 0; i <= 20; i++)
+            //{
+            //    var account = new Account()
+            //    {
+            //        Administrator = false,
+            //        Approved = false,
+            //        Refused = false,
+            //    };
 
-                account.ToEnterCRM("123");
-                account.ToEnterFirstName("123");
-                account.ToEnterLastName("Oliveira");
-                account.ToEnterGender(GenderEnum.Male);
-                account.ToEnterEmail(i + "@workker.com.br");
-                account.ToEnterBirthday(new DateTime(1989, 7, 17));
+            //    account.ToEnterCRM("123");
+            //    account.ToEnterFirstName("123");
+            //    account.ToEnterLastName("Oliveira");
+            //    account.ToEnterGender(GenderEnum.Male);
+            //    account.ToEnterEmail(i + "@workker.com.br");
+            //    account.ToEnterBirthday(new DateTime(1989, 7, 17));
 
-                var hospitals = new Hospitals().All<Hospital>();
+            //    var hospitals = new Hospitals().All<Hospital>();
 
-                foreach (var hospital in hospitals)
-                {
-                    account.AddHospital(hospital);
-                }
+            //    foreach (var hospital in hospitals)
+            //    {
+            //        account.AddHospital(hospital);
+            //    }
 
-                accountList.Add(account);
-            }
+            //    accountList.Add(account);
+            //}
 
-            var accounts = new Accounts();
-            accounts.SaveList(accountList);
+            //var accounts = new Accounts();
+            //accounts.SaveList(accountList);
         }
 
         public void insert_hemotransfusion_types()
