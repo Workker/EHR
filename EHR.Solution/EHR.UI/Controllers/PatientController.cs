@@ -2,7 +2,8 @@
 using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
-using EHR.Infrastructure.Util;
+using EHR.Domain.Util;
+using EHR.Infrastructure.Service.Cache;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Models.Mappers;
@@ -110,6 +111,7 @@ namespace EHR.UI.Controllers
                 ViewBag.Allergies = summary.Allergies;
                 ViewBag.Diagnostics = summary.Diagnostics;
                 ViewBag.Medications = summary.Medications;
+
                 return PartialView("_GeneralData", summary);
             }
             catch (Exception ex)

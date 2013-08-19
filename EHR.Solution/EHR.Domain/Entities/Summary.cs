@@ -21,7 +21,7 @@ namespace EHR.Domain.Entities
         public virtual Admission Admission { get; set; }
         public virtual Account Account { get; set; }
         public virtual string Mdr { get; set; }
-        public virtual HighData HighData { get; set; }
+        public virtual DischargeData HighData { get; set; }
         public virtual IPatient Patient { get; set; }
         public virtual ITreatment Treatment { get; set; }
 

@@ -142,7 +142,7 @@ namespace EHR.Controller
                                   Treatment = treatmentDTO,
                                   CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
                                   Account = account,
-                                  HighData = new HighData(),
+                                  HighData = new DischargeData(),
                                   Hospital = treatmentDTO.Hospital
                               };
 

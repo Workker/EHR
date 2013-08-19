@@ -3,8 +3,7 @@
 namespace EHR.Domain.Entities
 {
     [ProtoContract]
-    public class AllergyType : ValueObject
+    public class ConditionOfThePatientAtDischarge : ValueObject
     {
-
     }
 }

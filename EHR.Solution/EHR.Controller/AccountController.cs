@@ -11,29 +11,6 @@ namespace EHR.Controller
 {
     public class AccountController : EhrController
     {
-        private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
-        {
-            var account = new Account(false);
-            account.ToApprove(false);
-            account.ToRefuse(false);
-            account.ToEnterCRM(crm);
-            account.ToEnterFirstName(firstName);
-            account.ToEnterLastName(lastName);
-            account.ToEnterGender(gender);
-            account.ToEnterEmail(email);
-            account.ToEnterPassword(password);
-            account.ToEnterBirthday(birthday);
-
-            var hospitalsList = GetHospitalsFromRepository(hospitals);
-
-            foreach (var hospital in hospitalsList)
-            {
-                account.AddHospital(hospital);
-            }
-
-            return account;
-        }
-
         [ExceptionLogger]
         public override void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
         {
@@ -201,5 +178,27 @@ namespace EHR.Controller
 
             return hospitalsList;
         }
-    }
+
+        private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
+        {
+            var account = new Account(false);
+            account.ToApprove(false);
+            account.ToRefuse(false);
+            account.ToEnterCRM(crm);
+            account.ToEnterFirstName(firstName);
+            account.ToEnterLastName(lastName);
+            account.ToEnterGender(gender);
+            account.ToEnterEmail(email);
+            account.ToEnterPassword(password);
+            account.ToEnterBirthday(birthday);
+
+            var hospitalsList = GetHospitalsFromRepository(hospitals);
+
+            foreach (var hospital in hospitalsList)
+            {
+                account.AddHospital(hospital);
+            }
+
+            return account;
+        }
 }

@@ -1,4 +1,5 @@
 ﻿using EHR.Domain.Entities;
+using ProtoBuf;
 
 namespace EHR.Domain.Mapping
 {

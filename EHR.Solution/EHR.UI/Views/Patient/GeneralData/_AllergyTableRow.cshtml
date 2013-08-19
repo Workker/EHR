@@ -1,6 +1,5 @@
-﻿@using System.Globalization
-@using EHR.Domain.Entities
-@using EHR.Domain.Util
+﻿@using EHR.Domain.Entities
+@using EHR.Infrastructure.Service.Cache
 @using EHR.UI.Models
 
 @foreach (AllergyModel allergy in ViewBag.Allergies)
@@ -10,9 +9,13 @@
         <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteAllergy/?id=@allergy.Id", null)'><span>X</span></a>
         <span class="lastColumn"></span>
         <span class="middleColumn">
-            @for (int i = 1; i <= @allergy.Types.Count; i++)
-            {
-                @(EnumUtil.GetDescriptionFromEnumValue((AllergyTypeEnum)Enum.Parse(typeof(AllergyTypeEnum), @allergy.Types[i - 1].ToString(CultureInfo.InvariantCulture))) + (@allergy.Types.Count == i ? "" : ",  "))
+            @{
+                var allergyTypes = CacheManagementService.GetBy<IList<AllergyType>>("AllergyTypes");
+                
+                for (var i = 1; i <= @allergy.Types.Count; i++)
+                {
+                    @(allergyTypes.FirstOrDefault(type => type.Id == @allergy.Types[i - 1]).Description + (@allergy.Types.Count == i ? "" : ",  "))
+                }
             }
         </span>
     </li>

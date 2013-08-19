@@ -3,13 +3,13 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public class HighDataMap : ClassMap<HighData>
+    public class DischargeDataMap : ClassMap<DischargeData>
     {
-        HighDataMap()
+        DischargeDataMap()
         {
-            Id(h => h.Id);
+            Id(d => d.Id);
             Map(h => h.HighType).CustomType<short>();
-            Map(h => h.ConditionOfThePatientAtHigh).CustomType<short>();
+            References(h => h.ConditionOfThePatientAtDischarge).Cascade.None();
             Map(h => h.DestinationOfThePatientAtDischarge).CustomType<short>();
             Map(h => h.OrientationOfMultidisciplinaryTeamsMet).CustomType<short>();
             Map(h => h.TermMedicalReviewAt);

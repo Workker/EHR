@@ -6,11 +6,11 @@ using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
 {
-    public class HighData : IAggregateRoot<int>
+    public class DischargeData : IAggregateRoot<int>
     {
         public virtual int Id { get; set; }
         public virtual HighTypeEnum HighType { get; set; }
-        public virtual ConditionOfThePatientAtHighEnum ConditionOfThePatientAtHigh { get; set; }
+        public virtual ConditionOfThePatientAtDischarge ConditionOfThePatientAtDischarge { get; set; }
         public virtual DestinationOfThePatientAtDischargeEnum DestinationOfThePatientAtDischarge { get; set; }
         public virtual OrientationOfMultidisciplinaryTeamsMetEnum OrientationOfMultidisciplinaryTeamsMet { get; set; }
         public virtual int TermMedicalReviewAt { get; set; }

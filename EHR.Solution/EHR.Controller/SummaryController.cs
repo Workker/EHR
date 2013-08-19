@@ -129,7 +129,7 @@ namespace EHR.Controller
 
         [ExceptionLogger]
         public override void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, short highType,
-            short conditionOfThePatientAtHigh, short destinationOfThePatientAtDischarge,
+            short conditionOfThePatientAtDischargeId, short destinationOfThePatientAtDischarge,
            short orientationOfMultidisciplinaryTeamsMet, int termMedicalReviewAt, short specialtyId, DateTime prescribedHigh,
             string personWhoDeliveredTheSummary, DateTime deliveredDate)
         {
@@ -137,7 +137,7 @@ namespace EHR.Controller
             Assertion.NotNull(complementaryExams, "Lista de exames complementares está nula.").Validate();
             Assertion.NotNull(complementaryExamDeleteds, "Lista de exames complementares deletados está nula.").Validate();
             Assertion.GreaterThan((int)highType, 0, "Tipo de alta inválido.").Validate();
-            Assertion.GreaterThan((int)conditionOfThePatientAtHigh, 0, "Condição de alta inválida.").Validate();
+            Assertion.GreaterThan((int)conditionOfThePatientAtDischargeId, 0, "Condição de alta inválida.").Validate();
             Assertion.GreaterThan((int)destinationOfThePatientAtDischarge, 0, "Destino pós alta inválido.").Validate();
             Assertion.GreaterThan((int)orientationOfMultidisciplinaryTeamsMet, 0, "Opção de orientação de equipes multidisciplinares inválida.").Validate();
             Assertion.GreaterThan((int)specialtyId, 0, "Especialidade inválida.").Validate();
@@ -153,8 +153,12 @@ namespace EHR.Controller
 
             Assertion.NotNull(specialty, "Especialide não encontrada.").Validate();
 
+            var conditionOfThePatientAtDischarge = new Types<ConditionOfThePatientAtDischarge>().Get(conditionOfThePatientAtDischargeId);
+
+            Assertion.NotNull(specialty, "Destino pós alta inválido.").Validate();
+
             summary.HighData.HighType = (HighTypeEnum)highType;
-            summary.HighData.ConditionOfThePatientAtHigh = (ConditionOfThePatientAtHighEnum)conditionOfThePatientAtHigh;
+            summary.HighData.ConditionOfThePatientAtDischarge = conditionOfThePatientAtDischarge;
             summary.HighData.DestinationOfThePatientAtDischarge = (DestinationOfThePatientAtDischargeEnum)destinationOfThePatientAtDischarge;
             summary.HighData.OrientationOfMultidisciplinaryTeamsMet = (OrientationOfMultidisciplinaryTeamsMetEnum)orientationOfMultidisciplinaryTeamsMet;
             summary.HighData.TermMedicalReviewAt = termMedicalReviewAt;

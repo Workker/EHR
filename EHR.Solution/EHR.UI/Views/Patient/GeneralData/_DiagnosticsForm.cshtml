@@ -1,14 +1,13 @@
-﻿@using System.Globalization
-@using EHR.Domain.Entities
-@using EHR.Domain.Util
+﻿@using EHR.Domain.Entities
+@using EHR.Infrastructure.Service.Cache
 <form id="diagnostic">
     <label>Tipo de diagn&oacute;stico:</label>
     <select name="diagnostic.type" style="margin-left: 5px" required>
         <option value="-1">Selecione</option>
-        @foreach (var value in Enum.GetValues(typeof(DiagnosticTypeEnum)).Cast<short>().ToList())
+        @foreach (var diagnostic in CacheManagementService.GetBy<IList<DiagnosticType>>("DiagnosticTypes"))
         {
-            <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
+            <option value="@diagnostic.Id">
+                @(diagnostic.Description + "  ")
             </option>  
         }
     </select>

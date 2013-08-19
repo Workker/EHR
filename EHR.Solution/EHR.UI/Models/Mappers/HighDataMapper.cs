@@ -5,11 +5,11 @@ namespace EHR.UI.Models.Mappers
 {
     public static class HighDataMapper
     {
-        public static HighDataModel MapHighDataModelFrom(HighData highData)
+        public static HighDataModel MapHighDataModelFrom(DischargeData highData)
         {
-            Mapper.CreateMap<HighData, HighDataModel>().ForMember(ec => ec.ComplementaryExams, source => source.Ignore())
+            Mapper.CreateMap<DischargeData, HighDataModel>().ForMember(ec => ec.ComplementaryExams, source => source.Ignore())
                 .ForMember(s => s.Specialty, source => source.Ignore());
-            var highDataModel = Mapper.Map<HighData, HighDataModel>(highData);
+            var highDataModel = Mapper.Map<DischargeData, HighDataModel>(highData);
 
             highDataModel.PrescribedHighYear = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Year;
             highDataModel.PrescribedHighMonth = highData.PrescribedHigh == null ? 0 : highData.PrescribedHigh.Value.Month;
