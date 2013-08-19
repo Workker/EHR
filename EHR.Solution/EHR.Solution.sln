@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.UI", "EHR.UI\EHR.UI.csproj", "{861A5584-7574-4021-A0FE-01B1C1642DA2}"
 EndProject
