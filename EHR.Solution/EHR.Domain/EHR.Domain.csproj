@@ -159,13 +159,16 @@
     <Compile Include="Service\Lucene\GetDefLuceneService.cs" />
     <Compile Include="Service\Lucene\GetPatientByHospitalService.cs" />
     <Compile Include="Service\Lucene\GetTusLucene.cs" />
-    <Compile Include="Util\CryptographyUtil.cs" />
-    <Compile Include="Util\EnumUtil.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Documents\Domain.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EHR.Infrastructure\EHR.Infrastructure.csproj">
+      <Project>{7d33b377-c5ba-4a95-92e8-0dde91080ad7}</Project>
+      <Name>EHR.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

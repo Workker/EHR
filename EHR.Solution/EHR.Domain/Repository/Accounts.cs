@@ -15,8 +15,11 @@ namespace EHR.Domain.Repository
         public virtual Account GetBy(int id)
         {
             Assertion.GreaterThan(id, 0, "Identificador não informado").Validate();
+            
             var account = base.Get<Account>(id);
+            
             Assertion.NotNull(account, "Conta não encontrada.").Validate();
+            
             return account;
         }
 
@@ -31,6 +34,7 @@ namespace EHR.Domain.Repository
             var account = (Account)criterion.UniqueResult();
 
             Assertion.Null(account, "E-mail já cadastrado.");
+            
             return account;
         }
 
@@ -71,7 +75,6 @@ namespace EHR.Domain.Repository
             criterion.Add(Restrictions.Eq("Refused", false));
             criterion.AddOrder(Order.Desc("Id"));
 
-
             var account = criterion.List<Account>();
 
             Assertion.NotNull(account, "Lista de contas nula.").Validate();
@@ -84,7 +87,7 @@ namespace EHR.Domain.Repository
         {
             Assertion.NotNull(account, "Conta de usuário não informada.").Validate();
 
-            account.Approved = true;
+            account.ToApprove(true);
             base.Save(account);
 
             Assertion.IsTrue(account.Approved, "Conta de usuário não aprovada.").Validate();
@@ -95,7 +98,7 @@ namespace EHR.Domain.Repository
         {
             Assertion.NotNull(account, "Conta de usuário não informada.").Validate();
 
-            account.Refused = true;
+            account.ToRefuse(true);
             base.Save(account);
 
             Assertion.IsTrue(account.Refused, "Conta de usuário não reprovada.").Validate();

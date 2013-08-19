@@ -1,6 +1,6 @@
 ﻿using EHR.CoreShared;
 using EHR.CoreShared.Interfaces;
-using EHR.Domain.Util;
+using EHR.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
 using Workker.Framework.Domain;
@@ -29,11 +29,18 @@ namespace EHR.Domain.Entities
         {
             get { return _hospitals ?? (_hospitals = new List<Hospital>()); }
         }
-        public virtual bool Approved { get; set; }
-        public virtual bool Refused { get; set; }
-        public virtual bool Administrator { get; set; }
+        public virtual bool Approved { get; protected set; }
+        public virtual bool Refused { get; protected set; }
+        public virtual bool Administrator { get; protected set; }
 
         #endregion
+
+        protected Account() { }
+
+        public Account(bool administrator)
+        {
+            Administrator = administrator;
+        }
 
         public virtual void ToEnterCRM(string crm)
         {
@@ -70,7 +77,6 @@ namespace EHR.Domain.Entities
 
         public virtual void ToEnterGender(GenderEnum gender)
         {
-            //TODO: validar valor do enum informado
             Gender = gender;
         }
 
@@ -117,6 +123,16 @@ namespace EHR.Domain.Entities
             #endregion
 
             Hospitals.Add(hospital);
+        }
+
+        public void ToApprove(bool approved)
+        {
+            Approved = approved;
+        }
+
+        public void ToRefuse(bool refused)
+        {
+            Refused = refused;
         }
     }
 }
