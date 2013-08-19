@@ -9,115 +9,115 @@ namespace EHR.Test.Domain.Entities
     [TestFixture]
     public class AccountTest
     {
-        private Account account;
+        private Account _account;
 
         [TestFixtureSetUp]
         public void SetUp()
         {
-            account = new Account();
+            _account = new Account(false);
         }
 
         [Test]
         public void to_enter_a_crm_valid_successfully()
         {
-            account.ToEnterCRM("CRM Test");
+            _account.ToEnterCRM("CRM Test");
 
-            Contract.Assert(account.CRM.Equals("CRM Test"));
+            Contract.Assert(_account.CRM.Equals("CRM Test"));
         }
 
         [Test]
         [ExpectedException(UserMessage = "Invalid CRM!")]
         public void to_disallow_enter_an_invalid_crm()
         {
-            account.ToEnterCRM(string.Empty);
+            _account.ToEnterCRM(string.Empty);
         }
 
         [Test]
         public void to_enter_a_first_name_sucessfully()
         {
-            account.ToEnterFirstName("Peter");
+            _account.ToEnterFirstName("Peter");
 
-            Contract.Assert(account.FirstName.Equals("Peter"));
+            Contract.Assert(_account.FirstName.Equals("Peter"));
         }
 
         [Test]
         [ExpectedException(UserMessage = "Invalid first name!")]
         public void to_disallow_enter_an_invalid_first_name()
         {
-            account.ToEnterFirstName(string.Empty);
+            _account.ToEnterFirstName(string.Empty);
         }
 
         [Test]
         public void to_enter_a_last_name_sucessfully()
         {
-            account.ToEnterLastName("Cech");
+            _account.ToEnterLastName("Cech");
 
-            Contract.Assert(account.LastName.Equals("Cech"));
+            Contract.Assert(_account.LastName.Equals("Cech"));
         }
 
         [Test]
         [ExpectedException(UserMessage = "Invalid last name!")]
         public void to_disallow_enter_an_invalid_last_name()
         {
-            account.ToEnterLastName(string.Empty);
+            _account.ToEnterLastName(string.Empty);
         }
 
         [Test]
         public void to_enter_a_gender_sucessfully()
         {
-            account.ToEnterGender(GenderEnum.Male);
+            _account.ToEnterGender(GenderEnum.Male);
 
-            Contract.Assert(account.Gender.Equals(GenderEnum.Male));
+            Contract.Assert(_account.Gender.Equals(GenderEnum.Male));
         }
 
         [Test]
         public void to_enter_an_email_sucessfully()
         {
-            account.ToEnterEmail("test@test.com");
+            _account.ToEnterEmail("test@test.com");
 
-            Contract.Assert(account.Email.Equals("test@test.com"));
+            Contract.Assert(_account.Email.Equals("test@test.com"));
         }
 
         [Test]
         [ExpectedException(UserMessage = "Invalid email!")]
         public void to_disallow_enter_an_invalid_email()
         {
-            account.ToEnterEmail(string.Empty);
+            _account.ToEnterEmail(string.Empty);
         }
 
         [Test]
         public void to_enter_a_password_sucessfulyy()
         {
-            account.ToEnterPassword("swordfish");
+            _account.ToEnterPassword("swordfish");
 
-            Contract.Assert(!string.IsNullOrEmpty(account.Password));
+            Contract.Assert(!string.IsNullOrEmpty(_account.Password));
         }
 
         [Test]
         [ExpectedException(UserMessage = "Invalid password!")]
         public void to_disallow_enter_an_invalid_password()
         {
-            account.ToEnterPassword(string.Empty);
+            _account.ToEnterPassword(string.Empty);
         }
 
         [Test]
         public void to_enter_a_birthday_sucessfully()
         {
-            account.ToEnterBirthday(DateTime.Today);
+            _account.ToEnterBirthday(DateTime.Today);
         }
 
         [Test]
         [ExpectedException(UserMessage = "Invalid birthday!")]
         public void to_disallow_enter_an_invalid_birthday()
         {
-            account.ToEnterBirthday(DateTime.MinValue);
+            _account.ToEnterBirthday(DateTime.MinValue);
         }
 
         [Test]
         [ExpectedException(UserMessage = "Birthday greater than the current date!")]
         public void to_disallow_enter_a_birthday_greater_than_the_current_date()
         {
-            account.ToEnterBirthday(DateTime.Today.AddDays(1));
+            _account.ToEnterBirthday(DateTime.Today.AddDays(1));
         }
 
         [Test]
@@ -125,16 +125,32 @@ namespace EHR.Test.Domain.Entities
         {
             var hospital = new Hospital();
 
-            account.AddHospital(hospital);
+            _account.AddHospital(hospital);
 
-            Contract.Assert(account.Hospitals.Contains(hospital));
+            Contract.Assert(_account.Hospitals.Contains(hospital));
         }
 
         [Test]
         [ExpectedException(UserMessage = "Invalid hospital!")]
         public void to_disallow_add_an_invalid_hospital()
         {
-            account.AddHospital(null);
+            _account.AddHospital(null);
+        }
+
+        [Test]
+        public void to_approve_account_sucessfully()
+        {
+            _account.ToApprove(true);
+
+            Assert.IsTrue(_account.Approved);
+        }
+
+        [Test]
+        public void to_refuse_account_sucessfully()
+        {
+            _account.ToRefuse(true);
+
+            Assert.IsTrue(_account.Refused);
         }
     }
 }

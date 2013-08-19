@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
-using EHR.Domain.Util;
+using EHR.Infrastructure.Util;
 using System.Collections.Generic;
 
 namespace EHR.UI.Models.Mappers
@@ -26,8 +26,7 @@ namespace EHR.UI.Models.Mappers
         {
             var hospitalModel = new HospitalModel
             {
-                Name =
-                    EnumUtil.GetDescriptionFromEnumValue(hospital)
+                Name = EnumUtil.GetDescriptionFromEnumValue(hospital)
             };
 
             return hospitalModel;

@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Util\EmailUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Cache\CacheManagementService.cs" />
+    <Compile Include="Util\CryptographyUtil.cs" />
+    <Compile Include="Util\EnumUtil.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

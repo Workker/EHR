@@ -1,10 +1,8 @@
-﻿using System.Globalization;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Mapping;
 using EHR.Domain.Repository;
 using EHR.Domain.Service.Lucene;
-using EHR.Domain.Util;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
@@ -12,7 +10,6 @@ using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EHR.Test
 {
@@ -22,27 +19,18 @@ namespace EHR.Test
     {
         private void BuildSchema(Configuration config)
         {
-            new SchemaExport(config)
-                .Drop(true, true);
+            new SchemaExport(config).Drop(true, true);
 
-            new SchemaExport(config)
-                .Create(true, true);
+            new SchemaExport(config).Create(true, true);
         }
 
         [Test]
         public void a_create_database_by_model()
         {
-            try
-            {
-                Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(
+            Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(
                     c => c.FromAppSetting("connection")).ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).
                     Mappings(m => m.MergeMappings())
                     .ExposeConfiguration(BuildSchema).BuildSessionFactory();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
 
         [Test]
@@ -222,12 +210,9 @@ namespace EHR.Test
 
         public void insert_admin_account()
         {
-            var account = new Account()
-                              {
-                                  Administrator = true,
-                                  Approved = true,
-                              };
+            var account = new Account(true);
 
+            account.ToApprove(true);
             account.ToEnterCRM("123");
             account.ToEnterPassword("123");
             account.ToEnterFirstName("Thiago");
@@ -253,13 +238,10 @@ namespace EHR.Test
             var accountList = new List<Account>();
             for (var i = 0; i <= 20; i++)
             {
-                var account = new Account()
-                {
-                    Administrator = false,
-                    Approved = false,
-                    Refused = false,
-                };
+                var account = new Account(false);
 
+                account.ToApprove(false);
+                account.ToRefuse(false);
                 account.ToEnterCRM("123");
                 account.ToEnterFirstName("123");
                 account.ToEnterLastName("Oliveira");
@@ -335,7 +317,7 @@ namespace EHR.Test
         //[Test]
         public void data_initialize_all_sumaries_for_patients()
         {
-            GetPatientByHospitalService service = new GetPatientByHospitalService();
+            var service = new GetPatientByHospitalService();
             var patients = service.MockPatients("Ana");
 
             var doctor = new Accounts().GetBy(1);

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using EHR.CoreShared;
 using EHR.CoreShared.Interfaces;
-using EHR.Domain.Util;
+using EHR.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
