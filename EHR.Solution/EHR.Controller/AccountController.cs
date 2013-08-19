@@ -2,7 +2,7 @@
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Domain.Service.Lucene;
-using EHR.Domain.Util;
+using EHR.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
 using Workker.Framework.Domain;
@@ -13,13 +13,9 @@ namespace EHR.Controller
     {
         private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
         {
-            var account = new Account
-            {
-                Approved = false,
-                Refused = false,
-                Administrator = false
-            };
-
+            var account = new Account(false);
+            account.ToApprove(false);
+            account.ToRefuse(false);
             account.ToEnterCRM(crm);
             account.ToEnterFirstName(firstName);
             account.ToEnterLastName(lastName);
@@ -37,7 +33,7 @@ namespace EHR.Controller
 
             return account;
         }
-        
+
         [ExceptionLogger]
         public override void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals)
         {
@@ -98,7 +94,7 @@ namespace EHR.Controller
         public override IList<Account> GetAllNotApproved()
         {
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
-            
+
             var accountList = accounts.GetAllNotApproved();
 
             #region Poscondition
@@ -194,7 +190,7 @@ namespace EHR.Controller
             #endregion
 
             var hospitalRepository = (Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals);
-            
+
             var hospitalsList = hospitalRepository.GetBy(hospitals);
 
             #region Poscondition
