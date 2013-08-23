@@ -8,7 +8,7 @@ namespace EHR.Domain.Mapping
         MedicationMap()
         {
             Id(m => m.Id);
-            Map(m => m.Type).CustomType<short>();
+            Map(m => m.Type).CustomType<short>().Column("MedicationType");
             References(m => m.Def).Cascade.None();
             Map(m => m.Presentation);
             Map(m => m.PresentationType).CustomType<short>();

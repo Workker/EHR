@@ -2,7 +2,7 @@
 
 namespace EHR.Domain.Mapping
 {
-    public class ConditionOfThePatientAtDischargeMap : ValueObjectMap<ConditionOfThePatientAtDischarge>
+    public class ConditionOfThePatientAtDischargeMap : ValueObjectMap<ConditionAtDischarge>
     {
     }
 }

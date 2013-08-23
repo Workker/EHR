@@ -18,7 +18,7 @@ namespace EHR.Domain.Service.Lucene
                                          new Treatment
                                              {
                                                  Id = "123",
-                                                 Hospital = DbEnum.Copa,
+                                                 Hospital = DbEnum.CopaDor,
                                                  EntryDate = DateTime.Now.AddDays(-3),
                                                  CheckOutDate = DateTime.Now
                                              },
@@ -69,19 +69,19 @@ namespace EHR.Domain.Service.Lucene
                                          {
                                              new Treatment
                                                  {
-                                                     Hospital = DbEnum.Copa,
+                                                     Hospital = DbEnum.CopaDor,
                                                      EntryDate = DateTime.Now.AddDays(-3),
                                                      CheckOutDate = DateTime.Now
                                                  },
                                              new Treatment
                                                  {
-                                                     Hospital = DbEnum.Copa,
+                                                     Hospital = DbEnum.CopaDor,
                                                      EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
                                                      CheckOutDate = DateTime.Now.AddMonths(-3)
                                                  },
                                              new Treatment
                                                  {
-                                                     Hospital = DbEnum.Copa,
+                                                     Hospital = DbEnum.CopaDor,
                                                      EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
                                                      CheckOutDate = DateTime.Now.AddMonths(-5)
                                                  }

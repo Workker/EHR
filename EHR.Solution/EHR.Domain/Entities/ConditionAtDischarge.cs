@@ -3,7 +3,7 @@
 namespace EHR.Domain.Entities
 {
     [ProtoContract]
-    public class ConditionOfThePatientAtDischarge : ValueObject
+    public class ConditionAtDischarge : ValueObject
     {
     }
 }

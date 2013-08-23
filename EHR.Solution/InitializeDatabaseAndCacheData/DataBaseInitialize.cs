@@ -27,6 +27,16 @@ namespace InitializeDatabaseAndCacheData
         {
             try
             {
+                // Oracle Configuration
+
+                //     Fluently.Configure()
+                //.Database(OracleClientConfiguration.Oracle10.ConnectionString(c => c
+                //    .FromAppSetting("connectionOracle"))
+                //    .ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).Mappings(m => m.MergeMappings())
+                //     .ExposeConfiguration(BuildSchema).BuildSessionFactory();
+
+                // SQL Server Configuration
+
                 Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(
                     c => c.FromAppSetting("connection")).ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).
                     Mappings(m => m.MergeMappings())
@@ -96,43 +106,33 @@ namespace InitializeDatabaseAndCacheData
 
         public void insert_Conditions_Of_The_Patient_At_Discharge()
         {
-            var types = new List<ConditionOfThePatientAtDischarge>
+            var types = new List<ConditionAtDischarge>
                             {
-                                new ConditionOfThePatientAtDischarge() {Id = 1, Description = "Curado" }, 
-                                new ConditionOfThePatientAtDischarge() {Id = 2, Description = "Melhorado" },
-                                new ConditionOfThePatientAtDischarge() {Id = 3, Description = "Desistência de tratamento" },
+                                new ConditionAtDischarge() {Id = 1, Description = "Curado" }, 
+                                new ConditionAtDischarge() {Id = 2, Description = "Melhorado" },
+                                new ConditionAtDischarge() {Id = 3, Description = "Desistência de tratamento" },
                             };
 
-            var typesRepository = new Types<ConditionOfThePatientAtDischarge>();
+            var typesRepository = new Types<ConditionAtDischarge>();
 
             typesRepository.SaveList(types);
         }
 
-        public void insert_admin_account()
+        public void insert_hemotransfusion_types()
         {
-            var account = new Account(true);
-            account.ToApprove(true);
-
-            account.ToEnterCRM("123");
-            account.ToEnterPassword("123");
-            account.ToEnterFirstName("Thiago");
-            account.ToEnterLastName("Oliveira");
-            account.ToEnterGender(GenderEnum.Male);
-            account.ToEnterEmail("thiago@workker.com.br");
-            account.ToEnterBirthday(new DateTime(1989, 7, 17));
-
-            var hospitals = new Hospitals().All<Hospital>();
-
-            foreach (var hospital in hospitals)
+            var types = new List<HemotransfusionType> 
             {
-                account.AddHospital(hospital);
-            }
+                new HemotransfusionType {Id=1, Description = "Criopreciptado" },
+                new HemotransfusionType {Id=2, Description = "Concentrado de hemácias" },
+                new HemotransfusionType {Id=3, Description = "Concentrado de neutrófilos" },
+                new HemotransfusionType {Id=4, Description = "Concentrado de plaquetas" },
+                new HemotransfusionType {Id=5, Description = "Plasma" }
+            };
 
-            var accounts = new Accounts();
+            var reactionTypes = new Types<HemotransfusionType>();
 
-            accounts.Save(account);
+            reactionTypes.SaveList(types);
         }
-
 
         public void insert_specialties()
         {
@@ -234,67 +234,66 @@ namespace InitializeDatabaseAndCacheData
             reactionTypes.SaveList(types);
         }
 
-        
-
-        public void insert_twenty_accounts()
+        public void insert_admin_account()
         {
-            //var accountList = new List<Account>();
-            //for (var i = 0; i <= 20; i++)
-            //{
-            //    var account = new Account()
-            //    {
-            //        Administrator = false,
-            //        Approved = false,
-            //        Refused = false,
-            //    };
+            var account = new Account(true);
+            account.ToApprove(true);
 
-            //    account.ToEnterCRM("123");
-            //    account.ToEnterFirstName("123");
-            //    account.ToEnterLastName("Oliveira");
-            //    account.ToEnterGender(GenderEnum.Male);
-            //    account.ToEnterEmail(i + "@workker.com.br");
-            //    account.ToEnterBirthday(new DateTime(1989, 7, 17));
+            account.ToEnterCRM("123");
+            account.ToEnterPassword("123");
+            account.ToEnterFirstName("Thiago");
+            account.ToEnterLastName("Oliveira");
+            account.ToEnterGender(GenderEnum.Male);
+            account.ToEnterEmail("thiago@workker.com.br");
+            account.ToEnterBirthday(new DateTime(1989, 7, 17));
 
-            //    var hospitals = new Hospitals().All<Hospital>();
+            var hospitals = new Hospitals().All<Hospital>();
 
-            //    foreach (var hospital in hospitals)
-            //    {
-            //        account.AddHospital(hospital);
-            //    }
-
-            //    accountList.Add(account);
-            //}
-
-            //var accounts = new Accounts();
-            //accounts.SaveList(accountList);
-        }
-
-        public void insert_hemotransfusion_types()
-        {
-            var concentradoDeHemacias = new HemotransfusionType() { Id = 1, Description = "Criopreciptado" };
-
-            var concentradoDeNeutrofilos = new HemotransfusionType() { Id = 2, Description = "Concentrado de hemácias" };
-
-            var concentradoDePlaquetas = new HemotransfusionType() { Id = 3, Description = "Concentrado de neutrófilos" };
-
-            var criopreciptado = new HemotransfusionType() { Id = 4, Description = "Concentrado de plaquetas" };
-
-            var plasma = new HemotransfusionType() { Id = 5, Description = "Plasma" };
-
-
-            var types = new List<HemotransfusionType> 
+            foreach (var hospital in hospitals)
             {
-                concentradoDeHemacias,
-                concentradoDeNeutrofilos,
-                concentradoDePlaquetas,
-                criopreciptado,
-                plasma
-            };
+                account.AddHospital(hospital);
+            }
 
-            var reactionTypes = new Types<HemotransfusionType>();
+            var accounts = new Accounts();
 
-            reactionTypes.SaveList(types);
+            accounts.Save(account);
         }
+
+
+
+        //public void insert_twenty_accounts()
+        //{
+        //    //var accountList = new List<Account>();
+        //    //for (var i = 0; i <= 20; i++)
+        //    //{
+        //    //    var account = new Account()
+        //    //    {
+        //    //        Administrator = false,
+        //    //        Approved = false,
+        //    //        Refused = false,
+        //    //    };
+
+        //    //    account.ToEnterCRM("123");
+        //    //    account.ToEnterFirstName("123");
+        //    //    account.ToEnterLastName("Oliveira");
+        //    //    account.ToEnterGender(GenderEnum.Male);
+        //    //    account.ToEnterEmail(i + "@workker.com.br");
+        //    //    account.ToEnterBirthday(new DateTime(1989, 7, 17));
+
+        //    //    var hospitals = new Hospitals().All<Hospital>();
+
+        //    //    foreach (var hospital in hospitals)
+        //    //    {
+        //    //        account.AddHospital(hospital);
+        //    //    }
+
+        //    //    accountList.Add(account);
+        //    //}
+
+        //    //var accounts = new Accounts();
+        //    //accounts.SaveList(accountList);
+        //}
+
 
 
         //public void b_data_initialize()

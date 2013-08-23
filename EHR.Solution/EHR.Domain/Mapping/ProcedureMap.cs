@@ -10,7 +10,7 @@ namespace EHR.Domain.Mapping
             Table("MedicalProcedure");
             Id(x => x.Id);
             References(x => x.Tus);
-            Map(x => x.Date);
+            Map(x => x.Date).Column("ExecuteDate");
         }
     }
 }

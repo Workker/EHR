@@ -16,6 +16,9 @@ namespace InitializeDatabaseAndCacheData
             dataBase.insert_allergies_types();
             dataBase.insert_diagnostic_types();
             dataBase.insert_Conditions_Of_The_Patient_At_Discharge();
+            dataBase.insert_hemotransfusion_types();
+            dataBase.insert_specialties();
+            dataBase.insert_reactions_types();
             dataBase.insert_admin_account();
 
             var cache = new CacheInitialize();

@@ -2,6 +2,7 @@
 @using System.Globalization
 @using EHR.CoreShared
 @using EHR.UI.Models
+@using EHR.Infrastructure.Util
 @foreach (AccountModel account in ViewBag.Accounts)
 {
     <div class="clearfix bottomLine">
@@ -20,7 +21,7 @@
                                 <label>Hospital:&nbsp;</label>
                                 @for (int i = 1; i <= account.Hospitals.Count; i++)
                                 {
-                                    @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospitals[i - 1].ToString(CultureInfo.InvariantCulture))) + (account.Hospitals.Count == i ? "" : ",  "))
+                                    @(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospitals[i - 1].ToString(CultureInfo.InvariantCulture))) + (account.Hospitals.Count == i ? "" : ",  "))
                                 }
                             </span>
                         </div>

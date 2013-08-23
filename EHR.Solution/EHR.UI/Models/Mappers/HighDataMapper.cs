@@ -26,9 +26,9 @@ namespace EHR.UI.Models.Mappers
 
             }
 
-            highDataModel.DeliveredDateYear = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Year;
-            highDataModel.DeliveredDateMonth = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Month;
-            highDataModel.DeliveredDateDay = highData.DeliveredDate == null ? 0 : highData.DeliveredDate.Value.Day;
+            highDataModel.DeliveredDateYear = highData.Date == null ? 0 : highData.Date.Value.Year;
+            highDataModel.DeliveredDateMonth = highData.Date == null ? 0 : highData.Date.Value.Month;
+            highDataModel.DeliveredDateDay = highData.Date == null ? 0 : highData.Date.Value.Day;
 
             foreach (var complementaryExam in highData.ComplementaryExams)
             {

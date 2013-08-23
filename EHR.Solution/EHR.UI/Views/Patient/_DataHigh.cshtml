@@ -1,7 +1,7 @@
 ﻿@using System.Globalization
 @using EHR.Domain.Entities
-@using EHR.Domain.Util
 @using EHR.Infrastructure.Service.Cache
+@using EHR.Infrastructure.Util
 @using EHR.UI.Models
 <h3>Dados da Alta</h3>
 <hr />
@@ -23,7 +23,7 @@
     <br />
     <label>Condi&ccedil;&atilde;o do paciente na alta:</label>&nbsp;
 
-    @foreach (var condition in CacheManagementService.GetBy<IList<ConditionOfThePatientAtDischarge>>("ConditionsOfThePatientAtDischarge"))
+    @foreach (var condition in CacheManagementService.GetBy<IList<ConditionAtDischarge>>("ConditionsOfThePatientAtDischarge"))
     {
         <input type="radio" name="ConditionOfThePatientAtHigh"  @if (condition.Id == 1)
                                                                 { 

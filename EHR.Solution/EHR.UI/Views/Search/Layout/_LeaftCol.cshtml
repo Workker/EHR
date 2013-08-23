@@ -1,4 +1,5 @@
 ﻿@using EHR.CoreShared
+@using EHR.Infrastructure.Util
 <div class="leftColHead">
     <h4>Hospitais</h4>
 </div>
@@ -11,7 +12,7 @@
             <li>
 
                 <input name="hospital" type="checkbox" value="@hospital"/>
-                &nbsp; @(EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospital.ToString())) + "  ")
+                &nbsp; @(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospital.ToString())) + "  ")
 
             </li>      
             }

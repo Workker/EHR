@@ -125,12 +125,12 @@ namespace EHR.Domain.Entities
             Hospitals.Add(hospital);
         }
 
-        public void ToApprove(bool approved)
+        public virtual void ToApprove(bool approved)
         {
             Approved = approved;
         }
 
-        public void ToRefuse(bool refused)
+        public virtual void ToRefuse(bool refused)
         {
             Refused = refused;
         }

@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using EHR.CoreShared
 @using EHR.UI.Models
+@using EHR.Infrastructure.Util
 @model AccountModel
 @{
     ViewBag.Title = "Index";
@@ -57,7 +58,7 @@
                                 <div class="actions">
 
                                     <button id="ChangeHospitalButton" class="grayButton" onclick="ShowListOfHospital(this);">
-                                        @EHR.Domain.Util.EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), Model.CurrentHospital.ToString(CultureInfo.InvariantCulture)))&nbsp;<span class="arrow"></span>
+                                        @EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), Model.CurrentHospital.ToString(CultureInfo.InvariantCulture)))&nbsp;<span class="arrow"></span>
                                     </button>
                                     <div id="ChangeHospital">
                                         <ul>

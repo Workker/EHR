@@ -10,14 +10,14 @@ namespace EHR.Domain.Entities
     {
         public virtual int Id { get; set; }
         public virtual HighTypeEnum HighType { get; set; }
-        public virtual ConditionOfThePatientAtDischarge ConditionOfThePatientAtDischarge { get; set; }
-        public virtual DestinationOfThePatientAtDischargeEnum DestinationOfThePatientAtDischarge { get; set; }
-        public virtual OrientationOfMultidisciplinaryTeamsMetEnum OrientationOfMultidisciplinaryTeamsMet { get; set; }
+        public virtual ConditionAtDischarge ConditionAtDischarge { get; set; }
+        public virtual DestinationOfThePatientAtDischargeEnum DestinationAtDischarge { get; set; }
+        public virtual OrientationOfMultidisciplinaryTeamsMetEnum MultidisciplinaryTeamsMet { get; set; }
         public virtual int TermMedicalReviewAt { get; set; }
         public virtual Specialty Specialty { get; set; }
         public virtual DateTime? PrescribedHigh { get; set; }
         public virtual string PersonWhoDeliveredTheSummary { get; set; }
-        public virtual DateTime? DeliveredDate { get; set; }
+        public virtual DateTime? Date { get; set; }
         private IList<ComplementaryExam> _complementaryExams;
         public virtual IList<ComplementaryExam> ComplementaryExams
         {

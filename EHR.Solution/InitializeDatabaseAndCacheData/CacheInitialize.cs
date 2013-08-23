@@ -32,7 +32,7 @@ namespace InitializeDatabaseAndCacheData
 
         public void insert_conditions_Of_The_Patient_At_Discharge()
         {
-            var typesRepository = new Types<ConditionOfThePatientAtDischarge>();
+            var typesRepository = new Types<ConditionAtDischarge>();
             var list = typesRepository.All();
 
             CacheManagementService.SetIn(1, "ConditionsOfThePatientAtDischarge", list);

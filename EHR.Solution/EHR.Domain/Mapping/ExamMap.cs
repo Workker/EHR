@@ -8,8 +8,8 @@ namespace EHR.Domain.Mapping
         ExamMap()
         {
             Id(e => e.Id);
-            Map(e => e.Type).CustomType<short>();
-            Map(e => e.Date);
+            Map(e => e.Type).CustomType<short>().Column("ExamType");
+            Map(e => e.Date).Column("ExamDate");
             Map(e => e.Description);
         }
     }

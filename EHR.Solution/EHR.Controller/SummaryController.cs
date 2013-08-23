@@ -153,19 +153,19 @@ namespace EHR.Controller
 
             Assertion.NotNull(specialty, "Especialide não encontrada.").Validate();
 
-            var conditionOfThePatientAtDischarge = new Types<ConditionOfThePatientAtDischarge>().Get(conditionOfThePatientAtDischargeId);
+            var conditionOfThePatientAtDischarge = new Types<ConditionAtDischarge>().Get(conditionOfThePatientAtDischargeId);
 
             Assertion.NotNull(specialty, "Destino pós alta inválido.").Validate();
 
             summary.HighData.HighType = (HighTypeEnum)highType;
-            summary.HighData.ConditionOfThePatientAtDischarge = conditionOfThePatientAtDischarge;
-            summary.HighData.DestinationOfThePatientAtDischarge = (DestinationOfThePatientAtDischargeEnum)destinationOfThePatientAtDischarge;
-            summary.HighData.OrientationOfMultidisciplinaryTeamsMet = (OrientationOfMultidisciplinaryTeamsMetEnum)orientationOfMultidisciplinaryTeamsMet;
+            summary.HighData.ConditionAtDischarge = conditionOfThePatientAtDischarge;
+            summary.HighData.DestinationAtDischarge = (DestinationOfThePatientAtDischargeEnum)destinationOfThePatientAtDischarge;
+            summary.HighData.MultidisciplinaryTeamsMet = (OrientationOfMultidisciplinaryTeamsMetEnum)orientationOfMultidisciplinaryTeamsMet;
             summary.HighData.TermMedicalReviewAt = termMedicalReviewAt;
             summary.HighData.Specialty = specialty;
             summary.HighData.PrescribedHigh = prescribedHigh;
             summary.HighData.PersonWhoDeliveredTheSummary = personWhoDeliveredTheSummary;
-            summary.HighData.DeliveredDate = deliveredDate;
+            summary.HighData.Date = deliveredDate;
 
             foreach (var id in complementaryExamDeleteds)
             {
