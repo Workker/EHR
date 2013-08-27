@@ -670,7 +670,7 @@
     <Alias n="12" Id="(@3 Namespace=EHR.Domain.Mapping)" />
     <Alias n="13" Id="(@3 Namespace=EHR.Domain.Repository)" />
     <Alias n="14" Id="(@3 Namespace=EHR.Domain.Service.Lucene)" />
-    <Alias n="15" Id="(@3 Namespace=EHR.Domain.Util)" />
+    <Alias n="15" Id="(@3 Namespace=EHR.Infrastructure.Util)" />
     <Alias n="16" Id="(@1 Namespace=EHR.UI)" />
     <Alias n="17" Id="(@1 Namespace=EHR.UI.Controllers)" />
     <Alias n="18" Id="(@1 Namespace=EHR.UI.Filters)" />
@@ -868,12 +868,12 @@
     </Style>
   </Styles>
   <Paths>
-    <Path Id="075d9a69-4a94-4161-978d-b3822ebb6dd9.OutputPath" Value="E:\Projects\EHR\EHR.Solution\EHR.Domain\bin\Debug\EHR.Domain.dll" />
-    <Path Id="075d9a69-4a94-4161-978d-b3822ebb6dd9.OutputPathUri" Value="file:///E:/Projects/EHR/EHR.Solution/EHR.Domain/bin/Debug/EHR.Domain.dll" />
-    <Path Id="75af42b0-2a2a-4452-9500-2638183c812a.OutputPath" Value="E:\Projects\EHR\EHR.Solution\EHR.Controller\bin\Debug\EHR.Controller.dll" />
-    <Path Id="75af42b0-2a2a-4452-9500-2638183c812a.OutputPathUri" Value="file:///E:/Projects/EHR/EHR.Solution/EHR.Controller/bin/Debug/EHR.Controller.dll" />
-    <Path Id="861a5584-7574-4021-a0fe-01b1c1642da2.OutputPath" Value="E:\Projects\EHR\EHR.Solution\EHR.UI\bin\EHR.UI.dll" />
-    <Path Id="861a5584-7574-4021-a0fe-01b1c1642da2.OutputPathUri" Value="file:///E:/Projects/EHR/EHR.Solution/EHR.UI/bin/EHR.UI.dll" />
+    <Path Id="075d9a69-4a94-4161-978d-b3822ebb6dd9.OutputPath" Value="F:\Projetos\EHR\EHR.Solution\EHR.Domain\bin\Debug\EHR.Domain.dll" />
+    <Path Id="075d9a69-4a94-4161-978d-b3822ebb6dd9.OutputPathUri" Value="file:///F:/Projetos/EHR/EHR.Solution/EHR.Domain/bin/Debug/EHR.Domain.dll" />
+    <Path Id="75af42b0-2a2a-4452-9500-2638183c812a.OutputPath" Value="F:\Projetos\EHR\EHR.Solution\EHR.Controller\bin\Debug\EHR.Controller.dll" />
+    <Path Id="75af42b0-2a2a-4452-9500-2638183c812a.OutputPathUri" Value="file:///F:/Projetos/EHR/EHR.Solution/EHR.Controller/bin/Debug/EHR.Controller.dll" />
+    <Path Id="861a5584-7574-4021-a0fe-01b1c1642da2.OutputPath" Value="F:\Projetos\EHR\EHR.Solution\EHR.UI\bin\EHR.UI.dll" />
+    <Path Id="861a5584-7574-4021-a0fe-01b1c1642da2.OutputPathUri" Value="file:///F:/Projetos/EHR/EHR.Solution/EHR.UI/bin/EHR.UI.dll" />
     <Path Id="FxReferenceAssemblies" Value="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework" />
     <Path Id="FxReferenceAssembliesUri" Value="file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework" />
   </Paths>

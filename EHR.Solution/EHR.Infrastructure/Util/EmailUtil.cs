@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Configuration;
+using System;
 
 namespace EHR.Infrastructure.Util
 {
@@ -20,12 +23,20 @@ namespace EHR.Infrastructure.Util
             destinatarios.ForEach(destinatario => message.To.Add(destinatario));
 
             message.Subject = assunto;
+            message.From = new MailAddress(ConfigurationManager.AppSettings["Remetente"]);
             message.IsBodyHtml = true;
             message.Body = mensagem;
 
-            var smtp = new SmtpClient();
+            var smtpClient = new SmtpClient
+                                 {
+                                     Port = Convert.ToInt32(ConfigurationManager.AppSettings["PortaSMTP"]),
+                                     Host = Convert.ToString(ConfigurationManager.AppSettings["HostSMTP"]),
+                                     Credentials = new NetworkCredential(
+                                         Convert.ToString(ConfigurationManager.AppSettings["Usuario"]),
+                                         Convert.ToString(ConfigurationManager.AppSettings["Senha"]))
+                                 };
 
-            smtp.Send(message);
+            smtpClient.Send(message);
         }
 
         public static void EnviarEmail(string assunto, string mensagem, string destinatario)

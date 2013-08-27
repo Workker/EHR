@@ -10,10 +10,8 @@
             if (hospital != DbEnum.sumario)
             {
             <li>
-
                 <input name="hospital" type="checkbox" value="@hospital"/>
                 &nbsp; @(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), hospital.ToString())) + "  ")
-
             </li>      
             }
         }
