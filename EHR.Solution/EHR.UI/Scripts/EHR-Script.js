@@ -106,7 +106,7 @@ $(document).ready(function () {
     }).sethscCorner();
 
     Menu.add({
-        Title: 'Hemotransfusão',
+        Title: 'hemotransfus&atilde;o',
         onOutIcon: '../../Images/hemotransfusao.png',
         onClickIcon: '../../Images/hemotransfusao.png',
         HtmlSatusContent: '',

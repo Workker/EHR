@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using EHR.CoreShared.Interfaces;
 using EHR.Domain.Mapping;
 using FluentNHibernate.Cfg;
@@ -43,14 +44,14 @@ namespace EHR.Domain.Repository
 
         public virtual void Save(IAggregateRoot<int> root)
         {
-            var transaction = Session.BeginTransaction();
+            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
             Session.SaveOrUpdate(root);
             transaction.Commit();
         }
 
         public virtual void SaveList(List<IAggregateRoot<int>> roots)
         {
-            var transaction = Session.BeginTransaction();
+            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
 
             try
             {
@@ -69,7 +70,7 @@ namespace EHR.Domain.Repository
 
         public virtual void SaveList<T>(List<T> roots)
         {
-            var transaction = Session.BeginTransaction();
+            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
 
             try
             {
@@ -88,7 +89,7 @@ namespace EHR.Domain.Repository
 
         public virtual void Delete(IAggregateRoot<int> root)
         {
-            var transaction = Session.BeginTransaction();
+            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
             Session.Delete(root);
             transaction.Commit();
         }
