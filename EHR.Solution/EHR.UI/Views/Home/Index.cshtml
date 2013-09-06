@@ -39,7 +39,7 @@
                                     <h2 class="_6-f"><span class="_8_2">@Model.FirstName @Model.LastName</span></h2>
                                 </div>
                             </div>
-                            <div id="fbTimelineHeadline" class="clearfix">
+                            <div id="fbTimelineHeadline" class="clearfix" style="padding-left: 130px;">
                                 <button class="grayButton" onclick="ShowFormChangePassword(this);" style="position: absolute; margin: 7px 0px 0px 690px;">Alterar minha senha</button>
                                 <div id="ChangePassword">
                                     <form>
@@ -54,22 +54,6 @@
                                             <input type="button" value="Cancelar" class="uibutton" onclick="HideFormChangePassword(this);" />
                                         </div>
                                     </form>
-                                </div>
-                                <div class="actions">
-
-                                    <button id="ChangeHospitalButton" class="grayButton" onclick="ShowListOfHospital(this);">
-                                        @EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), Model.CurrentHospital.ToString(CultureInfo.InvariantCulture)))&nbsp;<span class="arrow"></span>
-                                    </button>
-                                    <div id="ChangeHospital">
-                                        <ul>
-                                            @foreach (HospitalModel hospital in ViewBag.Hospitals)
-                                            {
-                                                if (hospital.Id != Model.CurrentHospital)
-                                                {<li><a onclick='ChangeCurrentHospital("@hospital.Id")'>@hospital.Name</a></li>  }
-
-                                            }
-                                        </ul>
-                                    </div>
                                 </div>
                                 <div class="name">
                                     <div class="photoContainer">

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace EHR.UI.Models
 {
@@ -16,11 +15,6 @@ namespace EHR.UI.Models
         public DateTime Birthday { get; set; }
         public bool Administrator { get; set; }
         public short CurrentHospital { get; set; }
-        private IList<short> _hospitals;
-        public IList<short> Hospitals
-        {
-            get { return _hospitals ?? (_hospitals = new List<short>()); }
-            set { _hospitals = value; }
-        }
+        public short Hospital { get; set; }
     }
 }

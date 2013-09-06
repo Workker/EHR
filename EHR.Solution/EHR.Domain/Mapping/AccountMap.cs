@@ -15,7 +15,7 @@ namespace EHR.Domain.Mapping
             Map(a => a.Email);
             Map(a => a.Password);
             Map(a => a.Birthday);
-            HasManyToMany(a => a.Hospitals);
+            References(a => a.Hospital).Cascade.None();
             Map(a => a.Approved);
             Map(a => a.Refused);
             Map(a => a.Administrator);

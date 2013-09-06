@@ -127,7 +127,7 @@ namespace EHR.Test.Domain.Entities
 
             _account.AddHospital(hospital);
 
-            Contract.Assert(_account.Hospitals.Contains(hospital));
+            Contract.Assert(_account.Hospital == hospital);
         }
 
         [Test]

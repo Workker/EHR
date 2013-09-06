@@ -2,19 +2,12 @@
 using EHR.CoreShared.Interfaces;
 using EHR.Infrastructure.Util;
 using System;
-using System.Collections.Generic;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
 {
     public class Account : IAggregateRoot<int>
     {
-        #region Fields
-
-        private IList<Hospital> _hospitals;
-
-        #endregion
-
         #region Properties
 
         public virtual int Id { get; set; }
@@ -25,10 +18,7 @@ namespace EHR.Domain.Entities
         public virtual string Email { get; protected set; }
         public virtual string Password { get; protected set; }
         public virtual DateTime? Birthday { get; protected set; }
-        public virtual IList<Hospital> Hospitals
-        {
-            get { return _hospitals ?? (_hospitals = new List<Hospital>()); }
-        }
+        public virtual Hospital Hospital { get; set; }
         public virtual bool Approved { get; protected set; }
         public virtual bool Refused { get; protected set; }
         public virtual bool Administrator { get; protected set; }
@@ -122,7 +112,7 @@ namespace EHR.Domain.Entities
 
             #endregion
 
-            Hospitals.Add(hospital);
+            Hospital = hospital;
         }
 
         public virtual void ToApprove(bool approved)

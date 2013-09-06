@@ -19,10 +19,7 @@
                             </span>
                             <span class="fbProfileBylineFragment">
                                 <label>Hospital:&nbsp;</label>
-                                @for (int i = 1; i <= account.Hospitals.Count; i++)
-                                {
-                                    @(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospitals[i - 1].ToString(CultureInfo.InvariantCulture))) + (account.Hospitals.Count == i ? "" : ",  "))
-                                }
+                                @(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospital.ToString(CultureInfo.InvariantCulture))))
                             </span>
                         </div>
                         <br />

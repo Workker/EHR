@@ -10,6 +10,21 @@ namespace EHR.Domain.Repository
     public class Hospitals : BaseRepository
     {
         [ExceptionLogger]
+        public Hospital GetBy(short id)
+        {
+            Assertion.GreaterThan((int)id, 0, "Nenhum hospital informado.").Validate();
+
+            var hospitals = new Types<Hospital>();
+
+            var hostpital = hospitals.Get(id);
+
+            Assertion.NotNull(hostpital, "Nenhum hospital encontrado, que corresponde a lista informada.").Validate();
+
+            return hostpital;
+        }
+
+
+        [ExceptionLogger]
         public IList<Hospital> GetBy(IList<short> list)
         {
             Assertion.NotNull(list, "Não foram informados hospitais.").Validate();

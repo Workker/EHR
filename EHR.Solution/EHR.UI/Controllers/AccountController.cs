@@ -27,7 +27,7 @@ namespace EHR.UI.Controllers
                 FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName,
                                                                              account.Gender, account.Crm,
                                                                              account.Email, account.Password,
-                                                                             account.Birthday, account.Hospitals);
+                                                                             account.Birthday, account.Hospital);
 
                 this.ShowMessage(MessageTypeEnum.Success, "Conta de usuário criada. Aguarde aprovação do administrador.", true);
 
@@ -51,7 +51,7 @@ namespace EHR.UI.Controllers
                                                                                                   loginData.Password);
 
                 var account = AccountMapper.MapAccountModelFrom(accountObject);
-                account.CurrentHospital = account.Hospitals[0];
+                account.CurrentHospital = account.Hospital;
 
                 Session["hospitals"] = HospitalMapper.MapHospitalModelFrom(accountObject);
                 Session["account"] = account;

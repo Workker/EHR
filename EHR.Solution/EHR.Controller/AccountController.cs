@@ -1,11 +1,11 @@
-﻿using System.Net.Mail;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Domain.Service.Lucene;
 using EHR.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using Workker.Framework.Domain;
 
 namespace EHR.Controller
@@ -14,9 +14,9 @@ namespace EHR.Controller
     {
         [ExceptionLogger]
         public override void Register(string firstName, string lastName, short gender, string crm, string email,
-                                      string password, DateTime birthday, IList<short> hospitals)
+                                      string password, DateTime birthday, short hospitalId)
         {
-            ToRegisterAccount(firstName, lastName, gender, crm, email, password, birthday, hospitals);
+            ToRegisterAccount(firstName, lastName, gender, crm, email, password, birthday, hospitalId);
 
             ToSendEmail();
         }
@@ -34,7 +34,7 @@ namespace EHR.Controller
         }
 
         private void ToRegisterAccount(string firstName, string lastName, short gender, string crm, string email,
-                                       string password, DateTime birthday, IList<short> hospitals)
+                                       string password, DateTime birthday, short hospitalId)
         {
             #region Precondition
 
@@ -45,7 +45,7 @@ namespace EHR.Controller
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada.").Validate();
             Assertion.GreaterThan(birthday, DateTime.MinValue, "Data de aniverssario não informada.").Validate();
-            Assertion.GreaterThan(hospitals.Count, 0, "Hospital(is) não informado(s).").Validate();
+            Assertion.GreaterThan((int)hospitalId, 0, "Hospital não informado(s).").Validate();
 
             #endregion
 
@@ -53,7 +53,7 @@ namespace EHR.Controller
 
             Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
 
-            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitals);
+            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitalId);
 
             accounts.Save(account);
 
@@ -182,17 +182,17 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public IList<Hospital> GetHospitalsFromRepository(IList<short> hospitals)
+        public Hospital GetHospitalFromRepository(short hospitalId)
         {
             #region Precondition
 
-            Assertion.GreaterThan(hospitals.Count, 0, "Hospital(is) não informado(s).").Validate();
+            Assertion.GreaterThan((int)hospitalId, 0, "Hospital não informado.").Validate();
 
             #endregion
 
             var hospitalRepository = (Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals);
 
-            var hospitalsList = hospitalRepository.GetBy(hospitals);
+            var hospitalsList = hospitalRepository.GetBy(hospitalId);
 
             #region Poscondition
 
@@ -204,7 +204,7 @@ namespace EHR.Controller
         }
 
         private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email,
-                                      string password, DateTime birthday, IList<short> hospitals)
+                                      string password, DateTime birthday, short hospitalId)
         {
             var account = new Account(false);
             account.ToApprove(false);
@@ -217,12 +217,9 @@ namespace EHR.Controller
             account.ToEnterPassword(password);
             account.ToEnterBirthday(birthday);
 
-            var hospitalsList = GetHospitalsFromRepository(hospitals);
+            var hospital = GetHospitalFromRepository(hospitalId);
 
-            foreach (var hospital in hospitalsList)
-            {
-                account.AddHospital(hospital);
-            }
+            account.AddHospital(hospital);
 
             return account;
         }

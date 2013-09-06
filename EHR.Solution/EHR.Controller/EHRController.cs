@@ -63,7 +63,7 @@ namespace EHR.Controller
 
         #region Account
 
-        public virtual void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, IList<short> hospitals) { }
+        public virtual void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, short hospitalId) { }
         public virtual Account Login(string email, string password) { return null; }
         public virtual bool VerifyIfExist(string email) { return false; }
         public virtual IList<Account> GetAllNotApproved() { return null; }

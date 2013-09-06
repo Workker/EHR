@@ -431,31 +431,6 @@ function ChangePassword(element) {
     });
 }
 
-function ShowListOfHospital(element) {
-    if ($(element).hasClass("grayButtonClicked")) {
-        $(element).removeClass("grayButtonClicked");
-        $("#ChangeHospitalButton span").removeClass("arrowActive");
-        $("#ChangeHospitalButton span").addClass("arrow");
-        $(element).next().hide();
-    } else {
-        $(element).addClass("grayButtonClicked");
-        $(element).next().show();
-        $("#ChangeHospitalButton span").removeClass("arrow");
-        $("#ChangeHospitalButton span").addClass("arrowActive");
-    }
-}
-
-function ChangeCurrentHospital(q) {
-    $.ajax({
-        url: "../Home/ChangeCurrentHospital/?q=" + q,
-        type: "GET",
-        cache: false,
-        success: function () {
-            location.reload(true);
-        }
-    });
-}
-
 function ShowTopMenu(element) {
     if ($(element).next().hasClass("Display")) {
         $(element).next().removeClass("Display");

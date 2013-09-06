@@ -12,12 +12,7 @@ namespace EHR.UI.Models.Mappers
         {
             Mapper.CreateMap<Hospital, HospitalModel>();
 
-            var hospitalModels = new List<HospitalModel>();
-
-            foreach (var hospital in accountObject.Hospitals)
-            {
-                hospitalModels.Add(Mapper.Map<Hospital, HospitalModel>(hospital));
-            }
+            var hospitalModels = new List<HospitalModel> { Mapper.Map<Hospital, HospitalModel>(accountObject.Hospital) };
 
             return hospitalModels;
         }

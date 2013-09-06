@@ -2,8 +2,8 @@
 using EHR.Domain.Entities;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
+using EHR.UI.Models.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,21 +128,6 @@ namespace EHR.UI.Controllers
                 FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword);
 
                 this.ShowMessage(MessageTypeEnum.Success, "Senha alterada.");
-            }
-            catch (Exception ex)
-            {
-                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
-            }
-        }
-
-        public void ChangeCurrentHospital(string q)
-        {
-            try
-            {
-                var account = (AccountModel)Session["account"];
-
-                account.CurrentHospital = short.Parse(q);
-                Session["account"] = account;
             }
             catch (Exception ex)
             {
