@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared;
+using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
 using System.Collections.Generic;
@@ -15,11 +16,11 @@ namespace EHR.Domain.Repository
         public virtual Account GetBy(int id)
         {
             Assertion.GreaterThan(id, 0, "Identificador não informado").Validate();
-            
+
             var account = base.Get<Account>(id);
-            
+
             Assertion.NotNull(account, "Conta não encontrada.").Validate();
-            
+
             return account;
         }
 
@@ -34,7 +35,7 @@ namespace EHR.Domain.Repository
             var account = (Account)criterion.UniqueResult();
 
             Assertion.Null(account, "E-mail já cadastrado.");
-            
+
             return account;
         }
 
@@ -68,11 +69,12 @@ namespace EHR.Domain.Repository
         }
 
         [ExceptionLogger]
-        public virtual IList<Account> GetAllNotApproved()
+        public virtual IList<Account> GetAllNotApproved(Hospital hospital)
         {
             var criterion = Session.CreateCriteria<Account>();
             criterion.Add(Restrictions.Eq("Approved", false));
             criterion.Add(Restrictions.Eq("Refused", false));
+            criterion.Add(Restrictions.Eq("Hospital", hospital));
             criterion.AddOrder(Order.Desc("Id"));
 
             var account = criterion.List<Account>();

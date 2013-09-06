@@ -90,11 +90,14 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<Account> GetAllNotApproved()
+        public override IList<Account> GetAllNotApproved(short hospitalId)
         {
             var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
 
-            var accountList = accounts.GetAllNotApproved();
+            var hospitals = new Types<Hospital>();
+            var hospital = hospitals.Get(hospitalId);
+
+            var accountList = accounts.GetAllNotApproved(hospital);
 
             #region Poscondition
 

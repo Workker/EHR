@@ -151,7 +151,10 @@ namespace EHR.UI.Controllers
         private IEnumerable<Account> GetAccounts(bool skip)
         {
             var accountController = FactoryController.GetController(ControllerEnum.Account);
-            return skip ? accountController.GetAllNotApproved().Skip((int)Session["Skip"]).Take(10) : accountController.GetAllNotApproved().Take(10);
+
+            var hospitalModel = ((IList<HospitalModel>)Session["hospitals"]).FirstOrDefault();
+
+            return skip ? accountController.GetAllNotApproved(hospitalModel.Id).Skip((int)Session["Skip"]).Take(10) : accountController.GetAllNotApproved(hospitalModel.Id).Take(10);
         }
 
         #endregion

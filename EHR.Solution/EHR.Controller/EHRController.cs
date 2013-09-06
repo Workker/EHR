@@ -66,7 +66,7 @@ namespace EHR.Controller
         public virtual void Register(string firstName, string lastName, short gender, string crm, string email, string password, DateTime birthday, short hospitalId) { }
         public virtual Account Login(string email, string password) { return null; }
         public virtual bool VerifyIfExist(string email) { return false; }
-        public virtual IList<Account> GetAllNotApproved() { return null; }
+        public virtual IList<Account> GetAllNotApproved(short hospitalId) { return null; }
         public virtual IList<Summary> GetLastSumariesRealizedby(int accountId) { return null; }
         public virtual void ApproveAccount(int id) { }
         public virtual void RefuseAccount(int id) { }
