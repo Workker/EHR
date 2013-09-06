@@ -1,4 +1,5 @@
-﻿// Suggest of search
+﻿
+// Suggest of search
 (function ($) {
     var baseModel =
         {

@@ -8,7 +8,7 @@
                 Html.RenderPartial("_AccountApprovedListResult");
             }
         </div>
-        @if (((List<AccountModel>)ViewBag.Accounts).Count > 0)
+        @if (((List<AccountModel>)ViewBag.Accounts).Count > 10)
         { 
             <div class="clearfix uiMorePager uiMorePagerCenter showMore" id="moreAccounts">
                 <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore("../Home/MoreAccounts", this)'>Exibir mais</a>

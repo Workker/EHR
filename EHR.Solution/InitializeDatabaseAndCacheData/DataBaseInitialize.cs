@@ -48,27 +48,69 @@ namespace InitializeDatabaseAndCacheData
             }
         }
 
+        public void insert_states()
+        {
+            var states = new List<State>
+                             {
+                                 new State {Id = 1,Description = "Acre", Acronym = "AC"},
+                                 new State {Id = 2,Description = "Alagoas", Acronym = "AL"},
+                                 new State {Id = 3,Description = "Amapá", Acronym = "AP"},
+                                 new State {Id = 4,Description = "Amazonas", Acronym = "AM"},
+                                 new State {Id = 5,Description = "Bahia", Acronym = "BA"},
+                                 new State {Id = 6,Description = "Ceará", Acronym = "CE"},
+                                 new State {Id = 7,Description = "Distrito Federal", Acronym = "DF"},
+                                 new State {Id = 8,Description = "Espírito Santo", Acronym = "ES"},
+                                 new State {Id = 9,Description = "Goiás", Acronym = "GO"},
+                                 new State {Id = 10,Description = "Maranhão", Acronym = "MA"},
+                                 new State {Id = 11,Description = "Mato Grosso", Acronym = "MT"},
+                                 new State {Id = 12,Description = "Mato Grosso do Sul", Acronym = "MS"},
+                                 new State {Id = 13,Description = "Minas Gerais", Acronym = "MG"},
+                                 new State {Id = 14,Description = "Pará", Acronym = "PA"},
+                                 new State {Id = 15,Description = "Paraíba", Acronym = "PB"},
+                                 new State {Id = 16,Description = "Paraná", Acronym = "PR"},
+                                 new State {Id = 17,Description = "Pernambuco", Acronym = "PE"},
+                                 new State {Id = 18,Description = "Piauí", Acronym = "PI"},
+                                 new State {Id = 19,Description = "Rio de Janeiro", Acronym = "RJ"},
+                                 new State {Id = 20,Description = "Rio Grande do Norte", Acronym = "RN"},
+                                 new State {Id = 21,Description = "Rio Grande do Sul", Acronym = "RS"},
+                                 new State {Id = 22,Description = "Rondônia", Acronym = "RO"},
+                                 new State {Id = 23,Description = "Roraima", Acronym = "RR"},
+                                 new State {Id = 24,Description = "Santa Catarina", Acronym = "SC"},
+                                 new State {Id = 25,Description = "São Paulo", Acronym = "SP"},
+                                 new State {Id = 26,Description = "Sergipe", Acronym = "SE"},
+                                 new State {Id = 27,Description = "Tocantins", Acronym = "TO"},
+                             };
+
+            var reactionTypes = new Types<State>();
+
+            reactionTypes.SaveList(states);
+
+        }
+
         public void insert_hospitals()
         {
+
+            var reactionTypes = new Types<State>();
+
             var hospitalList = new List<Hospital>
                                    {
-                                       new Hospital{Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png"},
-                                       new Hospital{Name = "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png"},
-                                       new Hospital{Name = "Bangu", Description = "Hospital", URLImage = "../../Images/Hospitals/bangu.png"},
-                                       new Hospital{Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png"},
-                                       new Hospital{Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png"},
-                                       new Hospital{Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png"},
-                                       new Hospital{Name = "Esperança", Description = "Hospital", URLImage = "../../Images/Hospitals/esperanca.png"},
-                                       new Hospital{Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png"},
-                                       new Hospital{Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png"},
-                                       new Hospital{Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png"},
-                                       new Hospital{Name = "Norte D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/nortedor.png"},
-                                       new Hospital{Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png"},
-                                       new Hospital{Name = "Quinta D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/quintador.png"},
-                                       new Hospital{Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png"},
-                                       new Hospital{Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png"},
-                                       new Hospital{Name = "Rios D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/riosdor.png"},
-                                       new Hospital{Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png"}
+                                       new Hospital{Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png", State = reactionTypes.Get(25)},
+                                       new Hospital{Name = "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Bangu", Description = "Hospital", URLImage = "../../Images/Hospitals/bangu.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png", State = reactionTypes.Get(25)},
+                                       new Hospital{Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Esperança", Description = "Hospital", URLImage = "../../Images/Hospitals/esperanca.png", State = reactionTypes.Get(17)},
+                                       new Hospital{Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Norte D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/nortedor.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png", State = reactionTypes.Get(17)},
+                                       new Hospital{Name = "Quinta D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/quintador.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png", State = reactionTypes.Get(25)},
+                                       new Hospital{Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "Rios D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/riosdor.png", State = reactionTypes.Get(19)},
+                                       new Hospital{Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png", State = reactionTypes.Get(17)}
                                    };
             var repository = new Hospitals();
             repository.Save(hospitalList);

@@ -7,7 +7,7 @@
             Html.RenderPartial("_LastSumariesResult");
         }
     </div>
-    @if (((List<SummaryModel>)ViewBag.Summaries).Count > 0)
+    @if (((List<SummaryModel>)ViewBag.Summaries).Count > 10)
     {
         <div class="clearfix uiMorePager uiMorePagerCenter showMore">
             <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore("../Home/MoreSumaries", this)'>Exibir mais</a>

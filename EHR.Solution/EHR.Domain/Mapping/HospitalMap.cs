@@ -9,6 +9,7 @@ namespace EHR.Domain.Mapping
             Id(h => h.Id).GeneratedBy.Identity();
             Map(h => h.Name);
             Map(h => h.URLImage);
+            References(h => h.State).Cascade.None();
         }
     }
 }

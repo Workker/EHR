@@ -144,6 +144,7 @@
     <Compile Include="Mapping\ReactionTypeMap.cs" />
     <Compile Include="Mapping\ReasonOfAdmissionMap.cs" />
     <Compile Include="Mapping\SpecialtyMap.cs" />
+    <Compile Include="Mapping\StateMap.cs" />
     <Compile Include="Mapping\SummaryMap.cs" />
     <Compile Include="Mapping\TusMap.cs" />
     <Compile Include="Mapping\ValueObjectMap.cs" />

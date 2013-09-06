@@ -38,6 +38,7 @@ namespace EHR.UI.App_Start
                 "~/Scripts/jquery.tokeninput.js",
                 "~/Scripts/jquery.corner.js",
                 "~/Scripts/jquery.tmpl.js",
+                "~/Scripts/jquery.alphanumeric.js",
                 "~/Scripts/knockout-2.1.0.js",
                 "~/Scripts/knockout-mapping.js"));
 
