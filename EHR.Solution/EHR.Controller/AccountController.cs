@@ -17,51 +17,6 @@ namespace EHR.Controller
                                       string password, DateTime birthday, short hospitalId)
         {
             ToRegisterAccount(firstName, lastName, gender, crm, email, password, birthday, hospitalId);
-
-            ToSendEmail();
-        }
-
-        private void ToSendEmail()
-        {
-            //TODO: Passar aqui os e-mails dos administradores
-            var emails = new List<MailAddress>()
-                             {
-                                 new MailAddress("thiago@workker.com.br"),
-                                 new MailAddress("ramonfelipe@workker.com.br")
-                             };
-
-            EmailUtil.EnviarEmail("Aprovação de Cadastro", "Aprova ae!", emails);
-        }
-
-        private void ToRegisterAccount(string firstName, string lastName, short gender, string crm, string email,
-                                       string password, DateTime birthday, short hospitalId)
-        {
-            #region Precondition
-
-            Assertion.IsFalse(string.IsNullOrEmpty(firstName), "Primeiro nome não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(lastName), "Ultimo nome não informado.").Validate();
-            Assertion.GreaterThan((int)gender, 0, "Género não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(crm), "CRM não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada.").Validate();
-            Assertion.GreaterThan(birthday, DateTime.MinValue, "Data de aniverssario não informada.").Validate();
-            Assertion.GreaterThan((int)hospitalId, 0, "Hospital não informado(s).").Validate();
-
-            #endregion
-
-            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
-
-            Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
-
-            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitalId);
-
-            accounts.Save(account);
-
-            #region Poscondition
-
-            Assertion.GreaterThan(account.Id, 0, "Conta de usuário não criada.").Validate();
-
-            #endregion
         }
 
         [ExceptionLogger]
@@ -147,6 +102,8 @@ namespace EHR.Controller
             ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
 
             Assertion.IsTrue(account.Approved, "Conta não aprovada.").Validate();
+
+            ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi aprovado.");
         }
 
         [ExceptionLogger]
@@ -158,6 +115,8 @@ namespace EHR.Controller
             ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Refuse(account);
 
             Assertion.IsTrue(account.Refused, "A conta não pode ser recusada.").Validate();
+
+            ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi reprovado. \n Entre em contato com o responsavel pela aprovação na unidade " + account.Hospital.Name + ".");
         }
 
         [ExceptionLogger]
@@ -206,6 +165,40 @@ namespace EHR.Controller
             return hospitalsList;
         }
 
+
+        #region Private Methods
+
+        private void ToRegisterAccount(string firstName, string lastName, short gender, string crm, string email,
+                                       string password, DateTime birthday, short hospitalId)
+        {
+            #region Precondition
+
+            Assertion.IsFalse(string.IsNullOrEmpty(firstName), "Primeiro nome não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(lastName), "Ultimo nome não informado.").Validate();
+            Assertion.GreaterThan((int)gender, 0, "Género não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(crm), "CRM não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada.").Validate();
+            Assertion.GreaterThan(birthday, DateTime.MinValue, "Data de aniverssario não informada.").Validate();
+            Assertion.GreaterThan((int)hospitalId, 0, "Hospital não informado(s).").Validate();
+
+            #endregion
+
+            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+
+            Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
+
+            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitalId);
+
+            accounts.Save(account);
+
+            #region Poscondition
+
+            Assertion.GreaterThan(account.Id, 0, "Conta de usuário não criada.").Validate();
+
+            #endregion
+        }
+
         private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email,
                                       string password, DateTime birthday, short hospitalId)
         {
@@ -226,5 +219,17 @@ namespace EHR.Controller
 
             return account;
         }
+
+        private void ToSendEmail(string email, string subject, string mensage)
+        {
+            var emails = new List<MailAddress>()
+                             {
+                                 new MailAddress(email),
+                             };
+
+            EmailUtil.EnviarEmail(subject, mensage, emails);
+        }
+
+        #endregion
     }
 }
