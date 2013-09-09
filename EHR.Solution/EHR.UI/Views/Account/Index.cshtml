@@ -66,8 +66,23 @@
                                                 <input type="text" name="LastName" required placeholder="Sobrenome" class="inputtext text_field" style="margin-right: -15px;" />
                                             </div>
                                         </div>
-                                        <div class="mbm">
-                                            <input type="text" name="CRM" required placeholder="Seu CRM" class="inputtext text_field" />
+                                        <div class="clearfix short_fields">
+                                            <div class="mrm lfloat" style="padding-top: 10px;">
+                                                @foreach (var value in Enum.GetValues(typeof(ProfessionalRegistrationTypeEnum)).Cast<short>().ToList())
+                                                {
+                                                    <input type="radio" name="ProfessionalRegistration[0].Type" value="@value" @if (value == 1)
+                                                                                                                            { 
+                                                                                                                                @:required 
+                                                                                                                            }  />
+                                                    <label for="gender" class="gender_label">
+                                                        @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
+                                                    </label>
+                                                }
+
+                                            </div>
+                                            <div class="mbm rfloat" style="margin-right: -10px;">
+                                                <input type="text" name="ProfessionalRegistration[0].Number" required placeholder="N&uacute;mero" class="inputtext text_field" style="margin-right: -15px; width: 250px;" />
+                                            </div>
                                         </div>
                                         <div class="mbm">
                                             <input type="email" name="Email" required placeholder="Seu e-mail" class="inputtext text_field" />

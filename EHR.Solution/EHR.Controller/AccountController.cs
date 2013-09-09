@@ -13,10 +13,10 @@ namespace EHR.Controller
     public class AccountController : EhrController
     {
         [ExceptionLogger]
-        public override void Register(string firstName, string lastName, short gender, string crm, string email,
+        public override void Register(string firstName, string lastName, short gender, short professionalResgistrationType, string professionalResgistrationNumber, string email,
                                       string password, DateTime birthday, short hospitalId)
         {
-            ToRegisterAccount(firstName, lastName, gender, crm, email, password, birthday, hospitalId);
+            ToRegisterAccount(firstName, lastName, gender, professionalResgistrationType, professionalResgistrationNumber, email, password, birthday, hospitalId);
         }
 
         [ExceptionLogger]
@@ -168,7 +168,7 @@ namespace EHR.Controller
 
         #region Private Methods
 
-        private void ToRegisterAccount(string firstName, string lastName, short gender, string crm, string email,
+        private void ToRegisterAccount(string firstName, string lastName, short gender, short professionalResgistrationType, string professionalResgistrationNumber, string email,
                                        string password, DateTime birthday, short hospitalId)
         {
             #region Precondition
@@ -176,7 +176,8 @@ namespace EHR.Controller
             Assertion.IsFalse(string.IsNullOrEmpty(firstName), "Primeiro nome não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(lastName), "Ultimo nome não informado.").Validate();
             Assertion.GreaterThan((int)gender, 0, "Género não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(crm), "CRM não informado.").Validate();
+            Assertion.GreaterThan((int)professionalResgistrationType, 0, "Tipo do registro profissional não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(professionalResgistrationNumber), "Numero do registro profissional não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada.").Validate();
             Assertion.GreaterThan(birthday, DateTime.MinValue, "Data de aniverssario não informada.").Validate();
@@ -188,7 +189,8 @@ namespace EHR.Controller
 
             Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
 
-            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, crm, email, password, birthday, hospitalId);
+            var account = CreateAccount(firstName, lastName, (GenderEnum)gender, (ProfessionalRegistrationTypeEnum)professionalResgistrationType,
+                professionalResgistrationNumber, email, password, birthday, hospitalId);
 
             accounts.Save(account);
 
@@ -199,13 +201,22 @@ namespace EHR.Controller
             #endregion
         }
 
-        private Account CreateAccount(string firstName, string lastName, GenderEnum gender, string crm, string email,
-                                      string password, DateTime birthday, short hospitalId)
+        private Account CreateAccount(string firstName, string lastName, GenderEnum gender, ProfessionalRegistrationTypeEnum professionalResgistrationType,
+            string professionalResgistrationNumber, string email, string password, DateTime birthday, short hospitalId)
         {
+            var hospital = GetHospitalFromRepository(hospitalId);
+
+            var professionalResgistration = new ProfessionalRegistration
+                                                {
+                                                    Number = professionalResgistrationNumber,
+                                                    State = hospital.State,
+                                                    Type = professionalResgistrationType
+                                                };
+
             var account = new Account(false);
             account.ToApprove(false);
             account.ToRefuse(false);
-            account.ToEnterCRM(crm);
+            account.AddProfessionalRegistration(professionalResgistration);
             account.ToEnterFirstName(firstName);
             account.ToEnterLastName(lastName);
             account.ToEnterGender(gender);
@@ -213,7 +224,7 @@ namespace EHR.Controller
             account.ToEnterPassword(password);
             account.ToEnterBirthday(birthday);
 
-            var hospital = GetHospitalFromRepository(hospitalId);
+
 
             account.AddHospital(hospital);
 
@@ -222,7 +233,7 @@ namespace EHR.Controller
 
         private void ToSendEmail(string email, string subject, string mensage)
         {
-            var emails = new List<MailAddress>()
+            var emails = new List<MailAddress>
                              {
                                  new MailAddress(email),
                              };

@@ -17,20 +17,20 @@ namespace EHR.Test.Domain.Entities
             _account = new Account(false);
         }
 
-        [Test]
-        public void to_enter_a_crm_valid_successfully()
-        {
-            _account.ToEnterCRM("CRM Test");
+        //[Test]
+        //public void to_enter_a_crm_valid_successfully()
+        //{
+        //    _account.ToEnterCRM("CRM Test");
 
-            Contract.Assert(_account.CRM.Equals("CRM Test"));
-        }
+        //    Contract.Assert(_account.CRM.Equals("CRM Test"));
+        //}
 
-        [Test]
-        [ExpectedException(UserMessage = "Invalid CRM!")]
-        public void to_disallow_enter_an_invalid_crm()
-        {
-            _account.ToEnterCRM(string.Empty);
-        }
+        //[Test]
+        //[ExpectedException(UserMessage = "Invalid CRM!")]
+        //public void to_disallow_enter_an_invalid_crm()
+        //{
+        //    _account.ToEnterCRM(string.Empty);
+        //}
 
         [Test]
         public void to_enter_a_first_name_sucessfully()

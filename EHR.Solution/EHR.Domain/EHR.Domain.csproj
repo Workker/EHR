@@ -113,6 +113,8 @@
     <Compile Include="Entities\OrientationOfMultidisciplinaryTeamsMetEnum.cs" />
     <Compile Include="Entities\PresentationTypeEnum.cs" />
     <Compile Include="Entities\Procedure.cs" />
+    <Compile Include="Entities\ProfessionalRegistration.cs" />
+    <Compile Include="Entities\ProfessionalRegistrationTypeEnum.cs" />
     <Compile Include="Entities\ReactionType.cs" />
     <Compile Include="Entities\ReactionTypeEnum.cs" />
     <Compile Include="Entities\ReasonOfAdmission.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Mapping\MedicationMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />
+    <Compile Include="Mapping\ProfessionalRegistrationMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />
     <Compile Include="Mapping\ReasonOfAdmissionMap.cs" />
     <Compile Include="Mapping\SpecialtyMap.cs" />

@@ -1,4 +1,5 @@
-﻿using EHR.Controller;
+﻿using System.Linq;
+using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Infrastructure.Service.Cache;
 using EHR.UI.Infrastructure.Notification;
@@ -24,8 +25,10 @@ namespace EHR.UI.Controllers
         {
             try
             {
+                var professionalRegistration = account.ProfessionalRegistration.FirstOrDefault();
+
                 FactoryController.GetController(ControllerEnum.Account).Register(account.FirstName, account.LastName,
-                                                                             account.Gender, account.Crm,
+                                                                             account.Gender, professionalRegistration.Type, professionalRegistration.Number,
                                                                              account.Email, account.Password,
                                                                              account.Birthday, account.Hospital);
 

@@ -8,17 +8,11 @@ namespace EHR.UI.Models.Mappers
     {
         public static List<AccountModel> MapAccountModelFrom(IEnumerable<Account> accounts)
         {
-            Mapper.CreateMap<Account, AccountModel>().ForMember(dest => dest.Hospital, source => source.Ignore());
-
             var accountModels = new List<AccountModel>();
 
             foreach (var item in accounts)
             {
-                var account = Mapper.Map<Account, AccountModel>(item);
-
-                account.Hospital = item.Hospital.Id;
-
-                accountModels.Add(account);
+                accountModels.Add(MapAccountModelFrom(item));
             }
 
             return accountModels;
@@ -26,12 +20,16 @@ namespace EHR.UI.Models.Mappers
 
         public static AccountModel MapAccountModelFrom(Account accountObject)
         {
-            Mapper.CreateMap<Account, AccountModel>().ForMember(dest => dest.Hospital, source => source.Ignore());
+            Mapper.CreateMap<Account, AccountModel>().ForMember(dest => dest.Hospital, source => source.Ignore()).ForMember(dest => dest.ProfessionalRegistration, source => source.Ignore());
 
             var account = Mapper.Map<Account, AccountModel>(accountObject);
 
             account.Hospital = accountObject.Hospital.Id;
 
+            foreach (var profissionalRegistration in accountObject.ProfessionalRegistration)
+            {
+                account.ProfessionalRegistration.Add(ProfessionalRegistrationMapper.MapProfessionalRegistrationModelFrom(profissionalRegistration));
+            }
             return account;
         }
     }

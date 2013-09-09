@@ -2325,7 +2325,6 @@ form.async_saving ._42me, a.async_saving._42me, ._42me._42fr, ._42me._42fr:activ
 .registration #reg_box .error_field input.inputtext, .registration #reg_box .error_field input.inputpassword { border-color: #dd3c10; }
 .async_status { margin-left: 10px; position: relative; top: 3px; }
 #reg_box #reg div.large_form { padding-left: 0; }
-    #reg_box #reg div.large_form div.field_container select { font-size: 13px; padding: 5px; height: 30px; }
     #reg_box #reg div.large_form div.reg_btn { margin: 0 0 0 110px; }
 #reg_box.registration_redesign .uiStickyPlaceholderInput { background: #fff; -webkit-border-radius: 5px; width: 399px; }
 #reg_box.registration_redesign .short_fields { width: 399px; }
@@ -6802,7 +6801,7 @@ body.hasViewasChromeBar .fbTimelineStickyHeader { padding-top: 39px; }
     #reg_box #reg div.large_form td.label { font-size: 13px; width: 115px; padding-right: 3px; }
     #reg_box #reg div.large_form td.big_label { font-size: 15px; }
     #reg_box #reg div.large_form div.field_container input { padding: 6px; font-size: 16px; width: 250px; }
-    #reg_box #reg div.large_form div.field_container select { font-size: 13px; padding: 5px; height: 30px; }
+    #reg_box #reg div.large_form select { font-size: 13px; padding: 5px; height: 30px; -webkit-border-radius: 5px; border-color: #bdc7d8; margin: 0;}
     #reg_box #reg div.large_form .reg_locale_selector { padding-top: 8px; }
     #reg_box #reg div.large_form #birthday_warning { font-size: 11px; }
     #reg_box #reg div.large_form div.reg_btn { margin: 0 0 0 110px; }

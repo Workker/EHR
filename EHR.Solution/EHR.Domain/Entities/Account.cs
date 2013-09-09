@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared;
+﻿using System.Collections.Generic;
+using EHR.CoreShared;
 using EHR.CoreShared.Interfaces;
 using EHR.Infrastructure.Util;
 using System;
@@ -11,7 +12,6 @@ namespace EHR.Domain.Entities
         #region Properties
 
         public virtual int Id { get; set; }
-        public virtual string CRM { get; protected set; }
         public virtual string FirstName { get; protected set; }
         public virtual string LastName { get; protected set; }
         public virtual GenderEnum Gender { get; protected set; }
@@ -22,6 +22,11 @@ namespace EHR.Domain.Entities
         public virtual bool Approved { get; protected set; }
         public virtual bool Refused { get; protected set; }
         public virtual bool Administrator { get; protected set; }
+        private IList<ProfessionalRegistration> _professionalRegistration;
+        public virtual IList<ProfessionalRegistration> ProfessionalRegistration
+        {
+            get { return _professionalRegistration ?? (_professionalRegistration = new List<ProfessionalRegistration>()); }
+        }
 
         #endregion
 
@@ -30,17 +35,6 @@ namespace EHR.Domain.Entities
         public Account(bool administrator)
         {
             Administrator = administrator;
-        }
-
-        public virtual void ToEnterCRM(string crm)
-        {
-            #region Precondition
-
-            Assertion.IsFalse(string.IsNullOrEmpty(crm), "Invalid CRM!").Validate();
-
-            #endregion
-
-            CRM = crm;
         }
 
         public virtual void ToEnterFirstName(string firstName)
@@ -53,6 +47,18 @@ namespace EHR.Domain.Entities
 
             FirstName = firstName;
         }
+
+        public virtual void AddProfessionalRegistration(ProfessionalRegistration professionalRegistration)
+        {
+            #region Precondition
+
+            Assertion.NotNull(professionalRegistration, "Registro profissional inválido!").Validate();
+
+            #endregion
+
+            ProfessionalRegistration.Add(professionalRegistration); ;
+        }
+
 
         public virtual void ToEnterLastName(string lastName)
         {
