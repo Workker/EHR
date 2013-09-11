@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared;
+﻿using System.Globalization;
+using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Domain.Service.Lucene;
@@ -189,10 +190,20 @@ namespace EHR.Controller
 
             Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
 
+            var hospital = GetHospitalFromRepository(hospitalId);
+
             var account = CreateAccount(firstName, lastName, (GenderEnum)gender, (ProfessionalRegistrationTypeEnum)professionalResgistrationType,
-                professionalResgistrationNumber, email, password, birthday, hospitalId);
+                professionalResgistrationNumber, email, password, birthday, hospital);
 
             accounts.Save(account);
+
+            var administrator = accounts.GetAdministratorAccount(hospital);
+
+            ToSendEmail(administrator.Email, "Rede D'or São Luiz - Solicitação de Aprovação de Cadastro", account.FirstName + " " + account.LastName +
+                " - " + EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum),
+                professionalResgistrationType.ToString(CultureInfo.InvariantCulture))) + ": " + professionalResgistrationNumber +
+                ". Efetuou cadastro no sistema sumário de alta." + " Acesse o sistema para aprovar ou recusar o cadastro.");
+
 
             #region Poscondition
 
@@ -202,9 +213,9 @@ namespace EHR.Controller
         }
 
         private Account CreateAccount(string firstName, string lastName, GenderEnum gender, ProfessionalRegistrationTypeEnum professionalResgistrationType,
-            string professionalResgistrationNumber, string email, string password, DateTime birthday, short hospitalId)
+            string professionalResgistrationNumber, string email, string password, DateTime birthday, Hospital hospital)
         {
-            var hospital = GetHospitalFromRepository(hospitalId);
+
 
             var professionalResgistration = new ProfessionalRegistration
                                                 {

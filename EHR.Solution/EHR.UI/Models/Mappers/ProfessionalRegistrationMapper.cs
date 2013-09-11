@@ -7,9 +7,13 @@ namespace EHR.UI.Models.Mappers
     {
         public static ProfessionalRegistrationModel MapProfessionalRegistrationModelFrom(ProfessionalRegistration professionalRegistrationObj)
         {
-            Mapper.CreateMap<ProfessionalRegistration, ProfessionalRegistrationModel>();
+            Mapper.CreateMap<ProfessionalRegistration, ProfessionalRegistrationModel>().ForMember(dest => dest.State, source => source.Ignore());
 
-            return Mapper.Map<ProfessionalRegistration, ProfessionalRegistrationModel>(professionalRegistrationObj);
+            var professionalRegistration = Mapper.Map<ProfessionalRegistration, ProfessionalRegistrationModel>(professionalRegistrationObj);
+
+            professionalRegistration.State = professionalRegistrationObj.State.Id;
+
+            return professionalRegistration;
         }
 
     }

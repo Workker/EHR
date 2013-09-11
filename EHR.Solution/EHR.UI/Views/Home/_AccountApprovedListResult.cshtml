@@ -13,7 +13,7 @@
                         <h2 class="text">@account.FirstName &nbsp;@account.LastName</h2>
                         <div class="fbProfileByline searchResultPersonByline">
                             <span class="fbProfileBylineFragment">
-                                <label>CRM:&nbsp;</label>@account.Crm
+                                <label>CRM:&nbsp;</label>@account.ProfessionalRegistration.FirstOrDefault()
                                 &nbsp;&nbsp;
                                    <label>E-mail:&nbsp;</label>@account.Email
                             </span>

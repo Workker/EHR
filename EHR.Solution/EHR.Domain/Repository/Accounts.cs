@@ -24,6 +24,21 @@ namespace EHR.Domain.Repository
             return account;
         }
 
+        public virtual Account GetAdministratorAccount(Hospital hospital)
+        {
+            Assertion.NotNull(hospital, "Conta não encontrada.").Validate();
+
+            var criterion = Session.CreateCriteria<Account>();
+            criterion.Add(Restrictions.Eq("Administrator", true));
+            criterion.Add(Restrictions.Eq("Hospital", hospital));
+
+            var account = criterion.UniqueResult<Account>();
+
+            Assertion.NotNull(account, "Conta não encontrada.").Validate();
+
+            return account;
+        }
+
         [ExceptionLogger]
         public virtual Account GetBy(string email)
         {

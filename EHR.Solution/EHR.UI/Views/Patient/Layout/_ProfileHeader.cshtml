@@ -10,7 +10,7 @@
     <div class="data">
         <b id="birthday">Idade:</b>&nbsp;@Model.Patient.GetAge()<br />
         <b id="hospital">Hospital:</b>&nbsp;@Model.Patient.Hospital<br />
-        @*<b>Data do Sumario:</b>&nbsp;@Model.Date<br />*@
+        <b>Data do Sumario:</b>&nbsp;@Model.Date.Value.Date.ToShortDateString()<br />
     </div>
     <div class="board" style="display: inline-block">
         <div style="width: 48%; height: 100%; float: left; padding-top: 2px; text-align: center">
