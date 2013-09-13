@@ -135,6 +135,24 @@ namespace EHR.UI.Controllers
             }
         }
 
+        [HttpPost]
+        public void AddprofessionalResgistration(short professionalResgistrationType, string professionalResgistrationNumber, short stateId)
+        {
+            try
+            {
+                var account = GetAccount();
+
+                FactoryController.GetController(ControllerEnum.Account).AddprofessionalResgistration(account.Id, professionalResgistrationType, professionalResgistrationNumber, stateId);
+
+                this.ShowMessage(MessageTypeEnum.Warning, "Registro profissional adicionado.");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+            }
+
+        }
+
         #endregion
 
         #region Private Methods
@@ -183,6 +201,11 @@ namespace EHR.UI.Controllers
                 Session["Skip"] = 10 + (Session["Skip"] != null ? (int)Session["Skip"] : 0);
             else
                 Session["Skip"] = 0;
+        }
+
+        private AccountModel GetAccount()
+        {
+            return (AccountModel)Session["account"];
         }
 
         #endregion

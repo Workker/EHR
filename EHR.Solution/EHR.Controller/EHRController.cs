@@ -72,6 +72,7 @@ namespace EHR.Controller
         public virtual void ApproveAccount(int id) { }
         public virtual void RefuseAccount(int id) { }
         public virtual void AlterPasswordOfAccount(int id, string password) { }
+        public virtual void AddprofessionalResgistration(int accountId, short professionalResgistrationType, string professionalResgistrationNumber, short stateId) { }
 
         #endregion
 

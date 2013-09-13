@@ -1,11 +1,11 @@
-﻿using System.Globalization;
-using EHR.CoreShared;
+﻿using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using EHR.Domain.Service.Lucene;
 using EHR.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Mail;
 using Workker.Framework.Domain;
 
@@ -92,6 +92,31 @@ namespace EHR.Controller
             #endregion
 
             return summaryList;
+        }
+
+        [ExceptionLogger]
+        public override void AddprofessionalResgistration(int accountId, short professionalResgistrationType, string professionalResgistrationNumber, short stateId)
+        {
+            //todo: Implementando
+
+            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
+            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
+
+            var repository = new Types<State>();
+
+            var state = repository.Get(stateId);
+
+            var professionalRegistration = new ProfessionalRegistration
+                                                                    {
+                                                                        Number = professionalResgistrationNumber,
+                                                                        Type = (ProfessionalRegistrationTypeEnum)professionalResgistrationType,
+                                                                        State = state
+                                                                    };
+
+            account.AddProfessionalRegistration(professionalRegistration);
+
+            FactoryRepository.GetRepository(RepositoryEnum.Accounts).Save(account);
+
         }
 
         [ExceptionLogger]

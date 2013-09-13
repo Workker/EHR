@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractInMemoryDataFixture.cs" />
+    <Compile Include="Controller\AccountControllerTest.cs" />
     <Compile Include="Domain\Entities\AccountTest.cs" />
     <Compile Include="Domain\Entities\PatientsTest.cs" />
     <Compile Include="Domain\Entities\ProcedureTest.cs" />
