@@ -72,7 +72,6 @@ namespace EHR.Controller
             Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(place), "Lugar não informado.").Validate();
             Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
-            Assertion.GreaterThan((int)frequencyCase, 0, "Caso de frequencia não informado.").Validate();
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
 
             var summary = Summaries.Get<Summary>(idSummary);

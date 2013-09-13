@@ -1,6 +1,7 @@
 ﻿@model AccountModel
 @using System.Globalization
 @using EHR.CoreShared
+@using EHR.Domain.Entities
 @using EHR.UI.Models
 @using EHR.Infrastructure.Util
 @foreach (AccountModel account in ViewBag.Accounts)
@@ -13,7 +14,10 @@
                         <h2 class="text">@account.FirstName &nbsp;@account.LastName</h2>
                         <div class="fbProfileByline searchResultPersonByline">
                             <span class="fbProfileBylineFragment">
-                                <label>CRM:&nbsp;</label>@account.ProfessionalRegistration.FirstOrDefault()
+                                <label>
+                                    @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), account.ProfessionalRegistration.FirstOrDefault().Type.ToString(CultureInfo.InvariantCulture))))
+                                    :&nbsp;
+                                </label>@account.ProfessionalRegistration.FirstOrDefault().Number
                                 &nbsp;&nbsp;
                                    <label>E-mail:&nbsp;</label>@account.Email
                             </span>
