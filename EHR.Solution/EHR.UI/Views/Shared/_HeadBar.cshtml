@@ -1,10 +1,14 @@
-﻿@model EHR.UI.Models.AccountModel
+﻿@using System.Globalization
+@using EHR.CoreShared
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+@model EHR.UI.Models.AccountModel
 <div id="topBar" class="fixed_elem">
     <div id="headContent" class="clearfix">
         <h1 id="pageLogo"><a href="../Home/" style="background-color: transparent;">Rede D'or</a></h1>
-        <div id="notifications" class="lfloat" style="padding-top: 3px;">
+        @*<div id="notifications" class="lfloat" style="padding-top: 3px;">
             <img src="../../Images/Capture.PNG" alt="notifications" />
-        </div>
+        </div>*@
         <div id="headNav" class="clearfix">
             <form class="lfloat" id="navSearch" name="navSearch" role="search">
                 <div class="uiTypeahead" id="upjgpe42">
@@ -48,12 +52,66 @@
             </form>
             <div class="rfloat">
                 <ul id="pageNav" class="clearfix">
-                    <li class="navItem firstItem tinyman">
-                        <img src="../../Images/user.png" alt="user" /><a href="../Home">@Model.FirstName @Model.LastName
+                    <li class="navItem firstItem" id="navHome"><a href="../Home/">Home</a></li>
+                    <li class="navItem middleItem">
+                        <a href="../Home">@Model.FirstName @Model.LastName
 
                         </a></li>
                     <li class="navItem middleItem voiceBarToggle"></li>
-                    <li class="navItem middleItem" id="navHome"><a href="../Home/">Home</a></li>
+
+                    <li class="navItem middleItem ">
+                        <a onclick="ShowFormAddprofessionalResgistration(this);">Incluir CRM/CRO</a>
+                        <div id="AddprofessionalResgistration">
+                            <form>
+                                <div class="mbm">
+                                    <select name="stateId" required>
+                                        <option value="-1">Selecione o Estado</option>
+                                        @foreach (State value in (IList<State>)Session["States"])
+                                        {
+                                            <option value="@value.Id">
+                                                @value.Acronym
+                                            </option>  
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mbm">
+                                    <select name="professionalResgistrationType" required>
+                                        <option value="-1">Selecione o Tipo</option>
+                                        @foreach (var value in Enum.GetValues(typeof(ProfessionalRegistrationTypeEnum)).Cast<short>().ToList())
+                                        {
+                                            <option value="@value">
+                                                @EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), value.ToString(CultureInfo.InvariantCulture)))
+                                            </option>  
+                                        }
+                                    </select>
+                                </div>
+                                <div class="mbm">
+                                    <input type="text" name="professionalResgistrationNumber" placeholder="Informe o numero" required />
+                                </div>
+                                <div class="mbm">
+                                    <input type="submit" value="Incluir" class="uibutton special" onclick="AddprofessionalResgistration(this);" />
+                                    <input type="button" value="Cancelar" class="uibutton" onclick="HideFormAddprofessionalResgistration(this);" />
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="navItem middleItem">
+                        <a onclick="ShowFormChangePassword(this);">Alterar Minha Senha</a>
+                        <div id="ChangePassword">
+                            <form>
+                                <div class="mbm">
+                                    <input type="password" name="newPassword" placeholder="Nova Senha" required />
+                                </div>
+                                <div class="mbm">
+                                    <input type="password" name="confirm" placeholder="Confirme a nova senha" required />
+                                </div>
+                                <div class="mbm">
+                                    <input type="submit" value="Alterar" class="uibutton special" onclick="ChangePassword(this);" />
+                                    <input type="button" value="Cancelar" class="uibutton" onclick="HideFormChangePassword(this);" />
+                                </div>
+                            </form>
+                        </div>
+                    </li>
                     <li id="navAccount"><a onclick='ShowTopMenu(this);' id="navAccountLink">
                         <div class="menuPulldown" id="userNavigationLabel">Account Settings</div>
                     </a>

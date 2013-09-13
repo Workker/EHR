@@ -144,7 +144,7 @@ namespace EHR.UI.Controllers
 
                 FactoryController.GetController(ControllerEnum.Account).AddprofessionalResgistration(account.Id, professionalResgistrationType, professionalResgistrationNumber, stateId);
 
-                this.ShowMessage(MessageTypeEnum.Warning, "Registro profissional adicionado.");
+                this.ShowMessage(MessageTypeEnum.Success, "Registro profissional adicionado.");
             }
             catch (Exception ex)
             {

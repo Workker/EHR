@@ -47,5 +47,5 @@ div.data b { padding: 0px 0px 0px 50px; }
 
 .grayButton { display: inline-block; padding: 4px 5px; white-space: initial; }
 
-#ChangePassword { position: absolute; margin: 32px 0px 0px 672px; padding: 10px 5px 5px 5px; position: absolute; width: 133px; }
+#ChangePassword,  #AddprofessionalResgistration { position: absolute; margin: 2px 0px 0px 0px; padding: 10px 5px 5px 5px; position: absolute; width: 133px; }
 #facebook .accessible_elem { left: -9999px; position: absolute; background-image: url("../Images/icones.png"); background-position: -603px -35px; }

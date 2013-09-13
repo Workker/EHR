@@ -431,6 +431,32 @@ function ChangePassword(element) {
     });
 }
 
+function ShowFormAddprofessionalResgistration(element) {
+    $(element).addClass("grayButtonClicked");
+    $(element).next().show();
+}
+
+function HideFormAddprofessionalResgistration(element) {
+    $(element).parent().parent().parent().prev().removeClass("grayButtonClicked");
+    $(element).parent().parent().parent().hide();
+}
+
+function AddprofessionalResgistration(element) {
+    var form = $(element).parent().parent();
+    form.submit(function () {
+        $.ajax({
+            type: "POST",
+            url: "../Home/AddprofessionalResgistration",
+            cache: false,
+            data: form.serialize(),
+            success: function () {
+                HideFormAddprofessionalResgistration(element);
+            }
+        });
+        return false;
+    });
+}
+
 function ShowTopMenu(element) {
     if ($(element).next().hasClass("Display")) {
         $(element).next().removeClass("Display");

@@ -20,7 +20,7 @@ namespace EHR.Controller
                 case RepositoryEnum.Patient:
                     return new Patients();
                 default:
-                    throw new Exception("Controller not found.");
+                    throw new Exception("Repositório não encontrado.");
             }
         }
     }

@@ -119,5 +119,13 @@ namespace EHR.Controller
            string personWhoDeliveredTheSummary, DateTime deliveredDate) { }
 
         #endregion
+
+
+        #region State
+
+        public virtual IList<State> GetAll() { return null; }
+
+        #endregion
+
     }
 }

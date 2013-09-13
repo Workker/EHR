@@ -29,7 +29,7 @@
                                                                 { 
                                                                     @:required 
                                                                 }  value="@condition.Id" style="margin-right: 2px;" @if (((SummaryModel)Model).HighData.ConditionOfThePatientAtHigh == condition.Id)
-                                                                                                             {
+                                                                                                                    {
                                                                                               @:checked
                                                                                           }/>
         @condition.Description
@@ -81,7 +81,7 @@
     <br />
     <hr />
     <br />
-    <label>CRM:</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.Crm)" />
+    <label>@(((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Type):</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Number)" />
     <br />
     <br />
 
@@ -112,7 +112,7 @@
     <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" value="Cancelar" class="uibutton large" />
     <script type="text/javascript">
-        
+
         $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).HighData.PrescribedHighYear));
         $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).HighData.PrescribedHighMonth));
         $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).HighData.PrescribedHighDay));

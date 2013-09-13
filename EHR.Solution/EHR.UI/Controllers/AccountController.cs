@@ -59,6 +59,10 @@ namespace EHR.UI.Controllers
                 Session["hospitals"] = HospitalMapper.MapHospitalModelFrom(accountObject);
                 Session["account"] = account;
 
+                var aa= FactoryController.GetController(ControllerEnum.State).GetAll();
+
+                Session["States"] = aa;
+
                 return RedirectToAction("Index", "Home");
 
             }
