@@ -81,7 +81,10 @@
     <br />
     <hr />
     <br />
-    <label>@(((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Type):</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Number)" />
+    @{
+        //todo: Bug 
+        //<label>((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Type):</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Number)" />
+    }
     <br />
     <br />
 
