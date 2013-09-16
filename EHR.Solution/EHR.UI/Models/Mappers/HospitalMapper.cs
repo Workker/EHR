@@ -8,13 +8,13 @@ namespace EHR.UI.Models.Mappers
 {
     public static class HospitalMapper
     {
-        public static List<HospitalModel> MapHospitalModelFrom(Account accountObject)
+        public static HospitalModel MapHospitalModelFrom(Account accountObject)
         {
             Mapper.CreateMap<Hospital, HospitalModel>();
 
-            var hospitalModels = new List<HospitalModel> { Mapper.Map<Hospital, HospitalModel>(accountObject.Hospital) };
+            var hospitalModel = Mapper.Map<Hospital, HospitalModel>(accountObject.Hospital);
 
-            return hospitalModels;
+            return hospitalModel;
         }
 
         public static HospitalModel MapHospitalModelFrom(DbEnum hospital)

@@ -1,7 +1,4 @@
-﻿@using System.Globalization
-@using EHR.CoreShared
-@using EHR.UI.Models
-@using EHR.Infrastructure.Util
+﻿@using EHR.UI.Models
 @model AccountModel
 @{
     ViewBag.Title = "Index";
@@ -22,18 +19,7 @@
                         <div id="fbProfileCover" class="drop_elem">
                             <div class="cover" id="u_0_z">
                                 <div class="coverImage">
-                                    @{
-
-                                        foreach (HospitalModel hospitalModel in ViewBag.Hospitals)
-                                        {
-
-                                            if (hospitalModel.Id == Model.CurrentHospital)
-                                            {
-                                        <img class="coverPhotoImg photo img" src="@hospitalModel.URLImage" alt="Cover Photo" style="top: 0px; width: 100%"/>
-                                            }
-                                        }
-                                        
-                                    }
+                                    <img class="coverPhotoImg photo img" src="@(((HospitalModel)ViewBag.Hospital).URLImage)" alt="Cover Photo" style="top: 0px; width: 100%"/>
                                 </div>
                                 <div class="_6-e">
                                     <h2 class="_6-f"><span class="_8_2">@Model.FirstName @Model.LastName</span></h2>

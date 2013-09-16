@@ -28,6 +28,8 @@ namespace EHR.Controller
                     return new SpecialtyController();
                 case ControllerEnum.State:
                     return new StateController();
+                case ControllerEnum.Hospital:
+                    return new HospitalController();
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -45,6 +47,7 @@ namespace EHR.Controller
         Summary = 7,
         Def = 8,
         Specialty = 9,
-        State = 10
+        State = 10,
+        Hospital = 11
     }
 }

@@ -16,7 +16,7 @@ namespace EHR.UI.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Hospitals = Session["hospitals"];
+            ViewBag.Hospital = Session["hospital"];
             return View(Session["account"]);
         }
 
@@ -170,7 +170,7 @@ namespace EHR.UI.Controllers
         {
             var accountController = FactoryController.GetController(ControllerEnum.Account);
 
-            var hospitalModel = ((IList<HospitalModel>)Session["hospitals"]).FirstOrDefault();
+            var hospitalModel = (HospitalModel)Session["hospital"];
 
             return skip ? accountController.GetAllNotApproved(hospitalModel.Id).Skip((int)Session["Skip"]).Take(10) : accountController.GetAllNotApproved(hospitalModel.Id).Take(10);
         }

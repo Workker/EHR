@@ -1,24 +1,29 @@
-﻿using System.Linq;
-using EHR.Controller;
-using EHR.CoreShared;
-using EHR.Infrastructure.Service.Cache;
+﻿using EHR.Controller;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Models;
 using EHR.UI.Models.Mappers;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace EHR.UI.Controllers
 {
     public class AccountController : System.Web.Mvc.Controller
     {
-
         public ActionResult Index()
         {
-            ViewBag.Hospitals = CacheManagementService.GetBy<IList<Hospital>>("Hospitals");
+            try
+            {
+                ViewBag.Hospitals = FactoryController.GetController(ControllerEnum.Hospital).GetAllHospitals();
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message, true);
+
+                return View("Error");
+            }
         }
 
         public ActionResult Register(AccountModel account)
@@ -56,12 +61,10 @@ namespace EHR.UI.Controllers
                 var account = AccountMapper.MapAccountModelFrom(accountObject);
                 account.CurrentHospital = account.Hospital;
 
-                Session["hospitals"] = HospitalMapper.MapHospitalModelFrom(accountObject);
+                Session["hospital"] = HospitalMapper.MapHospitalModelFrom(accountObject);
                 Session["account"] = account;
 
-                var aa= FactoryController.GetController(ControllerEnum.State).GetAll();
-
-                Session["States"] = aa;
+                Session["States"] = FactoryController.GetController(ControllerEnum.State).GetAll();
 
                 return RedirectToAction("Index", "Home");
 

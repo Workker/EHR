@@ -127,5 +127,11 @@ namespace EHR.Controller
 
         #endregion
 
+        #region
+
+        public virtual IList<Hospital> GetAllHospitals() { return null; }
+
+        #endregion
+
     }
 }

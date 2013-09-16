@@ -66,7 +66,11 @@ namespace EHR.Domain.Repository
         [ExceptionLogger]
         public IList<Hospital> GetAll()
         {
-            return base.All<Hospital>();
+            var hospitalList = base.All<Hospital>();
+
+            Assertion.GreaterThan(hospitalList.Count, 0, "Não foram encontados hospitais cadastrados.").Validate();
+
+            return hospitalList;
         }
     }
 }
