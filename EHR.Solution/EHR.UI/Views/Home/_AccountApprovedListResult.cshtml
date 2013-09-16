@@ -1,6 +1,5 @@
 ﻿@model AccountModel
 @using System.Globalization
-@using EHR.CoreShared
 @using EHR.Domain.Entities
 @using EHR.UI.Models
 @using EHR.Infrastructure.Util
@@ -20,10 +19,6 @@
                                 </label>@account.ProfessionalRegistration.FirstOrDefault().Number
                                 &nbsp;&nbsp;
                                    <label>E-mail:&nbsp;</label>@account.Email
-                            </span>
-                            <span class="fbProfileBylineFragment">
-                                <label>Hospital:&nbsp;</label>
-                                @(EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), account.Hospital.ToString(CultureInfo.InvariantCulture))))
                             </span>
                         </div>
                         <br />
