@@ -48,3 +48,8 @@
         });
     </script>
 }
+@section scriptsBefore{
+    <script type="text/javascript">
+        $(document).ready(setInterval("CheckSession()", 30000));
+    </script>
+}

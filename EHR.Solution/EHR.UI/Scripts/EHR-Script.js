@@ -544,3 +544,26 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
         }
     });
 });
+
+function CheckSession() {
+    var request = false;
+
+    if (window.XMLHttpRequest) { // Mozilla/Safari
+        request = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { // IE
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    request.open('POST', '../Account/SessionCheck', true);
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+            var session = eval('(' + request.responseText + ')');
+            if (session.valid) {
+                // DO SOMETHING IF SESSION IS VALID
+            } else {
+                alert("Your Session has expired");
+                window.location = "login.aspx";
+            }
+        }
+    }
+    request.send(null);
+}

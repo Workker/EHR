@@ -497,6 +497,7 @@
     <Content Include="Views\Patient\DataHigh\_ComplementaryExamTable.cshtml" />
     <Content Include="Views\Patient\DataHigh\_ComplementaryExamTableRow.cshtml" />
     <Content Include="Views\Patient\Layout\_LastVisitors.cshtml" />
+    <Content Include="Views\Account\_SessionCheck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -83,5 +83,11 @@ namespace EHR.UI.Controllers
 
             return RedirectToAction("Index", "Account");
         }
+
+        [HttpPost]
+        public ActionResult SessionCheck()
+        {
+            return PartialView("_SessionCheck");
+        }
     }
 }

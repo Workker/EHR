@@ -9,13 +9,14 @@
     @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-    <body>
-        @RenderSection("Page")
-        	<div id="messagewrapper" style="display: none">
-		@Html.RenderMessages()
-	</div>
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", false)
-        @Scripts.Render("~/bundles/scripts")
-    </body>
+<body>
+    @RenderSection("Page")
+    <div id="messagewrapper" style="display: none">
+        @Html.RenderMessages()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", false)
+    @Scripts.Render("~/bundles/scripts")
+    @RenderSection("scriptsBefore", false)
+</body>
 </html>
