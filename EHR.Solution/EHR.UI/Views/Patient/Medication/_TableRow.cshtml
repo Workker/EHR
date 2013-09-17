@@ -1,4 +1,7 @@
-﻿@using EHR.UI.Models
+﻿@using System.Globalization
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+@using EHR.UI.Models
 @foreach (MedicationModel medication in ViewBag.Medications)
 {
     if (medication.Type == ViewBag.MedicationType)
@@ -6,8 +9,8 @@
     <li class="clearfix">
         <span class="firstColumn">@medication.Def.Description</span>
         <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteMedication/?id=@medication.Id", null)'><span>X</span></a>
-        <span class="lastColumn"></span>
-        <span class="middleColumn"></span>
+        <span class="lastColumn">@medication.Duration</span>
+        <span class="middleColumn">@(medication.Type != 3 ? "" : medication.Dosage + " " + EnumUtil.GetDescriptionFromEnumValue((FrequencyEnum)Enum.Parse(typeof(FrequencyEnum), medication.Frequency.ToString(CultureInfo.InvariantCulture))))</span>
     </li>
     }
 }
