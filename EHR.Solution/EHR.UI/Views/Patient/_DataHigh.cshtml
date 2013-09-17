@@ -65,7 +65,7 @@
     }
     <br />
     <br />
-    <label>Prazo de revisão médica em (Dias):</label>&nbsp;
+    <label>Prazo de revisão em (Dias):</label>&nbsp;
     <input type="text" name="TermMedicalReviewAt" size="3" value="@(((SummaryModel)Model).HighData.TermMedicalReviewAt)" />&nbsp;&nbsp;
     <label>Especialidade:</label>&nbsp;
     <input type="text" required style="margin-left: 10px;" name="Specialty.Description" value="@(((SummaryModel)Model).HighData.Specialty != null ? ((SummaryModel)Model).HighData.Specialty.Description : "")" onclick="GenericAutoComplete(this, '../Patient/SpecialtyAutoComplete', '#Specialty')" />
