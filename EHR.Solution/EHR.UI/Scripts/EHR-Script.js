@@ -560,8 +560,9 @@ function CheckSession() {
             if (session.valid) {
                 // DO SOMETHING IF SESSION IS VALID
             } else {
-                alert("Your Session has expired");
-                window.location = "login.aspx";
+                alert("A sua sessão expirou por ficar mais de 5 minutos sem atividade. ");
+                alert(window.location.host);
+                window.location = window.location.host;
             }
         }
     }

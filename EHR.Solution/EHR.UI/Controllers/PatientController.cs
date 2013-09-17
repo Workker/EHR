@@ -276,7 +276,8 @@ namespace EHR.UI.Controllers
             try
             {
                 ViewBag.MedicationType = medicationType;
-                return PartialView("Medication/_Form");
+
+                return PartialView(short.Parse(medicationType) != 3 ? "Medication/_SimpleForm" : "Medication/_CompleteForm");
             }
             catch (Exception ex)
             {

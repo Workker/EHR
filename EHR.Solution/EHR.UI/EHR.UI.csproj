@@ -477,7 +477,7 @@
     <Content Include="Views\Patient\GeneralData\_AllergyForm.cshtml" />
     <Content Include="Views\Patient\GeneralData\_AllergyTable.cshtml" />
     <Content Include="Views\Patient\GeneralData\_AllergyTableRow.cshtml" />
-    <Content Include="Views\Patient\Medication\_Form.cshtml" />
+    <Content Include="Views\Patient\Medication\_CompleteForm.cshtml" />
     <Content Include="Views\Patient\Medication\_Table.cshtml" />
     <Content Include="Views\Patient\Medication\_TableRow.cshtml" />
     <Content Include="Views\Search\Layout\_Result.cshtml" />
@@ -498,6 +498,7 @@
     <Content Include="Views\Patient\DataHigh\_ComplementaryExamTableRow.cshtml" />
     <Content Include="Views\Patient\Layout\_LastVisitors.cshtml" />
     <Content Include="Views\Account\_SessionCheck.cshtml" />
+    <Content Include="Views\Patient\Medication\_SimpleForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
