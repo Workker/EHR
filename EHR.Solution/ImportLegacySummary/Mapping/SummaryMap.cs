@@ -47,7 +47,7 @@ namespace ImportLegacySummary.Mapping
 
         private void AddProcedures(Legacy.Summary legacySummary, Summary newSummary)
         {
-            var tusRepository = new TusRepository();
+            var tusRepository = new TUSSRepository();
 
             foreach (var legacyProcedure in legacySummary.Procedures)
             {

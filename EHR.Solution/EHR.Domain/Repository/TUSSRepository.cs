@@ -6,14 +6,14 @@ using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository
 {
-    public class TusRepository
+    public class TUSSRepository
         : BaseRepository
     {
-        public TusRepository()
+        public TUSSRepository()
         {
         }
 
-        public TusRepository(ISession session)
+        public TUSSRepository(ISession session)
             : base(session)
         {
 

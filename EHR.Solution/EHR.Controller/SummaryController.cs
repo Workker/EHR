@@ -8,10 +8,10 @@ namespace EHR.Controller
 {
     public class SummaryController : EhrController
     {
-        private Defs _defsRepository;
-        public Defs DefsRepository
+        private DEFRepository _defsRepository;
+        public DEFRepository DefsRepository
         {
-            get { return _defsRepository ?? (_defsRepository = new Defs()); }
+            get { return _defsRepository ?? (_defsRepository = new DEFRepository()); }
             set
             {
                 _defsRepository = value;

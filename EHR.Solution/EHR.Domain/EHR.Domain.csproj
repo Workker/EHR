@@ -155,13 +155,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Accounts.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
-    <Compile Include="Repository\Cids.cs" />
-    <Compile Include="Repository\Defs.cs" />
+    <Compile Include="Repository\CIDRepository.cs" />
+    <Compile Include="Repository\DEFRepository.cs" />
     <Compile Include="Repository\FactoryRepository.cs" />
     <Compile Include="Repository\Hospitals.cs" />
     <Compile Include="Repository\Patients.cs" />
     <Compile Include="Repository\Specialties.cs" />
-    <Compile Include="Repository\TusRepository.cs" />
+    <Compile Include="Repository\TUSSRepository.cs" />
     <Compile Include="Repository\Summaries.cs" />
     <Compile Include="Repository\Types.cs" />
     <Compile Include="Service\Lucene\GetCidLucene.cs" />

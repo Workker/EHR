@@ -10,10 +10,10 @@ namespace EHR.Controller
     public class DiagnosticController : EhrController
     {
 
-        private Cids _cidsRepository;
-        public Cids CidsRepository
+        private CIDRepository _cidsRepository;
+        public CIDRepository CidsRepository
         {
-            get { return _cidsRepository ?? (_cidsRepository = new Cids()); }
+            get { return _cidsRepository ?? (_cidsRepository = new CIDRepository()); }
             set
             {
                 _cidsRepository = value;

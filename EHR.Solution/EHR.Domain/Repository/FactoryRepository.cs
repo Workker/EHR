@@ -15,7 +15,7 @@ namespace EHR.Domain.Repository
                 case RepositoryEnum.Sumaries:
                     return new Summaries();
                 case RepositoryEnum.Def:
-                    return new Defs();
+                    return new DEFRepository();
                 case RepositoryEnum.Patient:
                     return new Patients();
                 default:

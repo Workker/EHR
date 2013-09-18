@@ -9,10 +9,10 @@ namespace EHR.Controller
 {
     public class ProcedureController : EhrController
     {
-        private TusRepository _tusRepository;
-        public TusRepository TusRepository
+        private TUSSRepository _tusRepository;
+        public TUSSRepository TusRepository
         {
-            get { return _tusRepository ?? (_tusRepository = new TusRepository()); }
+            get { return _tusRepository ?? (_tusRepository = new TUSSRepository()); }
             set
             {
                 _tusRepository = value;

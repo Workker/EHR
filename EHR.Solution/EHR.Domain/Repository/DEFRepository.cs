@@ -6,35 +6,35 @@ using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository
 {
-    public class Cids : BaseRepository
+    public class DEFRepository : BaseRepository
     {
-        public Cids()
+        public DEFRepository()
         {
         }
 
-        public Cids(ISession session)
+        public DEFRepository(ISession session)
             : base(session)
         {
 
         }
 
         [ExceptionLogger]
-        public virtual CID GetByCode(string code)
+        public virtual DEF GetById(short id)
         {
-            Assertion.IsTrue(!string.IsNullOrEmpty(code), "Código não informado.").Validate();
+            Assertion.GreaterThan((int)id, 0, "Def inválido.").Validate();
 
-            var criterio = Session.CreateCriteria<CID>();
-            criterio.Add(Restrictions.Eq("Code", code));
+            var criterio = Session.CreateCriteria<DEF>();
+            criterio.Add(Restrictions.Eq("Id", id));
 
-            var cid = criterio.UniqueResult<CID>();
+            var def = criterio.UniqueResult<DEF>();
 
-            Assertion.NotNull(cid, "Cid inválido.").Validate();
+            Assertion.NotNull(def, "Def inválido.").Validate();
 
-            return cid;
+            return def;
         }
 
         //[ExceptionLogger]
-        //public virtual void Save(List<Cid> roots)
+        //public virtual void Save(List<Def> roots)
         //{
         //    var transaction = Session.BeginTransaction();
 
@@ -54,7 +54,7 @@ namespace EHR.Domain.Repository
         //}
 
         [ExceptionLogger]
-        public virtual void SalvarLista(IList<CID> roots)
+        public virtual void SalvarLista(IList<DEF> roots)
         {
             var transaction = Session.BeginTransaction();
 
