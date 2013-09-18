@@ -1,7 +1,7 @@
 ﻿using EHR.CoreShared;
-using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Collections.Generic;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository
@@ -53,24 +53,24 @@ namespace EHR.Domain.Repository
         //    }
         //}
 
-        //[ExceptionLogger]
-        //public virtual void SalvarLista(List<Cid> roots)
-        //{
-        //    var transaction = Session.BeginTransaction();
+        [ExceptionLogger]
+        public virtual void SalvarLista(IList<CID> roots)
+        {
+            var transaction = Session.BeginTransaction();
 
-        //    try
-        //    {
-        //        foreach (var root in roots)
-        //        {
-        //            Session.SaveOrUpdate(root);
-        //        }
-        //        transaction.Commit();
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        transaction.Rollback();
-        //        throw ex;
-        //    }
-        //}
+            try
+            {
+                foreach (var root in roots)
+                {
+                    Session.SaveOrUpdate(root);
+                }
+                transaction.Commit();
+            }
+            catch (System.Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+        }
     }
 }

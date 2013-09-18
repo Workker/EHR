@@ -160,6 +160,7 @@
     <Compile Include="Repository\FactoryRepository.cs" />
     <Compile Include="Repository\Hospitals.cs" />
     <Compile Include="Repository\Patients.cs" />
+    <Compile Include="Repository\Specialties.cs" />
     <Compile Include="Repository\TusRepository.cs" />
     <Compile Include="Repository\Summaries.cs" />
     <Compile Include="Repository\Types.cs" />

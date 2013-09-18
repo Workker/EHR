@@ -6,7 +6,8 @@ namespace EHR.Domain.Mapping
     {
         public SpecialtyMap()
         {
-            Id(d => d.Id).GeneratedBy.Identity();
+            Id(s => s.Id).GeneratedBy.Identity();
+            Map(s => s.CodeTerm);
         }
     }
 }

@@ -2,5 +2,6 @@
 {
     public class Specialty : ValueObject
     {
+        public virtual int CodeTerm { get; set; }
     }
 }
