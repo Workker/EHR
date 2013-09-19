@@ -65,22 +65,27 @@ namespace EHR.Controller
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)medicationType, 0, "Tipo de medicação inválido.").Validate();
             Assertion.GreaterThan((int)def, 0, "Medicamento não informado.");
-            Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
-            Assertion.GreaterThan((int)presentationType, 0, "Tipo de apresentação não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
-            Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
-            Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(place), "Lugar não informado.").Validate();
-            Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
+
+            if (medicationType == 3)
+            {
+                Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
+                Assertion.GreaterThan((int)presentationType, 0, "Tipo de apresentação não informado.").Validate();
+                Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
+                Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
+                Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
+                Assertion.IsFalse(string.IsNullOrEmpty(place), "Lugar não informado.").Validate();
+                Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
+            }
+
+
+
 
             var summary = Summaries.Get<Summary>(idSummary);
             var defObj = DefsRepository.GetById(def);
 
             summary.CreateMedication((MedicationTypeEnum)medicationType, defObj, presentation, presentationType, dose, dosage, way, place, frequency, frequencyCase, duration);
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]
@@ -93,8 +98,6 @@ namespace EHR.Controller
 
             summary.RemoveMedication(id);
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]
@@ -109,8 +112,6 @@ namespace EHR.Controller
 
             summary.CreateExam((ExamTypeEnum)type, date, description);
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]
@@ -122,8 +123,6 @@ namespace EHR.Controller
             var summary = Summaries.Get<Summary>(summaryId);
             summary.RemoveExam(examId);
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]
@@ -177,8 +176,6 @@ namespace EHR.Controller
             }
 
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]
@@ -199,8 +196,6 @@ namespace EHR.Controller
 
             summary.AddView(account, date);
             Summaries.Save(summary);
-
-            //todo: do
         }
     }
 }
