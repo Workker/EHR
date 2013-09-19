@@ -561,8 +561,7 @@ function CheckSession() {
                 // DO SOMETHING IF SESSION IS VALID
             } else {
                 alert("A sua sessão expirou por ficar mais de 5 minutos sem atividade. ");
-                alert(window.location.host);
-                window.location = window.location.host;
+                window.location = "http://" + window.location.host;
             }
         }
     }
