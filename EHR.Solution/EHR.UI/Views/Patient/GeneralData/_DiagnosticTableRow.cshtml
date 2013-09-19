@@ -1,11 +1,12 @@
-﻿@using EHR.Domain.Entities
-@using EHR.Infrastructure.Service.Cache
+﻿@using System.Globalization
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
 @using EHR.UI.Models
 
 @foreach (DiagnosticModel diagnostic in ViewBag.Diagnostics)
 {
     <li class="clearfix">
-        <span class="firstColumn">@(CacheManagementService.GetBy<List<DiagnosticType>>("DiagnosticTypes").FirstOrDefault(type => type.Id == diagnostic.Type).Description)</span>
+        <span class="firstColumn">@EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), @diagnostic.Type.ToString(CultureInfo.InvariantCulture)))</span>
         <a class="action" onclick='deleteRow(this, "../Patient/DeleteDiagnostic/?id=@diagnostic.Id", null)'><span>X</span></a>
         <span class="lastColumn">@diagnostic.Cid.Code</span>
         <span class="middleColumn">@diagnostic.Cid.Description</span>
