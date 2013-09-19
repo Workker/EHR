@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Web;
 using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
@@ -196,6 +197,9 @@ namespace EHR.UI.Controllers
             try
             {
                 AllergyController.RemoveAllergy(GetSummary().Id, int.Parse(id));
+
+                RefreshSessionSummary();
+
                 this.ShowMessage(MessageTypeEnum.Success, "Alergia excluida.");
             }
             catch (Exception ex)
@@ -240,6 +244,8 @@ namespace EHR.UI.Controllers
             try
             {
                 DiagnosticController.RemoveDiagnostic(GetSummary().Id, int.Parse(id));
+
+                RefreshSessionSummary();
 
                 this.ShowMessage(MessageTypeEnum.Success, "Diagnóstico excluído.");
             }
@@ -401,6 +407,8 @@ namespace EHR.UI.Controllers
             try
             {
                 FactoryController.GetController(ControllerEnum.Procedure).RemoveProcedure(GetSummary().Id, id);
+
+                RefreshSessionSummary();
 
                 this.ShowMessage(MessageTypeEnum.Success, "Procedimento excluído.");
             }
@@ -718,6 +726,8 @@ namespace EHR.UI.Controllers
 
                     Session["ComplementaryExams"] = complementaryExam;
                 }
+
+                RefreshSessionSummary();
 
                 this.ShowMessage(MessageTypeEnum.Success, "Exame complementar excluído.");
             }
