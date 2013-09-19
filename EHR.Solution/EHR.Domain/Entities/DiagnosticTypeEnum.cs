@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace EHR.Domain.Entities
 {
     public enum DiagnosticTypeEnum : short
     {
+        [Description("Principal")]
+        Principal = 1,
+        [Description("Associados e/ou Outros")]
+        AssociadosEOuOutros = 2
     }
 }

@@ -1,6 +1,5 @@
 ﻿@using System.Globalization
 @using EHR.Domain.Entities
-@using EHR.Infrastructure.Service.Cache
 @using EHR.Infrastructure.Util
 @using EHR.UI.Models
 <h3>Dados da Alta</h3>
@@ -21,19 +20,19 @@
     }
     <br />
     <br />
-    <label>Condi&ccedil;&atilde;o do paciente na alta:</label>&nbsp;
-
-    @foreach (var condition in CacheManagementService.GetBy<IList<ConditionAtDischarge>>("ConditionsOfThePatientAtDischarge"))
+    <label>Condi&ccedil;&atilde;o do paciente na alta:</label>&nbsp;    
+    @foreach (var value in Enum.GetValues(typeof(ConditionOfThePatientAtHighEnum)).Cast<short>().ToList())
     {
-        <input type="radio" name="ConditionOfThePatientAtHigh"  @if (condition.Id == 1)
+        <input type="radio" name="ConditionOfThePatientAtHigh"  @if (value == 1)
                                                                 { 
-                                                                    @:required 
-                                                                }  value="@condition.Id" style="margin-right: 2px;" @if (((SummaryModel)Model).HighData.ConditionOfThePatientAtHigh == condition.Id)
-                                                                                                                    {
-                                                                                              @:checked
-                                                                                          }/>
-        @condition.Description
+                                                                     @:required 
+                                                                }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).HighData.ConditionOfThePatientAtHigh == value)
+                                                                                                             {
+                                                                                               @:checked
+                                                                                           }/>
+        @EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
+
     <br />
     <br />
     <label>Destino do paciente na alta:</label>&nbsp;

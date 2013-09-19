@@ -92,7 +92,9 @@
     <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\ComplementaryExam.cs" />
     <Compile Include="Entities\ConditionAtDischarge.cs" />
+    <Compile Include="Entities\ConditionOfThePatientAtHighEnum.cs" />
     <Compile Include="Entities\DestinationOfThePatientAtDischargeEnum.cs" />
+    <Compile Include="Entities\DiagnosticTypeEnum.cs" />
     <Compile Include="Entities\DosageEnum.cs" />
     <Compile Include="Entities\Exam.cs" />
     <Compile Include="Entities\ExamTypeEnum.cs" />

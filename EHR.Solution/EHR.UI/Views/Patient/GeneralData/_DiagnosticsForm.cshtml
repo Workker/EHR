@@ -1,5 +1,5 @@
-﻿@using EHR.Domain.Entities
-@using EHR.Infrastructure.Service.Cache
+﻿@using System.Globalization
+@using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
 <form id="diagnostic">
     <label>Tipo de diagn&oacute;stico:</label>
@@ -8,10 +8,9 @@
         @foreach (var value in Enum.GetValues(typeof(DiagnosticTypeEnum)).Cast<short>().ToList())
         {
             <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), value.ToString())) + "  ")
+                @(EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
             </option>  
         }
-
     </select>
     <br />
     <br />

@@ -20,18 +20,18 @@ namespace InitializeDatabaseAndCacheData
             dataBase.insert_diagnostic_types();
             dataBase.insert_Conditions_Of_The_Patient_At_Discharge();
             dataBase.insert_hemotransfusion_types();
-            //dataBase.insert_specialties();
+            dataBase.insert_specialties();
             dataBase.insert_reactions_types();
             dataBase.insert_admin_account();
 
-            var importCid = new ImportCID();
-            importCid.ImportFromExcelFile();
+            //var importCid = new ImportCID();
+            //importCid.ImportFromExcelFile();
 
-            var importTus = new ImportTUSS();
-            importTus.ImportFromExcelFile();
+            //var importTus = new ImportTUSS();
+            //importTus.ImportFromExcelFile();
 
-            var importSpecialty = new ImportSpecialty();
-            importSpecialty.ImportFromExcelFile();
+            //var importSpecialty = new ImportSpecialty();
+            //importSpecialty.ImportFromExcelFile();
 
             //var cache = new CacheInitialize();
             //cache.insert_hospitals_in_cache();
