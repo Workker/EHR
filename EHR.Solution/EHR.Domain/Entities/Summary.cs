@@ -218,7 +218,6 @@ namespace EHR.Domain.Entities
                 Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
                 Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
                 Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
-                Assertion.IsFalse(string.IsNullOrEmpty(place), "Lugar não informado.").Validate();
                 Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
             }
 
