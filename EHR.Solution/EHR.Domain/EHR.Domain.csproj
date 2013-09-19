@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AllergyType.cs" />
+    <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\ComplementaryExam.cs" />
     <Compile Include="Entities\ConditionAtDischarge.cs" />
     <Compile Include="Entities\DestinationOfThePatientAtDischargeEnum.cs" />
