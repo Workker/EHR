@@ -92,7 +92,7 @@ namespace EHR.Controller
 
         #region Diagnostic
 
-        public virtual void SaveDiagnostic(short diagnosticType, string cid, int idSummary) { }
+        public virtual void SaveDiagnostic(short diagnosticType, string description, string cid, int idSummary) { }
         public virtual void RemoveDiagnostic(int idSummary, int id) { }
 
         #endregion

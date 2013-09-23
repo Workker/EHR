@@ -47,20 +47,27 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void SaveDiagnostic(short diagnosticType, string cid, int summaryId)
+        public override void SaveDiagnostic(short diagnosticType, string description, string cid, int summaryId)
         {
             Assertion.GreaterThan((int)diagnosticType, 0, "Tipo do diagnostico não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(cid), "Cid não informado.").Validate();
             Assertion.GreaterThan(summaryId, 0, "Summario de alta inválido.");
 
             var summary = Summaries.Get<Summary>(summaryId);
-            var cidObj = CidsRepository.GetByCode(cid);
+
             var typeDiagnostic = DiagnosticTypes.Get(diagnosticType);
 
-            summary.CreateDiagnostic(typeDiagnostic, cidObj);
-            Summaries.Save(summary);
+            if (string.IsNullOrEmpty(cid))
+            {
+                Assertion.IsFalse(string.IsNullOrEmpty(description), "CID não informado.").Validate();
+                summary.CreateDiagnostic(typeDiagnostic, description);
+            }
+            else
+            {
+                var cidObj = CidsRepository.GetByCode(cid);
+                summary.CreateDiagnostic(typeDiagnostic, cidObj);
+            }
 
-            //todo: do
+            Summaries.Save(summary);
         }
 
         [ExceptionLogger]

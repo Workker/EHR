@@ -148,17 +148,28 @@ namespace EHR.Domain.Entities
         public virtual void CreateDiagnostic(DiagnosticType diagnosticType, CID cid)
         {
             Assertion.NotNull(diagnosticType, "Tipo do diagnostico não informado.").Validate();
-            Assertion.NotNull(cid, "Cid não informado").Validate();
+            Assertion.NotNull(cid, "CID não informado").Validate();
 
             var diagnostic = new Diagnostic { Cid = cid, Type = diagnosticType };
-
-            Assertion.NotNull(diagnostic, "Diagnostico não foi criado corretamente.").Validate();
 
             Diagnostics.Add(diagnostic);
 
             Assertion.IsTrue(Diagnostics.Contains(diagnostic), "Diagnostico não foi atribuido corretamente ao sumário.").Validate();
 
         }
+
+        public virtual void CreateDiagnostic(DiagnosticType diagnosticType, string description)
+        {
+            Assertion.NotNull(diagnosticType, "Tipo do diagnostico não informado.").Validate();
+            Assertion.NotNull(description, "CID não informado.").Validate();
+
+            var diagnostic = new Diagnostic { Type = diagnosticType, Description = description };
+
+            Diagnostics.Add(diagnostic);
+
+            Assertion.IsTrue(Diagnostics.Contains(diagnostic), "Diagnostico não foi atribuido corretamente ao sumário.").Validate();
+        }
+
 
         public virtual void RemoveDiagnostic(int id)
         {

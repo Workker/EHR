@@ -9,6 +9,7 @@ namespace EHR.Domain.Entities
         public virtual int Id { get; set; }
         public virtual DiagnosticType Type { get; set; }
         public virtual CID Cid { get; set; }
+        public virtual string Description { get; set; }
 
 
         private void SetCid(CID cid)

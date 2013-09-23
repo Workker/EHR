@@ -10,6 +10,7 @@ namespace EHR.Domain.Mapping
             Id(x => x.Id);
             References(x => x.Type);
             References(x => x.Cid);
+            Map(d => d.Description);
         }
     }
 }

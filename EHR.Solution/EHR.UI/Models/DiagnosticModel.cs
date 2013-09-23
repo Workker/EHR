@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public short Type { get; set; }
         public CidModel Cid { get; set; }
+        public string Description { get; set; }
     }
 }

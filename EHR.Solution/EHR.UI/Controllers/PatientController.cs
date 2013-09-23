@@ -220,7 +220,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                DiagnosticController.SaveDiagnostic(diagnostic.Type, diagnostic.Cid.Code, GetSummary().Id);
+                DiagnosticController.SaveDiagnostic(diagnostic.Type, diagnostic.Description, diagnostic.Cid.Code, GetSummary().Id);
 
                 RefreshSessionSummary();
 
