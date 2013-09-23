@@ -1,7 +1,7 @@
 ﻿<form id="medicationForm">
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
     <label>Medicamento:</label>
-    <input type="text" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', '#def')" />
+    <input type="text" name="medication.description" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', '#def')" />
     <input type="hidden" name="medication.def.id" id="def" />
     <br />
     <br />

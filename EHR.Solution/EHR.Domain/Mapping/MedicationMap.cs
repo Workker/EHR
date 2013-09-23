@@ -19,6 +19,7 @@ namespace EHR.Domain.Mapping
             Map(m => m.Frequency).CustomType<short>();
             Map(m => m.FrequencyCase).CustomType<short>();
             Map(m => m.Duration);
+            Map(m => m.Description);
         }
     }
 }

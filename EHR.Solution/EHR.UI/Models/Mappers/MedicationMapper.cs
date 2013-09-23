@@ -21,7 +21,11 @@ namespace EHR.UI.Models.Mappers
         {
             Mapper.CreateMap<Medication, MedicationModel>().ForMember(def => def.Def, so => so.Ignore());
             var medicationModel = Mapper.Map<Medication, MedicationModel>(medication);
-            medicationModel.Def = DefMapper.MapDefModelFrom(medication.Def);
+            if (medication.Def != null)
+            {
+                medicationModel.Def = DefMapper.MapDefModelFrom(medication.Def);
+            }
+
             return medicationModel;
         }
     }

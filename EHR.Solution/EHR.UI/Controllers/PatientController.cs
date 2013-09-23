@@ -1,15 +1,14 @@
-﻿using System.Globalization;
-using System.Web;
-using EHR.Controller;
+﻿using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
 using EHR.Infrastructure.Util;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
-using EHR.UI.Models.Mappers;
 using EHR.UI.Models;
+using EHR.UI.Models.Mappers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -298,7 +297,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                SummaryController.SaveMedication(GetSummary().Id, medication.Type, medication.Def.Id, medication.Presentation,
+                SummaryController.SaveMedication(GetSummary().Id, medication.Type, medication.Def.Id, medication.Description, medication.Presentation,
                     medication.PresentationType, medication.Dose, medication.Dosage,
                     medication.Way, medication.Place, medication.Frequency, medication.FrequencyCase, medication.Duration);
 

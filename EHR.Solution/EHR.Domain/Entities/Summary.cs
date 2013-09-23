@@ -205,7 +205,7 @@ namespace EHR.Domain.Entities
 
         #region Medication
 
-        public virtual void CreateMedication(MedicationTypeEnum type, DEF def, string presentation, short presentationType,
+        public virtual void CreateMedication(MedicationTypeEnum type, DEF def, string description, string presentation, short presentationType,
             string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
         {
             Assertion.NotNull(def, "Medicamento não informado.");
@@ -233,8 +233,44 @@ namespace EHR.Domain.Entities
                                      Place = place,
                                      Frequency = (FrequencyEnum)frequency,
                                      FrequencyCase = (FrequencyCaseEnum)frequencyCase,
-                                     Duration = duration
+                                     Duration = duration,
+                                     Description = description
                                  };
+
+            Medications.Add(medication);
+
+            Assertion.IsTrue(Medications.Contains(medication), "Medicamento não foi inserido.").Validate();
+        }
+
+        public virtual void CreateMedication(MedicationTypeEnum type, string description, string presentation, short presentationType,
+            string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
+        {
+            Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
+
+            if (((short)type) == 3)
+            {
+                Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
+                Assertion.GreaterThan((int)presentationType, 0, "Tipo de apresentação não informado.").Validate();
+                Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
+                Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
+                Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
+                Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
+            }
+
+            var medication = new Medication
+            {
+                Type = type,
+                Presentation = presentation,
+                PresentationType = (PresentationTypeEnum)presentationType,
+                Dose = dose,
+                Dosage = (DosageEnum)dosage,
+                Way = (WayEnum)way,
+                Place = place,
+                Frequency = (FrequencyEnum)frequency,
+                FrequencyCase = (FrequencyCaseEnum)frequencyCase,
+                Duration = duration,
+                Description = description
+            };
 
             Medications.Add(medication);
 

@@ -17,5 +17,6 @@ namespace EHR.Domain.Entities
         public virtual FrequencyEnum Frequency { get; set; }
         public virtual FrequencyCaseEnum FrequencyCase { get; set; }
         public virtual int Duration { get; set; }
+        public virtual string Description { get; set; }
     }
 }

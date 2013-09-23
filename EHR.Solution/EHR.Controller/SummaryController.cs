@@ -28,8 +28,6 @@ namespace EHR.Controller
 
             summary.Mdr = mdr;
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]
@@ -42,8 +40,6 @@ namespace EHR.Controller
 
             summary.Observation = observation;
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]
@@ -59,12 +55,11 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void SaveMedication(int idSummary, short medicationType, short def, string presentation,
+        public override void SaveMedication(int idSummary, short medicationType, short def, string description, string presentation,
             short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)medicationType, 0, "Tipo de medicação inválido.").Validate();
-            Assertion.GreaterThan((int)def, 0, "Medicamento não informado.");
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
 
             if (medicationType == 3)
@@ -77,13 +72,21 @@ namespace EHR.Controller
                 Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
             }
 
-
-
-
             var summary = Summaries.Get<Summary>(idSummary);
-            var defObj = DefsRepository.GetById(def);
 
-            summary.CreateMedication((MedicationTypeEnum)medicationType, defObj, presentation, presentationType, dose, dosage, way, place, frequency, frequencyCase, duration);
+            if (string.IsNullOrEmpty(description))
+            {
+                Assertion.GreaterThan((int)def, 0, "Medicamento não informado.");
+
+                var defObj = DefsRepository.GetById(def);
+
+                summary.CreateMedication((MedicationTypeEnum)medicationType, defObj, description, presentation, presentationType, dose, dosage, way, place, frequency, frequencyCase, duration);
+            }
+            else
+            {
+                summary.CreateMedication((MedicationTypeEnum)medicationType, description, presentation, presentationType, dose, dosage, way, place, frequency, frequencyCase, duration);
+            }
+
             Summaries.Save(summary);
         }
 
@@ -104,7 +107,7 @@ namespace EHR.Controller
         {
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)type, 0, "Tipo de exame inválido.").Validate();
-            //todo: validade date
+            Assertion.GreaterThan(date, DateTime.MinValue, "Data do exame não informada.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(description), "Dia inválido.").Validate();
 
             var summary = Summaries.Get<Summary>(idSummary);

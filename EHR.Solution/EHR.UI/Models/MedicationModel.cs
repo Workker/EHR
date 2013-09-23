@@ -14,5 +14,6 @@
         public short Frequency { get; set; }
         public short FrequencyCase { get; set; }
         public int Duration { get; set; }
+        public string Description { get; set; }
     }
 }
