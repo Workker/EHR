@@ -11,11 +11,24 @@ namespace EHR.UI.Models.Mappers
             var proceduresModels = new List<ProcedureModel>();
             foreach (var procedure in procedures)
             {
-                Mapper.CreateMap<Procedure, ProcedureModel>();
-                var procedureModel = Mapper.Map<Procedure, ProcedureModel>(procedure);
+                var procedureModel = MapProcedureModel(procedure);
                 proceduresModels.Add(procedureModel);
             }
             return proceduresModels;
+        }
+
+        private static ProcedureModel MapProcedureModel(Procedure procedure)
+        {
+            Mapper.CreateMap<Procedure, ProcedureModel>().ForMember(tuss => tuss.Code, proc => proc.Ignore());
+
+            var procedureModel = Mapper.Map<Procedure, ProcedureModel>(procedure);
+
+            if (procedure.Tus != null)
+            {
+                procedureModel.Code = procedure.GetCode();
+            }
+
+            return procedureModel;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace EHR.Domain.Entities
         public virtual int Id { get; set; }
         public virtual TUS Tus { get; set; }
         public virtual DateTime? Date { get; set; }
+        public virtual string Description { get; set; }
 
         public virtual void SetDate(DateTime date)
         {

@@ -377,14 +377,11 @@ namespace EHR.UI.Controllers
             return PartialView("Procedure/_ProcedureForm");
         }
 
-        public PartialViewResult SaveProcedure(string day, string month, string year, string procedureCode,
-                                               string
-            procedure)
+        public PartialViewResult SaveProcedure(string day, string month, string year, string procedureCode, string procedure, string description)
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Procedure).SaveProcedure(day, month, year,
-                                                                                        procedureCode, GetSummary().Id);
+                FactoryController.GetController(ControllerEnum.Procedure).SaveProcedure(day, month, year, procedureCode, GetSummary().Id, description);
 
                 RefreshSessionSummary();
                 ViewBag.Procedures = new List<ProcedureModel> { GetSummary().Procedures.Last() };

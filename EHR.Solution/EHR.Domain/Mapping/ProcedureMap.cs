@@ -11,6 +11,7 @@ namespace EHR.Domain.Mapping
             Id(x => x.Id);
             References(x => x.Tus);
             Map(x => x.Date).Column("ExecuteDate");
+            Map(p => p.Description);
         }
     }
 }

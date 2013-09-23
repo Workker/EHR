@@ -32,8 +32,6 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override List<TUS> GetTus(string term)
         {
-            //todo: do
-
             var tusList = GetTusLuceneService.GetTus(term);
 
             Assertion.NotNull(tusList, "Lista de procedimentos nula.").Validate();
@@ -42,22 +40,26 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void SaveProcedure(string day, string month, string year, string procedureCode, int idSummary)
+        public override void SaveProcedure(string day, string month, string year, string procedureCode, int idSummary, string description)
         {
             Assertion.GreaterThan(int.Parse(month), 0, "Mês inválido").Validate();
             Assertion.GreaterThan(int.Parse(day), 0, "Dia inválido").Validate();
             Assertion.GreaterThan(int.Parse(year), 0, "Ano inválido").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(procedureCode), "Codigo do procedimento inválido").Validate();
 
             var summary = Summaries.Get<Summary>(idSummary);
 
-            var tus = TusRepository.GetByCode(procedureCode);
-
-            summary.CreateProcedure(int.Parse(month), int.Parse(day), int.Parse(year), tus);
+            if (string.IsNullOrEmpty(procedureCode))
+            {
+                summary.CreateProcedure(int.Parse(month), int.Parse(day), int.Parse(year), description);
+            }
+            else
+            {
+                Assertion.IsFalse(string.IsNullOrEmpty(procedureCode), "Codigo do procedimento inválido").Validate();
+                var tus = TusRepository.GetByCode(procedureCode);
+                summary.CreateProcedure(int.Parse(month), int.Parse(day), int.Parse(year), tus);
+            }
 
             Summaries.Save(summary);
-
-            //todo: do
         }
 
         [ExceptionLogger]

@@ -96,6 +96,21 @@ namespace EHR.Domain.Entities
             Assertion.IsTrue(Procedures.Contains(procedure), "Procedimento não foi inserido corretamente.").Validate();
         }
 
+        public virtual void CreateProcedure(int month, int day, int year, string description)
+        {
+            Assertion.GreaterThan(month, 0, "Mês inválido.").Validate();
+            Assertion.GreaterThan(day, 0, "Dia inválido.").Validate();
+            Assertion.GreaterThan(year, 0, "Ano inválido.").Validate();
+
+            var date = new DateTime(year, month, day);
+            var procedure = new Procedure { Date = date, Description = description };
+
+            Procedures.Add(procedure);
+
+            Assertion.IsTrue(Procedures.Contains(procedure), "Procedimento não foi inserido corretamente.").Validate();
+        }
+
+
         public virtual void RemoveProcedure(int id)
         {
             Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
@@ -169,7 +184,6 @@ namespace EHR.Domain.Entities
 
             Assertion.IsTrue(Diagnostics.Contains(diagnostic), "Diagnostico não foi atribuido corretamente ao sumário.").Validate();
         }
-
 
         public virtual void RemoveDiagnostic(int id)
         {

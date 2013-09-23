@@ -74,13 +74,13 @@ namespace EHR.Test.Domain.Entities
             summary.CreateProcedure(1, 5, 0, new TUS { Id = 1 });
         }
 
-        [Test]
-        [ExpectedException(typeof(ApplicationException), ExpectedMessage = "Tus não informado.")]
-        public void create_procedure_witch_tus_null_must_return_exeption()
-        {
-            var summary = new Summary();
-            summary.CreateProcedure(1, 5, 2011, null);
-        }
+        //[Test]
+        //[ExpectedException(typeof(ApplicationException), ExpectedMessage = "Tus não informado.")]
+        //public void create_procedure_witch_tus_null_must_return_exeption()
+        //{
+        //    var summary = new Summary();
+        //    summary.CreateProcedure(1, 5, 2011, null);
+        //}
 
         [Test]
         [ExpectedException(typeof(ApplicationException), ExpectedMessage = "Tus inválido.")]
