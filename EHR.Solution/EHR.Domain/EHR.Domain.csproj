@@ -102,6 +102,7 @@
     <Compile Include="Entities\FrequencyEnum.cs" />
     <Compile Include="Entities\DischargeData.cs" />
     <Compile Include="Entities\HighTypeEnum.cs" />
+    <Compile Include="Entities\HistoryRecord.cs" />
     <Compile Include="Entities\MonthEnum.cs" />
     <Compile Include="Entities\DiagnosticType.cs" />
     <Compile Include="Entities\Account.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Entities\GenderEnum.cs" />
     <Compile Include="Entities\Specialty.cs" />
     <Compile Include="Entities\Summary.cs" />
+    <Compile Include="Entities\HistoricalActionType.cs" />
     <Compile Include="Entities\ValueObject.cs" />
     <Compile Include="Entities\View.cs" />
     <Compile Include="Entities\WayEnum.cs" />
@@ -142,6 +144,8 @@
     <Compile Include="Mapping\HemotransfusionMap.cs" />
     <Compile Include="Mapping\HemotransfusionTypeMap.cs" />
     <Compile Include="Mapping\DischargeDataMap.cs" />
+    <Compile Include="Mapping\HistoricalActionTypeMap.cs" />
+    <Compile Include="Mapping\HistoryRecordMap.cs" />
     <Compile Include="Mapping\HospitalMap.cs" />
     <Compile Include="Mapping\MedicationMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />

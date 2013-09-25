@@ -22,8 +22,9 @@ namespace InitializeDatabaseAndCacheData
             dataBase.insert_hemotransfusion_types();
             dataBase.insert_specialties();
             dataBase.insert_reactions_types();
+            dataBase.insert_Historical_Action_Types();
             dataBase.insert_admin_account();
-
+            
             //var importCid = new ImportCID();
             //importCid.ImportFromExcelFile();
 

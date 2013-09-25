@@ -67,6 +67,12 @@ namespace EHR.Domain.Entities
             get { return _views ?? (_views = new List<View>()); }
         }
 
+        private IList<HistoryRecord> _history;
+        public virtual IList<HistoryRecord> History
+        {
+            get { return _history ?? (_history = new List<HistoryRecord>()); }
+        }
+
         #endregion
 
         #region LastVisitors
@@ -347,6 +353,22 @@ namespace EHR.Domain.Entities
             Exams.Remove(exam);
 
             Assertion.IsFalse(Exams.Contains(exam), "Exame não foi removido.").Validate();
+        }
+
+        #endregion
+
+        #region History
+
+        public virtual void AddRecordToHistory(Account account, DateTime date, HistoricalActionType action, string Description)
+        {
+            var record = new HistoryRecord()
+            {
+                Account = account,
+                Action = action,
+                Date = date,
+            };
+
+            History.Add(record);
         }
 
         #endregion

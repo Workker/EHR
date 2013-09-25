@@ -339,6 +339,23 @@ namespace InitializeDatabaseAndCacheData
             accounts.Save(account);
         }
 
+        public void insert_Historical_Action_Types()
+        {
+            var list = new List<HistoricalActionType>
+                           {
+                               new HistoricalActionType{Description = "incluiu"},
+                               new HistoricalActionType{Description = "alterou"},
+                               new HistoricalActionType{Description = "excluiu"},
+                               new HistoricalActionType{Description = "viu"},
+                               new HistoricalActionType{Description = "fechou"},
+                               new HistoricalActionType{Description = "reabriu"},
+                               new HistoricalActionType{Description = "imprimiu"},
+                           };
+            var types = new Types<HistoricalActionType>();
+
+            types.SaveList(list);
+        }
+
 
 
         //public void insert_twenty_accounts()
