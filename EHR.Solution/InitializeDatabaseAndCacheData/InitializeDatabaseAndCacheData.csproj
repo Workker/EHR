@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="CacheInitialize.cs" />
     <Compile Include="DataBaseInitialize.cs" />
+    <Compile Include="IndexUpdate.cs" />
     <Compile Include="Initialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -175,6 +175,9 @@
     <Compile Include="Service\Lucene\GetDefLuceneService.cs" />
     <Compile Include="Service\Lucene\GetPatientByHospitalService.cs" />
     <Compile Include="Service\Lucene\GetTusLucene.cs" />
+    <Compile Include="Service\Lucene\UpdateCIDIndexService.cs" />
+    <Compile Include="Service\Lucene\UpdateDEFIndexService.cs" />
+    <Compile Include="Service\Lucene\UpdateTUSSIndexService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EHR.Infrastructure\EHR.Infrastructure.csproj">

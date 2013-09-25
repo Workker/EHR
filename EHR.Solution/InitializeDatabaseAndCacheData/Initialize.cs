@@ -24,15 +24,20 @@ namespace InitializeDatabaseAndCacheData
             dataBase.insert_reactions_types();
             dataBase.insert_Historical_Action_Types();
             dataBase.insert_admin_account();
-            
-            //var importCid = new ImportCID();
-            //importCid.ImportFromExcelFile();
 
-            //var importTus = new ImportTUSS();
-            //importTus.ImportFromExcelFile();
+            var importCid = new ImportCID();
+            importCid.ImportFromExcelFile();
+
+            var importTus = new ImportTUSS();
+            importTus.ImportFromExcelFile();
 
             //var importSpecialty = new ImportSpecialty();
             //importSpecialty.ImportFromExcelFile();
+
+            var index = new IndexUpdate();
+            index.update_cid_index();
+            //index.update_def_index();
+            index.update_tuss_index();
 
             //var cache = new CacheInitialize();
             //cache.insert_hospitals_in_cache();

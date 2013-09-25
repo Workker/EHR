@@ -343,13 +343,13 @@ namespace InitializeDatabaseAndCacheData
         {
             var list = new List<HistoricalActionType>
                            {
-                               new HistoricalActionType{Description = "incluiu"},
-                               new HistoricalActionType{Description = "alterou"},
-                               new HistoricalActionType{Description = "excluiu"},
-                               new HistoricalActionType{Description = "viu"},
-                               new HistoricalActionType{Description = "fechou"},
-                               new HistoricalActionType{Description = "reabriu"},
-                               new HistoricalActionType{Description = "imprimiu"},
+                               new HistoricalActionType{Id = 1,Description = "incluiu"},
+                               new HistoricalActionType{Id = 2,Description = "alterou"},
+                               new HistoricalActionType{Id = 3,Description = "excluiu"},
+                               new HistoricalActionType{Id = 4,Description = "viu"},
+                               new HistoricalActionType{Id = 5,Description = "fechou"},
+                               new HistoricalActionType{Id = 6,Description = "reabriu"},
+                               new HistoricalActionType{Id = 7,Description = "imprimiu"},
                            };
             var types = new Types<HistoricalActionType>();
 
