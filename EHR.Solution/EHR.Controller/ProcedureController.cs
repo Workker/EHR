@@ -30,7 +30,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override List<TUS> GetTus(string term)
+        public override List<TUSS> GetTus(string term)
         {
             var tusList = GetTusLuceneService.GetTus(term);
 

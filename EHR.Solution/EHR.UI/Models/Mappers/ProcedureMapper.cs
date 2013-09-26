@@ -19,13 +19,12 @@ namespace EHR.UI.Models.Mappers
 
         private static ProcedureModel MapProcedureModel(Procedure procedure)
         {
-            Mapper.CreateMap<Procedure, ProcedureModel>().ForMember(tuss => tuss.Code, proc => proc.Ignore());
-
+            Mapper.CreateMap<Procedure, ProcedureModel>().ForMember(tuss => tuss.TUSS, proc => proc.Ignore());
             var procedureModel = Mapper.Map<Procedure, ProcedureModel>(procedure);
 
             if (procedure.Tus != null)
             {
-                procedureModel.Code = procedure.GetCode();
+                procedureModel.TUSS = TUSSMapper.MapTUSSModelFrom(procedure.Tus);
             }
 
             return procedureModel;

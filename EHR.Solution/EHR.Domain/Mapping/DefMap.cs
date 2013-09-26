@@ -1,5 +1,4 @@
 ﻿using EHR.CoreShared;
-using EHR.Domain.Entities;
 
 namespace EHR.Domain.Mapping
 {
@@ -7,7 +6,8 @@ namespace EHR.Domain.Mapping
     {
         public DefMap()
         {
-            Id(d=> d.Id).GeneratedBy.Identity();
+            Id(d => d.Id).GeneratedBy.Identity();
+            Map(d => d.ActivePrinciple);
         }
     }
 }

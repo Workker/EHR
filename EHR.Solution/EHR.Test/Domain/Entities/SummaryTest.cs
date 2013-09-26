@@ -44,7 +44,7 @@ namespace EHR.Test.Domain.Entities
         {
             var summary = new Summary();
 
-            summary.CreateProcedure(1, 5, 2012, new TUS { Id = 1 });
+            summary.CreateProcedure(1, 5, 2012, new TUSS { Id = 1 });
 
             Assert.IsTrue(summary.Procedures.Count > 0);
         }
@@ -55,7 +55,7 @@ namespace EHR.Test.Domain.Entities
         public void create_procedure_witch_month_equals_zero_must_return_exeption()
         {
             var summary = new Summary();
-            summary.CreateProcedure(0, 5, 2012, new TUS { Id = 1 });
+            summary.CreateProcedure(0, 5, 2012, new TUSS { Id = 1 });
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace EHR.Test.Domain.Entities
         public void create_procedure_witch_day_equals_zero_must_return_exeption()
         {
             var summary = new Summary();
-            summary.CreateProcedure(1, 0, 2011, new TUS { Id = 1 });
+            summary.CreateProcedure(1, 0, 2011, new TUSS { Id = 1 });
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace EHR.Test.Domain.Entities
         public void create_procedure_witch_year_equals_zero_must_return_exeption()
         {
             var summary = new Summary();
-            summary.CreateProcedure(1, 5, 0, new TUS { Id = 1 });
+            summary.CreateProcedure(1, 5, 0, new TUSS { Id = 1 });
         }
 
         //[Test]
@@ -87,7 +87,7 @@ namespace EHR.Test.Domain.Entities
         public void create_procedure_witch_tus_witch_id_equals_zero_must_return_exeption()
         {
             var summary = new Summary();
-            summary.CreateProcedure(1, 5, 2011, new TUS { Id = 0 });
+            summary.CreateProcedure(1, 5, 2011, new TUSS { Id = 0 });
         }
 
         #endregion

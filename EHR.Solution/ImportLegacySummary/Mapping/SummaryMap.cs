@@ -56,7 +56,7 @@ namespace ImportLegacySummary.Mapping
                     && !String.IsNullOrWhiteSpace(legacyProcedure.TusCode))
                 {
                     DateTime procDate = legacyProcedure.DateProc.Value;
-                    TUS tus = tusRepository.GetByCode(legacyProcedure.TusCode);
+                    TUSS tus = tusRepository.GetByCode(legacyProcedure.TusCode);
 
                     newSummary.CreateProcedure(procDate.Month, procDate.Day, procDate.Year, tus);
                 }

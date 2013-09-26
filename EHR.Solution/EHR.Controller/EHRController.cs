@@ -19,7 +19,7 @@ namespace EHR.Controller
             }
         }
 
-        public virtual List<TUS> GetTus(string term) { return null; }
+        public virtual List<TUSS> GetTus(string term) { return null; }
         public virtual List<CID> GetCids(string term) { return null; }
 
         public virtual void SaveObservation(int summaryId, string observation) { }

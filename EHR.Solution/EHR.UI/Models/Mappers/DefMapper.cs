@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EHR.CoreShared;
-using EHR.Domain.Entities;
 using System.Collections.Generic;
 
 namespace EHR.UI.Models.Mappers
@@ -18,12 +17,6 @@ namespace EHR.UI.Models.Mappers
             }
             return defModels;
         }
-
-        //public static DefModel MapDefModelFrom(DEF def)
-        //{
-        //    Mapper.CreateMap<DEF, DefModel>();
-        //    return Mapper.Map<DEF, DefModel>(def);
-        //}
 
         public static DefModel MapDefModelFrom(DEF def)
         {

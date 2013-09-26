@@ -2,7 +2,7 @@
 @foreach (ProcedureModel p in ViewBag.Procedures)
 {
     <li class="clearfix">
-        <span class="firstColumn">@p.Description</span>
+        <span class="firstColumn">@(p.TUSS == null ? p.Description : p.TUSS.Description)</span>
         <a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteProcedure/?id=@p.Id", null)'><span>X</span></a>
         <span class="lastColumn"></span>
         <span class="middleColumn">

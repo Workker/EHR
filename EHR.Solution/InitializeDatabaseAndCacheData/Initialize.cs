@@ -28,15 +28,18 @@ namespace InitializeDatabaseAndCacheData
             var importCid = new ImportCID();
             importCid.ImportFromExcelFile();
 
+            var importDEF = new ImportDEF();
+            importDEF.ImportFromExcelFile();
+
             var importTus = new ImportTUSS();
             importTus.ImportFromExcelFile();
 
-            //var importSpecialty = new ImportSpecialty();
-            //importSpecialty.ImportFromExcelFile();
+            var importSpecialty = new ImportSpecialty();
+            importSpecialty.ImportFromExcelFile();
 
             var index = new IndexUpdate();
             index.update_cid_index();
-            //index.update_def_index();
+            index.update_def_index();
             index.update_tuss_index();
 
             //var cache = new CacheInitialize();

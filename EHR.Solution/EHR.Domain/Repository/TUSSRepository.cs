@@ -20,14 +20,14 @@ namespace EHR.Domain.Repository
         }
 
         [ExceptionLogger]
-        public virtual TUS GetByCode(string code)
+        public virtual TUSS GetByCode(string code)
         {
             Assertion.IsTrue(!string.IsNullOrEmpty(code), "Código do TUS inválido").Validate();
 
-            var criterio = Session.CreateCriteria<TUS>();
+            var criterio = Session.CreateCriteria<TUSS>();
             criterio.Add(Restrictions.Eq("Code", code));
 
-            var tus = criterio.UniqueResult<TUS>();
+            var tus = criterio.UniqueResult<TUSS>();
 
             Assertion.NotNull(tus, "TUS inválido.").Validate();
 
@@ -35,7 +35,7 @@ namespace EHR.Domain.Repository
         }
 
         [ExceptionLogger]
-        public virtual void Save(IList<TUS> roots)
+        public virtual void Save(IList<TUSS> roots)
         {
             var transaction = Session.BeginTransaction();
 

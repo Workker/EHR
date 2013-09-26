@@ -10,7 +10,7 @@ namespace EHR.Domain.Service.Lucene
         public void UpdateIndex()
         {
             var repository = new TUSSRepository();
-            var tus = repository.All<TUS>().ToList();
+            var tus = repository.All<TUSS>().ToList();
             var service = new SaveTusInLuceneService();
 
             service.Save(tus);

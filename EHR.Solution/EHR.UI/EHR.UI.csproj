@@ -222,6 +222,7 @@
     <Compile Include="Models\HemotransfusionModel.cs" />
     <Compile Include="Models\HighDataModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
+    <Compile Include="Models\Mappers\TUSSMapper.cs" />
     <Compile Include="Models\MedicationModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Models\SpecialtyModel.cs" />
     <Compile Include="Models\SummaryModel.cs" />
     <Compile Include="Models\TreatmentModel.cs" />
+    <Compile Include="Models\TUSSModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

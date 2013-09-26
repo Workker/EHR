@@ -86,7 +86,7 @@ namespace EHR.Domain.Entities
 
         #region Procedure
 
-        public virtual void CreateProcedure(int month, int day, int year, TUS tus)
+        public virtual void CreateProcedure(int month, int day, int year, TUSS tus)
         {
             Assertion.GreaterThan(month, 0, "Mês inválido.").Validate();
             Assertion.GreaterThan(day, 0, "Dia inválido.").Validate();

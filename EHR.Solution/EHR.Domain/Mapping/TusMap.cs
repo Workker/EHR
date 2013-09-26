@@ -3,7 +3,7 @@
 
 namespace EHR.Domain.Mapping
 {
-    public class TusMap : ValueObjectMap<TUS>
+    public class TusMap : ValueObjectMap<TUSS>
     {
         public TusMap()
         {

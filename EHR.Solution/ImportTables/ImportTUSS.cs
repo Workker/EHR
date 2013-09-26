@@ -14,11 +14,11 @@ namespace ImportTables
 
             var data = excelRepository.GetAllDataFrom("E:\\Projects\\EHR\\EHR.Solution\\ImportTables", "TUSS.xls", "TUSS");
 
-            var list = new List<TUS>();
+            var list = new List<TUSS>();
 
             foreach (DataRow row in data.Rows)
             {
-                var tus = new TUS();
+                var tus = new TUSS();
 
                 foreach (DataColumn column in data.Columns)
                 {

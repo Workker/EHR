@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImportCID.cs" />
+    <Compile Include="ImportDEF.cs" />
     <Compile Include="ImportSpecialty.cs" />
     <Compile Include="ImportTUSS.cs" />
     <Compile Include="Repository\ExcelRepository.cs" />
