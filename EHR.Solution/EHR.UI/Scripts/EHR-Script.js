@@ -278,6 +278,27 @@ function SaveComplementaryExam(element) {
     });
 }
 
+function SaveMedicalReview(element) {
+
+    var termMedicalReviewAt = $(element).prev().prev().prev().prev().prev().prev().prev().prev().val();
+    var specialtyId = $(element).prev().prev().prev().val();
+    var specialtyDescription = $(element).prev().prev().prev().prev().val();
+
+    $.ajax({
+        type: "POST",
+        url: "../Patient/SaveMedicalReview",
+        cache: false,
+        data: { TermMedicalReviewAt: termMedicalReviewAt, "Specialty.Id": specialtyId, "Specialty.Description": specialtyDescription },
+        success: function (data) {
+            var divContent = $(element).parent().parent();
+            $(divContent).hide();
+            $(divContent).prev().html(data);
+            $(divContent).prev().show();
+        }
+    });
+}
+
+
 // Role display or hide table
 function Display(element, option) {
     if (option == true) {

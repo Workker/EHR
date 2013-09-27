@@ -601,8 +601,10 @@ namespace EHR.UI.Controllers
             {
                 var summary = GetSummary();
 
+                Session["MedicalReviews"] = summary.HighData.MedicalReviews;
                 Session["ComplementaryExams"] = summary.HighData.ComplementaryExams;
 
+                ViewBag.MedicalReviews = GetMedicalReviewsFromSession();
                 ViewBag.ComplementaryExams = GetComplementaryExamsFromSession();
 
                 return PartialView("_DataHigh", summary);
@@ -640,16 +642,37 @@ namespace EHR.UI.Controllers
                     }
                 }
 
+                var medicalReview = new List<MedicalReview>();
+                var medicalReviewDeleteds = new List<int>();
+
+                foreach (var medicalReviewModel in GetMedicalReviewsFromSession())
+                {
+                    if (medicalReviewModel.Id == 0)
+                    {
+                        medicalReview.Add(new MedicalReview
+                        {
+                            Specialty = new Specialty { Id = medicalReviewModel.Specialty.Id, Description = medicalReviewModel.Specialty.Description },
+                            TermMedicalReviewAt = medicalReviewModel.TermMedicalReviewAt
+                        });
+                    }
+
+                    if (medicalReviewModel.Deleted)
+                    {
+                        medicalReviewDeleteds.Add(medicalReviewModel.Id);
+                    }
+                }
+
                 FactoryController.GetController(ControllerEnum.Summary).SaveHighData
                     (
                     GetSummary().Id,
                     complementaryExam,
                     complementaryExamDeleteds,
+                    medicalReview,
+                    medicalReviewDeleteds,
                     highDataModel.HighType,
                     highDataModel.ConditionOfThePatientAtHigh,
                     highDataModel.DestinationOfThePatientAtDischarge,
                     highDataModel.OrientationOfMultidisciplinaryTeamsMet,
-                    highDataModel.TermMedicalReviewAt, highDataModel.Specialty.Id,
                     new DateTime(highDataModel.PrescribedHighYear, highDataModel.PrescribedHighMonth, highDataModel.PrescribedHighDay),
                     highDataModel.PersonWhoDeliveredTheSummary,
                     new DateTime(highDataModel.DeliveredDateYear, highDataModel.DeliveredDateMonth, highDataModel.DeliveredDateDay)
@@ -680,6 +703,55 @@ namespace EHR.UI.Controllers
                 this.ShowMessage(MessageTypeEnum.Error, ex.Message);
 
                 return null;
+            }
+        }
+
+        public PartialViewResult MedicalReviewForm()
+        {
+            return PartialView("DataHigh/_MedicalReviewForm");
+        }
+
+        [HttpPost]
+        public PartialViewResult SaveMedicalReview(MedicalReviewModel review)
+        {
+            try
+            {
+                AddOnSessionMedicalReviews(review);
+                ViewBag.MedicalReviews = new List<MedicalReviewModel> { GetMedicalReviewsFromSession().Last() };
+
+                this.ShowMessage(MessageTypeEnum.Success, "Prazo para revisão incluída.");
+
+                return PartialView("DataHigh/_MedicalReviewTableRow");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+
+                return null;
+            }
+        }
+
+        [HttpPost]
+        public void DeleteMedicalReview(int id)
+        {
+            try
+            {
+                if (id != 0)
+                {
+                    var medicalReviews = GetMedicalReviewsFromSession();
+
+                    medicalReviews.Find(c => c.Id == id).Deleted = true;
+
+                    Session["MedicalReviews"] = medicalReviews;
+                }
+
+                RefreshSessionSummary();
+
+                this.ShowMessage(MessageTypeEnum.Success, "Prazo para revisão excluido.");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
             }
         }
 
@@ -733,6 +805,10 @@ namespace EHR.UI.Controllers
             }
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void AddOnSessionComplementaryExams(ComplementaryExamModel complementaryExamModel)
         {
             var complementaryExams = GetComplementaryExamsFromSession();
@@ -745,9 +821,17 @@ namespace EHR.UI.Controllers
             return (List<ComplementaryExamModel>)Session["ComplementaryExams"];
         }
 
-        #endregion
+        private void AddOnSessionMedicalReviews(MedicalReviewModel medicalReviewModel)
+        {
+            var medicalReviewModels = GetMedicalReviewsFromSession();
+            medicalReviewModels.Add(medicalReviewModel);
+            Session["MedicalReviews"] = medicalReviewModels;
+        }
 
-        #region Private Methods
+        private List<MedicalReviewModel> GetMedicalReviewsFromSession()
+        {
+            return (List<MedicalReviewModel>)Session["MedicalReviews"];
+        }
 
         private SummaryModel GetSummary()
         {

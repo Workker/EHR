@@ -24,6 +24,7 @@ namespace EHR.Domain.Entities
         public virtual DischargeData HighData { get; set; }
         public virtual IPatient Patient { get; set; }
         public virtual ITreatment Treatment { get; set; }
+        public virtual bool Finalized { get; set; }
 
         private IList<Allergy> _allergies;
         public virtual IList<Allergy> Allergies

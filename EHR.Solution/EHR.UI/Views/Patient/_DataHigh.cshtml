@@ -63,12 +63,13 @@
         @EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
+    <hr />
     <br />
-    <label>Prazo de revisão em (Dias):</label>&nbsp;
-    <input type="text" name="TermMedicalReviewAt" size="3" value="@(((SummaryModel)Model).HighData.TermMedicalReviewAt)" />&nbsp;&nbsp;
-    <label>Especialidade:</label>&nbsp;
-    <input type="text" required style="margin-left: 10px;" name="Specialty.Description" value="@(((SummaryModel)Model).HighData.Specialty != null ? ((SummaryModel)Model).HighData.Specialty.Description : "")" onclick="GenericAutoComplete(this, '../Patient/SpecialtyAutoComplete', '#Specialty')" />
-    <input type="hidden" name="Specialty.id" id="Specialty" value="@(((SummaryModel)Model).HighData.Specialty != null ? ((SummaryModel)Model).HighData.Specialty.Id : 0)" />
+    <h3>Prazo para Revis&atilde;o:</h3>
+    <br />
+    @{
+        Html.RenderPartial("DataHigh/_MedicalReviewTable");
+    }
     <br />
     <hr />
     <br />

@@ -128,11 +128,13 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, short highType,
+        public override void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
             short conditionOfThePatientAtDischargeId, short destinationOfThePatientAtDischarge,
-           short orientationOfMultidisciplinaryTeamsMet, int termMedicalReviewAt, short specialtyId, DateTime prescribedHigh,
+           short orientationOfMultidisciplinaryTeamsMet, DateTime prescribedHigh,
             string personWhoDeliveredTheSummary, DateTime deliveredDate)
         {
+            #region Preconditions
+
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.NotNull(complementaryExams, "Lista de exames complementares está nula.").Validate();
             Assertion.NotNull(complementaryExamDeleteds, "Lista de exames complementares deletados está nula.").Validate();
@@ -140,29 +142,33 @@ namespace EHR.Controller
             Assertion.GreaterThan((int)conditionOfThePatientAtDischargeId, 0, "Condição de alta inválida.").Validate();
             Assertion.GreaterThan((int)destinationOfThePatientAtDischarge, 0, "Destino pós alta inválido.").Validate();
             Assertion.GreaterThan((int)orientationOfMultidisciplinaryTeamsMet, 0, "Opção de orientação de equipes multidisciplinares inválida.").Validate();
-            Assertion.GreaterThan((int)specialtyId, 0, "Especialidade inválida.").Validate();
             Assertion.GreaterThan(prescribedHigh, DateTime.MinValue, "Data de alta inválida.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(personWhoDeliveredTheSummary), "Nome da pessoa a que o sumário foi entregue não foi informado.").Validate();
             Assertion.GreaterThan(deliveredDate, DateTime.MinValue, "Data de entrega inválida.").Validate();
+
+            #endregion
 
             var summary = Summaries.Get<Summary>(idSummary);
 
             Assertion.NotNull(summary, "Sumário de alta não encontrado.").Validate();
 
-            var specialty = new Types<Specialty>().Get(specialtyId);
-
-            Assertion.NotNull(specialty, "Especialide não encontrada.").Validate();
-
             var conditionOfThePatientAtDischarge = new Types<ConditionAtDischarge>().Get(conditionOfThePatientAtDischargeId);
-
-            Assertion.NotNull(specialty, "Destino pós alta inválido.").Validate();
 
             summary.HighData.HighType = (HighTypeEnum)highType;
             summary.HighData.ConditionAtDischarge = conditionOfThePatientAtDischarge;
             summary.HighData.DestinationAtDischarge = (DestinationOfThePatientAtDischargeEnum)destinationOfThePatientAtDischarge;
             summary.HighData.MultidisciplinaryTeamsMet = (OrientationOfMultidisciplinaryTeamsMetEnum)orientationOfMultidisciplinaryTeamsMet;
-            summary.HighData.TermMedicalReviewAt = termMedicalReviewAt;
-            summary.HighData.Specialty = specialty;
+
+            foreach (var id in medicalReviewDeleteds)
+            {
+                summary.HighData.RemoveMedicalReview(id);
+            }
+
+            foreach (var medicalReview in medicalReviews)
+            {
+                summary.HighData.MedicalReviews.Add(medicalReview);
+            }
+
             summary.HighData.PrescribedHigh = prescribedHigh;
             summary.HighData.PersonWhoDeliveredTheSummary = personWhoDeliveredTheSummary;
             summary.HighData.Date = deliveredDate;

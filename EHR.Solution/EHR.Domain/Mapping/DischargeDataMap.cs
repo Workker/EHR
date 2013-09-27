@@ -12,12 +12,11 @@ namespace EHR.Domain.Mapping
             References(h => h.ConditionAtDischarge).Cascade.None();
             Map(h => h.DestinationAtDischarge).CustomType<short>();
             Map(h => h.MultidisciplinaryTeamsMet).CustomType<short>();
-            Map(h => h.TermMedicalReviewAt);
-            References(h => h.Specialty).Cascade.None();
+            HasMany(h => h.MedicalReviews).Cascade.AllDeleteOrphan();
+            HasMany(s => s.ComplementaryExams).Cascade.AllDeleteOrphan();
             Map(h => h.PrescribedHigh);
             Map(h => h.PersonWhoDeliveredTheSummary);
             Map(h => h.Date).Column("DeliveredDate");
-            HasMany(s => s.ComplementaryExams).Cascade.AllDeleteOrphan();
         }
     }
 }

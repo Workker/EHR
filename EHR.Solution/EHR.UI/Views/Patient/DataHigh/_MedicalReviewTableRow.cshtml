@@ -1,0 +1,12 @@
+﻿@using EHR.UI.Models
+@foreach (MedicalReviewModel medicalReview in ViewBag.MedicalReviews)
+{
+    <li class="clearfix">
+        <span class="firstColumn">
+            @medicalReview.Specialty.Description
+        </span>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteMedicalReview/?id=@medicalReview.Id", null)'><span>X</span></a>
+        <span class="lastColumn">@medicalReview.TermMedicalReviewAt  Dia(s)</span>
+        <span class="middleColumn"></span>
+    </li>
+}

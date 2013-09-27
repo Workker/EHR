@@ -205,6 +205,7 @@
     <Compile Include="Models\Mappers\HemotransfusionMapper.cs" />
     <Compile Include="Models\Mappers\HighDataMapper.cs" />
     <Compile Include="Models\Mappers\HospitalMapper.cs" />
+    <Compile Include="Models\Mappers\MedicalReviewMapper.cs" />
     <Compile Include="Models\Mappers\MedicationMapper.cs" />
     <Compile Include="Models\Mappers\PatientMapper.cs" />
     <Compile Include="Models\Mappers\ProcedureMapper.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Models\HighDataModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
     <Compile Include="Models\Mappers\TUSSMapper.cs" />
+    <Compile Include="Models\MedicalReviewModel.cs" />
     <Compile Include="Models\MedicationModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
@@ -501,6 +503,9 @@
     <Content Include="Views\Patient\Layout\_LastVisitors.cshtml" />
     <Content Include="Views\Account\_SessionCheck.cshtml" />
     <Content Include="Views\Patient\Medication\_SimpleForm.cshtml" />
+    <Content Include="Views\Patient\DataHigh\_MedicalReviewForm.cshtml" />
+    <Content Include="Views\Patient\DataHigh\_MedicalReviewTable.cshtml" />
+    <Content Include="Views\Patient\DataHigh\_MedicalReviewTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

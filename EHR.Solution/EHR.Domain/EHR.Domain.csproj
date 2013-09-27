@@ -103,6 +103,7 @@
     <Compile Include="Entities\DischargeData.cs" />
     <Compile Include="Entities\HighTypeEnum.cs" />
     <Compile Include="Entities\HistoryRecord.cs" />
+    <Compile Include="Entities\MedicalReview.cs" />
     <Compile Include="Entities\MonthEnum.cs" />
     <Compile Include="Entities\DiagnosticType.cs" />
     <Compile Include="Entities\Account.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Mapping\HistoricalActionTypeMap.cs" />
     <Compile Include="Mapping\HistoryRecordMap.cs" />
     <Compile Include="Mapping\HospitalMap.cs" />
+    <Compile Include="Mapping\MedicalReviewMap.cs" />
     <Compile Include="Mapping\MedicationMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />

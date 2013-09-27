@@ -1,0 +1,13 @@
+﻿<div id="medicalReview">
+    <label>Prazo de revis&atilde;o em (Dias):</label>&nbsp;
+    <input type="text" name="TermMedicalReviewAt" size="3" value="" />
+    <br />
+    <br />
+    <label>Especialidade:</label>&nbsp;
+    <input type="text" required style="margin-left: 10px;" name="SpecialtyDescription" value="" onclick="GenericAutoComplete(this, '../Patient/SpecialtyAutoComplete', '#Specialty')" />
+    <input type="hidden" name="SpecialtyId" id="Specialty" value="" />
+    <br />
+    <br />
+    <input type="button" onclick='SaveMedicalReview(this);' value="Adicionar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
+</div>

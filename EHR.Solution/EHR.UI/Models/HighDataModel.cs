@@ -9,9 +9,12 @@ namespace EHR.UI.Models
         public short ConditionOfThePatientAtHigh { get; set; }
         public short DestinationOfThePatientAtDischarge { get; set; }
         public short OrientationOfMultidisciplinaryTeamsMet { get; set; }
-        public int TermMedicalReviewAt { get; set; }
-        public SpecialtyModel Specialty { get; set; }
         public string PersonWhoDeliveredTheSummary { get; set; }
+        private List<MedicalReviewModel> _medicalReviews;
+        public List<MedicalReviewModel> MedicalReviews
+        {
+            get { return _medicalReviews ?? (_medicalReviews = new List<MedicalReviewModel>()); }
+        }
         private List<ComplementaryExamModel> _complementaryExams;
         public List<ComplementaryExamModel> ComplementaryExams
         {

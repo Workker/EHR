@@ -113,10 +113,10 @@ namespace EHR.Controller
 
         #endregion
 
-        public virtual void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, short highType,
-           short conditionOfThePatientAtHigh, short destinationOfThePatientAtDischarge,
-          short orientationOfMultidisciplinaryTeamsMet, int termMedicalReviewAt, short specialty, DateTime prescribedHigh,
-           string personWhoDeliveredTheSummary, DateTime deliveredDate) { }
+        public virtual void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
+            short conditionOfThePatientAtDischargeId, short destinationOfThePatientAtDischarge,
+           short orientationOfMultidisciplinaryTeamsMet, DateTime prescribedHigh,
+            string personWhoDeliveredTheSummary, DateTime deliveredDate) { }
 
         #endregion
 

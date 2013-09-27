@@ -12,7 +12,6 @@ namespace EHR.UI.Models.Mappers
             foreach (var specialty in specialties)
             {
                 var specialtyModel = MapSpecialtyModelFrom(specialty);
-                specialtyModel.Code = specialty.Id;
                 specialtyModels.Add(specialtyModel);
             }
             return specialtyModels;
@@ -21,7 +20,9 @@ namespace EHR.UI.Models.Mappers
         public static SpecialtyModel MapSpecialtyModelFrom(Specialty specialty)
         {
             Mapper.CreateMap<Specialty, SpecialtyModel>();
-            return Mapper.Map<Specialty, SpecialtyModel>(specialty);
+            var specialtyModel = Mapper.Map<Specialty, SpecialtyModel>(specialty);
+            specialtyModel.Code = specialty.Id;
+            return specialtyModel;
         }
     }
 }
