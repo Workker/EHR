@@ -102,6 +102,7 @@
     <Compile Include="Entities\FrequencyEnum.cs" />
     <Compile Include="Entities\DischargeData.cs" />
     <Compile Include="Entities\HighTypeEnum.cs" />
+    <Compile Include="Entities\HistoricalActionTypeEnum.cs" />
     <Compile Include="Entities\HistoryRecord.cs" />
     <Compile Include="Entities\MedicalReview.cs" />
     <Compile Include="Entities\MonthEnum.cs" />

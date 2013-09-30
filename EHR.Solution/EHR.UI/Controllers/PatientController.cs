@@ -40,8 +40,6 @@ namespace EHR.UI.Controllers
                 var allergies = FactoryController.GetController(ControllerEnum.Patient).GetAllergiesBy(patient.CPF);
                 var medications = FactoryController.GetController(ControllerEnum.Patient).GetMedicationsOfUseAfterInternationBy(patient.CPF);
 
-                RegisterView(summary);
-
                 var summaryModel = SummaryMapper.MapSummaryModelFrom(summary);
 
                 summaryModel.Patient = patientModel;
@@ -50,10 +48,10 @@ namespace EHR.UI.Controllers
                 if (GetSummary() == null)
                     Response.Redirect("/Home");
 
-                ViewBag.LastVisitors = summaryModel.LastVisitors != null
-                                           ? DistinctView(summaryModel.LastVisitors
-                                           .OrderByDescending(model => model.Id).Take(10).ToList())
-                                           : new List<ViewModel>();
+                //ViewBag.LastVisitors = summaryModel.LastVisitors != null
+                //                           ? DistinctView(summaryModel.LastVisitors
+                //                           .OrderByDescending(model => model.Id).Take(10).ToList())
+                //                           : new List<ViewModel>();
 
                 ViewBag.AllAlergies = AllergyMapper.MapAllergyModelsFrom(allergies);
                 ViewBag.AllMedications = MedicationMapper.MapMedicationModelsFrom(medications);
@@ -61,6 +59,8 @@ namespace EHR.UI.Controllers
                 ViewBag.Diagnostics = summaryModel.Diagnostics;
                 ViewBag.Procedures = summaryModel.Procedures;
                 ViewBag.Medications = summaryModel.Medications;
+
+               this.RegisterActionOfUser(HistoricalActionTypeEnum.View);
 
                 return View(summaryModel);
             }
@@ -153,6 +153,7 @@ namespace EHR.UI.Controllers
             try
             {
                 FactoryController.GetController(ControllerEnum.Summary).SaveObservation(GetSummary().Id, observation);
+                
                 RefreshSessionSummary();
 
                 this.ShowMessage(MessageTypeEnum.Success, "História, exame fisico na admissão, breve curso hospitalar e exames relevantes. Atualizado.");
@@ -836,11 +837,6 @@ namespace EHR.UI.Controllers
         private SummaryModel GetSummary()
         {
             return (SummaryModel)Session["Summary"];
-        }
-
-        private void RegisterView(Summary summary)
-        {
-            SummaryController.AddView(summary.Id, ((AccountModel)Session["account"]).Id, DateTime.Now);
         }
 
         private AccountModel GetAccount()

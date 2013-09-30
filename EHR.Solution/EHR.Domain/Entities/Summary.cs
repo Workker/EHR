@@ -62,25 +62,10 @@ namespace EHR.Domain.Entities
             get { return _hemotransfusions ?? (_hemotransfusions = new List<Hemotransfusion>()); }
         }
 
-        private IList<View> _views;
-        public virtual IList<View> Views
-        {
-            get { return _views ?? (_views = new List<View>()); }
-        }
-
         private IList<HistoryRecord> _history;
         public virtual IList<HistoryRecord> History
         {
             get { return _history ?? (_history = new List<HistoryRecord>()); }
-        }
-
-        #endregion
-
-        #region LastVisitors
-
-        public virtual void AddView(Account account, DateTime date)
-        {
-            Views.Add(new View { Account = account, VisiteDate = date });
         }
 
         #endregion
@@ -116,7 +101,6 @@ namespace EHR.Domain.Entities
 
             Assertion.IsTrue(Procedures.Contains(procedure), "Procedimento não foi inserido corretamente.").Validate();
         }
-
 
         public virtual void RemoveProcedure(int id)
         {
@@ -360,10 +344,10 @@ namespace EHR.Domain.Entities
 
         #region History
 
-        public virtual void AddRecordToHistory(Account account, DateTime date, HistoricalActionType action, string Description)
+        public virtual void AddRecordToHistory(Account account, DateTime date, HistoricalActionType action, string description)
         {
-            var record = new HistoryRecord()
-            {
+            var record = new HistoryRecord
+                             {
                 Account = account,
                 Action = action,
                 Date = date,
@@ -373,6 +357,5 @@ namespace EHR.Domain.Entities
         }
 
         #endregion
-
     }
 }

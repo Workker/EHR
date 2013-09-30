@@ -22,6 +22,5 @@ namespace EHR.UI.Models
         public List<MedicationModel> Medications { get; set; }
         public List<HemotransfusionModel> Hemotransfusions { get; set; }
         public IList<ExamModel> Exams { get; set; }
-        public IList<ViewModel> LastVisitors { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace EHR.UI.Models.Mappers
                 .ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore())
                 .ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
                 .ForMember(ex => ex.Exams, so => so.Ignore()).ForMember(me => me.Medications, so => so.Ignore())
-                .ForMember(hd => hd.HighData, so => so.Ignore()).ForMember(ac => ac.LastVisitors, so => so.Ignore())
+                .ForMember(hd => hd.HighData, so => so.Ignore())
                 .ForMember(p => p.Patient, so => so.Ignore());
 
             var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
@@ -23,7 +23,6 @@ namespace EHR.UI.Models.Mappers
             summaryModel.Medications = MedicationMapper.MapMedicationModelsFrom(summary.Medications);
             summaryModel.Hemotransfusions = HemotransfusionMapper.MapHemotransfusionModelsFrom(summary.Hemotransfusions);
             summaryModel.Exams = ExamMapper.MapExamModelsFrom(summary.Exams);
-            summaryModel.LastVisitors = MapViewModelFrom(summary.Views);
             summaryModel.Patient = PatientMapper.MapPatientModelFrom(summary.Patient);
             summaryModel.Hospital = HospitalMapper.MapHospitalModelFrom(summary.Hospital);
 

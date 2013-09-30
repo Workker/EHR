@@ -11,6 +11,7 @@ namespace EHR.Domain.Mapping
             References(h => h.Account).Cascade.None();
             References(h => h.Action).Cascade.None();
             Map(h => h.Date).Column("DateOfAction");
+            Map(h => h.Description);
         }
     }
 }

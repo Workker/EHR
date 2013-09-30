@@ -41,7 +41,7 @@ namespace EHR.Controller
 
         public virtual void SaveMdr(int summaryId, string mdr) { }
         public virtual Summary GetBy(int id) { return null; }
-        public virtual void AddView(int idSummary, int idAccount, DateTime date) { }
+        public virtual void AddToHistorical(int idSummary, int idAccount, HistoricalActionTypeEnum actionType, DateTime date, string description) { }
 
         #endregion
 

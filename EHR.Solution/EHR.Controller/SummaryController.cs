@@ -187,22 +187,27 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void AddView(int idSummary, int idAccount, DateTime date)
+        public override void AddToHistorical(int idSummary, int idAccount, HistoricalActionTypeEnum actionType, DateTime date, string description)
         {
+            #region Preconditions
+
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan(idAccount, 0, "Conta de usuário inválida.").Validate();
             Assertion.GreaterThan(date, DateTime.MinValue, "Data inválida.").Validate();
+
+            #endregion
 
             var summary = Summaries.Get<Summary>(idSummary);
 
             Assertion.NotNull(summary, "Sumário de alta não encontrado.").Validate();
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(idAccount);
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
 
             Assertion.NotNull(account, "Conta de usuário inválida.").Validate();
 
-            summary.AddView(account, date);
+            var action = new Types<HistoricalActionType>().Get((short) actionType);
+
+            summary.AddRecordToHistory(account, date, action,description);
             Summaries.Save(summary);
         }
     }

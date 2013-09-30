@@ -9,8 +9,8 @@ namespace EHR.Domain.Entities
     public abstract class ValueObject : CoreShared.ValueObject
     {
         [ProtoMember(1)]
-        public virtual short Id { get; set; }
+        public override short Id { get; set; }
         [ProtoMember(2)]
-        public virtual string Description { get; set; }
+        public override string Description { get; set; }
     }
 }
