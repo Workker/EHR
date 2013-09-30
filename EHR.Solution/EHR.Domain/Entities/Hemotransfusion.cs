@@ -1,9 +1,8 @@
-﻿using EHR.CoreShared.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace EHR.Domain.Entities
 {
-    public class Hemotransfusion : IAggregateRoot<int>
+    public class Hemotransfusion 
     {
         public virtual int Id { get; set; }
         public virtual HemotransfusionType Type { get; set; }

@@ -9,12 +9,12 @@ namespace EHR.Domain.Mapping
         {
             Id(s => s.Id);
             Map(s => s.Cpf);
-            Map(s => s.Date).Column("SummaryDate");
-            Map(s => s.Observation);
+            Map(s => s.Date);
+            Map(s => s.Observation).Length(1000);
             Map(s => s.CodeMedicalRecord);
             Map(s => s.Hospital);
             Map(s => s.EntryDateTreatment);
-            Map(s => s.Mdr);
+            Map(s => s.Mdr).Length(1000);
             References(s => s.Admission);
             References(s => s.HighData).Cascade.All();
             HasMany(s => s.Diagnostics).Cascade.AllDeleteOrphan();

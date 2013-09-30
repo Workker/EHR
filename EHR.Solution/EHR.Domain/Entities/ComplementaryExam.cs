@@ -1,8 +1,6 @@
-﻿using EHR.CoreShared.Interfaces;
-
-namespace EHR.Domain.Entities
+﻿namespace EHR.Domain.Entities
 {
-    public class ComplementaryExam : IAggregateRoot<int>
+    public class ComplementaryExam
     {
         public virtual int Id { get; set; }
         public virtual string Description { get; set; }

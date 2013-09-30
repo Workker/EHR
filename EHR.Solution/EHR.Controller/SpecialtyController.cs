@@ -13,9 +13,11 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override List<Specialty> GetSpecialty(string term)
         {
-            //todo: do
+            Assertion.IsFalse(string.IsNullOrEmpty(term), "Termo não informado.").Validate();
 
-            var listSpe = _typesRepository.All<Specialty>().Where(l => l.Description.Substring(0, term.Length).ToUpper() == term.ToUpper()).ToList();
+            var listSpe =
+                _typesRepository.All<Specialty>().Where(
+                    l => l.Description.Substring(0, term.Length).ToUpper() == term.ToUpper()).ToList();
 
             Assertion.NotNull(listSpe, "Lista de especialidades nula.").Validate();
 

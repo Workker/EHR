@@ -10,7 +10,7 @@ namespace EHR.Domain.Mapping
             Id(e => e.Id);
             Map(e => e.Type).CustomType<short>().Column("ExamType");
             Map(e => e.Date).Column("ExamDate");
-            Map(e => e.Description);
+            Map(e => e.Description).Length(1000);
         }
     }
 }

@@ -6,7 +6,7 @@ using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
 {
-    public class DischargeData : IAggregateRoot<int>
+    public class DischargeData
     {
         #region Properties
 

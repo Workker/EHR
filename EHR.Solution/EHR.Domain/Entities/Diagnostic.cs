@@ -1,10 +1,9 @@
 ﻿using EHR.CoreShared;
-using EHR.CoreShared.Interfaces;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities
 {
-    public class Diagnostic : IAggregateRoot<int>
+    public class Diagnostic
     {
         public virtual int Id { get; set; }
         public virtual DiagnosticType Type { get; set; }

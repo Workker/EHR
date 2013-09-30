@@ -1,9 +1,8 @@
 ﻿using EHR.CoreShared;
-using EHR.CoreShared.Interfaces;
 
 namespace EHR.Domain.Entities
 {
-    public class Medication : IAggregateRoot<int>
+    public class Medication
     {
         public virtual int Id { get; set; }
         public virtual MedicationTypeEnum Type { get; set; }
