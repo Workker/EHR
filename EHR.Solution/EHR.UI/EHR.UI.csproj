@@ -203,7 +203,7 @@
     <Compile Include="Models\Mappers\DiagnosticMapper.cs" />
     <Compile Include="Models\Mappers\ExamMapper.cs" />
     <Compile Include="Models\Mappers\HemotransfusionMapper.cs" />
-    <Compile Include="Models\Mappers\HighDataMapper.cs" />
+    <Compile Include="Models\Mappers\DischargeDataMapper.cs" />
     <Compile Include="Models\Mappers\HospitalMapper.cs" />
     <Compile Include="Models\Mappers\MedicalReviewMapper.cs" />
     <Compile Include="Models\Mappers\MedicationMapper.cs" />
@@ -221,7 +221,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ExamModel.cs" />
     <Compile Include="Models\HemotransfusionModel.cs" />
-    <Compile Include="Models\HighDataModel.cs" />
+    <Compile Include="Models\DischargeDataModel.cs" />
     <Compile Include="Models\HospitalModel.cs" />
     <Compile Include="Models\Mappers\TUSSMapper.cs" />
     <Compile Include="Models\MedicalReviewModel.cs" />

@@ -594,7 +594,7 @@ namespace EHR.UI.Controllers
 
         #endregion
 
-        #region High Data
+        #region Discharge Data
 
         public PartialViewResult DataHigh()
         {
@@ -602,8 +602,8 @@ namespace EHR.UI.Controllers
             {
                 var summary = GetSummary();
 
-                Session["MedicalReviews"] = summary.HighData.MedicalReviews;
-                Session["ComplementaryExams"] = summary.HighData.ComplementaryExams;
+                Session["MedicalReviews"] = summary.DischargeData.MedicalReviews;
+                Session["ComplementaryExams"] = summary.DischargeData.ComplementaryExams;
 
                 ViewBag.MedicalReviews = GetMedicalReviewsFromSession();
                 ViewBag.ComplementaryExams = GetComplementaryExamsFromSession();
@@ -619,7 +619,7 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public void SaveHighData(HighDataModel highDataModel)
+        public void SaveHighData(DischargeDataModel highDataModel)
         {
             try
             {
@@ -671,9 +671,9 @@ namespace EHR.UI.Controllers
                     medicalReview,
                     medicalReviewDeleteds,
                     highDataModel.HighType,
-                    highDataModel.ConditionOfThePatientAtHigh,
+                    highDataModel.ConditionAtDischarge,
                     highDataModel.DestinationOfThePatientAtDischarge,
-                    highDataModel.OrientationOfMultidisciplinaryTeamsMet,
+                    highDataModel.MultidisciplinaryTeamsMet,
                     new DateTime(highDataModel.PrescribedHighYear, highDataModel.PrescribedHighMonth, highDataModel.PrescribedHighDay),
                     highDataModel.PersonWhoDeliveredTheSummary,
                     new DateTime(highDataModel.DeliveredDateYear, highDataModel.DeliveredDateMonth, highDataModel.DeliveredDateDay)

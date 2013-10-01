@@ -12,7 +12,7 @@
         <input type="radio" name="highType"  @if (value == 1)
                                              { 
                                                  @:required 
-                                             }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).HighData.HighType == value)
+                                             }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.HighType == value)
                                                                                           {
                                                                                               @:checked
                                                                                           } />
@@ -26,7 +26,7 @@
         <input type="radio" name="ConditionOfThePatientAtHigh"  @if (value == 1)
                                                                 { 
                                                                      @:required 
-                                                                }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).HighData.ConditionOfThePatientAtHigh == value)
+                                                                }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.ConditionAtDischarge == value)
                                                                                                              {
                                                                                                @:checked
                                                                                            }/>
@@ -41,7 +41,7 @@
         <input type="radio" name="DestinationOfThePatientAtDischarge"  @if (value == 1)
                                                                        { 
                                                                            @:required 
-                                                                       }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).HighData.DestinationOfThePatientAtDischarge == value)
+                                                                       }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.DestinationOfThePatientAtDischarge == value)
                                                                                                                     {
                                                                                               @:checked
                                                                                           }/>
@@ -56,7 +56,7 @@
         <input type="radio" name="OrientationOfMultidisciplinaryTeamsMet"  @if (value == 1)
                                                                            { 
                                                                                @:required 
-                                                                           }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).HighData.OrientationOfMultidisciplinaryTeamsMet == value)
+                                                                           }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value)
                                                                                                                        {
                                                                                               @:checked
                                                                                           }/>
@@ -101,7 +101,7 @@
     <hr />
     <br />
     <label>Sum&aacute;rio entregue a:</label>&nbsp;
-    <input type="text" name="PersonWhoDeliveredTheSummary" required value="@(((SummaryModel)Model).HighData.PersonWhoDeliveredTheSummary)" />
+    <input type="text" name="PersonWhoDeliveredTheSummary" required value="@(((SummaryModel)Model).DischargeData.PersonWhoDeliveredTheSummary)" />
     <br />
     <br />
     <label>Data:</label>&nbsp;
@@ -116,13 +116,13 @@
     <input type="reset" value="Cancelar" class="uibutton large" />
     <script type="text/javascript">
 
-        $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).HighData.PrescribedHighYear));
-        $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).HighData.PrescribedHighMonth));
-        $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).HighData.PrescribedHighDay));
+        $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
+        $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth));
+        $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighDay));
 
-        $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).HighData.DeliveredDateYear));
-        $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).HighData.DeliveredDateMonth));
-        $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).HighData.DeliveredDateDay));
+        $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateYear));
+        $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth));
+        $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateDay));
 
         $(document).on('submit', '#dataHigh', function (e) {
             e.preventDefault();

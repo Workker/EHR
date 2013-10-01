@@ -12,11 +12,11 @@ namespace EHR.UI.Models.Mappers
                 .ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore())
                 .ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
                 .ForMember(ex => ex.Exams, so => so.Ignore()).ForMember(me => me.Medications, so => so.Ignore())
-                .ForMember(hd => hd.HighData, so => so.Ignore())
+                .ForMember(hd => hd.DischargeData, so => so.Ignore())
                 .ForMember(p => p.Patient, so => so.Ignore());
 
             var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
-            summaryModel.HighData = HighDataMapper.MapHighDataModelFrom(summary.HighData);
+            summaryModel.DischargeData = DischargeDataMapper.MapHighDataModelFrom(summary.HighData);
             summaryModel.Allergies = AllergyMapper.MapAllergyModelsFrom(summary.Allergies);
             summaryModel.Diagnostics = DiagnosticMapper.MapDiagnosticsModelsFrom(summary.Diagnostics);
             summaryModel.Procedures = ProcedureMapper.MapProceduresModelsFrom(summary.Procedures);

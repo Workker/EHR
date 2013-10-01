@@ -2,13 +2,13 @@
 
 namespace EHR.UI.Models
 {
-    public class HighDataModel
+    public class DischargeDataModel
     {
         public int Id { get; set; }
         public short HighType { get; set; }
-        public short ConditionOfThePatientAtHigh { get; set; }
+        public short ConditionAtDischarge { get; set; }
         public short DestinationOfThePatientAtDischarge { get; set; }
-        public short OrientationOfMultidisciplinaryTeamsMet { get; set; }
+        public short MultidisciplinaryTeamsMet { get; set; }
         public string PersonWhoDeliveredTheSummary { get; set; }
         private List<MedicalReviewModel> _medicalReviews;
         public List<MedicalReviewModel> MedicalReviews

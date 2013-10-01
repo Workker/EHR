@@ -15,7 +15,7 @@ namespace EHR.UI.Models
         public string CodeMedicalRecord { get; set; }
         public string Mdr { get; set; }
         public string Observation { get; set; }
-        public HighDataModel HighData { get; set; }
+        public DischargeDataModel DischargeData { get; set; }
         public List<AllergyModel> Allergies { get; set; }
         public List<DiagnosticModel> Diagnostics { get; set; }
         public List<ProcedureModel> Procedures { get; set; }
