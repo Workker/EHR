@@ -71,5 +71,17 @@ namespace EHR.Domain.Repository
 
             return summaries;
         }
+
+        [ExceptionLogger]
+        public void FinalizeSummary(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Sumario de alta invalido.").Validate();
+
+            var summary = base.Get<Summary>(id);
+
+            summary.Finalized = true;
+
+            base.Save(summary);
+        }
     }
 }

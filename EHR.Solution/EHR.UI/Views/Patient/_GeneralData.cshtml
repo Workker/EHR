@@ -76,4 +76,10 @@
             return false;
         });
     }
+
+    @if (((SummaryModel)Session["Summary"]).Finalized == true)
+    {
+        @:RemoveEdition();    
+                }
+
 </script>

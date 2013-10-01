@@ -5,7 +5,7 @@
 <h3>Dados da Alta</h3>
 <hr />
 <br />
-<form id="dischargeData">
+<form id="dischargeData" style="padding-bottom: 20px;">
     <label>Tipo Alta:</label>&nbsp;
     @foreach (var value in Enum.GetValues(typeof(HighTypeEnum)).Cast<short>().ToList())
     {
@@ -25,11 +25,11 @@
     {
         <input type="radio" name="ConditionOfThePatientAtHigh"  @if (value == 1)
                                                                 { 
-                                                                     @:required 
+                                                                    @:required 
                                                                 }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.ConditionAtDischarge == value)
                                                                                                              {
-                                                                                               @:checked
-                                                                                           }/>
+                                                                                                                 @:checked
+                                                                                                             }/>
         @EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
 
@@ -43,8 +43,8 @@
                                                                            @:required 
                                                                        }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.DestinationOfThePatientAtDischarge == value)
                                                                                                                     {
-                                                                                              @:checked
-                                                                                          }/>
+                                                                                                                        @:checked
+                                                                                                                    }/>
         @EnumUtil.GetDescriptionFromEnumValue((DestinationOfThePatientAtDischargeEnum)Enum.Parse(typeof(DestinationOfThePatientAtDischargeEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
@@ -58,8 +58,8 @@
                                                                                @:required 
                                                                            }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value)
                                                                                                                        {
-                                                                                              @:checked
-                                                                                          }/>
+                                                                                                                           @:checked
+                                                                                                                       }/>
         @EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
@@ -113,9 +113,9 @@
     <hr />
     <br />
     <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
-    <input type="reset" value="Cancelar" class="uibutton large" />
+    <input type="reset" value="Cancelar" class="uibutton large" />&nbsp;&nbsp;
+    <input type="button" value="Finalizar" class="uibutton large special" onclick="FinalizeSummary();" />
     <script type="text/javascript">
-
         $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
         $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth));
         $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighDay));
@@ -136,6 +136,9 @@
                 }
             });
         });
-
+        @if (((SummaryModel)Session["Summary"]).Finalized == true)
+    {
+        @:RemoveEdition();    
+        }
     </script>
 </form>

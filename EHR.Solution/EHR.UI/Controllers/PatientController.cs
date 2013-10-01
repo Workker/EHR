@@ -60,7 +60,7 @@ namespace EHR.UI.Controllers
                 ViewBag.Procedures = summaryModel.Procedures;
                 ViewBag.Medications = summaryModel.Medications;
 
-               this.RegisterActionOfUser(HistoricalActionTypeEnum.View);
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.View);
 
                 return View(summaryModel);
             }
@@ -153,7 +153,7 @@ namespace EHR.UI.Controllers
             try
             {
                 FactoryController.GetController(ControllerEnum.Summary).SaveObservation(GetSummary().Id, observation);
-                
+
                 RefreshSessionSummary();
 
                 this.ShowMessage(MessageTypeEnum.Success, "História, exame fisico na admissão, breve curso hospitalar e exames relevantes. Atualizado.");
@@ -663,7 +663,7 @@ namespace EHR.UI.Controllers
                     }
                 }
 
-                FactoryController.GetController(ControllerEnum.Summary).SaveHighData
+                FactoryController.GetController(ControllerEnum.Summary).SaveDischargeData
                     (
                     GetSummary().Id,
                     complementaryExam,
@@ -805,6 +805,22 @@ namespace EHR.UI.Controllers
                 this.ShowMessage(MessageTypeEnum.Error, ex.Message);
             }
         }
+
+        [HttpPost]
+        public void FinalizeSummary()
+        {
+            try
+            {
+                FactoryController.GetController(ControllerEnum.Summary).FinalizeSummary(GetSummary().Id);
+                this.ShowMessage(MessageTypeEnum.Success, "Sumario Finalizado.");
+            }
+            catch (Exception exception)
+            {
+
+                this.ShowMessage(MessageTypeEnum.Error, exception.Message);
+            }
+        }
+
 
         #endregion
 

@@ -566,6 +566,18 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
     });
 });
 
+
+function FinalizeSummary() {
+    $.ajax({
+        type: "POST",
+        url: '../Patient/FinalizeSummary',
+        cache: false,
+        success: function () {
+            RemoveEdition();
+        }
+    });
+}
+
 function CheckSession() {
     var request = false;
 
@@ -585,6 +597,11 @@ function CheckSession() {
                 window.location = "http://" + window.location.host;
             }
         }
-    }
+    };
     request.send(null);
+}
+
+function RemoveEdition() {
+    $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text]").attr("disabled", true);
+    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").remove();
 }

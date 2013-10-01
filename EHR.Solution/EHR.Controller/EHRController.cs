@@ -42,6 +42,7 @@ namespace EHR.Controller
         public virtual void SaveMdr(int summaryId, string mdr) { }
         public virtual Summary GetBy(int id) { return null; }
         public virtual void AddToHistorical(int idSummary, int idAccount, HistoricalActionTypeEnum actionType, DateTime date, string description) { }
+        public virtual void FinalizeSummary(int summaryid) { }
 
         #endregion
 
@@ -113,7 +114,7 @@ namespace EHR.Controller
 
         #endregion
 
-        public virtual void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
+        public virtual void SaveDischargeData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
             short conditionOfThePatientAtDischargeId, short destinationOfThePatientAtDischarge,
            short orientationOfMultidisciplinaryTeamsMet, DateTime prescribedHigh,
             string personWhoDeliveredTheSummary, DateTime deliveredDate) { }

@@ -1,4 +1,5 @@
-﻿<h1>Hemotransfus&atilde;o</h1>
+﻿@using EHR.UI.Models
+<h1>Hemotransfus&atilde;o</h1>
 <hr />
 <br />
 <label>Realisada:</label>&nbsp;
@@ -19,4 +20,10 @@ n&atilde;o
         $('input[value="true"]').attr("checked", "");
         $('#ulHemotransfusion').removeAttr("style");
     }
+
+    @if (((SummaryModel)Session["Summary"]).Finalized == true)
+    {
+        @:RemoveEdition();    
+                }
+
 </script>

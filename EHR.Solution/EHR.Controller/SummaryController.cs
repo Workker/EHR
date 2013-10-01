@@ -128,7 +128,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void SaveHighData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
+        public override void SaveDischargeData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
             short conditionOfThePatientAtDischargeId, short destinationOfThePatientAtDischarge,
            short orientationOfMultidisciplinaryTeamsMet, DateTime prescribedHigh,
             string personWhoDeliveredTheSummary, DateTime deliveredDate)
@@ -205,10 +205,18 @@ namespace EHR.Controller
 
             Assertion.NotNull(account, "Conta de usuário inválida.").Validate();
 
-            var action = new Types<HistoricalActionType>().Get((short) actionType);
+            var action = new Types<HistoricalActionType>().Get((short)actionType);
 
-            summary.AddRecordToHistory(account, date, action,description);
+            summary.AddRecordToHistory(account, date, action, description);
             Summaries.Save(summary);
+        }
+
+        [ExceptionLogger]
+        public override void FinalizeSummary(int summaryId)
+        {
+            Assertion.GreaterThan(summaryId, 0, "Sumario de alta invalido.").Validate();
+
+            Summaries.FinalizeSummary(summaryId);
         }
     }
 }

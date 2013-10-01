@@ -8,3 +8,9 @@
     ViewBag.MedicationType = (short)MedicationTypeEnum.Prescription;
     Html.RenderPartial("Medication/_Table", medicationUseBefore);
 }
+<script type="text/javascript">
+    @if (((SummaryModel)Session["Summary"]).Finalized == true)
+    {
+        @:RemoveEdition();    
+        }
+</script>
