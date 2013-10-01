@@ -138,7 +138,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/dados_alta.png',
         onClickIcon: '../../Images/dados_alta.png',
         HtmlSatusContent: '',
-        url: '/Patient/DataHigh',
+        url: '/Patient/DischargeData',
         data: ''
     }).sethscCorner();
 

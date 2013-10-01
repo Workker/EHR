@@ -466,7 +466,7 @@
     <Content Include="Views\Patient\_Hemotransfusion.cshtml" />
     <Content Include="Views\Patient\_ColonizationbyMDR.cshtml" />
     <Content Include="Views\Patient\_Prescriptions.cshtml" />
-    <Content Include="Views\Patient\_DataHigh.cshtml" />
+    <Content Include="Views\Patient\_DischargeData.cshtml" />
     <Content Include="Views\Patient\_Form.cshtml" />
     <Content Include="Views\Patient\_Images.cshtml" />
     <Content Include="Views\Patient\GeneralData\_DiagnosticsForm.cshtml" />
@@ -497,15 +497,15 @@
     <Content Include="Views\Home\_AccountApprovedList.cshtml" />
     <Content Include="Views\Home\_LastSumariesResult.cshtml" />
     <Content Include="Views\Home\_AccountApprovedListResult.cshtml" />
-    <Content Include="Views\Patient\DataHigh\_ComplementaryExamForm.cshtml" />
-    <Content Include="Views\Patient\DataHigh\_ComplementaryExamTable.cshtml" />
-    <Content Include="Views\Patient\DataHigh\_ComplementaryExamTableRow.cshtml" />
+    <Content Include="Views\Patient\DischargeData\_ComplementaryExamForm.cshtml" />
+    <Content Include="Views\Patient\DischargeData\_ComplementaryExamTable.cshtml" />
+    <Content Include="Views\Patient\DischargeData\_ComplementaryExamTableRow.cshtml" />
     <Content Include="Views\Patient\Layout\_LastVisitors.cshtml" />
     <Content Include="Views\Account\_SessionCheck.cshtml" />
     <Content Include="Views\Patient\Medication\_SimpleForm.cshtml" />
-    <Content Include="Views\Patient\DataHigh\_MedicalReviewForm.cshtml" />
-    <Content Include="Views\Patient\DataHigh\_MedicalReviewTable.cshtml" />
-    <Content Include="Views\Patient\DataHigh\_MedicalReviewTableRow.cshtml" />
+    <Content Include="Views\Patient\DischargeData\_MedicalReviewForm.cshtml" />
+    <Content Include="Views\Patient\DischargeData\_MedicalReviewTable.cshtml" />
+    <Content Include="Views\Patient\DischargeData\_MedicalReviewTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

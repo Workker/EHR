@@ -1,0 +1,141 @@
+﻿@using System.Globalization
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+@using EHR.UI.Models
+<h3>Dados da Alta</h3>
+<hr />
+<br />
+<form id="dischargeData">
+    <label>Tipo Alta:</label>&nbsp;
+    @foreach (var value in Enum.GetValues(typeof(HighTypeEnum)).Cast<short>().ToList())
+    {
+        <input type="radio" name="highType"  @if (value == 1)
+                                             { 
+                                                 @:required 
+                                             }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.HighType == value)
+                                                                                          {
+                                                                                              @:checked
+                                                                                          } />
+        @EnumUtil.GetDescriptionFromEnumValue((HighTypeEnum)Enum.Parse(typeof(HighTypeEnum), value.ToString(CultureInfo.InvariantCulture)))
+    }
+    <br />
+    <br />
+    <label>Condi&ccedil;&atilde;o do paciente na alta:</label>&nbsp;    
+    @foreach (var value in Enum.GetValues(typeof(ConditionOfThePatientAtHighEnum)).Cast<short>().ToList())
+    {
+        <input type="radio" name="ConditionOfThePatientAtHigh"  @if (value == 1)
+                                                                { 
+                                                                     @:required 
+                                                                }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.ConditionAtDischarge == value)
+                                                                                                             {
+                                                                                               @:checked
+                                                                                           }/>
+        @EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString(CultureInfo.InvariantCulture)))
+    }
+
+    <br />
+    <br />
+    <label>Destino do paciente na alta:</label>&nbsp;
+    @foreach (var value in Enum.GetValues(typeof(DestinationOfThePatientAtDischargeEnum)).Cast<short>().ToList())
+    {
+        <input type="radio" name="DestinationOfThePatientAtDischarge"  @if (value == 1)
+                                                                       { 
+                                                                           @:required 
+                                                                       }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.DestinationOfThePatientAtDischarge == value)
+                                                                                                                    {
+                                                                                              @:checked
+                                                                                          }/>
+        @EnumUtil.GetDescriptionFromEnumValue((DestinationOfThePatientAtDischargeEnum)Enum.Parse(typeof(DestinationOfThePatientAtDischargeEnum), value.ToString(CultureInfo.InvariantCulture)))
+    }
+    <br />
+    <hr />
+    <br />
+    <label>Orienta&ccedil;&atilde;o das equipes multidisciplinares preenchidas:</label>&nbsp;
+    @foreach (var value in Enum.GetValues(typeof(OrientationOfMultidisciplinaryTeamsMetEnum)).Cast<short>().ToList())
+    {
+        <input type="radio" name="OrientationOfMultidisciplinaryTeamsMet"  @if (value == 1)
+                                                                           { 
+                                                                               @:required 
+                                                                           }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value)
+                                                                                                                       {
+                                                                                              @:checked
+                                                                                          }/>
+        @EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString(CultureInfo.InvariantCulture)))
+    }
+    <br />
+    <hr />
+    <br />
+    <h3>Prazo para Revis&atilde;o:</h3>
+    <br />
+    @{
+        Html.RenderPartial("DischargeData/_MedicalReviewTable");
+    }
+    <br />
+    <hr />
+    <br />
+    <h3>Exames complementares p&oacute;s alta:</h3>
+    <br />
+    @{
+        Html.RenderPartial("DischargeData/_ComplementaryExamTable");
+    }
+    <br />
+    <hr />
+    <br />
+    @{
+        //todo: Bug 
+        //<label>((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Type):</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Number)" />
+    }
+    <br />
+    <br />
+
+    <label>M&eacute;dico:</label>&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))"/>
+
+    <br />
+    <br />
+    <label>Alta Prescrita:</label>&nbsp;
+    @{
+        ViewBag.Context = "PrescribedHigh";
+        Html.RenderPartial("_DatePicker");
+    }
+    <br />
+    <hr />
+    <br />
+    <label>Sum&aacute;rio entregue a:</label>&nbsp;
+    <input type="text" name="PersonWhoDeliveredTheSummary" required value="@(((SummaryModel)Model).DischargeData.PersonWhoDeliveredTheSummary)" />
+    <br />
+    <br />
+    <label>Data:</label>&nbsp;
+    @{
+        ViewBag.Context = "DeliveredDate";
+        Html.RenderPartial("_DatePicker");
+    }
+    <br />
+    <hr />
+    <br />
+    <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" value="Cancelar" class="uibutton large" />
+    <script type="text/javascript">
+
+        $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
+        $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth));
+        $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighDay));
+
+        $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateYear));
+        $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth));
+        $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateDay));
+
+        $(document).on('submit', '#dischargeData', function (e) {
+            e.preventDefault();
+            data = $(this).serialize();
+            $.ajax({
+                type: "POST",
+                url: '../Patient/SaveHighData',
+                cache: false,
+                data: data,
+                success: function () {
+                }
+            });
+        });
+
+    </script>
+</form>

@@ -596,7 +596,7 @@ namespace EHR.UI.Controllers
 
         #region Discharge Data
 
-        public PartialViewResult DataHigh()
+        public PartialViewResult DischargeData()
         {
             try
             {
@@ -608,7 +608,7 @@ namespace EHR.UI.Controllers
                 ViewBag.MedicalReviews = GetMedicalReviewsFromSession();
                 ViewBag.ComplementaryExams = GetComplementaryExamsFromSession();
 
-                return PartialView("_DataHigh", summary);
+                return PartialView("_DischargeData", summary);
             }
             catch (Exception ex)
             {
@@ -619,7 +619,7 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public void SaveHighData(DischargeDataModel highDataModel)
+        public void SaveHighData(DischargeDataModel dischargeDataModel)
         {
             try
             {
@@ -670,13 +670,13 @@ namespace EHR.UI.Controllers
                     complementaryExamDeleteds,
                     medicalReview,
                     medicalReviewDeleteds,
-                    highDataModel.HighType,
-                    highDataModel.ConditionAtDischarge,
-                    highDataModel.DestinationOfThePatientAtDischarge,
-                    highDataModel.MultidisciplinaryTeamsMet,
-                    new DateTime(highDataModel.PrescribedHighYear, highDataModel.PrescribedHighMonth, highDataModel.PrescribedHighDay),
-                    highDataModel.PersonWhoDeliveredTheSummary,
-                    new DateTime(highDataModel.DeliveredDateYear, highDataModel.DeliveredDateMonth, highDataModel.DeliveredDateDay)
+                    dischargeDataModel.HighType,
+                    dischargeDataModel.ConditionAtDischarge,
+                    dischargeDataModel.DestinationOfThePatientAtDischarge,
+                    dischargeDataModel.MultidisciplinaryTeamsMet,
+                    new DateTime(dischargeDataModel.PrescribedHighYear, dischargeDataModel.PrescribedHighMonth, dischargeDataModel.PrescribedHighDay),
+                    dischargeDataModel.PersonWhoDeliveredTheSummary,
+                    new DateTime(dischargeDataModel.DeliveredDateYear, dischargeDataModel.DeliveredDateMonth, dischargeDataModel.DeliveredDateDay)
                         );
 
                 RefreshSessionSummary();
@@ -709,7 +709,7 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult MedicalReviewForm()
         {
-            return PartialView("DataHigh/_MedicalReviewForm");
+            return PartialView("DischargeData/_MedicalReviewForm");
         }
 
         [HttpPost]
@@ -722,7 +722,7 @@ namespace EHR.UI.Controllers
 
                 this.ShowMessage(MessageTypeEnum.Success, "Prazo para revisão incluída.");
 
-                return PartialView("DataHigh/_MedicalReviewTableRow");
+                return PartialView("DischargeData/_MedicalReviewTableRow");
             }
             catch (Exception ex)
             {
@@ -758,7 +758,7 @@ namespace EHR.UI.Controllers
 
         public PartialViewResult ComplementaryExamForm()
         {
-            return PartialView("DataHigh/_ComplementaryExamForm");
+            return PartialView("DischargeData/_ComplementaryExamForm");
         }
 
         [HttpPost]
@@ -772,7 +772,7 @@ namespace EHR.UI.Controllers
 
                 this.ShowMessage(MessageTypeEnum.Success, "Exame complementar incluído.");
 
-                return PartialView("DataHigh/_ComplementaryExamTableRow");
+                return PartialView("DischargeData/_ComplementaryExamTableRow");
             }
             catch (Exception ex)
             {
