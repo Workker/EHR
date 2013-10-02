@@ -48,10 +48,8 @@ namespace EHR.UI.Controllers
                 if (GetSummary() == null)
                     Response.Redirect("/Home");
 
-                //ViewBag.LastVisitors = summaryModel.LastVisitors != null
-                //                           ? DistinctView(summaryModel.LastVisitors
-                //                           .OrderByDescending(model => model.Id).Take(10).ToList())
-                //                           : new List<ViewModel>();
+                ViewBag.LastVisitors = summaryModel.Views;
+                ViewBag.LastActions = summaryModel.Actions;
 
                 ViewBag.AllAlergies = AllergyMapper.MapAllergyModelsFrom(allergies);
                 ViewBag.AllMedications = MedicationMapper.MapMedicationModelsFrom(medications);
@@ -155,6 +153,8 @@ namespace EHR.UI.Controllers
                 FactoryController.GetController(ControllerEnum.Summary).SaveObservation(GetSummary().Id, observation);
 
                 RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Change, "a observacao");
 
                 this.ShowMessage(MessageTypeEnum.Success, "História, exame fisico na admissão, breve curso hospitalar e exames relevantes. Atualizado.");
             }
@@ -865,11 +865,6 @@ namespace EHR.UI.Controllers
             var summary = SummaryController.GetBy(GetSummary().Id);
 
             Session["Summary"] = SummaryMapper.MapSummaryModelFrom(summary);
-        }
-
-        private IList<ViewModel> DistinctView(IEnumerable<ViewModel> viewModels)
-        {
-            return viewModels.GroupBy(x => x.Account.Id).Select(x => x.FirstOrDefault()).ToList();
         }
 
         #endregion

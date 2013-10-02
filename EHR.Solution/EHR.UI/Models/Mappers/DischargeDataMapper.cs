@@ -12,7 +12,7 @@ namespace EHR.UI.Models.Mappers
 
             var dischargeDataModel = Mapper.Map<DischargeData, DischargeDataModel>(dischargeData);
 
-            dischargeDataModel.ConditionAtDischarge = dischargeData.ConditionAtDischarge.Id;
+            dischargeDataModel.ConditionAtDischarge = dischargeData.ConditionAtDischarge == null ? short.MinValue : dischargeData.ConditionAtDischarge.Id;
             dischargeDataModel.DestinationOfThePatientAtDischarge = (short)dischargeData.DestinationAtDischarge;
             dischargeDataModel.MultidisciplinaryTeamsMet = (short)dischargeData.MultidisciplinaryTeamsMet;
             dischargeDataModel.PrescribedHighYear = dischargeData.PrescribedHigh == null ? 0 : dischargeData.PrescribedHigh.Value.Year;

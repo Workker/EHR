@@ -23,5 +23,7 @@ namespace EHR.UI.Models
         public List<HemotransfusionModel> Hemotransfusions { get; set; }
         public IList<ExamModel> Exams { get; set; }
         public bool Finalized { get; set; }
+        public List<HistoryRecordMoldel> Views { get; set; }
+        public List<HistoryRecordMoldel> Actions { get; set; }
     }
 }

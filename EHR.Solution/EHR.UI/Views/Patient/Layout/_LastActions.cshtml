@@ -1,0 +1,15 @@
+﻿@using EHR.UI.Models
+<div style="padding-top: 30px">
+    <h4>&Uacute;ltimas Itera&ccedil;&Otilde;es</h4>
+    <hr />
+    <ul>
+        @foreach (HistoryRecordMoldel historyRecordMoldel in ViewBag.LastActions)
+        {
+            <li style="border-bottom: 1px solid #e9e9e9; padding-bottom: 5px; padding-top: 5px;">
+                <span>@(historyRecordMoldel.Account.FirstName + " " + historyRecordMoldel.Account.LastName)</span><br />
+                <span>@(historyRecordMoldel.Action) @(historyRecordMoldel.Description)</span><br />
+                <span>em @(historyRecordMoldel.Date.ToShortDateString()) as @(historyRecordMoldel.Date.ToShortTimeString())</span>
+            </li>
+        }
+    </ul>
+</div>

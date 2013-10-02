@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EHR.Domain.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EHR.UI.Models.Mappers
 {
@@ -8,14 +9,36 @@ namespace EHR.UI.Models.Mappers
     {
         public static SummaryModel MapSummaryModelFrom(Summary summary)
         {
-            Mapper.CreateMap<Summary, SummaryModel>().ForMember(hosp => hosp.Hospital, source => source.Ignore())
-                .ForMember(al => al.Allergies, so => so.Ignore()).ForMember(di => di.Diagnostics, so => so.Ignore())
-                .ForMember(proc => proc.Procedures, so => so.Ignore()).ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
-                .ForMember(ex => ex.Exams, so => so.Ignore()).ForMember(me => me.Medications, so => so.Ignore())
+            Mapper.CreateMap<Summary, SummaryModel>()
+                .ForMember(hosp => hosp.Hospital, source => source.Ignore())
+                .ForMember(al => al.Allergies, so => so.Ignore())
+                .ForMember(di => di.Diagnostics, so => so.Ignore())
+                .ForMember(proc => proc.Procedures, so => so.Ignore())
+                .ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
+                .ForMember(ex => ex.Exams, so => so.Ignore())
+                .ForMember(me => me.Medications, so => so.Ignore())
                 .ForMember(hd => hd.DischargeData, so => so.Ignore())
-                .ForMember(p => p.Patient, so => so.Ignore());
+                .ForMember(p => p.Patient, so => so.Ignore())
+                .ForMember(ac => ac.Actions, souce => souce.Ignore())
+                .ForMember(vi => vi.Views, source => source.Ignore());
 
             var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
+
+            var views = new List<HistoryRecord>();
+            var actions = new List<HistoryRecord>();
+
+            foreach (var historyRecord in summary.History)
+            {
+                if (historyRecord.Action.Id == 4)
+                {
+                    views.Add(historyRecord);
+                }
+                else
+                {
+                    actions.Add(historyRecord);
+                }
+            }
+
             summaryModel.DischargeData = DischargeDataMapper.MapHighDataModelFrom(summary.HighData);
             summaryModel.Allergies = AllergyMapper.MapAllergyModelsFrom(summary.Allergies);
             summaryModel.Diagnostics = DiagnosticMapper.MapDiagnosticsModelsFrom(summary.Diagnostics);
@@ -25,6 +48,9 @@ namespace EHR.UI.Models.Mappers
             summaryModel.Exams = ExamMapper.MapExamModelsFrom(summary.Exams);
             summaryModel.Patient = PatientMapper.MapPatientModelFrom(summary.Patient);
             summaryModel.Hospital = HospitalMapper.MapHospitalModelFrom(summary.Hospital);
+            summaryModel.Actions = HistoryRecordMapper.MapHistoryRecordModelsFrom(actions.OrderByDescending(hr => hr.Date).Take(10));
+            summaryModel.Views = HistoryRecordMapper.MapHistoryRecordModelsFrom(
+                views.OrderByDescending(hr => hr.Date).GroupBy(x => x.Account.Id).Select(x => x.FirstOrDefault()).Take(10).ToList());
 
             return summaryModel;
         }
@@ -40,24 +66,5 @@ namespace EHR.UI.Models.Mappers
             }
             return sumaryModels;
         }
-
-        private static IList<ViewModel> MapViewModelFrom(IEnumerable<View> views)
-        {
-            var viewModels = new List<ViewModel>();
-
-            foreach (var view in views)
-            {
-                Mapper.CreateMap<View, ViewModel>();
-                viewModels.Add(new ViewModel
-                {
-                    Id = view.Id,
-                    Account = AccountMapper.MapAccountModelFrom(view.Account),
-                    VisiteDate = view.VisiteDate
-                });
-            }
-
-            return viewModels;
-        }
-
     }
 }

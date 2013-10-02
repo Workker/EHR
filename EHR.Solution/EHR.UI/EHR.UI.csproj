@@ -195,6 +195,7 @@
     <Compile Include="Infrastructure\Notification\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\Notification\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\Notification\MessageTypeEnum.cs" />
+    <Compile Include="Models\HistoryRecordMoldel.cs" />
     <Compile Include="Models\Mappers\AccountMapper.cs" />
     <Compile Include="Models\Mappers\AllergyMapper.cs" />
     <Compile Include="Models\Mappers\CidMapper.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Models\Mappers\ExamMapper.cs" />
     <Compile Include="Models\Mappers\HemotransfusionMapper.cs" />
     <Compile Include="Models\Mappers\DischargeDataMapper.cs" />
+    <Compile Include="Models\Mappers\HistoryRecordMapper.cs" />
     <Compile Include="Models\Mappers\HospitalMapper.cs" />
     <Compile Include="Models\Mappers\MedicalReviewMapper.cs" />
     <Compile Include="Models\Mappers\MedicationMapper.cs" />
@@ -233,7 +235,6 @@
     <Compile Include="Models\SummaryModel.cs" />
     <Compile Include="Models\TreatmentModel.cs" />
     <Compile Include="Models\TUSSModel.cs" />
-    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -506,6 +507,7 @@
     <Content Include="Views\Patient\DischargeData\_MedicalReviewForm.cshtml" />
     <Content Include="Views\Patient\DischargeData\_MedicalReviewTable.cshtml" />
     <Content Include="Views\Patient\DischargeData\_MedicalReviewTableRow.cshtml" />
+    <Content Include="Views\Patient\Layout\_LastActions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

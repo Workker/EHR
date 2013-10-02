@@ -351,6 +351,7 @@ namespace EHR.Domain.Entities
                 Account = account,
                 Action = action,
                 Date = date,
+                Description = description
             };
 
             History.Add(record);
