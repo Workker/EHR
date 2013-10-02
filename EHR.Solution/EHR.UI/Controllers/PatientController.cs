@@ -154,7 +154,10 @@ namespace EHR.UI.Controllers
 
                 RefreshSessionSummary();
 
-                this.RegisterActionOfUser(HistoricalActionTypeEnum.Change, "a observacao");
+                this.RegisterActionOfUser(
+                    string.IsNullOrEmpty(GetSummary().Observation)
+                        ? HistoricalActionTypeEnum.Include
+                        : HistoricalActionTypeEnum.Change, "observacao");
 
                 this.ShowMessage(MessageTypeEnum.Success, "História, exame fisico na admissão, breve curso hospitalar e exames relevantes. Atualizado.");
             }
@@ -181,6 +184,8 @@ namespace EHR.UI.Controllers
 
                 ViewBag.Allergies = new List<AllergyModel> { GetSummary().Allergies.Last() };
 
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "alergia");
+
                 this.ShowMessage(MessageTypeEnum.Success, "Alergia incluída.");
 
                 return PartialView("GeneralData/_AllergyTableRow");
@@ -199,6 +204,8 @@ namespace EHR.UI.Controllers
                 AllergyController.RemoveAllergy(GetSummary().Id, int.Parse(id));
 
                 RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Exclude, "alergia");
 
                 this.ShowMessage(MessageTypeEnum.Success, "Alergia excluida.");
             }
@@ -227,6 +234,8 @@ namespace EHR.UI.Controllers
 
                 ViewBag.Diagnostics = new List<DiagnosticModel> { GetSummary().Diagnostics.Last() };
 
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "diagnóstico");
+
                 this.ShowMessage(MessageTypeEnum.Success, "Diagnóstico incluído.");
 
                 return PartialView("GeneralData/_DiagnosticTableRow");
@@ -246,6 +255,8 @@ namespace EHR.UI.Controllers
                 DiagnosticController.RemoveDiagnostic(GetSummary().Id, int.Parse(id));
 
                 RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Exclude, "diagnóstico");
 
                 this.ShowMessage(MessageTypeEnum.Success, "Diagnóstico excluído.");
             }
@@ -307,6 +318,19 @@ namespace EHR.UI.Controllers
                 ViewBag.Medications = new List<MedicationModel> { GetSummary().Medications.Last() };
                 ViewBag.MedicationType = medication.Type;
 
+                switch (medication.Type)
+                {
+                    case 1:
+                        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "medicamento utilizado antes da internacao");
+                        break;
+                    case 2:
+                        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "medicamento utilizado durante a internacao");
+                        break;
+                    case 3:
+                        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "medicamento na prescricao de alta");
+                        break;
+                }
+
                 this.ShowMessage(MessageTypeEnum.Success, "Medicamento incluído.");
 
                 return PartialView("Medication/_TableRow");
@@ -319,13 +343,26 @@ namespace EHR.UI.Controllers
             }
         }
 
-        public void DeleteMedication(Medication medication)
+        public void DeleteMedication(MedicationModel medication)
         {
             try
             {
                 SummaryController.RemoveMedication(GetSummary().Id, medication.Id);
 
                 RefreshSessionSummary();
+
+                switch (medication.Type)
+                {
+                    case 1:
+                        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "medicamento utilizado antes da internacao");
+                        break;
+                    case 2:
+                        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "medicamento utilizado durante a internacao");
+                        break;
+                    case 3:
+                        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "medicamento na prescricao de alta");
+                        break;
+                }
 
                 this.ShowMessage(MessageTypeEnum.Success, "Medicamento excluído.");
             }
@@ -387,6 +424,8 @@ namespace EHR.UI.Controllers
                 RefreshSessionSummary();
                 ViewBag.Procedures = new List<ProcedureModel> { GetSummary().Procedures.Last() };
 
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "procedimento");
+
                 this.ShowMessage(MessageTypeEnum.Success, "Procedimento incluído.");
 
                 return PartialView("Procedure/_ProcedureTableRow");
@@ -406,6 +445,8 @@ namespace EHR.UI.Controllers
                 FactoryController.GetController(ControllerEnum.Procedure).RemoveProcedure(GetSummary().Id, id);
 
                 RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Exclude, "procedimento");
 
                 this.ShowMessage(MessageTypeEnum.Success, "Procedimento excluído.");
             }
@@ -464,6 +505,8 @@ namespace EHR.UI.Controllers
                 RefreshSessionSummary();
                 ViewBag.Exams = new List<ExamModel> { GetSummary().Exams.Last() };
 
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "exame");
+
                 this.ShowMessage(MessageTypeEnum.Success, "Exame incluído.");
 
                 return PartialView("Exams/_ExamsTableRow");
@@ -483,6 +526,8 @@ namespace EHR.UI.Controllers
                 FactoryController.GetController(ControllerEnum.Summary).RemoveExam(GetSummary().Id, id);
 
                 RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Exclude, "exame");
 
                 this.ShowMessage(MessageTypeEnum.Success, "Exame excluído.");
             }
@@ -527,6 +572,8 @@ namespace EHR.UI.Controllers
                 RefreshSessionSummary();
                 ViewBag.Hemotransfusions = new List<HemotransfusionModel> { GetSummary().Hemotransfusions.Last() };
 
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "hemotransfusao");
+
                 this.ShowMessage(MessageTypeEnum.Success, "Hemotransfusão incluída.");
 
                 return PartialView("Hemotransfusion/_HemotransfusionTableRow");
@@ -547,6 +594,8 @@ namespace EHR.UI.Controllers
                                                                                                       int.Parse(id));
 
                 RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Exclude, "hemotransfusao");
 
                 this.ShowMessage(MessageTypeEnum.Success, "Hemotransfusão excluída.");
             }
@@ -581,6 +630,12 @@ namespace EHR.UI.Controllers
             try
             {
                 FactoryController.GetController(ControllerEnum.Summary).SaveMdr(GetSummary().Id, mdr);
+
+                this.RegisterActionOfUser(
+                    string.IsNullOrEmpty(GetSummary().Mdr)
+                        ? HistoricalActionTypeEnum.Include
+                        : HistoricalActionTypeEnum.Change, "colonização por germes multiresistentes");
+
 
                 RefreshSessionSummary();
 
@@ -680,6 +735,8 @@ namespace EHR.UI.Controllers
                         );
 
                 RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "dados de alta");
 
                 this.ShowMessage(MessageTypeEnum.Success, "Dados de alta salvo.");
             }
@@ -812,6 +869,9 @@ namespace EHR.UI.Controllers
             try
             {
                 FactoryController.GetController(ControllerEnum.Summary).FinalizeSummary(GetSummary().Id);
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Closed, "sumario");
+
                 this.ShowMessage(MessageTypeEnum.Success, "Sumario Finalizado.");
             }
             catch (Exception exception)
