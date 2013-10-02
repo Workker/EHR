@@ -89,11 +89,11 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public void ApproveAccount(string id)
+        public void ApproveAccount(string accountId, string professionalRegistrationId)
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Account).ApproveAccount(int.Parse(id));
+                FactoryController.GetController(ControllerEnum.Account).ApproveProfessionalRegistration(int.Parse(accountId), int.Parse(professionalRegistrationId));
 
                 this.ShowMessage(MessageTypeEnum.Success, "Usuário aprovado.");
             }

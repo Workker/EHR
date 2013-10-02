@@ -8,7 +8,7 @@ namespace EHR.Domain.Mapping
         public AccountMap()
         {
             Id(a => a.Id);
-            HasMany(a => a.ProfessionalRegistration).Cascade.All();
+            HasMany(a => a.ProfessionalRegistrations).Cascade.All();
             Map(a => a.FirstName);
             Map(a => a.LastName);
             Map(a => a.Gender).CustomType<short>();

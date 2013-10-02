@@ -3,6 +3,7 @@ using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
 using System.Collections.Generic;
+using NHibernate.SqlCommand;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository
@@ -63,12 +64,29 @@ namespace EHR.Domain.Repository
             var criterion = Session.CreateCriteria<Account>();
             criterion.Add(Restrictions.Eq("Email", email));
             criterion.Add(Restrictions.Eq("Password", password));
-            criterion.Add(Restrictions.Eq("Approved", true));
-            criterion.Add(Restrictions.Eq("Refused", false));
+            criterion.CreateAlias("ProfessionalRegistrations", "ProfessionalRegistration", JoinType.LeftOuterJoin);
 
             var account = criterion.UniqueResult<Account>();
 
             Assertion.NotNull(account, "Falha na autenticação. Verifique o usuário e senha digitados.").Validate();
+
+            if (account.Administrator)
+            {
+                return account;
+            }
+
+            if (account.ProfessionalRegistrations.Count > 0)
+            {
+                foreach (var professionalRegistration in account.ProfessionalRegistrations)
+                {
+                    if (professionalRegistration.Approved && professionalRegistration.Refused == false)
+                    {
+                        return account;
+                    }
+                }
+            }
+
+            Assertion.IsTrue(false, "Falha na autenticação. Conta nao aprovada.").Validate();
 
             return account;
         }
@@ -87,9 +105,10 @@ namespace EHR.Domain.Repository
         public virtual IList<Account> GetAllNotApproved(Hospital hospital)
         {
             var criterion = Session.CreateCriteria<Account>();
-            criterion.Add(Restrictions.Eq("Approved", false));
-            criterion.Add(Restrictions.Eq("Refused", false));
             criterion.Add(Restrictions.Eq("Hospital", hospital));
+            criterion.Add(Restrictions.Eq("Administrator", false));
+            criterion.CreateAlias("ProfessionalRegistrations", "ProfessionalRegistration", JoinType.InnerJoin).Add(
+                Restrictions.Eq("ProfessionalRegistration.Approved", false)).Add(Restrictions.Eq("ProfessionalRegistration.Refused", false));
             criterion.AddOrder(Order.Desc("Id"));
 
             var account = criterion.List<Account>();
@@ -100,14 +119,14 @@ namespace EHR.Domain.Repository
         }
 
         [ExceptionLogger]
-        public virtual void Approve(Account account)
+        public virtual void ApproveProfessionalRegistration(int professionalRegistrationId)
         {
-            Assertion.NotNull(account, "Conta de usuário não informada.").Validate();
+            Assertion.GreaterThan(professionalRegistrationId, 0, "Registro Profissional inválido.").Validate();
 
-            account.ToApprove(true);
-            base.Save(account);
+            var professionalRegistration = base.Get<ProfessionalRegistration>(professionalRegistrationId);
+            professionalRegistration.Approved = true;
 
-            Assertion.IsTrue(account.Approved, "Conta de usuário não aprovada.").Validate();
+            base.Save(professionalRegistration);
         }
 
         [ExceptionLogger]

@@ -308,35 +308,32 @@ namespace InitializeDatabaseAndCacheData
 
         public void insert_admin_account()
         {
-            var account = new Account(true);
-            account.ToApprove(true);
-
-
-            var state = new Types<State>();
-
-            account.AddProfessionalRegistration(new ProfessionalRegistration
-                    {
-                        Number = "123",
-                        State = state.Get(15),
-                        Type = ProfessionalRegistrationTypeEnum.CRM
-                    });
-            account.ToEnterPassword("123");
-            account.ToEnterFirstName("Thiago");
-            account.ToEnterLastName("Oliveira");
-            account.ToEnterGender(GenderEnum.Male);
-            account.ToEnterEmail("thiago@workker.com.br");
-            account.ToEnterBirthday(new DateTime(1989, 7, 17));
-
             var hospitals = new Hospitals().All<Hospital>();
 
             foreach (var hospital in hospitals)
             {
+                var account = new Account(true);
+
+                account.AddProfessionalRegistration(new ProfessionalRegistration
+                        {
+                            Number = "123" + hospital.Id,
+                            State = hospital.State,
+                            Type = ProfessionalRegistrationTypeEnum.CRM
+                        });
+                account.ToEnterPassword("123");
+                account.ToEnterFirstName(hospital.Name);
+                account.ToEnterLastName("Admin");
+                account.ToEnterGender(GenderEnum.Male);
+                account.ToEnterEmail(hospital.Name + "@workker.com.br");
+                account.ToEnterBirthday(new DateTime(1989, 7, 17));
+
                 account.AddHospital(hospital);
+
+
+                var accounts = new Accounts();
+
+                accounts.Save(account);
             }
-
-            var accounts = new Accounts();
-
-            accounts.Save(account);
         }
 
         public void insert_Historical_Action_Types()

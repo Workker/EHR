@@ -16,13 +16,14 @@
                                 <label>
                                     @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), account.ProfessionalRegistration.FirstOrDefault().Type.ToString(CultureInfo.InvariantCulture))))
                                     :&nbsp;
-                                </label>@account.ProfessionalRegistration.FirstOrDefault().Number
+                                </label>@account.ProfessionalRegistration.FirstOrDefault().Number - @account.ProfessionalRegistration.FirstOrDefault().State.Acronym
+                                <input type="hidden" name="professionalRegistrationId" hidden value="@account.ProfessionalRegistration.FirstOrDefault().Id"/>
                                 &nbsp;&nbsp;
                                    <label>E-mail:&nbsp;</label>@account.Email
                             </span>
                         </div>
                         <br />
-                        <input type="hidden" value="@account.Id" name="id"/>
+                        <input type="hidden" value="@account.Id" name="accountId"/>
                         <input type="submit" onclick='approveAccount(this, "../Home/ApproveAccount")' value="Aprovar" class="uibutton special" />&nbsp;&nbsp;
                            <input type="submit" onclick='refuseAccount(this, "../Home/RefuseAccount")' value="Reprovar" class="uibutton" />
                     </div>

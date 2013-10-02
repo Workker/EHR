@@ -1,8 +1,9 @@
 ﻿using EHR.CoreShared;
+using EHR.CoreShared.Interfaces;
 
 namespace EHR.Domain.Entities
 {
-    public class ProfessionalRegistration
+    public class ProfessionalRegistration : IAggregateRoot<int>
     {
         public virtual int Id { get; set; }
         public virtual string Number { get; set; }

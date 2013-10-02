@@ -11,7 +11,7 @@ namespace EHR.UI.Models.Mappers
 
             var professionalRegistration = Mapper.Map<ProfessionalRegistration, ProfessionalRegistrationModel>(professionalRegistrationObj);
 
-            professionalRegistration.State = professionalRegistrationObj.State.Id;
+            professionalRegistration.State = StateMapper.MapSpecialtyModelFrom(professionalRegistrationObj.State);
 
             return professionalRegistration;
         }

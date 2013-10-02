@@ -26,10 +26,11 @@ namespace EHR.UI.Models.Mappers
 
             account.Hospital = accountObject.Hospital.Id;
 
-            foreach (var profissionalRegistration in accountObject.ProfessionalRegistration)
+            foreach (var profissionalRegistration in accountObject.ProfessionalRegistrations)
             {
                 account.ProfessionalRegistration.Add(ProfessionalRegistrationMapper.MapProfessionalRegistrationModelFrom(profissionalRegistration));
             }
+
             return account;
         }
     }

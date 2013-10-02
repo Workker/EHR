@@ -22,10 +22,10 @@ namespace EHR.Domain.Entities
         public virtual bool Approved { get; protected set; }
         public virtual bool Refused { get; protected set; }
         public virtual bool Administrator { get; protected set; }
-        private IList<ProfessionalRegistration> _professionalRegistration;
-        public virtual IList<ProfessionalRegistration> ProfessionalRegistration
+        private IList<ProfessionalRegistration> _professionalRegistrations;
+        public virtual IList<ProfessionalRegistration> ProfessionalRegistrations
         {
-            get { return _professionalRegistration ?? (_professionalRegistration = new List<ProfessionalRegistration>()); }
+            get { return _professionalRegistrations ?? (_professionalRegistrations = new List<ProfessionalRegistration>()); }
         }
 
         #endregion
@@ -56,7 +56,7 @@ namespace EHR.Domain.Entities
 
             #endregion
 
-            ProfessionalRegistration.Add(professionalRegistration); ;
+            ProfessionalRegistrations.Add(professionalRegistration); ;
         }
 
 

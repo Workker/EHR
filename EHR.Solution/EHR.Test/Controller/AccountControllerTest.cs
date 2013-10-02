@@ -18,7 +18,7 @@ namespace EHR.Test.Controller
 
             var accountB = accounts.GetBy(3);
 
-            Assert.GreaterOrEqual(accountB.ProfessionalRegistration.Count, 2);
+            Assert.GreaterOrEqual(accountB.ProfessionalRegistrations.Count, 2);
         }
     }
 }

@@ -100,7 +100,7 @@ namespace EHR.Controller
             //todo: Implementando
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
+            //((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
 
             var repository = new Types<State>();
 
@@ -120,14 +120,14 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void ApproveAccount(int accountId)
+        public override void ApproveProfessionalRegistration(int accountId, int professionalRegistrationId)
         {
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
+            Assertion.GreaterThan(professionalRegistrationId, 0, "Registro Profissional inválido.").Validate();
+
+            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).ApproveProfessionalRegistration(professionalRegistrationId);
 
             var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
-
-            Assertion.IsTrue(account.Approved, "Conta não aprovada.").Validate();
 
             ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi aprovado.");
         }

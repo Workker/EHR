@@ -213,6 +213,7 @@
     <Compile Include="Models\Mappers\ProcedureMapper.cs" />
     <Compile Include="Models\Mappers\ProfessionalRegistrationMapper.cs" />
     <Compile Include="Models\Mappers\SpecialtyMapper.cs" />
+    <Compile Include="Models\Mappers\StateMapper.cs" />
     <Compile Include="Models\Mappers\SummaryMapper.cs" />
     <Compile Include="Models\Mappers\TreatmentMapper.cs" />
     <Compile Include="Models\AllergyModel.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\ProfessionalRegistrationModel.cs" />
     <Compile Include="Models\SpecialtyModel.cs" />
+    <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SummaryModel.cs" />
     <Compile Include="Models\TreatmentModel.cs" />
     <Compile Include="Models\TUSSModel.cs" />
