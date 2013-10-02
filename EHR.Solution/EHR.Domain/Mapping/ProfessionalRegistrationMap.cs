@@ -3,7 +3,7 @@ using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {
-    public class ProfessionalRegistrationMap: ClassMap<ProfessionalRegistration>
+    public class ProfessionalRegistrationMap : ClassMap<ProfessionalRegistration>
     {
         ProfessionalRegistrationMap()
         {
@@ -11,6 +11,8 @@ namespace EHR.Domain.Mapping
             Map(p => p.Number).Column("RNumber");
             Map(p => p.Type).CustomType<short>().Column("RType");
             References(p => p.State).Cascade.None();
+            Map(p => p.Approved);
+            Map(p => p.Refused);
         }
     }
 }

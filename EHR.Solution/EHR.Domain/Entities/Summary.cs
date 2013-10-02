@@ -24,6 +24,7 @@ namespace EHR.Domain.Entities
         public virtual DischargeData HighData { get; set; }
         public virtual IPatient Patient { get; set; }
         public virtual ITreatment Treatment { get; set; }
+        public virtual string TreatmentId { get; set; }
         public virtual bool Finalized { get; set; }
 
         private IList<Allergy> _allergies;
@@ -348,11 +349,11 @@ namespace EHR.Domain.Entities
         {
             var record = new HistoryRecord
                              {
-                Account = account,
-                Action = action,
-                Date = date,
-                Description = description
-            };
+                                 Account = account,
+                                 Action = action,
+                                 Date = date,
+                                 Description = description
+                             };
 
             History.Add(record);
         }

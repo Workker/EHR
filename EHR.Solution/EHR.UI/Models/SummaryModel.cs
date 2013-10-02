@@ -25,5 +25,6 @@ namespace EHR.UI.Models
         public bool Finalized { get; set; }
         public List<HistoryRecordMoldel> Views { get; set; }
         public List<HistoryRecordMoldel> Actions { get; set; }
+        public string TreatmentId { get; set; }
     }
 }

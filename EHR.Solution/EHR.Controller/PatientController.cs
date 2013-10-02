@@ -134,7 +134,7 @@ namespace EHR.Controller
             ITreatment treatmentDTO = string.IsNullOrEmpty(treatment) ? patient.Treatments.OrderByDescending(t => t.EntryDate).FirstOrDefault() : patient.Treatments.FirstOrDefault(t => t.Id == treatment);
 
             Assertion.NotNull(treatmentDTO, "Tratamento invalido.").Validate();
-            
+
             var summary = new Summary
                               {
                                   Cpf = patient.CPF,
@@ -143,7 +143,9 @@ namespace EHR.Controller
                                   CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
                                   Account = account,
                                   HighData = new DischargeData(),
-                                  Hospital = treatmentDTO.Hospital
+                                  Hospital = treatmentDTO.Hospital,
+                                  TreatmentId = treatmentDTO.Id,
+                                  EntryDateTreatment = treatmentDTO.EntryDate
                               };
 
             Assertion.NotNull(summary, "Sumário de alta foi criado.");

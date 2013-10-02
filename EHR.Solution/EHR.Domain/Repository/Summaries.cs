@@ -1,4 +1,6 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.CoreShared.Interfaces;
+using EHR.Domain.Entities;
+using EHR.Domain.Service.Lucene;
 using NHibernate.Criterion;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,11 @@ namespace EHR.Domain.Repository
 
             var summary = criterio.List<Summary>().OrderByDescending(s => s.Date).FirstOrDefault();
 
+            if (summary != null)
+            {
+                summary.Patient = GetPatient(cpf);
+            }
+
             //Assertion.NotNull(summary, "Sumário inválido.").Validate();
             return summary;
         }
@@ -33,6 +40,11 @@ namespace EHR.Domain.Repository
             criterio.Add(Restrictions.Eq("CodeMedicalRecord", codeMedicalRecord));
 
             var summary = criterio.UniqueResult<Summary>();
+
+            if (summary != null)
+            {
+                summary.Patient = GetPatient(cpf);
+            }
 
             //Assertion.NotNull(summary, "Sumário inválido.").Validate();
 
@@ -83,5 +95,15 @@ namespace EHR.Domain.Repository
 
             base.Save(summary);
         }
+
+        #region Private Methods
+
+        private IPatient GetPatient(string cpf)
+        {
+            var service = new GetPatientByHospitalService();
+            return service.GetPatientBy(cpf);
+        }
+
+        #endregion
     }
 }

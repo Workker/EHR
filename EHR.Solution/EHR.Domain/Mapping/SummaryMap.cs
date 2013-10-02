@@ -26,6 +26,7 @@ namespace EHR.Domain.Mapping
             References(s => s.Account).Cascade.None();
             Map(s => s.Finalized);
             HasMany(s => s.History).Cascade.All().LazyLoad();
+            Map(s => s.TreatmentId);
         }
     }
 }
