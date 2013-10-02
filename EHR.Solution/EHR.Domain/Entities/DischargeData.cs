@@ -20,9 +20,8 @@ namespace EHR.Domain.Entities
         {
             get { return _medicalReviews ?? (_medicalReviews = new List<MedicalReview>()); }
         }
-        public virtual DateTime? PrescribedHigh { get; set; }
-        public virtual string PersonWhoDeliveredTheSummary { get; set; }
         public virtual DateTime? Date { get; set; }
+        public virtual string PersonWhoDeliveredTheSummary { get; set; }
         private IList<ComplementaryExam> _complementaryExams;
         public virtual IList<ComplementaryExam> ComplementaryExams
         {

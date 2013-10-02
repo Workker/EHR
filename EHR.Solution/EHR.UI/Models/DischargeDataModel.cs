@@ -23,6 +23,8 @@ namespace EHR.UI.Models
         public int PrescribedHighMonth { get; set; }
         public int PrescribedHighYear { get; set; }
         public int PrescribedHighDay { get; set; }
+        public int PrescribedHighHour { get; set; }
+        public int PrescribedHighMinute { get; set; }
         public int DeliveredDateMonth { get; set; }
         public int DeliveredDateYear { get; set; }
         public int DeliveredDateDay { get; set; }

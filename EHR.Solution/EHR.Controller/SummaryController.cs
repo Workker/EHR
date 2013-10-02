@@ -130,7 +130,7 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void SaveDischargeData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
             short conditionOfThePatientAtDischargeId, short destinationOfThePatientAtDischarge,
-           short orientationOfMultidisciplinaryTeamsMet, DateTime prescribedHigh,
+           short orientationOfMultidisciplinaryTeamsMet, DateTime prescribedDischarge,
             string personWhoDeliveredTheSummary, DateTime deliveredDate)
         {
             #region Preconditions
@@ -142,7 +142,7 @@ namespace EHR.Controller
             Assertion.GreaterThan((int)conditionOfThePatientAtDischargeId, 0, "Condição de alta inválida.").Validate();
             Assertion.GreaterThan((int)destinationOfThePatientAtDischarge, 0, "Destino pós alta inválido.").Validate();
             Assertion.GreaterThan((int)orientationOfMultidisciplinaryTeamsMet, 0, "Opção de orientação de equipes multidisciplinares inválida.").Validate();
-            Assertion.GreaterThan(prescribedHigh, DateTime.MinValue, "Data de alta inválida.").Validate();
+            Assertion.GreaterThan(prescribedDischarge, DateTime.MinValue, "Data de alta inválida.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(personWhoDeliveredTheSummary), "Nome da pessoa a que o sumário foi entregue não foi informado.").Validate();
             Assertion.GreaterThan(deliveredDate, DateTime.MinValue, "Data de entrega inválida.").Validate();
 
@@ -169,7 +169,13 @@ namespace EHR.Controller
                 summary.HighData.MedicalReviews.Add(medicalReview);
             }
 
-            summary.HighData.PrescribedHigh = prescribedHigh;
+            if (summary.Date != prescribedDischarge)
+            {
+                summary.Date = prescribedDischarge;
+            }
+
+
+
             summary.HighData.PersonWhoDeliveredTheSummary = personWhoDeliveredTheSummary;
             summary.HighData.Date = deliveredDate;
 

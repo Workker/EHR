@@ -14,7 +14,6 @@ namespace EHR.Domain.Mapping
             Map(h => h.MultidisciplinaryTeamsMet).CustomType<short>();
             HasMany(h => h.MedicalReviews).Cascade.AllDeleteOrphan();
             HasMany(s => s.ComplementaryExams).Cascade.AllDeleteOrphan();
-            Map(h => h.PrescribedHigh);
             Map(h => h.PersonWhoDeliveredTheSummary);
             Map(h => h.Date).Column("DeliveredDate");
         }

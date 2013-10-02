@@ -138,14 +138,14 @@ namespace EHR.Controller
             var summary = new Summary
                               {
                                   Cpf = patient.CPF,
-                                  Date = DateTime.Now,
+                                  Date = treatmentDTO.CheckOutDate,
                                   Treatment = treatmentDTO,
                                   CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
                                   Account = account,
                                   HighData = new DischargeData(),
                                   Hospital = treatmentDTO.Hospital,
                                   TreatmentId = treatmentDTO.Id,
-                                  EntryDateTreatment = treatmentDTO.EntryDate
+                                  EntryDateTreatment = treatmentDTO.EntryDate,
                               };
 
             Assertion.NotNull(summary, "Sumário de alta foi criado.");

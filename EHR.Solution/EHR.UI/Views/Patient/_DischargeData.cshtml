@@ -97,7 +97,7 @@
         ViewBag.Context = "PrescribedHigh";
         Html.RenderPartial("_DatePicker");
     }
-    &nbsp;&nbsp;<input type="time" name="time" value="" />
+    &nbsp;&nbsp;<input type="time" name="time" value="@(((SummaryModel)Model).DischargeData.PrescribedHighHour):@(((SummaryModel)Model).DischargeData.PrescribedHighMinute)" />
     <br />
     <hr />
     <br />

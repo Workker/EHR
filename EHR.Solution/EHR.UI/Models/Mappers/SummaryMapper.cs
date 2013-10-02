@@ -40,7 +40,7 @@ namespace EHR.UI.Models.Mappers
                 }
             }
 
-            summaryModel.DischargeData = DischargeDataMapper.MapHighDataModelFrom(summary.HighData);
+            summaryModel.DischargeData = DischargeDataMapper.MapHighDataModelFrom(summary);
             summaryModel.Allergies = AllergyMapper.MapAllergyModelsFrom(summary.Allergies);
             summaryModel.Diagnostics = DiagnosticMapper.MapDiagnosticsModelsFrom(summary.Diagnostics);
             summaryModel.Procedures = ProcedureMapper.MapProceduresModelsFrom(summary.Procedures);
