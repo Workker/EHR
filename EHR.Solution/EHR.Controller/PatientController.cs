@@ -71,12 +71,12 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<IPatient> GetBy(Patient patientDTO)
+        public override IList<IPatient> GetBy(Patient patient)
         {
-            Assertion.NotNull(patientDTO, "Paciente não informado.").Validate();
+            Assertion.NotNull(patient, "Paciente não informado.").Validate();
 
             var service = new GetPatientByHospitalService();
-            var patients = service.GetPatientBy(patientDTO);
+            var patients = service.GetPatientBy(patient);
 
             Assertion.NotNull(patients, "Lista de pacientes está nula.").Validate();
 
@@ -84,13 +84,13 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<IPatient> GetBy(Patient patientDTO, List<string> hospitals)
+        public override IList<IPatient> GetBy(Patient patient, List<string> hospitals)
         {
-            Assertion.NotNull(patientDTO, "Paciente não informado.").Validate();
+            Assertion.NotNull(patient, "Paciente não informado.").Validate();
             Assertion.NotNull(hospitals, "Lista dos hospitais está nula.").Validate();
 
             var service = new GetPatientByHospitalService();
-            var patients = service.AdvancedGetPatientBy(patientDTO, hospitals);
+            var patients = service.AdvancedGetPatientBy(patient, hospitals);
 
             Assertion.NotNull(patients, "Lista de pacientes está nula.").Validate();
 

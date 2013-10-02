@@ -20,7 +20,8 @@ namespace EHR.UI.Models.Mappers
                 .ForMember(hd => hd.DischargeData, so => so.Ignore())
                 .ForMember(p => p.Patient, so => so.Ignore())
                 .ForMember(ac => ac.Actions, souce => souce.Ignore())
-                .ForMember(vi => vi.Views, source => source.Ignore());
+                .ForMember(vi => vi.Views, source => source.Ignore())
+                .ForMember(tr => tr.Treatment, source => source.Ignore());
 
             var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
 
@@ -51,6 +52,7 @@ namespace EHR.UI.Models.Mappers
             summaryModel.Actions = HistoryRecordMapper.MapHistoryRecordModelsFrom(actions.OrderByDescending(hr => hr.Date).Take(10));
             summaryModel.Views = HistoryRecordMapper.MapHistoryRecordModelsFrom(
                 views.OrderByDescending(hr => hr.Date).GroupBy(x => x.Account.Id).Select(x => x.FirstOrDefault()).Take(10).ToList());
+            summaryModel.Treatment = TreatmentMapper.MapTreatmentModelFrom(summary.Treatment);
 
             return summaryModel;
         }

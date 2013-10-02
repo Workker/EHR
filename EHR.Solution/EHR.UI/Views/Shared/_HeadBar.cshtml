@@ -5,7 +5,7 @@
 @model EHR.UI.Models.AccountModel
 <div id="topBar" class="fixed_elem">
     <div id="headContent" class="clearfix">
-        <h1 id="pageLogo"><a href="../Home/" style="background-color: transparent;">Rede D'or</a></h1>
+        <h1 id="pageLogo"><a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")Home" style="background-color: transparent;">Rede D'or</a></h1>
         @*<div id="notifications" class="lfloat" style="padding-top: 3px;">
             <img src="../../Images/Capture.PNG" alt="notifications" />
         </div>*@
@@ -52,7 +52,7 @@
             </form>
             <div class="rfloat">
                 <ul id="pageNav" class="clearfix">
-                    <li class="navItem firstItem" id="navHome"><a href="../Home/">Home</a></li>
+                    <li class="navItem firstItem" id="navHome"><a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")Home">Home</a></li>
                     <li class="navItem middleItem">
                         <a href="../Home">@Model.FirstName @Model.LastName
 
