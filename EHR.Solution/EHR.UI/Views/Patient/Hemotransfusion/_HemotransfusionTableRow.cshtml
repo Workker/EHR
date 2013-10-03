@@ -7,7 +7,7 @@
 {
     <li class="clearfix">
         <span class="firstColumn">@EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), hemotransfusion.HemotransfusionType.ToString(CultureInfo.InvariantCulture)))</span>
-        <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteHemotransfusion/?id=@hemotransfusion.Id", null)'><span>X</span></a>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this, "/Patient/DeleteHemotransfusion/?id=@hemotransfusion.Id", null)'><span>X</span></a>
         <span class="lastColumn"></span>
         <span class="middleColumn">
             @for (var i = 1; i <= hemotransfusion.ReactionTypes.Count; i++)

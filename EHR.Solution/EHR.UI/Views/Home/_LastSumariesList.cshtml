@@ -10,7 +10,7 @@
     @if (((List<SummaryModel>)ViewBag.Summaries).Count > 10)
     {
         <div class="clearfix uiMorePager uiMorePagerCenter showMore">
-            <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore("../Home/MoreSumaries", this)'>Exibir mais</a>
+            <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore(this,"/Home/MoreSumaries")'>Exibir mais</a>
         </div>
     }
 </div>

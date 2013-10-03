@@ -8,7 +8,7 @@
         <span class="firstColumn">
             @EnumUtil.GetDescriptionFromEnumValue((ExamTypeEnum)Enum.Parse(typeof(ExamTypeEnum), exam.Type.ToString(CultureInfo.InvariantCulture)))
         </span>
-        <a class="action" title="Excluir registro" onclick='deleteRow(this,"../Patient/DeleteExam/?id=@exam.Id", null)'><span>X</span></a>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this,"/Patient/DeleteExam/?id=@exam.Id", null)'><span>X</span></a>
         <span class="lastColumn">@exam.Date.ToShortDateString()</span>
         <span class="middleColumn">@exam.Description
         </span>

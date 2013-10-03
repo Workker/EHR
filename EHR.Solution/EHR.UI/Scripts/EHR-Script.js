@@ -18,7 +18,7 @@
                 ko.mapping.updateFromJS(viewModel, resultModel);
             } else {
                 $.ajax({
-                    url: "../Search/SearchPeaple",
+                    url: "http://" + window.location.host + "/Search/SearchPeaple",
                     data: { "query": q },
                     type: "GET",
                     dataType: "json",
@@ -200,7 +200,11 @@ $(document).ready(function () {
 
 // Table Component
 function newRow(currentNode, url) {
-    $.ajax({ type: "GET", url: url, cache: false }).success(function (d) {
+    $.ajax({
+        type: "GET",
+        url: "http://" + window.location.host + url,
+        cache: false
+    }).success(function (d) {
         $(currentNode).parent().parent().clone($(currentNode).parent().parent())
             .appendTo($(currentNode).parent().parent().parent());
         var contentDiv = $(currentNode).parent().next();
@@ -216,7 +220,7 @@ function saveRow(element, url) {
     form.submit(function () {
         $.ajax({
             type: "POST",
-            url: url,
+            url: "http://" + window.location.host + url,
             cache: false,
             data: form.serialize(),
             success: function (data) {
@@ -230,7 +234,12 @@ function saveRow(element, url) {
 }
 
 function editRow(url, data, e) {
-    $.ajax({ type: "GET", url: url, cache: false, data: data }).success(function (d) {
+    $.ajax({
+        type: "GET",
+        url: "http://" + window.location.host + url,
+        cache: false,
+        data: data
+    }).success(function (d) {
         var div = $(e).parent().next();
         $(div).html(d);
         $(div).show();
@@ -239,7 +248,12 @@ function editRow(url, data, e) {
 }
 
 function deleteRow(e, url, data) {
-    $.ajax({ type: "POST", url: url, cache: false, data: data }).success(function () {
+    $.ajax({
+        type: "POST",
+        url: "http://" + window.location.host + url,
+        cache: false,
+        data: data
+    }).success(function () {
         var li = $(e).parent();
         $(li).remove();
     });
@@ -266,7 +280,7 @@ function SaveComplementaryExam(element) {
 
     $.ajax({
         type: "POST",
-        url: "../Patient/SaveComplementaryExam",
+        url: "http://" + window.location.host + "/Patient/SaveComplementaryExam",
         cache: false,
         data: { description: description, period: period },
         success: function (data) {
@@ -286,7 +300,7 @@ function SaveMedicalReview(element) {
 
     $.ajax({
         type: "POST",
-        url: "../Patient/SaveMedicalReview",
+        url: "http://" + window.location.host + "/Patient/SaveMedicalReview",
         cache: false,
         data: { TermMedicalReviewAt: termMedicalReviewAt, "Specialty.Id": specialtyId, "Specialty.Description": specialtyDescription },
         success: function (data) {
@@ -341,7 +355,7 @@ function formatDatePicker() {
 // AdvancedSearch
 function goAdvancedSearch(q) {
     $.ajax({
-        url: "../Search/Index/?query=" + q,
+        url: "http://" + window.location.host + "/Search/Index/?query=" + q,
         type: "GET",
         cache: false,
         success: function (r) {
@@ -364,9 +378,9 @@ function goFilter(form) {
     });
 }
 
-function GetMore(url, element) {
+function GetMore(element, url) {
     $.ajax({
-        url: url,
+        url: "http://" + window.location.host + url,
         type: "GET",
         cache: false,
         success: function (r) {
@@ -380,13 +394,13 @@ function GetMore(url, element) {
     });
 }
 
-function approveAccount(element, url) {
+function approveAccount(element) {
     var form = $(element).parent().parent().parent().parent();
 
     form.submit(function () {
         $.ajax({
             type: "POST",
-            url: url,
+            url: "http://" + window.location.host + "/Home/ApproveAccount",
             cache: false,
             data: form.serialize(),
             success: function (data) {
@@ -398,12 +412,12 @@ function approveAccount(element, url) {
     });
 }
 
-function refuseAccount(element, url) {
+function refuseAccount(element) {
     var form = $(element).parent().parent().parent().parent();
     form.submit(function () {
         $.ajax({
             type: "POST",
-            url: url,
+            url: "http://" + window.location.host + "/Home/RefuseAccount",
             cache: false,
             data: form.serialize(),
             success: function (data) {
@@ -441,7 +455,7 @@ function ChangePassword(element) {
     form.submit(function () {
         $.ajax({
             type: "POST",
-            url: "../Home/AlterPasswordOfAccount",
+            url: "http://" + window.location.host + "/Home/AlterPasswordOfAccount",
             cache: false,
             data: form.serialize(),
             success: function () {
@@ -467,7 +481,7 @@ function AddprofessionalResgistration(element) {
     form.submit(function () {
         $.ajax({
             type: "POST",
-            url: "../Home/AddprofessionalResgistration",
+            url: "http://" + window.location.host + "/Home/AddprofessionalResgistration",
             cache: false,
             data: form.serialize(),
             success: function () {
@@ -494,7 +508,7 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
     $(autoCompleteElement).autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: url,
+                url: "http://" + window.location.host + url,
                 type: "GET",
                 dataType: "JSON",
                 data: { term: request.term },
@@ -558,7 +572,7 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
     data = $(this).serialize();
     $.ajax({
         type: "POST",
-        url: '../Patient/SaveMdr',
+        url: "http://" + window.location.host + '/Patient/SaveMdr',
         cache: false,
         data: data,
         success: function () {
@@ -566,11 +580,23 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
     });
 });
 
-
-function FinalizeSummary() {
+$(document).on('submit', '#dischargeData', function (e) {
+    e.preventDefault();
+    data = $(this).serialize();
     $.ajax({
         type: "POST",
-        url: '../Patient/FinalizeSummary',
+        url: "http://" + window.location.host + '/Patient/SaveHighData',
+        cache: false,
+        data: data,
+        success: function () {
+        }
+    });
+});
+
+function FinalizeSummary(url) {
+    $.ajax({
+        type: "POST",
+        url: "http://" + window.location.host + "/Patient/FinalizeSummary",
         cache: false,
         success: function () {
             RemoveEdition();
@@ -578,30 +604,22 @@ function FinalizeSummary() {
     });
 }
 
-function CheckSession() {
-    var request = false;
-
-    if (window.XMLHttpRequest) { // Mozilla/Safari
-        request = new XMLHttpRequest();
-    } else if (window.ActiveXObject) { // IE
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    request.open('POST', '../Account/SessionCheck', true);
-    request.onreadystatechange = function () {
-        if (request.readyState == 4) {
-            var session = eval('(' + request.responseText + ')');
-            if (session.valid) {
-                // DO SOMETHING IF SESSION IS VALID
-            } else {
-                alert("A sua sessão expirou por ficar mais de 5 minutos sem atividade. ");
-                window.location = "http://" + window.location.host;
-            }
-        }
-    };
-    request.send(null);
+function RemoveEdition() {
+    $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
+    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").remove();
 }
 
-function RemoveEdition() {
-    $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text]").attr("disabled", true);
-    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").remove();
+function SaveObsevation(element) {
+    var form = $(element).parent();
+    form.submit(function () {
+        $.ajax({
+            type: "POST",
+            url: "http://" + window.location.host + "/Patient/SaveObservation",
+            cache: false,
+            data: form.serialize(),
+            success: function () {
+            }
+        });
+        return false;
+    });
 }

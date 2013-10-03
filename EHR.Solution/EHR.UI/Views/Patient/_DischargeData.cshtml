@@ -23,8 +23,8 @@
     <label>Condi&ccedil;&atilde;o do paciente na alta:</label>&nbsp;    
     @foreach (var value in Enum.GetValues(typeof(ConditionOfThePatientAtHighEnum)).Cast<short>().ToList())
     {
-        <input type="radio" name="ConditionOfThePatientAtHigh"  @if (value == 1)
-                                                                { 
+        <input type="radio" name="ConditionAtDischarge"  @if (value == 1)
+                                                         { 
                                                                     @:required 
                                                                 }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.ConditionAtDischarge == value)
                                                                                                              {
@@ -32,7 +32,6 @@
                                                                                                              }/>
         @EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
-
     <br />
     <br />
     <label>Destino do paciente na alta:</label>&nbsp;
@@ -53,8 +52,8 @@
     <label>Orienta&ccedil;&atilde;o das equipes multidisciplinares preenchidas:</label>&nbsp;
     @foreach (var value in Enum.GetValues(typeof(OrientationOfMultidisciplinaryTeamsMetEnum)).Cast<short>().ToList())
     {
-        <input type="radio" name="OrientationOfMultidisciplinaryTeamsMet"  @if (value == 1)
-                                                                           { 
+        <input type="radio" name="MultidisciplinaryTeamsMet"  @if (value == 1)
+                                                              { 
                                                                                @:required 
                                                                            }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value)
                                                                                                                        {
@@ -97,7 +96,7 @@
         ViewBag.Context = "PrescribedHigh";
         Html.RenderPartial("_DatePicker");
     }
-    &nbsp;&nbsp;<input type="time" name="time" value="@(((SummaryModel)Model).DischargeData.PrescribedHighHour):@(((SummaryModel)Model).DischargeData.PrescribedHighMinute)" />
+    &nbsp;&nbsp;<input type="time" name="PrescribedDischargeTime" value="@(((SummaryModel)Model).DischargeData.PrescribedHighHour):@(((SummaryModel)Model).DischargeData.PrescribedHighMinute)" />
     <br />
     <hr />
     <br />
@@ -125,21 +124,9 @@
         $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth));
         $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateDay));
 
-        $(document).on('submit', '#dischargeData', function (e) {
-            e.preventDefault();
-            data = $(this).serialize();
-            $.ajax({
-                type: "POST",
-                url: '../Patient/SaveHighData',
-                cache: false,
-                data: data,
-                success: function () {
-                }
-            });
-        });
         @if (((SummaryModel)Session["Summary"]).Finalized == true)
-    {
-        @:RemoveEdition();    
+        {
+            @:RemoveEdition();    
         }
     </script>
 </form>

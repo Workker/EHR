@@ -51,7 +51,6 @@
 }
 @section scriptsBefore{
     <script type="text/javascript">
-        $(document).ready(setInterval("CheckSession()", 2000));
             @if (((SummaryModel)Session["Summary"]).Finalized == true)
             {
         @:RemoveEdition();    

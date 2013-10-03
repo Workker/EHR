@@ -99,7 +99,7 @@ namespace EHR.UI.Controllers
 
         private string BuildResultsOfSimpleSearchOfPatients(IEnumerable<PatientModel> patients)
         {
-            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"cpf\":\"" + patient.Cpf + "\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" + patient.Hospital + "\", \"imageUrl\":\"../Images/Profiles/1.jpg\"}"));
+            var result = patients.Aggregate("{\"results\":[{\"type\":\"header\",\"text\":\"Pacientes\"}", (current, patient) => current + (",{\"type\":\"person\",\"cpf\":\"" + patient.Cpf + "\",\"name\":\"" + patient.Name + "\",\"hospital\":\"" + patient.Hospital + "\", \"imageUrl\":\"/Images/Profiles/1.jpg\"}"));
             return result + "]}";
         }
 

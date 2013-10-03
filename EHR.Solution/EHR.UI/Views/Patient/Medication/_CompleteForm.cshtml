@@ -4,7 +4,7 @@
 <form id="medicationForm">
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
     <label>Medicamento:</label>
-    <input type="text" name="medication.description" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '../Patient/DefAutoComplete', '#def')" />
+    <input type="text" name="medication.description" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '/Patient/DefAutoComplete', '#def')" />
     <input type="hidden" name="medication.def.id" id="def" />
     <br />
     <br />
@@ -73,7 +73,7 @@
     <input type="number" name="medication.duration" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
     <br />
     <br />
-    <input type="submit" onclick='saveRow(this, "../Patient/SaveMedication");' value="Savar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="submit" onclick='saveRow(this, "/Patient/SaveMedication");' value="Savar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
 <script type="text/javascript">

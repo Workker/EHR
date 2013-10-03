@@ -28,5 +28,6 @@ namespace EHR.UI.Models
         public int DeliveredDateMonth { get; set; }
         public int DeliveredDateYear { get; set; }
         public int DeliveredDateDay { get; set; }
+        public string PrescribedDischargeTime { get; set; }
     }
 }

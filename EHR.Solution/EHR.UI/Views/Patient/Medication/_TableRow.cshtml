@@ -8,7 +8,7 @@
     {
     <li class="clearfix">
         <span class="firstColumn">@(medication.Def == null ? medication.Description : medication.Def.Description)</span>
-        <a class="action" title="Excluir registro" onclick='deleteRow(this, "../Patient/DeleteMedication/?id=@medication.Id", null)'><span>X</span></a>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this, "/Patient/DeleteMedication/?id=@medication.Id", null)'><span>X</span></a>
         <span class="lastColumn">@medication.Duration Dia(s)</span>
         <span class="middleColumn">@(medication.Type != 3 ? "" : medication.Dose + " " + EnumUtil.GetDescriptionFromEnumValue((DosageEnum)Enum.Parse(typeof(DosageEnum), medication.Dosage.ToString(CultureInfo.InvariantCulture))) + " " + EnumUtil.GetDescriptionFromEnumValue((FrequencyEnum)Enum.Parse(typeof(FrequencyEnum), medication.Frequency.ToString(CultureInfo.InvariantCulture))))</span>
     </li>

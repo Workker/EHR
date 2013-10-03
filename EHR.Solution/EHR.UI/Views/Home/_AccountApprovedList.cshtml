@@ -11,7 +11,7 @@
         @if (((List<AccountModel>)ViewBag.Accounts).Count > 10)
         { 
             <div class="clearfix uiMorePager uiMorePagerCenter showMore" id="moreAccounts">
-                <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore("../Home/MoreAccounts", this)'>Exibir mais</a>
+                <a class="pam uiBoxLightblue  uiMorePagerPrimary" onclick='GetMore(this,"/Home/MoreAccounts")'>Exibir mais</a>
             </div>
         }
     </div>

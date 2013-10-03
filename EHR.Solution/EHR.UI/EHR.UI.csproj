@@ -504,7 +504,6 @@
     <Content Include="Views\Patient\DischargeData\_ComplementaryExamTable.cshtml" />
     <Content Include="Views\Patient\DischargeData\_ComplementaryExamTableRow.cshtml" />
     <Content Include="Views\Patient\Layout\_LastVisitors.cshtml" />
-    <Content Include="Views\Account\_SessionCheck.cshtml" />
     <Content Include="Views\Patient\Medication\_SimpleForm.cshtml" />
     <Content Include="Views\Patient\DischargeData\_MedicalReviewForm.cshtml" />
     <Content Include="Views\Patient\DischargeData\_MedicalReviewTable.cshtml" />

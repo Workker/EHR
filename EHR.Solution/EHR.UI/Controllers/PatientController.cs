@@ -729,7 +729,7 @@ namespace EHR.UI.Controllers
                     dischargeDataModel.ConditionAtDischarge,
                     dischargeDataModel.DestinationOfThePatientAtDischarge,
                     dischargeDataModel.MultidisciplinaryTeamsMet,
-                    new DateTime(dischargeDataModel.PrescribedHighYear, dischargeDataModel.PrescribedHighMonth, dischargeDataModel.PrescribedHighDay, dischargeDataModel.PrescribedHighHour, dischargeDataModel.PrescribedHighMinute, 0),
+                    new DateTime(dischargeDataModel.PrescribedHighYear, dischargeDataModel.PrescribedHighMonth, dischargeDataModel.PrescribedHighDay, int.Parse(dischargeDataModel.PrescribedDischargeTime.Substring(0, 2)), int.Parse(dischargeDataModel.PrescribedDischargeTime.Substring(3, 2)), 0),
                     dischargeDataModel.PersonWhoDeliveredTheSummary,
                     new DateTime(dischargeDataModel.DeliveredDateYear, dischargeDataModel.DeliveredDateMonth, dischargeDataModel.DeliveredDateDay)
                         );

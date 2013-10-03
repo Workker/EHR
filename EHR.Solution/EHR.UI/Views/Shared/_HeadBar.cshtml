@@ -36,8 +36,8 @@
                                 <li class="${ type() }">{{if type() == "header"}}
                                     <span data-bind="text: text"></span>
                                     {{else}}
-                                    <a href="../Patient/${cpf}">
-                                        <img src="${ imageUrl() }" />
+                                    <a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")Patient/${cpf}">
+                                        <img src="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")${ imageUrl() }" />
                                         <span class="text" data-bind="text: name"></span>
                                         <span class="subtext" data-bind="text: hospital"></span>
                                     </a>
@@ -114,10 +114,10 @@
                     </li>
                     <li id="navAccount">
                         <a onclick='ShowTopMenu(this);' id="navAccountLink">
-                                  <div class="menuPulldown" id="userNavigationLabel">Account Settings</div>
-                              </a>
+                            <div class="menuPulldown" id="userNavigationLabel">Account Settings</div>
+                        </a>
                         <div id="LogOut" class="noDisplay">
-                            <a href="../Account/Logout">Sair</a>
+                            <a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)/Account/Logout">Sair</a>
                         </div>
                     </li>
                 </ul>

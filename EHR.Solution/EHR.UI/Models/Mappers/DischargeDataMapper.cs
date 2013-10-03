@@ -25,7 +25,7 @@ namespace EHR.UI.Models.Mappers
             dischargeDataModel.PrescribedHighHour = summary.Date.Value.Hour == null ? 0 : summary.Date.Value.Hour;
             dischargeDataModel.PrescribedHighMinute = summary.Date.Value.Minute == null ? 0 : summary.Date.Value.Minute;
             
-            dischargeDataModel.DeliveredDateYear = dischargeData.Date == null ? 0 : dischargeData.Date.Value.Day;
+            dischargeDataModel.DeliveredDateYear = dischargeData.Date == null ? 0 : dischargeData.Date.Value.Year;
             dischargeDataModel.DeliveredDateMonth = dischargeData.Date == null ? 0 : dischargeData.Date.Value.Month;
             dischargeDataModel.DeliveredDateDay = dischargeData.Date == null ? 0 : dischargeData.Date.Value.Day;
 
