@@ -71,7 +71,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<IPatient> GetBy(Patient patient)
+        public override IList<IPatient> GetBy(IPatient patient)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
 
@@ -84,7 +84,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<IPatient> GetBy(Patient patient, List<string> hospitals)
+        public override IList<IPatient> GetBy(IPatient patient, IList<short> hospitals)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
             Assertion.NotNull(hospitals, "Lista dos hospitais está nula.").Validate();

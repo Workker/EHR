@@ -22,7 +22,10 @@ namespace EHR.UI.Controllers
                 Session["Date"] = null;
                 var patient = new Patient { Name = query };
                 var patientController = FactoryController.GetController(ControllerEnum.Patient);
-                ViewBag.Patients = patientController.GetBy(patient, new List<string>()).Take(10);
+                ViewBag.Patients = patientController.GetBy(patient, new List<short>()).Take(10);
+                ViewBag.Hospitals =
+                    HospitalMapper.MapHospitalModelFrom(
+                        FactoryController.GetController(ControllerEnum.Hospital).GetAllHospitals());
                 Session["Name"] = query;
                 return PartialView("_Search");
             }
@@ -34,11 +37,11 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult FilterPeople(string day, string month, string year, List<string> hospital)
+        public ActionResult FilterPeople(string day, string month, string year, List<short> hospitalId)
         {
             try
             {
-                Session["Hospital"] = hospital;
+                Session["Hospital"] = hospitalId ?? (hospitalId = new List<short>());
                 FillDateParameter(day, month, year);
                 ViewBag.Patients = GetTreatment(false);
 
@@ -123,7 +126,7 @@ namespace EHR.UI.Controllers
         {
             var patientController = FactoryController.GetController(ControllerEnum.Patient);
 
-            return skip ? patientController.GetBy(patient, (List<string>)Session["Hospital"]).Skip((int)Session["Skip"]).Take(10) : patientController.GetBy(patient, (List<string>)Session["Hospital"]).Take(10);
+            return skip ? patientController.GetBy(patient, (List<short>)Session["Hospital"]).Skip((int)Session["Skip"]).Take(10) : patientController.GetBy(patient, (List<short>)Session["Hospital"]).Take(10);
         }
 
         private void FillDateParameter(string day, string month, string year)

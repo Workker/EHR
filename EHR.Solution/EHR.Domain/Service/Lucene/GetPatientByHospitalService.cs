@@ -3,6 +3,7 @@ using EHR.CoreShared.Interfaces;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace EHR.Domain.Service.Lucene
 {
@@ -52,10 +53,18 @@ namespace EHR.Domain.Service.Lucene
             return service.GetPatientsDbFor();
         }
 
-        public IList<IPatient> AdvancedGetPatientBy(IPatient patient, List<string> hospital)
+        public IList<IPatient> AdvancedGetPatientBy(IPatient patient, IList<short> hospitals)
         {
+            //todo: remover mock
+            var listHospital = new List<string>();
+
+            foreach (short hospital in hospitals)
+            {
+                listHospital.Add(hospital.ToString(CultureInfo.InvariantCulture));
+            }
+
             var servico = new GetPatientsLuceneService();
-            return servico.GetPatientsAdvancedSearch(patient, hospital);
+            return servico.GetPatientsAdvancedSearch(patient, listHospital);
         }
         //todo: mock
         public IList<IPatient> MockPatients(string name)
