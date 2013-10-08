@@ -593,20 +593,40 @@ $(document).on('submit', '#dischargeData', function (e) {
     });
 });
 
-function FinalizeSummary(url) {
+function RemoveEdition(reopen) {
+    $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
+    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").hide();
+    if (reopen == true) {
+        $(".contentPage input[value=Reabrir]").show();
+    }
+}
+
+function FinalizeSummary() {
     $.ajax({
         type: "POST",
         url: "http://" + window.location.host + "/Patient/FinalizeSummary",
         cache: false,
         success: function () {
-            RemoveEdition();
+            RemoveEdition(true);
         }
     });
 }
 
-function RemoveEdition() {
-    $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
-    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").remove();
+function ReOpenEdition() {
+    $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", false);
+    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").show();
+    $(".contentPage input[value=Reabrir]").hide();
+}
+
+function ReOpenSummary() {
+    $.ajax({
+        type: "POST",
+        url: "http://" + window.location.host + "/Patient/ReOpenSummary",
+        cache: false,
+        success: function () {
+            ReOpenEdition();
+        }
+    });
 }
 
 function SaveObsevation(element) {

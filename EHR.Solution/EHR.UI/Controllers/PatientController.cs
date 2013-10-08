@@ -870,6 +870,8 @@ namespace EHR.UI.Controllers
             {
                 FactoryController.GetController(ControllerEnum.Summary).FinalizeSummary(GetSummary().Id);
 
+                RefreshSessionSummary();
+
                 this.RegisterActionOfUser(HistoricalActionTypeEnum.Closed, "sumario");
 
                 this.ShowMessage(MessageTypeEnum.Success, "Sumario Finalizado.");
@@ -881,6 +883,25 @@ namespace EHR.UI.Controllers
             }
         }
 
+        [HttpPost]
+        public void ReOpenSummary()
+        {
+            try
+            {
+                FactoryController.GetController(ControllerEnum.Summary).ReOpenSummary(GetSummary().Id);
+
+                RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Reopened, "sumario");
+
+                this.ShowMessage(MessageTypeEnum.Success, "Sumario Reaberto.");
+            }
+            catch (Exception exception)
+            {
+
+                this.ShowMessage(MessageTypeEnum.Error, exception.Message);
+            }
+        }
 
         #endregion
 

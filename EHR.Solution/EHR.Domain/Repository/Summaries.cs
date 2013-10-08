@@ -96,6 +96,18 @@ namespace EHR.Domain.Repository
             base.Save(summary);
         }
 
+        [ExceptionLogger]
+        public void ReOpenSummary(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Sumario de alta invalido.").Validate();
+
+            var summary = base.Get<Summary>(id);
+
+            summary.Finalized = false;
+
+            base.Save(summary);
+        }
+
         #region Private Methods
 
         private IPatient GetPatient(string cpf)

@@ -224,5 +224,14 @@ namespace EHR.Controller
 
             Summaries.FinalizeSummary(summaryId);
         }
+
+        [ExceptionLogger]
+        public override void ReOpenSummary(int summaryId)
+        {
+            Assertion.GreaterThan(summaryId, 0, "Sumario de alta invalido.").Validate();
+
+            Summaries.ReOpenSummary(summaryId);
+        }
+
     }
 }

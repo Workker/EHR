@@ -53,10 +53,10 @@
     @foreach (var value in Enum.GetValues(typeof(OrientationOfMultidisciplinaryTeamsMetEnum)).Cast<short>().ToList())
     {
         <input type="radio" name="MultidisciplinaryTeamsMet"  @if (value == 1)
-                                                              { 
-                                                                               @:required 
-                                                                           }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value)
-                                                                                                                       {
+                                                              {
+                                                                  @:required 
+                                                              }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value)
+                                                                                                          {
                                                                                                                            @:checked
                                                                                                                        }/>
         @EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString(CultureInfo.InvariantCulture)))
@@ -86,9 +86,7 @@
     }
     <br />
     <br />
-
     <label>M&eacute;dico:</label>&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))"/>
-
     <br />
     <br />
     <label>Alta Prescrita:</label>&nbsp;
@@ -96,7 +94,27 @@
         ViewBag.Context = "PrescribedHigh";
         Html.RenderPartial("_DatePicker");
     }
-    &nbsp;&nbsp;<input type="time" name="PrescribedDischargeTime" value="@(((SummaryModel)Model).DischargeData.PrescribedHighHour):@(((SummaryModel)Model).DischargeData.PrescribedHighMinute)" />
+    &nbsp;&nbsp;<input type="time" name="PrescribedDischargeTime" value="@{
+                                                                            var hour = ((SummaryModel)Model).DischargeData.PrescribedHighHour;
+                                                                            if (hour.ToString(CultureInfo.InvariantCulture).Length < 2)
+                                                                            {
+                                                                                @(string.Concat(0, hour))
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                @hour
+                                                                            }
+                                                                         }:@{
+                                                                             var minute = ((SummaryModel)Model).DischargeData.PrescribedHighMinute;
+                                                                             if (minute.ToString(CultureInfo.InvariantCulture).Length < 2)
+                                                                             {
+                                                                                 @(string.Concat(0, minute))
+                                                                             }
+                                                                             else
+                                                                             {
+                                                                                 @minute
+                                                                             }
+                                                                            }" />
     <br />
     <hr />
     <br />
@@ -112,9 +130,37 @@
     <br />
     <hr />
     <br />
-    <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
-    <input type="reset" value="Cancelar" class="uibutton large" />&nbsp;&nbsp;
-    <input type="button" value="Finalizar" class="uibutton large special" onclick="FinalizeSummary();" />
+    <input type="submit" value="Salvar" class="uibutton large confirm" style="margin-right: 5px" />
+    <input type="reset" value="Cancelar" class="uibutton large" style="margin-right: 5px" />
+    <input type="button" value="Finalizar" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
+    @{
+        var summary = (SummaryModel)Model;
+        if (summary.Finalized)
+        {
+            var action = summary.Actions.OrderByDescending(x => x.Id).FirstOrDefault();
+
+            var account = (AccountModel)Session["account"];
+
+            if (action.Account.Id == account.Id)
+            {
+                <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" />
+                <script type="text/javascript">
+                    RemoveEdition(true);
+                </script>
+            }
+            else
+            {
+                <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
+                <script type="text/javascript">
+                    RemoveEdition(false);
+                </script>
+            }
+        }
+        else
+        {
+        <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
+        }
+    }
     <script type="text/javascript">
         $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
         $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth));
@@ -123,10 +169,5 @@
         $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateYear));
         $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth));
         $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateDay));
-
-        @if (((SummaryModel)Session["Summary"]).Finalized == true)
-        {
-            @:RemoveEdition();    
-        }
     </script>
 </form>

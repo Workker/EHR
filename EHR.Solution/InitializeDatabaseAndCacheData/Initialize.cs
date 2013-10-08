@@ -15,12 +15,10 @@ namespace InitializeDatabaseAndCacheData
             dataBase.create_database_by_model();
             dataBase.insert_states();
             dataBase.insert_hospitals_SQL();
-            //dataBase.insert_hospitals_Oracle();
             dataBase.insert_allergies_types();
             dataBase.insert_diagnostic_types();
             dataBase.insert_Conditions_Of_The_Patient_At_Discharge();
             dataBase.insert_hemotransfusion_types();
-            dataBase.insert_specialties();
             dataBase.insert_reactions_types();
             dataBase.insert_Historical_Action_Types();
             dataBase.insert_admin_account();

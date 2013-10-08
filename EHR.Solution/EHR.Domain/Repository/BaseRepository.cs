@@ -44,14 +44,14 @@ namespace EHR.Domain.Repository
 
         public virtual void Save(IAggregateRoot<int> root)
         {
-            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
+            var transaction = Session.BeginTransaction();
             Session.SaveOrUpdate(root);
             transaction.Commit();
         }
 
         public virtual void SaveList(List<IAggregateRoot<int>> roots)
         {
-            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
+            var transaction = Session.BeginTransaction();
 
             try
             {
@@ -70,7 +70,7 @@ namespace EHR.Domain.Repository
 
         public virtual void SaveList<T>(List<T> roots)
         {
-            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
+            var transaction = Session.BeginTransaction();
 
             try
             {
@@ -89,7 +89,7 @@ namespace EHR.Domain.Repository
 
         public virtual void Delete(IAggregateRoot<int> root)
         {
-            var transaction = Session.BeginTransaction(IsolationLevel.ReadUncommitted);
+            var transaction = Session.BeginTransaction();
             Session.Delete(root);
             transaction.Commit();
         }

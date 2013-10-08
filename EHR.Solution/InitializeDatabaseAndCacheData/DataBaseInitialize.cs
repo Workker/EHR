@@ -30,11 +30,11 @@ namespace InitializeDatabaseAndCacheData
             {
                 // Oracle Configuration
 
-                //     Fluently.Configure()
-                //.Database(OracleClientConfiguration.Oracle10.ConnectionString(c => c
-                //    .FromAppSetting("connectionOracle"))
-                //    .ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).Mappings(m => m.MergeMappings())
-                //     .ExposeConfiguration(BuildSchema).BuildSessionFactory();
+           //     Fluently.Configure()
+           //.Database(OracleClientConfiguration.Oracle10.ConnectionString(c => c
+           //    .FromAppSetting("connection"))
+           //    .ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).Mappings(m => m.MergeMappings())
+           //     .ExposeConfiguration(BuildSchema).BuildSessionFactory();
 
                 // SQL Server Configuration
 
