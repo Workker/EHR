@@ -10,6 +10,7 @@ namespace EHR.Domain.Mapping
             Map(h => h.Name);
             Map(h => h.URLImage);
             References(h => h.State).Cascade.None();
+            Map(h => h.Key).Column("HospitalKey");
         }
     }
 }
