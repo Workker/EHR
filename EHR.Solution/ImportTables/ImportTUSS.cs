@@ -12,7 +12,7 @@ namespace ImportTables
         {
             var excelRepository = new ExcelRepository();
 
-            var data = excelRepository.GetAllDataFrom("E:\\Projects\\EHR\\EHR.Solution\\ImportTables", "TUSS.xls", "TUSS");
+            var data = excelRepository.GetAllDataFrom("B:\\Documents\\EHR\\EHR.Solution\\ImportTables", "TUSS.xls", "TUSS");
 
             var list = new List<TUSS>();
 

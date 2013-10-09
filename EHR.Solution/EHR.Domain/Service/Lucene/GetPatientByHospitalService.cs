@@ -1,5 +1,6 @@
 ﻿using EHR.CoreShared;
 using EHR.CoreShared.Interfaces;
+using EHRIntegracao.Domain.Services;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System;
 using System.Collections.Generic;
@@ -13,31 +14,36 @@ namespace EHR.Domain.Service.Lucene
         {
             var servico = new GetPatientsLuceneService();
             var patient = servico.GetPatientBy(cpf);
-            //Todo: Remover esta merda depois
-            patient.Treatments = new List<ITreatment>
-                                     {
-                                         new Treatment
-                                             {
-                                                 Id = "123",
-                                                 Hospital = DbEnum.CopaDor,
-                                                 EntryDate = DateTime.Now.AddDays(-3),
-                                                 CheckOutDate = DateTime.Now
-                                             },
-                                         new Treatment
-                                             {
-                                                 Id = "1234",
-                                                 Hospital = DbEnum.Esperanca,
-                                                 EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
-                                                 CheckOutDate = DateTime.Now.AddMonths(-3)
-                                             },
-                                         new Treatment
-                                             {
-                                                 Id = "1235",
-                                                 Hospital = DbEnum.QuintaDor,
-                                                 EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
-                                                 CheckOutDate = DateTime.Now.AddMonths(-5)
-                                             }
-                                     };
+            TreatmentsLuceneService treatmentsService = new TreatmentsLuceneService();
+
+            var treatments = treatmentsService.GetTreatments(patient.Records);
+            if (treatments != null)
+                patient.AddTreatments(treatments);
+
+            //patient.Treatments = new List<ITreatment>
+            //                         {
+            //                             new Treatment
+            //                                 {
+            //                                     Id = "123",
+            //                                     Hospital = DbEnum.CopaDor,
+            //                                     EntryDate = DateTime.Now.AddDays(-3),
+            //                                     CheckOutDate = DateTime.Now
+            //                                 },
+            //                             new Treatment
+            //                                 {
+            //                                     Id = "1234",
+            //                                     Hospital = DbEnum.Esperanca,
+            //                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
+            //                                     CheckOutDate = DateTime.Now.AddMonths(-3)
+            //                                 },
+            //                             new Treatment
+            //                                 {
+            //                                     Id = "1235",
+            //                                     Hospital = DbEnum.QuintaDor,
+            //                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
+            //                                     CheckOutDate = DateTime.Now.AddMonths(-5)
+            //                                 }
+            //                         };
             return patient;
         }
 

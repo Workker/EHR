@@ -12,7 +12,7 @@ namespace ImportTables
         {
             var excelRepository = new ExcelRepository();
 
-            var data = excelRepository.GetAllDataFrom("E:\\Projects\\EHR\\EHR.Solution\\ImportTables", "CID.xls", "CID10");
+            var data = excelRepository.GetAllDataFrom("B:\\Documents\\EHR\\EHR.Solution\\ImportTables", "CID.xls", "CID10");
 
             var list = new List<CID>();
 

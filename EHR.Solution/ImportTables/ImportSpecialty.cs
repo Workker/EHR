@@ -13,7 +13,7 @@ namespace ImportTables
 
             var excelRepository = new ExcelRepository();
 
-            var data = excelRepository.GetAllDataFrom("E:\\Projects\\EHR\\EHR.Solution\\ImportTables", "ESPECIALIDADES.xls", "Plan1");
+            var data = excelRepository.GetAllDataFrom("B:\\Documents\\EHR\\EHR.Solution\\ImportTables", "ESPECIALIDADES.xls", "Plan1");
 
             var list = new List<Specialty>();
 
