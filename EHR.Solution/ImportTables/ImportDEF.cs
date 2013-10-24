@@ -8,11 +8,11 @@ namespace ImportTables
 {
    public  class ImportDEF
     {
-        public void ImportFromExcelFile()
+        public void ImportFromExcelFile(string path)
         {
             var excelRepository = new ExcelRepository();
 
-            var data = excelRepository.GetAllDataFrom("B:\\Documents\\EHR\\EHR.Solution\\ImportTables", "DEF.xls", "Sheet1");
+            var data = excelRepository.GetAllDataFrom(path, "DEF.xls", "Sheet1");
 
             var list = new List<DEF>();
 

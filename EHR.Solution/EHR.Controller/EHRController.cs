@@ -1,5 +1,6 @@
 ﻿using EHR.CoreShared;
 using EHR.CoreShared.Interfaces;
+using EHR.Domain.DTOs;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using System;
@@ -43,7 +44,8 @@ namespace EHR.Controller
         public virtual Summary GetBy(int id) { return null; }
         public virtual void AddToHistorical(int idSummary, int idAccount, HistoricalActionTypeEnum actionType, DateTime date, string description) { }
         public virtual void FinalizeSummary(int summaryid) { }
-        public virtual void ReOpenSummary(int summaryId){}
+        public virtual void ReOpenSummary(int summaryId) { }
+        public virtual DischargeSummaryReportDTO GetReportData(int summaryId) { return null; }
 
         #endregion
 

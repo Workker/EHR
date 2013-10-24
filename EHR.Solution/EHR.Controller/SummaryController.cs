@@ -1,4 +1,5 @@
-﻿using EHR.Domain.Entities;
+﻿using EHR.Domain.DTOs;
+using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using System;
 using System.Collections.Generic;
@@ -231,6 +232,15 @@ namespace EHR.Controller
             Assertion.GreaterThan(summaryId, 0, "Sumario de alta invalido.").Validate();
 
             Summaries.ReOpenSummary(summaryId);
+        }
+
+        [ExceptionLogger]
+        public override DischargeSummaryReportDTO GetReportData(int summaryId)
+        {
+            var summary = Summaries.Get<Summary>(summaryId);
+            var dto = new DischargeSummaryReportDTO() { };
+
+            return dto;
         }
 
     }

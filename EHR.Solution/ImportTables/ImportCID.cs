@@ -8,11 +8,11 @@ namespace ImportTables
 {
     public class ImportCID
     {
-        public void ImportFromExcelFile()
+        public void ImportFromExcelFile(string path)
         {
             var excelRepository = new ExcelRepository();
 
-            var data = excelRepository.GetAllDataFrom("B:\\Documents\\EHR\\EHR.Solution\\ImportTables", "CID.xls", "CID10");
+            var data = excelRepository.GetAllDataFrom(path, "CID.xls", "CID10");
 
             var list = new List<CID>();
 

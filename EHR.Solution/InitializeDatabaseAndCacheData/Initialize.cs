@@ -11,6 +11,7 @@ namespace InitializeDatabaseAndCacheData
         public void LoadData()
         {
             var dataBase = new DataBaseInitialize();
+            string path = "E:\\Projects\\EHR\\EHR.Solution\\ImportTables";
 
             dataBase.create_database_by_model();
             dataBase.insert_states();
@@ -24,16 +25,16 @@ namespace InitializeDatabaseAndCacheData
             dataBase.insert_admin_account();
 
             var importCid = new ImportCID();
-            importCid.ImportFromExcelFile();
+            importCid.ImportFromExcelFile(path);
 
             var importDEF = new ImportDEF();
-            importDEF.ImportFromExcelFile();
+            importDEF.ImportFromExcelFile(path);
 
             var importTus = new ImportTUSS();
-            importTus.ImportFromExcelFile();
+            importTus.ImportFromExcelFile(path);
 
             var importSpecialty = new ImportSpecialty();
-            importSpecialty.ImportFromExcelFile();
+            importSpecialty.ImportFromExcelFile(path);
 
             var index = new IndexUpdate();
             index.update_cid_index();

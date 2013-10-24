@@ -8,11 +8,11 @@ namespace ImportTables
 {
     public class ImportTUSS
     {
-        public void ImportFromExcelFile()
+        public void ImportFromExcelFile(string path)
         {
             var excelRepository = new ExcelRepository();
 
-            var data = excelRepository.GetAllDataFrom("B:\\Documents\\EHR\\EHR.Solution\\ImportTables", "TUSS.xls", "TUSS");
+            var data = excelRepository.GetAllDataFrom(path, "TUSS.xls", "TUSS");
 
             var list = new List<TUSS>();
 

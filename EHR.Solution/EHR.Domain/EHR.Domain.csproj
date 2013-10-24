@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\DischargeSummaryReportDTO.cs" />
     <Compile Include="Entities\AllergyType.cs" />
     <Compile Include="Entities\AllergyTypeEnum.cs" />
     <Compile Include="Entities\ComplementaryExam.cs" />
