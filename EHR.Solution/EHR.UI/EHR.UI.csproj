@@ -232,12 +232,18 @@
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\ProfessionalRegistrationModel.cs" />
+    <Compile Include="Models\Reports\DischargePrescriptionsModel.cs" />
     <Compile Include="Models\SpecialtyModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SummaryModel.cs" />
     <Compile Include="Models\TreatmentModel.cs" />
     <Compile Include="Models\TUSSModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\DischargePrescriptions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DischargePrescriptions.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\highslide.css" />
@@ -328,6 +334,17 @@
     <Content Include="Images\exam9_thumb.jpg" />
     <Content Include="Images\graphics\outlines\Outlines.psd" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Report\DischargePrescriptions.xsc">
+      <DependentUpon>DischargePrescriptions.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\DischargePrescriptions.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DischargePrescriptions.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\DischargePrescriptions.xss">
+      <DependentUpon>DischargePrescriptions.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\abtimicrobianos.png" />
     <Content Include="Images\Capture.PNG" />
@@ -532,10 +549,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Report\DischargePrescriptions.rdlc" />
-    <EmbeddedResource Include="Report\DischargeSummary.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

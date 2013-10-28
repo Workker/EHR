@@ -11,8 +11,7 @@ namespace EHR.Domain.Repository
         {
         }
 
-        public CIDRepository(ISession session)
-            : base(session)
+        public CIDRepository(ISession session): base(session)
         {
 
         }
@@ -31,26 +30,5 @@ namespace EHR.Domain.Repository
 
             return cid;
         }
-
-        //[ExceptionLogger]
-        //public virtual void Save(List<Cid> roots)
-        //{
-        //    var transaction = Session.BeginTransaction();
-
-        //    try
-        //    {
-        //        foreach (var root in roots)
-        //        {
-        //            Session.SaveOrUpdate(root);
-        //        }
-        //        transaction.Commit();
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        transaction.Rollback();
-        //        throw ex;
-        //    }
-        //}
-
     }
 }

@@ -91,7 +91,6 @@
     <Compile Include="Domain\Mapping\DiagnosticMapTest.cs" />
     <Compile Include="Domain\Mapping\PatientMapTest.cs" />
     <Compile Include="Domain\Repository\SummariesTest.cs" />
-    <Compile Include="InfraEstrutura\CriarBancoDeDadosPorModelo.cs" />
     <Compile Include="Infrastructure\CacheManagementServiceTest.cs" />
     <Compile Include="InMemorySessionFactoryProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +103,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Repository\" />
     <Folder Include="UI\Controller\" />
   </ItemGroup>
   <ItemGroup>

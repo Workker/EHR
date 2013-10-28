@@ -1,5 +1,4 @@
 ﻿using EHR.Domain.Entities;
-using System;
 using System.Collections.Generic;
 
 namespace EHR.Domain.DTOs
@@ -38,6 +37,5 @@ namespace EHR.Domain.DTOs
         //Professional
         public string ProfissionalName { get; set; }
         public string ProfissionalRegistration { get; set; }
-        //Data ?
     }
 }

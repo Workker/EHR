@@ -8,22 +8,24 @@ namespace EHR.Controller
 {
     public class AllergyController : EhrController
     {
-        private Types<AllergyType> _allergyTypes;
-        public Types<AllergyType> AllergyTypes
+        private readonly Types<AllergyType> _allergyTypes;
+
+        public AllergyController()
         {
-            get { return _allergyTypes ?? (_allergyTypes = new Types<AllergyType>()); }
-            set
-            {
-                _allergyTypes = value;
-            }
+            _allergyTypes = _allergyTypes ?? (_allergyTypes = new Types<AllergyType>());
         }
+
 
         [ExceptionLogger]
         public override void SaveAllergy(string theWitch, IList<short> types, int idSummary)
         {
+            #region Preconditions
+
             Assertion.IsFalse(string.IsNullOrEmpty(theWitch), "Motivo da alergia não informado.").Validate();
             Assertion.GreaterThan(types.Count, 0, "Não foi selecionado um tipo de alergia.").Validate();
             Assertion.GreaterThan(idSummary, 0, "Summario de alta inválido.").Validate();
+
+            #endregion
 
             var summary = Summaries.Get<Summary>(idSummary);
 
@@ -61,7 +63,7 @@ namespace EHR.Controller
         {
             Assertion.GreaterThan(id, short.Parse("0"), "Alergia deve ser informada.").Validate();
 
-            var type = AllergyTypes.Get(id);
+            var type = _allergyTypes.Get(id);
 
             Assertion.NotNull(type, "Alergia não encontrada.").Validate();
 

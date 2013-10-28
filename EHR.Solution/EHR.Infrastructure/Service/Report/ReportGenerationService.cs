@@ -1,11 +1,11 @@
-﻿using Microsoft.Reporting.WebForms;
+﻿using System;
+using Microsoft.Reporting.WebForms;
 
 namespace EHR.Infrastructure.Service.Report
 {
-    public class ReportGenerationService
+    public class ReportGenerationService : IDisposable
     {
         private readonly LocalReport _localReport = new LocalReport();
-
 
         public ReportGenerationService(string reportPath)
         {
@@ -25,7 +25,8 @@ namespace EHR.Infrastructure.Service.Report
             Warning[] warnings;
             string[] streams;
             string deviceInfo = DefinePropertiesOfDevice(type);
-            byte[] renderedBytes = _localReport.Render(reportType, deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            byte[] renderedBytes = _localReport.Render(reportType, deviceInfo, out mimeType, out encoding,
+                                                       out fileNameExtension, out streams, out warnings);
 
             return renderedBytes;
         }
@@ -60,11 +61,25 @@ namespace EHR.Infrastructure.Service.Report
             }
             return deviceInfo;
         }
-    }
 
-    public enum ReportType
-    {
-        pdf,
-        image
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _localReport.Dispose();
+            }
+        }
+
+        public enum ReportType
+        {
+            pdf,
+            image
+        }
     }
 }

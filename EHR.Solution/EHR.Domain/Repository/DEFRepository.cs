@@ -11,8 +11,7 @@ namespace EHR.Domain.Repository
         {
         }
 
-        public DEFRepository(ISession session)
-            : base(session)
+        public DEFRepository(ISession session): base(session)
         {
 
         }

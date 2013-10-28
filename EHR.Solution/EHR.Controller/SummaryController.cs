@@ -9,38 +9,11 @@ namespace EHR.Controller
 {
     public class SummaryController : EhrController
     {
-        private DEFRepository _defsRepository;
-        public DEFRepository DefsRepository
+        private readonly DEFRepository _defsRepository;
+
+        public SummaryController()
         {
-            get { return _defsRepository ?? (_defsRepository = new DEFRepository()); }
-            set
-            {
-                _defsRepository = value;
-            }
-        }
-
-        [ExceptionLogger]
-        public override void SaveMdr(int summaryId, string mdr)
-        {
-            Assertion.GreaterThan(summaryId, 0, "Sumário de alta não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(mdr), "Colonização de germes multiresitentes não informada.").Validate();
-
-            var summary = Summaries.Get<Summary>(summaryId);
-
-            summary.Mdr = mdr;
-            Summaries.Save(summary);
-        }
-
-        [ExceptionLogger]
-        public override void SaveObservation(int summaryId, string observation)
-        {
-            Assertion.GreaterThan(summaryId, 0, "Sumário de alta não informado.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(observation), "Observação não informada.").Validate();
-
-            var summary = Summaries.Get<Summary>(summaryId);
-
-            summary.Observation = observation;
-            Summaries.Save(summary);
+            _defsRepository = _defsRepository ?? (_defsRepository = new DEFRepository());
         }
 
         [ExceptionLogger]
@@ -54,11 +27,45 @@ namespace EHR.Controller
 
             return summary;
         }
+        
+        [ExceptionLogger]
+        public override void SaveMdr(int summaryId, string mdr)
+        {
+            #region Preconditions
+
+            Assertion.GreaterThan(summaryId, 0, "Sumário de alta não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(mdr), "Colonização de germes multiresitentes não informada.").Validate();
+
+            #endregion
+
+            var summary = GetBy(summaryId);
+
+            summary.Mdr = mdr;
+            Summaries.Save(summary);
+        }
+
+        [ExceptionLogger]
+        public override void SaveObservation(int summaryId, string observation)
+        {
+            #region Preconditions
+
+            Assertion.GreaterThan(summaryId, 0, "Sumário de alta não informado.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(observation), "Observação não informada.").Validate();
+
+            #endregion
+
+            var summary = GetBy(summaryId);
+
+            summary.Observation = observation;
+            Summaries.Save(summary);
+        }
 
         [ExceptionLogger]
         public override void SaveMedication(int idSummary, short medicationType, short def, string description, string presentation,
             short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
         {
+            #region Preconditions
+
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)medicationType, 0, "Tipo de medicação inválido.").Validate();
             Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
@@ -73,13 +80,15 @@ namespace EHR.Controller
                 Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
             }
 
-            var summary = Summaries.Get<Summary>(idSummary);
+            #endregion
 
-            if (string.IsNullOrEmpty(description))
+            var summary = GetBy(idSummary);
+
+            if (def != short.MinValue)
             {
                 Assertion.GreaterThan((int)def, 0, "Medicamento não informado.");
 
-                var defObj = DefsRepository.GetById(def);
+                var defObj = _defsRepository.GetById(def);
 
                 summary.CreateMedication((MedicationTypeEnum)medicationType, defObj, description, presentation, presentationType, dose, dosage, way, place, frequency, frequencyCase, duration);
             }
@@ -94,11 +103,14 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void RemoveMedication(int idSummary, int id)
         {
+            #region Preconditions
+
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta não informado.").Validate();
             Assertion.GreaterThan(idSummary, 0, "Medicamento não informado.").Validate();
 
-            var summary = Summaries.Get<Summary>(idSummary);
+            #endregion
 
+            var summary = GetBy(idSummary);
             summary.RemoveMedication(id);
             Summaries.Save(summary);
         }
@@ -106,13 +118,16 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void SaveExam(int idSummary, short type, DateTime date, string description)
         {
+            #region Preconditions
+
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)type, 0, "Tipo de exame inválido.").Validate();
             Assertion.GreaterThan(date, DateTime.MinValue, "Data do exame não informada.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(description), "Dia inválido.").Validate();
 
-            var summary = Summaries.Get<Summary>(idSummary);
+            #endregion
 
+            var summary = GetBy(idSummary);
             summary.CreateExam((ExamTypeEnum)type, date, description);
             Summaries.Save(summary);
         }
@@ -120,10 +135,14 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void RemoveExam(int summaryId, int examId)
         {
+            #region Preconditions
+
             Assertion.GreaterThan(summaryId, 0, "Duração não informada.").Validate();
             Assertion.GreaterThan(examId, 0, "Duração não informada.").Validate();
 
-            var summary = Summaries.Get<Summary>(summaryId);
+            #endregion
+
+            var summary = GetBy(summaryId);
             summary.RemoveExam(examId);
             Summaries.Save(summary);
         }
@@ -149,7 +168,7 @@ namespace EHR.Controller
 
             #endregion
 
-            var summary = Summaries.Get<Summary>(idSummary);
+            var summary = GetBy(idSummary);
 
             Assertion.NotNull(summary, "Sumário de alta não encontrado.").Validate();
 
@@ -174,8 +193,6 @@ namespace EHR.Controller
             {
                 summary.Date = prescribedDischarge;
             }
-
-
 
             summary.HighData.PersonWhoDeliveredTheSummary = personWhoDeliveredTheSummary;
             summary.HighData.Date = deliveredDate;
@@ -204,7 +221,7 @@ namespace EHR.Controller
 
             #endregion
 
-            var summary = Summaries.Get<Summary>(idSummary);
+            var summary = GetBy(idSummary);
 
             Assertion.NotNull(summary, "Sumário de alta não encontrado.").Validate();
 
@@ -237,11 +254,22 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override DischargeSummaryReportDTO GetReportData(int summaryId)
         {
-            var summary = Summaries.Get<Summary>(summaryId);
-            var dto = new DischargeSummaryReportDTO() { };
+            var summary = GetBy(summaryId);
+            var dto = new DischargeSummaryReportDTO
+            {
+                //Patient
+                Name = summary.Patient.Name,
+                //Gender =
 
+                MedicalRecord = summary.CodeMedicalRecord,
+                //Summary
+                Allergies = summary.Allergies,
+                Procedures = summary.Procedures,
+                Exams = summary.Exams,
+                Medications = summary.Medications,
+                //Professional
+            };
             return dto;
         }
-
     }
 }

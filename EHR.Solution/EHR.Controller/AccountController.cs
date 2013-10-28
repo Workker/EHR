@@ -13,6 +13,13 @@ namespace EHR.Controller
 {
     public class AccountController : EhrController
     {
+        private readonly Accounts _accounts;
+
+        public AccountController()
+        {
+            _accounts = _accounts ?? (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+        }
+
         [ExceptionLogger]
         public override void Register(string firstName, string lastName, short gender, short professionalResgistrationType, string professionalResgistrationNumber, string email,
                                       string password, DateTime birthday, short hospitalId)
@@ -30,11 +37,9 @@ namespace EHR.Controller
 
             #endregion
 
-            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
-
             var passwordEncrypted = CryptographyUtil.EncryptToSha512(password);
 
-            var account = accounts.GetBy(email, passwordEncrypted);
+            var account = _accounts.GetBy(email, passwordEncrypted);
 
             #region Poscondition
 
@@ -48,12 +53,10 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override IList<Account> GetAllNotApproved(short hospitalId)
         {
-            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
-
             var hospitals = new Types<Hospital>();
             var hospital = hospitals.Get(hospitalId);
 
-            var accountList = accounts.GetAllNotApproved(hospital);
+            var accountList = _accounts.GetAllNotApproved(hospital);
 
             #region Poscondition
 
@@ -73,10 +76,9 @@ namespace EHR.Controller
 
             #endregion
 
-            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
+            var account = _accounts.Get<Account>(accountId);
 
-            var summaryList =
-                ((Summaries)FactoryRepository.GetRepository(RepositoryEnum.Sumaries)).GetLastSumariesrealizedby(account);
+            var summaryList = Summaries.GetLastSumariesrealizedby(account);
 
             var service = new GetPatientByHospitalService();
 
@@ -99,7 +101,7 @@ namespace EHR.Controller
         {
             //todo: Implementando
 
-            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
+            var account = _accounts.Get<Account>(accountId);
             //((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
 
             var repository = new Types<State>();
@@ -122,12 +124,16 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void ApproveProfessionalRegistration(int accountId, int professionalRegistrationId)
         {
+            #region Precondition
+
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
             Assertion.GreaterThan(professionalRegistrationId, 0, "Registro Profissional inválido.").Validate();
 
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).ApproveProfessionalRegistration(professionalRegistrationId);
+            #endregion
 
-            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
+            _accounts.ApproveProfessionalRegistration(professionalRegistrationId);
+
+            var account = _accounts.Get<Account>(accountId);
 
             ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi aprovado.");
         }
@@ -137,8 +143,9 @@ namespace EHR.Controller
         {
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
 
-            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Refuse(account);
+            var account = _accounts.Get<Account>(accountId);
+
+            _accounts.Refuse(account);
 
             Assertion.IsTrue(account.Refused, "A conta não pode ser recusada.").Validate();
 
@@ -155,11 +162,11 @@ namespace EHR.Controller
 
             #endregion
 
-            var account = FactoryRepository.GetRepository(RepositoryEnum.Accounts).Get<Account>(accountId);
+            var account = _accounts.Get<Account>(accountId);
 
             account.ToEnterPassword(password);
 
-            ((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Save(account);
+            _accounts.Save(account);
 
             #region Poscondition
 
@@ -211,7 +218,7 @@ namespace EHR.Controller
 
             #endregion
 
-            var accounts = (Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts);
+            var accounts = _accounts;
 
             Assertion.Null(accounts.GetBy(email), "E-mail já cadastrado.").Validate();
 
