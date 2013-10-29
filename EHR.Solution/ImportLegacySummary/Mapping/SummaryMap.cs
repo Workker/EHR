@@ -14,14 +14,14 @@ namespace ImportLegacySummary.Mapping
         {
             Mapper.CreateMap<Legacy.Summary, Summary>()
                 .ForMember(d => d.Date, o => o.MapFrom(m => DateTime.Now))
-                .ForMember(d => d.Admission, o => o.MapFrom(m =>
-                    new Admission
-                    {
-                        ReasonOfAdmission = new List<ReasonOfAdmission> { 
-                            new ReasonOfAdmission { Description = m.Admission } 
-                        }
-                    }
-                ))
+                //.ForMember(d => d.Admission, o => o.MapFrom(m =>
+                //    new Admission
+                //    {
+                //        ReasonOfAdmission = new List<ReasonOfAdmission> { 
+                //            new ReasonOfAdmission { Description = m.Admission } 
+                //        }
+                //    }
+                //))
                 .AfterMap(AddDiagnostics)
                 .AfterMap(AddProcedures)
                 .AfterMap(AddMedications)

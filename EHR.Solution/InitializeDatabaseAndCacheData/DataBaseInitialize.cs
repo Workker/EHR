@@ -117,7 +117,6 @@ namespace InitializeDatabaseAndCacheData
             repository.Save(hospitalList);
         }
 
-
         public void insert_hospitals_Oracle()
         {
 
@@ -354,7 +353,35 @@ namespace InitializeDatabaseAndCacheData
             types.SaveList(list);
         }
 
+        public void insert_admission_options()
+        {
+            var admissions = new List<ReasonOfAdmission>
+                                 {
+                                     new ReasonOfAdmission
+                                     {
+                                         Id = 1,
+                                         Description = "Cirúrgica"
+                                     },
+                                     new ReasonOfAdmission
+                                     {
+                                         Id = 2,
+                                         Description = "Clínica",
+                                     },
+                                     new ReasonOfAdmission
+                                     {
+                                         Id = 3,
+                                         Description = "Eletiva"
+                                     },
+                                     new ReasonOfAdmission
+                                     {
+                                         Id = 4,
+                                         Description = "Emergência"
+                                     }
+                                 };
 
+            var repository = new Types<ReasonOfAdmission>();
+            repository.SaveList<ReasonOfAdmission>(admissions);
+        }
 
         //public void insert_twenty_accounts()
         //{

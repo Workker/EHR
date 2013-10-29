@@ -23,6 +23,7 @@ namespace InitializeDatabaseAndCacheData
             dataBase.insert_reactions_types();
             dataBase.insert_Historical_Action_Types();
             dataBase.insert_admin_account();
+            dataBase.insert_admission_options();
 
             var importCid = new ImportCID();
             importCid.ImportFromExcelFile(path);

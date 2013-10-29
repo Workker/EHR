@@ -4,12 +4,30 @@
 <h1>Dados Gerais</h1>
 <hr />
 <br />
-@*<h3>Admiss&atilde;o</h3>
+<h3>Admiss&atilde;o</h3>
 <br />
 <label>Motivo da admiss&atilde;o:</label>&nbsp;
-<input type="text" id="motivoDaAdmissao" name="motivoDaAdmissao" />
+<form>
+    @foreach (var reason in ((List<ReasonOfAdmissionModel>)ViewBag.ResonsOfAdmission))
+    {
+        <input name="reasonOfAdmission" type="checkbox" value="@reason.Id"
+        @if (reason.Id == 1)
+        { 
+            @:required
+        } 
+        @foreach (ReasonOfAdmissionModel reasonS in Model.ReasonsOfAdmission)
+        {
+            if (reasonS.Id == reason.Id)
+            {
+                @:checked
+                }
+        } onchange="SaveReasonOfAdmission(this);"/>
+        @:&nbsp;@reason.Description
+    }
+</form>
 <br />
-<hr />*@
+<br />
+<hr />
 @{
     Html.RenderPartial("GeneralData/_AllergyTable");
 }
@@ -46,12 +64,7 @@
     <input type="reset" value="Limpar" class="uibutton large" />
 </form>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#motivoDaAdmissao").tokenInput("../Patient/Admission", {
-            theme: "facebook"
-        });
-        ToggleAllergy();
-    });
+    ToggleAllergy();
 
     function ToggleAllergy() {
         var liCount = $("#ulAllergy > li").length;
@@ -65,6 +78,5 @@
     @if (((SummaryModel)Session["Summary"]).Finalized == true)
     {
         @:RemoveEdition();    
-                }
-
+                    }
 </script>

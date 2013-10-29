@@ -643,3 +643,19 @@ function SaveObsevation(element) {
         return false;
     });
 }
+
+function SaveReasonOfAdmission(element) {
+    var form = $(element).parent();
+   
+        $.ajax({
+            type: "POST",
+            url: "http://" + window.location.host + "/Patient/SaveReasonOfAdmission",
+            cache: false,
+            data: form.serialize(),
+            success: function () {
+                alert();
+            }
+        });
+       
+    
+}

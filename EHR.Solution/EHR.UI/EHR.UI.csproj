@@ -212,6 +212,7 @@
     <Compile Include="Models\Mappers\PatientMapper.cs" />
     <Compile Include="Models\Mappers\ProcedureMapper.cs" />
     <Compile Include="Models\Mappers\ProfessionalRegistrationMapper.cs" />
+    <Compile Include="Models\Mappers\ReasonsOfAdmissionMapper.cs" />
     <Compile Include="Models\Mappers\SpecialtyMapper.cs" />
     <Compile Include="Models\Mappers\StateMapper.cs" />
     <Compile Include="Models\Mappers\SummaryMapper.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\ProfessionalRegistrationModel.cs" />
+    <Compile Include="Models\ReasonOfAdmissionModel.cs" />
     <Compile Include="Models\Reports\DischargePrescriptionsModel.cs" />
     <Compile Include="Models\SpecialtyModel.cs" />
     <Compile Include="Models\StateModel.cs" />
@@ -239,6 +241,11 @@
     <Compile Include="Models\TreatmentModel.cs" />
     <Compile Include="Models\TUSSModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\DischargePrescriptions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -336,6 +343,17 @@
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <Content Include="Report\DischargePrescriptions.xsc">
       <DependentUpon>DischargePrescriptions.xsd</DependentUpon>
+    </Content>
+    <Content Include="Report\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Content>
     <None Include="Report\DischargePrescriptions.xsd">
       <SubType>Designer</SubType>

@@ -27,7 +27,7 @@ namespace EHR.Controller
 
             return summary;
         }
-        
+
         [ExceptionLogger]
         public override void SaveMdr(int summaryId, string mdr)
         {
@@ -41,6 +41,22 @@ namespace EHR.Controller
             var summary = GetBy(summaryId);
 
             summary.Mdr = mdr;
+            Summaries.Save(summary);
+        }
+
+        [ExceptionLogger]
+        public override void SaveReasonOfAdmission(int idSummary, IList<short> reasonsOfAdmission)
+        {
+            var summary = Summaries.Get<Summary>(idSummary);
+            var repository = new Types<ReasonOfAdmission>();
+
+            summary.ReasonOfAdmission.Clear();
+
+            foreach (short reason in reasonsOfAdmission)
+            {
+                summary.ReasonOfAdmission.Add(repository.Get(reason));
+            }
+
             Summaries.Save(summary);
         }
 

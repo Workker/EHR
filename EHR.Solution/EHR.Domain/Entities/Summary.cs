@@ -18,7 +18,6 @@ namespace EHR.Domain.Entities
         public virtual DbEnum Hospital { get; set; }
         public virtual string Cpf { get; set; }
         public virtual DateTime? Date { get; set; }
-        public virtual Admission Admission { get; set; }
         public virtual Account Account { get; set; }
         public virtual string Mdr { get; set; }
         public virtual DischargeData HighData { get; set; }
@@ -26,6 +25,12 @@ namespace EHR.Domain.Entities
         public virtual ITreatment Treatment { get; set; }
         public virtual string TreatmentId { get; set; }
         public virtual bool Finalized { get; set; }
+
+        private IList<ReasonOfAdmission> _reasonOfAdmission;
+        public virtual IList<ReasonOfAdmission> ReasonOfAdmission
+        {
+            get { return _reasonOfAdmission ?? (_reasonOfAdmission = new List<ReasonOfAdmission>()); }
+        }
 
         private IList<Allergy> _allergies;
         public virtual IList<Allergy> Allergies

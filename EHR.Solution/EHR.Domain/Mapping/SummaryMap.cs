@@ -15,7 +15,6 @@ namespace EHR.Domain.Mapping
             Map(s => s.Hospital);
             Map(s => s.EntryDateTreatment);
             Map(s => s.Mdr).Length(1000);
-            References(s => s.Admission);
             References(s => s.HighData).Cascade.All();
             HasMany(s => s.Diagnostics).Cascade.AllDeleteOrphan();
             HasMany(s => s.Allergies).Cascade.AllDeleteOrphan();
@@ -27,6 +26,7 @@ namespace EHR.Domain.Mapping
             Map(s => s.Finalized);
             HasMany(s => s.History).Cascade.All().LazyLoad();
             Map(s => s.TreatmentId);
+            HasManyToMany(s => s.ReasonOfAdmission).Cascade.None();
         }
     }
 }

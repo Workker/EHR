@@ -1,14 +1,12 @@
 ﻿using EHR.Controller;
 using EHR.CoreShared;
 using EHR.Domain.Entities;
-using EHR.Infrastructure.Util;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Models;
 using EHR.UI.Models.Mappers;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -47,6 +45,10 @@ namespace EHR.UI.Controllers
 
                 if (GetSummary() == null)
                     Response.Redirect("/Home");
+
+
+                var resonsOfAdmission = FactoryController.GetController(ControllerEnum.Types).GetReasonsOfAdmission();
+                ViewBag.ResonsOfAdmission = ReasonsOfAdmissionMapper.MapReasonsOfAdmissionModelFrom(resonsOfAdmission);
 
                 ViewBag.LastVisitors = summaryModel.Views;
                 ViewBag.LastActions = summaryModel.Actions;
@@ -105,6 +107,9 @@ namespace EHR.UI.Controllers
             try
             {
                 var summary = GetSummary();
+
+                var resonsOfAdmission = FactoryController.GetController(ControllerEnum.Types).GetReasonsOfAdmission();
+                ViewBag.ResonsOfAdmission = ReasonsOfAdmissionMapper.MapReasonsOfAdmissionModelFrom(resonsOfAdmission);
                 ViewBag.Allergies = summary.Allergies;
                 ViewBag.Diagnostics = summary.Diagnostics;
                 ViewBag.Medications = summary.Medications;
@@ -118,30 +123,17 @@ namespace EHR.UI.Controllers
             }
         }
 
-        public string Admission(string q)
+        public void SaveReasonOfAdmission(List<short> reasonOfAdmission)
         {
             try
             {
-                var stringReturn = "[";
-
-                foreach (var id in Enum.GetValues(typeof(ReasonOfAdmissionEnum)).Cast<short>().ToList())
-                {
-                    var description =
-                        EnumUtil.GetDescriptionFromEnumValue(
-                            (ReasonOfAdmissionEnum)Enum.Parse(typeof(ReasonOfAdmissionEnum), id.ToString(CultureInfo.InvariantCulture)));
-                    if (description.Contains(q))
-                    {
-                        stringReturn += "{\"name\":\"" + description + "\",\"id\":\"" + id + "\"}, ";
-                    }
-                }
-                stringReturn = stringReturn.Remove(stringReturn.Length - 2);
-                stringReturn += "]";
-                return stringReturn;
+                FactoryController.GetController(ControllerEnum.Summary).SaveReasonOfAdmission(GetSummary().Id, reasonOfAdmission);
+                RefreshSessionSummary();
+                this.ShowMessage(MessageTypeEnum.Success, "Motivo de admissao atualizado.");
             }
             catch (Exception ex)
             {
                 this.ShowMessage(MessageTypeEnum.Error, ex.Message);
-                return null;
             }
         }
 

@@ -84,6 +84,7 @@
     <Compile Include="StateController.cs" />
     <Compile Include="SummaryController.cs" />
     <Compile Include="DefController.cs" />
+    <Compile Include="TypesController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EHR.Domain\EHR.Domain.csproj">

@@ -46,6 +46,8 @@ namespace EHR.Controller
         public virtual void FinalizeSummary(int summaryid) { }
         public virtual void ReOpenSummary(int summaryId) { }
         public virtual DischargeSummaryReportDTO GetReportData(int summaryId) { return null; }
+        public virtual IList<ReasonOfAdmission> GetReasonsOfAdmission() { return null; }
+        public virtual void SaveReasonOfAdmission(int idSummary, IList<short> reasonsOfAdmission) { }
 
         #endregion
 

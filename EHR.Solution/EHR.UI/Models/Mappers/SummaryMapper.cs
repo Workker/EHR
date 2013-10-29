@@ -11,6 +11,7 @@ namespace EHR.UI.Models.Mappers
         {
             Mapper.CreateMap<Summary, SummaryModel>()
                 .ForMember(hosp => hosp.Hospital, source => source.Ignore())
+                .ForMember(ad => ad.ReasonsOfAdmission, source => source.Ignore())
                 .ForMember(al => al.Allergies, so => so.Ignore())
                 .ForMember(di => di.Diagnostics, so => so.Ignore())
                 .ForMember(proc => proc.Procedures, so => so.Ignore())
@@ -41,6 +42,7 @@ namespace EHR.UI.Models.Mappers
             }
 
             summaryModel.DischargeData = DischargeDataMapper.MapHighDataModelFrom(summary);
+            summaryModel.ReasonsOfAdmission = ReasonsOfAdmissionMapper.MapReasonsOfAdmissionModelFrom(summary.ReasonOfAdmission);
             summaryModel.Allergies = AllergyMapper.MapAllergyModelsFrom(summary.Allergies);
             summaryModel.Diagnostics = DiagnosticMapper.MapDiagnosticsModelsFrom(summary.Diagnostics);
             summaryModel.Procedures = ProcedureMapper.MapProceduresModelsFrom(summary.Procedures);
