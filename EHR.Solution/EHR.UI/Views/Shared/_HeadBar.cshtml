@@ -54,7 +54,7 @@
                 <ul id="pageNav" class="clearfix">
                     <li class="navItem firstItem" id="navHome"><a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")Home">Home</a></li>
                     <li class="navItem middleItem">
-                        <a href="../Home" style="max-width: 100px; overflow: hidden;">@Model.FirstName @Model.LastName
+                        <a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")Home" style="max-width: 100px; overflow: hidden;">@Model.FirstName @Model.LastName
 
                         </a></li>
                     <li class="navItem middleItem voiceBarToggle"></li>

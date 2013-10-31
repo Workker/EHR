@@ -10,7 +10,7 @@
         </span>
         <a class="action" title="Excluir registro" onclick='deleteRow(this,"/Patient/DeleteExam/?id=@exam.Id", null)'><span>X</span></a>
         <span class="lastColumn">@exam.Date.ToShortDateString()</span>
-        <span class="middleColumn">@exam.Description
+        <span class="middleColumn" style="height: 15px;overflow:hidden;">@exam.Description
         </span>
     </li>
 }
