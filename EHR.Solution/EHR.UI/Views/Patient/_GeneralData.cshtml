@@ -6,8 +6,8 @@
 <br />
 <h3>Admiss&atilde;o</h3>
 <br />
-<label>Motivo da admiss&atilde;o:</label>&nbsp;
 <form>
+<label>Motivo da admiss&atilde;o:</label>&nbsp;
     @foreach (var reason in ((List<ReasonOfAdmissionModel>)ViewBag.ResonsOfAdmission))
     {
         <input name="reasonOfAdmission" type="checkbox" value="@reason.Id"

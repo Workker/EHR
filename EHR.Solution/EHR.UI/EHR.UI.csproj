@@ -241,16 +241,6 @@
     <Compile Include="Models\TreatmentModel.cs" />
     <Compile Include="Models\TUSSModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report\DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Report\DischargePrescriptions.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DischargePrescriptions.xsd</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\highslide.css" />
@@ -341,28 +331,6 @@
     <Content Include="Images\exam9_thumb.jpg" />
     <Content Include="Images\graphics\outlines\Outlines.psd" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
-    <Content Include="Report\DischargePrescriptions.xsc">
-      <DependentUpon>DischargePrescriptions.xsd</DependentUpon>
-    </Content>
-    <Content Include="Report\DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Content>
-    <None Include="Report\DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Report\DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Content>
-    <None Include="Report\DischargePrescriptions.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DischargePrescriptions.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="Report\DischargePrescriptions.xss">
-      <DependentUpon>DischargePrescriptions.xsd</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\abtimicrobianos.png" />
     <Content Include="Images\Capture.PNG" />
@@ -547,6 +515,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
