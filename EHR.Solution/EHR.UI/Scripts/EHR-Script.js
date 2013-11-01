@@ -107,7 +107,7 @@ $(document).ready(function () {
     }).sethscCorner();
 
     Menu.add({
-        Title: 'hemotransfus&atilde;o',
+        Title: 'Hemotransfus&atilde;o',
         onOutIcon: '../../Images/hemotransfusao.png',
         onClickIcon: '../../Images/hemotransfusao.png',
         HtmlSatusContent: '',
@@ -594,7 +594,7 @@ $(document).on('submit', '#dischargeData', function (e) {
 });
 
 function RemoveEdition(reopen) {
-    $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
+    $(".contentPage input[type=radio], .contentPage input[type=checkbox], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
     $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").hide();
     if (reopen == true) {
         $(".contentPage input[value=Reabrir]").show();
@@ -653,7 +653,6 @@ function SaveReasonOfAdmission(element) {
             cache: false,
             data: form.serialize(),
             success: function () {
-                alert();
             }
         });
        

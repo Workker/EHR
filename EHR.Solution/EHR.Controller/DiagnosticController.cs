@@ -56,7 +56,7 @@ namespace EHR.Controller
 
             var typeDiagnostic = DiagnosticTypes.Get(diagnosticType);
 
-            if (string.IsNullOrEmpty(cid))
+            if (!string.IsNullOrEmpty(cid))
             {
                 Assertion.IsFalse(string.IsNullOrEmpty(description), "CID não informado.").Validate();
                 summary.CreateDiagnostic(typeDiagnostic, description);
