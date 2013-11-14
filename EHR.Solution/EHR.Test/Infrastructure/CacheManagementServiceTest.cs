@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using EHR.Domain.Repository;
 using EHR.Infrastructure.Service.Cache;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace EHR.Test.Infrastructure
 {

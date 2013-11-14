@@ -1,4 +1,4 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using EHR.CoreShared.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace EHR.Domain.Entities
         public virtual string Observation { get; set; }
         public virtual DateTime? EntryDateTreatment { get; set; }
         public virtual string CodeMedicalRecord { get; set; }
-        public virtual DbEnum Hospital { get; set; }
+        public virtual Hospital Hospital { get; set; }
         public virtual string Cpf { get; set; }
         public virtual DateTime? Date { get; set; }
         public virtual Account Account { get; set; }

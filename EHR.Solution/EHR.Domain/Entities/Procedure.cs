@@ -1,5 +1,5 @@
-﻿using System;
-using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
+using System;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities

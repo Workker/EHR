@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EHR.CoreShared;
+using EHR.CoreShared.Entities;
 using System.Collections.Generic;
 
 namespace EHR.UI.Models.Mappers

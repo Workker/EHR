@@ -1,5 +1,5 @@
 ﻿using EHR.Controller;
-using EHR.CoreShared;
+using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;

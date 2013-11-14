@@ -1,5 +1,7 @@
 ﻿using EHR.CoreShared;
+using EHR.CoreShared.Entities;
 using EHR.CoreShared.Interfaces;
+using EHR.Domain.Repository;
 using EHRIntegracao.Domain.Services;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System;
@@ -20,30 +22,32 @@ namespace EHR.Domain.Service.Lucene
             if (treatments != null)
                 patient.AddTreatments(treatments);
 
-            //patient.Treatments = new List<ITreatment>
-            //                         {
-            //                             new Treatment
-            //                                 {
-            //                                     Id = "123",
-            //                                     Hospital = DbEnum.CopaDor,
-            //                                     EntryDate = DateTime.Now.AddDays(-3),
-            //                                     CheckOutDate = DateTime.Now
-            //                                 },
-            //                             new Treatment
-            //                                 {
-            //                                     Id = "1234",
-            //                                     Hospital = DbEnum.Esperanca,
-            //                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
-            //                                     CheckOutDate = DateTime.Now.AddMonths(-3)
-            //                                 },
-            //                             new Treatment
-            //                                 {
-            //                                     Id = "1235",
-            //                                     Hospital = DbEnum.QuintaDor,
-            //                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
-            //                                     CheckOutDate = DateTime.Now.AddMonths(-5)
-            //                                 }
-            //                         };
+            var hospitals = new Types<Hospital>().All();
+
+            patient.Treatments = new List<ITreatment>
+                                     {
+                                         new Treatment
+                                             {
+                                                 Id = "123",
+                                                 Hospital = hospitals[3],
+                                                 EntryDate = DateTime.Now.AddDays(-3),
+                                                 CheckOutDate = DateTime.Now
+                                             },
+                                         new Treatment
+                                             {
+                                                 Id = "1234",
+                                                 Hospital = hospitals[6],
+                                                 EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
+                                                 CheckOutDate = DateTime.Now.AddMonths(-3)
+                                             },
+                                         new Treatment
+                                             {
+                                                 Id = "1235",
+                                                 Hospital = hospitals[12],
+                                                 EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
+                                                 CheckOutDate = DateTime.Now.AddMonths(-5)
+                                             }
+                                     };
             return patient;
         }
 
@@ -78,30 +82,30 @@ namespace EHR.Domain.Service.Lucene
             var servico = new GetPatientsLuceneService();
             var patients = servico.MockPatients(name);
 
-            foreach (var patient in patients)
-            {
-                patient.Treatments = new List<ITreatment>
-                                         {
-                                             new Treatment
-                                                 {
-                                                     Hospital = DbEnum.CopaDor,
-                                                     EntryDate = DateTime.Now.AddDays(-3),
-                                                     CheckOutDate = DateTime.Now
-                                                 },
-                                             new Treatment
-                                                 {
-                                                     Hospital = DbEnum.CopaDor,
-                                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
-                                                     CheckOutDate = DateTime.Now.AddMonths(-3)
-                                                 },
-                                             new Treatment
-                                                 {
-                                                     Hospital = DbEnum.CopaDor,
-                                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
-                                                     CheckOutDate = DateTime.Now.AddMonths(-5)
-                                                 }
-                                         };
-            }
+            //foreach (var patient in patients)
+            //{
+            //    patient.Treatments = new List<ITreatment>
+            //                             {
+            //                                 new Treatment
+            //                                     {
+            //                                         Hospital = DbEnum.CopaDor,
+            //                                         EntryDate = DateTime.Now.AddDays(-3),
+            //                                         CheckOutDate = DateTime.Now
+            //                                     },
+            //                                 new Treatment
+            //                                     {
+            //                                         Hospital = DbEnum.CopaDor,
+            //                                         EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
+            //                                         CheckOutDate = DateTime.Now.AddMonths(-3)
+            //                                     },
+            //                                 new Treatment
+            //                                     {
+            //                                         Hospital = DbEnum.CopaDor,
+            //                                         EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
+            //                                         CheckOutDate = DateTime.Now.AddMonths(-5)
+            //                                     }
+            //                             };
+            //}
 
             return patients;
         }

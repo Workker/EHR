@@ -1,4 +1,4 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
 using NUnit.Framework;
 using System;

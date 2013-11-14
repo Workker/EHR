@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using EHR.CoreShared;
+using EHR.CoreShared.Entities;
 using EHR.CoreShared.Interfaces;
 using EHR.Infrastructure.Util;
 using System;
@@ -58,7 +58,6 @@ namespace EHR.Domain.Entities
 
             ProfessionalRegistrations.Add(professionalRegistration); ;
         }
-
 
         public virtual void ToEnterLastName(string lastName)
         {

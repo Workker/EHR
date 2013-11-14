@@ -1,13 +1,14 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
 using EHR.Domain.Mapping;
 using EHR.Domain.Repository;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using Configuration = NHibernate.Cfg.Configuration;
 using Environment = System.Environment;
 
 namespace InitializeDatabaseAndCacheData
@@ -28,20 +29,21 @@ namespace InitializeDatabaseAndCacheData
         {
             try
             {
-                // Oracle Configuration
-
-                //     Fluently.Configure()
-                //.Database(OracleClientConfiguration.Oracle10.ConnectionString(c => c
-                //    .FromAppSetting("connection"))
-                //    .ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).Mappings(m => m.MergeMappings())
-                //     .ExposeConfiguration(BuildSchema).BuildSessionFactory();
-
-                // SQL Server Configuration
-
-                Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(
+                if (ConfigurationManager.AppSettings["Environment"].Equals("Deploy"))
+                {
+                    Fluently.Configure()
+               .Database(OracleClientConfiguration.Oracle10.ConnectionString(c => c
+                   .FromAppSetting("connection"))
+                   .ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).Mappings(m => m.MergeMappings())
+                    .ExposeConfiguration(BuildSchema).BuildSessionFactory();
+                }
+                if (ConfigurationManager.AppSettings["Environment"].Equals("Development"))
+                {
+                    Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(
                     c => c.FromAppSetting("connection")).ShowSql()).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).
                     Mappings(m => m.MergeMappings())
                     .ExposeConfiguration(BuildSchema).BuildSessionFactory();
+                }
             }
             catch (Exception)
             {
@@ -88,59 +90,28 @@ namespace InitializeDatabaseAndCacheData
 
         }
 
-        public void insert_hospitals_SQL()
+        public void insert_hospitals()
         {
-
             var state = new Types<State>();
-
             var hospitalList = new List<Hospital>
                                    {
-                                       new Hospital{Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png", State = state.Get(25),Key = DbEnum.Assuncao},
-                                       new Hospital{Name =  "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png", State = state.Get(19),Key = DbEnum.Badim},
-                                       new Hospital{Name = "Bangu", Description = "Hospital", URLImage = "../../Images/Hospitals/bangu.png", State = state.Get(19),Key = DbEnum.Bangu},
-                                       new Hospital{Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png", State = state.Get(19),Key = DbEnum.BarraDor},
-                                       new Hospital{Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png", State = state.Get(25),Key = DbEnum.Brasil},
-                                       new Hospital{Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png", State = state.Get(19),Key = DbEnum.CopaDor},
-                                       new Hospital{Name = "Esperança", Description = "Hospital", URLImage = "../../Images/Hospitals/esperanca.png", State = state.Get(17),Key = DbEnum.Esperanca},
-                                       new Hospital{Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png", State = state.Get(19),Key = DbEnum.IsraelitaAlbertSabim},
-                                       new Hospital{Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png", State = state.Get(19),Key = DbEnum.Joari},
-                                       new Hospital{Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png", State = state.Get(19),Key = DbEnum.NiteroiDOr},
-                                       new Hospital{Name = "Norte D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/nortedor.png", State = state.Get(19),Key = DbEnum.Norte},
-                                       new Hospital{Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png", State = state.Get(17),Key = DbEnum.Pronto},
-                                       new Hospital{Name = "Quinta D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/quintador.png", State = state.Get(19),Key = DbEnum.QuintaDor},
-                                       new Hospital{Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png", State = state.Get(25),Key = DbEnum.RedeDOrSaoLuiz},
-                                       new Hospital{Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png", State = state.Get(19),Key = DbEnum.RioDeJaneiro},
-                                       new Hospital{Name = "Rios D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/riosdor.png", State = state.Get(19),Key = DbEnum.RiosDor},
-                                       new Hospital{Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png", State = state.Get(17),Key = DbEnum.SaoMarcos}
-                                   };
-            var repository = new Hospitals();
-            repository.Save(hospitalList);
-        }
-
-        public void insert_hospitals_Oracle()
-        {
-
-            var state = new Types<State>();
-
-            var hospitalList = new List<Hospital>
-                                   {
-                                       new Hospital{Id = 1,Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png", State = state.Get(25)},
-                                       new Hospital{Id = 2,Name = "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png", State = state.Get(19)},
-                                       new Hospital{Id = 3,Name = "Bangu", Description = "Hospital", URLImage = "../../Images/Hospitals/bangu.png", State = state.Get(19)},
-                                       new Hospital{Id = 4,Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png", State = state.Get(19)},
-                                       new Hospital{Id = 5,Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png", State = state.Get(25)},
-                                       new Hospital{Id = 6,Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png", State = state.Get(19)},
-                                       new Hospital{Id = 7,Name = "Esperança", Description = "Hospital", URLImage = "../../Images/Hospitals/esperanca.png", State = state.Get(17)},
-                                       new Hospital{Id = 8,Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png", State = state.Get(19)},
-                                       new Hospital{Id = 9,Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png", State = state.Get(19)},
-                                       new Hospital{Id = 10,Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png", State = state.Get(19)},
-                                       new Hospital{Id = 11,Name = "Norte D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/nortedor.png", State = state.Get(19)},
-                                       new Hospital{Id = 12,Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png", State = state.Get(17)},
-                                       new Hospital{Id = 13,Name = "Quinta D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/quintador.png", State = state.Get(19)},
-                                       new Hospital{Id = 14,Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png", State = state.Get(25)},
-                                       new Hospital{Id = 15,Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png", State = state.Get(19)},
-                                       new Hospital{Id = 16,Name = "Rios D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/riosdor.png", State = state.Get(19)},
-                                       new Hospital{Id = 17,Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png", State = state.Get(17)}
+                                       new Hospital{Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png", State = state.Get(25),Key = "Assuncao"},
+                                       new Hospital{Name =  "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png", State = state.Get(19),Key = "Badim"},
+                                       new Hospital{Name = "Bangu", Description = "Hospital", URLImage = "../../Images/Hospitals/bangu.png", State = state.Get(19),Key = "Bangu", Database = new Database{Description = "Homologacao",Host = "10.250.10.218", Service = "HMBANGU", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png", State = state.Get(19),Key = "BarraDor", Database = new Database{Description = "Homologacao",Host = "10.250.10.218", Service = "HMLBARRA", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png", State = state.Get(25),Key = "Brasil"},
+                                       new Hospital{Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png", State = state.Get(19),Key = "CopaDor", Database = new Database{Description = "Homologacao",Host = "10.250.10.218", Service = "HMLCOPA", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "Esperança", Description = "Hospital", URLImage = "../../Images/Hospitals/esperanca.png", State = state.Get(17),Key = "Esperanca", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMLESP", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png", State = state.Get(19),Key = "IsraelitaAlbertSabim"},
+                                       new Hospital{Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png", State = state.Get(19),Key = "Joari"},
+                                       new Hospital{Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png", State = state.Get(19),Key = "NiteroiDOr"},
+                                       new Hospital{Name = "Norte D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/nortedor.png", State = state.Get(19),Key = "Norte", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMNORTE", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png", State = state.Get(17),Key = "Pronto", Database = new Database{Description = "Homologacao",Host = "172.29.8.11", Service = "HMPRONTO", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "Quinta D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/quintador.png", State = state.Get(19),Key = "QuintaDor", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMQUINTA", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png", State = state.Get(25),Key = "RedeDOrSaoLuiz"},
+                                       new Hospital{Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png", State = state.Get(19),Key = "RioDeJaneiro"},
+                                       new Hospital{Name = "Rios D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/riosdor.png", State = state.Get(19),Key = "RiosDor", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMRIOS", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
+                                       new Hospital{Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png", State = state.Get(17),Key = "SaoMarcos", Database = new Database{Description = "Homologacao",Host = "10.250.3.11", Service = "HMSM", User = "SUMARIO_ALTA", Password = "sumario_alta"}}
                                    };
             var repository = new Hospitals();
             repository.Save(hospitalList);
@@ -382,61 +353,6 @@ namespace InitializeDatabaseAndCacheData
             var repository = new Types<ReasonOfAdmission>();
             repository.SaveList<ReasonOfAdmission>(admissions);
         }
-
-        //public void insert_twenty_accounts()
-        //{
-        //    //var accountList = new List<Account>();
-        //    //for (var i = 0; i <= 20; i++)
-        //    //{
-        //    //    var account = new Account()
-        //    //    {
-        //    //        Administrator = false,
-        //    //        Approved = false,
-        //    //        Refused = false,
-        //    //    };
-
-        //    //    account.ToEnterCRM("123");
-        //    //    account.ToEnterFirstName("123");
-        //    //    account.ToEnterLastName("Oliveira");
-        //    //    account.ToEnterGender(GenderEnum.Male);
-        //    //    account.ToEnterEmail(i + "@workker.com.br");
-        //    //    account.ToEnterBirthday(new DateTime(1989, 7, 17));
-
-        //    //    var hospitals = new Hospitals().All<Hospital>();
-
-        //    //    foreach (var hospital in hospitals)
-        //    //    {
-        //    //        account.AddHospital(hospital);
-        //    //    }
-
-        //    //    accountList.Add(account);
-        //    //}
-
-        //    //var accounts = new Accounts();
-        //    //accounts.SaveList(accountList);
-        //}
-
-
-
-        //public void b_data_initialize()
-        //{
-        //    insert_hospitals_in_database();
-        //    insert_allergies_types();
-        //    insert_diagnostic_types();
-        //    insert_reactions_types();
-        //    insert_hemotransfusion_types();
-        //    insert_admin_account();
-        //    //insert_twenty_accounts();
-        //    //data_initialize_all_sumaries_for_patients();
-        //    insert_specialties();
-        //    //var summaries = new Summaries();
-        //    //var sumary = new Summary { Cpf = "02338013751" };
-        //    //summaries.Save(sumary);
-
-        //    //  sumary.CreateAllergy("Teste", new List<AllergyType>() { new AllergyType() {Description = AllergyTypeEnum.Angioedema.ToString() } });
-        //    // sumary.CreateDiagnostic(new DiagnosticType() { Description = DiagnosticTypeEnum.Principal.ToString() }, new Cid() { Code = "0001", Description = "Teste" });
-        //    //sumary.CreateProcedure(5, 5, 2013, new Tus() { Code = "001", Description = "Teste" });
-        //}
 
         private string RemoveSpecialCharacters(string palavra)
         {

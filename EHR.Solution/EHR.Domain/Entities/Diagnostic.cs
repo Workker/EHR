@@ -1,4 +1,4 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Entities

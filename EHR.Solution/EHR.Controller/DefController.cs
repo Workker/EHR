@@ -1,4 +1,4 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using EHR.Domain.Service.Lucene;
 using System.Collections.Generic;
 using Workker.Framework.Domain;

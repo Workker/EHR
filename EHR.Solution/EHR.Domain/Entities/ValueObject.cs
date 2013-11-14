@@ -6,7 +6,7 @@ namespace EHR.Domain.Entities
     [ProtoInclude(5, typeof(AllergyType))]
     [ProtoInclude(6, typeof(ConditionAtDischarge))]
     [ProtoInclude(7, typeof(DiagnosticType))]
-    public abstract class ValueObject : CoreShared.ValueObject
+    public abstract class ValueObject : CoreShared.Entities.ValueObject
     {
         [ProtoMember(1)]
         public override short Id { get; set; }

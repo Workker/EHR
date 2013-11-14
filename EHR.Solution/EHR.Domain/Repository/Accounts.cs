@@ -1,9 +1,9 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
-using System.Collections.Generic;
 using NHibernate.SqlCommand;
+using System.Collections.Generic;
 using Workker.Framework.Domain;
 
 namespace EHR.Domain.Repository

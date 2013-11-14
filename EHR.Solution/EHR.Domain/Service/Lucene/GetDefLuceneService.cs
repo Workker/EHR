@@ -1,4 +1,4 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System.Collections.Generic;
 

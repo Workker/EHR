@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using EHR.CoreShared;
+using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using System;
-using System.Collections.Generic;
 using Legacy = ImportLegacySummary.DTO;
 
 namespace ImportLegacySummary.Mapping

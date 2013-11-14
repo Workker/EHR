@@ -1,5 +1,5 @@
-﻿using FluentNHibernate.Mapping;
-using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
+using FluentNHibernate.Mapping;
 
 namespace EHR.Domain.Mapping
 {

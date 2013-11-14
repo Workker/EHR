@@ -1,4 +1,4 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using NHibernate;
 using NHibernate.Criterion;
 using Workker.Framework.Domain;

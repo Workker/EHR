@@ -1,11 +1,11 @@
-﻿using System;
-using System.Data;
-using EHR.CoreShared.Interfaces;
+﻿using EHR.CoreShared.Interfaces;
 using EHR.Domain.Mapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace EHR.Domain.Repository
 {
@@ -113,13 +113,17 @@ namespace EHR.Domain.Repository
 
         public static ISessionFactory CreateSessionFactory()
         {
-            return
-                //Fluently.Configure().Database(OracleClientConfiguration.Oracle10.ConnectionString(c => c
-                //    .FromAppSetting("connection"))).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).BuildSessionFactory();
-
-            Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(c => c
-            .FromAppSetting("connection")
-            )).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).BuildSessionFactory();
+            if (ConfigurationManager.AppSettings["Environment"].Equals("Deploy"))
+            {
+                return Fluently.Configure().Database(OracleClientConfiguration.Oracle10.ConnectionString(c => c
+                  .FromAppSetting("connection"))).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).BuildSessionFactory();
+            }
+            if (ConfigurationManager.AppSettings["Environment"].Equals("Development"))
+            {
+                return Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(c => c
+                    .FromAppSetting("connection"))).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).BuildSessionFactory();
+            }
+            return null;
         }
 
         #endregion

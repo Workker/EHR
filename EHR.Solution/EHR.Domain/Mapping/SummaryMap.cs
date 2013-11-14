@@ -12,7 +12,7 @@ namespace EHR.Domain.Mapping
             Map(s => s.Date).Column("SummaryDate");
             Map(s => s.Observation).Length(1000);
             Map(s => s.CodeMedicalRecord);
-            Map(s => s.Hospital);
+            References(s => s.Hospital).Cascade.None();
             Map(s => s.EntryDateTreatment);
             Map(s => s.Mdr).Length(1000);
             References(s => s.HighData).Cascade.All();

@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using EHR.CoreShared;
 using EHR.CoreShared.Interfaces;
-using EHR.Infrastructure.Util;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -48,7 +45,7 @@ namespace EHR.UI.Models.Mappers
             foreach (var item in patients)
             {
                 var account = Mapper.Map<IPatient, PatientModel>(item);
-                account.Hospital = EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), item.Hospital.ToString()));
+                account.Hospital = HospitalMapper.MapHospitalModelFrom(item.Hospital);
                 patientModels.Add(account);
             }
             return patientModels;
@@ -61,15 +58,10 @@ namespace EHR.UI.Models.Mappers
             {
                 var firstOrDefault = patient.Treatments.FirstOrDefault(t => t.Id == treatmentStr);
                 if (firstOrDefault != null)
-                    patientModel.Hospital =
-                        EnumUtil.GetDescriptionFromEnumValue(
-                            (DbEnum)
-                            Enum.Parse(typeof(DbEnum),
-                                       firstOrDefault.Hospital.ToString()));
+                    patientModel.Hospital = HospitalMapper.MapHospitalModelFrom(firstOrDefault.Hospital);
             }
             else
-                patientModel.Hospital =
-                    EnumUtil.GetDescriptionFromEnumValue((DbEnum)Enum.Parse(typeof(DbEnum), patient.Hospital.ToString()));
+                patientModel.Hospital = HospitalMapper.MapHospitalModelFrom(patient.Hospital);
         }
     }
 }

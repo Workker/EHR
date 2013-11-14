@@ -76,6 +76,7 @@
       <HintPath>..\..\..\..\LibEHR\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -136,6 +137,7 @@
     <Compile Include="Mapping\CidMap.cs" />
     <Compile Include="Mapping\ComplementaryExamMap.cs" />
     <Compile Include="Mapping\ConditionOfThePatientAtDischargeMap.cs" />
+    <Compile Include="Mapping\DatabaseMap.cs" />
     <Compile Include="Mapping\DefMap.cs" />
     <Compile Include="Mapping\DiagnosticMap.cs" />
     <Compile Include="Mapping\DiagnosticTypeMap.cs" />

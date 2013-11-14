@@ -1,4 +1,4 @@
-﻿using EHR.CoreShared;
+﻿using EHR.CoreShared.Entities;
 using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
