@@ -1,0 +1,27 @@
+﻿@using System.Globalization
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+<form id="diagnostic">
+    <label>Tipo de diagn&oacute;stico:</label>
+    <select name="diagnostic.type" style="margin-left: 5px" required>
+        <option value="-1">Selecione</option>
+        @foreach (var value in Enum.GetValues(typeof(DiagnosticTypeEnum)).Cast<short>().ToList())
+        {
+            <option value="@value">
+                @(EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
+            </option>  
+        }
+    </select>
+    <br />
+    <br />
+    <label>CID:</label>
+    <input type="text" name="diagnostic.description" required style="margin-left: 93px" size="50" onclick="GenericAutoComplete(this, '/DischargeSummary/CidAutoComplete', '#cidCode')" />
+    <br />
+    <br />
+    <label>CID c&oacute;digo:</label>
+    <input type="text" name="diagnostic.cid.code" id="cidCode" readonly="readonly" style="margin-left: 53px" /><br />
+    <br />
+    <br />
+    <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveDiagnostic");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
+</form>

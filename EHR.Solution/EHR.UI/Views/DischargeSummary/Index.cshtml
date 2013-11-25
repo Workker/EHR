@@ -1,0 +1,59 @@
+﻿@using EHR.UI.Models
+@model EHR.UI.Models.SummaryModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Page
+{
+    <section id="super">
+        <header class="slim">
+            @Html.Partial("_HeadBar", Session["account"])
+        </header>
+        <div class="page">
+            <div id="contentCol" class="fixed_elem">
+                <div id="content" class="clearfix">
+                    <div class="header">
+                        @{Html.RenderPartial("Layout/_ProfileHeader", Model);}
+                    </div>
+                    <aside id="timeLine" class="lfloat">
+                        @{Html.RenderPartial("Layout/_TimeLine", Model.Patient);}
+                    </aside>
+                    <div class="verticalLine"></div>
+                    <aside class="lfloat Menu">
+                        @{Html.RenderPartial("Layout/_Data");}
+                    </aside>
+                    <div id="center" class="lfloat contentPage">
+                        @{Html.RenderPartial("_GeneralData", Model);}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript" src="~/Scripts/AjaxFlagMenu-1.0.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/highslide-with-gallery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#motivoDaAdmissao").tokenInput("../DischargeSummary/Admission", {
+                theme: "facebook"
+            });
+            window.ToggleAllergy();
+        });
+        $('#observation').focusout(function () {
+            window.SaveObsevation();
+        });
+    </script>
+}
+@section scriptsBefore{
+    <script type="text/javascript">
+            @if (((SummaryModel)Session["Summary"]).Finalized == true)
+            {
+        @:RemoveEdition();    
+                }
+    </script>
+}

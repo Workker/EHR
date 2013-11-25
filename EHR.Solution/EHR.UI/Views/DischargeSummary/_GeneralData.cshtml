@@ -1,0 +1,82 @@
+﻿@using EHR.Domain.Entities
+@using EHR.UI.Models
+@model SummaryModel
+<h1>Dados Gerais</h1>
+<hr />
+<br />
+<h3>Admiss&atilde;o</h3>
+<br />
+<form>
+<label>Motivo da admiss&atilde;o:</label>&nbsp;
+    @foreach (var reason in ((List<ReasonOfAdmissionModel>)ViewBag.ResonsOfAdmission))
+    {
+        <input name="reasonOfAdmission" type="checkbox" value="@reason.Id"
+        @if (reason.Id == 1)
+        { 
+            @:required
+        } 
+        @foreach (ReasonOfAdmissionModel reasonS in Model.ReasonsOfAdmission)
+        {
+            if (reasonS.Id == reason.Id)
+            {
+                @:checked
+                }
+        } onchange="SaveReasonOfAdmission(this);"/>
+        @:&nbsp;@reason.Description
+    }
+</form>
+<br />
+<br />
+<hr />
+@{
+    Html.RenderPartial("GeneralData/_AllergyTable");
+}
+<br />
+<hr />
+@{
+    Html.RenderPartial("GeneralData/_DiagnosticsTable");
+}
+<br />
+<hr />
+<h3>Medicamentos Relevantes Utilizados Antes da Interna&ccedil;&atilde;o</h3>
+<br />
+@{
+    var medicationUseBefore = new MedicationModel { Type = (short)MedicationTypeEnum.MedicationUseBefore };
+    ViewBag.MedicationType = (short)MedicationTypeEnum.MedicationUseBefore;
+    Html.RenderPartial("Medication/_Table", medicationUseBefore);
+}
+<br />
+<hr />
+<h3>Medicamentos Relevantes Utilizados Durante a Interna&ccedil;&atilde;o</h3>
+<br />
+@{
+    var medicationUseDuring = new MedicationModel { Type = (short)MedicationTypeEnum.MedicationUseDuring };
+    ViewBag.MedicationType = (short)MedicationTypeEnum.MedicationUseDuring;
+    Html.RenderPartial("Medication/_Table", medicationUseDuring);
+}
+<br />
+<hr />
+<h3>História, exame fisico na admissão, breve curso hospitalar e exames relevantes:</h3>
+<br />
+<form style="padding-bottom: 20px;">
+    <textarea rows="10" cols="135" maxlength="1000" id="observation" name="observation">@Model.Observation</textarea><br />
+    <input type="submit" value="Salvar" onclick="SaveObsevation(this)" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" value="Limpar" class="uibutton large" />
+</form>
+<script type="text/javascript">
+    ToggleAllergy();
+
+    function ToggleAllergy() {
+        var liCount = $("#ulAllergy > li").length;
+        if (liCount > 1) {
+            $('input[value="false"]').removeAttr("checked");
+            $('input[value="true"]').attr("checked", "");
+            $('#ulAllergy').removeAttr("style");
+        }
+    }
+
+    @if (((SummaryModel)Session["Summary"]).Finalized == true)
+    {
+        @:RemoveEdition();    
+                    }
+</script>

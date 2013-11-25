@@ -75,7 +75,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/dados_gerais.png',
         onClickIcon: '../../Images/dados_gerais.png',
         HtmlSatusContent: '',
-        url: '/Patient/GeneralData',
+        url: '/DischargeSummary/GeneralData',
         data: ''
     }).sethscCorner();
 
@@ -84,7 +84,7 @@ $(document).ready(function () {
     //    onOutIcon: '../../Images/exames.png',
     //    onClickIcon: '../../Images/exames.png',
     //    HtmlSatusContent: '',
-    //    url: '/Patient/Images',
+    //    url: '/DischargeSummary/Images',
     //    data: ''
     //});
 
@@ -93,7 +93,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/exames.png',
         onClickIcon: '../../Images/exames.png',
         HtmlSatusContent: '',
-        url: '/Patient/Exams',
+        url: '/DischargeSummary/Exams',
         data: ''
     });
 
@@ -102,7 +102,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/procedimentos.png',
         onClickIcon: '../../Images/procedimentos.png',
         HtmlSatusContent: '',
-        url: '/Patient/Procedures',
+        url: '/DischargeSummary/Procedures',
         data: ''
     }).sethscCorner();
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/hemotransfusao.png',
         onClickIcon: '../../Images/hemotransfusao.png',
         HtmlSatusContent: '',
-        url: '/Patient/Hemotransfusion',
+        url: '/DischargeSummary/Hemotransfusion',
         data: ''
     }).sethscCorner();
 
@@ -120,7 +120,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/mdr.png',
         onClickIcon: '../../Images/mdr.png',
         HtmlSatusContent: '',
-        url: '/Patient/ColonizationbyMdr',
+        url: '/DischargeSummary/ColonizationbyMdr',
         data: ''
     }).sethscCorner();
 
@@ -129,7 +129,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/receituario.png',
         onClickIcon: '../../Images/receituario.png',
         HtmlSatusContent: '',
-        url: '/Patient/Prescriptions',
+        url: '/DischargeSummary/Prescriptions',
         data: ''
     }).sethscCorner();
 
@@ -138,7 +138,7 @@ $(document).ready(function () {
         onOutIcon: '../../Images/dados_alta.png',
         onClickIcon: '../../Images/dados_alta.png',
         HtmlSatusContent: '',
-        url: '/Patient/DischargeData',
+        url: '/DischargeSummary/DischargeData',
         data: ''
     }).sethscCorner();
 
@@ -147,7 +147,7 @@ $(document).ready(function () {
     //    onOutIcon: '../../Images/formulario.png',
     //    onClickIcon: '../../Images/formulario.png',
     //    HtmlSatusContent: '',
-    //    url: '/Patient/Form',
+    //    url: '/DischargeSummary/Form',
     //    data: ''
     //}).sethscCorner();
 
@@ -280,7 +280,7 @@ function SaveComplementaryExam(element) {
 
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + "/Patient/SaveComplementaryExam",
+        url: "http://" + window.location.host + "/DischargeSummary/SaveComplementaryExam",
         cache: false,
         data: { description: description, period: period },
         success: function (data) {
@@ -300,7 +300,7 @@ function SaveMedicalReview(element) {
 
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + "/Patient/SaveMedicalReview",
+        url: "http://" + window.location.host + "/DischargeSummary/SaveMedicalReview",
         cache: false,
         data: { TermMedicalReviewAt: termMedicalReviewAt, "Specialty.Id": specialtyId, "Specialty.Description": specialtyDescription },
         success: function (data) {
@@ -572,7 +572,7 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
     data = $(this).serialize();
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + '/Patient/SaveMdr',
+        url: "http://" + window.location.host + '/DischargeSummary/SaveMdr',
         cache: false,
         data: data,
         success: function () {
@@ -585,7 +585,7 @@ $(document).on('submit', '#dischargeData', function (e) {
     data = $(this).serialize();
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + '/Patient/SaveHighData',
+        url: "http://" + window.location.host + '/DischargeSummary/SaveHighData',
         cache: false,
         data: data,
         success: function () {
@@ -604,7 +604,7 @@ function RemoveEdition(reopen) {
 function FinalizeSummary() {
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + "/Patient/FinalizeSummary",
+        url: "http://" + window.location.host + "/DischargeSummary/FinalizeSummary",
         cache: false,
         success: function () {
             RemoveEdition(true);
@@ -621,7 +621,7 @@ function ReOpenEdition() {
 function ReOpenSummary() {
     $.ajax({
         type: "POST",
-        url: "http://" + window.location.host + "/Patient/ReOpenSummary",
+        url: "http://" + window.location.host + "/DischargeSummary/ReOpenSummary",
         cache: false,
         success: function () {
             ReOpenEdition();
@@ -634,7 +634,7 @@ function SaveObsevation(element) {
     form.submit(function () {
         $.ajax({
             type: "POST",
-            url: "http://" + window.location.host + "/Patient/SaveObservation",
+            url: "http://" + window.location.host + "/DischargeSummary/SaveObservation",
             cache: false,
             data: form.serialize(),
             success: function () {
@@ -649,7 +649,7 @@ function SaveReasonOfAdmission(element) {
    
         $.ajax({
             type: "POST",
-            url: "http://" + window.location.host + "/Patient/SaveReasonOfAdmission",
+            url: "http://" + window.location.host + "/DischargeSummary/SaveReasonOfAdmission",
             cache: false,
             data: form.serialize(),
             success: function () {

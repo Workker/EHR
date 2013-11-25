@@ -1,0 +1,19 @@
+﻿@using System.Globalization
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+@using EHR.UI.Models
+
+@foreach (AllergyModel allergy in ViewBag.Allergies)
+{
+    <li class="clearfix">
+        <span class="firstColumn">@allergy.TheWhich</span>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this, "/DischargeSummary/DeleteAllergy/?id=@allergy.Id", null)'><span>X</span></a>
+        <span class="lastColumn"></span>
+        <span class="middleColumn">
+            @for (int i = 1; i <= @allergy.Types.Count; i++)
+            {
+                @(EnumUtil.GetDescriptionFromEnumValue((AllergyTypeEnum)Enum.Parse(typeof(AllergyTypeEnum), @allergy.Types[i - 1].ToString(CultureInfo.InvariantCulture))) + (@allergy.Types.Count == i ? "" : ",  "))
+            }
+        </span>
+    </li>
+}

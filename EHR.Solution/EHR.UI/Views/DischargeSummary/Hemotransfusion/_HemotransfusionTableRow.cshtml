@@ -1,0 +1,19 @@
+﻿@using System.Globalization
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+@using EHR.UI.Models
+
+@foreach (HemotransfusionModel hemotransfusion in ViewBag.Hemotransfusions)
+{
+    <li class="clearfix">
+        <span class="firstColumn">@EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), hemotransfusion.HemotransfusionType.ToString(CultureInfo.InvariantCulture)))</span>
+        <a class="action" title="Excluir registro" onclick='deleteRow(this, "/DischargeSummary/DeleteHemotransfusion/?id=@hemotransfusion.Id", null)'><span>X</span></a>
+        <span class="lastColumn"></span>
+        <span class="middleColumn">
+            @for (var i = 1; i <= hemotransfusion.ReactionTypes.Count; i++)
+            {
+                @(EnumUtil.GetDescriptionFromEnumValue((ReactionTypeEnum)Enum.Parse(typeof(ReactionTypeEnum), hemotransfusion.ReactionTypes[i - 1].ToString(CultureInfo.InvariantCulture))) + (hemotransfusion.ReactionTypes.Count == i ? "" : ",  "))
+            }
+        </span>
+    </li>
+}

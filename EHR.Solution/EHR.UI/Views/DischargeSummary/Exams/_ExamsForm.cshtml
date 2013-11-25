@@ -1,0 +1,28 @@
+﻿@using System.Globalization
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+<form id="exams">
+    <label>Tipo de exame:</label>&nbsp;
+            <select name="type" required>
+                <option value="-1">Selecione</option>
+                @foreach (var value in Enum.GetValues(typeof(ExamTypeEnum)).Cast<short>().ToList())
+                {
+                    <option value="@value">
+                        @(EnumUtil.GetDescriptionFromEnumValue((ExamTypeEnum)Enum.Parse(typeof(ExamTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
+                    </option>  
+                }
+            </select>
+    <br />
+    <br />
+    <label>Data:</label>
+    @{Html.RenderPartial("_DatePicker");}
+    <br />
+    <br />
+    <label>Descri&ccedil;&atilde;o:</label>
+    <br />
+    <textarea rows="10" cols="90" maxlength="1000" name="description" required></textarea>
+    <br />
+    <br />
+    <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveExam");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+            <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
+</form>

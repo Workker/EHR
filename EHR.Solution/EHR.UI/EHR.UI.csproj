@@ -512,6 +512,7 @@
     <Content Include="Views\Patient\DischargeData\_MedicalReviewTable.cshtml" />
     <Content Include="Views\Patient\DischargeData\_MedicalReviewTableRow.cshtml" />
     <Content Include="Views\Patient\Layout\_LastActions.cshtml" />
+    <Content Include="Views\Patient\Cadastre\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

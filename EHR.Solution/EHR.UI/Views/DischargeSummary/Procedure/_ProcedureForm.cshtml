@@ -1,0 +1,18 @@
+﻿<form id="procedures">
+    <label>Procedimento:</label>&nbsp;
+    <input type="text" name="description" required onclick="GenericAutoComplete(this, '/DischargeSummary/TusAutoComplete', 'input[name=procedureCode]')" />
+    <br />
+    <br />
+    <label>C&oacute;digo:</label>
+    <input type="text" style="margin-left: 45px" name="procedureCode" readonly="readonly" /><br />
+    <br />
+    <label style="margin: 0px 55px 0px 0px">Data:</label>
+    @{Html.RenderPartial("_DatePicker");}
+    <br />
+    <br />
+    <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveProcedure");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
+</form>
+<script type="text/javascript">
+    formatDatePicker();
+</script>
