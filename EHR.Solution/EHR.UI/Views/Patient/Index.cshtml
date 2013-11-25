@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Paciente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Page{
+    <section id="super">
+        <header class="slim">
+            @Html.Partial("_HeadBar", Session["account"])
+        </header>
+        <div class="page">
+            <div id="contentCol" class="fixed_elem">
+                <div id="content" class="clearfix">
+                    <div id="center" class="lfloat contentPage">
+                        @{Html.RenderPartial("_Registration");}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

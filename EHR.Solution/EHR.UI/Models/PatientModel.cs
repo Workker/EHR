@@ -11,6 +11,7 @@ namespace EHR.UI.Models
         public string Cpf { get; set; }
         public HospitalModel Hospital { get; set; }
         public List<TreatmentModel> Treatments { get; set; }
+        public char Genre { get; set; }
 
         public int GetAge()
         {

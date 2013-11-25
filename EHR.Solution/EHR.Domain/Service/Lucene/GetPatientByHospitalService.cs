@@ -24,30 +24,30 @@ namespace EHR.Domain.Service.Lucene
 
             var hospitals = new Types<Hospital>().All();
 
-            patient.Treatments = new List<ITreatment>
-                                     {
-                                         new Treatment
-                                             {
-                                                 Id = "123",
-                                                 Hospital = hospitals[3],
-                                                 EntryDate = DateTime.Now.AddDays(-3),
-                                                 CheckOutDate = DateTime.Now
-                                             },
-                                         new Treatment
-                                             {
-                                                 Id = "1234",
-                                                 Hospital = hospitals[6],
-                                                 EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
-                                                 CheckOutDate = DateTime.Now.AddMonths(-3)
-                                             },
-                                         new Treatment
-                                             {
-                                                 Id = "1235",
-                                                 Hospital = hospitals[12],
-                                                 EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
-                                                 CheckOutDate = DateTime.Now.AddMonths(-5)
-                                             }
-                                     };
+            //patient.Treatments = new List<ITreatment>
+            //                         {
+            //                             new Treatment
+            //                                 {
+            //                                     Id = "123",
+            //                                     Hospital = hospitals[3],
+            //                                     EntryDate = DateTime.Now.AddDays(-3),
+            //                                     CheckOutDate = DateTime.Now
+            //                                 },
+            //                             new Treatment
+            //                                 {
+            //                                     Id = "1234",
+            //                                     Hospital = hospitals[6],
+            //                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-3),
+            //                                     CheckOutDate = DateTime.Now.AddMonths(-3)
+            //                                 },
+            //                             new Treatment
+            //                                 {
+            //                                     Id = "1235",
+            //                                     Hospital = hospitals[12],
+            //                                     EntryDate = DateTime.Now.AddMonths(-3).AddDays(-5),
+            //                                     CheckOutDate = DateTime.Now.AddMonths(-5)
+            //                                 }
+            //                         };
             return patient;
         }
 

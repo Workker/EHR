@@ -1,7 +1,7 @@
 ﻿@using EHR.UI.Models
 @model EHR.UI.Models.SummaryModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sumário de Alta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -53,7 +53,7 @@
     <script type="text/javascript">
             @if (((SummaryModel)Session["Summary"]).Finalized == true)
             {
-        @:RemoveEdition();    
-                }
+                @:RemoveEdition();
+            }
     </script>
 }

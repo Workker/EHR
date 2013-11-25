@@ -1,4 +1,5 @@
 ﻿using EHR.CoreShared.Entities;
+using NHibernate;
 using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,6 @@ namespace EHR.Domain.Repository
 
             return hostpital;
         }
-
 
         [ExceptionLogger]
         public IList<Hospital> GetBy(IList<short> list)
@@ -71,6 +71,16 @@ namespace EHR.Domain.Repository
             Assertion.GreaterThan(hospitalList.Count, 0, "Não foram encontados hospitais cadastrados.").Validate();
 
             return hospitalList;
+        }
+
+        public IList<Hospital> GetAllCached()
+        {
+            return Session.CreateCriteria(typeof(Hospital))
+                    .SetCacheable(true)
+                    .SetCacheRegion("Hospitals")
+                    .SetCacheMode(CacheMode.Normal)
+                    .AddOrder(Order.Asc("Id"))
+                    .List<Hospital>();
         }
     }
 }

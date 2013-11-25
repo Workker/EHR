@@ -1,5 +1,6 @@
 ﻿using EHR.CoreShared.Interfaces;
 using EHR.Domain.Mapping;
+using EHR.Infrastructure.Util;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -121,7 +122,7 @@ namespace EHR.Domain.Repository
             if (ConfigurationManager.AppSettings["Environment"].Equals("Development"))
             {
                 return Fluently.Configure().Database(MsSqlConfiguration.MsSql2008.ConnectionString(c => c
-                    .FromAppSetting("connection"))).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).BuildSessionFactory();
+                    .FromAppSetting("connection"))).Mappings(m => m.FluentMappings.AddFromAssemblyOf<SummaryMap>()).ExposeConfiguration(x => x.SetInterceptor(new SqlStatementInterceptor())).BuildSessionFactory();
             }
             return null;
         }

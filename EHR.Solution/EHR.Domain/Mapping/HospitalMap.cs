@@ -6,6 +6,7 @@ namespace EHR.Domain.Mapping
     {
         HospitalMap()
         {
+            Cache.NonStrictReadWrite();
             Id(h => h.Id).GeneratedBy.Identity();
             Map(h => h.Name);
             Map(h => h.URLImage);

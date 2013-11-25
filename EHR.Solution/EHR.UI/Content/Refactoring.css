@@ -222,8 +222,6 @@ div.uiTypeaheadView .selected { background-color: #6D84B4; border-color: #3B5998
 
     .calltoaction .text, .calltoaction .subtext { display: block; overflow: hidden; padding-bottom: 2px; text-overflow: ellipsis; white-space: nowrap; }
 
-
-
 /* Search Page*/
 .leftCol { float: left; padding: 20px 0 0 2px; position: relative; width: 179px; word-wrap: break-word;}
 
@@ -7069,3 +7067,4 @@ table.login_form_standalone_labels tr td { height: 30px; padding: 0; vertical-al
 ._6y { text-align: right; }
 ._6z { text-align: justify; }
 #bootloader_Upbkv { height: 42px; }
+    .SimpleleftCol { float: left; padding: 0px 0 0 2px; position: relative; word-wrap: break-word;}
