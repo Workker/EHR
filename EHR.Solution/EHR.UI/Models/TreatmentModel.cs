@@ -7,6 +7,6 @@ namespace EHR.UI.Models
         public string Id { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        public short Hospital { get; set; }
+        public HospitalModel Hospital { get; set; }
     }
 }

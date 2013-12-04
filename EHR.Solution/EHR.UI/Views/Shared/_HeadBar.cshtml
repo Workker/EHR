@@ -37,7 +37,7 @@
                                 <li class="${ type() }">{{if type() == "header"}}
                                     <span data-bind="text: text"></span>
                                     {{else}}
-                                    <a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")Patient/${cpf}">
+                                    <a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")DischargeSummary/${cpf}">
                                         <img src="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")${ imageUrl() }" />
                                         <span class="text" data-bind="text: name"></span>
                                         <span class="subtext" data-bind="text: hospital"></span>
