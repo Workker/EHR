@@ -109,10 +109,10 @@ Backup*/
 UpgradeLog*.XML
 
 # Indices
-EHR.Solution\EHR.UI\lucene_index_cid
-EHR.Solution\EHR.UI\lucene_index_def
-EHR.Solution\EHR.UI\lucene_index_patient
-EHR.Solution\EHR.UI\lucene_index_record
-EHR.Solution\EHR.UI\lucene_index_treatment
-EHR.Solution\EHR.UI\lucene_index_tus
+lucene_index_cid/
+lucene_index_def/
+lucene_index_patient/
+lucene_index_record/
+lucene_index_treatment/
+lucene_index_tus/
 
