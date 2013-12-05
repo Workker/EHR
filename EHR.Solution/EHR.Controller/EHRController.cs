@@ -31,7 +31,7 @@ namespace EHR.Controller
 
         public virtual IPatient GetBy(string cpf) { return null; }
         public virtual IList<IPatient> GetBy(IPatient dto) { return null; }
-        public virtual IList<IPatient> GetBy(IPatient patient, IList<short> hospital) { return null; }
+        public virtual IList<IPatient> GetBy(IPatient patient, List<string> hospital) { return null; }
         public virtual Summary GetSummaryBy(IPatient patient, string treatment, int idAccount) { return null; }
         public virtual IList<Allergy> GetAllergiesBy(string cpf) { return null; }
         public virtual IList<Medication> GetMedicationsOfUseAfterInternationBy(string cpf) { return null; }

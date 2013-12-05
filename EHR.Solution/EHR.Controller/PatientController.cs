@@ -84,7 +84,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override IList<IPatient> GetBy(IPatient patient, IList<short> hospitals)
+        public override IList<IPatient> GetBy(IPatient patient, List<string> hospitals)
         {
             Assertion.NotNull(patient, "Paciente não informado.").Validate();
             Assertion.NotNull(hospitals, "Lista dos hospitais está nula.").Validate();
@@ -135,6 +135,9 @@ namespace EHR.Controller
 
             Assertion.NotNull(treatmentDTO, "Tratamento invalido.").Validate();
 
+            var hospitals = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached();
+
+
             var summary = new Summary
                               {
                                   Cpf = patient.CPF,
@@ -143,7 +146,7 @@ namespace EHR.Controller
                                   CodeMedicalRecord = string.IsNullOrEmpty(treatment) ? treatmentDTO.Id : treatment,
                                   Account = account,
                                   HighData = new DischargeData(),
-                                  Hospital = treatmentDTO.Hospital,
+                                  Hospital = hospitals.Find(h => h.Key == treatmentDTO.Hospital.Key),
                                   TreatmentId = treatmentDTO.Id,
                                   EntryDateTreatment = treatmentDTO.EntryDate,
                               };

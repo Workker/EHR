@@ -95,23 +95,23 @@ namespace InitializeDatabaseAndCacheData
             var state = new Types<State>();
             var hospitalList = new List<Hospital>
                                    {
-                                       new Hospital{Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png", State = state.Get(25),Key = "Assuncao"},
-                                       new Hospital{Name =  "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png", State = state.Get(19),Key = "Badim"},
+                                       //new Hospital{Name = "Assunção", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/assuncao.png", State = state.Get(25),Key = "Assuncao"},
+                                       //new Hospital{Name =  "Badim", Description = "Hospital", URLImage = "../../Images/Hospitals/badim.png", State = state.Get(19),Key = "Badim"},
                                        new Hospital{Name = "Bangu", Description = "Hospital", URLImage = "../../Images/Hospitals/bangu.png", State = state.Get(19),Key = "Bangu", Database = new Database{Description = "Homologacao",Host = "10.250.10.218", Service = "HMBANGU", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
-                                       new Hospital{Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png", State = state.Get(19),Key = "BarraDor"},
-                                       new Hospital{Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png", State = state.Get(25),Key = "Brasil"},
-                                       new Hospital{Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png", State = state.Get(19),Key = "CopaDor"},
+                                       //new Hospital{Name = "Barra D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/barrador.png", State = state.Get(19),Key = "BarraDor"},
+                                       //new Hospital{Name = "Brasil", Description = "Hospital e Maternidade", URLImage = "../../Images/Hospitals/brasil.png", State = state.Get(25),Key = "Brasil"},
+                                       //new Hospital{Name = "Copa D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/copador.png", State = state.Get(19),Key = "CopaDor"},
                                        new Hospital{Name = "Esperança", Description = "Hospital", URLImage = "../../Images/Hospitals/esperanca.png", State = state.Get(17),Key = "Esperanca", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMLESP", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
-                                       new Hospital{Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png", State = state.Get(19),Key = "IsraelitaAlbertSabim"},
-                                       new Hospital{Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png", State = state.Get(19),Key = "Joari"},
-                                       new Hospital{Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png", State = state.Get(19),Key = "NiteroiDOr"},
+                                       //new Hospital{Name = "Israelita Albert Sabim", Description = "Hospital", URLImage = "../../Images/Hospitals/israelitaalbertsabim.png", State = state.Get(19),Key = "IsraelitaAlbertSabim"},
+                                       //new Hospital{Name = "Joari", Description = "Hospital", URLImage = "../../Images/Hospitals/joari.png", State = state.Get(19),Key = "Joari"},
+                                       //new Hospital{Name = "Niterói D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/niteroidor.png", State = state.Get(19),Key = "NiteroiDOr"},
                                        new Hospital{Name = "Norte D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/nortedor.png", State = state.Get(19),Key = "Norte", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMNORTE", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
-                                       new Hospital{Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png", State = state.Get(17),Key = "Pronto"},
+                                       //new Hospital{Name = "Prontolinda", Description = "Hospital", URLImage = "../../Images/Hospitals/prontolinda.png", State = state.Get(17),Key = "Pronto"},
                                        new Hospital{Name = "Quinta D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/quintador.png", State = state.Get(19),Key = "QuintaDor", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMQUINTA", User = "admwpd", Password = "admwpd"}},
-                                       new Hospital{Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png", State = state.Get(25),Key = "RedeDOrSaoLuiz"},
-                                       new Hospital{Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png", State = state.Get(19),Key = "RioDeJaneiro"},
+                                       //new Hospital{Name = "Rede D'Or São Luiz", Description = "Hospital", URLImage = "../../Images/Hospitals/saoluiz.png", State = state.Get(25),Key = "RedeDOrSaoLuiz"},
+                                       //new Hospital{Name = "Rio de Janeiro", Description = "Hospital", URLImage = "../../Images/Hospitals/riodejaneiro.png", State = state.Get(19),Key = "RioDeJaneiro"},
                                        new Hospital{Name = "Rios D'Or", Description = "Hospital", URLImage = "../../Images/Hospitals/riosdor.png", State = state.Get(19),Key = "RiosDor", Database = new Database{Description = "Homologacao",Host = "10.250.3.45", Service = "HMRIOS", User = "SUMARIO_ALTA", Password = "sumario_alta"}},
-                                       new Hospital{Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png", State = state.Get(17),Key = "SaoMarcos"}
+                                       //new Hospital{Name = "São Marcos", Description = "Hospital", URLImage = "../../Images/Hospitals/saomarcos.png", State = state.Get(17),Key = "SaoMarcos"}
                                    };
             var repository = new Hospitals();
             repository.Save(hospitalList);

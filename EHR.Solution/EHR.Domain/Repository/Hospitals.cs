@@ -73,14 +73,14 @@ namespace EHR.Domain.Repository
             return hospitalList;
         }
 
-        public IList<Hospital> GetAllCached()
+        public List<Hospital> GetAllCached()
         {
             return Session.CreateCriteria(typeof(Hospital))
                     .SetCacheable(true)
                     .SetCacheRegion("Hospitals")
                     .SetCacheMode(CacheMode.Normal)
                     .AddOrder(Order.Asc("Id"))
-                    .List<Hospital>();
+                    .List<Hospital>().ToList();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace EHR.UI.Controllers
                 Session["Date"] = null;
                 var patient = new Patient { Name = query };
                 var patientController = FactoryController.GetController(ControllerEnum.Patient);
-                ViewBag.Patients = patientController.GetBy(patient, new List<short>()).Take(10);
+                ViewBag.Patients = patientController.GetBy(patient, new List<String>()).Take(10);
                 ViewBag.Hospitals =
                     HospitalMapper.MapHospitalModelFrom(
                         FactoryController.GetController(ControllerEnum.Hospital).GetAllHospitals());
@@ -38,11 +38,11 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult FilterPeople(string day, string month, string year, List<short> hospitalId)
+        public ActionResult FilterPeople(string day, string month, string year, List<string> hospitalKey)
         {
             try
             {
-                Session["Hospital"] = hospitalId ?? (hospitalId = new List<short>());
+                Session["SearchHospital"] = hospitalKey ?? (hospitalKey = new List<string>());
                 FillDateParameter(day, month, year);
                 ViewBag.Patients = GetTreatment(false);
 
@@ -91,8 +91,8 @@ namespace EHR.UI.Controllers
 
         private void ManagerSession(bool skip)
         {
-            if (Session["Hospital"] == null)
-                Session["Hospital"] = new List<string>();
+            if (Session["SearchHospital"] == null)
+                Session["SearchHospital"] = new List<string>();
 
 
             if (skip)
@@ -127,7 +127,7 @@ namespace EHR.UI.Controllers
         {
             var patientController = FactoryController.GetController(ControllerEnum.Patient);
 
-            return skip ? patientController.GetBy(patient, (List<short>)Session["Hospital"]).Skip((int)Session["Skip"]).Take(10) : patientController.GetBy(patient, (List<short>)Session["Hospital"]).Take(10);
+            return skip ? patientController.GetBy(patient, (List<string>)Session["SearchHospital"]).Skip((int)Session["Skip"]).Take(10) : patientController.GetBy(patient, (List<string>)Session["SearchHospital"]).Take(10);
         }
 
         private void FillDateParameter(string day, string month, string year)

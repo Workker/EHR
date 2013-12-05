@@ -15,8 +15,14 @@ namespace EHR.Domain.Repository
         {
             Assertion.IsTrue(!string.IsNullOrEmpty(cpf), "CPF não informado.").Validate();
 
+            var maxDateQuery = DetachedCriteria.For<Summary>();
+            var proj = Projections.ProjectionList();
+            proj.Add(Projections.Max("Date"));
+            maxDateQuery.SetProjection(proj);
+
             var criterio = Session.CreateCriteria<Summary>();
             criterio.Add(Restrictions.Eq("Cpf", cpf));
+            criterio.Add(Subqueries.PropertyEq("Date", maxDateQuery));
 
             var summary = criterio.List<Summary>().OrderByDescending(s => s.Date).FirstOrDefault();
 
@@ -24,8 +30,6 @@ namespace EHR.Domain.Repository
             {
                 summary.Patient = GetPatient(cpf);
             }
-
-            //Assertion.NotNull(summary, "Sumário inválido.").Validate();
             return summary;
         }
 
@@ -45,8 +49,6 @@ namespace EHR.Domain.Repository
             {
                 summary.Patient = GetPatient(cpf);
             }
-
-            //Assertion.NotNull(summary, "Sumário inválido.").Validate();
 
             return summary;
         }

@@ -1,24 +1,35 @@
-﻿using EHR.CoreShared.Interfaces;
+﻿using EHR.CoreShared.Entities;
+using EHR.CoreShared.Interfaces;
+using EHR.Domain.Repository;
 using EHRIntegracao.Domain.Services;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace EHR.Domain.Service.Lucene
 {
     public class GetPatientByHospitalService
     {
+        private readonly List<Hospital> _hospitals;
+        private readonly GetPatientsLuceneService _patientsLuceneServiceservice;
+        private readonly GetRecordsLuceneService _recordsLuceneServiceservice;
+        private readonly TreatmentsLuceneService _treatmentsLuceneServiceservice;
+
+        public GetPatientByHospitalService()
+        {
+            _hospitals = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached();
+            _patientsLuceneServiceservice = new GetPatientsLuceneService();
+            _recordsLuceneServiceservice = new GetRecordsLuceneService();
+            _treatmentsLuceneServiceservice = new TreatmentsLuceneService();
+        }
+
         public IPatient GetPatientBy(string cpf)
         {
-            var servico = new GetPatientsLuceneService();
-            var recordsService = new GetRecordsLuceneService();
-            var treatmentsService = new TreatmentsLuceneService();
+            var patient = _patientsLuceneServiceservice.GetPatientBy(cpf);
 
-            var patient = servico.GetPatientBy(cpf);
+            patient = SetHospitalFrom(patient);
+            patient.Records = _recordsLuceneServiceservice.GetRecordBy(cpf);
 
-            patient.Records = recordsService.GetRecordBy(cpf);
-
-            var treatments = treatmentsService.GetTreatments(patient.Records);
+            var treatments = _treatmentsLuceneServiceservice.GetTreatments(patient.Records);
 
             if (treatments != null)
                 patient.AddTreatments(treatments);
@@ -28,28 +39,37 @@ namespace EHR.Domain.Service.Lucene
 
         public IList<IPatient> GetPatientBy(IPatient patient)
         {
-            var servico = new GetPatientsLuceneService();
-            return servico.GetPatients(patient.Name);
+            var patients = _patientsLuceneServiceservice.GetPatients(patient.Name);
+            return SetHospitalInPatientFrom(patients);
         }
 
-        public IList<IPatient> GetPatientAll()
+        public IList<IPatient> AdvancedGetPatientBy(IPatient patient, List<string> hospitals)
         {
-            var service = new GetPatientsService();
-            return service.GetPatientsDbFor();
+            var patients = _patientsLuceneServiceservice.GetPatientsAdvancedSearch(patient, hospitals);
+            return SetHospitalInPatientFrom(patients);
         }
 
-        public IList<IPatient> AdvancedGetPatientBy(IPatient patient, IList<short> hospitals)
+        private List<IPatient> SetHospitalInPatientFrom(List<IPatient> patients)
         {
-            //todo: remover mock
-            var listHospital = new List<string>();
+            var patientList = new List<IPatient>();
 
-            foreach (short hospital in hospitals)
+            foreach (IPatient current in patients)
             {
-                listHospital.Add(hospital.ToString(CultureInfo.InvariantCulture));
+                current.Hospital = FindBy(_hospitals, current.Hospital.Key);
+                patientList.Add(current);
             }
+            return patientList;
+        }
 
-            var servico = new GetPatientsLuceneService();
-            return servico.GetPatientsAdvancedSearch(patient, listHospital);
+        private IPatient SetHospitalFrom(IPatient current)
+        {
+            current.Hospital = FindBy(_hospitals, current.Hospital.Key);
+            return current;
+        }
+
+        private Hospital FindBy(List<Hospital> hospitals, string key)
+        {
+            return hospitals.Find(x => x.Key == key);
         }
     }
 }
