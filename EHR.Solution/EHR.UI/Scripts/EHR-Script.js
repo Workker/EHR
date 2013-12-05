@@ -646,15 +646,22 @@ function SaveObsevation(element) {
 
 function SaveReasonOfAdmission(element) {
     var form = $(element).parent();
-   
-        $.ajax({
-            type: "POST",
-            url: "http://" + window.location.host + "/DischargeSummary/SaveReasonOfAdmission",
-            cache: false,
-            data: form.serialize(),
-            success: function () {
-            }
-        });
-       
-    
+
+    $.ajax({
+        type: "POST",
+        url: "http://" + window.location.host + "/DischargeSummary/SaveReasonOfAdmission",
+        cache: false,
+        data: form.serialize(),
+        success: function () {
+        }
+    });
+
+
+}
+
+if (window.navigator.appName == "Microsoft Internet Explorer") {
+    if (document.documentMode < 10) {
+        alert("Este sistema foi desenvolvido para ser acessado por Internet Explorer versao 10 ou superiror. Os controles de formulario seram desabilitados. Por favor atualize seu navegador!");
+        $(" input[type=radio],  textarea,  select,  input[type=text],  input[type=time], input[type=submit], input[type=password], button").attr("disabled", true);
+    }
 }
