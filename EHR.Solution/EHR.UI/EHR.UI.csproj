@@ -535,6 +535,7 @@
     <Content Include="Views\DischargeSummary\Layout\_LastActions.cshtml" />
     <Content Include="Views\Patient\_Registration.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\DischargeSummary\Layout\_RemoveEdition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,10 +50,7 @@
     </script>
 }
 @section scriptsBefore{
-    <script type="text/javascript">
-            @if (((SummaryModel)Session["Summary"]).Finalized == true)
-            {
-                @:RemoveEdition();
-            }
-    </script>
+    @{
+         Html.RenderPartial("Layout/_RemoveEdition");
+    }
 }

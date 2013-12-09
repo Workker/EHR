@@ -20,10 +20,7 @@ n&atilde;o
         $('input[value="true"]').attr("checked", "");
         $('#ulHemotransfusion').removeAttr("style");
     }
-
-    @if (((SummaryModel)Session["Summary"]).Finalized == true)
-    {
-        @:RemoveEdition();    
-                }
-
 </script>
+@{
+    Html.RenderPartial("Layout/_RemoveEdition");
+}

@@ -8,5 +8,6 @@ namespace EHR.UI.Models
         public string URLImage { get; set; }
         public string Key { get; set; }
         public bool Selected { get; set; }
+        public StateModel State { get; set; }
     }
 }

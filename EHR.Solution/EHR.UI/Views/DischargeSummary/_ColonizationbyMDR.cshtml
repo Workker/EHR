@@ -23,9 +23,7 @@
         $('input[value="true"]').attr("checked", "");
         $('#divMdr').removeAttr("style");
     }
-
-    @if (((SummaryModel)Session["Summary"]).Finalized == true)
-    {
-        @:RemoveEdition();    
-        }
 </script>
+@{
+    Html.RenderPartial("Layout/_RemoveEdition");
+}

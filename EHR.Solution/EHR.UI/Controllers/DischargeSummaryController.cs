@@ -69,7 +69,7 @@ namespace EHR.UI.Controllers
             catch (Exception ex)
             {
                 this.ShowMessage(MessageTypeEnum.Error, ex.Message);
-                return null;
+                return RedirectToAction("Index", "Home");
             }
         }
 

@@ -29,6 +29,7 @@ namespace EHR.UI.Models.Mappers
             Mapper.CreateMap<Hospital, HospitalModel>();
 
             var hospitalModel = Mapper.Map<Hospital, HospitalModel>(hospital);
+            hospitalModel.State = StateMapper.MapSpecialtyModelFrom(hospital.State);
 
             return hospitalModel;
         }

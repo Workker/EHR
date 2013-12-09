@@ -1,11 +1,7 @@
-﻿@using EHR.UI.Models
-<h1>Exames Relevantes</h1>
+﻿<h1>Exames Relevantes</h1>
 <hr />
 <br />
 @{Html.RenderPartial("Exams/_ExamsTable");}
-<script type="text/javascript">
-    @if (((SummaryModel)Session["Summary"]).Finalized == true)
-    {
-        @:RemoveEdition();    
-        }
-</script>
+@{
+    Html.RenderPartial("Layout/_RemoveEdition");
+}

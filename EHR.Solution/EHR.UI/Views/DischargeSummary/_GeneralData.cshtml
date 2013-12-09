@@ -7,7 +7,7 @@
 <h3>Admiss&atilde;o</h3>
 <br />
 <form>
-<label>Motivo da admiss&atilde;o:</label>&nbsp;
+    <label>Motivo da admiss&atilde;o:</label>&nbsp;
     @foreach (var reason in ((List<ReasonOfAdmissionModel>)ViewBag.ResonsOfAdmission))
     {
         <input name="reasonOfAdmission" type="checkbox" value="@reason.Id"
@@ -74,9 +74,7 @@
             $('#ulAllergy').removeAttr("style");
         }
     }
-
-    @if (((SummaryModel)Session["Summary"]).Finalized == true)
-    {
-        @:RemoveEdition();    
-                    }
 </script>
+@{
+    Html.RenderPartial("Layout/_RemoveEdition");
+}

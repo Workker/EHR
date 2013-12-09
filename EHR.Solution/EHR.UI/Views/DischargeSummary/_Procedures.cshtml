@@ -1,13 +1,9 @@
-﻿@using EHR.UI.Models
-<h1>Procedimentos</h1>
+﻿<h1>Procedimentos</h1>
 <hr />
 <br />
 @{
     Html.RenderPartial("Procedure/_ProcedureTable");
 }
-<script type="text/javascript">
-    @if (((SummaryModel)Session["Summary"]).Finalized == true)
-    {
-        @:RemoveEdition();    
-        }
-</script>
+@{
+    Html.RenderPartial("Layout/_RemoveEdition");
+}

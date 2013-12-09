@@ -135,31 +135,37 @@
     <input type="button" value="Finalizar" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
     @{
         var summary = (SummaryModel)Model;
+         var account = ((AccountModel)Session["Account"]);
         if (summary.Finalized)
         {
             var action = summary.Actions.OrderByDescending(x => x.Id).FirstOrDefault();
 
-            var account = (AccountModel)Session["account"];
-
             if (action.Account.Id == account.Id)
             {
-                <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" />
-                <script type="text/javascript">
-                    RemoveEdition(true);
-                </script>
+        <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" />
+        <script type="text/javascript">
+            RemoveEdition(true);
+        </script>
             }
             else
             {
-                <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
+        <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
+        <script type="text/javascript">
+            RemoveEdition(false);
+        </script>
+            }
+        }
+        else if (!account.ProfessionalRegistration.Any(x => x.State.Id == summary.Hospital.State.Id))
+            {
                 <script type="text/javascript">
                     RemoveEdition(false);
                 </script>
             }
-        }
         else
         {
         <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
         }
+         
     }
     <script type="text/javascript">
         $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
