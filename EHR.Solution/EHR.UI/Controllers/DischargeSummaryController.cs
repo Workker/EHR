@@ -1,6 +1,7 @@
 ﻿using EHR.Controller;
 using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
+using EHR.Infrastructure.Service.Report;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Models;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+//using MVC4.RDLC.Models;
 
 namespace EHR.UI.Controllers
 {
@@ -894,6 +896,18 @@ namespace EHR.UI.Controllers
                 this.ShowMessage(MessageTypeEnum.Error, exception.Message);
             }
         }
+
+        #endregion
+
+        #region Reports
+
+        //public FileContentResult GeneratePrescriptionsReport(ReportDataSource reportDataSource)
+        //{
+        //    var summary = GetSummary();
+        //    var report = new ReportGenerationService("~/Report/Prescriptions.rdlc");
+        //    report.GenerateReport();
+
+        //}
 
         #endregion
 

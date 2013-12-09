@@ -131,7 +131,7 @@ namespace EHR.Controller
 
             #endregion
 
-            _accounts.ApproveProfessionalRegistration(professionalRegistrationId);
+            _accounts.ApproveProfessionalRegistration(accountId, professionalRegistrationId);
 
             var account = _accounts.Get<Account>(accountId);
 

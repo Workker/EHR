@@ -111,22 +111,30 @@ namespace EHR.Domain.Repository
                 Restrictions.Eq("ProfessionalRegistration.Approved", false)).Add(Restrictions.Eq("ProfessionalRegistration.Refused", false));
             criterion.AddOrder(Order.Desc("Id"));
 
-            var account = criterion.List<Account>();
+            var accounts = criterion.List<Account>();
 
-            Assertion.NotNull(account, "Lista de contas nula.").Validate();
+            Assertion.NotNull(accounts, "Lista de contas nula.").Validate();
 
-            return account;
+            return accounts;
         }
 
         [ExceptionLogger]
-        public virtual void ApproveProfessionalRegistration(int professionalRegistrationId)
+        public virtual void ApproveProfessionalRegistration(int accountId, int professionalRegistrationId)
         {
+            Assertion.GreaterThan(accountId, 0, "Conta inválida.").Validate();
             Assertion.GreaterThan(professionalRegistrationId, 0, "Registro Profissional inválido.").Validate();
 
-            var professionalRegistration = base.Get<ProfessionalRegistration>(professionalRegistrationId);
-            professionalRegistration.Approved = true;
+            var account = base.Get<Account>(accountId);
+            
+            foreach (var professionalRegistration in account.ProfessionalRegistrations)
+            {
+                if (professionalRegistration.Id == professionalRegistrationId)
+                {
+                    professionalRegistration.Approved = true;
+                }
+            }
 
-            base.Save(professionalRegistration);
+            base.Save(account);
         }
 
         [ExceptionLogger]
@@ -138,6 +146,21 @@ namespace EHR.Domain.Repository
             base.Save(account);
 
             Assertion.IsTrue(account.Refused, "Conta de usuário não reprovada.").Validate();
+        }
+
+        private IList<Account> RemoveAppoveds(IList<Account> accounts)
+        {
+            foreach (var account in accounts)
+            {
+                foreach (var professionalRegistration in account.ProfessionalRegistrations)
+                {
+                    if (professionalRegistration.Approved)
+                    {
+                        account.ProfessionalRegistrations.Remove(professionalRegistration);
+                    }
+                }
+            }
+            return accounts;
         }
     }
 }

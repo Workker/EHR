@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Reporting.WebForms;
+﻿using Microsoft.Reporting.WebForms;
+using System;
 
 namespace EHR.Infrastructure.Service.Report
 {
@@ -12,9 +12,9 @@ namespace EHR.Infrastructure.Service.Report
             _localReport.ReportPath = reportPath;
         }
 
-        public byte[] GenerateReport(object data, ReportType type)
+        public byte[] GenerateReport(object data, ReportType type, string dataSet)
         {
-            var reportDataSource = new ReportDataSource { Name = "DataSet1", Value = data };
+            var reportDataSource = new ReportDataSource { Name = dataSet, Value = data };
 
             _localReport.DataSources.Add(reportDataSource);
 

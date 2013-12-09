@@ -660,7 +660,11 @@ function SaveReasonOfAdmission(element) {
 }
 
 if (window.navigator.appName == "Microsoft Internet Explorer") {
-    if (document.documentMode < 10) {
+    var ua = navigator.userAgent;
+    var index = ua.indexOf("Trident/");
+    var st = ua.substring(index, index + 12);
+    var  version = st.substr(st.indexOf("/") + 1, 1);
+    if (document.documentMode < 10 && version < 6) {
         alert("Este sistema foi desenvolvido para ser acessado por Internet Explorer versao 10 ou superiror. Os controles de formulario seram desabilitados. Por favor atualize seu navegador!");
         $(" input[type=radio],  textarea,  select,  input[type=text],  input[type=time], input[type=submit], input[type=password], button").attr("disabled", true);
     }

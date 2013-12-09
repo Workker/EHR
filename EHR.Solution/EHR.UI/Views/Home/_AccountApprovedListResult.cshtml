@@ -16,8 +16,11 @@
                                 <label>
                                     @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), account.ProfessionalRegistration.FirstOrDefault().Type.ToString(CultureInfo.InvariantCulture))))
                                     :&nbsp;
-                                </label>@account.ProfessionalRegistration.FirstOrDefault().Number - @account.ProfessionalRegistration.FirstOrDefault().State.Acronym
-                                <input type="hidden" name="professionalRegistrationId" hidden value="@account.ProfessionalRegistration.FirstOrDefault().Id"/>
+                                    @{
+                                        var professionalRegistrationModel = account.ProfessionalRegistration.FirstOrDefault(x => x.Approved == false);
+                                    }
+                                </label>@professionalRegistrationModel.Number - @professionalRegistrationModel.State.Acronym
+                                <input type="hidden" name="professionalRegistrationId" hidden value="@professionalRegistrationModel.Id"/>
                                 &nbsp;&nbsp;
                                    <label>E-mail:&nbsp;</label>@account.Email
                             </span>
