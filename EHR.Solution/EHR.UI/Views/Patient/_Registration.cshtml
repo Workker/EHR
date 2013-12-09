@@ -1,25 +1,25 @@
 ﻿<h1>Cadastro de Paciente</h1>
 <div style="border: 1px solid #e2e2e3; padding: 5px; position: absolute; width: 930px;">
-    <form>
+    <form method="POST" action="@Url.Action("Registering")">
         <div class="SimpleleftCol">
             <img src="../../../Images/photo_none.png" alt="Profile Photo">
         </div>
         <div class="rfloat" style="margin-right: 25%">
             <label>Nome:</label>
-            <input type="text" name="Name" required size="100" />
+            <input type="text" name="name" required size="100" />
             <br />
             <br />
             <label>CPF:</label>
-            <input type="text" name="CPF" required />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" name="cpf" required />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label>Data de Nacimento:</label>
             @{Html.RenderPartial("_DatePicker");}
             <br />
             <br />
             <label>Sexo:</label>
-            <input type="radio" name="Genre" value="M"/>&nbsp;Masculino
-            <input type="radio" name="Genre" value="F" />&nbsp;Feminino&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="genre" value="M" />&nbsp;Masculino
+            <input type="radio" name="genre" value="F" />&nbsp;Feminino&nbsp;&nbsp;&nbsp;
             <label>Identidade:</label>
-            <input type="text" name="Identity" /><br />
+            <input type="text" name="identity" /><br />
             <br />
             <input type="submit" value="Salvar" class="uibutton large confirm" />
         </div>

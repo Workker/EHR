@@ -1,4 +1,5 @@
 ﻿using EHR.CoreShared;
+using EHR.CoreShared.Entities;
 using EHR.CoreShared.Interfaces;
 using EHR.Domain.Entities;
 using EHR.Domain.Repository;
@@ -24,6 +25,14 @@ namespace EHR.Controller
             Assertion.NotNull(patient, "Paciente não encontrado.").Validate();
 
             return patient;
+        }
+
+        [ExceptionLogger]
+        public override void Registering(IPatient patient)
+        {
+            Assertion.NotNull(patient, "Dados invalidaos.").Validate();
+
+            FactoryRepository.GetRepository(RepositoryEnum.Patient).Save(patient);
         }
 
         [ExceptionLogger]

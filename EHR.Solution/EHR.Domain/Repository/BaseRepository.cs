@@ -50,6 +50,13 @@ namespace EHR.Domain.Repository
             transaction.Commit();
         }
 
+        public virtual void Save(IAggregateRoot<string> root)
+        {
+            var transaction = Session.BeginTransaction();
+            Session.SaveOrUpdate(root);
+            transaction.Commit();
+        }
+
         public virtual void SaveList(List<IAggregateRoot<int>> roots)
         {
             var transaction = Session.BeginTransaction();

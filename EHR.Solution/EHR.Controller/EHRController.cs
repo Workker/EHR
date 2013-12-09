@@ -35,6 +35,7 @@ namespace EHR.Controller
         public virtual Summary GetSummaryBy(IPatient patient, string treatment, int idAccount) { return null; }
         public virtual IList<Allergy> GetAllergiesBy(string cpf) { return null; }
         public virtual IList<Medication> GetMedicationsOfUseAfterInternationBy(string cpf) { return null; }
+        public virtual void Registering(IPatient patient) { }
 
         #endregion
 
