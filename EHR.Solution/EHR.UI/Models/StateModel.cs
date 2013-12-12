@@ -9,5 +9,6 @@ namespace EHR.UI.Models
     {
         public short Id { get; set; }
         public string Acronym { get; set; }
+        public string Description { get; set; }
     }
 }

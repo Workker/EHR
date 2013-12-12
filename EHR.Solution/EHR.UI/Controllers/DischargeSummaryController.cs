@@ -1,7 +1,10 @@
-﻿using EHR.Controller;
+﻿using System.Data;
+using System.Globalization;
+using EHR.Controller;
 using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
 using EHR.Infrastructure.Service.Report;
+using EHR.Infrastructure.Util;
 using EHR.UI.Filters;
 using EHR.UI.Infrastructure.Notification;
 using EHR.UI.Models;
@@ -10,7 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-//using MVC4.RDLC.Models;
+using EHR.UI.Models.Reports;
+using Microsoft.Reporting.WebForms;
 
 namespace EHR.UI.Controllers
 {
@@ -30,7 +34,7 @@ namespace EHR.UI.Controllers
             get { return FactoryController.GetController(ControllerEnum.Summary); }
         }
 
-        public ActionResult Index(string cpf, string treatment)
+        public ActionResult Index(string cpf, string treatment, string hospitalId)
         {
             try
             {
@@ -44,6 +48,7 @@ namespace EHR.UI.Controllers
 
                 summaryModel.Patient = patientModel;
                 Session["Summary"] = summaryModel;
+                Session["Patient"] = patientModel;
 
                 if (GetSummary() == null)
                     Response.Redirect("/Home");
@@ -901,13 +906,83 @@ namespace EHR.UI.Controllers
 
         #region Reports
 
-        //public FileContentResult GeneratePrescriptionsReport(ReportDataSource reportDataSource)
-        //{
-        //    var summary = GetSummary();
-        //    var report = new ReportGenerationService("~/Report/Prescriptions.rdlc");
-        //    report.GenerateReport();
+        public ActionResult GeneratePrescriptionsReport()
+        {
+            var summary = GetSummary();
 
-        //}
+            var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
+
+            var summaryReportDtOs = new List<SummaryReportDTO>
+                {
+                    new SummaryReportDTO
+                        {
+                            AccoutName = summary.Account.FirstName + " " + summary.Account.LastName,
+                            HospitalName = summary.Hospital.Name,
+                            PatientBirthday = summary.Patient.DateBirthday.ToShortDateString(),
+                            //PatientGender = summary.Patient.Genre.ToString(),
+                            PatientAge = summary.Patient.GetAge().ToString(),
+                            PatientName = summary.Patient.Name,
+                            RecordCode = summary.CodeMedicalRecord,
+                            State = summary.Hospital.State.Description,
+                            //ProfissionalRegistrationNumber = (summary.Account.ProfessionalRegistration.Where(p => p.State == summary.Hospital.State)).FirstOrDefault().Number
+                        }
+                };
+
+            var report = new ReportGenerationService("Report/Prescriptions.rdlc");
+            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
+            var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
+            var dataSources = new List<ReportDataSource> { prescriptionDataSource, summaryDataSource };
+
+            return File(report.GenerateReport(dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
+        }
+
+        private List<PrescriptionReportDTO> SetDataToPrescriptionReportDTO(SummaryModel summary)
+        {
+            var prescriptionDtOs = new List<PrescriptionReportDTO>();
+
+            foreach (var medication in summary.Medications.Where(m => m.Type == 3))
+            {
+                var prescriptionDTO = new PrescriptionReportDTO
+                    {
+                        DEFDescription = medication.Def.Description,
+                        Presentation =
+                            medication.Presentation + " " +
+                            @EnumUtil.GetDescriptionFromEnumValue(
+                                (PresentationTypeEnum)
+                                Enum.Parse(typeof(PresentationTypeEnum),
+                                           medication.PresentationType.ToString(CultureInfo.InvariantCulture))),
+                        Dose =
+                            medication.Dose + " " +
+                            EnumUtil.GetDescriptionFromEnumValue(
+                                (DosageEnum)
+                                Enum.Parse(typeof(DosageEnum), medication.Dosage.ToString(CultureInfo.InvariantCulture))),
+                        Way =
+                            EnumUtil.GetDescriptionFromEnumValue(
+                                (WayEnum)Enum.Parse(typeof(WayEnum), medication.Way.ToString(CultureInfo.InvariantCulture))),
+                        Frequency =
+                            EnumUtil.GetDescriptionFromEnumValue(
+                                (FrequencyEnum)
+                                Enum.Parse(typeof(FrequencyEnum), medication.Frequency.ToString(CultureInfo.InvariantCulture))),
+                        Duration = medication.Duration + " Dia(s)"
+                    };
+                if (string.IsNullOrEmpty(medication.Place))
+                {
+                    prescriptionDTO.Way += " " + medication.Place;
+                }
+
+                if (((short[])Enum.GetValues(typeof(FrequencyCaseEnum))).ToList().Contains(medication.FrequencyCase))
+                {
+                    prescriptionDTO.Frequency += " " +
+                                                 EnumUtil.GetDescriptionFromEnumValue(
+                                                     (FrequencyCaseEnum)
+                                                     Enum.Parse(typeof(FrequencyCaseEnum),
+                                                                medication.FrequencyCase.ToString(CultureInfo.InvariantCulture)));
+                }
+
+                prescriptionDtOs.Add(prescriptionDTO);
+            }
+            return prescriptionDtOs;
+        }
 
         #endregion
 
@@ -950,8 +1025,10 @@ namespace EHR.UI.Controllers
         private void RefreshSessionSummary()
         {
             var summary = SummaryController.GetBy(GetSummary().Id);
+            var summaryModel = SummaryMapper.MapSummaryModelFrom(summary);
 
-            Session["Summary"] = SummaryMapper.MapSummaryModelFrom(summary);
+            summaryModel.Patient = (PatientModel)Session["Patient"];
+            Session["Summary"] = summaryModel;
         }
 
         #endregion

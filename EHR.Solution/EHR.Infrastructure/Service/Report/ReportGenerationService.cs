@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WebForms;
 using System;
+using System.Collections.Generic;
 
 namespace EHR.Infrastructure.Service.Report
 {
@@ -12,15 +13,16 @@ namespace EHR.Infrastructure.Service.Report
             _localReport.ReportPath = reportPath;
         }
 
-        public byte[] GenerateReport(object data, ReportType type, string dataSet)
+        public byte[] GenerateReport(List<ReportDataSource> reportDataSources, ReportType type)
         {
-            var reportDataSource = new ReportDataSource { Name = dataSet, Value = data };
-
-            _localReport.DataSources.Add(reportDataSource);
+            foreach (var reportDataSource in reportDataSources)
+            {
+                _localReport.DataSources.Add(reportDataSource);
+            }
 
             string reportType = type.ToString();
-            string mimeType;
             string encoding;
+            string mimeType;
             string fileNameExtension;
             Warning[] warnings;
             string[] streams;
@@ -29,6 +31,11 @@ namespace EHR.Infrastructure.Service.Report
                                                        out fileNameExtension, out streams, out warnings);
 
             return renderedBytes;
+        }
+
+        public ReportDataSource CreateReportDataSource(object data, string dataSet)
+        {
+            return new ReportDataSource { Name = dataSet, Value = data };
         }
 
         private static string DefinePropertiesOfDevice(ReportType type)

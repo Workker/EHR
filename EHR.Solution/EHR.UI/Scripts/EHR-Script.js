@@ -142,14 +142,14 @@ $(document).ready(function () {
         data: ''
     }).sethscCorner();
 
-    //Menu.add({
-    //    Title: 'Formulário',
-    //    onOutIcon: '../../Images/formulario.png',
-    //    onClickIcon: '../../Images/formulario.png',
-    //    HtmlSatusContent: '',
-    //    url: '/DischargeSummary/Form',
-    //    data: ''
-    //}).sethscCorner();
+    Menu.add({
+        Title: 'Impresso',
+        onOutIcon: '../../Images/formulario.png',
+        onClickIcon: '../../Images/formulario.png',
+        HtmlSatusContent: '',
+        url: '/DischargeSummary/Form',
+        data: ''
+    }).sethscCorner();
 
     $("#_td").corner("4px");
     $("#o_td").corner("4px");
