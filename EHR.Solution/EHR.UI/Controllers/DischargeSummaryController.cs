@@ -906,12 +906,43 @@ namespace EHR.UI.Controllers
 
         #region Reports
 
+        public ActionResult GenerateSummayReport()
+        {
+            var summary = GetSummary();
+            var summaryReportDtOs = SetDataToSummaryReportDTO(summary);
+            var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
+            var report = new ReportGenerationService("Report/Summary.rdlc");
+
+            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
+            var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
+            var dataSources = new List<ReportDataSource> { prescriptionDataSource, summaryDataSource };
+
+            return File(GenerateReportFile(report, dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
+        }
+
         public ActionResult GeneratePrescriptionsReport()
         {
             var summary = GetSummary();
 
             var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
+            var summaryReportDtOs = SetDataToSummaryReportDTO(summary);
 
+            var report = new ReportGenerationService("Report/Prescriptions.rdlc");
+
+            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
+            var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
+            var dataSources = new List<ReportDataSource> { prescriptionDataSource, summaryDataSource };
+
+            return File(GenerateReportFile(report, dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
+        }
+
+        private Byte[] GenerateReportFile(ReportGenerationService report, List<ReportDataSource> dataSources, ReportGenerationService.ReportType reportType)
+        {
+            return report.GenerateReport(dataSources, reportType);
+        }
+
+        private List<SummaryReportDTO> SetDataToSummaryReportDTO(SummaryModel summary)
+        {
             var summaryReportDtOs = new List<SummaryReportDTO>
                 {
                     new SummaryReportDTO
@@ -927,13 +958,7 @@ namespace EHR.UI.Controllers
                             //ProfissionalRegistrationNumber = (summary.Account.ProfessionalRegistration.Where(p => p.State == summary.Hospital.State)).FirstOrDefault().Number
                         }
                 };
-
-            var report = new ReportGenerationService("Report/Prescriptions.rdlc");
-            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
-            var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
-            var dataSources = new List<ReportDataSource> { prescriptionDataSource, summaryDataSource };
-
-            return File(report.GenerateReport(dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
+            return summaryReportDtOs;
         }
 
         private List<PrescriptionReportDTO> SetDataToPrescriptionReportDTO(SummaryModel summary)

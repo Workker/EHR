@@ -236,7 +236,12 @@
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\ProfessionalRegistrationModel.cs" />
     <Compile Include="Models\ReasonOfAdmissionModel.cs" />
+    <Compile Include="Models\Reports\AllergieReportDTO.cs" />
+    <Compile Include="Models\Reports\DiagnosticReportDTO.cs" />
+    <Compile Include="Models\Reports\ExamReportDTO.cs" />
+    <Compile Include="Models\Reports\HemotransfusionReportDTO.cs" />
     <Compile Include="Models\Reports\PrescriptionReportDTO.cs" />
+    <Compile Include="Models\Reports\ProcedureReportDTO.cs" />
     <Compile Include="Models\Reports\SummaryReportDTO.cs" />
     <Compile Include="Models\SpecialtyModel.cs" />
     <Compile Include="Models\StateModel.cs" />
@@ -248,6 +253,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Prescriptions.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Summary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Summary.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +359,17 @@
     </None>
     <Content Include="Report\Prescriptions.xss">
       <DependentUpon>Prescriptions.xsd</DependentUpon>
+    </Content>
+    <Content Include="Report\Summary.xsc">
+      <DependentUpon>Summary.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\Summary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Summary.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\Summary.xss">
+      <DependentUpon>Summary.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\abtimicrobianos.png" />
@@ -559,6 +580,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\Summary.rdlc" />
     <EmbeddedResource Include="Report\Prescriptions.rdlc" />
   </ItemGroup>
   <PropertyGroup>
