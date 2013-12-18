@@ -142,14 +142,14 @@ $(document).ready(function () {
         data: ''
     }).sethscCorner();
 
-    Menu.add({
-        Title: 'Impresso',
-        onOutIcon: '../../Images/formulario.png',
-        onClickIcon: '../../Images/formulario.png',
-        HtmlSatusContent: '',
-        url: '/DischargeSummary/Form',
-        data: ''
-    }).sethscCorner();
+    //Menu.add({
+    //    Title: 'Impresso',
+    //    onOutIcon: '../../Images/formulario.png',
+    //    onClickIcon: '../../Images/formulario.png',
+    //    HtmlSatusContent: '',
+    //    url: '/DischargeSummary/Form',
+    //    data: ''
+    //}).sethscCorner();
 
     $("#_td").corner("4px");
     $("#o_td").corner("4px");
@@ -597,7 +597,7 @@ function RemoveEdition(reopen) {
     $(".contentPage input[type=radio], .contentPage input[type=checkbox], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
     $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").hide();
     if (reopen == true) {
-        $(".contentPage input[value=Reabrir]").show();
+        $(".contentPage input[value=Reabrir], .contentPage a").show();
     }
 }
 
@@ -615,7 +615,7 @@ function FinalizeSummary() {
 function ReOpenEdition() {
     $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", false);
     $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").show();
-    $(".contentPage input[value=Reabrir]").hide();
+    $(".contentPage input[value=Reabrir], .contentPage a").hide();
 }
 
 function ReOpenSummary() {

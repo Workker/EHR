@@ -1004,15 +1004,17 @@ namespace EHR.UI.Controllers
             {
                 var reactions = "";
 
-                foreach (var reaction in hemotransfusion.ReactionTypes)
+                if (hemotransfusion.ReactionTypes != null)
                 {
-                    reactions +=
-                        EnumUtil.GetDescriptionFromEnumValue(
-                            (ReactionTypeEnum)
-                            Enum.Parse(typeof(ReactionTypeEnum), reaction.ToString(CultureInfo.InvariantCulture))) + ", ";
+                    foreach (var reaction in hemotransfusion.ReactionTypes)
+                    {
+                        reactions +=
+                            EnumUtil.GetDescriptionFromEnumValue(
+                                (ReactionTypeEnum)
+                                Enum.Parse(typeof(ReactionTypeEnum), reaction.ToString(CultureInfo.InvariantCulture))) + ", ";
+                    }
+                    reactions = reactions.Remove(reactions.Length - 2, 2);
                 }
-
-                reactions = reactions.Remove(reactions.Length - 2, 2);
 
                 var hemotransfusionReportDtO = new HemotransfusionReportDTO
                 {
