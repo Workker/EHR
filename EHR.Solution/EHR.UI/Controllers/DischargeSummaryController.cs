@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Globalization;
+﻿using System.Globalization;
 using EHR.Controller;
 using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
@@ -906,6 +905,22 @@ namespace EHR.UI.Controllers
 
         #region Reports
 
+        public ActionResult GeneratePrescriptionsReport()
+        {
+            var summary = GetSummary();
+
+            var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
+            var summaryReportDtOs = SetDataToSummaryReportDTO(summary);
+
+            var report = new ReportGenerationService("Report/Prescriptions.rdlc");
+
+            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
+            var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
+            var dataSources = new List<ReportDataSource> { prescriptionDataSource, summaryDataSource };
+
+            return File(GenerateReportFile(report, dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
+        }
+
         public ActionResult GenerateSummayReport()
         {
             var summary = GetSummary();
@@ -914,27 +929,173 @@ namespace EHR.UI.Controllers
             var summaryReportDtOs = SetDataToSummaryReportDTO(summary);
             var allergyReportDtOs = SetDataToAllergyReportDTO(summary);
             var diagnosticReportDtOs = SetDataToDiagnosticReportDTO(summary);
+            var medicationUseBeforeReportDtOs = SetDataToMedicationUseBeforeReportDTO(summary);
+            var medicationUseDuringReportDtOs = SetDataToMedicationUseDuringReportDTO(summary);
+            var examReportDtOs = SetDataToExamReportDTO(summary);
+            var procedureReportDtOs = SetDataToProcedureReportDTO(summary);
+            var hemotransfusionReportDtOs = SetDataTohemotransfusionReportDTO(summary);
             var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
-
-
-
+            var medicalReviewDtOs = SetDataToMedicalReviewReportDTO(summary);
+            var complementaryExamDtOs = SetDataTocomplementaryExamReportDTO(summary);
 
             var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
             var allergyDataSource = report.CreateReportDataSource(allergyReportDtOs, "Allergy");
             var diagnosticDataSource = report.CreateReportDataSource(diagnosticReportDtOs, "Diagnostic");
-            var medicationUseBeforeDataSource = report.CreateReportDataSource(new List<PrescriptionReportDTO>(), "MedicationUseBefore");
-            var medicationUseDuringDataSource = report.CreateReportDataSource(new List<PrescriptionReportDTO>(), "MedicationUseDuring");
-            var examDataSource = report.CreateReportDataSource(new List<ExamReportDTO>(), "Exam");
-            var procedureDataSource = report.CreateReportDataSource(new List<ProcedureReportDTO>(), "Procedure");
-            var hemotransfusionDataSource = report.CreateReportDataSource(new List<HemotransfusionReportDTO>(), "Hemotransfusion");
+            var medicationUseBeforeDataSource = report.CreateReportDataSource(medicationUseBeforeReportDtOs, "MedicationUseBefore");
+            var medicationUseDuringDataSource = report.CreateReportDataSource(medicationUseDuringReportDtOs, "MedicationUseDuring");
+            var examDataSource = report.CreateReportDataSource(examReportDtOs, "Exam");
+            var procedureDataSource = report.CreateReportDataSource(procedureReportDtOs, "Procedure");
+            var hemotransfusionDataSource = report.CreateReportDataSource(hemotransfusionReportDtOs, "Hemotransfusion");
             var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
-            var medicalReviewDataSource = report.CreateReportDataSource(new List<MedicalReviewReportDTO>(), "MedicalReview");
-            var complementaryExamDataSource = report.CreateReportDataSource(new List<ComplementaryExamReportDTO>(), "ComplementaryExam");
+            var medicalReviewDataSource = report.CreateReportDataSource(medicalReviewDtOs, "MedicalReview");
+            var complementaryExamDataSource = report.CreateReportDataSource(complementaryExamDtOs, "ComplementaryExam");
 
             var dataSources = new List<ReportDataSource> { summaryDataSource, allergyDataSource, diagnosticDataSource, medicationUseBeforeDataSource,
                 medicationUseDuringDataSource, examDataSource, procedureDataSource, hemotransfusionDataSource, prescriptionDataSource, medicalReviewDataSource,complementaryExamDataSource };
 
             return File(GenerateReportFile(report, dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private List<ComplementaryExamReportDTO> SetDataTocomplementaryExamReportDTO(SummaryModel summary)
+        {
+            var complementaryExamReportDtOs = new List<ComplementaryExamReportDTO>();
+
+            foreach (var complementaryExam in summary.DischargeData.ComplementaryExams)
+            {
+                var complementaryExamReportDtO = new ComplementaryExamReportDTO
+                {
+                    Description = complementaryExam.Description,
+                    Period = complementaryExam.Period + " dia(s)"
+                };
+
+                complementaryExamReportDtOs.Add(complementaryExamReportDtO);
+            }
+
+            return complementaryExamReportDtOs;
+        }
+
+        private List<MedicalReviewReportDTO> SetDataToMedicalReviewReportDTO(SummaryModel summary)
+        {
+            var medicalReviewReportDtOs = new List<MedicalReviewReportDTO>();
+
+            foreach (var medicalReview in summary.DischargeData.MedicalReviews)
+            {
+                var mediacalReviewDtO = new MedicalReviewReportDTO
+                {
+                    Specialty = medicalReview.Specialty.Description,
+                    TermMedicalReviewAt = medicalReview.TermMedicalReviewAt + " dia(s)"
+                };
+
+                medicalReviewReportDtOs.Add(mediacalReviewDtO);
+            }
+
+            return medicalReviewReportDtOs;
+        }
+
+        private List<HemotransfusionReportDTO> SetDataTohemotransfusionReportDTO(SummaryModel summary)
+        {
+            var hemotransfusionReportDtOs = new List<HemotransfusionReportDTO>();
+
+            foreach (var hemotransfusion in summary.Hemotransfusions)
+            {
+                var reactions = "";
+
+                foreach (var reaction in hemotransfusion.ReactionTypes)
+                {
+                    reactions +=
+                        EnumUtil.GetDescriptionFromEnumValue(
+                            (ReactionTypeEnum)
+                            Enum.Parse(typeof(ReactionTypeEnum), reaction.ToString(CultureInfo.InvariantCulture))) + ", ";
+                }
+
+                reactions = reactions.Remove(reactions.Length - 2, 2);
+
+                var hemotransfusionReportDtO = new HemotransfusionReportDTO
+                {
+                    Type = EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), hemotransfusion.HemotransfusionType.ToString(CultureInfo.InvariantCulture))),
+                    ReAction = reactions
+                };
+
+                hemotransfusionReportDtOs.Add(hemotransfusionReportDtO);
+            }
+
+            return hemotransfusionReportDtOs;
+        }
+
+        private List<ProcedureReportDTO> SetDataToProcedureReportDTO(SummaryModel summary)
+        {
+            var procedureReportDtOs = new List<ProcedureReportDTO>();
+
+            foreach (var procedure in summary.Procedures)
+            {
+                var procedureReportDtO = new ProcedureReportDTO
+                {
+                    Date = procedure.Date.ToShortDateString(),
+                    Description = procedure.TUSS == null ? procedure.Description : procedure.TUSS.Description
+                };
+
+                procedureReportDtOs.Add(procedureReportDtO);
+            }
+            return procedureReportDtOs;
+        }
+
+        private List<ExamReportDTO> SetDataToExamReportDTO(SummaryModel summary)
+        {
+            var examReportDtOs = new List<ExamReportDTO>();
+
+            foreach (var exam in summary.Exams)
+            {
+                var examReportDtO = new ExamReportDTO
+                {
+                    Date = exam.Date.ToShortDateString(),
+                    Description = exam.Description,
+                    Type = EnumUtil.GetDescriptionFromEnumValue((ExamTypeEnum)Enum.Parse(typeof(ExamTypeEnum), exam.Type.ToString(CultureInfo.InvariantCulture)))
+                };
+
+                examReportDtOs.Add(examReportDtO);
+            }
+
+
+            return examReportDtOs;
+        }
+
+        private List<PrescriptionReportDTO> SetDataToMedicationUseDuringReportDTO(SummaryModel summary)
+        {
+            var medicationUsingDuringReportDtOs = new List<PrescriptionReportDTO>();
+
+            foreach (var medication in summary.Medications.Where(m => m.Type == 2))
+            {
+                var medicationUsingDuringReportDtO = new PrescriptionReportDTO
+                {
+                    DEFDescription = medication.Def.Description,
+                    Duration = medication.Duration + " Dia(s)"
+                };
+
+                medicationUsingDuringReportDtOs.Add(medicationUsingDuringReportDtO);
+            }
+
+            return medicationUsingDuringReportDtOs;
+        }
+
+        private List<PrescriptionReportDTO> SetDataToMedicationUseBeforeReportDTO(SummaryModel summary)
+        {
+            var medicationUseBeforeReportDtOs = new List<PrescriptionReportDTO>();
+
+            foreach (var medication in summary.Medications.Where(m => m.Type == 1))
+            {
+                var medicationUseBeforeDtO = new PrescriptionReportDTO
+                {
+                    DEFDescription = medication.Def.Description,
+                    Duration = medication.Duration + " dia(s)"
+                };
+                medicationUseBeforeReportDtOs.Add(medicationUseBeforeDtO);
+            }
+
+            return medicationUseBeforeReportDtOs;
         }
 
         private List<DiagnosticReportDTO> SetDataToDiagnosticReportDTO(SummaryModel summary)
@@ -944,11 +1105,11 @@ namespace EHR.UI.Controllers
             foreach (var diagnostic in summary.Diagnostics)
             {
                 var diagnosticDto = new DiagnosticReportDTO
-                    {
-                        Type = EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), diagnostic.Type.ToString(CultureInfo.InvariantCulture))),
-                        CIDCode = diagnostic.Cid != null ? diagnostic.Cid.Code : "",
-                        CIDDescription = diagnostic.Cid != null ? diagnostic.Cid.Description : diagnostic.Description
-                    };
+                {
+                    Type = EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), diagnostic.Type.ToString(CultureInfo.InvariantCulture))),
+                    CIDCode = diagnostic.Cid != null ? diagnostic.Cid.Code : "",
+                    CIDDescription = diagnostic.Cid != null ? diagnostic.Cid.Description : diagnostic.Description
+                };
                 diagnosticReportDtOs.Add(diagnosticDto);
             }
 
@@ -974,31 +1135,15 @@ namespace EHR.UI.Controllers
                 types = types.Remove(types.Length - 2, 2);
 
                 var allergyReportDtO = new AllergyReportDTO
-                    {
-                        TheWhich = allegy.TheWhich,
-                        Types = types
-                    };
+                {
+                    TheWhich = allegy.TheWhich,
+                    Types = types
+                };
 
                 allergyReportDTOs.Add(allergyReportDtO);
             }
 
             return allergyReportDTOs;
-        }
-
-        public ActionResult GeneratePrescriptionsReport()
-        {
-            var summary = GetSummary();
-
-            var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
-            var summaryReportDtOs = SetDataToSummaryReportDTO(summary);
-
-            var report = new ReportGenerationService("Report/Prescriptions.rdlc");
-
-            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
-            var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
-            var dataSources = new List<ReportDataSource> { prescriptionDataSource, summaryDataSource };
-
-            return File(GenerateReportFile(report, dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
         }
 
         private Byte[] GenerateReportFile(ReportGenerationService report, List<ReportDataSource> dataSources, ReportGenerationService.ReportType reportType)
@@ -1008,19 +1153,41 @@ namespace EHR.UI.Controllers
 
         private List<SummaryReportDTO> SetDataToSummaryReportDTO(SummaryModel summary)
         {
+
+            var resonsOfAdmission = "";
+
+            foreach (var reson in summary.ReasonsOfAdmission)
+            {
+                resonsOfAdmission += reson.Description + ", ";
+            }
+
+            resonsOfAdmission = resonsOfAdmission.Remove(resonsOfAdmission.Length - 2, 2);
+
             var summaryReportDtOs = new List<SummaryReportDTO>
                 {
                     new SummaryReportDTO
                         {
-                            AccoutName = summary.Account.FirstName + " " + summary.Account.LastName,
-                            HospitalName = summary.Hospital.Name,
-                            PatientBirthday = summary.Patient.DateBirthday.ToShortDateString(),
-                            //PatientGender = summary.Patient.Genre.ToString(),
-                            PatientAge = summary.Patient.GetAge().ToString(),
                             PatientName = summary.Patient.Name,
+                            //PatientGender = summary.Patient.Genre.ToString(),
+                            PatientAge = summary.Patient.GetAge().ToString(CultureInfo.InvariantCulture),
+                            PatientBirthday = summary.Patient.DateBirthday.ToShortDateString(),
                             RecordCode = summary.CodeMedicalRecord,
-                            State = summary.Hospital.State.Description,
-                            //ProfissionalRegistrationNumber = (summary.Account.ProfessionalRegistration.Where(p => p.State == summary.Hospital.State)).FirstOrDefault().Number
+                            HospitalName = summary.Hospital.Description + " " + summary.Hospital.Name,
+                            EntryDate = summary.Treatment.EntryDate.ToString(CultureInfo.InvariantCulture),
+                            DischargeDate = summary.Treatment.CheckOutDate.ToString(CultureInfo.InvariantCulture),
+                            InpatientDays = (summary.Treatment.CheckOutDate - summary.Treatment.EntryDate).TotalDays.ToString(CultureInfo.InvariantCulture),
+                            ResonOfAdmission = resonsOfAdmission,
+                            ConditionAtDischarge = EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), summary.DischargeData.ConditionAtDischarge.ToString(CultureInfo.InvariantCulture))),
+                            DestinationOfThePatientAtDischarge = EnumUtil.GetDescriptionFromEnumValue((DestinationOfThePatientAtDischargeEnum)Enum.Parse(typeof(DestinationOfThePatientAtDischargeEnum), summary.DischargeData.DestinationOfThePatientAtDischarge.ToString(CultureInfo.InvariantCulture))),
+                            Observation = summary.Observation,
+                            MDR = summary.Mdr,
+                            MultidisciplinaryTeamsMet = EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), summary.DischargeData.MultidisciplinaryTeamsMet.ToString(CultureInfo.InvariantCulture))),
+                            AccoutName = summary.Account.FirstName + " " + summary.Account.LastName,
+                            //ProfissionalRegistrationNumber = (summary.Account.ProfessionalRegistration.Where(p => p.State.Id == summary.Hospital.State.Id)).FirstOrDefault().Number,
+                            SummaryDate = summary.Date.ToString(),
+                            PersonWhoDeliveredTheSummary = summary.DischargeData.PersonWhoDeliveredTheSummary,
+                            DeliveredDate = summary.DischargeData.DeliveredDateDay +"/"+ summary.DischargeData.DeliveredDateMonth + "/"+summary.DischargeData.DeliveredDateYear,
+                            State = summary.Hospital.State.Description
                         }
                 };
             return summaryReportDtOs;
@@ -1033,28 +1200,28 @@ namespace EHR.UI.Controllers
             foreach (var medication in summary.Medications.Where(m => m.Type == 3))
             {
                 var prescriptionDTO = new PrescriptionReportDTO
-                    {
-                        DEFDescription = medication.Def.Description,
-                        Presentation =
-                            medication.Presentation + " " +
-                            @EnumUtil.GetDescriptionFromEnumValue(
-                                (PresentationTypeEnum)
-                                Enum.Parse(typeof(PresentationTypeEnum),
-                                           medication.PresentationType.ToString(CultureInfo.InvariantCulture))),
-                        Dose =
-                            medication.Dose + " " +
-                            EnumUtil.GetDescriptionFromEnumValue(
-                                (DosageEnum)
-                                Enum.Parse(typeof(DosageEnum), medication.Dosage.ToString(CultureInfo.InvariantCulture))),
-                        Way =
-                            EnumUtil.GetDescriptionFromEnumValue(
-                                (WayEnum)Enum.Parse(typeof(WayEnum), medication.Way.ToString(CultureInfo.InvariantCulture))),
-                        Frequency =
-                            EnumUtil.GetDescriptionFromEnumValue(
-                                (FrequencyEnum)
-                                Enum.Parse(typeof(FrequencyEnum), medication.Frequency.ToString(CultureInfo.InvariantCulture))),
-                        Duration = medication.Duration + " Dia(s)"
-                    };
+                {
+                    DEFDescription = medication.Def.Description,
+                    Presentation =
+                        medication.Presentation + " " +
+                        @EnumUtil.GetDescriptionFromEnumValue(
+                            (PresentationTypeEnum)
+                            Enum.Parse(typeof(PresentationTypeEnum),
+                                       medication.PresentationType.ToString(CultureInfo.InvariantCulture))),
+                    Dose =
+                        medication.Dose + " " +
+                        EnumUtil.GetDescriptionFromEnumValue(
+                            (DosageEnum)
+                            Enum.Parse(typeof(DosageEnum), medication.Dosage.ToString(CultureInfo.InvariantCulture))),
+                    Way =
+                        EnumUtil.GetDescriptionFromEnumValue(
+                            (WayEnum)Enum.Parse(typeof(WayEnum), medication.Way.ToString(CultureInfo.InvariantCulture))),
+                    Frequency =
+                        EnumUtil.GetDescriptionFromEnumValue(
+                            (FrequencyEnum)
+                            Enum.Parse(typeof(FrequencyEnum), medication.Frequency.ToString(CultureInfo.InvariantCulture))),
+                    Duration = medication.Duration + " Dia(s)"
+                };
                 if (string.IsNullOrEmpty(medication.Place))
                 {
                     prescriptionDTO.Way += " " + medication.Place;
@@ -1073,10 +1240,6 @@ namespace EHR.UI.Controllers
             }
             return prescriptionDtOs;
         }
-
-        #endregion
-
-        #region Private Methods
 
         private void AddOnSessionComplementaryExams(ComplementaryExamModel complementaryExamModel)
         {

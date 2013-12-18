@@ -9,5 +9,6 @@ namespace EHR.UI.Models
         public string Key { get; set; }
         public bool Selected { get; set; }
         public StateModel State { get; set; }
+        public string Description { get; set; }
     }
 }

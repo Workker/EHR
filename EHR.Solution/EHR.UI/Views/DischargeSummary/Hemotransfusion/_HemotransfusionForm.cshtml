@@ -8,7 +8,7 @@
         @foreach (var value in Enum.GetValues(typeof(HemotransfusionTypeEnum)).Cast<short>().ToList())
         {
             <option value="@value">
-                @(EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
+                @(EnumUtil.GetDescriptionFromEnumValue((HemotransfusionTypeEnum)Enum.Parse(typeof(HemotransfusionTypeEnum), value.ToString(CultureInfo.InvariantCulture))))
             </option>  
         }
     </select>

@@ -95,15 +95,15 @@
         Html.RenderPartial("_DatePicker");
     }
     &nbsp;&nbsp;<input type="time" name="PrescribedDischargeTime" value="@{
-                                                                            var hour = ((SummaryModel)Model).DischargeData.PrescribedHighHour;
-                                                                            if (hour.ToString(CultureInfo.InvariantCulture).Length < 2)
-                                                                            {
+        var hour = ((SummaryModel)Model).DischargeData.PrescribedHighHour;
+        if (hour.ToString(CultureInfo.InvariantCulture).Length < 2)
+        {
                                                                                 @(string.Concat(0, hour))
-                                                                            }
-                                                                            else
-                                                                            {
+        }
+        else
+        {
                                                                                 @hour
-                                                                            }
+        }
                                                                          }:@{
                                                                              var minute = ((SummaryModel)Model).DischargeData.PrescribedHighMinute;
                                                                              if (minute.ToString(CultureInfo.InvariantCulture).Length < 2)
@@ -130,12 +130,12 @@
     <br />
     <hr />
     <br />
-    <input type="submit" value="Salvar" class="uibutton large confirm" style="margin-right: 5px" />
+    <input type="submit" value="Salvar" class="uibutton large confirm" style="margin-right: 5px;" />
     <input type="reset" value="Cancelar" class="uibutton large" style="margin-right: 5px" />
     <input type="button" value="Finalizar" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
     @{
         var summary = (SummaryModel)Model;
-         var account = ((AccountModel)Session["Account"]);
+        var account = ((AccountModel)Session["Account"]);
         if (summary.Finalized)
         {
             var action = summary.Actions.OrderByDescending(x => x.Id).FirstOrDefault();
@@ -154,13 +154,16 @@
             RemoveEdition(false);
         </script>
             }
+            
+        <a href="@Url.Action("GeneratePrescriptionsReport", new { id = "PDF" })" target="_blank" class="uibutton large special" style="text-decoration: none; margin-right: 5px;">Imprimir Prescricao de Alta</a>
+        <a href="@Url.Action("GenerateSummayReport", new { id = "PDF" })" target="_blank" class="uibutton large special" style="text-decoration: none;">Imprimir Sumario de Alta</a>
         }
         else if (!account.ProfessionalRegistration.Any(x => x.State.Id == summary.Hospital.State.Id))
-            {
-                <script type="text/javascript">
-                    RemoveEdition(false);
-                </script>
-            }
+        {
+        <script type="text/javascript">
+            RemoveEdition(false);
+        </script>
+        }
         else
         {
         <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
