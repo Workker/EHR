@@ -53,10 +53,9 @@ namespace EHR.Controller
             Assertion.GreaterThan(summaryId, 0, "Summario de alta inválido.");
 
             var summary = Summaries.Get<Summary>(summaryId);
-
             var typeDiagnostic = DiagnosticTypes.Get(diagnosticType);
-
-            if (!string.IsNullOrEmpty(cid))
+            
+            if (string.IsNullOrEmpty(cid))
             {
                 Assertion.IsFalse(string.IsNullOrEmpty(description), "CID não informado.").Validate();
                 summary.CreateDiagnostic(typeDiagnostic, description);

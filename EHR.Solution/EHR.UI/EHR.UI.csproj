@@ -236,10 +236,12 @@
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\ProfessionalRegistrationModel.cs" />
     <Compile Include="Models\ReasonOfAdmissionModel.cs" />
-    <Compile Include="Models\Reports\AllergieReportDTO.cs" />
+    <Compile Include="Models\Reports\AllergyReportDTO.cs" />
+    <Compile Include="Models\Reports\ComplementaryExamReportDTO.cs" />
     <Compile Include="Models\Reports\DiagnosticReportDTO.cs" />
     <Compile Include="Models\Reports\ExamReportDTO.cs" />
     <Compile Include="Models\Reports\HemotransfusionReportDTO.cs" />
+    <Compile Include="Models\Reports\MedicalReviewReportDTO.cs" />
     <Compile Include="Models\Reports\PrescriptionReportDTO.cs" />
     <Compile Include="Models\Reports\ProcedureReportDTO.cs" />
     <Compile Include="Models\Reports\SummaryReportDTO.cs" />

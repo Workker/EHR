@@ -909,15 +909,80 @@ namespace EHR.UI.Controllers
         public ActionResult GenerateSummayReport()
         {
             var summary = GetSummary();
-            var summaryReportDtOs = SetDataToSummaryReportDTO(summary);
-            var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
             var report = new ReportGenerationService("Report/Summary.rdlc");
 
-            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
+            var summaryReportDtOs = SetDataToSummaryReportDTO(summary);
+            var allergyReportDtOs = SetDataToAllergyReportDTO(summary);
+            var diagnosticReportDtOs = SetDataToDiagnosticReportDTO(summary);
+            var prescriptionDtOs = SetDataToPrescriptionReportDTO(summary);
+
+
+
+
             var summaryDataSource = report.CreateReportDataSource(summaryReportDtOs, "Summary");
-            var dataSources = new List<ReportDataSource> { prescriptionDataSource, summaryDataSource };
+            var allergyDataSource = report.CreateReportDataSource(allergyReportDtOs, "Allergy");
+            var diagnosticDataSource = report.CreateReportDataSource(diagnosticReportDtOs, "Diagnostic");
+            var medicationUseBeforeDataSource = report.CreateReportDataSource(new List<PrescriptionReportDTO>(), "MedicationUseBefore");
+            var medicationUseDuringDataSource = report.CreateReportDataSource(new List<PrescriptionReportDTO>(), "MedicationUseDuring");
+            var examDataSource = report.CreateReportDataSource(new List<ExamReportDTO>(), "Exam");
+            var procedureDataSource = report.CreateReportDataSource(new List<ProcedureReportDTO>(), "Procedure");
+            var hemotransfusionDataSource = report.CreateReportDataSource(new List<HemotransfusionReportDTO>(), "Hemotransfusion");
+            var prescriptionDataSource = report.CreateReportDataSource(prescriptionDtOs, "Prescription");
+            var medicalReviewDataSource = report.CreateReportDataSource(new List<MedicalReviewReportDTO>(), "MedicalReview");
+            var complementaryExamDataSource = report.CreateReportDataSource(new List<ComplementaryExamReportDTO>(), "ComplementaryExam");
+
+            var dataSources = new List<ReportDataSource> { summaryDataSource, allergyDataSource, diagnosticDataSource, medicationUseBeforeDataSource,
+                medicationUseDuringDataSource, examDataSource, procedureDataSource, hemotransfusionDataSource, prescriptionDataSource, medicalReviewDataSource,complementaryExamDataSource };
 
             return File(GenerateReportFile(report, dataSources, ReportGenerationService.ReportType.pdf), "application/pdf");
+        }
+
+        private List<DiagnosticReportDTO> SetDataToDiagnosticReportDTO(SummaryModel summary)
+        {
+            var diagnosticReportDtOs = new List<DiagnosticReportDTO>();
+
+            foreach (var diagnostic in summary.Diagnostics)
+            {
+                var diagnosticDto = new DiagnosticReportDTO
+                    {
+                        Type = EnumUtil.GetDescriptionFromEnumValue((DiagnosticTypeEnum)Enum.Parse(typeof(DiagnosticTypeEnum), diagnostic.Type.ToString(CultureInfo.InvariantCulture))),
+                        CIDCode = diagnostic.Cid != null ? diagnostic.Cid.Code : "",
+                        CIDDescription = diagnostic.Cid != null ? diagnostic.Cid.Description : diagnostic.Description
+                    };
+                diagnosticReportDtOs.Add(diagnosticDto);
+            }
+
+            return diagnosticReportDtOs;
+        }
+
+        private List<AllergyReportDTO> SetDataToAllergyReportDTO(SummaryModel summary)
+        {
+            var allergyReportDTOs = new List<AllergyReportDTO>();
+
+            foreach (var allegy in summary.Allergies)
+            {
+                var types = "";
+
+                foreach (var type in allegy.Types)
+                {
+                    types +=
+                        EnumUtil.GetDescriptionFromEnumValue(
+                            (AllergyTypeEnum)
+                            Enum.Parse(typeof(AllergyTypeEnum), type.ToString(CultureInfo.InvariantCulture))) + ", ";
+                }
+
+                types = types.Remove(types.Length - 2, 2);
+
+                var allergyReportDtO = new AllergyReportDTO
+                    {
+                        TheWhich = allegy.TheWhich,
+                        Types = types
+                    };
+
+                allergyReportDTOs.Add(allergyReportDtO);
+            }
+
+            return allergyReportDTOs;
         }
 
         public ActionResult GeneratePrescriptionsReport()
