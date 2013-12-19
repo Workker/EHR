@@ -456,7 +456,7 @@
         </PageBreak>
         <Top>23.78075cm</Top>
         <Height>1.2cm</Height>
-        <Width>16.21896cm</Width>
+        <Width>16.21894cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -712,7 +712,7 @@
         <Top>4.30515cm</Top>
         <Left>0.02709cm</Left>
         <Height>1.2cm</Height>
-        <Width>16.19187cm</Width>
+        <Width>16.19186cm</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
@@ -1648,7 +1648,7 @@
         <DataSetName>Exam</DataSetName>
         <Top>12.71945cm</Top>
         <Height>1.2cm</Height>
-        <Width>16.21896cm</Width>
+        <Width>16.21897cm</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -3226,7 +3226,7 @@
         <DataSetName>ComplementaryExam</DataSetName>
         <Top>31.71305cm</Top>
         <Height>1.2cm</Height>
-        <Width>16.21896cm</Width>
+        <Width>16.21895cm</Width>
         <ZIndex>38</ZIndex>
         <Style>
           <Border>
@@ -4054,7 +4054,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ProfissionalRegistrationNumber</rd:DefaultName>
-          <Top>0cm</Top>
           <Left>9.79997cm</Left>
           <Height>0.6cm</Height>
           <Width>6.41899cm</Width>
