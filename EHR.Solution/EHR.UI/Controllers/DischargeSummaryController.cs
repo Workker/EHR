@@ -1229,13 +1229,16 @@ namespace EHR.UI.Controllers
                     prescriptionDTO.Way += " " + medication.Place;
                 }
 
-                if (((short[])Enum.GetValues(typeof(FrequencyCaseEnum))).ToList().Contains(medication.FrequencyCase))
+                if (medication.FrequencyCase > 0)
                 {
-                    prescriptionDTO.Frequency += " " +
-                                                 EnumUtil.GetDescriptionFromEnumValue(
-                                                     (FrequencyCaseEnum)
-                                                     Enum.Parse(typeof(FrequencyCaseEnum),
-                                                                medication.FrequencyCase.ToString(CultureInfo.InvariantCulture)));
+                    if (((short[])Enum.GetValues(typeof(FrequencyCaseEnum))).ToList().Contains(medication.FrequencyCase))
+                    {
+                        prescriptionDTO.Frequency += " " +
+                                                     EnumUtil.GetDescriptionFromEnumValue(
+                                                         (FrequencyCaseEnum)
+                                                         Enum.Parse(typeof(FrequencyCaseEnum),
+                                                                    medication.FrequencyCase.ToString(CultureInfo.InvariantCulture)));
+                    }
                 }
 
                 prescriptionDtOs.Add(prescriptionDTO);

@@ -85,6 +85,10 @@ namespace EHR.Controller
             foreach (var summary in summaryList)
             {
                 summary.Patient = service.GetPatientBy(summary.Cpf);
+
+                summary.Treatment =
+                    summary.Patient.Treatments.Find(
+                        t => t.Id == summary.TreatmentId && t.Hospital.Key == summary.Hospital.Key);
             }
 
             #region Poscondition
