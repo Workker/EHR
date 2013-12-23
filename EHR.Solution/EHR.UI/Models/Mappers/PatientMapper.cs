@@ -14,7 +14,9 @@ namespace EHR.UI.Models.Mappers
             var patientModel = Mapper.Map<IPatient, PatientModel>(patient);
             var treatmentModels = new List<TreatmentModel>();
 
-            AddHospital(patient, treatmentStr, patientModel);
+            patientModel.Hospital = HospitalMapper.MapHospitalModelFrom(patient.Hospital);
+
+            //AddHospital(patient, treatmentStr, patientModel);
 
             foreach (var treatment in patient.Treatments)
             {
@@ -51,17 +53,17 @@ namespace EHR.UI.Models.Mappers
             return patientModels;
         }
 
-        private static void AddHospital(IPatient patient, string treatmentStr, PatientModel patientModel)
-        {
-            if (patient.Treatments != null && patient.Treatments.Count > 0 && !string.IsNullOrEmpty(treatmentStr) &&
-                patient.Treatments.Count(t => t.Id == treatmentStr) > 0)
-            {
-                var firstOrDefault = patient.Treatments.FirstOrDefault(t => t.Id == treatmentStr);
-                if (firstOrDefault != null)
-                    patientModel.Hospital = HospitalMapper.MapHospitalModelFrom(firstOrDefault.Hospital);
-            }
-            else
-                patientModel.Hospital = HospitalMapper.MapHospitalModelFrom(patient.Hospital);
-        }
+        //private static void AddHospital(IPatient patient, string treatmentStr, PatientModel patientModel)
+        //{
+        //    if (patient.Treatments != null && patient.Treatments.Count > 0 && !string.IsNullOrEmpty(treatmentStr) &&
+        //        patient.Treatments.Count(t => t.Id == treatmentStr) > 0)
+        //    {
+        //        var firstOrDefault = patient.Treatments.FirstOrDefault(t => t.Id == treatmentStr);
+        //        if (firstOrDefault != null)
+        //            patientModel.Hospital = HospitalMapper.MapHospitalModelFrom(firstOrDefault.Hospital);
+        //    }
+        //    else
+        //        patientModel.Hospital = HospitalMapper.MapHospitalModelFrom(patient.Hospital);
+        //}
     }
 }
