@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared.Entities;
+﻿using System;
+using EHR.CoreShared.Entities;
 using EHR.Domain.Entities;
 using NHibernate;
 using NHibernate.Criterion;
@@ -125,7 +126,7 @@ namespace EHR.Domain.Repository
             Assertion.GreaterThan(professionalRegistrationId, 0, "Registro Profissional inválido.").Validate();
 
             var account = base.Get<Account>(accountId);
-            
+
             foreach (var professionalRegistration in account.ProfessionalRegistrations)
             {
                 if (professionalRegistration.Id == professionalRegistrationId)

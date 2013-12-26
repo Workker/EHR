@@ -46,15 +46,33 @@ namespace EHR.Domain.Repository
         public virtual void Save(IAggregateRoot<int> root)
         {
             var transaction = Session.BeginTransaction();
-            Session.SaveOrUpdate(root);
-            transaction.Commit();
+
+            try
+            {
+                Session.SaveOrUpdate(root);
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         public virtual void Save(IAggregateRoot<string> root)
         {
             var transaction = Session.BeginTransaction();
-            Session.SaveOrUpdate(root);
-            transaction.Commit();
+
+            try
+            {
+                Session.SaveOrUpdate(root);
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         public virtual void SaveList(List<IAggregateRoot<int>> roots)
@@ -98,8 +116,17 @@ namespace EHR.Domain.Repository
         public virtual void Delete(IAggregateRoot<int> root)
         {
             var transaction = Session.BeginTransaction();
-            Session.Delete(root);
-            transaction.Commit();
+            
+            try
+            {
+                Session.Delete(root);
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
 
         #endregion
