@@ -50,7 +50,7 @@ namespace EHR.Controller
         public override void SaveDiagnostic(short diagnosticType, string description, string cid, int summaryId)
         {
             Assertion.GreaterThan((int)diagnosticType, 0, "Tipo do diagnostico não informado.").Validate();
-            Assertion.GreaterThan(summaryId, 0, "Summario de alta inválido.");
+            Assertion.GreaterThan(summaryId, 0, "Summario de alta inválido.").Validate();
 
             var summary = Summaries.Get<Summary>(summaryId);
             var typeDiagnostic = DiagnosticTypes.Get(diagnosticType);

@@ -102,7 +102,7 @@ namespace EHR.Controller
 
             if (def != short.MinValue)
             {
-                Assertion.GreaterThan((int)def, 0, "Medicamento não informado.");
+                Assertion.GreaterThan((int)def, 0, "Medicamento não informado.").Validate();
 
                 var defObj = _defsRepository.GetById(def);
 
