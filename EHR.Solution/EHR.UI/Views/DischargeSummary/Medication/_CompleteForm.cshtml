@@ -9,7 +9,7 @@
     <br />
     <br />
     <label>Apresenta&ccedil;&atilde;o:</label>
-    <input type="number" name="medication.presentation" required style="margin: 0px 5px 0px 10px;" />
+    <input type="number" name="medication.presentation" required style="margin: 0px 5px 0px 10px;" min="0.0" value="0.0"/>
     <select name="medication.presentationType" required>
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(PresentationTypeEnum)).Cast<short>().ToList())
@@ -22,7 +22,7 @@
     <br />
     <br />
     <label>Dose:</label>
-    <input type="number" name="medication.dose" required style="margin: 0px 5px 0px 60px;" />
+    <input type="number" name="medication.dose" required style="margin: 0px 5px 0px 60px;" min="0.0" value="0.0"/>
     <select name="medication.dosage" required>
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(DosageEnum)).Cast<short>().ToList())
@@ -70,7 +70,7 @@
     <br />
     <br />
     <label>Dura&ccedil;&atilde;o:</label>
-    <input type="number" name="medication.duration" style="margin-left: 40px;" />&nbsp;&nbsp;Dia(s)<br />
+    <input type="number" name="medication.duration" style="margin-left: 40px;" min="1" value="1"/>&nbsp;&nbsp;Dia(s)<br />
     <br />
     <br />
     <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveMedication");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
