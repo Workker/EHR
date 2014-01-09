@@ -24,6 +24,7 @@
                     dataType: "json",
                     cache: false,
                     success: function (r) {
+                        sessionTimeOut(r);
                         resultModel = r;
                         ko.mapping.updateFromJS(viewModel, resultModel);
                         $("#advancedSearchLink").attr("onclick", "goAdvancedSearch(\"" + q + "\")");
@@ -205,6 +206,7 @@ function newRow(currentNode, url) {
         url: "http://" + window.location.host + url,
         cache: false
     }).success(function (d) {
+        sessionTimeOut(d);
         $(currentNode).parent().parent().clone($(currentNode).parent().parent())
             .appendTo($(currentNode).parent().parent().parent());
         var contentDiv = $(currentNode).parent().next();
@@ -224,6 +226,7 @@ function saveRow(element, url) {
             cache: false,
             data: form.serialize(),
             success: function (data) {
+                sessionTimeOut(data);
                 var divContent = $(element).parent().parent().parent();
                 var data2 = data.toString().replace('<li class="clearfix">', '').replace("</li>", "");
                 $(divContent).html(data2);
@@ -240,6 +243,7 @@ function editRow(url, data, e) {
         cache: false,
         data: data
     }).success(function (d) {
+        sessionTimeOut(d);
         var div = $(e).parent().next();
         $(div).html(d);
         $(div).show();
@@ -253,7 +257,8 @@ function deleteRow(e, url, data) {
         url: "http://" + window.location.host + url,
         cache: false,
         data: data
-    }).success(function () {
+    }).success(function (resp) {
+        sessionTimeOut(resp);
         var li = $(e).parent();
         $(li).remove();
     });
@@ -284,6 +289,7 @@ function SaveComplementaryExam(element) {
         cache: false,
         data: { description: description, period: period },
         success: function (data) {
+            sessionTimeOut(data);
             var divContent = $(element).parent().parent();
             $(divContent).hide();
             $(divContent).prev().html(data);
@@ -304,6 +310,7 @@ function SaveMedicalReview(element) {
         cache: false,
         data: { TermMedicalReviewAt: termMedicalReviewAt, "Specialty.Id": specialtyId, "Specialty.Description": specialtyDescription },
         success: function (data) {
+            sessionTimeOut(data);
             var divContent = $(element).parent().parent();
             $(divContent).hide();
             $(divContent).prev().html(data);
@@ -359,6 +366,7 @@ function goAdvancedSearch(q) {
         type: "GET",
         cache: false,
         success: function (r) {
+            sessionTimeOut(r);
             $("#content").html(r);
             $("ul.results").hide();
         }
@@ -372,6 +380,7 @@ function goFilter(form) {
         type: "POST",
         cache: false,
         success: function (r) {
+            sessionTimeOut(r);
             $("div#DivResult").html(r);
             $("ul.results").hide();
         }
@@ -384,6 +393,7 @@ function GetMore(element, url) {
         type: "GET",
         cache: false,
         success: function (r) {
+            sessionTimeOut(r);
             if (r.length > 10) {
                 $(element).parent().prev().append(r);
             } else {
@@ -404,6 +414,7 @@ function approveAccount(element) {
             cache: false,
             data: form.serialize(),
             success: function (data) {
+                sessionTimeOut(data);
                 var divContent = $(element).parent().parent().parent().parent().parent();
                 $(divContent).hide();
             }
@@ -421,6 +432,7 @@ function refuseAccount(element) {
             cache: false,
             data: form.serialize(),
             success: function (data) {
+                sessionTimeOut(data);
                 var divContent = $(element).parent().parent().parent().parent().parent();
                 $(divContent).hide();
             }
@@ -458,7 +470,8 @@ function ChangePassword(element) {
             url: "http://" + window.location.host + "/Home/AlterPasswordOfAccount",
             cache: false,
             data: form.serialize(),
-            success: function () {
+            success: function (resp) {
+                sessionTimeOut(resp);
                 HideFormChangePassword(element);
             }
         });
@@ -484,7 +497,8 @@ function AddprofessionalResgistration(element) {
             url: "http://" + window.location.host + "/Home/AddprofessionalResgistration",
             cache: false,
             data: form.serialize(),
-            success: function () {
+            success: function (resp) {
+                sessionTimeOut(resp);
                 HideFormAddprofessionalResgistration(element);
             }
         });
@@ -513,6 +527,7 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
                 dataType: "JSON",
                 data: { term: request.term },
                 success: function (data) {
+                    sessionTimeOut(data);
                     response($.map(data, function (item) {
                         return { label: item.Description, value: item.Description, code: item.Code };
                     }));
@@ -575,7 +590,8 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
         url: "http://" + window.location.host + '/DischargeSummary/SaveMdr',
         cache: false,
         data: data,
-        success: function () {
+        success: function (resp) {
+            sessionTimeOut(resp);
         }
     });
 });
@@ -588,7 +604,8 @@ $(document).on('submit', '#dischargeData', function (e) {
         url: "http://" + window.location.host + '/DischargeSummary/SaveHighData',
         cache: false,
         data: data,
-        success: function () {
+        success: function (resp) {
+            sessionTimeOut(resp);
         }
     });
 });
@@ -606,7 +623,8 @@ function FinalizeSummary() {
         type: "POST",
         url: "http://" + window.location.host + "/DischargeSummary/FinalizeSummary",
         cache: false,
-        success: function () {
+        success: function (resp) {
+            sessionTimeOut(resp);
             RemoveEdition(true);
         }
     });
@@ -623,7 +641,8 @@ function ReOpenSummary() {
         type: "POST",
         url: "http://" + window.location.host + "/DischargeSummary/ReOpenSummary",
         cache: false,
-        success: function () {
+        success: function (resp) {
+            sessionTimeOut(resp);
             ReOpenEdition();
         }
     });
@@ -637,7 +656,8 @@ function SaveObsevation(element) {
             url: "http://" + window.location.host + "/DischargeSummary/SaveObservation",
             cache: false,
             data: form.serialize(),
-            success: function () {
+            success: function (resp) {
+                sessionTimeOut(resp);
             }
         });
         return false;
@@ -652,7 +672,8 @@ function SaveReasonOfAdmission(element) {
         url: "http://" + window.location.host + "/DischargeSummary/SaveReasonOfAdmission",
         cache: false,
         data: form.serialize(),
-        success: function () {
+        success: function (resp) {
+            sessionTimeOut(resp);
         }
     });
 
@@ -663,9 +684,17 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
     var ua = navigator.userAgent;
     var index = ua.indexOf("Trident/");
     var st = ua.substring(index, index + 12);
-    var  version = st.substr(st.indexOf("/") + 1, 1);
+    var version = st.substr(st.indexOf("/") + 1, 1);
     if (document.documentMode < 10 && version < 6) {
         alert("Este sistema foi desenvolvido para ser acessado por Internet Explorer versao 10 ou superiror. Os controles de formulario seram desabilitados. Por favor atualize seu navegador!");
         $(" input[type=radio],  textarea,  select,  input[type=text],  input[type=time], input[type=submit], input[type=password], button").attr("disabled", true);
+    }
+}
+
+function sessionTimeOut(string) {
+    var index = string.indexOf("Rede D&#39;or S&#227;o Luiz - Login");
+    if (index > 0) {
+        alert("A sua sessao expirou. Voce sera redirecionado, para a tela de login.");
+        location.reload();
     }
 }
