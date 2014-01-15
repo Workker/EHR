@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using EHR.CoreShared.Entities
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
 @using EHR.UI.Models
@@ -81,14 +82,23 @@
     <hr />
     <br />
     @{
-        //todo: Bug 
-        //<label>((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Type):</label>&nbsp;<input type="text" disabled value="@(((SummaryModel)Model).Account.ProfessionalRegistration.FirstOrDefault().Number)" />
+        var accountM = ((SummaryModel)Model).Account;
+        var hospital = ((SummaryModel)Model).Hospital;
+
+        var professionalRegistration = accountM.ProfessionalRegistration.Where(h => h.State.Id == hospital.State.Id);
+
+        if (professionalRegistration.Any())
+        {
+            <label>@EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), professionalRegistration.SingleOrDefault().Type.ToString(CultureInfo.InvariantCulture))):
+            </label>@:&nbsp;<input type="text" disabled value="@professionalRegistration.SingleOrDefault().Number" />
+
+    <br />
+    <br />
+    <label>M&eacute;dico:</label>@:&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))"/>
+    <br />
+            <br />
+        }
     }
-    <br />
-    <br />
-    <label>M&eacute;dico:</label>&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))"/>
-    <br />
-    <br />
     <label>Alta Prescrita:</label>&nbsp;
     @{
         ViewBag.Context = "PrescribedHigh";

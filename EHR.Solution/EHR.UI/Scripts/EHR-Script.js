@@ -24,7 +24,7 @@
                     dataType: "json",
                     cache: false,
                     success: function (r) {
-                        sessionTimeOut(r);
+                       // sessionTimeOut(r); todo: Colocar validacao de sessao
                         resultModel = r;
                         ko.mapping.updateFromJS(viewModel, resultModel);
                         $("#advancedSearchLink").attr("onclick", "goAdvancedSearch(\"" + q + "\")");
@@ -692,7 +692,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 }
 
 function sessionTimeOut(string) {
-    var index = string.indexOf("Rede D&#39;or S&#227;o Luiz - Login");
+    var index = string.indexOf("Login");
     if (index > 0) {
         alert("A sua sessao expirou. Voce sera redirecionado, para a tela de login.");
         location.reload();

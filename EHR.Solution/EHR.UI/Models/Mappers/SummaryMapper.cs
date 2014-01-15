@@ -26,6 +26,11 @@ namespace EHR.UI.Models.Mappers
 
             var summaryModel = Mapper.Map<Summary, SummaryModel>(summary);
 
+            foreach (var professionalRegistration in ProfessionalRegistrationMapper.MapProfessionalRegistrationsModelFrom(summary.Account.ProfessionalRegistrations))
+            {
+                summaryModel.Account.ProfessionalRegistration.Add(professionalRegistration);
+            }
+
             var views = new List<HistoryRecord>();
             var actions = new List<HistoryRecord>();
 
