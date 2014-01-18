@@ -615,7 +615,7 @@ function RemoveEdition(reopen) {
     $(".contentPage input[type=radio], .contentPage input[type=checkbox], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
     $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").hide();
     if (reopen == true) {
-        $(".contentPage input[value=Reabrir], .contentPage a").show();
+        $(".contentPage input[value=Reabrir]").show();
     }
 }
 
@@ -627,14 +627,16 @@ function FinalizeSummary() {
         success: function (resp) {
             sessionTimeOut(resp);
             RemoveEdition(true);
+            $("#prescriptionsReport").show();
+            $("#summaryReport").show();
         }
     });
 }
 
 function ReOpenEdition() {
     $(".contentPage input[type=radio], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", false);
-    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").show();
-    $(".contentPage input[value=Reabrir], .contentPage a").hide();
+    $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button], .contentPage a").show();
+    $(".contentPage input[value=Reabrir]").hide();
 }
 
 function ReOpenSummary() {
@@ -645,6 +647,8 @@ function ReOpenSummary() {
         success: function (resp) {
             sessionTimeOut(resp);
             ReOpenEdition();
+            $("#prescriptionsReport").hide();
+            $("#summaryReport").hide();
         }
     });
 }

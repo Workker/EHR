@@ -88,14 +88,15 @@
 
         if (professionalRegistration.Any())
         {
-            <label>@EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), professionalRegistration.SingleOrDefault().Type.ToString(CultureInfo.InvariantCulture))):
-            </label>@:&nbsp;<input type="text" disabled value="@professionalRegistration.SingleOrDefault().Number" />
+        <label>@EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), professionalRegistration.SingleOrDefault().Type.ToString(CultureInfo.InvariantCulture))):
+        </label>
+        @:&nbsp;<input type="text" disabled value="@professionalRegistration.SingleOrDefault().Number" />
 
-    <br />
-    <br />
-    <label>M&eacute;dico:</label>@:&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))"/>
-    <br />
-            <br />
+        <br />
+        <br />
+        <label>M&eacute;dico:</label>@:&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))"/>
+        <br />
+        <br />
         }
     }
     <label>Alta Prescrita:</label>&nbsp;
@@ -142,15 +143,15 @@
     <input type="submit" value="Salvar" class="uibutton large confirm" style="margin-right: 5px;" />
     <input type="reset" value="Cancelar" class="uibutton large" style="margin-right: 5px" />
     @{
-        var summaryM = (SummaryModel) Session["summary"];
-        var accoutUser = (AccountModel) Session["account"];
+        var summaryM = (SummaryModel)Session["summary"];
+        var accoutUser = (AccountModel)Session["account"];
         if (accoutUser.ProfessionalRegistration.Any(p => p.Type != 2) && summaryM.DischargeData.HighType > 0)
         {
-            <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
+        <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
         }
         else
         {
-            <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px;display: none;" />
+        <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px; display: none;" />
         }
     }
     @{
@@ -174,9 +175,10 @@
             RemoveEdition(false);
         </script>
             }
-            
-        <a href="@Url.Action("GeneratePrescriptionsReport", new { id = "PDF" })" target="_blank" class="uibutton large special" style="text-decoration: none; margin-right: 5px;">Imprimir Prescricao de Alta</a>
-        <a href="@Url.Action("GenerateSummayReport", new { id = "PDF" })" target="_blank" class="uibutton large special" style="text-decoration: none;">Imprimir Sumario de Alta</a>
+        <script type="text/javascript">
+            $("#prescriptionsReport").show();
+            $("#summaryReport").show();
+        </script>
         }
         else if (!account.ProfessionalRegistration.Any(x => x.State.Id == summary.Hospital.State.Id))
         {
@@ -188,7 +190,8 @@
         {
         <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
         }
-         
+        <a href="@Url.Action("GeneratePrescriptionsReport", new { id = "PDF" })" id="prescriptionsReport" target="_blank" class="uibutton large special" style="text-decoration: none; margin-right: 5px;display: none;">Imprimir Prescricao de Alta</a>
+        <a href="@Url.Action("GenerateSummayReport", new { id = "PDF" })" id="summaryReport" target="_blank" class="uibutton large special" style="text-decoration: none;display: none;">Imprimir Sumario de Alta</a> 
     }
     <script type="text/javascript">
         $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
