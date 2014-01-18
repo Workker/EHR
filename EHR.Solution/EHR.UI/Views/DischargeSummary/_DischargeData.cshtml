@@ -1,5 +1,4 @@
 ﻿@using System.Globalization
-@using EHR.CoreShared.Entities
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
 @using EHR.UI.Models
@@ -142,7 +141,18 @@
     <br />
     <input type="submit" value="Salvar" class="uibutton large confirm" style="margin-right: 5px;" />
     <input type="reset" value="Cancelar" class="uibutton large" style="margin-right: 5px" />
-    <input type="button" value="Finalizar" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
+    @{
+        var summaryM = (SummaryModel) Session["summary"];
+        var accoutUser = (AccountModel) Session["account"];
+        if (accoutUser.ProfessionalRegistration.Any(p => p.Type != 2) && summaryM.DischargeData.HighType > 0)
+        {
+            <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
+        }
+        else
+        {
+            <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px;display: none;" />
+        }
+    }
     @{
         var summary = (SummaryModel)Model;
         var account = ((AccountModel)Session["Account"]);

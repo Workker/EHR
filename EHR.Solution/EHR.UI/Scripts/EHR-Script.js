@@ -606,6 +606,7 @@ $(document).on('submit', '#dischargeData', function (e) {
         data: data,
         success: function (resp) {
             sessionTimeOut(resp);
+            $("#finalizeSummary").show();
         }
     });
 });
