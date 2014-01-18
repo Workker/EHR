@@ -772,12 +772,17 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                AddOnSessionMedicalReviews(review);
-                ViewBag.MedicalReviews = new List<MedicalReviewModel> { GetMedicalReviewsFromSession().Last() };
+                if (review.Specialty.Id <= int.MinValue)
+                {
+                    AddOnSessionMedicalReviews(review);
+                    ViewBag.MedicalReviews = new List<MedicalReviewModel> { GetMedicalReviewsFromSession().Last() };
 
-                this.ShowMessage(MessageTypeEnum.Success, "Prazo para revisão incluída.");
+                    this.ShowMessage(MessageTypeEnum.Success, "Prazo para revisão incluída.");
 
-                return PartialView("DischargeData/_MedicalReviewTableRow");
+                    return PartialView("DischargeData/_MedicalReviewTableRow");
+                }
+                this.ShowMessage(MessageTypeEnum.Error, "Especialidade não informada.");
+                return null;
             }
             catch (Exception ex)
             {
