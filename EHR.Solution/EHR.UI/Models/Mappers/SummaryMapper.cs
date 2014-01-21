@@ -59,7 +59,8 @@ namespace EHR.UI.Models.Mappers
             summaryModel.Actions = HistoryRecordMapper.MapHistoryRecordModelsFrom(actions.OrderByDescending(hr => hr.Date).Take(10));
             summaryModel.Views = HistoryRecordMapper.MapHistoryRecordModelsFrom(
                 views.OrderByDescending(hr => hr.Date).GroupBy(x => x.Account.Id).Select(x => x.FirstOrDefault()).Take(10).ToList());
-            summaryModel.Treatment = TreatmentMapper.MapTreatmentModelFrom(summary.Treatment);
+            if (summary.Treatment != null)
+                summaryModel.Treatment = TreatmentMapper.MapTreatmentModelFrom(summary.Treatment);
 
             return summaryModel;
         }
