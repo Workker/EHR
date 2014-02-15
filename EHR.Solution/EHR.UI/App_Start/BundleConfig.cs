@@ -43,7 +43,8 @@ namespace EHR.UI.App_Start
                 "~/Scripts/knockout-mapping.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                "~/Scripts/jquery-ui-{version}.js"));
+                "~/Scripts/jquery-ui-{version}.js",
+                "~/Scripts/jquery.ui.datepicker-pt-BR.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.unobtrusive*",

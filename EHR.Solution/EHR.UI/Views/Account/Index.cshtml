@@ -60,53 +60,65 @@
                                     <div id="reg_form_box" class="large_form">
                                         <div class="clearfix short_fields">
                                             <div class="mrm lfloat">
-                                                <input type="text" name="FirstName" required placeholder="Nome" class="inputtext text_field" />
+                                                <input type="text" name="FirstName" placeholder="Nome" class="inputtext text_field" maxlength="65" />
                                             </div>
                                             <div class="mbm rfloat" style="margin-right: -10px;">
-                                                <input type="text" name="LastName" required placeholder="Sobrenome" class="inputtext text_field" style="margin-right: -15px;" />
+                                                <input type="text" name="LastName" placeholder="Sobrenome" class="inputtext text_field" style="margin-right: -15px;" maxlength="65" />
                                             </div>
                                         </div>
                                         <div class="clearfix short_fields">
                                             <div class="mrm lfloat" style="padding-top: 10px;">
                                                 @foreach (var value in Enum.GetValues(typeof(ProfessionalRegistrationTypeEnum)).Cast<short>().ToList())
                                                 {
-                                                    <input type="radio" name="ProfessionalRegistration[0].Type" value="@value" @if (value == 1)
+                                                    <input type="radio" id="DocumentType" name="ProfessionalRegistration[0].Type" value="@value" @if (value == 1)
                                                                                                                             { 
                                                                                                                                 @:required 
                                                                                                                             }  />
-                                                    <label for="gender" class="gender_label">
+                                                    <label for="DocumentType" class="gender_label">
                                                         @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
                                                     </label>
                                                 }
 
                                             </div>
                                             <div class="mbm rfloat" style="margin-right: -10px;">
-                                                <input type="text" name="ProfessionalRegistration[0].Number" required placeholder="N&uacute;mero" class="inputtext text_field" style="margin-right: -15px; width: 250px;" />
+                                                <input type="text" name="ProfessionalRegistration[0].Number" required placeholder="N&uacute;mero" class="inputtext text_field" style="width: 138px;" maxlength="10" />
+                                               
+                                                 <select name="stateId" required style="margin-right: -15px; width: 110px;">
+                                                    <option value="-1">Estado</option>
+                                                        <option>RJ</option>
+                                                        <option>SP</option>
+
+                                                        @*
+                                                            @foreach (State value in (IList<State>)Session["States"])
+                                                            {
+                                                                <option value="@value.Id">
+                                                                    @value.Acronym
+                                                                </option>  
+                                                            }
+                                                        *@
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="mbm">
-                                            <input type="email" name="Email" required placeholder="Seu e-mail" class="inputtext text_field" />
+                                            <input type="email" name="email" placeholder="Seu e-mail" class="inputtext text_field" />
                                         </div>
                                         <div class="mbm">
-                                            <input type="email" name="emailConfirmation" required placeholder="Insira o e-mail novamente" class="inputtext text_field" />
+                                            <input type="email" name="emailConfirmation" placeholder="Insira o e-mail novamente" class="inputtext text_field" />
                                         </div>
                                         <div class="mbm">
-                                            <input type="password" name="Password" required placeholder="Nova senha" class="inputtext text_field" />
+                                            <input type="password" name="password" placeholder="Nova senha" class="inputtext text_field" />
                                         </div>
-                                        <div class="mtm mbs birthday_label">Anivers&aacute;rio:</div>
-                                        <div class="clearfix field_container">
-                                            <div class="mrm lfloat">
-                                                @{Html.RenderPartial("_DatePicker");}
-                                            </div>
+                                        <div class="mbm">
+                                            <input type="text" name="bday" style="width: 160px" maxlength="10" class="inputtext text_field" placeholder="Data de nascimento">
                                         </div>
                                         <div class="mtl mbm">
                                             @foreach (var value in Enum.GetValues(typeof(GenderEnum)).Cast<short>().ToList())
                                             {
                                                 <div class="uiInputLabel clearfix inlineBlock">
-                                                    <input type="radio" name="Gender" id="gender"  @if (value == 1)
+                                                    <input type="radio" name="gender" id="gender"  @*@if (value == 1)
                                                                                                    { 
                                                                                                         @:required 
-                                                                                                    }  value="@value" class=" uiInputLabelRadio">
+                                                                                                    }*@  value="@value" class=" uiInputLabelRadio">
                                                     <label for="gender" class="gender_label">@(EnumUtil.GetDescriptionFromEnumValue((GenderEnum)Enum.Parse(typeof(GenderEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")</label>
                                                 </div>
                                             }
@@ -116,7 +128,7 @@
                                             @{
                                                 var hospitals = ViewBag.hospitals;
                                             }
-                                            <table style="margin-left: -10px;">
+                                            <table style="margin-left: -3px;">
                                                 <tr>
                                                     @for (
                                                         int count = 0; count < hospitals.Count; count++)
@@ -147,4 +159,266 @@
             </div>
         </div>
     </div>
+}
+
+@section scripts
+{
+    <style type="text/css">
+        /*somente para mudar o tamanho do datepicker*/
+        #ui-datepicker-div { font-size:11px; }
+    </style>
+    <script type="text/javascript" src="~/Scripts/AjaxFlagMenu-1.0.2.min.js"></script>
+    <script type="text/javascript">
+
+        $.datepicker.setDefaults($.extend({ 'dateFormat': 'dd/mm/yy' }, $.datepicker.regional['pt-BR']));
+
+        $("document").ready(function () {
+
+            $("input").focusout(function () {
+
+                if ($(this).css("background-color") != "white") {
+
+                    $(this).css('border', '');
+                }
+            });
+
+            $("input[name='bday']").datepicker();
+
+            $("input[name='FirstName']").keypress(function (event) {
+
+                if(!onlyLetters(event))
+                    event.preventDefault();
+            });
+
+            $("input[name='LastName']").keypress(function (event) {
+
+                if (!onlyLetters(event))
+                    event.preventDefault();
+            });
+           
+            $("input[name='ProfessionalRegistration[0].Number']").keypress(function (event) {
+                if (!onlyNumbers(event))
+                    event.preventDefault();
+            });
+
+            $("button[class~='signup_button']").click(function (event) {
+
+                return ValidateForm();
+            });
+           
+        });
+
+        function MarkInvalidField(field) {
+
+            $(field).css('border', '1px solid red');
+
+        }
+
+        function VerifyIfTextContainsOnlyLetters(text) {
+
+            regex = /^[a-zA-Z]+$/;
+
+            if (!regex.test(text))
+                return false;
+            else
+                return true;
+        }
+
+        function VerifyIfTextContainsOnlyNumbers(text) {
+
+            regex = /^[0-9]+$/;
+
+            if (!regex.test(text))
+                return false;
+            else
+                return true;
+        }
+
+        function ValidateForm() {
+
+            //validate first name
+            var firstNameField = $("input[name='FirstName']");
+
+            if (firstNameField.val() === "") {
+                displayMessage("O campo nome não pode ser vazio", "error");
+                MarkInvalidField(firstNameField);
+                firstNameField.focus();
+                return false;
+            }
+
+            if (!VerifyIfTextContainsOnlyLetters(firstNameField.val())) {
+
+                displayMessage("O campo nome deve conter somente letras.", "error");
+                MarkInvalidField(firstNameField);
+                firstNameField.focus();
+                return false;
+            }
+
+            //validate last name
+            var lastNameField = $("input[name='LastName']");
+
+            if (lastNameField.val() === "") {
+                displayMessage("O campo sobrenome não pode ser vazio", "error");
+                MarkInvalidField(lastNameField);
+                lastNameField.focus();
+                return false;
+            }
+
+            if (!VerifyIfTextContainsOnlyLetters(lastNameField.val())) {
+
+                displayMessage("O campo nome deve conter somente letras.", "error");
+                MarkInvalidField(lastNameField);
+                lastNameField.focus();
+                return false;
+            }
+
+            //validate crm/cro
+            var professionalRegistrationRadios = $("input[name='ProfessionalRegistration[0].Type']");
+
+            if ((professionalRegistrationRadios[0].checked == false) && (professionalRegistrationRadios[1].checked == false)) {
+                displayMessage("O tipo de registro profissional deve ser selecionado", "error");
+                MarkInvalidField(professionalRegistrationRadios[0]);
+                professionalRegistrationRadios[0].focus();
+                return false;
+            }
+
+            //validate crm/cro number
+            var professionalRegistrationField = $("input[name='ProfessionalRegistration[0].Number']");
+
+            if (professionalRegistrationField.val() === "") {
+                displayMessage("O número do CRM/ CRO não pode ser vazio.", "error");
+                MarkInvalidField(professionalRegistrationField);
+                professionalRegistrationField.focus();
+                return false;
+            }
+
+            if (!VerifyIfTextContainsOnlyNumbers(professionalRegistrationField.val())) {
+
+                displayMessage("O número do CRM/ CRO deve conter somente números.", "error");
+                MarkInvalidField(professionalRegistrationField);
+                professionalRegistrationField.focus();
+                return false;
+            }
+
+            //validate state
+            var stateField = $("select[name='stateId']");
+
+            if (stateField.val() === "-1") {
+                displayMessage("Um estado deve ser selecionado.", "error");
+                stateField.focus();
+                MarkInvalidField(stateField);
+                return false;
+            }
+
+            //Verify if email is valid
+            function ValidadeEmail(email) {
+
+                var regex = /[-0-9a-zA-Z.+_]+@@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}/;
+
+                if (!regex.test(email))
+                    return false;
+                else
+                    return true;
+            }
+
+            //validate first email
+            var firstEmailField = $("input[name='email']");
+
+            if (firstEmailField.val() === "") {
+                displayMessage("O campo de email deve ser preenchido.", "error");
+                MarkInvalidField(firstEmailField);
+                firstEmailField.focus();
+                return false;
+            }
+
+            if (!ValidadeEmail(firstEmailField.val())) {
+                displayMessage("Email inválido.", "error");
+                MarkInvalidField(firstEmailField);
+                firstEmailField.focus();
+                return false;
+            }
+
+            //validade second email
+            var secondEmailField = $("input[name='emailConfirmation']");
+
+            if (secondEmailField.val() === "") {
+                displayMessage("O campo de confirmação de email deve ser preenchido.", "error");
+                MarkInvalidField(secondEmailField);
+                secondEmailField.focus();
+                return false;
+            }
+
+            if (!ValidadeEmail(secondEmailField.val())) {
+                displayMessage("Email inválido.", "error");
+                MarkInvalidField(secondEmailField);
+                secondEmailField.focus();
+                return false;
+            }
+
+            //Validate if both emails are equal
+            if (!(firstEmailField.val() == secondEmailField.val())) {
+                displayMessage("Os emails digitados não correspondem, por favor verifique.", "error");
+                MarkInvalidField(firstEmailField);
+                firstEmailField.focus();
+                return false;
+            }
+
+            //Validade password
+            var passwordField = $("input[name='password']");
+
+            if (passwordField.val() === "") {
+                displayMessage("O campo senha deve ser preenchido.", "error");
+                MarkInvalidField(passwordField);
+                passwordField.focus();
+                return false;
+            }
+
+            //validade birth date
+            var birthdateField = $("input[name='bday']");
+
+            if (birthdateField.val() === "") {
+                displayMessage("O campo data de nascimento deve ser preenchido.", "error");
+                MarkInvalidField(birthdateField);
+                birthdateField.focus();
+                return false;
+            }
+
+            var regex = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-./])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/
+
+            if (!(regex.test(birthdateField.val()))) {
+
+                displayMessage("Data inválida.", "error");
+                birthdateField.focus();
+                return false;
+            }
+
+            //validate gender
+            var genderField = $("input[name='gender']");
+
+            if ((genderField[0].checked == false) && (genderField[1].checked == false)) {
+                displayMessage("O campo sexo deve ser selecionado.", "error");
+                MarkInvalidField(genderField[0]);
+                genderField[0].focus();
+                return false;
+            }
+
+            //validate hospital
+            var hospitalField = $("input[name='hospital']");
+
+            for (i = 0; i < hospitalField.length; i++) {
+
+                if (hospitalField[i].checked == true) {
+
+                    return true;
+                }
+            }
+
+            displayMessage("Um hospital deve ser selecionado.", "error");
+            MarkInvalidField(hospitalField[0]);
+            hospitalField[0].focus();
+            return false;
+        }
+
+    </script>
+
 }

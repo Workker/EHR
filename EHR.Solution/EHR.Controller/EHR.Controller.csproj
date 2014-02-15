@@ -42,7 +42,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\LibEHR\EHR.CoreShared.dll</HintPath>
     </Reference>
-    <Reference Include="EHRIntegracao.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="EHRIntegracao.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\LibEHR\EHRIntegracao.Domain.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.3.0.1304.0\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
@@ -65,7 +67,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Workker.Framework.Domain">
-      <HintPath>..\..\..\..\LibWorkker\Workker.Framework.Domain.dll</HintPath>
+      <HintPath>..\..\..\..\LibEHR\Workker.Framework.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

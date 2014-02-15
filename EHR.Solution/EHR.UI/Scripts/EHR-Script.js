@@ -57,6 +57,7 @@ $(function () {
 
 // Generate Data menu
 $(document).ready(function () {
+
     handleAjaxMessages();
     displayMessages();
     var Menu = $("#_Menu").AjaxFlagMenu({
@@ -454,12 +455,12 @@ $(".unitsSideBar li input[type='checkbox']").live(
 
 function ShowFormChangePassword(element) {
     $(element).addClass("grayButtonClicked");
-    $(element).next().show();
+    $(element).next().fadeIn("fast");
 }
 
 function HideFormChangePassword(element) {
     $(element).parent().parent().parent().prev().removeClass("grayButtonClicked");
-    $(element).parent().parent().parent().hide();
+    $(element).parent().parent().parent().fadeOut("fast");
 }
 
 function ChangePassword(element) {
@@ -481,12 +482,14 @@ function ChangePassword(element) {
 
 function ShowFormAddprofessionalResgistration(element) {
     $(element).addClass("grayButtonClicked");
-    $(element).next().show();
+    $(element).next().fadeIn("fast");
 }
 
 function HideFormAddprofessionalResgistration(element) {
+
     $(element).parent().parent().parent().prev().removeClass("grayButtonClicked");
-    $(element).parent().parent().parent().hide();
+    $(element).parent().parent().parent().fadeOut("fast");
+
 }
 
 function AddprofessionalResgistration(element) {
@@ -617,6 +620,7 @@ function RemoveEdition(reopen) {
     if (reopen == true) {
         $(".contentPage input[value=Reabrir]").show();
     }
+
 }
 
 function FinalizeSummary() {
@@ -691,7 +695,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
     var st = ua.substring(index, index + 12);
     var version = st.substr(st.indexOf("/") + 1, 1);
     if (document.documentMode < 10 && version < 6) {
-        alert("Este sistema foi desenvolvido para ser acessado por Internet Explorer versao 10 ou superiror. Os controles de formulario seram desabilitados. Por favor atualize seu navegador!");
+        alert("Este sistema foi desenvolvido para ser acessado por Internet Explorer versao 10 ou superior. Os controles de formulario serão desabilitados. Por favor atualize seu navegador.");
         $(" input[type=radio],  textarea,  select,  input[type=text],  input[type=time], input[type=submit], input[type=password], button").attr("disabled", true);
     }
 }
@@ -702,4 +706,27 @@ function sessionTimeOut(string) {
         alert("A sua sessao expirou. Voce sera redirecionado, para a tela de login.");
         location.reload();
     }
+}
+
+
+//***Validation***//
+
+function onlyLetters(event) {
+
+    var key = event.which || event.keyCode;
+
+    if ((48 <= key && key <= 57))
+        return false;
+    else
+        return true;
+}
+
+function onlyNumbers(event) {
+
+    var key = event.which || event.keyCode;
+
+    if ((48 <= key && key <= 57))
+        return true;
+    else
+        return false;
 }

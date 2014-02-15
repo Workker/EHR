@@ -11,7 +11,7 @@ namespace InitializeDatabaseAndCacheData
         public void LoadData()
         {
             var dataBase = new DataBaseInitialize();
-            string path = "E:\\Projects\\EHR\\EHR.Solution\\ImportTables";
+            string path = "D:\\Projetos\\EHR\\EHR.Solution\\ImportTables";
 
             dataBase.create_database_by_model();
             dataBase.insert_states();

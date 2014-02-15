@@ -4,7 +4,56 @@
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
 @model EHR.UI.Models.AccountModel
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.20.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#mascaraModal').fadeTo("fast", 0);
+
+            $("#lnkIncluirRegistroProfissional").click(function () {
+            
+                HideFormChangePassword($("#cancelNewPassword"));
+                $("#mascaraModal").fadeIn("slow");
+                $('#mascaraModal').css({ 'width': $(window).width(), 'height': $(document).height() });
+
+                ShowFormAddprofessionalResgistration(this);
+            });
+
+            $("#changePassword").click(function (event) {
+
+                HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+                $("#mascaraModal").fadeIn("slow");
+                $('#mascaraModal').css({ 'width': $(window).width(), 'height': $(document).height() });
+
+                ShowFormChangePassword(this);
+            });
+
+            $("#mascaraModal").click(function () {
+
+                HideFormChangePassword($("#cancelNewPassword"));
+                HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+                $(this).hide();
+            });
+
+            /*
+            $("#lnkIncluirRegistroProfissional").mouseup(function () {
+
+                $(document).click(function () {
+                    HideFormChangePassword($("#cancelNewPassword"));
+                    HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+                });
+            });
+            */
+
+
+        });
+
+    </script>
+
 <div id="topBar" class="fixed_elem">
+    <div id="invisibleCoverDiv"></div>
     <div id="headContent" class="clearfix">
         <h1 id="pageLogo"><a href="@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)@Url.Content("~/")Home" style="background-color: transparent;">Rede D'or</a></h1>
         @*<div id="notifications" class="lfloat" style="padding-top: 3px;">
@@ -16,7 +65,7 @@
                     <div class="wrap" id="search">
                         <div class="innerWrap searchBox">
                             <span class="uiSearchInput textInput searchContainer" id="upjgpe43">
-                                <input type="text" placeholder="Digite o Nome ou CPF do paciente" class="inputtext DOMControl_placeholder" autocomplete="off" maxlength="100" id="searchPeople" data-bind="value: query, valueUpdate: 'afterkeyup', event: { keyup: doSearch }">
+                                <input type="text" id="patientSearch" placeholder="Digite o Nome ou CPF do paciente" class="inputtext DOMControl_placeholder" autocomplete="off" maxlength="100" id="searchPeople" data-bind="value: query, valueUpdate: 'afterkeyup', event: { keyup: doSearch }">
                             </span>
                             <i class="_585_"></i>
                             <span class="backgroundSearch">aaa</span>
@@ -61,7 +110,7 @@
                     <li class="navItem middleItem voiceBarToggle"></li>
 
                     <li class="navItem middleItem ">
-                        <a onclick="ShowFormAddprofessionalResgistration(this);">Incluir CRM/CRO</a>
+                        <a id="lnkIncluirRegistroProfissional">Incluir CRM/CRO</a>
                         <div id="AddprofessionalResgistration">
                             <form>
                                 <div class="mbm">
@@ -91,13 +140,13 @@
                                 </div>
                                 <div class="mbm">
                                     <input type="submit" value="Incluir" class="uibutton special" onclick="AddprofessionalResgistration(this);" />
-                                    <input type="button" value="Cancelar" class="uibutton" onclick="HideFormAddprofessionalResgistration(this);" />
+                                    <input type="button" id="cancelProfessionalResgistrationNumber" value="Cancelar" class="uibutton" onclick="HideFormAddprofessionalResgistration(this);" />
                                 </div>
                             </form>
                         </div>
                     </li>
                     <li class="navItem middleItem">
-                        <a onclick="ShowFormChangePassword(this);">Alterar Minha Senha</a>
+                        <a id="changePassword">Alterar Minha Senha</a>
                         <div id="ChangePassword">
                             <form>
                                 <div class="mbm">
@@ -108,7 +157,7 @@
                                 </div>
                                 <div class="mbm">
                                     <input type="submit" value="Alterar" class="uibutton special" onclick="ChangePassword(this);" />
-                                    <input type="button" value="Cancelar" class="uibutton" onclick="HideFormChangePassword(this);" />
+                                    <input type="button" id="cancelNewPassword" value="Cancelar" class="uibutton" onclick="HideFormChangePassword(this);" />
                                 </div>
                             </form>
                         </div>
