@@ -23,6 +23,20 @@
         $('input[value="true"]').attr("checked", "");
         $('#divMdr').removeAttr("style");
     }
+
+    $(document).ready(function () {
+
+        $("#ColonizationByMDR input[type='submit']").click(function () {
+
+            if ($("#ColonizationByMDR textarea").val() == "") {
+
+                displayMessage("O campo descri&ccedil;&atilde;o deve ser preenchido.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("#ColonizationByMDR textarea").focus();
+                return false;
+            }
+        });
+    });
 </script>
 @{
     Html.RenderPartial("Layout/_RemoveEdition");

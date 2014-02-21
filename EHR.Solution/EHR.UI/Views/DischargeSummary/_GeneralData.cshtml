@@ -21,7 +21,7 @@
             {
                 @:checked
                 }
-        } onchange="SaveReasonOfAdmission(this);"/>
+        } />
         @:&nbsp;@reason.Description
     }
 </form>
@@ -60,7 +60,8 @@
 <br />
 <form style="padding-bottom: 20px;">
     <textarea rows="10" cols="135" maxlength="1000" id="observation" name="observation">@Model.Observation</textarea><br />
-    <input type="submit" value="Salvar" onclick="SaveObsevation(this)" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input id="generalSubmitButton" type="submit" value="Salvar" class="uibutton large confirm" />
+    &nbsp;&nbsp;
     <input type="reset" value="Limpar" class="uibutton large" />
 </form>
 <script type="text/javascript">
@@ -74,6 +75,37 @@
             $('#ulAllergy').removeAttr("style");
         }
     }
+
+    $(document).ready(function () {
+
+        $("input[name='reasonOfAdmission']").change(function () {
+
+            var valorDaCheckClicada = $(this).val();
+
+            $("input[name='reasonOfAdmission']").each(function () {
+
+                if ($(this).val() != valorDaCheckClicada) {
+                    $(this).attr("checked", false);
+                }
+            });
+
+            SaveReasonOfAdmission($(this));
+        });
+
+        $("#generalSubmitButton").click(function () {
+
+            if ($("#observation").val() == "") {
+
+                displayMessage("O campo de orbserva&ccedil;&atilde;o deve ser preenchido.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("#observation").focus();
+                return false;
+            }
+
+            SaveObsevation(this);
+        });
+
+    });
 </script>
 @{
     Html.RenderPartial("Layout/_RemoveEdition");

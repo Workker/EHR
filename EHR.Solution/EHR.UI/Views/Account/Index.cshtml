@@ -81,22 +81,28 @@
 
                                             </div>
                                             <div class="mbm rfloat" style="margin-right: -10px;">
-                                                <input type="text" name="ProfessionalRegistration[0].Number" required placeholder="N&uacute;mero" class="inputtext text_field" style="width: 138px;" maxlength="10" />
-                                               
-                                                 <select name="stateId" required style="margin-right: -15px; width: 110px;">
-                                                    <option value="-1">Estado</option>
-                                                        <option>RJ</option>
-                                                        <option>SP</option>
-
-                                                        @*
-                                                            @foreach (State value in (IList<State>)Session["States"])
-                                                            {
-                                                                <option value="@value.Id">
-                                                                    @value.Acronym
-                                                                </option>  
-                                                            }
-                                                        *@
-                                                </select>
+                                                <table style="margin-right: -15px;">
+                                                    <tr>
+                                                        <td style="padding-right: 6px;">
+                                                            <input type="text" name="ProfessionalRegistration[0].Number" required placeholder="N&uacute;mero" class="inputtext text_field" style="width: 136px;" maxlength="10" />
+                                                        </td>
+                                                        <td style="border: 1px solid #bdc7d8; background-color: #fff;">
+                                                            <select name="stateId"required style="width: 110px; border: 0px; font-size: 18px; color: #6d6d6d;">
+                                                                <option value="-1">Estado</option>
+                                                                <option>RJ</option>
+                                                                <option>SP</option>
+                                                                @*
+                                                                    @foreach (State value in (IList<State>)Session["States"])
+                                                                    {
+                                                                        <option value="@value.Id">
+                                                                            @value.Acronym
+                                                                        </option>  
+                                                                    }
+                                                                *@
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </div>
                                         <div class="mbm">
@@ -109,7 +115,7 @@
                                             <input type="password" name="password" placeholder="Nova senha" class="inputtext text_field" />
                                         </div>
                                         <div class="mbm">
-                                            <input type="text" name="bday" style="width: 160px" maxlength="10" class="inputtext text_field" placeholder="Data de nascimento">
+                                            <input type="text" name="Birthday" style="width: 160px" maxlength="10" class="inputtext text_field" placeholder="Data de nascimento">
                                         </div>
                                         <div class="mtl mbm">
                                             @foreach (var value in Enum.GetValues(typeof(GenderEnum)).Cast<short>().ToList())
@@ -163,10 +169,6 @@
 
 @section scripts
 {
-    <style type="text/css">
-        /*somente para mudar o tamanho do datepicker*/
-        #ui-datepicker-div { font-size:11px; }
-    </style>
     <script type="text/javascript" src="~/Scripts/AjaxFlagMenu-1.0.2.min.js"></script>
     <script type="text/javascript">
 
@@ -174,15 +176,7 @@
 
         $("document").ready(function () {
 
-            $("input").focusout(function () {
-
-                if ($(this).css("background-color") != "white") {
-
-                    $(this).css('border', '');
-                }
-            });
-
-            $("input[name='bday']").datepicker();
+            $("input[name='Birthday']").datepicker();
 
             $("input[name='FirstName']").keypress(function (event) {
 
@@ -208,32 +202,6 @@
            
         });
 
-        function MarkInvalidField(field) {
-
-            $(field).css('border', '1px solid red');
-
-        }
-
-        function VerifyIfTextContainsOnlyLetters(text) {
-
-            regex = /^[a-zA-Z]+$/;
-
-            if (!regex.test(text))
-                return false;
-            else
-                return true;
-        }
-
-        function VerifyIfTextContainsOnlyNumbers(text) {
-
-            regex = /^[0-9]+$/;
-
-            if (!regex.test(text))
-                return false;
-            else
-                return true;
-        }
-
         function ValidateForm() {
 
             //validate first name
@@ -241,7 +209,7 @@
 
             if (firstNameField.val() === "") {
                 displayMessage("O campo nome não pode ser vazio", "error");
-                MarkInvalidField(firstNameField);
+                //MarkInvalidField(firstNameField);
                 firstNameField.focus();
                 return false;
             }
@@ -249,7 +217,7 @@
             if (!VerifyIfTextContainsOnlyLetters(firstNameField.val())) {
 
                 displayMessage("O campo nome deve conter somente letras.", "error");
-                MarkInvalidField(firstNameField);
+                //MarkInvalidField(firstNameField);
                 firstNameField.focus();
                 return false;
             }
@@ -259,7 +227,7 @@
 
             if (lastNameField.val() === "") {
                 displayMessage("O campo sobrenome não pode ser vazio", "error");
-                MarkInvalidField(lastNameField);
+                //MarkInvalidField(lastNameField);
                 lastNameField.focus();
                 return false;
             }
@@ -267,7 +235,7 @@
             if (!VerifyIfTextContainsOnlyLetters(lastNameField.val())) {
 
                 displayMessage("O campo nome deve conter somente letras.", "error");
-                MarkInvalidField(lastNameField);
+                //MarkInvalidField(lastNameField);
                 lastNameField.focus();
                 return false;
             }
@@ -277,7 +245,7 @@
 
             if ((professionalRegistrationRadios[0].checked == false) && (professionalRegistrationRadios[1].checked == false)) {
                 displayMessage("O tipo de registro profissional deve ser selecionado", "error");
-                MarkInvalidField(professionalRegistrationRadios[0]);
+                //MarkInvalidField(professionalRegistrationRadios[0]);
                 professionalRegistrationRadios[0].focus();
                 return false;
             }
@@ -287,7 +255,7 @@
 
             if (professionalRegistrationField.val() === "") {
                 displayMessage("O número do CRM/ CRO não pode ser vazio.", "error");
-                MarkInvalidField(professionalRegistrationField);
+                //MarkInvalidField(professionalRegistrationField);
                 professionalRegistrationField.focus();
                 return false;
             }
@@ -295,7 +263,7 @@
             if (!VerifyIfTextContainsOnlyNumbers(professionalRegistrationField.val())) {
 
                 displayMessage("O número do CRM/ CRO deve conter somente números.", "error");
-                MarkInvalidField(professionalRegistrationField);
+                //MarkInvalidField(professionalRegistrationField);
                 professionalRegistrationField.focus();
                 return false;
             }
@@ -306,7 +274,7 @@
             if (stateField.val() === "-1") {
                 displayMessage("Um estado deve ser selecionado.", "error");
                 stateField.focus();
-                MarkInvalidField(stateField);
+                //MarkInvalidField(stateField.parent());
                 return false;
             }
 
@@ -326,14 +294,14 @@
 
             if (firstEmailField.val() === "") {
                 displayMessage("O campo de email deve ser preenchido.", "error");
-                MarkInvalidField(firstEmailField);
+                //MarkInvalidField(firstEmailField);
                 firstEmailField.focus();
                 return false;
             }
 
             if (!ValidadeEmail(firstEmailField.val())) {
                 displayMessage("Email inválido.", "error");
-                MarkInvalidField(firstEmailField);
+                //MarkInvalidField(firstEmailField);
                 firstEmailField.focus();
                 return false;
             }
@@ -343,14 +311,14 @@
 
             if (secondEmailField.val() === "") {
                 displayMessage("O campo de confirmação de email deve ser preenchido.", "error");
-                MarkInvalidField(secondEmailField);
+                //MarkInvalidField(secondEmailField);
                 secondEmailField.focus();
                 return false;
             }
 
             if (!ValidadeEmail(secondEmailField.val())) {
                 displayMessage("Email inválido.", "error");
-                MarkInvalidField(secondEmailField);
+                //MarkInvalidField(secondEmailField);
                 secondEmailField.focus();
                 return false;
             }
@@ -358,7 +326,7 @@
             //Validate if both emails are equal
             if (!(firstEmailField.val() == secondEmailField.val())) {
                 displayMessage("Os emails digitados não correspondem, por favor verifique.", "error");
-                MarkInvalidField(firstEmailField);
+                //MarkInvalidField(firstEmailField);
                 firstEmailField.focus();
                 return false;
             }
@@ -368,17 +336,17 @@
 
             if (passwordField.val() === "") {
                 displayMessage("O campo senha deve ser preenchido.", "error");
-                MarkInvalidField(passwordField);
+                //MarkInvalidField(passwordField);
                 passwordField.focus();
                 return false;
             }
 
             //validade birth date
-            var birthdateField = $("input[name='bday']");
+            var birthdateField = $("input[name='Birthday']");
 
             if (birthdateField.val() === "") {
                 displayMessage("O campo data de nascimento deve ser preenchido.", "error");
-                MarkInvalidField(birthdateField);
+                //MarkInvalidField(birthdateField);
                 birthdateField.focus();
                 return false;
             }
@@ -397,7 +365,7 @@
 
             if ((genderField[0].checked == false) && (genderField[1].checked == false)) {
                 displayMessage("O campo sexo deve ser selecionado.", "error");
-                MarkInvalidField(genderField[0]);
+                //MarkInvalidField(genderField[0]);
                 genderField[0].focus();
                 return false;
             }
@@ -414,7 +382,7 @@
             }
 
             displayMessage("Um hospital deve ser selecionado.", "error");
-            MarkInvalidField(hospitalField[0]);
+            //MarkInvalidField(hospitalField[0]);
             hospitalField[0].focus();
             return false;
         }

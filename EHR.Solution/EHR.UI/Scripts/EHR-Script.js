@@ -56,10 +56,12 @@ $(function () {
 });
 
 // Generate Data menu
-$(document).ready(function () {
+function ConfigureMenu() {
 
     handleAjaxMessages();
     displayMessages();
+
+
     var Menu = $("#_Menu").AjaxFlagMenu({
         Caption: 'Menu',
         CaptionClass: 'CaptionClass',
@@ -156,7 +158,8 @@ $(document).ready(function () {
     $("#_td").corner("4px");
     $("#o_td").corner("4px");
 
-});
+}
+
 
 
 //// Images Gallery
@@ -547,8 +550,8 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
 }
 
 function displayMessage(message, messageType) {
-    $("#messagewrapper").html('<div class="messagebox ' + messageType.toLowerCase() + '"></div>');
-    $("#messagewrapper .messagebox").text(message);
+
+    $("#messagewrapper").html('<div class="messagebox ' + messageType.toLowerCase() + '">' + message + '</div>');
     displayMessages();
 }
 
@@ -615,6 +618,7 @@ $(document).on('submit', '#dischargeData', function (e) {
 });
 
 function RemoveEdition(reopen) {
+
     $(".contentPage input[type=radio], .contentPage input[type=checkbox], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
     $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").hide();
     if (reopen == true) {
@@ -674,6 +678,7 @@ function SaveObsevation(element) {
 }
 
 function SaveReasonOfAdmission(element) {
+    
     var form = $(element).parent();
 
     $.ajax({
@@ -729,4 +734,40 @@ function onlyNumbers(event) {
         return true;
     else
         return false;
+}
+
+function MarkInvalidField(field) {
+
+    $(field).css('border', '1px solid red');
+
+}
+
+function VerifyIfTextContainsOnlyLetters(text) {
+
+    regex = /^[a-zA-Z]+$/;
+
+    if (!regex.test(text))
+        return false;
+    else
+        return true;
+}
+
+function VerifyIfTextContainsOnlyNumbers(text) {
+
+    regex = /^[0-9]+$/;
+
+    if (!regex.test(text))
+        return false;
+    else
+        return true;
+}
+
+function VerifyDate(date) {
+
+    var regex = /^(?=\d)(?:(?:31(?!.(?:0?[2469]|11))|(?:30|29)(?!.0?2)|29(?=.0?2.(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))(?:\x20|$))|(?:2[0-8]|1\d|0?[1-9]))([-./])(?:1[012]|0?[1-9])\1(?:1[6-9]|[2-9]\d)?\d\d(?:(?=\x20\d)\x20|$))?(((0?[1-9]|1[012])(:[0-5]\d){0,2}(\x20[AP]M))|([01]\d|2[0-3])(:[0-5]\d){1,2})?$/
+
+    if (!(regex.test(date)))
+        return false;
+    else
+        return true;
 }

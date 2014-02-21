@@ -139,7 +139,7 @@ namespace EHR.Controller
             Assertion.GreaterThan(idSummary, 0, "Sumário de alta inválido.").Validate();
             Assertion.GreaterThan((int)type, 0, "Tipo de exame inválido.").Validate();
             Assertion.GreaterThan(date, DateTime.MinValue, "Data do exame não informada.").Validate();
-            Assertion.IsFalse(string.IsNullOrEmpty(description), "Dia inválido.").Validate();
+            Assertion.IsFalse(string.IsNullOrEmpty(description), "Descrição não informada.").Validate();
 
             #endregion
 

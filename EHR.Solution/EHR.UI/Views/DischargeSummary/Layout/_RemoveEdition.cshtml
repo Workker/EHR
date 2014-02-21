@@ -3,14 +3,15 @@
             @if (((SummaryModel)Session["Summary"]).Finalized == true)
             {
                 @:RemoveEdition();
-                    }
-        @{
+            }
+            
+            @{
             var summary = ((SummaryModel)Session["Summary"]);
             var account = ((AccountModel)Session["Account"]);
 
             if (!account.ProfessionalRegistration.Any(x => x.State.Id == summary.Hospital.State.Id && x.Approved == true))
             {
-                  @:RemoveEdition();
+                @:RemoveEdition();
             }
             }
     </script>

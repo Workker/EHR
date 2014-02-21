@@ -32,6 +32,7 @@
         </div>
     </section>
 }
+
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryui")
@@ -39,6 +40,9 @@
     <script type="text/javascript" src="~/Scripts/highslide-with-gallery.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            ConfigureMenu();
+
             $("#motivoDaAdmissao").tokenInput("../DischargeSummary/Admission", {
                 theme: "facebook"
             });
@@ -47,11 +51,13 @@
         $('#observation').focusout(function () {
             window.SaveObsevation();
         });
+
+
     </script>
 }
 
 @section scriptsBefore{
     @{
-         Html.RenderPartial("Layout/_RemoveEdition");
+        Html.RenderPartial("Layout/_RemoveEdition");
     }
 }

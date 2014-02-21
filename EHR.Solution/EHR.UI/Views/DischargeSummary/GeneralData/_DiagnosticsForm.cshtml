@@ -2,8 +2,8 @@
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
 <form id="diagnostic">
-    <label>Tipo de diagn&oacute;stico:</label>
-    <select name="diagnostic.type" style="margin-left: 5px" required>
+    <label>Tipo de diagn&oacute;stico:</label>    
+        <select name="diagnostic.type" style="margin-left: 5px" required>
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(DiagnosticTypeEnum)).Cast<short>().ToList())
         {

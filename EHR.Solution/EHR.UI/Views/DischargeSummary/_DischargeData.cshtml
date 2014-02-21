@@ -102,9 +102,13 @@
     <label>Alta Prescrita:</label>&nbsp;
     @{
         ViewBag.Context = "PrescribedHigh";
-        Html.RenderPartial("_DatePicker");
+        //Html.RenderPartial("_DatePicker");
     }
-    &nbsp;&nbsp;<input type="time" name="PrescribedDischargeTime" value="@{
+    <input type="text" name="dischargeDate" maxlength="10">
+    <input type="hidden" name="PrescribedHighday" />
+    <input type="hidden" name="PrescribedHighmonth" />
+    <input type="hidden" name="PrescribedHighyear" />
+    &nbsp;&nbsp;<input type="time" name="PrescribedDischargeTime" maxlength="5" value="@{
         var hour = ((SummaryModel)Model).DischargeData.PrescribedHighHour;
         if (hour.ToString(CultureInfo.InvariantCulture).Length < 2)
         {
@@ -135,8 +139,12 @@
     <label>Data:</label>&nbsp;
     @{
         ViewBag.Context = "DeliveredDate";
-        Html.RenderPartial("_DatePicker");
+        //Html.RenderPartial("_DatePicker");
     }
+    <input type="text" name="deliveredDate" maxlength="10">
+    <input type="hidden" name="DeliveredDateday" />
+    <input type="hidden" name="DeliveredDatemonth" />
+    <input type="hidden" name="DeliveredDateyear" />
     <br />
     <hr />
     <br />
@@ -194,6 +202,11 @@
         <a href="@Url.Action("GenerateSummayReport", new { id = "PDF" })" id="summaryReport" target="_blank" class="uibutton large special" style="text-decoration: none;display: none;">Imprimir Sumario de Alta</a> 
     }
     <script type="text/javascript">
+
+        $("#dischargeData input[name='dischargeDate']").val(String(@(((SummaryModel)Model).DischargeData.PrescribedHighDay)) + "/" + String(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth)) + "/" + String(@(((SummaryModel)Model).DischargeData.PrescribedHighYear)));
+        $("#dischargeData input[name='deliveredDate']").val(String(@(((SummaryModel)Model).DischargeData.DeliveredDateDay)) + "/" + String(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth)) + "/" + String(@(((SummaryModel)Model).DischargeData.DeliveredDateYear)));
+
+        @*        
         $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
         $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth));
         $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighDay));
@@ -201,5 +214,75 @@
         $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateYear));
         $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth));
         $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateDay));
+        *@
+
+
+        $(document).ready(function () {
+
+            $("#dischargeData input[name='dischargeDate'").datepicker();
+            $("#dischargeData input[name='deliveredDate'").datepicker();
+
+            $("#dischargeData input[type='submit']").click(function () {
+
+                if ($("#dischargeData input[name='highType']:checked").length == "0") {
+
+                    displayMessage("Um tipo de alta deve ser selecionado.", "error");
+                    //MarkInvalidField(secondEmailField);
+                    $("#dischargeData input[name='highType']")[0].focus();
+                    return false;
+                }
+
+                if ($("#dischargeData input[name='ConditionAtDischarge']:checked").length == "0") {
+
+                    displayMessage("Um tipo de condi&ccedil;&atilde;o deve ser selecionado.", "error");
+                    //MarkInvalidField(secondEmailField);
+                    $("#dischargeData input[name='ConditionAtDischarge']")[0].focus();
+                    return false;
+                }
+
+                if ($("#dischargeData input[name='DestinationOfThePatientAtDischarge']:checked").length == "0") {
+
+                    displayMessage("Um tipo de destino deve ser selecionado.", "error");
+                    //MarkInvalidField(secondEmailField);
+                    $("#dischargeData input[name='DestinationOfThePatientAtDischarge']")[0].focus();
+                    return false;
+                }
+
+                if ($("#dischargeData input[name='dischargeDate']").val() == "") {
+
+                    displayMessage("A data de alta deve ser preenchida.", "error");
+                    //MarkInvalidField(secondEmailField);
+                    $("#dischargeData input[name='dischargeDate']").focus();
+                    return false;
+                }
+
+                if ($("#dischargeData input[name='dischargeDate']").val() != "") {
+
+                    var splitDate = $("#dischargeData input[name='dischargeDate']").val().split("/");
+
+                    $("#dischargeData input[name='PrescribedHighday']").val(splitDate[0]);
+                    $("#dischargeData input[name='PrescribedHighmonth']").val(splitDate[1]);
+                    $("#dischargeData input[name='PrescribedHighyear']").val(splitDate[2]);
+                }
+
+                if ($("#dischargeData input[name='deliveredDate']").val() == "") {
+
+                    displayMessage("A data de alat deve ser preenchida.", "error");
+                    //MarkInvalidField(secondEmailField);
+                    $("#dischargeData input[name='dischargeDate']").focus();
+                    return false;
+                }
+
+                if ($("#dischargeData input[name='deliveredDate']").val() != "") {
+
+                    var splitDate = $("#dischargeData input[name='deliveredDate']").val().split("/");
+
+                    $("#dischargeData input[name='DeliveredDateday']").val(splitDate[0]);
+                    $("#dischargeData input[name='DeliveredDatemonth']").val(splitDate[1]);
+                    $("#dischargeData input[name='DeliveredDateyear']").val(splitDate[2]);
+                }
+            });
+        });
+
     </script>
 </form>

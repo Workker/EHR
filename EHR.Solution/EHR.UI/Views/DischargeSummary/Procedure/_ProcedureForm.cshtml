@@ -4,15 +4,56 @@
     <br />
     <br />
     <label>C&oacute;digo:</label>
-    <input type="text" style="margin-left: 45px" name="procedureCode" readonly="readonly" /><br />
+    <input type="text" style="margin-left: 42px" name="procedureCode" readonly="readonly" /><br />
     <br />
-    <label style="margin: 0px 55px 0px 0px">Data:</label>
-    @{Html.RenderPartial("_DatePicker");}
+    <label style="margin: 0px 45px 0px 0px">Data:</label>
+    @*@{Html.RenderPartial("_DatePicker");}*@
+    <input type="text" name="Date" style="margin-left: 9px" maxlength="10" class="inputtext text_field">
+    <input type="hidden" name="year" />
+    <input type="hidden" name="month" />
+    <input type="hidden" name="day" />
     <br />
     <br />
     <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveProcedure");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
 <script type="text/javascript">
-    formatDatePicker();
+    //formatDatePicker();
+
+    $(document).ready(function () {
+
+        $("input[name='Date']").datepicker();
+
+        $("input[type='submit']").click(function () {
+
+            if ($("input[name='description']").val() == "") {
+
+                displayMessage("A descri&ccedil;&atilde;o do procedimento não pode ser vazia.", "error");
+                $("input[name='description']").focus();
+                return false;
+            }
+
+            if ($("input[name='Date']").val() == "") {
+
+                displayMessage("A data de realiza&ccedil;&atilde;o do procedimento não pode ser vazia.", "error");
+                $("input[name='Date']").focus();
+                return false;
+            }
+
+            var splitDate = $("input[name='Date']").val().split("/");
+
+            $("input[name='day']").val(splitDate[0]);
+            $("input[name='month']").val(splitDate[1]);
+            $("input[name='year']").val(splitDate[2]);
+
+            if (!VerifyDate($("input[name='Date']").val())) {
+
+                displayMessage("Data inválida.", "error");
+                $("input[name='Date']").focus();
+                return false;
+            }
+        });
+
+    });
+
 </script>

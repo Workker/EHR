@@ -142,3 +142,6 @@ div.data b { color: #000; }
     #messagewrapper .warning { color: #c09853; border: 1px solid #fbeed5; background: #fcf8e3 url("../Images/Icons/warn.gif") no-repeat 8px 12px; }
 
     #messagewrapper .error { color: #b94a48; border-color: #eed3d7; background: #f2dede url("../Images/Icons/fail.gif") no-repeat 8px 12px; }
+
+/*somente para mudar o tamanho do datepicker*/
+#ui-datepicker-div { font-size:11px; }

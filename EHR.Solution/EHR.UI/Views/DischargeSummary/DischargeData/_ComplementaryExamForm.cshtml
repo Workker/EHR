@@ -1,12 +1,39 @@
 ﻿<div id="complementaryExam">
     <label>Exame:</label>&nbsp;
-    <input type="text" name="Description" />
+    <input type="text" name="Description" maxlength="40" />
     <br />
     <br />
     <label>Periodo:</label>
-    <input type="text" name="Period" />
+    <input type="text" name="Period" maxlength="3" />
     <br />
     <br />
-    <input type="button" onclick='SaveComplementaryExam(this);' value="Adicionar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="button" value="Adicionar" class="uibutton large confirm" />&nbsp;&nbsp;
             <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#complementaryExam input[type='button']").click(function () {
+
+            if ($("#complementaryExam input[name='Description']").val() == "") {
+
+                displayMessage("O campo exame deve ser preenchido.", "error");
+                //MarkInvalidField(lastNameField);
+                $("#complementaryExam input[name='Description']").focus();
+                return false;
+            }
+
+            if ($("#complementaryExam input[name='Period']").val() == "") {
+
+                displayMessage("O campo per&iacute;odo ser preenchido.", "error");
+                //MarkInvalidField(lastNameField);
+                $("#complementaryExam input[name='Period']").focus();
+                return false;
+            }
+
+            SaveComplementaryExam(this);
+        });
+    });
+
+</script>

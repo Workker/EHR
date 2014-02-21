@@ -3,7 +3,7 @@
 @using EHR.Infrastructure.Util
 <form id="exams">
     <label>Tipo de exame:</label>&nbsp;
-            <select name="type" required>
+            <select name="type">
                 <option value="-1">Selecione</option>
                 @foreach (var value in Enum.GetValues(typeof(ExamTypeEnum)).Cast<short>().ToList())
                 {
@@ -15,14 +15,56 @@
     <br />
     <br />
     <label>Data:</label>
-    @{Html.RenderPartial("_DatePicker");}
+    <input type="text" name="Date" style="width: 150px" maxlength="10" class="inputtext text_field">
+    @*@{Html.RenderPartial("_DatePicker");}*@
     <br />
     <br />
     <label>Descri&ccedil;&atilde;o:</label>
     <br />
-    <textarea rows="10" cols="90" maxlength="1000" name="description" required></textarea>
+    <textarea rows="10" cols="90" maxlength="1000" name="description"></textarea>
     <br />
     <br />
     <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveExam");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
             <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("input[name='Date']").datepicker();
+
+        //validate inputs
+        $("input[type='submit']").click(function () {
+
+            if ($("select[name='type']").val() == "-1") {
+
+                displayMessage("Um tipo de exame deve ser selecionado.", "error");
+                $("select[name='type']").focus();
+                return false;
+            }
+
+            if ($("input[name='Date']").val() == "") {
+
+                displayMessage("A data de realiza&ccedil;&atilde;o do exame não pode ser vazia.", "error");
+                $("input[name='Date']").focus();
+                return false;
+            }
+
+            if (!VerifyDate($("input[name='Date']").val())) {
+
+                displayMessage("Data inválida.", "error");
+                $("input[name='Date']").focus();
+                return false;
+            }
+
+            if ($("textarea[name='description'").val() == "") {
+
+                displayMessage("A descri&ccedil;&atilde;o do exame deve ser preenchida.", "error");
+                $("textarea[name='description'").focus();
+                return false;
+            }
+        });
+    });
+
+</script>

@@ -3,7 +3,7 @@
 @using EHR.Infrastructure.Util
 <form id="allergy">
     <label>A que:</label>&nbsp;
-        <input type="text" name="theWitch" autofocus required size="50" />
+        <input type="text" name="theWitch" autofocus size="50" maxlength="65" />
     <br />
     <br />
     <label>Tipo(s):</label>&nbsp;
@@ -14,6 +14,35 @@
                 }
     <br />
     <br />
-    <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveAllergy");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
-            <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
+    <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#allergy input[type='submit']").click(function () {
+
+            
+            if ($("input[name='theWitch']").val() == "") {
+
+                displayMessage("O campo de descri&ccedil;&atilde;o da alergia deve ser preenchido.", "error");
+                //MarkInvalidField(firstNameField);
+                $("input[name='theWitch']").focus();
+                return false;
+            }
+
+            if ($("input[name='type']:checked").length == 0) {
+
+                displayMessage("Ao menos um tipo de rea&ccedil;&atilde;o deve ser selecionada.", "error");
+                //MarkInvalidField(hospitalField[0]);
+                $("input[name='type']")[0].focus();
+                return false;
+            }
+
+            saveRow($(this), "/DischargeSummary/SaveAllergy");
+        });
+    });
+
+
+</script>

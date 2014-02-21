@@ -30,6 +30,34 @@
     </div>
     <br />
     <br />
-    <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveHemotransfusion");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#hemotransfusion input[type='submit']").click(function () {
+           
+            if ($("select[name='typeHemotrasfusion']").val() == "-1") {
+
+                displayMessage("Um tipo de hemotransfus&atilde;o deve ser selecionado.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("select[name='typeHemotrasfusion']").focus();
+                return false;
+            }
+
+            if ($("#hemotransfusion input[type='radio']:checked").val() == "yes") {
+
+                if ($("#hemotransfusion input[type='checkbox']:checked").length == 0) {
+
+                    displayMessage("Um tipo rea&ccedil;&atilde;o deve ser selecionado.", "error");
+                    //MarkInvalidField(secondEmailField);
+                    $("#hemotransfusion input[type='checkbox']")[0].focus();
+                    return false;
+                }
+            }
+
+            saveRow(this, "/DischargeSummary/SaveHemotransfusion");
+        });
+    });
+</script>

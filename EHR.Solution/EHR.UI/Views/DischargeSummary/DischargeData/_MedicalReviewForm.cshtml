@@ -1,13 +1,54 @@
 ﻿<div id="medicalReview">
     <label>Prazo de revis&atilde;o em (Dias):</label>&nbsp;
-    <input type="text" name="TermMedicalReviewAt" size="3" value="" />
+    <input type="text" name="TermMedicalReviewAt" size="3" maxlength="3" />
     <br />
     <br />
     <label>Especialidade:</label>&nbsp;
     <input type="text" required style="margin-left: 10px;" name="SpecialtyDescription" value="" onclick="GenericAutoComplete(this, '/DischargeSummary/SpecialtyAutoComplete', '#Specialty')" />
-    <input type="hidden" name="SpecialtyId" id="Specialty" value="" />
+    <input type="text" name="SpecialtyId" id="Specialty" />
     <br />
     <br />
-    <input type="button" onclick='SaveMedicalReview(this);' value="Adicionar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="button" value="Adicionar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#medicalReview input[name='TermMedicalReviewAt']").keypress(function (event) {
+
+            if (!onlyNumbers(event))
+                event.preventDefault();
+        });
+
+
+        $("#medicalReview input[type='button']").click(function () {
+
+            if ($("#medicalReview input[name='TermMedicalReviewAt']").val() == "") {
+
+                displayMessage("O prazo de revis&atilde;o deve ser informado.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("#medicalReview input[name='TermMedicalReviewAt']").focus();
+                return false;
+            }
+
+            if (!VerifyIfTextContainsOnlyNumbers($("#medicalReview input[name='TermMedicalReviewAt']").val())) {
+
+                displayMessage("O campo de prazo de revis&atilde;o deve conter somente n&uacute;meros.", "error");
+                //MarkInvalidField(lastNameField);
+                $("#medicalReview input[name='TermMedicalReviewAt']").focus();
+                return false;
+            }
+
+            if ($("#medicalReview input[name='SpecialtyDescription']").val() == "") {
+
+                displayMessage("A especialidade deve ser informada.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("#medicalReview input[name='SpecialtyDescription']").focus();
+                return false;
+            }
+
+            SaveMedicalReview(this);
+        });
+    });
+</script>

@@ -6,10 +6,10 @@
     <br />
     <br />
     <label>Dura&ccedil;&atilde;o:</label>
-    <input type="number" name="medication.duration" style="margin-left: 40px;" min="1" value="1"/>&nbsp;&nbsp;Dia(s)<br />
+    <input type="text" name="medication.duration" style="margin-left: 40px;" value="1" maxlength="3"/>&nbsp;&nbsp;Dia(s)<br />
     <br />
     <br />
-    <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveMedication");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+    <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
 <script type="text/javascript">
@@ -20,5 +20,24 @@
             $(e).next().attr("disabled", "disabled");
         }
     }
-    $('input[type="number"]').numeric();
+
+    $('input[name="medication.duration"]').keypress(function (event) { return onlyNumbers(event); });
+
+    $(document).ready(function () {
+
+        $("#medicationForm input[type='submit']").click(function () {
+
+            if ($("input[name='medication.description']").val() == "") {
+
+                displayMessage("O campo de medica&ccedil;&atilde;o deve ser preenchido.", "error");
+                //MarkInvalidField(firstNameField);
+                $("input[name='medication.description']").focus();
+                return false;
+            }
+
+            saveRow(this, "/DischargeSummary/SaveMedication");
+        });
+        
+    });
+
 </script>
