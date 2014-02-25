@@ -170,6 +170,7 @@
 @section scripts
 {
     <script type="text/javascript" src="~/Scripts/AjaxFlagMenu-1.0.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.maskedinput.min.js"></script>
     <script type="text/javascript">
 
         $.datepicker.setDefaults($.extend({ 'dateFormat': 'dd/mm/yy' }, $.datepicker.regional['pt-BR']));
@@ -177,6 +178,7 @@
         $("document").ready(function () {
 
             $("input[name='Birthday']").datepicker();
+            $("input[name='Birthday']").mask("99/99/9999");
 
             $("input[name='FirstName']").keypress(function (event) {
 
