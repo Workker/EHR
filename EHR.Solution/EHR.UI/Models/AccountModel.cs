@@ -21,5 +21,6 @@ namespace EHR.UI.Models
         public bool Administrator { get; set; }
         public short CurrentHospital { get; set; }
         public short Hospital { get; set; }
+        public bool Refused { get; set; }
     }
 }

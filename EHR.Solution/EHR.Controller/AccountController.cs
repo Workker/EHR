@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Mail;
 using Workker.Framework.Domain;
+using System.Linq.Expressions;
+using  System.Linq;
 
 namespace EHR.Controller
 {
@@ -106,12 +108,14 @@ namespace EHR.Controller
             //todo: Implementando
 
             var account = _accounts.Get<Account>(accountId);
+            Assertion.IsTrue(account.ProfessionalRegistrations == null ||
+                             account.ProfessionalRegistrations.Count == 0 ||
+                             !account.ProfessionalRegistrations.Any(p => p.State.Id == stateId && p.Type == (ProfessionalRegistrationTypeEnum)professionalResgistrationType),
+                             "Este estado ja foi registrado").Validate();
+
             //((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
-
             var repository = new Types<State>();
-
             var state = repository.Get(stateId);
-
             var professionalRegistration = new ProfessionalRegistration
                                                                     {
                                                                         Number = professionalResgistrationNumber,
@@ -120,9 +124,7 @@ namespace EHR.Controller
                                                                     };
 
             account.AddProfessionalRegistration(professionalRegistration);
-
             FactoryRepository.GetRepository(RepositoryEnum.Accounts).Save(account);
-
         }
 
         [ExceptionLogger]
@@ -143,17 +145,16 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void RefuseAccount(int accountId)
+        public override void RefuseAccount(int Id, int ProfessionalId)
         {
-            Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
+            Assertion.GreaterThan(Id, 0, "Usuário inválido.").Validate();
 
-            var account = _accounts.Get<Account>(accountId);
+            var account = _accounts.Get<Account>(Id);
+            var professional = account.ProfessionalRegistrations.FirstOrDefault(p => p.Id == ProfessionalId);
+            account.RemoveProfessionalRegistration(professional);
+            _accounts.Save(account);
 
-            _accounts.Refuse(account);
-
-            Assertion.IsTrue(account.Refused, "A conta não pode ser recusada.").Validate();
-
-            ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi reprovado. \n Entre em contato com o responsavel pela aprovação na unidade " + account.Hospital.Name + ".");
+            //ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi reprovado. \n Entre em contato com o responsavel pela aprovação na unidade " + account.Hospital.Name + ".");
         }
 
         [ExceptionLogger]

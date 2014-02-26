@@ -5,19 +5,26 @@
 @using EHR.Infrastructure.Util
 @foreach (AccountModel account in ViewBag.Accounts)
 {
-    <div class="clearfix bottomLine">
+    foreach (var profissional in account.ProfessionalRegistration.Where(p=> p.Approved == false))
+    {
+    <div id="recusarDiv" class="clearfix bottomLine">
         <form id="Accounts">
-            <div class="clearfix _8m _8u" style="margin-bottom: 10px;">
+            <div class="d clearfix _8m _8u" style="margin-bottom: 10px;">
                 <div class="pls">
                     <div class="fsm fwn fcg">
                         <h2 class="text">@account.FirstName &nbsp;@account.LastName</h2>
                         <div class="fbProfileByline searchResultPersonByline">
                             <span class="fbProfileBylineFragment">
                                 <label>
-                                    @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), account.ProfessionalRegistration.FirstOrDefault().Type.ToString(CultureInfo.InvariantCulture))))
+                                    @*  @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), account.ProfessionalRegistration.FirstOrDefault().Type.ToString(CultureInfo.InvariantCulture))))
                                     :&nbsp;
                                     @{
                                         var professionalRegistrationModel = account.ProfessionalRegistration.FirstOrDefault(x => x.Approved == false);
+                                    }*@
+                                     @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), profissional.Type.ToString(CultureInfo.InvariantCulture))))
+                                    :&nbsp;
+                                    @{
+                                        var professionalRegistrationModel = profissional;
                                     }
                                 </label>@professionalRegistrationModel.Number - @professionalRegistrationModel.State.Acronym
                                 <input type="hidden" name="professionalRegistrationId" hidden value="@professionalRegistrationModel.Id"/>
@@ -27,11 +34,14 @@
                         </div>
                         <br />
                         <input type="hidden" value="@account.Id" name="accountId"/>
-                        <input type="submit" onclick='approveAccount(this)' value="Aprovar" class="uibutton special" />&nbsp;&nbsp;
-                           <input type="submit" onclick='refuseAccount(this)' value="Reprovar" class="uibutton" />
+                        <input type="submit" onclick='approveAccount(@account.Id , @profissional.Id)' value="Aprovar" class="uibutton special" />&nbsp;&nbsp;
+                           <input type="submit" onclick='refuseAccount(@account.Id , @profissional.Id)' value="Reprovar" class="uibutton" />
                     </div>
                 </div>
             </div>
         </form>
     </div>
+    }
+    
+    
 }

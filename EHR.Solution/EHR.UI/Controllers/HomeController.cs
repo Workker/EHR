@@ -89,11 +89,11 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public void ApproveAccount(string accountId, string professionalRegistrationId)
+        public void ApproveAccount(string accountId, string professionalId)
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Account).ApproveProfessionalRegistration(int.Parse(accountId), int.Parse(professionalRegistrationId));
+                FactoryController.GetController(ControllerEnum.Account).ApproveProfessionalRegistration(int.Parse(accountId), int.Parse(professionalId));
 
                 this.ShowMessage(MessageTypeEnum.Success, "Usuário aprovado.");
             }
@@ -104,11 +104,11 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public void RefuseAccount(string id)
+        public void RefuseAccount(string accountId, string professionalId)
         {
             try
             {
-                FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(id));
+                FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(accountId), int.Parse(professionalId));
 
                 this.ShowMessage(MessageTypeEnum.Warning, "Usuário reprovado.");
             }

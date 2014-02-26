@@ -408,41 +408,46 @@ function GetMore(element, url) {
     });
 }
 
-function approveAccount(element) {
-    var form = $(element).parent().parent().parent().parent();
+function approveAccount(accountId, ProfessionalId) {
+   // var form = $(element).parent().parent().parent().parent();
 
-    form.submit(function () {
+   // form.submit(function () {
         $.ajax({
             type: "POST",
             url: "http://" + window.location.host + "/Home/ApproveAccount",
             cache: false,
-            data: form.serialize(),
+            //            data: form.serialize(),
+            data: { accountId: accountId, ProfessionalId: ProfessionalId },
             success: function (data) {
                 sessionTimeOut(data);
-                var divContent = $(element).parent().parent().parent().parent().parent();
-                $(divContent).hide();
+                //var divContent = $(element).parent().parent().parent().parent().parent();
+                //$(divContent).hide();
+                $("#recusarDiv").hide();
             }
         });
         return false;
-    });
+    //});
 }
 
-function refuseAccount(element) {
-    var form = $(element).parent().parent().parent().parent();
-    form.submit(function () {
+function refuseAccount(accountId, ProfessionalId) {
+    
+   // debugger;
+   // var form = $(element).parent().parent().parent().parent();
+   // form.submit(function () {
         $.ajax({
             type: "POST",
             url: "http://" + window.location.host + "/Home/RefuseAccount",
             cache: false,
-            data: form.serialize(),
+            //            data: form.serialize(),
+            data:{accountId: accountId,ProfessionalId : ProfessionalId},
             success: function (data) {
                 sessionTimeOut(data);
-                var divContent = $(element).parent().parent().parent().parent().parent();
-                $(divContent).hide();
+                //var divContent = $(element).parent().parent().parent().parent().parent();
+                $("#recusarDiv").hide();
             }
         });
-        return false;
-    });
+    //    return false;
+   // });
 }
 
 // Toggle of class of Advanced Search

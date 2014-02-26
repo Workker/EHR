@@ -59,6 +59,18 @@ namespace EHR.Domain.Entities
             ProfessionalRegistrations.Add(professionalRegistration); ;
         }
 
+
+        public virtual void RemoveProfessionalRegistration(ProfessionalRegistration professionalRegistration)
+        {
+            #region Precondition
+
+            Assertion.NotNull(professionalRegistration, "Registro profissional inválido!").Validate();
+
+            #endregion
+
+            ProfessionalRegistrations.Remove(professionalRegistration); ;
+        }
+
         public virtual void ToEnterLastName(string lastName)
         {
             #region Precondition

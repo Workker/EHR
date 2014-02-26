@@ -6,6 +6,7 @@ using NHibernate.Criterion;
 using NHibernate.SqlCommand;
 using System.Collections.Generic;
 using Workker.Framework.Domain;
+using NHibernate.Transform;
 
 namespace EHR.Domain.Repository
 {
@@ -112,7 +113,7 @@ namespace EHR.Domain.Repository
                 Restrictions.Eq("ProfessionalRegistration.Approved", false)).Add(Restrictions.Eq("ProfessionalRegistration.Refused", false));
             criterion.AddOrder(Order.Desc("Id"));
 
-            var accounts = criterion.List<Account>();
+            var accounts = criterion.SetResultTransformer(new DistinctRootEntityResultTransformer()).List<Account>();
 
             Assertion.NotNull(accounts, "Lista de contas nula.").Validate();
 
