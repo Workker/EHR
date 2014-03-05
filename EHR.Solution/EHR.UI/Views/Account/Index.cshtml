@@ -89,16 +89,13 @@
                                                         <td style="border: 1px solid #bdc7d8; background-color: #fff;">
                                                             <select name="stateId"required style="width: 110px; border: 0px; font-size: 18px; color: #6d6d6d;">
                                                                 <option value="-1">Estado</option>
-                                                                <option>RJ</option>
-                                                                <option>SP</option>
-                                                                @*
-                                                                    @foreach (State value in (IList<State>)Session["States"])
+                                                                    @foreach (EHR.CoreShared.Entities.State value in (IList<EHR.CoreShared.Entities.State>)Session["States"])
                                                                     {
                                                                         <option value="@value.Id">
                                                                             @value.Acronym
                                                                         </option>  
                                                                     }
-                                                                *@
+                                                                
                                                             </select>
                                                         </td>
                                                     </tr>

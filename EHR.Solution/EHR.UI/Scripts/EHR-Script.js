@@ -275,6 +275,8 @@ function closeForm(element) {
 
     if ($(spanOfLinkAction).text() == "+") {
         var li = $(divContent).parent();
+        $(li).prev("hr").remove();
+        $(li).next("hr").remove();
         $(li).remove();
     } else {
         $(divContent).hide();

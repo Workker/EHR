@@ -1,6 +1,6 @@
 ﻿<form id="procedures">
     <label>Procedimento:</label>&nbsp;
-    <input type="text" name="description" required onclick="GenericAutoComplete(this, '/DischargeSummary/TusAutoComplete', 'input[name=procedureCode]')" />
+    <input type="text" name="description" maxlength="40" required onclick="GenericAutoComplete(this, '/DischargeSummary/TusAutoComplete', 'input[name=procedureCode]')" />
     <br />
     <br />
     <label>C&oacute;digo:</label>
@@ -23,6 +23,7 @@
     $(document).ready(function () {
 
         $("input[name='Date']").datepicker();
+        $("input[name='Date']").mask("99/99/9999");
 
         $("input[type='submit']").click(function () {
 

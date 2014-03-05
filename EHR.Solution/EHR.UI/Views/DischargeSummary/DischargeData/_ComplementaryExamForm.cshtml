@@ -8,7 +8,7 @@
     <br />
     <br />
     <input type="button" value="Adicionar" class="uibutton large confirm" />&nbsp;&nbsp;
-            <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
+    <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </div>
 <script type="text/javascript">
 
@@ -16,23 +16,35 @@
 
         $("#complementaryExam input[type='button']").click(function () {
 
-            if ($("#complementaryExam input[name='Description']").val() == "") {
+            if ($("#complementaryExam input[name='Description']")[$("#complementaryExam input[name='Description']").length - 1].value == "") {
 
                 displayMessage("O campo exame deve ser preenchido.", "error");
                 //MarkInvalidField(lastNameField);
                 $("#complementaryExam input[name='Description']").focus();
                 return false;
             }
+            
+            if ($("#complementaryExam input[name='Period']")[$("#complementaryExam input[name='Period']").length - 1].value == "") {
 
-            if ($("#complementaryExam input[name='Period']").val() == "") {
-
-                displayMessage("O campo per&iacute;odo ser preenchido.", "error");
+                displayMessage("O campo per&iacute;odo deve ser preenchido.", "error");
                 //MarkInvalidField(lastNameField);
                 $("#complementaryExam input[name='Period']").focus();
                 return false;
             }
 
+            if (!VerifyIfTextContainsOnlyNumbers($("#complementaryExam input[name='Period']")[$("#complementaryExam input[name='Period']").length - 1].value)) {
+
+                displayMessage("O campo per&iacute;odo deve conter somente n&uacute;meros.", "error");
+                //MarkInvalidField(professionalRegistrationField);
+                $("#complementaryExam input[name='Period']").focus();
+                return false;
+            }
+            
             SaveComplementaryExam(this);
+
+            $("#complementaryExam input[type='Description']").val("");
+            $("#complementaryExam input[name='Period']").val("");
+
         });
     });
 

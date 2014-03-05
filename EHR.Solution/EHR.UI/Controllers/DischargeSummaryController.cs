@@ -759,7 +759,7 @@ namespace EHR.UI.Controllers
 
                 this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "dados de alta");
 
-                this.ShowMessage(MessageTypeEnum.Success, "Dados de alta salvo.");
+                this.ShowMessage(MessageTypeEnum.Success, "Dados de alta salvos com sucesso.");
             }
             catch (Exception ex)
             {
@@ -795,7 +795,7 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                if (review.Specialty.Id >= int.MinValue)
+                if (review.Specialty.Id >= short.MinValue)
                 {
                     AddOnSessionMedicalReviews(review);
                     ViewBag.MedicalReviews = new List<MedicalReviewModel> { GetMedicalReviewsFromSession().Last() };

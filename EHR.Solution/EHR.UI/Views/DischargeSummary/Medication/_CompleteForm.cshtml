@@ -138,6 +138,15 @@
                 return false;
             }
 
+            if ($("input[name='medication.duration']").val() == "") {
+
+                displayMessage("O campo dura&ccedil;&atilde;o deve ser preenchido.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("input[name='medication.duration']").focus();
+                return false;
+            }
+            
+
             saveRow(this, "/DischargeSummary/SaveMedication");
         });
 

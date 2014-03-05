@@ -1,7 +1,7 @@
 ﻿<form id="medicationForm">
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
     <label>Medicamento:</label>
-    <input type="text" name="medication.description" required style="margin-left: 10px;" onclick="GenericAutoComplete(this, '/DischargeSummary/DefAutoComplete', '#def')" />
+    <input type="text" name="medication.description" required style="margin-left: 10px;" maxlength="40" onclick="GenericAutoComplete(this, '/DischargeSummary/DefAutoComplete', '#def')" />
     <input type="hidden" name="medication.def.id" id="def" />
     <br />
     <br />
@@ -13,6 +13,7 @@
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
 <script type="text/javascript">
+
     function SelectFrequencyCase(e) {
         if ($(e).val() == 8) {
             $(e).next().removeAttr("disabled");
@@ -32,6 +33,22 @@
                 displayMessage("O campo de medica&ccedil;&atilde;o deve ser preenchido.", "error");
                 //MarkInvalidField(firstNameField);
                 $("input[name='medication.description']").focus();
+                return false;
+            }
+
+            if ($("input[name='medication.duration']").val() == "") {
+
+                displayMessage("O campo de dura&ccedil;&atilde;o deve ser preenchido.", "error");
+                //MarkInvalidField(firstNameField);
+                $("input[name='medication.duration']").focus();
+                return false;
+            }
+
+            if (!VerifyIfTextContainsOnlyNumbers($("input[name='medication.duration']").val())) {
+
+                displayMessage("O campo de dura&ccedil;&atilde;o deve conter somente n&uacute;meros.", "error");
+                //MarkInvalidField(firstNameField);
+                $("input[name='medication.duration']").focus();
                 return false;
             }
 

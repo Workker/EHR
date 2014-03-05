@@ -15,7 +15,7 @@ namespace EHR.UI.Controllers
             try
             {
                 ViewBag.Hospitals = FactoryController.GetController(ControllerEnum.Hospital).GetAllHospitals();
-
+                Session["States"] = FactoryController.GetController(ControllerEnum.State).GetAll();
                 return View();
             }
             catch (Exception ex)

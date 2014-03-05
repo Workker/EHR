@@ -27,12 +27,12 @@
     <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveExam");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
             <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
-
 <script type="text/javascript">
 
     $(document).ready(function () {
 
         $("input[name='Date']").datepicker();
+        $("input[name='Date']").mask("99/99/9999");
 
         //validate inputs
         $("input[type='submit']").click(function () {
