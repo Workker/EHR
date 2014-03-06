@@ -8,8 +8,45 @@
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.20.js"></script>
     <script type="text/javascript">
 
-        $(document).ready(function () {
+        function validateAddCrmCroPopUp() {
 
+            if ($("div[class='mbm'] select[name='professionalResgistrationType']").val() == -1) {
+
+                $("#popupErrorMsgEmpty_type").show("fast");
+                $("div[class='mbm'] select[name='professionalResgistrationType']").focus();
+                return false;
+            }
+
+            if ($("div[class='mbm'] input[name='professionalResgistrationNumber']").val() == "") {
+
+                $("#popupErrorMsgEmpty_professionalRegistration").show("fast");
+                $("div[class='mbm'] select[name='professionalResgistrationNumber']").focus();
+                return false;
+            }
+
+            if ($("div[class='mbm'] select[name='stateId']").val() == -1) {
+
+                $("#popupErrorMsgEmpty_state").show("fast");
+                $("div[class='mbm'] select[name='stateId']").focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        $(document).ready(function () {
+            
+            $(this).click(function () { $("[id*='popupErrorMsg']").hide("slow"); });
+            
+
+            $("div[class='mbm'] input[name='professionalResgistrationNumber']").keypress(function (event) {
+                if (!onlyNumbers(event))
+                    event.preventDefault();
+            });
+
+
+            $("[id*='popupErrorMsg']").hide();
+            
             $('#mascaraModal').fadeTo("fast", 0);
 
             $("#lnkIncluirRegistroProfissional").click(function () {
@@ -37,17 +74,35 @@
                 $(this).hide();
             });
 
-            /*
-            $("#lnkIncluirRegistroProfissional").mouseup(function () {
+            $("#btnAddProfessionalRegistration").click(function (event) {
 
-                $(document).click(function () {
-                    HideFormChangePassword($("#cancelNewPassword"));
-                    HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
-                });
+                if (validateAddCrmCroPopUp()) {
+
+                    return AddprofessionalResgistration($(this));
+                }
+                else {
+
+                    return false;
+                }
+
+                /*
+                if (validateAddCrmCroPopUp()) {
+
+                    if () {
+                        displayMessage("CRM/ CRO inclu&iacute;do com sucesso.", "success");
+                        HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+                        return false;
+                    }
+                    else {
+                        displayMessage("Houve um erro ao incuir o CRM/ CRO.", "error");
+                        HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+                        return false;
+                    }
+                }
+                else
+                    return false;
+                    */
             });
-            */
-
-
         });
 
     </script>
@@ -114,18 +169,7 @@
                         <div id="AddprofessionalResgistration">
                             <form>
                                 <div class="mbm">
-                                    <select name="stateId" required>
-                                        <option value="-1">Selecione o Estado</option>
-                                        @foreach (State value in (IList<State>)Session["States"])
-                                        {
-                                            <option value="@value.Id">
-                                                @value.Acronym
-                                            </option>  
-                                        }
-                                    </select>
-                                </div>
-                                <div class="mbm">
-                                    <select name="professionalResgistrationType" required>
+                                    <select name="professionalResgistrationType" style="width:130px;">
                                         <option value="-1">Selecione o Tipo</option>
                                         @foreach (var value in Enum.GetValues(typeof(ProfessionalRegistrationTypeEnum)).Cast<short>().ToList())
                                         {
@@ -134,12 +178,26 @@
                                             </option>  
                                         }
                                     </select>
+                                    <label id="popupErrorMsgEmpty_type" style="float: right; position:absolute; background-color: #f2dede; color: #b94a48; width: 200px;">Um tipo de registro profissional deve ser selecionado.</label>
                                 </div>
                                 <div class="mbm">
-                                    <input type="text" name="professionalResgistrationNumber" placeholder="Informe o numero" required />
+                                    <input type="text" name="professionalResgistrationNumber" maxlength="10" placeholder="Informe o numero" style="width:122px;" />
+                                    <label id="popupErrorMsgEmpty_professionalRegistration" style="float: right; position:absolute; background-color: #f2dede; color: #b94a48; width: 200px;">O múmero do registro profissional deve ser selecionado.</label>
                                 </div>
                                 <div class="mbm">
-                                    <input type="submit" value="Incluir" class="uibutton special" onclick="AddprofessionalResgistration(this);" />
+                                    <select name="stateId" style="width:130px;">
+                                        <option value="-1">Selecione o Estado</option>
+                                        @foreach (State value in (IList<State>)Session["States"])
+                                        {
+                                            <option value="@value.Id">
+                                                @value.Acronym
+                                            </option>  
+                                        }
+                                    </select>
+                                    <label  id="popupErrorMsgEmpty_state" style="float: right; position:absolute; background-color: #f2dede; color: #b94a48; width: 150px;">Um estado deve ser selecionado.</label>
+                                </div>
+                                <div class="mbm">
+                                    <input type="submit" id="btnAddProfessionalRegistration" value="Incluir" class="uibutton special" />
                                     <input type="button" id="cancelProfessionalResgistrationNumber" value="Cancelar" class="uibutton" onclick="HideFormAddprofessionalResgistration(this);" />
                                 </div>
                             </form>

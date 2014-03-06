@@ -15,7 +15,7 @@
     <br />
     <br />
     <label>CID:</label>
-    <input type="text" name="diagnostic.description" required style="margin-left: 93px" size="50" maxlength="100" onclick="GenericAutoComplete(this, '/DischargeSummary/CidAutoComplete', '#cidCode')" />
+    <input type="text" name="diagnostic.description" style="margin-left: 93px" size="50" maxlength="100" onclick="GenericAutoComplete(this, '/DischargeSummary/CidAutoComplete', '#cidCode')" />
     <br />
     <br />
     <label>CID c&oacute;digo:</label>
@@ -23,5 +23,39 @@
     <br />
     <br />
     <input type="submit" onclick='saveRow(this, "/DischargeSummary/SaveDiagnostic");' value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
-            <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
+    <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#diagnostic input[type='submit']").click(function () {
+
+            if ($("#diagnostic select[name='diagnostic.type']").val() == "-1") {
+
+                displayMessage("Um tipo de diagn&oacute;stico deve ser selecionado.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("#diagnostic select[name='diagnostic.type']").focus();
+                return false;
+            }
+
+            if ($("#diagnostic input[name='diagnostic.description']").val() == "") {
+
+                displayMessage("O campo CID deve ser preenchido.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("#diagnostic input[name='diagnostic.description']").focus();
+                return false;
+            }
+
+            if ($("#diagnostic input[name='diagnostic.cid.code']").val() == "") {
+
+                displayMessage("CID inv&aacute;lido.", "error");
+                //MarkInvalidField(secondEmailField);
+                $("#diagnostic input[name='diagnostic.description']").focus();
+                return false;
+            }
+
+        });
+    });
+
+</script>
