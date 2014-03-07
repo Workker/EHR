@@ -95,7 +95,7 @@ namespace EHR.UI.Controllers
             {
                 FactoryController.GetController(ControllerEnum.Account).ApproveProfessionalRegistration(int.Parse(accountId), int.Parse(professionalId));
 
-                this.ShowMessage(MessageTypeEnum.Success, "Usuário aprovado.");
+                this.ShowMessage(MessageTypeEnum.Success, "Usu&aacute;rio aprovado.");
             }
             catch (Exception ex)
             {
@@ -110,7 +110,7 @@ namespace EHR.UI.Controllers
             {
                 FactoryController.GetController(ControllerEnum.Account).RefuseAccount(int.Parse(accountId), int.Parse(professionalId));
 
-                this.ShowMessage(MessageTypeEnum.Warning, "Usuário reprovado.");
+                this.ShowMessage(MessageTypeEnum.Success, "Usu&aacute;rio reprovado.");
             }
             catch (Exception ex)
             {

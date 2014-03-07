@@ -34,8 +34,8 @@
                         </div>
                         <br />
                         <input type="hidden" value="@account.Id" name="accountId"/>
-                        <input type="submit" onclick='approveAccount(@account.Id , @profissional.Id)' value="Aprovar" class="uibutton special" />&nbsp;&nbsp;
-                           <input type="submit" onclick='refuseAccount(@account.Id , @profissional.Id)' value="Reprovar" class="uibutton" />
+                        <input type="button" onclick="approveAccount(@account.Id , @profissional.Id);" value="Aprovar" class="uibutton special" />&nbsp;&nbsp;
+                        <input type="button" onclick='refuseAccount(@account.Id , @profissional.Id);' value="Reprovar" class="uibutton" />
                     </div>
                 </div>
             </div>

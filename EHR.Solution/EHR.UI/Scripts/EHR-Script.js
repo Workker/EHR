@@ -424,6 +424,7 @@ function approveAccount(accountId, ProfessionalId) {
                 sessionTimeOut(data);
                 //var divContent = $(element).parent().parent().parent().parent().parent();
                 //$(divContent).hide();
+                handleAjaxMessages();
                 $("#recusarDiv").hide();
             }
         });
@@ -444,6 +445,7 @@ function refuseAccount(accountId, ProfessionalId) {
             data:{accountId: accountId,ProfessionalId : ProfessionalId},
             success: function (data) {
                 sessionTimeOut(data);
+                handleAjaxMessages();
                 //var divContent = $(element).parent().parent().parent().parent().parent();
                 $("#recusarDiv").hide();
             }
