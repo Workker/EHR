@@ -507,20 +507,25 @@ function HideFormAddprofessionalResgistration(element) {
 function AddprofessionalResgistration(element) {
 
     var form = $(element).parent().parent();
-    form.submit(function () {
+    //form.submit(function () {
         $.ajax({
             type: "POST",
             url: "http://" + window.location.host + "/Home/AddprofessionalResgistration",
             cache: false,
-            data: form.serialize(),
+            data: {
+                professionalResgistrationType : $("select[name='professionalResgistrationType']").val(),
+                professionalResgistrationNumber : $("input[name='professionalResgistrationNumber']").val(),
+                stateId: $("select[name='stateId']").val() },
+            //data: form.serialize(),
             success: function (resp) {
                 sessionTimeOut(resp);
                 handleAjaxMessages();
+                clearAddProfessionalRegistrationMenu();
                 HideFormAddprofessionalResgistration(element);
             }
         });
         return false;
-    });
+    //});
 }
 
 function ShowTopMenu(element) {
@@ -781,4 +786,11 @@ function VerifyDate(date) {
         return false;
     else
         return true;
+}
+
+function clearAddProfessionalRegistrationMenu() {
+
+    $("select[name='professionalResgistrationType']").val("-1");
+    $("input[name='professionalResgistrationNumber']").val("");
+    $("select[name='stateId']").val("-1");
 }
