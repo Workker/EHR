@@ -4,109 +4,8 @@
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
 @model EHR.UI.Models.AccountModel
-    <script type="text/javascript" src="~/Scripts/jquery-1.10.1.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery-ui-1.8.20.js"></script>
-    <script type="text/javascript">
-
-        function validateAddCrmCroPopUp() {
-
-            if ($("div[class='mbm'] select[name='professionalResgistrationType']").val() == -1) {
-
-                $("#popupErrorMsgEmpty_type").show("fast");
-                $("div[class='mbm'] select[name='professionalResgistrationType']").focus();
-                return false;
-            }
-
-            if ($("div[class='mbm'] input[name='professionalResgistrationNumber']").val() == "") {
-
-                $("#popupErrorMsgEmpty_professionalRegistration").show("fast");
-                $("div[class='mbm'] select[name='professionalResgistrationNumber']").focus();
-                return false;
-            }
-
-            if ($("div[class='mbm'] select[name='stateId']").val() == -1) {
-
-                $("#popupErrorMsgEmpty_state").show("fast");
-                $("div[class='mbm'] select[name='stateId']").focus();
-                return false;
-            }
-
-            return true;
-        }
-
-        $(document).ready(function () {
-            
-            $(this).click(function () { $("[id*='popupErrorMsg']").hide("slow"); });
-            
-
-            $("div[class='mbm'] input[name='professionalResgistrationNumber']").keypress(function (event) {
-                if (!onlyNumbers(event))
-                    event.preventDefault();
-            });
-
-
-            $("[id*='popupErrorMsg']").hide();
-            
-            $('#mascaraModal').fadeTo("fast", 0);
-
-            $("#lnkIncluirRegistroProfissional").click(function () {
-            
-                HideFormChangePassword($("#cancelNewPassword"));
-                $("#mascaraModal").fadeIn("slow");
-                $('#mascaraModal').css({ 'width': $(window).width(), 'height': $(document).height() });
-
-                ShowFormAddprofessionalResgistration(this);
-            });
-
-            $("#changePassword").click(function (event) {
-
-                HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
-                $("#mascaraModal").fadeIn("slow");
-                $('#mascaraModal').css({ 'width': $(window).width(), 'height': $(document).height() });
-
-                ShowFormChangePassword(this);
-            });
-
-            $("#mascaraModal").click(function () {
-
-                HideFormChangePassword($("#cancelNewPassword"));
-                HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
-                $(this).hide();
-            });
-
-            $("#btnAddProfessionalRegistration").click(function (event) {
-
-                if (validateAddCrmCroPopUp()) {
-
-                    return AddprofessionalResgistration($(this));
-                }
-                else {
-
-                    return false;
-                }
-
-                /*
-                if (validateAddCrmCroPopUp()) {
-
-                    if () {
-                        displayMessage("CRM/ CRO inclu&iacute;do com sucesso.", "success");
-                        HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
-                        return false;
-                    }
-                    else {
-                        displayMessage("Houve um erro ao incuir o CRM/ CRO.", "error");
-                        HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
-                        return false;
-                    }
-                }
-                else
-                    return false;
-                    */
-            });
-        });
-
-    </script>
-
+<script type="text/javascript" src="~/Scripts/jquery-1.10.1.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-ui-1.8.20.js"></script>
 <div id="topBar" class="fixed_elem">
     <div id="invisibleCoverDiv"></div>
     <div id="headContent" class="clearfix">
@@ -233,3 +132,103 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+    function validateAddCrmCroPopUp() {
+
+        if ($("div[class='mbm'] select[name='professionalResgistrationType']").val() == -1) {
+
+            $("#popupErrorMsgEmpty_type").show("fast");
+            $("div[class='mbm'] select[name='professionalResgistrationType']").focus();
+            return false;
+        }
+
+        if ($("div[class='mbm'] input[name='professionalResgistrationNumber']").val() == "") {
+
+            $("#popupErrorMsgEmpty_professionalRegistration").show("fast");
+            $("div[class='mbm'] select[name='professionalResgistrationNumber']").focus();
+            return false;
+        }
+
+        if ($("div[class='mbm'] select[name='stateId']").val() == -1) {
+
+            $("#popupErrorMsgEmpty_state").show("fast");
+            $("div[class='mbm'] select[name='stateId']").focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    $(document).ready(function () {
+
+        $(this).click(function () { $("[id*='popupErrorMsg']").hide("slow"); });
+
+
+        $("div[class='mbm'] input[name='professionalResgistrationNumber']").keypress(function (event) {
+            if (!onlyNumbers(event))
+                event.preventDefault();
+        });
+
+
+        $("[id*='popupErrorMsg']").hide();
+
+        $('#mascaraModal').fadeTo("fast", 0);
+
+        $("#lnkIncluirRegistroProfissional").click(function () {
+
+            HideFormChangePassword($("#cancelNewPassword"));
+            $("#mascaraModal").fadeIn("slow");
+            $('#mascaraModal').css({ 'width': $(window).width(), 'height': $(document).height() });
+
+            ShowFormAddprofessionalResgistration(this);
+        });
+
+        $("#changePassword").click(function (event) {
+
+            HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+            $("#mascaraModal").fadeIn("slow");
+            $('#mascaraModal').css({ 'width': $(window).width(), 'height': $(document).height() });
+
+            ShowFormChangePassword(this);
+        });
+
+        $("#mascaraModal").click(function () {
+
+            HideFormChangePassword($("#cancelNewPassword"));
+            HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+            $(this).hide();
+        });
+
+        $("#btnAddProfessionalRegistration").click(function (event) {
+
+            if (validateAddCrmCroPopUp()) {
+
+                return AddprofessionalResgistration($(this));
+            }
+            else {
+
+                return false;
+            }
+
+            /*
+            if (validateAddCrmCroPopUp()) {
+
+                if () {
+                    displayMessage("CRM/ CRO inclu&iacute;do com sucesso.", "success");
+                    HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+                    return false;
+                }
+                else {
+                    displayMessage("Houve um erro ao incuir o CRM/ CRO.", "error");
+                    HideFormAddprofessionalResgistration($("#cancelProfessionalResgistrationNumber"));
+                    return false;
+                }
+            }
+            else
+                return false;
+                */
+        });
+    });
+
+</script>

@@ -111,7 +111,7 @@ namespace EHR.Controller
             Assertion.IsTrue(account.ProfessionalRegistrations == null ||
                              account.ProfessionalRegistrations.Count == 0 ||
                              !account.ProfessionalRegistrations.Any(p => p.State.Id == stateId && p.Type == (ProfessionalRegistrationTypeEnum)professionalResgistrationType),
-                             "Este estado ja foi registrado").Validate();
+                             "Este estado j&aacute; foi registrado").Validate();
 
             //((Accounts)FactoryRepository.GetRepository(RepositoryEnum.Accounts)).Approve(account);
             var repository = new Types<State>();
@@ -133,7 +133,7 @@ namespace EHR.Controller
             #region Precondition
 
             Assertion.GreaterThan(accountId, 0, "Usuário inválido.").Validate();
-            Assertion.GreaterThan(professionalRegistrationId, 0, "Registro Profissional inválido.").Validate();
+            Assertion.GreaterThan(professionalRegistrationId, 0, "Registro Profissional inv&aacute;lido.").Validate();
 
             #endregion
 
@@ -147,7 +147,7 @@ namespace EHR.Controller
         [ExceptionLogger]
         public override void RefuseAccount(int Id, int ProfessionalId)
         {
-            Assertion.GreaterThan(Id, 0, "Usuário inválido.").Validate();
+            Assertion.GreaterThan(Id, 0, "Usuário inv&aacute;lido.").Validate();
 
             var account = _accounts.Get<Account>(Id);
             var professional = account.ProfessionalRegistrations.FirstOrDefault(p => p.Id == ProfessionalId);

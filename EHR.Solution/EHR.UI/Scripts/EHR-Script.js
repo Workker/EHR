@@ -505,6 +505,7 @@ function HideFormAddprofessionalResgistration(element) {
 }
 
 function AddprofessionalResgistration(element) {
+
     var form = $(element).parent().parent();
     form.submit(function () {
         $.ajax({
@@ -514,6 +515,7 @@ function AddprofessionalResgistration(element) {
             data: form.serialize(),
             success: function (resp) {
                 sessionTimeOut(resp);
+                handleAjaxMessages();
                 HideFormAddprofessionalResgistration(element);
             }
         });
