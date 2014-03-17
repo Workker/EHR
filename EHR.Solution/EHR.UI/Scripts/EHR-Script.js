@@ -425,7 +425,7 @@ function approveAccount(accountId, ProfessionalId) {
                 //var divContent = $(element).parent().parent().parent().parent().parent();
                 //$(divContent).hide();
                 handleAjaxMessages();
-                $("#recusarDiv").hide();
+                //$("#recusarDiv").hide();
             }
         });
         return false;
@@ -447,7 +447,7 @@ function refuseAccount(accountId, ProfessionalId) {
                 sessionTimeOut(data);
                 handleAjaxMessages();
                 //var divContent = $(element).parent().parent().parent().parent().parent();
-                $("#recusarDiv").hide();
+                //$("#recusarDiv").hide();
             }
         });
     //    return false;
