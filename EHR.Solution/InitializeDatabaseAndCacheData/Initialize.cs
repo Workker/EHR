@@ -1,5 +1,6 @@
 ﻿using ImportTables;
 using NUnit.Framework;
+using System.Configuration;
 
 namespace InitializeDatabaseAndCacheData
 {
@@ -11,7 +12,7 @@ namespace InitializeDatabaseAndCacheData
         public void LoadData()
         {
             var dataBase = new DataBaseInitialize();
-            string path = "D:\\Projetos\\EHR\\EHR.Solution\\ImportTables";
+            string path = ConfigurationManager.AppSettings["ProjectPath"];
 
             dataBase.create_database_by_model();
             dataBase.insert_states();
