@@ -24,7 +24,7 @@
                     dataType: "json",
                     cache: false,
                     success: function (r) {
-                       // sessionTimeOut(r); todo: Colocar validacao de sessao
+                        // sessionTimeOut(r); todo: Colocar validacao de sessao
                         resultModel = r;
                         ko.mapping.updateFromJS(viewModel, resultModel);
                         $("#advancedSearchLink").attr("onclick", "goAdvancedSearch(\"" + q + "\")");
@@ -411,47 +411,47 @@ function GetMore(element, url) {
 }
 
 function approveAccount(accountId, ProfessionalId) {
-   // var form = $(element).parent().parent().parent().parent();
+    // var form = $(element).parent().parent().parent().parent();
 
-   // form.submit(function () {
-        $.ajax({
-            type: "POST",
-            url: "http://" + window.location.host + "/Home/ApproveAccount",
-            cache: false,
-            //            data: form.serialize(),
-            data: { accountId: accountId, ProfessionalId: ProfessionalId },
-            success: function (data) {
-                sessionTimeOut(data);
-                //var divContent = $(element).parent().parent().parent().parent().parent();
-                //$(divContent).hide();
-                handleAjaxMessages();
-                //$("#recusarDiv").hide();
-            }
-        });
-        return false;
+    // form.submit(function () {
+    $.ajax({
+        type: "POST",
+        url: "http://" + window.location.host + "/Home/ApproveAccount",
+        cache: false,
+        //            data: form.serialize(),
+        data: { accountId: accountId, ProfessionalId: ProfessionalId },
+        success: function (data) {
+            sessionTimeOut(data);
+            //var divContent = $(element).parent().parent().parent().parent().parent();
+            //$(divContent).hide();
+            handleAjaxMessages();
+            //$("#recusarDiv").hide();
+        }
+    });
+    return false;
     //});
 }
 
 function refuseAccount(accountId, ProfessionalId) {
-    
-   // debugger;
-   // var form = $(element).parent().parent().parent().parent();
-   // form.submit(function () {
-        $.ajax({
-            type: "POST",
-            url: "http://" + window.location.host + "/Home/RefuseAccount",
-            cache: false,
-            //            data: form.serialize(),
-            data:{accountId: accountId,ProfessionalId : ProfessionalId},
-            success: function (data) {
-                sessionTimeOut(data);
-                handleAjaxMessages();
-                //var divContent = $(element).parent().parent().parent().parent().parent();
-                //$("#recusarDiv").hide();
-            }
-        });
+
+    // debugger;
+    // var form = $(element).parent().parent().parent().parent();
+    // form.submit(function () {
+    $.ajax({
+        type: "POST",
+        url: "http://" + window.location.host + "/Home/RefuseAccount",
+        cache: false,
+        //            data: form.serialize(),
+        data: { accountId: accountId, ProfessionalId: ProfessionalId },
+        success: function (data) {
+            sessionTimeOut(data);
+            handleAjaxMessages();
+            //var divContent = $(element).parent().parent().parent().parent().parent();
+            //$("#recusarDiv").hide();
+        }
+    });
     //    return false;
-   // });
+    // });
 }
 
 // Toggle of class of Advanced Search
@@ -475,8 +475,8 @@ function HideFormChangePassword(element) {
     $(element).parent().parent().parent().fadeOut("fast");
 }
 
-function ChangePassword(element) {
-    var form = $(element).parent().parent();
+function ChangePassword() {
+    var form = $("form[name='changePassword']");
     form.submit(function () {
         $.ajax({
             type: "POST",
@@ -485,11 +485,43 @@ function ChangePassword(element) {
             data: form.serialize(),
             success: function (resp) {
                 sessionTimeOut(resp);
-                HideFormChangePassword(element);
+                HideFormChangePassword($("button[id='changePassword']"));
             }
         });
         return false;
     });
+}
+
+function ValidateChangePasswordForm() {
+    //validate first email
+    var firstPasswordField = $("input[name='newPassword']");
+
+    if (firstPasswordField.val() === "") {
+        displayMessage("O campo de nova senha deve ser preenchido.", "error");
+        //MarkInvalidField(firstEmailField);
+        firstPasswordField.focus();
+        return false;
+    }
+
+    //validade second email
+    var secondPasswordField = $("input[name='newPasswordConfirm']");
+
+    if (secondPasswordField.val() === "") {
+        displayMessage("O campo de confirmação de nova senha deve ser preenchido.", "error");
+        //MarkInvalidField(secondEmailField);
+        secondPasswordField.focus();
+        return false;
+    }
+
+    //Validate if both emails are equal
+    if (!(firstPasswordField.val() == secondPasswordField.val())) {
+        displayMessage("As senhas digitadas não correspondem, por favor verifique.", "error");
+        //MarkInvalidField(firstEmailField);
+        firstPasswordField.focus();
+        return false;
+    }
+
+    return ChangePassword();
 }
 
 function ShowFormAddprofessionalResgistration(element) {
@@ -508,23 +540,24 @@ function AddprofessionalResgistration(element) {
 
     var form = $(element).parent().parent();
     //form.submit(function () {
-        $.ajax({
-            type: "POST",
-            url: "http://" + window.location.host + "/Home/AddprofessionalResgistration",
-            cache: false,
-            data: {
-                professionalResgistrationType : $("select[name='professionalResgistrationType']").val(),
-                professionalResgistrationNumber : $("input[name='professionalResgistrationNumber']").val(),
-                stateId: $("select[name='stateId']").val() },
-            //data: form.serialize(),
-            success: function (resp) {
-                sessionTimeOut(resp);
-                handleAjaxMessages();
-                clearAddProfessionalRegistrationMenu();
-                HideFormAddprofessionalResgistration(element);
-            }
-        });
-        return false;
+    $.ajax({
+        type: "POST",
+        url: "http://" + window.location.host + "/Home/AddprofessionalResgistration",
+        cache: false,
+        data: {
+            professionalResgistrationType: $("select[name='professionalResgistrationType']").val(),
+            professionalResgistrationNumber: $("input[name='professionalResgistrationNumber']").val(),
+            stateId: $("select[name='stateId']").val()
+        },
+        //data: form.serialize(),
+        success: function (resp) {
+            sessionTimeOut(resp);
+            handleAjaxMessages();
+            clearAddProfessionalRegistrationMenu();
+            HideFormAddprofessionalResgistration(element);
+        }
+    });
+    return false;
     //});
 }
 
@@ -694,7 +727,7 @@ function SaveObsevation(element) {
 }
 
 function SaveReasonOfAdmission(element) {
-    
+
     var form = $(element).parent();
 
     $.ajax({

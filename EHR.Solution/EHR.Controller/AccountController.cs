@@ -6,10 +6,9 @@ using EHR.Infrastructure.Util;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Mail;
 using Workker.Framework.Domain;
-using System.Linq.Expressions;
-using  System.Linq;
 
 namespace EHR.Controller
 {
@@ -154,7 +153,7 @@ namespace EHR.Controller
             account.RemoveProfessionalRegistration(professional);
             _accounts.Save(account);
 
-            //ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi reprovado. \n Entre em contato com o responsavel pela aprovação na unidade " + account.Hospital.Name + ".");
+            ToSendEmail(account.Email, "Rede D'or São Luiz - Aprovação de Cadastro", "Seu cadastro no sistema ERH foi reprovado. \n Entre em contato com o responsavel pela aprovação na unidade " + account.Hospital.Name + ".");
         }
 
         [ExceptionLogger]
@@ -219,6 +218,7 @@ namespace EHR.Controller
             Assertion.IsFalse(string.IsNullOrEmpty(email), "E-mail não informado.").Validate();
             Assertion.IsFalse(string.IsNullOrEmpty(password), "Senha não informada.").Validate();
             Assertion.GreaterThan(birthday, DateTime.MinValue, "Data de aniverssario não informada.").Validate();
+            Assertion.IsTrue(GetMonthsBetween(DateTime.Now, birthday) >= 216, "Não é permitido o cadastro de menores de 18 anos.").Validate();
             Assertion.GreaterThan((int)hospitalId, 0, "Hospital não informado(s).").Validate();
 
             #endregion
@@ -287,6 +287,22 @@ namespace EHR.Controller
                              };
 
             EmailUtil.EnviarEmail(subject, mensage, emails);
+        }
+
+        private static int GetMonthsBetween(DateTime from, DateTime to)
+        {
+            if (from > to) return GetMonthsBetween(to, from);
+
+            var monthDiff = Math.Abs((to.Year * 12 + (to.Month - 1)) - (from.Year * 12 + (from.Month - 1)));
+
+            if (from.AddMonths(monthDiff) > to || to.Day < from.Day)
+            {
+                return monthDiff - 1;
+            }
+            else
+            {
+                return monthDiff;
+            }
         }
 
         #endregion

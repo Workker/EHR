@@ -1,4 +1,7 @@
-﻿@using System.Globalization
+﻿@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
 @{
@@ -20,15 +23,19 @@
                                     <tbody>
                                         <tr>
                                             <td class="html7magic">
-                                                <label for="email">E-mail</label></td>
+                                                <label for="email">E-mail</label>
+                                            </td>
                                             <td class="html7magic">
-                                                <label for="password">Senha</label></td>
+                                                <label for="password">Senha</label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input name="Email" type="email" id="email" required tabindex="1" class="inputtext"></td>
+                                                <input name="Email" type="email" id="email" required tabindex="1" class="inputtext">
+                                            </td>
                                             <td>
-                                                <input name="Password" id="password" type="password" required tabindex="2" class="inputtext"></td>
+                                                <input name="Password" id="password" type="password" required tabindex="2" class="inputtext">
+                                            </td>
                                             <td>
                                                 <label for="loginButton" class="uiButton uiButtonConfirm">
                                                     <input name="loginButton" type="submit" value="Entrar" tabindex="4">
@@ -70,10 +77,8 @@
                                             <div class="mrm lfloat" style="padding-top: 10px;">
                                                 @foreach (var value in Enum.GetValues(typeof(ProfessionalRegistrationTypeEnum)).Cast<short>().ToList())
                                                 {
-                                                    <input type="radio" id="DocumentType" name="ProfessionalRegistration[0].Type" value="@value" @if (value == 1)
-                                                                                                                            { 
-                                                                                                                                @:required 
-                                                                                                                            }  />
+                                                    <input type="radio" id="DocumentType" name="ProfessionalRegistration[0].Type" value="@value" @if (value == 1) {  @: required
+                                                                                                                                                                                       } />
                                                     <label for="DocumentType" class="gender_label">
                                                         @(EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")
                                                     </label>
@@ -87,16 +92,17 @@
                                                             <input type="text" name="ProfessionalRegistration[0].Number" required placeholder="N&uacute;mero" class="inputtext text_field" style="width: 136px;" maxlength="10" />
                                                         </td>
                                                         <td style="border: 1px solid #bdc7d8; background-color: #fff;">
-                                                            <select name="stateId"required style="width: 110px; border: 0px; font-size: 18px; color: #6d6d6d;">
+                                                            <select name="ProfessionalRegistration[0].State.Id" required style="width: 110px; border: 0px; font-size: 18px; color: #6d6d6d;">
                                                                 <option value="-1">Estado</option>
-                                                                    @foreach (EHR.CoreShared.Entities.State value in (IList<EHR.CoreShared.Entities.State>)Session["States"])
-                                                                    {
-                                                                        <option value="@value.Id">
-                                                                            @value.Acronym
-                                                                        </option>  
-                                                                    }
-                                                                
+                                                                @foreach (EHR.CoreShared.Entities.State value in (IList<EHR.CoreShared.Entities.State>)Session["States"])
+                                                                {
+                                                                    <option value="@value.Id">
+                                                                        @value.Acronym
+                                                                    </option>
+                                                                }
+
                                                             </select>
+
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -118,10 +124,10 @@
                                             @foreach (var value in Enum.GetValues(typeof(GenderEnum)).Cast<short>().ToList())
                                             {
                                                 <div class="uiInputLabel clearfix inlineBlock">
-                                                    <input type="radio" name="gender" id="gender"  @*@if (value == 1)
-                                                                                                   { 
-                                                                                                        @:required 
-                                                                                                    }*@  value="@value" class=" uiInputLabelRadio">
+                                                    <input type="radio" name="gender" id="gender" @*@if (value == 1)
+                                                                                                   {
+                                                                                                        @:required
+                                                                                                    }*@ value="@value" class=" uiInputLabelRadio">
                                                     <label for="gender" class="gender_label">@(EnumUtil.GetDescriptionFromEnumValue((GenderEnum)Enum.Parse(typeof(GenderEnum), value.ToString(CultureInfo.InvariantCulture))) + "  ")</label>
                                                 </div>
                                             }
@@ -140,10 +146,10 @@
                                                         {
                                                             WriteLiteral("</tr><tr>");
                                                         }
-                                                
+
                                                         <td style="padding: 3px 3px 3px 3px;">
-                                                            <input name="hospital" type="radio"  
-                                                                value="@hospitals[count].Id"/>
+                                                            <input name="hospital" type="radio"
+                                                                   value="@hospitals[count].Id" />
                                                             <label style="font-size: 14px; color: #333;">@(@hospitals[count].Name + "  ")</label><br />
                                                         </td>
                                                     }
@@ -179,7 +185,7 @@
 
             $("input[name='FirstName']").keypress(function (event) {
 
-                if(!onlyLetters(event))
+                if (!onlyLetters(event))
                     event.preventDefault();
             });
 
@@ -188,7 +194,7 @@
                 if (!onlyLetters(event))
                     event.preventDefault();
             });
-           
+
             $("input[name='ProfessionalRegistration[0].Number']").keypress(function (event) {
                 if (!onlyNumbers(event))
                     event.preventDefault();
@@ -198,7 +204,7 @@
 
                 return ValidateForm();
             });
-           
+
         });
 
         function ValidateForm() {
@@ -268,7 +274,7 @@
             }
 
             //validate state
-            var stateField = $("select[name='stateId']");
+            var stateField = $("select[name='ProfessionalRegistration[0].State.Id']");
 
             if (stateField.val() === "-1") {
                 displayMessage("Um estado deve ser selecionado.", "error");

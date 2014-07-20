@@ -1,4 +1,8 @@
-﻿@using System.Globalization
+﻿@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
+@using System.Web
 @using EHR.CoreShared
 @using EHR.CoreShared.Entities
 @using EHR.Domain.Entities
@@ -105,15 +109,15 @@
                     <li class="navItem middleItem">
                         <a id="changePassword">Alterar Minha Senha</a>
                         <div id="ChangePassword">
-                            <form>
+                            <form name="changePassword">
                                 <div class="mbm">
-                                    <input type="password" name="newPassword" placeholder="Nova Senha" required />
+                                    <input type="password" name="newPassword" placeholder="Nova Senha" />
                                 </div>
                                 <div class="mbm">
-                                    <input type="password" name="confirm" placeholder="Confirme a nova senha" required />
+                                    <input type="password" name="newPasswordConfirm" placeholder="Confirme a nova senha" />
                                 </div>
                                 <div class="mbm">
-                                    <input type="submit" value="Alterar" class="uibutton special" onclick="ChangePassword(this);" />
+                                    <button type="button" class="uibutton special" id="changePassword">Alterar</button>
                                     <input type="button" id="cancelNewPassword" value="Cancelar" class="uibutton" onclick="HideFormChangePassword(this);" />
                                 </div>
                             </form>
@@ -161,6 +165,11 @@
     }
 
     $(document).ready(function () {
+
+        $("button[id='changePassword']").click(function (event) {
+
+            return ValidateChangePasswordForm();
+        });
 
         $(this).click(function () { $("[id*='popupErrorMsg']").hide("slow"); });
 
