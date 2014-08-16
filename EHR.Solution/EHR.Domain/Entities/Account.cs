@@ -102,7 +102,20 @@ namespace EHR.Domain.Entities
         {
             #region Precondition
 
-            Assertion.IsFalse(string.IsNullOrEmpty(password), "Invalid password!").Validate();
+            Assertion.IsTrue(string.IsNullOrEmpty(password), "A nova senha não foi informada.").Validate();
+
+            #endregion
+
+            Password = CryptographyUtil.EncryptToSha512(password);
+        }
+
+        public virtual void ChangePassword(string password, string newPasswordConfirm)
+        {
+            #region Precondition
+
+            Assertion.IsTrue(string.IsNullOrEmpty(password), "A nova senha não foi informada.").Validate();
+            Assertion.IsTrue(string.IsNullOrEmpty(newPasswordConfirm), "A confirmação de senha não foi informada.").Validate();
+            Assertion.IsFalse(string.Equals(password, newPasswordConfirm), "Senhas diferentes.").Validate();
 
             #endregion
 

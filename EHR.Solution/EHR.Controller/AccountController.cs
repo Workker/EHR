@@ -157,7 +157,7 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
-        public override void AlterPasswordOfAccount(int accountId, string password)
+        public override void AlterPasswordOfAccount(int accountId, string password, string newPasswordConfirm)
         {
             #region Precondition
 
@@ -168,7 +168,7 @@ namespace EHR.Controller
 
             var account = _accounts.Get<Account>(accountId);
 
-            account.ToEnterPassword(password);
+            account.ChangePassword(password, newPasswordConfirm);
 
             _accounts.Save(account);
 

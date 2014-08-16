@@ -119,13 +119,13 @@ namespace EHR.UI.Controllers
         }
 
         [HttpPost]
-        public void AlterPasswordOfAccount(string newPassword)
+        public void AlterPasswordOfAccount(string newPassword, string newPasswordConfirm)
         {
             try
             {
                 var account = (AccountModel)Session["account"];
 
-                FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword);
+                FactoryController.GetController(ControllerEnum.Account).AlterPasswordOfAccount(account.Id, newPassword, newPasswordConfirm);
 
                 this.ShowMessage(MessageTypeEnum.Success, "Senha alterada.");
             }

@@ -78,7 +78,7 @@ namespace EHR.Controller
         public virtual IList<Summary> GetLastSumariesRealizedby(int accountId) { return null; }
         public virtual void ApproveProfessionalRegistration(int accountId, int professionalRegistrationId) { }
         public virtual void RefuseAccount(int id ,int ProfessionalId) { }
-        public virtual void AlterPasswordOfAccount(int id, string password) { }
+        public virtual void AlterPasswordOfAccount(int id, string password, string newPasswordConfirm) { }
         public virtual void AddprofessionalResgistration(int accountId, short professionalResgistrationType, string professionalResgistrationNumber, short stateId) { }
 
         #endregion

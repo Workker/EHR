@@ -24,7 +24,7 @@
                     dataType: "json",
                     cache: false,
                     success: function (r) {
-                        // sessionTimeOut(r); todo: Colocar validacao de sessao
+                         sessionTimeOut(r);
                         resultModel = r;
                         ko.mapping.updateFromJS(viewModel, resultModel);
                         $("#advancedSearchLink").attr("onclick", "goAdvancedSearch(\"" + q + "\")");
@@ -755,6 +755,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 }
 
 function sessionTimeOut(string) {
+    alert(string.getAllResponseHeaders());
     var index = string.indexOf("Login");
     if (index > 0) {
         alert("A sua sessao expirou. Voce sera redirecionado, para a tela de login.");
