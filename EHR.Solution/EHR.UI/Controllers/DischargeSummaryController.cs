@@ -1185,13 +1185,12 @@ namespace EHR.UI.Controllers
         {
 
             var resonsOfAdmission = "";
-
             foreach (var reson in summary.ReasonsOfAdmission)
             {
                 resonsOfAdmission += reson.Description + ", ";
             }
 
-            resonsOfAdmission = resonsOfAdmission.Remove(resonsOfAdmission.Length - 2, 2);
+            // resonsOfAdmission = resonsOfAdmission.Remove(resonsOfAdmission.Length - 2, 2); todo: why?
 
             var summaryReportDtOs = new List<SummaryReportDTO>
                 {

@@ -24,7 +24,6 @@
                     dataType: "json",
                     cache: false,
                     success: function (r) {
-                         sessionTimeOut(r);
                         resultModel = r;
                         ko.mapping.updateFromJS(viewModel, resultModel);
                         $("#advancedSearchLink").attr("onclick", "goAdvancedSearch(\"" + q + "\")");
@@ -210,7 +209,6 @@ function newRow(currentNode, url) {
         url: "http://" + window.location.host + url,
         cache: false
     }).success(function (d) {
-        sessionTimeOut(d);
         $(currentNode).parent().parent().clone($(currentNode).parent().parent())
             .appendTo($(currentNode).parent().parent().parent());
         var contentDiv = $(currentNode).parent().next();
@@ -230,7 +228,6 @@ function saveRow(element, url) {
             cache: false,
             data: form.serialize(),
             success: function (data) {
-                sessionTimeOut(data);
                 var divContent = $(element).parent().parent().parent();
                 var data2 = data.toString().replace('<li class="clearfix">', '').replace("</li>", "");
                 $(divContent).html(data2);
@@ -247,7 +244,6 @@ function editRow(url, data, e) {
         cache: false,
         data: data
     }).success(function (d) {
-        sessionTimeOut(d);
         var div = $(e).parent().next();
         $(div).html(d);
         $(div).show();
@@ -262,7 +258,6 @@ function deleteRow(e, url, data) {
         cache: false,
         data: data
     }).success(function (resp) {
-        sessionTimeOut(resp);
         var li = $(e).parent();
         $(li).remove();
     });
@@ -295,7 +290,6 @@ function SaveComplementaryExam(element) {
         cache: false,
         data: { description: description, period: period },
         success: function (data) {
-            sessionTimeOut(data);
             var divContent = $(element).parent().parent();
             $(divContent).hide();
             $(divContent).prev().html(data);
@@ -316,7 +310,6 @@ function SaveMedicalReview(element) {
         cache: false,
         data: { TermMedicalReviewAt: termMedicalReviewAt, "Specialty.Id": specialtyId, "Specialty.Description": specialtyDescription },
         success: function (data) {
-            sessionTimeOut(data);
             var divContent = $(element).parent().parent();
             $(divContent).hide();
             $(divContent).prev().html(data);
@@ -372,7 +365,6 @@ function goAdvancedSearch(q) {
         type: "GET",
         cache: false,
         success: function (r) {
-            sessionTimeOut(r);
             $("#content").html(r);
             $("ul.results").hide();
         }
@@ -386,7 +378,6 @@ function goFilter(form) {
         type: "POST",
         cache: false,
         success: function (r) {
-            sessionTimeOut(r);
             $("div#DivResult").html(r);
             $("ul.results").hide();
         }
@@ -399,7 +390,6 @@ function GetMore(element, url) {
         type: "GET",
         cache: false,
         success: function (r) {
-            sessionTimeOut(r);
             if (r.length > 10) {
                 $(element).parent().prev().append(r);
             } else {
@@ -421,7 +411,6 @@ function approveAccount(accountId, ProfessionalId) {
         //            data: form.serialize(),
         data: { accountId: accountId, ProfessionalId: ProfessionalId },
         success: function (data) {
-            sessionTimeOut(data);
             //var divContent = $(element).parent().parent().parent().parent().parent();
             //$(divContent).hide();
             handleAjaxMessages();
@@ -444,7 +433,6 @@ function refuseAccount(accountId, ProfessionalId) {
         //            data: form.serialize(),
         data: { accountId: accountId, ProfessionalId: ProfessionalId },
         success: function (data) {
-            sessionTimeOut(data);
             handleAjaxMessages();
             //var divContent = $(element).parent().parent().parent().parent().parent();
             //$("#recusarDiv").hide();
@@ -484,7 +472,6 @@ function ChangePassword() {
             cache: false,
             data: form.serialize(),
             success: function (resp) {
-                sessionTimeOut(resp);
                 HideFormChangePassword($("button[id='changePassword']"));
             }
         });
@@ -551,7 +538,6 @@ function AddprofessionalResgistration(element) {
         },
         //data: form.serialize(),
         success: function (resp) {
-            sessionTimeOut(resp);
             handleAjaxMessages();
             clearAddProfessionalRegistrationMenu();
             HideFormAddprofessionalResgistration(element);
@@ -582,7 +568,6 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
                 dataType: "JSON",
                 data: { term: request.term },
                 success: function (data) {
-                    sessionTimeOut(data);
                     response($.map(data, function (item) {
                         return { label: item.Description, value: item.Description, code: item.Code };
                     }));
@@ -646,7 +631,6 @@ $(document).on('submit', '#ColonizationByMDR', function (e) {
         cache: false,
         data: data,
         success: function (resp) {
-            sessionTimeOut(resp);
         }
     });
 });
@@ -660,7 +644,6 @@ $(document).on('submit', '#dischargeData', function (e) {
         cache: false,
         data: data,
         success: function (resp) {
-            sessionTimeOut(resp);
             $("#finalizeSummary").show();
         }
     });
@@ -682,7 +665,6 @@ function FinalizeSummary() {
         url: "http://" + window.location.host + "/DischargeSummary/FinalizeSummary",
         cache: false,
         success: function (resp) {
-            sessionTimeOut(resp);
             RemoveEdition(true);
             $("#prescriptionsReport").show();
             $("#summaryReport").show();
@@ -702,7 +684,6 @@ function ReOpenSummary() {
         url: "http://" + window.location.host + "/DischargeSummary/ReOpenSummary",
         cache: false,
         success: function (resp) {
-            sessionTimeOut(resp);
             ReOpenEdition();
             $("#prescriptionsReport").hide();
             $("#summaryReport").hide();
@@ -719,7 +700,6 @@ function SaveObsevation(element) {
             cache: false,
             data: form.serialize(),
             success: function (resp) {
-                sessionTimeOut(resp);
             }
         });
         return false;
@@ -736,7 +716,6 @@ function SaveReasonOfAdmission(element) {
         cache: false,
         data: form.serialize(),
         success: function (resp) {
-            sessionTimeOut(resp);
         }
     });
 
@@ -753,16 +732,6 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
         $(" input[type=radio],  textarea,  select,  input[type=text],  input[type=time], input[type=submit], input[type=password], button").attr("disabled", true);
     }
 }
-
-function sessionTimeOut(string) {
-    alert(string.getAllResponseHeaders());
-    var index = string.indexOf("Login");
-    if (index > 0) {
-        alert("A sua sessao expirou. Voce sera redirecionado, para a tela de login.");
-        location.reload();
-    }
-}
-
 
 //***Validation***//
 

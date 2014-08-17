@@ -9,27 +9,19 @@
     <label>Tipo Alta:</label>&nbsp;
     @foreach (var value in Enum.GetValues(typeof(HighTypeEnum)).Cast<short>().ToList())
     {
-        <input type="radio" name="highType"  @if (value == 1)
-                                             { 
-                                                 @:required 
-                                             }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.HighType == value)
-                                                                                          {
-                                                                                              @:checked
-                                                                                          } />
+        <input type="radio" name="highType" @if (value == 1) {  @: required
+                                                            } value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.HighType == value) { @: checked
+                                                                                                         } />
         @EnumUtil.GetDescriptionFromEnumValue((HighTypeEnum)Enum.Parse(typeof(HighTypeEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
     <br />
-    <label>Condi&ccedil;&atilde;o do paciente na alta:</label>&nbsp;    
+    <label>Condi&ccedil;&atilde;o do paciente na alta:</label>&nbsp;
     @foreach (var value in Enum.GetValues(typeof(ConditionOfThePatientAtHighEnum)).Cast<short>().ToList())
     {
-        <input type="radio" name="ConditionAtDischarge"  @if (value == 1)
-                                                         { 
-                                                                    @:required 
-                                                                }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.ConditionAtDischarge == value)
-                                                                                                             {
-                                                                                                                 @:checked
-                                                                                                             }/>
+        <input type="radio" name="ConditionAtDischarge" @if (value == 1) {  @: required
+                                                                               } value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.ConditionAtDischarge == value) { @: checked
+                                                                                                                            } />
         @EnumUtil.GetDescriptionFromEnumValue((ConditionOfThePatientAtHighEnum)Enum.Parse(typeof(ConditionOfThePatientAtHighEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
@@ -37,13 +29,9 @@
     <label>Destino do paciente na alta:</label>&nbsp;
     @foreach (var value in Enum.GetValues(typeof(DestinationOfThePatientAtDischargeEnum)).Cast<short>().ToList())
     {
-        <input type="radio" name="DestinationOfThePatientAtDischarge"  @if (value == 1)
-                                                                       { 
-                                                                           @:required 
-                                                                       }  value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.DestinationOfThePatientAtDischarge == value)
-                                                                                                                    {
-                                                                                                                        @:checked
-                                                                                                                    }/>
+        <input type="radio" name="DestinationOfThePatientAtDischarge" @if (value == 1) {  @: required
+                                                                                      } value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.DestinationOfThePatientAtDischarge == value) { @: checked
+                                                                                                                                   } />
         @EnumUtil.GetDescriptionFromEnumValue((DestinationOfThePatientAtDischargeEnum)Enum.Parse(typeof(DestinationOfThePatientAtDischargeEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
@@ -52,13 +40,9 @@
     <label>Orienta&ccedil;&atilde;o das equipes multidisciplinares preenchidas:</label>&nbsp;
     @foreach (var value in Enum.GetValues(typeof(OrientationOfMultidisciplinaryTeamsMetEnum)).Cast<short>().ToList())
     {
-        <input type="radio" name="MultidisciplinaryTeamsMet"  @if (value == 1)
-                                                              {
-                                                                  @:required 
-                                                              }  value="@value" style="margin-right: 2px;"@if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value)
-                                                                                                          {
-                                                                                                                           @:checked
-                                                                                                                       }/>
+        <input type="radio" name="MultidisciplinaryTeamsMet" @if (value == 1) { @: required
+                                                                             } value="@value" style="margin-right: 2px;" @if (((SummaryModel)Model).DischargeData.MultidisciplinaryTeamsMet == value) { @: checked
+                                                                                                                                      } />
         @EnumUtil.GetDescriptionFromEnumValue((OrientationOfMultidisciplinaryTeamsMetEnum)Enum.Parse(typeof(OrientationOfMultidisciplinaryTeamsMetEnum), value.ToString(CultureInfo.InvariantCulture)))
     }
     <br />
@@ -88,13 +72,15 @@
 
         if (professionalRegistration.Any())
         {
-        <label>@EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), professionalRegistration.SingleOrDefault().Type.ToString(CultureInfo.InvariantCulture))):
+            <label>
+                @EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), professionalRegistration.SingleOrDefault().Type.ToString(CultureInfo.InvariantCulture))):
         </label>
         @:&nbsp;<input type="text" disabled value="@professionalRegistration.SingleOrDefault().Number" />
 
+
         <br />
         <br />
-        <label>M&eacute;dico:</label>@:&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))"/>
+        <label>M&eacute;dico:</label>@:&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))" />
         <br />
         <br />
         }
@@ -102,7 +88,7 @@
     <label>Alta Prescrita:</label>&nbsp;
     @{
         ViewBag.Context = "PrescribedHigh";
-        //Html.RenderPartial("_DatePicker");
+    //Html.RenderPartial("_DatePicker");
     }
     <input type="text" name="dischargeDate" maxlength="10">
     <input type="hidden" name="PrescribedHighday" />
@@ -139,7 +125,7 @@
     <label>Data:</label>&nbsp;
     @{
         ViewBag.Context = "DeliveredDate";
-        //Html.RenderPartial("_DatePicker");
+    //Html.RenderPartial("_DatePicker");
     }
     <input type="text" name="deliveredDate" maxlength="10">
     <input type="hidden" name="DeliveredDateday" />
@@ -155,11 +141,11 @@
         var accoutUser = (AccountModel)Session["account"];
         if (accoutUser.ProfessionalRegistration.Any(p => p.Type != 2) && summaryM.DischargeData.HighType > 0)
         {
-        <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
+            <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px" />
         }
         else
         {
-        <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px; display: none;" />
+            <input type="button" value="Finalizar" id="finalizeSummary" class="uibutton large special" onclick="FinalizeSummary();" style="margin-right: 5px; display: none;" />
         }
     }
     @{
@@ -171,51 +157,40 @@
 
             if (action.Account.Id == account.Id)
             {
-        <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" />
-        <script type="text/javascript">
-            RemoveEdition(true);
-        </script>
+                <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" />
+                <script type="text/javascript">
+                    RemoveEdition(true);
+                </script>
             }
             else
             {
-        <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
-        <script type="text/javascript">
-            RemoveEdition(false);
-        </script>
+                <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
+                <script type="text/javascript">
+                    RemoveEdition(false);
+                </script>
             }
-        <script type="text/javascript">
-            $("#prescriptionsReport").show();
-            $("#summaryReport").show();
-        </script>
+            <script type="text/javascript">
+                $("#prescriptionsReport").show();
+                $("#summaryReport").show();
+            </script>
         }
         else if (!account.ProfessionalRegistration.Any(x => x.State.Id == summary.Hospital.State.Id))
         {
-        <script type="text/javascript">
-            RemoveEdition(false);
-        </script>
+            <script type="text/javascript">
+                RemoveEdition(false);
+            </script>
         }
         else
         {
-        <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
+            <input type="button" value="Reabrir" class="uibutton large special" onclick="ReOpenSummary();" style="display: none;" />
         }
         <a href="@Url.Action("GeneratePrescriptionsReport", new { id = "PDF" })" id="prescriptionsReport" target="_blank" class="uibutton large special" style="text-decoration: none; margin-right: 5px;display: none;">Imprimir Prescricao de Alta</a>
-        <a href="@Url.Action("GenerateSummayReport", new { id = "PDF" })" id="summaryReport" target="_blank" class="uibutton large special" style="text-decoration: none;display: none;">Imprimir Sumario de Alta</a> 
+        <a href="@Url.Action("GenerateSummayReport", new { id = "PDF" })" id="summaryReport" target="_blank" class="uibutton large special" style="text-decoration: none;display: none;">Imprimir Sumario de Alta</a>
     }
     <script type="text/javascript">
 
         $("#dischargeData input[name='dischargeDate']").val(String(@(((SummaryModel)Model).DischargeData.PrescribedHighDay)) + "/" + String(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth)) + "/" + String(@(((SummaryModel)Model).DischargeData.PrescribedHighYear)));
         $("#dischargeData input[name='deliveredDate']").val(String(@(((SummaryModel)Model).DischargeData.DeliveredDateDay)) + "/" + String(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth)) + "/" + String(@(((SummaryModel)Model).DischargeData.DeliveredDateYear)));
-
-        @*        
-        $('[name="PrescribedHighyear"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighYear));
-        $('[name="PrescribedHighmonth"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighMonth));
-        $('[name="PrescribedHighday"]').val(@(((SummaryModel)Model).DischargeData.PrescribedHighDay));
-
-        $('[name="DeliveredDateyear"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateYear));
-        $('[name="DeliveredDatemonth"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateMonth));
-        $('[name="DeliveredDateday"]').val(@(((SummaryModel)Model).DischargeData.DeliveredDateDay));
-        *@
-
 
         $(document).ready(function () {
 
@@ -229,7 +204,6 @@
                 if ($("#dischargeData input[name='highType']:checked").length == "0") {
 
                     displayMessage("Um tipo de alta deve ser selecionado.", "error");
-                    //MarkInvalidField(secondEmailField);
                     $("#dischargeData input[name='highType']")[0].focus();
                     return false;
                 }
@@ -237,7 +211,6 @@
                 if ($("#dischargeData input[name='ConditionAtDischarge']:checked").length == "0") {
 
                     displayMessage("Um tipo de condi&ccedil;&atilde;o deve ser selecionado.", "error");
-                    //MarkInvalidField(secondEmailField);
                     $("#dischargeData input[name='ConditionAtDischarge']")[0].focus();
                     return false;
                 }
@@ -245,7 +218,6 @@
                 if ($("#dischargeData input[name='DestinationOfThePatientAtDischarge']:checked").length == "0") {
 
                     displayMessage("Um tipo de destino deve ser selecionado.", "error");
-                    //MarkInvalidField(secondEmailField);
                     $("#dischargeData input[name='DestinationOfThePatientAtDischarge']")[0].focus();
                     return false;
                 }
@@ -253,7 +225,6 @@
                 if ($("#dischargeData input[name='dischargeDate']").val() == "") {
 
                     displayMessage("A data de alta deve ser preenchida.", "error");
-                    //MarkInvalidField(secondEmailField);
                     $("#dischargeData input[name='dischargeDate']").focus();
                     return false;
                 }
@@ -270,7 +241,6 @@
                 if ($("#dischargeData input[name='deliveredDate']").val() == "") {
 
                     displayMessage("A data de alat deve ser preenchida.", "error");
-                    //MarkInvalidField(secondEmailField);
                     $("#dischargeData input[name='dischargeDate']").focus();
                     return false;
                 }
