@@ -11,17 +11,10 @@
     @foreach (var reason in ((List<ReasonOfAdmissionModel>)ViewBag.ResonsOfAdmission))
     {
         <input name="reasonOfAdmission" type="checkbox" value="@reason.Id"
-        @if (reason.Id == 1)
-        { 
-            @:required
-        } 
-        @foreach (ReasonOfAdmissionModel reasonS in Model.ReasonsOfAdmission)
-        {
-            if (reasonS.Id == reason.Id)
-            {
-                @:checked
-                }
-        } />
+               @if (reason.Id == 1) {  @: required
+                       }
+               @foreach (ReasonOfAdmissionModel reasonS in Model.ReasonsOfAdmission) { if (reasonS.Id == reason.Id) { @: checked
+                               } } />
         @:&nbsp;@reason.Description
     }
 </form>
@@ -96,8 +89,7 @@
 
             if ($("#observation").val() == "") {
 
-                displayMessage("O campo de orbserva&ccedil;&atilde;o deve ser preenchido.", "error");
-                //MarkInvalidField(secondEmailField);
+                displayMessage("O campo de História, exame fisico na admissão, breve curso hospitalar e exames relevantes deve ser preenchido.", "error");
                 $("#observation").focus();
                 return false;
             }
