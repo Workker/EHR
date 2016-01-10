@@ -102,7 +102,7 @@ namespace EHR.Domain.Entities
         {
             #region Precondition
 
-            Assertion.IsTrue(string.IsNullOrEmpty(password), "A nova senha não foi informada.").Validate();
+            Assertion.IsTrue(!string.IsNullOrEmpty(password), "A nova senha não foi informada.").Validate();
 
             #endregion
 

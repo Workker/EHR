@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared.Entities;
+﻿using System.Configuration;
+using EHR.CoreShared.Entities;
 using EHR.Domain.Repository;
 using EHRIntegracao.Domain.Services.SaveLucene;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace EHR.Domain.Service.Lucene
         {
             var repository = new CIDRepository();
             var cids = repository.All<CID>().ToList();
-            var service = new SaveCidInLuceneService();
+            var service = new SaveCidInLuceneService(ConfigurationManager.AppSettings["CIDIndexPath"]);
             
             service.Save(cids);
         }

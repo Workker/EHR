@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using Workker.Framework.Domain;
 
 namespace EHR.Controller
@@ -202,7 +203,6 @@ namespace EHR.Controller
             return hospitalsList;
         }
 
-
         #region Private Methods
 
         private void ToRegisterAccount(string firstName, string lastName, short gender, short professionalResgistrationType, string professionalResgistrationNumber, string email,
@@ -272,8 +272,6 @@ namespace EHR.Controller
             account.ToEnterPassword(password);
             account.ToEnterBirthday(birthday);
 
-
-
             account.AddHospital(hospital);
 
             return account;
@@ -281,12 +279,15 @@ namespace EHR.Controller
 
         private void ToSendEmail(string email, string subject, string mensage)
         {
-            var emails = new List<MailAddress>
+            Task.Factory.StartNew(() =>
+            {
+                var emails = new List<MailAddress>
                              {
                                  new MailAddress(email),
                              };
 
-            EmailUtil.EnviarEmail(subject, mensage, emails);
+                EmailUtil.EnviarEmail(subject, mensage, emails);
+            });
         }
 
         private static int GetMonthsBetween(DateTime from, DateTime to)

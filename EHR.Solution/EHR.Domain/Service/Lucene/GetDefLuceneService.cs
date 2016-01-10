@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared.Entities;
+﻿using System.Configuration;
+using EHR.CoreShared.Entities;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System.Collections.Generic;
 
@@ -9,7 +10,7 @@ namespace EHR.Domain.Service.Lucene
         private GetDefFromLuceneService _getDefFromLuceneService;
         public virtual GetDefFromLuceneService GetDefFromLuceneService
         {
-            get { return _getDefFromLuceneService ?? (_getDefFromLuceneService = new GetDefFromLuceneService()); }
+            get { return _getDefFromLuceneService ?? (_getDefFromLuceneService = new GetDefFromLuceneService(ConfigurationManager.AppSettings["DEFIndexPath"])); }
             set
             {
                 _getDefFromLuceneService = value;

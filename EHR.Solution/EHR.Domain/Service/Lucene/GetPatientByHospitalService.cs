@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared.Entities;
+﻿using System.Configuration;
+using EHR.CoreShared.Entities;
 using EHR.CoreShared.Interfaces;
 using EHR.Domain.Repository;
 using EHRIntegracao.Domain.Services;
@@ -17,9 +18,9 @@ namespace EHR.Domain.Service.Lucene
         public GetPatientByHospitalService()
         {
             _hospitals = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached();
-            _patientsLuceneServiceservice = new GetPatientsLuceneService();
-            _recordsLuceneServiceservice = new GetRecordsLuceneService();
-            _treatmentsLuceneServiceservice = new TreatmentsLuceneService();
+            _patientsLuceneServiceservice = new GetPatientsLuceneService(ConfigurationManager.AppSettings["PatientIndexPath"]);
+            _recordsLuceneServiceservice = new GetRecordsLuceneService(ConfigurationManager.AppSettings["RecordIndexPath"]);
+            _treatmentsLuceneServiceservice = new TreatmentsLuceneService(ConfigurationManager.AppSettings["TreatmentIndexPath"]);
         }
 
         public IPatient GetPatientBy(string cpf)

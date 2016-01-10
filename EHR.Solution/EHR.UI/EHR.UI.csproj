@@ -623,7 +623,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3315</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2796/</IISUrl>
+          <IISUrl>http://localhost:3315/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

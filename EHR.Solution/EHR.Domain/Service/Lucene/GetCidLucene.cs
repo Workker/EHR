@@ -1,4 +1,5 @@
-﻿using EHR.CoreShared.Entities;
+﻿using System.Configuration;
+using EHR.CoreShared.Entities;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System.Collections.Generic;
 
@@ -9,7 +10,7 @@ namespace EHR.Domain.Service.Lucene
         private GetCidFromLuceneService _getCidFromLuceneService;
         public virtual GetCidFromLuceneService GetCidFromLuceneService
         {
-            get { return _getCidFromLuceneService ?? (_getCidFromLuceneService = new GetCidFromLuceneService()); }
+            get { return _getCidFromLuceneService ?? (_getCidFromLuceneService = new GetCidFromLuceneService(ConfigurationManager.AppSettings["CIDIndexPath"])); }
             set
             {
                 _getCidFromLuceneService = value;
