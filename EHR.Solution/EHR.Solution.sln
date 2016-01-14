@@ -1,14 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.UI", "EHR.UI\EHR.UI.csproj", "{861A5584-7574-4021-A0FE-01B1C1642DA2}"
-EndProject
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D2653BF6-D185-4B47-AD70-B11B8ED6DB47}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Import", "Import", "{6201E61C-8478-46B6-912A-09AF493FAE25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{241C88B7-0379-4FB4-A0CE-552AEC0318A4}"
+	ProjectSection(SolutionItems) = preProject
+		Graph1.dgml = Graph1.dgml
+		Performance1.psess = Performance1.psess
+		SequenceDiagram1.sequencediagram = SequenceDiagram1.sequencediagram
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataInitialize", "DataInitialize", "{7E7576A9-EFAC-41B5-9B29-15DADC818A5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.UI", "EHR.UI\EHR.UI.csproj", "{861A5584-7574-4021-A0FE-01B1C1642DA2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Test", "EHR.Test\EHR.Test.csproj", "{55F94D7F-C923-40E8-9710-2B4D351CCCBC}"
 EndProject
@@ -19,20 +32,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Domain", "EHR.Domain\EH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Controller", "EHR.Controller\EHR.Controller.csproj", "{75AF42B0-2A2A-4452-9500-2638183C812A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Import", "Import", "{6201E61C-8478-46B6-912A-09AF493FAE25}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportLegacySummary", "ImportLegacySummary\ImportLegacySummary.csproj", "{1B2917E6-5971-49D4-9926-FC0F9D3E75E5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{241C88B7-0379-4FB4-A0CE-552AEC0318A4}"
-	ProjectSection(SolutionItems) = preProject
-		Graph1.dgml = Graph1.dgml
-		Performance1.psess = Performance1.psess
-		SequenceDiagram1.sequencediagram = SequenceDiagram1.sequencediagram
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Infrastructure", "EHR.Infrastructure\EHR.Infrastructure.csproj", "{7D33B377-C5BA-4A95-92E8-0DDE91080AD7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataInitialize", "DataInitialize", "{7E7576A9-EFAC-41B5-9B29-15DADC818A5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitializeDatabaseAndCacheData", "InitializeDatabaseAndCacheData\InitializeDatabaseAndCacheData.csproj", "{DCED3C72-8763-4946-8CA5-F39ACC2FD7D5}"
 EndProject
@@ -108,7 +110,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1B2917E6-5971-49D4-9926-FC0F9D3E75E5} = {6201E61C-8478-46B6-912A-09AF493FAE25}
-		{E7B656E2-273B-4FA0-BBF0-0162790F3EA8} = {6201E61C-8478-46B6-912A-09AF493FAE25}
 		{DCED3C72-8763-4946-8CA5-F39ACC2FD7D5} = {7E7576A9-EFAC-41B5-9B29-15DADC818A5E}
+		{E7B656E2-273B-4FA0-BBF0-0162790F3EA8} = {6201E61C-8478-46B6-912A-09AF493FAE25}
 	EndGlobalSection
 EndGlobal

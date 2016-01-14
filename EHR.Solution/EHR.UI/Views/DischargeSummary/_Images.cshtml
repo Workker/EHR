@@ -1,25 +1,88 @@
-﻿<h1>Imagens Relevantes</h1>
+﻿@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/scripts")
+
+
+    <script type="text/javascript" src="~/Scripts/AjaxFlagMenu-1.0.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/highslide-with-gallery.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //// Images Gallery
+            hs.graphicsDir = '../../Images/graphics/';
+            hs.align = 'center';
+            hs.transitions = ['expand', 'crossfade'];
+            hs.fadeInOut = true;
+            hs.dimmingOpacity = 0.8;
+            hs.wrapperClassName = 'borderless floating-caption';
+            hs.captionEval = 'this.thumb.alt';
+            hs.marginLeft = 100; // make room for the thumbstrip
+            hs.marginBottom = 80; // make room for the controls and the floating caption
+            hs.numberPosition = 'caption';
+            hs.lang.number = '%1/%2';
+
+            // Add the slideshow providing the controlbar and the thumbstrip
+            hs.addSlideshow({
+                slideshowGroup: 'group1',
+                interval: 5000,
+                repeat: false,
+                useControls: true,
+                overlayOptions: {
+                    className: 'text-controls',
+                    position: 'bottom center',
+                    relativeTo: 'viewport',
+                    offsetX: 50,
+                    offsetY: -5
+
+                },
+                thumbstrip: {
+                    position: 'middle left',
+                    mode: 'vertical',
+                    relativeTo: 'viewport'
+                }
+            });
+
+ //            Add the simple close button
+            hs.registerOverlay({
+                html: '<div class="closebutton" onclick="return hs.close(this)" title="Close"></div>',
+                position: 'top right',
+                fade: 2 // fading the semi-transparent overlay looks bad in IE
+            });
+
+           });
+
+
+    </script>
+}
+<h1>Imagens Relevantes</h1>
 <hr />
 <br />
 <div class="highslide-gallery" style="width: 600px; margin: auto">
-    <a class="highslide" href="../Images/exam1.jpg" onclick="return hs.expand(this)">
-        <img src="../Images/exam1_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam2.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam2_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam3.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam3_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam4.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam4_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam5.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam5_thumb.jpg" alt="a" /></a>
-    <a class="highslide" href="../images/exam6.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam6_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam7.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam7_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam8.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam8_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam9.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam9_thumb.jpg" alt="" /></a>
-    <a class="highslide" href="../images/exam10.jpg" onclick="return hs.expand(this)">
-        <img src="../images/exam10_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam1.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam1_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam2.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam2_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam3.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam3_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam4.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam4_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam5.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam5_thumb.jpg" alt="a" /></a>
+    <a class="highslide" href=".~/Images/exam6.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam6_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam7.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam7_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam8.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam8_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam9.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam9_thumb.jpg" alt="" /></a>
+    <a class="highslide" href="~/Images/exam10.jpg" onclick="return hs.expand(this)">
+        <img src="~/Images/exam10_thumb.jpg" alt="" /></a>
 </div>
+
+
+@{
+    Html.RenderPartial("Layout/_RemoveEdition");
+}

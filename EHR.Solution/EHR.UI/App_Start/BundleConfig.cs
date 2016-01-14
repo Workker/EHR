@@ -51,7 +51,7 @@ namespace EHR.UI.App_Start
                 "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                "~/Scripts/EHR-Script.js",
+                "~/Scripts/EHR-Script.js", "~/Scripts/highslide-with-gallery.js",
                 "~/Scripts/jquery.maskedinput.min.js"));
 
             BundleTable.EnableOptimizations = true;

@@ -36,7 +36,7 @@ namespace EHR.Infrastructure.Util
                                          Convert.ToString(ConfigurationManager.AppSettings["Senha"]))
                                  };
 
-            smtpClient.Send(message);
+            //smtpClient.Send(message);
         }
 
         public static void EnviarEmail(string assunto, string mensagem, string destinatario)

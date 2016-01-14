@@ -82,14 +82,14 @@ function ConfigureMenu() {
         data: ''
     }).sethscCorner();
 
-    //Menu.add({
-    //    Title: 'Imagens',
-    //    onOutIcon: '../../Images/exames.png',
-    //    onClickIcon: '../../Images/exames.png',
-    //    HtmlSatusContent: '',
-    //    url: '/DischargeSummary/Images',
-    //    data: ''
-    //});
+    Menu.add({
+        Title: 'Imagens',
+        onOutIcon: '../../Images/exames.png',
+        onClickIcon: '../../Images/exames.png',
+        HtmlSatusContent: '',
+        url: '/DischargeSummary/Images',
+        data: ''
+    });
 
     Menu.add({
         Title: 'Exames',
@@ -145,14 +145,14 @@ function ConfigureMenu() {
         data: ''
     }).sethscCorner();
 
-    //Menu.add({
-    //    Title: 'Impresso',
-    //    onOutIcon: '../../Images/formulario.png',
-    //    onClickIcon: '../../Images/formulario.png',
-    //    HtmlSatusContent: '',
-    //    url: '/DischargeSummary/Form',
-    //    data: ''
-    //}).sethscCorner();
+    Menu.add({
+        Title: 'Impresso',
+        onOutIcon: '../../Images/formulario.png',
+        onClickIcon: '../../Images/formulario.png',
+        HtmlSatusContent: '',
+        url: '/DischargeSummary/Form',
+        data: ''
+    }).sethscCorner();
 
     $("#_td").corner("4px");
     $("#o_td").corner("4px");
@@ -161,7 +161,7 @@ function ConfigureMenu() {
 
 
 
-//// Images Gallery
+////// Images Gallery
 //hs.graphicsDir = '../Images/graphics/';
 //hs.align = 'center';
 //hs.transitions = ['expand', 'crossfade'];
@@ -195,7 +195,7 @@ function ConfigureMenu() {
 //    }
 //});
 
-//// Add the simple close button
+// Add the simple close button
 //hs.registerOverlay({
 //    html: '<div class="closebutton" onclick="return hs.close(this)" title="Close"></div>',
 //    position: 'top right',

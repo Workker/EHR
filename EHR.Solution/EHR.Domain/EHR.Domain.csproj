@@ -40,11 +40,11 @@
     </Reference>
     <Reference Include="EHR.CoreShared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LibEHR\EHR.CoreShared.dll</HintPath>
+      <HintPath>..\..\..\LibEHR\EHR.CoreShared.dll</HintPath>
     </Reference>
     <Reference Include="EHRIntegracao.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LibEHR\EHRIntegracao.Domain.dll</HintPath>
+      <HintPath>..\..\..\LibEHR\EHRIntegracao.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching">
       <HintPath>..\packages\EnyimMemcached.2.12\lib\net35\Enyim.Caching.dll</HintPath>
@@ -77,7 +77,7 @@
     </Reference>
     <Reference Include="protobuf-net, Version=2.0.0.640, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LibEHR\protobuf-net.dll</HintPath>
+      <HintPath>..\..\..\LibEHR\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -89,7 +89,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Workker.Framework.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LibEHR\Workker.Framework.Domain.dll</HintPath>
+      <HintPath>..\..\..\LibEHR\Workker.Framework.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

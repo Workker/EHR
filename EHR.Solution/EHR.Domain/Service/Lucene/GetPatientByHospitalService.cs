@@ -5,6 +5,8 @@ using EHR.Domain.Repository;
 using EHRIntegracao.Domain.Services;
 using EHRIntegracao.Domain.Services.GetEntities;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace EHR.Domain.Service.Lucene
 {
@@ -30,17 +32,70 @@ namespace EHR.Domain.Service.Lucene
             patient = SetHospitalFrom(patient);
             patient.Records = _recordsLuceneServiceservice.GetRecordBy(cpf);
 
-            var treatments = _treatmentsLuceneServiceservice.GetTreatments(patient.Records);
+            var treatments =  _treatmentsLuceneServiceservice.GetTreatments(patient.Records);
+
+            //treatments.Add(new Treatment()
+            //{
+            //    CheckOutDate = new System.DateTime(2009, 6, 22),
+            //    EntryDate = new System.DateTime(2009, 6, 20),
+            //    Hospital = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached().FirstOrDefault(),
+            //    Id = "243857"
+            //});
+
+            //treatments.Add(new Treatment()
+            //{
+            //    CheckOutDate = new System.DateTime(2011, 8, 1),
+            //    EntryDate = new System.DateTime(2011, 8, 1),
+            //    Hospital = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached().FirstOrDefault(),
+            //    Id = "243858"
+            //});
+
+            //treatments.Add(new Treatment()
+            //{
+            //    CheckOutDate = new System.DateTime(2015, 4, 15),
+            //    EntryDate = new System.DateTime(2015, 5, 13),
+            //    Hospital = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached().Skip(1).FirstOrDefault(),
+            //    Id = "243859"
+            //});
+
+            //treatments.Add(new Treatment()
+            //{
+            //    CheckOutDate = new System.DateTime(2015, 6, 27),
+            //    EntryDate = new System.DateTime(2015, 6, 20),
+            //    Hospital = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached().Skip(2).FirstOrDefault(),
+            //    Id = "243860"
+            //});
+
+            
 
             if (treatments != null)
-                patient.AddTreatments(treatments);
+            {
+                int indice = 1;
+                foreach (var item in treatments)
+                {
+                    item.Id = item.Id + indice;
+                    indice++;
+                } 
+               
+            }
 
+            treatments.Add(new Treatment()
+            {
+
+                CheckOutDate = new System.DateTime(2016, 1, 11),
+                EntryDate = new System.DateTime(2016, 1, 11),
+                Hospital = ((Hospitals)FactoryRepository.GetRepository(RepositoryEnum.Hospitals)).GetAllCached().FirstOrDefault(),
+                Id = "99999"
+            });
+
+            patient.AddTreatments(treatments);
             return patient;
         }
 
         public IList<IPatient> GetPatientBy(IPatient patient)
         {
             var patients = _patientsLuceneServiceservice.GetPatients(patient.Name);
+            
             return SetHospitalInPatientFrom(patients);
         }
 

@@ -24,6 +24,13 @@
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,11 +82,11 @@
     </Reference>
     <Reference Include="EHR.CoreShared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LibEHR\EHR.CoreShared.dll</HintPath>
+      <HintPath>..\..\..\LibEHR\EHR.CoreShared.dll</HintPath>
     </Reference>
     <Reference Include="EHRIntegracao.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LibEHR\EHRIntegracao.Domain.dll</HintPath>
+      <HintPath>..\..\..\LibEHR\EHRIntegracao.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.Unity, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -95,14 +102,17 @@
     <Reference Include="Microsoft.Practices.Unity.Interception.Configuration">
       <HintPath>..\packages\Unity.Interception.3.0.1304.0\lib\Net45\Microsoft.Practices.Unity.Interception.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.ReportViewer.Common\11.0.0.0__89845dcd8080cc91\Microsoft.ReportViewer.Common.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.Common">
+      <HintPath>..\packages\MicrosoftReportViewerWebForms.11.0.0.0\lib\Microsoft.ReportViewer.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel">
+      <HintPath>..\packages\MicrosoftReportViewerWebForms.11.0.0.0\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
       <Private>True</Private>
-      <HintPath>..\packages\MicosoftReportViewerWebForms_v11.1.0.1\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms">
+      <HintPath>..\packages\MicrosoftReportViewerWebForms.11.0.0.0\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -185,7 +195,7 @@
     </Reference>
     <Reference Include="Workker.Framework.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\LibEHR\Workker.Framework.Domain.dll</HintPath>
+      <HintPath>..\..\..\LibEHR\Workker.Framework.Domain.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -335,6 +345,45 @@
     <Content Include="Content\workkerReset.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\site-style.css" />
+    <Content Include="highslide\graphics\close.png" />
+    <Content Include="highslide\graphics\closeX.png" />
+    <Content Include="highslide\graphics\controlbar-black-border.gif" />
+    <Content Include="highslide\graphics\controlbar-text-buttons.png" />
+    <Content Include="highslide\graphics\controlbar-white-small.gif" />
+    <Content Include="highslide\graphics\controlbar-white.gif" />
+    <Content Include="highslide\graphics\controlbar2.gif" />
+    <Content Include="highslide\graphics\controlbar3.gif" />
+    <Content Include="highslide\graphics\controlbar4-hover.gif" />
+    <Content Include="highslide\graphics\controlbar4.gif" />
+    <Content Include="highslide\graphics\fullexpand.gif" />
+    <Content Include="highslide\graphics\geckodimmer.png" />
+    <Content Include="highslide\graphics\icon.gif" />
+    <Content Include="highslide\graphics\loader.gif" />
+    <Content Include="highslide\graphics\loader.white.gif" />
+    <Content Include="highslide\graphics\outlines\beveled.png" />
+    <Content Include="highslide\graphics\outlines\drop-shadow.png" />
+    <Content Include="highslide\graphics\outlines\glossy-dark.png" />
+    <Content Include="highslide\graphics\outlines\outer-glow.png" />
+    <Content Include="highslide\graphics\outlines\rounded-black.png" />
+    <Content Include="highslide\graphics\outlines\rounded-white.png" />
+    <Content Include="highslide\graphics\resize.gif" />
+    <Content Include="highslide\graphics\scrollarrows.png" />
+    <Content Include="highslide\graphics\zoomin.cur" />
+    <Content Include="highslide\graphics\zoomout.cur" />
+    <Content Include="highslide\highslide-full.js" />
+    <Content Include="highslide\highslide-full.min.js" />
+    <Content Include="highslide\highslide-full.packed.js" />
+    <Content Include="highslide\highslide-ie6.css" />
+    <Content Include="highslide\highslide-with-gallery.js" />
+    <Content Include="highslide\highslide-with-gallery.min.js" />
+    <Content Include="highslide\highslide-with-gallery.packed.js" />
+    <Content Include="highslide\highslide-with-html.js" />
+    <Content Include="highslide\highslide-with-html.min.js" />
+    <Content Include="highslide\highslide-with-html.packed.js" />
+    <Content Include="highslide\highslide.css" />
+    <Content Include="highslide\highslide.js" />
+    <Content Include="highslide\highslide.min.js" />
+    <Content Include="highslide\highslide.packed.js" />
     <Content Include="Images\age_ico.png" />
     <Content Include="Images\birthday_ico.png" />
     <Content Include="Images\doctor.png" />
@@ -359,7 +408,58 @@
     <Content Include="Images\exam9.JPG" />
     <Content Include="Images\exam9_thumb.jpg" />
     <Content Include="Images\graphics\outlines\Outlines.psd" />
+    <Content Include="highslide\graphics\outlines\Outlines.psd" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <Content Include="Images\thumb6.jpg" />
+    <Content Include="Images\thumbnail.jpg" />
+    <Content Include="Images\thumbstrip01.jpg" />
+    <Content Include="Images\thumbstrip01.thumb.png" />
+    <Content Include="Images\thumbstrip02.jpg" />
+    <Content Include="Images\thumbstrip02.thumb.png" />
+    <Content Include="Images\thumbstrip03.jpg" />
+    <Content Include="Images\thumbstrip03.thumb.png" />
+    <Content Include="Images\thumbstrip04.jpg" />
+    <Content Include="Images\thumbstrip04.thumb.png" />
+    <Content Include="Images\thumbstrip05.jpg" />
+    <Content Include="Images\thumbstrip05.thumb.png" />
+    <Content Include="Images\thumbstrip06.jpg" />
+    <Content Include="Images\thumbstrip06.thumb.png" />
+    <Content Include="Images\thumbstrip07.jpg" />
+    <Content Include="Images\thumbstrip07.thumb.png" />
+    <Content Include="Images\thumbstrip08.jpg" />
+    <Content Include="Images\thumbstrip08.thumb.png" />
+    <Content Include="Images\thumbstrip09.jpg" />
+    <Content Include="Images\thumbstrip09.thumb.png" />
+    <Content Include="Images\thumbstrip10.jpg" />
+    <Content Include="Images\thumbstrip10.thumb.png" />
+    <Content Include="Images\thumbstrip11.jpg" />
+    <Content Include="Images\thumbstrip11.thumb.png" />
+    <Content Include="Images\thumbstrip12.jpg" />
+    <Content Include="Images\thumbstrip12.thumb.png" />
+    <Content Include="Images\thumbstrip13.jpg" />
+    <Content Include="Images\thumbstrip13.thumb.png" />
+    <Content Include="Images\thumbstrip14.jpg" />
+    <Content Include="Images\thumbstrip14.thumb.png" />
+    <Content Include="Images\thumbstrip15.jpg" />
+    <Content Include="Images\thumbstrip15.thumb.png" />
+    <Content Include="Images\thumbstrip16.jpg" />
+    <Content Include="Images\thumbstrip16.thumb.png" />
+    <Content Include="Images\thumbstrip17.jpg" />
+    <Content Include="Images\thumbstrip17.thumb.png" />
+    <Content Include="Images\thumbstrip18.jpg" />
+    <Content Include="Images\thumbstrip18.thumb.png" />
+    <Content Include="Images\thumbstrip19.jpg" />
+    <Content Include="Images\thumbstrip19.thumb.png" />
+    <Content Include="Images\thumbstrip20.jpg" />
+    <Content Include="Images\thumbstrip20.thumb.png" />
+    <Content Include="Images\thumbstrip21.jpg" />
+    <Content Include="Images\thumbstrip21.thumb.png" />
+    <Content Include="Images\thumbstrip22.jpg" />
+    <Content Include="Images\thumbstrip22.thumb.png" />
+    <Content Include="Images\thumbstrip23.jpg" />
+    <Content Include="Images\thumbstrip23.thumb.png" />
+    <Content Include="Images\thumbstrip24.jpg" />
+    <Content Include="Images\thumbstrip24.thumb.png" />
     <Content Include="Report\Prescriptions.xsc">
       <DependentUpon>Prescriptions.xsd</DependentUpon>
     </Content>
@@ -383,6 +483,7 @@
     <Content Include="Report\Summary.xss">
       <DependentUpon>Summary.xsd</DependentUpon>
     </Content>
+    <Content Include="Scripts\highslide\graphics\outlines\Outlines.psd" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\abtimicrobianos.png" />
     <Content Include="Images\Capture.PNG" />
@@ -477,6 +578,45 @@
     <Content Include="Scripts\exporting.js" />
     <Content Include="Scripts\highcharts.js" />
     <Content Include="Scripts\highslide-with-gallery.js" />
+    <Content Include="Scripts\highslide\graphics\close.png" />
+    <Content Include="Scripts\highslide\graphics\closeX.png" />
+    <Content Include="Scripts\highslide\graphics\controlbar-black-border.gif" />
+    <Content Include="Scripts\highslide\graphics\controlbar-text-buttons.png" />
+    <Content Include="Scripts\highslide\graphics\controlbar-white-small.gif" />
+    <Content Include="Scripts\highslide\graphics\controlbar-white.gif" />
+    <Content Include="Scripts\highslide\graphics\controlbar2.gif" />
+    <Content Include="Scripts\highslide\graphics\controlbar3.gif" />
+    <Content Include="Scripts\highslide\graphics\controlbar4-hover.gif" />
+    <Content Include="Scripts\highslide\graphics\controlbar4.gif" />
+    <Content Include="Scripts\highslide\graphics\fullexpand.gif" />
+    <Content Include="Scripts\highslide\graphics\geckodimmer.png" />
+    <Content Include="Scripts\highslide\graphics\icon.gif" />
+    <Content Include="Scripts\highslide\graphics\loader.gif" />
+    <Content Include="Scripts\highslide\graphics\loader.white.gif" />
+    <Content Include="Scripts\highslide\graphics\outlines\beveled.png" />
+    <Content Include="Scripts\highslide\graphics\outlines\drop-shadow.png" />
+    <Content Include="Scripts\highslide\graphics\outlines\glossy-dark.png" />
+    <Content Include="Scripts\highslide\graphics\outlines\outer-glow.png" />
+    <Content Include="Scripts\highslide\graphics\outlines\rounded-black.png" />
+    <Content Include="Scripts\highslide\graphics\outlines\rounded-white.png" />
+    <Content Include="Scripts\highslide\graphics\resize.gif" />
+    <Content Include="Scripts\highslide\graphics\scrollarrows.png" />
+    <Content Include="Scripts\highslide\graphics\zoomin.cur" />
+    <Content Include="Scripts\highslide\graphics\zoomout.cur" />
+    <Content Include="Scripts\highslide\highslide-full.js" />
+    <Content Include="Scripts\highslide\highslide-full.min.js" />
+    <Content Include="Scripts\highslide\highslide-full.packed.js" />
+    <Content Include="Scripts\highslide\highslide-ie6.css" />
+    <Content Include="Scripts\highslide\highslide-with-gallery.js" />
+    <Content Include="Scripts\highslide\highslide-with-gallery.min.js" />
+    <Content Include="Scripts\highslide\highslide-with-gallery.packed.js" />
+    <Content Include="Scripts\highslide\highslide-with-html.js" />
+    <Content Include="Scripts\highslide\highslide-with-html.min.js" />
+    <Content Include="Scripts\highslide\highslide-with-html.packed.js" />
+    <Content Include="Scripts\highslide\highslide.css" />
+    <Content Include="Scripts\highslide\highslide.js" />
+    <Content Include="Scripts\highslide\highslide.min.js" />
+    <Content Include="Scripts\highslide\highslide.packed.js" />
     <Content Include="Scripts\jquery-1.10.1.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
@@ -500,6 +640,45 @@
     <Content Include="Scripts\knockout-mapping.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\close.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\closeX.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar-black-border.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar-text-buttons.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar-white-small.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar-white.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar2.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar3.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar4-hover.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\controlbar4.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\fullexpand.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\geckodimmer.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\icon.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\loader.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\loader.white.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\outlines\beveled.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\outlines\drop-shadow.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\outlines\glossy-dark.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\outlines\outer-glow.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\outlines\rounded-black.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\outlines\rounded-white.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\resize.gif" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\scrollarrows.png" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\zoomin.cur" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\zoomout.cur" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-full.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-full.min.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-full.packed.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-ie6.css" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-with-gallery.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-with-gallery.min.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-with-gallery.packed.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-with-html.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-with-html.min.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide-with-html.packed.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide.css" />
+    <Content Include="Views\DischargeSummary\highslide\highslide.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide.min.js" />
+    <Content Include="Views\DischargeSummary\highslide\highslide.packed.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -571,6 +750,7 @@
     <Content Include="Views\Patient\_Registration.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\DischargeSummary\Layout\_RemoveEdition.cshtml" />
+    <Content Include="Views\DischargeSummary\highslide\graphics\outlines\Outlines.psd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

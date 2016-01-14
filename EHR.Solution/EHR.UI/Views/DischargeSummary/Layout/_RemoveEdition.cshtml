@@ -1,5 +1,15 @@
 ﻿@using EHR.UI.Models
     <script type="text/javascript">
+        function RemoveEdition(reopen) {
+
+            $(".contentPage input[type=radio], .contentPage input[type=checkbox], .contentPage textarea, .contentPage select, .contentPage input[type=text], .contentPage input[type=time]").attr("disabled", true);
+            $(".action, .contentPage input[type=submit], .contentPage input[type=reset], .contentPage input[type=button]").hide();
+            if (reopen == true) {
+                $(".contentPage input[value=Reabrir]").show();
+            }
+
+        }
+
             @if (((SummaryModel)Session["Summary"]).Finalized == true)
             {
                 @:RemoveEdition();
