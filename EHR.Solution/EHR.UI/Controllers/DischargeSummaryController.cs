@@ -89,6 +89,11 @@ namespace EHR.UI.Controllers
             return PartialView("_Images");
         }
 
+        public PartialViewResult Charts()
+        {
+            return PartialView("_Charts");
+        }
+
         public PartialViewResult Prescriptions()
         {
             try

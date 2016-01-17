@@ -135,6 +135,7 @@ namespace EHR.Test.Domain.Entities
         public void to_disallow_add_an_invalid_hospital()
         {
             _account.AddHospital(null);
+
         }
 
         [Test]

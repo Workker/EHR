@@ -146,20 +146,27 @@ function ConfigureMenu() {
     }).sethscCorner();
 
     Menu.add({
-        Title: 'Impresso',
-        onOutIcon: '../../Images/formulario.png',
-        onClickIcon: '../../Images/formulario.png',
+        Title: 'Sinais vitais',
+        onOutIcon: '../../Images/graphics.png',
+        onClickIcon: '../../Images/graphics.png',
         HtmlSatusContent: '',
-        url: '/DischargeSummary/Form',
+        url: '/DischargeSummary/Charts',
         data: ''
-    }).sethscCorner();
+    });
+    //.sethscCorner();
+
+    //Menu.add({
+    //    Title: 'Impresso',
+    //    onOutIcon: '../../Images/formulario.png',
+    //    onClickIcon: '../../Images/formulario.png',
+    //    HtmlSatusContent: '',
+    //    url: '/DischargeSummary/Form',
+    //    data: ''
+    //}).sethscCorner();
 
     $("#_td").corner("4px");
     $("#o_td").corner("4px");
-
 }
-
-
 
 ////// Images Gallery
 //hs.graphicsDir = '../Images/graphics/';
