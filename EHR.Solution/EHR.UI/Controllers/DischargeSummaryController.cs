@@ -109,6 +109,21 @@ namespace EHR.UI.Controllers
             }
         }
 
+        public PartialViewResult PrescriptionsForService()
+        {
+            try
+            {
+                var medications = GetSummary().Medications;
+                ViewBag.Medications = medications;
+                return PartialView("_PrescriptionsForService");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+                return null;
+            }
+        }
+
         #endregion
 
         #region General Data
@@ -296,8 +311,23 @@ namespace EHR.UI.Controllers
             try
             {
                 ViewBag.MedicationType = medicationType;
-
+                                                                                                                
                 return PartialView(short.Parse(medicationType) != 3 ? "Medication/_SimpleForm" : "Medication/_CompleteForm");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+
+                return null;
+            }
+        }
+
+        public PartialViewResult PrescriptionForServiceForm(string medicationType)
+        {
+            try
+            {
+                ViewBag.MedicationType = medicationType;
+                return PartialView("PrescriptionForService/_CompleteForm");
             }
             catch (Exception ex)
             {
@@ -392,6 +422,57 @@ namespace EHR.UI.Controllers
                 return null;
             }
         }
+
+        public JsonResult TypePrescriptionAutoComplete(string term, string type)
+        {
+            try
+            {
+                ControllerEnum controller;
+
+                switch (type)
+                {
+                    case "2":
+                        controller = ControllerEnum.Cuidados;
+                        break;
+                    case "3":
+                        controller = ControllerEnum.Dietas;
+                        break;
+                    default:
+                        controller = ControllerEnum.Def;
+                        break;
+                }
+                var typePrescription = FactoryController.GetController(controller).GetPrescription(term);
+
+                var valueObjectsModels = ValueObjectMapper.MapValueObjectsModelsFrom(typePrescription);
+
+                return Json(valueObjectsModels, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+
+                return null;
+            }
+        }
+
+        public JsonResult CuidadosAutoComplete(string term)
+        {
+            try
+            {
+                var defDtOs = FactoryController.GetController(ControllerEnum.Cuidados).GetCuidadosMedicos(term);
+
+                var defModels = CuidadoMedicoMapper.MapCuidadoMedicoModelsFrom(defDtOs);
+
+                return Json(defModels, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+
+                return null;
+            }
+        }
+
 
         #endregion
 

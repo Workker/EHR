@@ -128,6 +128,15 @@ function ConfigureMenu() {
     }).sethscCorner();
 
     Menu.add({
+        Title: 'Prescrições',
+        onOutIcon: '../../Images/receituario.png',
+        onClickIcon: '../../Images/receituario.png',
+        HtmlSatusContent: '',
+        url: '/DischargeSummary/PrescriptionsForService',
+        data: ''
+    }).sethscCorner();
+
+    Menu.add({
         Title: 'Prescrição de Alta',
         onOutIcon: '../../Images/receituario.png',
         onClickIcon: '../../Images/receituario.png',
@@ -153,6 +162,8 @@ function ConfigureMenu() {
         url: '/DischargeSummary/Charts',
         data: ''
     });
+
+    
     //.sethscCorner();
 
     //Menu.add({
@@ -574,6 +585,30 @@ function GenericAutoComplete(autoCompleteElement, url, codeElement) {
                 type: "GET",
                 dataType: "JSON",
                 data: { term: request.term },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.Description, value: item.Description, code: item.Code };
+                    }));
+                }
+            });
+        },
+        messages: {
+            noResults: "",
+            results: ""
+        }, select: function (event, ui) {
+            $(codeElement).val(ui.item.code);
+        }
+    });
+}
+
+function GenericAutoCompleteWhichType(autoCompleteElement, url, codeElement, type) {
+    $(autoCompleteElement).autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "http://" + window.location.host + url,
+                type: "GET",
+                dataType: "JSON",
+                data: { term: request.term, type },
                 success: function (data) {
                     response($.map(data, function (item) {
                         return { label: item.Description, value: item.Description, code: item.Code };

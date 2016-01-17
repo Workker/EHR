@@ -32,6 +32,11 @@ namespace EHR.Controller
                     return new HospitalController();
                 case ControllerEnum.Types:
                     return new TypesController();
+                case ControllerEnum.Cuidados:
+                    return new CuidadosController();
+                case ControllerEnum.Dietas:
+                    return new DietasController();
+
                 default:
                     throw new Exception("Controller not found.");
             }
@@ -51,6 +56,8 @@ namespace EHR.Controller
         Specialty = 9,
         State = 10,
         Hospital = 11,
-        Types = 12
+        Types = 12,
+        Cuidados = 13,
+        Dietas = 14
     }
 }

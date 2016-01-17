@@ -73,7 +73,9 @@
   <ItemGroup>
     <Compile Include="AccountController.cs" />
     <Compile Include="AllergyController.cs" />
+    <Compile Include="CuidadosController.cs" />
     <Compile Include="DiagnosticController.cs" />
+    <Compile Include="DietasController.cs" />
     <Compile Include="FactoryController.cs" />
     <Compile Include="EHRController.cs" />
     <Compile Include="FactoryRepository.cs" />

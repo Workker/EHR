@@ -1,0 +1,14 @@
+﻿@using EHR.Domain.Entities
+@using EHR.UI.Models
+
+<h1>Requisi&ccedil;&atilde;o de prescri&ccedil;&atilde;o</h1>
+<hr />
+<br />
+@{
+    var medicationUseBefore = new MedicationModel { Type = (short)MedicationTypeEnum.Prescription };
+    ViewBag.MedicationType = (short)MedicationTypeEnum.Prescription;
+    Html.RenderPartial("PrescriptionForService/_Table", medicationUseBefore);
+}
+@{
+    Html.RenderPartial("Layout/_RemoveEdition");
+}

@@ -1,10 +1,25 @@
 ﻿@using System.Globalization
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
-<form id="medicationForm">
 
+<script type="text/javascript">
+
+
+    function AutoCompletePrescription(objeto, valor) {
+        switch (valor.val()) {
+            case "1":
+                GenericAutoComplete(objeto, '/DischargeSummary/DefAutoComplete', '#def')
+                break;
+           default:
+                GenericAutoCompleteWhichType(objeto, '/DischargeSummary/TypePrescriptionAutoComplete', '#def', valor.val())
+                break;
+        }
+    }
+</script>
+
+<form id="PrescriptionForServiceForm">
     <label>Tipo prescri&ccedil;&atilde;o:</label>
-    <select name="tipo.prescricao">
+    <select id="tipoPrescricao" name="tipoPrescricao">
         <option value="-1">Selecione</option>
         <option value="1">
             Medicamentos
@@ -32,8 +47,8 @@
     <br />
 
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
-    <label>Medicamento:</label>
-    <input type="text" name="medication.description" style="margin-left: 10px;" onclick="GenericAutoComplete(this, '/DischargeSummary/DefAutoComplete', '#def')" />
+    <label>Pesquisa:</label>
+    <input type="text" name="medication.description" style="margin-left: 10px;" onclick="AutoCompletePrescription(this, $('#tipoPrescricao'));" />
     <input type="hidden" name="medication.def.id" id="def" />
     <br />
     <br />
@@ -109,7 +124,8 @@
 
     $(document).ready(function () {
 
-        $("#medicationForm input[type='submit']").click(function () {
+
+        $("#PrescriptionForServiceForm input[type='submit']").click(function () {
 
             if ($("input[name='medication.description']").val() == "") {
 

@@ -53,7 +53,8 @@ namespace EHR.Controller
         #endregion
 
         #region Medication
-
+        public virtual List<EHR.CoreShared.Entities.ValueObject> GetPrescription(string term) { return null; }
+        public virtual List<CuidadoMedico> GetCuidadosMedicos(string term) { return null; }
         public virtual List<DEF> GetDef(string term) { return null; }
         public virtual void SaveMedication(int idSummary, short medicationType, short def, string description, string presentation,
             short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration) { }

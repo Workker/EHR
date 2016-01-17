@@ -26,4 +26,27 @@ namespace EHR.UI.Models.Mappers
             return defModel;
         }
     }
+
+    public static class CuidadoMedicoMapper
+    {
+        public static List<CuidadoMedicoModel> MapCuidadoMedicoModelsFrom(IList<CuidadoMedico> cuidadosMedicos)
+        {
+            var defModels = new List<CuidadoMedicoModel>();
+            foreach (var cuidadoMedico in cuidadosMedicos)
+            {
+                var cuidadoMedicoModel = MapCuidadoMedicoModelFrom(cuidadoMedico);
+                cuidadoMedicoModel.Code = cuidadoMedico.Id;
+                defModels.Add(cuidadoMedicoModel);
+            }
+            return defModels;
+        }
+
+        public static CuidadoMedicoModel MapCuidadoMedicoModelFrom(CuidadoMedico def)
+        {
+            Mapper.CreateMap<CuidadoMedico, CuidadoMedicoModel>();
+            var defModel = Mapper.Map<CuidadoMedico, CuidadoMedicoModel>(def);
+            defModel.Code = def.Id;
+            return defModel;
+        }
+    }
 }

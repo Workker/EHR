@@ -9,4 +9,12 @@ namespace EHR.UI.Models
         public string Description { get; set; }
         public short Code { get; set; }
     }
+
+    [Serializable]
+    public class CuidadoMedicoModel
+    {
+        public short Id { get; set; }
+        public string Description { get; set; }
+        public short Code { get; set; }
+    }
 }

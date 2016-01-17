@@ -1,7 +1,9 @@
 ﻿@using System.Globalization
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
-<form id="medicationForm">
+
+
+<form id="PrescritionForm">
 
     <label>Tipo prescri&ccedil;&atilde;o:</label>
     <select name="tipo.prescricao">
@@ -12,19 +14,19 @@
         <option value="2">
             Cuidados
         </option>
-        <option value="3">
+        <option value="2">
             Dietas
         </option>
-        <option value="4">
+        <option value="2">
             Procedimentos
         </option>
-        <option value="5">
+        <option value="2">
             Suporte Ventilatório
         </option>
-        <option value="6">
+        <option value="2">
             Monitorização
         </option>
-        <option value="7">
+        <option value="2">
             Hemocomponentes
         </option>
     </select>
@@ -32,7 +34,6 @@
     <br />
 
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
-    <label>Medicamento:</label>
     <input type="text" name="medication.description" style="margin-left: 10px;" onclick="GenericAutoComplete(this, '/DischargeSummary/DefAutoComplete', '#def')" />
     <input type="hidden" name="medication.def.id" id="def" />
     <br />

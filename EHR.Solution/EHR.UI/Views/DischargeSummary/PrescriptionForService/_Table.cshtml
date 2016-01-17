@@ -1,0 +1,14 @@
+﻿@model EHR.UI.Models.MedicationModel
+<ul class="ulTable _4kg  _4ks">
+    @{
+        Html.RenderPartial("Medication/_TableRow");
+    }
+    <li class="clearfix">
+        <div class="clearfix">
+            <a class="action" onclick='newRow(this,"/DischargeSummary/prescriptionForServiceForm/?medicationType=@Model.Type");'>
+                <span>+</span>
+            </a>
+        </div>
+        <div class="content"></div>
+    </li>
+</ul>
