@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D2653BF6-D185-4B47-AD70-B11B8ED6DB47}"
 	ProjectSection(SolutionItems) = preProject
@@ -109,6 +109,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{6201E61C-8478-46B6-912A-09AF493FAE25} = {7E7576A9-EFAC-41B5-9B29-15DADC818A5E}
 		{1B2917E6-5971-49D4-9926-FC0F9D3E75E5} = {6201E61C-8478-46B6-912A-09AF493FAE25}
 		{DCED3C72-8763-4946-8CA5-F39ACC2FD7D5} = {7E7576A9-EFAC-41B5-9B29-15DADC818A5E}
 		{E7B656E2-273B-4FA0-BBF0-0162790F3EA8} = {6201E61C-8478-46B6-912A-09AF493FAE25}

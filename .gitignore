@@ -116,3 +116,6 @@ lucene_index_record/
 lucene_index_treatment/
 lucene_index_tus/
 
+EHR.Solution/.vs/config/applicationhost.config
+EHR.Solution/EHR.UI/Web.config
+EHR.Solution/InitializeDatabaseAndCacheData/App.config
