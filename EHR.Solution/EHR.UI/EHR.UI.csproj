@@ -204,6 +204,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\DischargeSummaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -759,6 +760,7 @@
     <Content Include="Views\DischargeSummary\PrescriptionForService\_SimpleForm.cshtml" />
     <Content Include="Views\DischargeSummary\PrescriptionForService\_Table.cshtml" />
     <Content Include="Views\DischargeSummary\PrescriptionForService\_TableRow.cshtml" />
+    <Content Include="Views\Charts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
