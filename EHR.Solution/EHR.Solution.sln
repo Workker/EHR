@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitializeDatabaseAndCacheD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportTables", "ImportTables\ImportTables.csproj", "{E7B656E2-273B-4FA0-BBF0-0162790F3EA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EHR.Analytics", "EHR.Analytics\EHR.Analytics.csproj", "{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,14 @@ Global
 		{E7B656E2-273B-4FA0-BBF0-0162790F3EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7B656E2-273B-4FA0-BBF0-0162790F3EA8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7B656E2-273B-4FA0-BBF0-0162790F3EA8}.Release|x86.ActiveCfg = Release|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Debug|x86.Build.0 = Debug|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Release|x86.ActiveCfg = Release|Any CPU
+		{864E634D-3BF2-466F-BACA-DA0D62CA5DA0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
