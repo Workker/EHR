@@ -14,7 +14,7 @@ namespace EHR.Domain.Service.Lucene
             var def = repository.All<DEF>().ToList();
             var service = new SaveDefInLuceneService(ConfigurationManager.AppSettings["DEFIndexPath"]);
 
-            service.Save(def);
+            service.Save(def, ConfigurationManager.AppSettings["DEFIndexPath"]);
         }
     }
 }

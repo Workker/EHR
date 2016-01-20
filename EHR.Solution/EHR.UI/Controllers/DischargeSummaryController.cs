@@ -65,6 +65,7 @@ namespace EHR.UI.Controllers
                 ViewBag.Diagnostics = summaryModel.Diagnostics;
                 ViewBag.Procedures = summaryModel.Procedures;
                 ViewBag.Medications = summaryModel.Medications;
+                ViewBag.PrescriptionsForService = summaryModel.PrescriptionsForService;
 
                 this.RegisterActionOfUser(HistoricalActionTypeEnum.View);
 
@@ -113,8 +114,8 @@ namespace EHR.UI.Controllers
         {
             try
             {
-                var medications = GetSummary().Medications;
-                ViewBag.Medications = medications;
+                var prescriptionsForService = GetSummary().PrescriptionsForService;
+                ViewBag.PrescriptionsForService = prescriptionsForService;
                 return PartialView("_PrescriptionsForService");
             }
             catch (Exception ex)
@@ -139,6 +140,7 @@ namespace EHR.UI.Controllers
                 ViewBag.Allergies = summary.Allergies;
                 ViewBag.Diagnostics = summary.Diagnostics;
                 ViewBag.Medications = summary.Medications;
+                ViewBag.PrescriptionsForService = summary.PrescriptionsForService;
 
                 return PartialView("_GeneralData", summary);
             }
@@ -311,7 +313,7 @@ namespace EHR.UI.Controllers
             try
             {
                 ViewBag.MedicationType = medicationType;
-                                                                                                                
+
                 return PartialView(short.Parse(medicationType) != 3 ? "Medication/_SimpleForm" : "Medication/_CompleteForm");
             }
             catch (Exception ex)
@@ -326,8 +328,9 @@ namespace EHR.UI.Controllers
         {
             try
             {
+                var summary = GetSummary();
                 ViewBag.MedicationType = medicationType;
-                return PartialView("PrescriptionForService/_CompleteForm");
+                return PartialView("PrescriptionForService/_CompleteForm", summary);
             }
             catch (Exception ex)
             {
@@ -376,6 +379,24 @@ namespace EHR.UI.Controllers
             }
         }
 
+
+        public void DeletePrescriptionForService(PrescriptionForServiceModel prescription)
+        {
+            try
+            {
+                SummaryController.InactivePrescriptionForService(GetSummary().Id, prescription.Id);
+
+                RefreshSessionSummary();
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Exclude, "Prescrição excluida com sucesso.");
+                
+                this.ShowMessage(MessageTypeEnum.Success, "Medicamento exclu&iacute;do.");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+            }
+        }
         public void DeleteMedication(MedicationModel medication)
         {
             try
@@ -423,6 +444,74 @@ namespace EHR.UI.Controllers
             }
         }
 
+        [HttpPost]
+        public PartialViewResult SavePrescriptionForService(PrescriptionForServiceModel prescription)
+        {
+            try
+            {
+                prescription.Description = prescription.TypePrescription.Description;
+
+                if (prescription.Frequency == 0)
+                    prescription.Frequency = 1;
+
+                prescription.TypePrescription.Code = prescription.TypePrescription.Id.ToString();
+
+                PrescriptionItemType itemType;
+
+                switch (prescription.Type)
+                {
+                    case 1:
+                        itemType = PrescriptionItemType.Medicamentos;
+                        break;
+                    case 2:
+                        itemType = PrescriptionItemType.Dietas;
+                        break;
+                    case 3:
+                        itemType = PrescriptionItemType.Cuidados;
+                        break;
+                    default:
+                        itemType = PrescriptionItemType.Medicamentos;
+                        break;
+                }
+                var actualDate = DateTime.Now;
+                SummaryController.SavePrescriptionForService(GetSummary().Id, (TypePrescription)prescription.Type, prescription.TypePrescription.Id, prescription.TypePrescription.Code, itemType, prescription.Presentation,
+                    prescription.PresentationType, prescription.Dose, prescription.Dosage,
+                    prescription.Way, prescription.Place, prescription.Frequency, prescription.FrequencyCase, prescription.Duration,
+                   actualDate.Date.Month,
+                    actualDate.Date.Year, actualDate.Date.Day, actualDate.Date.Hour, actualDate.Date.Minute,
+                    1, "Observation");
+
+                RefreshSessionSummary();
+                ViewBag.PrescriptionsForService = new List<PrescriptionForServiceModel> { GetSummary().PrescriptionsForService.Last() };
+                ViewBag.PrescriptionForServiceType = prescription.Type;
+
+
+                this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "Requisição de prescrição enviada.");
+                //TODO: poderá ser utilizado, se quiser criar um log por setorizado: farmacia, enfermagem.
+                //switch (prescription.Type)
+                //{
+                //    case 1:
+                //        break;
+                //    case 2:
+                //        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "Requisição de prescrição alterada.");
+                //        break;
+                //    case 3:
+                //        this.RegisterActionOfUser(HistoricalActionTypeEnum.Include, "Requisição de prescrição alterada.");
+                //        break;
+                //}
+
+                this.ShowMessage(MessageTypeEnum.Success, "Prescrição inclu&iacute;da.");
+
+                return PartialView("PrescriptionForService/_TableRow");
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessage(MessageTypeEnum.Error, ex.Message);
+
+                return null;
+            }
+        }
+
         public JsonResult TypePrescriptionAutoComplete(string term, string type)
         {
             try
@@ -443,7 +532,7 @@ namespace EHR.UI.Controllers
                 }
                 var typePrescription = FactoryController.GetController(controller).GetPrescription(term);
 
-                var valueObjectsModels = ValueObjectMapper.MapValueObjectsModelsFrom(typePrescription);
+                var valueObjectsModels = PrescriptionItemMapper.MapItemsPrescriptionModelsFrom(typePrescription);
 
                 return Json(valueObjectsModels, JsonRequestBehavior.AllowGet);
             }

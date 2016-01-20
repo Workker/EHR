@@ -18,6 +18,7 @@ namespace EHR.UI.Models.Mappers
                 .ForMember(hemo => hemo.Hemotransfusions, so => so.Ignore())
                 .ForMember(ex => ex.Exams, so => so.Ignore())
                 .ForMember(me => me.Medications, so => so.Ignore())
+                 .ForMember(pres => pres.PrescriptionsForService, so => so.Ignore())
                 .ForMember(hd => hd.DischargeData, so => so.Ignore())
                 .ForMember(p => p.Patient, so => so.Ignore())
                 .ForMember(ac => ac.Actions, souce => souce.Ignore())
@@ -52,6 +53,7 @@ namespace EHR.UI.Models.Mappers
             summaryModel.Diagnostics = DiagnosticMapper.MapDiagnosticsModelsFrom(summary.Diagnostics);
             summaryModel.Procedures = ProcedureMapper.MapProceduresModelsFrom(summary.Procedures);
             summaryModel.Medications = MedicationMapper.MapMedicationModelsFrom(summary.Medications);
+            summaryModel.PrescriptionsForService = PrescriptionsForServiceMapper.MapDefModelsFrom(summary.PrescriptionsForService);
             summaryModel.Hemotransfusions = HemotransfusionMapper.MapHemotransfusionModelsFrom(summary.Hemotransfusions);
             summaryModel.Exams = ExamMapper.MapExamModelsFrom(summary.Exams);
             summaryModel.Patient = PatientMapper.MapPatientModelFrom(summary.Patient);

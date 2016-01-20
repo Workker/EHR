@@ -8,10 +8,11 @@ namespace EHR.UI.Models
 {
 
     [Serializable]
-    public class ValueObjectModel
+    public class ItemPrescriptionModel
     {
         public short Id { get; set; }
         public string Description { get; set; }
-        public short Code { get; set; }
+        public string Code { get; set; }
+        public short Type { get; set; }
     }
 }

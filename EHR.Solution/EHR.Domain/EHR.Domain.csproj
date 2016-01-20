@@ -96,6 +96,8 @@
     <Compile Include="DTOs\DischargeSummaryReportDTO.cs" />
     <Compile Include="Entities\AllergyType.cs" />
     <Compile Include="Entities\AllergyTypeEnum.cs" />
+    <Compile Include="Entities\PrescriptionItem.cs" />
+    <Compile Include="Entities\TypePrescription.cs" />
     <Compile Include="Entities\ComplementaryExam.cs" />
     <Compile Include="Entities\ConditionAtDischarge.cs" />
     <Compile Include="Entities\ConditionOfThePatientAtHighEnum.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Entities\Allergy.cs" />
     <Compile Include="Entities\Diagnostic.cs" />
     <Compile Include="Entities\OrientationOfMultidisciplinaryTeamsMetEnum.cs" />
+    <Compile Include="Entities\PrescriptionForService.cs" />
     <Compile Include="Entities\PresentationTypeEnum.cs" />
     <Compile Include="Entities\Procedure.cs" />
     <Compile Include="Entities\ProfessionalRegistration.cs" />
@@ -156,6 +159,8 @@
     <Compile Include="Mapping\MedicalReviewMap.cs" />
     <Compile Include="Mapping\MedicationMap.cs" />
     <Compile Include="Mapping\PatientMap.cs" />
+    <Compile Include="Mapping\PrescriptionForServiceMap.cs" />
+    <Compile Include="Mapping\PrescriptionItemMap.cs" />
     <Compile Include="Mapping\ProcedureMap.cs" />
     <Compile Include="Mapping\ProfessionalRegistrationMap.cs" />
     <Compile Include="Mapping\ReactionTypeMap.cs" />
@@ -172,6 +177,7 @@
     <Compile Include="Repository\DEFRepository.cs" />
     <Compile Include="Repository\FactoryRepository.cs" />
     <Compile Include="Repository\Hospitals.cs" />
+    <Compile Include="Repository\ItemPrescriptionRepository.cs" />
     <Compile Include="Repository\Patients.cs" />
     <Compile Include="Repository\Specialties.cs" />
     <Compile Include="Repository\TUSSRepository.cs" />

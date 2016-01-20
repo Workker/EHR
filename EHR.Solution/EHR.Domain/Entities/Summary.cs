@@ -56,6 +56,12 @@ namespace EHR.Domain.Entities
             get { return _medications ?? (_medications = new List<Medication>()); }
         }
 
+        private IList<PrescriptionForService> _prescriptionsForService;
+        public virtual IList<PrescriptionForService> PrescriptionsForService
+        {
+            get { return _prescriptionsForService ?? (_prescriptionsForService = new List<PrescriptionForService>()); }
+        }
+
         private IList<Exam> _exams;
         public virtual IList<Exam> Exams
         {
@@ -244,24 +250,85 @@ namespace EHR.Domain.Entities
             }
 
             var medication = new Medication
-                                 {
-                                     Type = type,
-                                     Def = def,
-                                     Presentation = presentation,
-                                     PresentationType = (PresentationTypeEnum)presentationType,
-                                     Dose = dose,
-                                     Dosage = (DosageEnum)dosage,
-                                     Way = (WayEnum)way,
-                                     Place = place,
-                                     Frequency = (FrequencyEnum)frequency,
-                                     FrequencyCase = (FrequencyCaseEnum)frequencyCase,
-                                     Duration = duration,
-                                     Description = description
-                                 };
+            {
+                Type = type,
+                Def = def,
+                Presentation = presentation,
+                PresentationType = (PresentationTypeEnum)presentationType,
+                Dose = dose,
+                Dosage = (DosageEnum)dosage,
+                Way = (WayEnum)way,
+                Place = place,
+                Frequency = (FrequencyEnum)frequency,
+                FrequencyCase = (FrequencyCaseEnum)frequencyCase,
+                Duration = duration,
+                Description = description
+            };
 
             Medications.Add(medication);
 
             Assertion.IsTrue(Medications.Contains(medication), "Medicamento não foi inserido.").Validate();
+        }
+
+        public virtual void CreatePrescriptionForService(PrescriptionItem prescriptionItem, TypePrescription typePrescriptionEnum,
+           string presentation,
+           short presentationType,
+           string dose, short dosage,
+           short way, string place,
+           short frequency,
+           short frequencyCase,
+           int duration,
+           int PrescriptionHighMonth,
+           int PrescriptionHighYear,
+           int PrescriptionHighDay,
+           int PrescriptionHighHour, int PrescriptionHighMinute,
+             int quantity, string observation)
+        {
+            Assertion.NotNull(prescriptionItem, "Item de prescrição não informado.");
+            Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
+
+            if (typePrescriptionEnum == TypePrescription.Medicamentos)
+            {
+                Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
+                Assertion.GreaterThan((int)presentationType, 0, "Tipo de apresentação não informado.").Validate();
+                Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
+                Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
+                Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
+                Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
+            }
+
+            var prescriptionForService = new PrescriptionForService
+            {
+                Quantity = quantity,
+                Revoked = false,
+                TypePrescription = typePrescriptionEnum,
+                ForService = true,
+              //  PatientName = this.Patient.Name,
+                ProfessionalName = this.Account.FirstName + " " + this.Account.LastName,
+                ProfessionalId = this.Account.Id,
+                PrescriptionItem = prescriptionItem,
+                Presentation = presentation,
+                PresentationType = (PresentationTypeEnum)presentationType,
+                Dose = dose,
+                Dosage = (DosageEnum)dosage,
+                Way = (WayEnum)way,
+                Place = place,
+                Frequency = (FrequencyEnum)frequency,
+                Duration = duration,
+                Observation = observation,
+                CloseDate = DateTime.Now,
+                OpenDate = DateTime.Now,
+                CreationDate = DateTime.Now,
+                Status = StatusPrescriptionEnum.EmAberto
+            };
+
+
+            if (frequencyCase > 0)
+                prescriptionForService.FrequencyCase = (FrequencyCaseEnum)frequencyCase;
+
+            PrescriptionsForService.Add(prescriptionForService);
+
+            Assertion.IsTrue(PrescriptionsForService.Contains(prescriptionForService), "Prescrição não foi inserida corretamente.").Validate();
         }
 
         public virtual void CreateMedication(MedicationTypeEnum type, string description, string presentation, short presentationType,
@@ -312,6 +379,20 @@ namespace EHR.Domain.Entities
             Assertion.IsFalse(Medications.Contains(medication), "Medicamento não foi removido.").Validate();
         }
 
+        public virtual void RemovePrescriptionForService(int id)
+        {
+            Assertion.GreaterThan(id, 0, "Id não informado.").Validate();
+
+            var prescriptionForService = PrescriptionsForService.FirstOrDefault(m => m.Id == id);
+            
+            //TODO: inativer em vez de deletar
+            Assertion.NotNull(prescriptionForService, "Prescrição não encontrada.").Validate();
+
+            PrescriptionsForService.Remove(prescriptionForService);
+
+            Assertion.IsFalse(PrescriptionsForService.Contains(prescriptionForService), "Prescrição não foi removida.").Validate();
+        }
+
         #endregion
 
         #region Exam
@@ -353,12 +434,12 @@ namespace EHR.Domain.Entities
         public virtual void AddRecordToHistory(Account account, DateTime date, HistoricalActionType action, string description)
         {
             var record = new HistoryRecord
-                             {
-                                 Account = account,
-                                 Action = action,
-                                 Date = date,
-                                 Description = description
-                             };
+            {
+                Account = account,
+                Action = action,
+                Date = date,
+                Description = description
+            };
 
             History.Add(record);
         }

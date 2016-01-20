@@ -4,29 +4,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using EHR.Domain.Entities;
 
 namespace EHR.UI.Models.Mappers
 {
-    public static class ValueObjectMapper
+    public static class PrescriptionItemMapper
     {
-        public static List<ValueObjectModel> MapValueObjectsModelsFrom(IList<ValueObject> valuesObjects)
+        public static List<ItemPrescriptionModel> MapItemsPrescriptionModelsFrom(IList<PrescriptionItem> valuesObjects)
         {
-            var defModels = new List<ValueObjectModel>();
-            foreach (var valueObject in valuesObjects)
+            var defModels = new List<ItemPrescriptionModel>();
+            foreach (var prescriptionItem in valuesObjects)
             {
-                var valueObjectModel = MapValueObjectModelFrom(valueObject);
-                valueObjectModel.Code = valueObject.Id;
-                defModels.Add(valueObjectModel);
+                var PrescriptionModel = MapItemPrescriptionModelFrom(prescriptionItem);
+                defModels.Add(PrescriptionModel);
             }
             return defModels;
         }
 
-        public static ValueObjectModel MapValueObjectModelFrom(ValueObject def)
+        public static ItemPrescriptionModel MapItemPrescriptionModelFrom(PrescriptionItem prescriptionItem)
         {
-            Mapper.CreateMap<ValueObject, ValueObjectModel>();
-            var defModel = Mapper.Map<ValueObject, ValueObjectModel>(def);
-            defModel.Code = def.Id;
-            return defModel;
+            Mapper.CreateMap<PrescriptionItem, ItemPrescriptionModel>();
+            var prescriptionModel = new ItemPrescriptionModel();//Mapper.Map<PrescriptionItem, ItemPrescriptionModel>(prescriptionItem);
+            prescriptionModel.Code = prescriptionItem.code;
+            prescriptionModel.Id = prescriptionItem.Id;
+            prescriptionModel.Description = prescriptionItem.Description;
+            prescriptionModel.Type = (short)prescriptionItem.PrescriptionItemType;
+
+            return prescriptionModel;
         }
     }
 }

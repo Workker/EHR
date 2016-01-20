@@ -132,6 +132,21 @@ namespace EHR.Controller
         }
 
         [ExceptionLogger]
+        public override void InactivePrescriptionForService(int idSummary, int id)
+        {
+            #region Preconditions
+
+            Assertion.GreaterThan(idSummary, 0, "Sumário de alta não informado.").Validate();
+            Assertion.GreaterThan(idSummary, 0, "Medicamento não informado.").Validate();
+
+            #endregion
+
+            var summary = GetBy(idSummary);
+            summary.RemovePrescriptionForService(id);
+            Summaries.Save(summary);
+        }
+
+        [ExceptionLogger]
         public override void SaveExam(int idSummary, short type, DateTime date, string description)
         {
             #region Preconditions

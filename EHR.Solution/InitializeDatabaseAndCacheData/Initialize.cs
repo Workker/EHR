@@ -8,7 +8,7 @@ namespace InitializeDatabaseAndCacheData
     public class Initialize
     {
         [Test]
-        [Ignore]
+        //[Ignore]
         public void LoadData()
         {
             var dataBase = new DataBaseInitialize();
@@ -31,6 +31,7 @@ namespace InitializeDatabaseAndCacheData
 
             var importDEF = new ImportDEF();
             importDEF.ImportFromExcelFile(path);
+            importDEF.ImportPrescriptionItemFromExcelFile(path);
 
             var importTus = new ImportTUSS();
             importTus.ImportFromExcelFile(path);

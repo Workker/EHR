@@ -231,6 +231,8 @@
     <Compile Include="Models\Mappers\MedicalReviewMapper.cs" />
     <Compile Include="Models\Mappers\MedicationMapper.cs" />
     <Compile Include="Models\Mappers\PatientMapper.cs" />
+    <Compile Include="Models\Mappers\PrescriptionDateModelMapper.cs" />
+    <Compile Include="Models\Mappers\PrescriptionsForServiceMapper.cs" />
     <Compile Include="Models\Mappers\ProcedureMapper.cs" />
     <Compile Include="Models\Mappers\ProfessionalRegistrationMapper.cs" />
     <Compile Include="Models\Mappers\ReasonsOfAdmissionMapper.cs" />
@@ -253,6 +255,7 @@
     <Compile Include="Models\MedicalReviewModel.cs" />
     <Compile Include="Models\MedicationModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\PrescriptionDateModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\ProfessionalRegistrationModel.cs" />
     <Compile Include="Models\ReasonOfAdmissionModel.cs" />

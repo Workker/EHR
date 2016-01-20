@@ -5,11 +5,18 @@ using EHR.Domain.Entities;
 using EHR.Domain.Repository;
 using System;
 using System.Collections.Generic;
+using Workker.Framework.Domain;
 
 namespace EHR.Controller
 {
     public abstract class EhrController
     {
+
+        private ItemPrescriptionRepository _itemPrescriptionRepository;
+
+
+
+
         private Summaries _summaries;
         public Summaries Summaries
         {
@@ -53,13 +60,51 @@ namespace EHR.Controller
         #endregion
 
         #region Medication
-        public virtual List<EHR.CoreShared.Entities.ValueObject> GetPrescription(string term) { return null; }
+        public virtual List<PrescriptionItem> GetPrescription(string term) { return null; }
         public virtual List<CuidadoMedico> GetCuidadosMedicos(string term) { return null; }
         public virtual List<DEF> GetDef(string term) { return null; }
         public virtual void SaveMedication(int idSummary, short medicationType, short def, string description, string presentation,
-            short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration) { }
-        public virtual void RemoveMedication(int idSummary, int id) { }
+            short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration)
+        { }
 
+        [ExceptionLogger]
+        public virtual void SavePrescriptionForService(int idSummary, TypePrescription typePrescriptionEnum, short itemPrescriptionID, string itemPrescriptionCode, PrescriptionItemType prescriptionItemType, string presentation,
+           short presentationType, string dose, short dosage, short way, string place, short frequency, short frequencyCase, int duration
+            , int PrescriptionHighMonth, int PrescriptionHighYear, int PrescriptionHighDay, int PrescriptionHighHour, int PrescriptionHighMinute,
+            int quantity, string observation)
+        {
+            #region Preconditions
+            Assertion.GreaterThan(idSummary, 0, "Prontuário inválido, favor contactar o suporte.").Validate();
+            Assertion.GreaterThan(duration, 0, "Duração não informada.").Validate();
+
+            if (typePrescriptionEnum == TypePrescription.Medicamentos)
+            {
+                Assertion.IsFalse(string.IsNullOrEmpty(presentation), "Apresentação não informada.").Validate();
+                Assertion.GreaterThan((int)presentationType, 0, "Tipo de apresentação não informado.").Validate();
+                Assertion.IsFalse(string.IsNullOrEmpty(dose), "Dose não informada.").Validate();
+                Assertion.GreaterThan((int)dosage, 0, "Dosagem não informada.").Validate();
+                Assertion.GreaterThan((int)way, 0, "Via informada.").Validate();
+                Assertion.GreaterThan((int)frequency, 0, "Frequencia não informada.").Validate();
+            }
+
+            #endregion
+
+            var summary = GetBy(idSummary);
+
+            PrescriptionItem prescriptionItem;
+            Assertion.GreaterThan(itemPrescriptionCode, string.Empty, "Item de prescrição não informado.").Validate();
+            _itemPrescriptionRepository = new ItemPrescriptionRepository();
+
+            prescriptionItem = _itemPrescriptionRepository.GetById(itemPrescriptionCode, prescriptionItemType);
+
+            summary.CreatePrescriptionForService(prescriptionItem, typePrescriptionEnum, presentation, presentationType, dose, dosage, way, place, frequency
+                , frequencyCase, duration, PrescriptionHighMonth, PrescriptionHighYear, PrescriptionHighDay, PrescriptionHighHour, PrescriptionHighMinute
+                , quantity, observation);
+
+            Summaries.Save(summary);
+        }
+        public virtual void RemoveMedication(int idSummary, int id) { }
+        public virtual void InactivePrescriptionForService(int idSummary, int id) { }
         #endregion
 
         #region Exam
@@ -72,13 +117,14 @@ namespace EHR.Controller
         #region Account
 
         public virtual void Register(string firstName, string lastName, short gender, short professionalResgistrationType, string professionalResgistrationNumber, string email,
-                                      string password, DateTime birthday, short hospitalId) { }
+                                      string password, DateTime birthday, short hospitalId)
+        { }
         public virtual Account Login(string email, string password) { return null; }
         public virtual bool VerifyIfExist(string email) { return false; }
         public virtual IList<Account> GetAllNotApproved(short hospitalId) { return null; }
         public virtual IList<Summary> GetLastSumariesRealizedby(int accountId) { return null; }
         public virtual void ApproveProfessionalRegistration(int accountId, int professionalRegistrationId) { }
-        public virtual void RefuseAccount(int id ,int ProfessionalId) { }
+        public virtual void RefuseAccount(int id, int ProfessionalId) { }
         public virtual void AlterPasswordOfAccount(int id, string password, string newPasswordConfirm) { }
         public virtual void AddprofessionalResgistration(int accountId, short professionalResgistrationType, string professionalResgistrationNumber, short stateId) { }
 
@@ -124,7 +170,8 @@ namespace EHR.Controller
         public virtual void SaveDischargeData(int idSummary, IList<ComplementaryExam> complementaryExams, IList<int> complementaryExamDeleteds, IList<MedicalReview> medicalReviews, IList<int> medicalReviewDeleteds, short highType,
             short conditionOfThePatientAtDischargeId, short destinationOfThePatientAtDischarge,
            short orientationOfMultidisciplinaryTeamsMet, DateTime prescribedHigh,
-            string personWhoDeliveredTheSummary, DateTime deliveredDate) { }
+            string personWhoDeliveredTheSummary, DateTime deliveredDate)
+        { }
 
         #endregion
 

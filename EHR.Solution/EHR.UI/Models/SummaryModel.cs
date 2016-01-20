@@ -16,11 +16,13 @@ namespace EHR.UI.Models
         public string Mdr { get; set; }
         public string Observation { get; set; }
         public DischargeDataModel DischargeData { get; set; }
+        public PrescriptionDateModel PrescriptionDateModel { get; set; }
         public List<ReasonOfAdmissionModel> ReasonsOfAdmission { get; set; }
         public List<AllergyModel> Allergies { get; set; }
         public List<DiagnosticModel> Diagnostics { get; set; }
         public List<ProcedureModel> Procedures { get; set; }
         public List<MedicationModel> Medications { get; set; }
+        public List<PrescriptionForServiceModel> PrescriptionsForService { get; set; }
         public List<HemotransfusionModel> Hemotransfusions { get; set; }
         public IList<ExamModel> Exams { get; set; }
         public bool Finalized { get; set; }

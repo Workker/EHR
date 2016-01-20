@@ -1,16 +1,15 @@
 ﻿@using System.Globalization
 @using EHR.Domain.Entities
 @using EHR.Infrastructure.Util
+@using EHR.UI.Models
 
 <script type="text/javascript">
-
-
     function AutoCompletePrescription(objeto, valor) {
         switch (valor.val()) {
             case "1":
                 GenericAutoComplete(objeto, '/DischargeSummary/DefAutoComplete', '#def')
                 break;
-           default:
+            default:
                 GenericAutoCompleteWhichType(objeto, '/DischargeSummary/TypePrescriptionAutoComplete', '#def', valor.val())
                 break;
         }
@@ -19,7 +18,7 @@
 
 <form id="PrescriptionForServiceForm">
     <label>Tipo prescri&ccedil;&atilde;o:</label>
-    <select id="tipoPrescricao" name="tipoPrescricao">
+    <select id="tipoPrescricao" name="prescription.type">
         <option value="-1">Selecione</option>
         <option value="1">
             Medicamentos
@@ -48,13 +47,13 @@
 
     <input type="hidden" name="medication.type" value="@ViewBag.MedicationType" />
     <label>Pesquisa:</label>
-    <input type="text" name="medication.description" style="margin-left: 10px;" onclick="AutoCompletePrescription(this, $('#tipoPrescricao'));" />
-    <input type="hidden" name="medication.def.id" id="def" />
+    <input type="text" name="prescription.typePrescription.description" style="margin-left: 10px;" onclick="AutoCompletePrescription(this, $('#tipoPrescricao'));" />
+    <input type="hidden" name="prescription.typePrescription.id" id="def" />
     <br />
     <br />
     <label>Apresenta&ccedil;&atilde;o:</label>
-    <input type="number" name="medication.presentation" style="margin: 0px 5px 0px 10px;" min="0.0" value="0.0" />
-    <select name="medication.presentationType">
+    <input type="number" name="prescription.presentation" style="margin: 0px 5px 0px 10px;" min="0.0" value="0.0" />
+    <select name="prescription.presentationType">
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(PresentationTypeEnum)).Cast<short>().ToList())
         {
@@ -66,8 +65,8 @@
     <br />
     <br />
     <label>Dose:</label>
-    <input type="number" name="medication.dose" required style="margin: 0px 5px 0px 60px;" min="0.0" value="0.0" />
-    <select name="medication.dosage" required>
+    <input type="number" name="prescription.dose" required style="margin: 0px 5px 0px 60px;" min="0.0" value="0.0" />
+    <select name="prescription.dosage" required>
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(DosageEnum)).Cast<short>().ToList())
         {
@@ -79,7 +78,7 @@
     <br />
     <br />
     <label>Via:</label>
-    <select name="medication.way" required style="margin: 0px 5px 0px 70px;">
+    <select name="prescription.way" required style="margin: 0px 5px 0px 70px;">
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(WayEnum)).Cast<short>().ToList())
         {
@@ -89,11 +88,11 @@
         }
     </select>
     <label>Local:</label>
-    <input type="text" name="medication.place" />
+    <input type="text" name="prescription.place" />
     <br />
     <br />
     <label>Frequ&ecirc;ncia:</label>
-    <select name="medication.frequency" required style="margin: 0px 5px 0px 25px;" onchange="SelectFrequencyCase(this);">
+    <select name="medication.prescription" required style="margin: 0px 5px 0px 25px;" onchange="SelectFrequencyCase(this);">
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(FrequencyEnum)).Cast<short>().ToList())
         {
@@ -102,7 +101,7 @@
             </option>
         }
     </select>
-    <select name="medication.frequencyCase" disabled id="frequencyCase">
+    <select name="prescription.frequencyCase" disabled id="frequencyCase">
         <option value="-1">Selecione</option>
         @foreach (var value in Enum.GetValues(typeof(FrequencyCaseEnum)).Cast<short>().ToList())
         {
@@ -114,18 +113,53 @@
     <br />
     <br />
     <label>Dura&ccedil;&atilde;o:</label>
-    <input type="number" name="medication.duration" style="margin-left: 40px;" min="1" value="1" />&nbsp;&nbsp;Dia(s)<br />
+    <input type="number" name="prescription.duration" style="margin-left: 40px;" min="1" value="1" />&nbsp;&nbsp;Dia(s)<br />
     <br />
     <br />
-    <input type="submit" value="Salvar" class="uibutton large confirm" />&nbsp;&nbsp;
+
+    @{
+        var accountM = ((SummaryModel)Model).Account;
+        var hospital = ((SummaryModel)Model).Hospital;
+
+        var professionalRegistration = accountM.ProfessionalRegistration.Where(h => h.State.Id == hospital.State.Id);
+
+        if (professionalRegistration.Any())
+        {
+            <label>
+                @EnumUtil.GetDescriptionFromEnumValue((ProfessionalRegistrationTypeEnum)Enum.Parse(typeof(ProfessionalRegistrationTypeEnum), professionalRegistration.SingleOrDefault().Type.ToString(CultureInfo.InvariantCulture))):
+            </label>
+            @:&nbsp;<input type="text" disabled value="@professionalRegistration.SingleOrDefault().Number" />
+            <br />
+            <br />
+            <label>M&eacute;dico:</label>@:&nbsp;<input type="text" disabled value="@(string.Concat(((SummaryModel)Model).Account.FirstName, " ", ((SummaryModel)Model).Account.LastName))" />
+            <br />
+            <br />
+        }
+    }
+    <label>Prescrição realizada em:</label>&nbsp;
+    @{
+        ViewBag.Context = "PrescribedHigh";
+    }
+    <input type="text" disabled="disabled" name="prescriptionDate" maxlength="10">
+    <input type="hidden" name="prescription.prescribedHighday" />
+    <input type="hidden" name="prescription.prescribedHighmonth" />
+    <input type="hidden" name="prescription.prescribedHighyear" />
+    <br />
+    <br />
+    
+    <input type="submit" value="Inativar" class="uibutton large confirm" name="inativar" />&nbsp;&nbsp;
+    <input type="submit" value="Salvar" class="uibutton large confirm" name="salvar" />&nbsp;&nbsp;
     <input type="reset" onclick="closeForm(this);" value="Cancelar" class="uibutton large" />
 </form>
 <script type="text/javascript">
 
+
     $(document).ready(function () {
-
-
-        $("#PrescriptionForServiceForm input[type='submit']").click(function () {
+        $("#PrescriptionForServiceForm input[name='prescriptionDate']").val(@DateTime.Now.Day.ToString() + "/" + @DateTime.Now.Month.ToString() +"/"+ @DateTime.Now.Year.ToString());
+        $("#PrescriptionForServiceForm input[name='inativar']").click(function () {
+            saveRow(this, "/DischargeSummary/InactivePrescriptionForService");
+        });
+        $("#PrescriptionForServiceForm input[name='salvar']").click(function () {
 
             if ($("input[name='medication.description']").val() == "") {
 
@@ -192,7 +226,7 @@
             }
 
 
-            saveRow(this, "/DischargeSummary/SaveMedication");
+            saveRow(this, "/DischargeSummary/SavePrescriptionForService");
         });
 
     });

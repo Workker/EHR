@@ -21,6 +21,7 @@ namespace EHR.Domain.Mapping
             HasMany(s => s.Hemotransfusions).Cascade.AllDeleteOrphan();
             HasMany(s => s.Procedures).Cascade.AllDeleteOrphan();
             HasMany(s => s.Medications).Cascade.AllDeleteOrphan();
+            HasMany(s => s.PrescriptionsForService).Cascade.AllDeleteOrphan();
             HasMany(s => s.Exams).Cascade.AllDeleteOrphan();
             References(s => s.Account).Cascade.None();
             Map(s => s.Finalized);
