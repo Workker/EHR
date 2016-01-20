@@ -416,6 +416,7 @@
     <Content Include="fonts\weathericons-regular-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="graphs-xcharts.html" />
     <Content Include="img\clear.png" />
     <Content Include="img\error-404-v2.png" />
     <Content Include="img\error-404-v3.png" />
