@@ -204,6 +204,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\DischargeSummaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -391,7 +392,9 @@
     <Content Include="highslide\highslide.packed.js" />
     <Content Include="Images\age_ico.png" />
     <Content Include="Images\birthday_ico.png" />
+    <Content Include="Images\doctor.jpg" />
     <Content Include="Images\doctor.png" />
+    <Content Include="Images\doctormin.jpg" />
     <Content Include="Images\exam1.jpg" />
     <Content Include="Images\exam10.jpg" />
     <Content Include="Images\exam10_thumb.jpg" />
@@ -762,6 +765,7 @@
     <Content Include="Views\DischargeSummary\PrescriptionForService\_SimpleForm.cshtml" />
     <Content Include="Views\DischargeSummary\PrescriptionForService\_Table.cshtml" />
     <Content Include="Views\DischargeSummary\PrescriptionForService\_TableRow.cshtml" />
+    <Content Include="Views\Charts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

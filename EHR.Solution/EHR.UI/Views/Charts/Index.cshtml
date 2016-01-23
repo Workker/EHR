@@ -1,0 +1,148 @@
+﻿@using System
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
+@using EHR.Domain.Entities
+@using EHR.Infrastructure.Util
+@{
+    ViewBag.Title = "Rede D'or São Luiz - Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Page
+{
+    <div id="container" style="min-width: 650px; height: 250px; margin: 0 auto"></div>
+
+    Não iniciados
+    <div id="container2" style="min-width: 650px; height: 250px; margin: 0 auto">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data de criação</th>
+                    <th>Data início</th>
+                    <th>Data fim</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>prescrição de remédios</td>
+                    <td>precisção de remédios para sinusite</td>
+                    <td>01/01/2016</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    Iniciados
+    <div id="container3" style="min-width: 650px; height: 250px; margin: 0 auto">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data de criação</th>
+                    <th>Data início</th>
+                    <th>Data fim</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>prescrição de remédios</td>
+                    <td>precisção de remédios para sinusite</td>
+                    <td>01/01/2016</td>
+                    <td>05/01/2016</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    Finalizados
+    <div id="container4" style="min-width: 650px; height: 250px; margin: 0 auto">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data de criação</th>
+                    <th>Data início</th>
+                    <th>Data fim</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>prescrição de remédios</td>
+                    <td>precisção de remédios para sinusite</td>
+                    <td>01/01/2016</td>
+                    <td>05/01/2016</td>
+                    <td>31/01/2016</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+}
+
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/AjaxFlagMenu-1.0.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/highcharts.js"></script>
+    <script type="text/javascript" src="~/Scripts/exporting.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            var chart;
+            $(document).ready(function () {
+                chart = new Highcharts.Chart({
+                    chart: {
+                        type: 'column',
+                        renderTo: 'container'
+                    },
+                    title: {
+                        text: 'Dashboard de prescições'
+                    },
+                    xAxis: {
+                        categories: ['Cuidados', 'Medicamentos', 'Suporte Ventilatório', 'Dietas', 'Procedimentos', 'Monitorização', 'Hemocomponentes']
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Total de prescrições'
+                        }
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage}%)<br/>',
+                        shared: true
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'percent'
+                        }
+                    },
+                    series: [{
+                        name: 'Iniciado',
+                        data: [5, 3, 5, 2, 2, 5, 3]
+                    }, {
+                        name: 'Pendente',
+                        data: [2, 2, 3, 3, 5, 2, 2]
+                    }, {
+                        name: 'Finalizado',
+                        data: [3, 5, 2, 5, 3, 3, 5]
+                    }]
+                });
+            });
+        });
+
+
+    </script>
+}
