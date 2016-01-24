@@ -6,10 +6,11 @@ using System.Web.Mvc;
 
 namespace EHR.Analytics.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : System.Web.Mvc.Controller
     {
         public ActionResult Index()
         {
+            ViewBag.NomePagina = "Home";
             return View();
         }
 

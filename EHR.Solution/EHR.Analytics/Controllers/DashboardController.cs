@@ -6,11 +6,12 @@ using System.Web.Mvc;
 
 namespace EHR.Analytics.Controllers
 {
-    public class ChartsController : Controller
+    public class DashboardController : System.Web.Mvc.Controller
     {
-        // GET: Charts
+        // GET: Dashboard
         public ActionResult Index()
         {
+            ViewBag.NomePagina = "DashBoard";
             return View();
         }
     }
