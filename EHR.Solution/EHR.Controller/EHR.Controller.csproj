@@ -82,6 +82,7 @@
     <Compile Include="HemotransfusionController.cs" />
     <Compile Include="HospitalController.cs" />
     <Compile Include="PatientController.cs" />
+    <Compile Include="PrescriptionsController.cs" />
     <Compile Include="ProcedureController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecialtyController.cs" />

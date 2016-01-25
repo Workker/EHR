@@ -167,6 +167,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AcompanhamentosController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -3068,6 +3069,7 @@
     <Content Include="scss\theme\theme_styles.scss" />
     <Content Include="scss\theme\wizard.scss" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Acompanhamentos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3081,6 +3083,10 @@
     <ProjectReference Include="..\EHR.Controller\EHR.Controller.csproj">
       <Project>{75af42b0-2a2a-4452-9500-2638183c812a}</Project>
       <Name>EHR.Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EHR.Domain\EHR.Domain.csproj">
+      <Project>{075d9a69-4a94-4161-978d-b3822ebb6dd9}</Project>
+      <Name>EHR.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

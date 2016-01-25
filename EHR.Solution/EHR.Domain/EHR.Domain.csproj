@@ -179,6 +179,7 @@
     <Compile Include="Repository\Hospitals.cs" />
     <Compile Include="Repository\ItemPrescriptionRepository.cs" />
     <Compile Include="Repository\Patients.cs" />
+    <Compile Include="Repository\PrescriptionForServiceRepository.cs" />
     <Compile Include="Repository\Specialties.cs" />
     <Compile Include="Repository\TUSSRepository.cs" />
     <Compile Include="Repository\Summaries.cs" />

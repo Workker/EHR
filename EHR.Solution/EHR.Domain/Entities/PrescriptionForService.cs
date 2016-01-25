@@ -1,4 +1,5 @@
 ﻿using EHR.CoreShared.Entities;
+using EHR.CoreShared.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

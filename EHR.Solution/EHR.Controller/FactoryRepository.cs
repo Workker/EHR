@@ -19,6 +19,8 @@ namespace EHR.Controller
                     return new DEFRepository();
                 case RepositoryEnum.Patient:
                     return new Patients();
+                case RepositoryEnum.Prescriptions:
+                    return new PrescriptionForServiceRepository();
                 default:
                     throw new Exception("Repositório não encontrado.");
             }
@@ -31,6 +33,7 @@ namespace EHR.Controller
         Hospitals = 2,
         Sumaries = 3,
         Def = 4,
-        Patient = 5
+        Patient = 5,
+        Prescriptions = 6
     }
 }
